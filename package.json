@@ -1,0 +1,30 @@
+{
+  "name": "dark-bc",
+  "version": "0.0.1",
+  "description": "Bondage Club now in Dark!",
+  "main": "dist/dark-bc.js",
+  "scripts": {
+    "build": "node esbuild.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dDeepLb/Dark-BC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dDeepLb/Dark-BC/issues"
+  },
+  "homepage": "https://github.com/dDeepLb/Dark-BC#readme",
+  "dependencies": {
+    "bondage-club-mod-sdk": "^1.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.12",
+    "@types/core-js": "^2.5.5",
+    "@types/node": "^17.0.35",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.2"
+  }
+}
