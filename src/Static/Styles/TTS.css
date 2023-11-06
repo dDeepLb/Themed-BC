@@ -1,0 +1,89 @@
+.tts-dialog {
+  background-color: var(--primaryColor);
+  border: 2px solid var(--accentColor1);
+  color: var(--textColor);
+}
+
+.tts-option {
+  background-color: var(--secondaryColor);
+  border-color: var(--accentColor1);
+  color: var(--textColor);
+}
+
+input[type="range"].tts-slider {
+  background-color: var(--secondaryColor);
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 15px;
+  outline: none;
+  border-radius: 50px;
+}
+
+input[type="range"].tts-slider::-webkit-slider-thumb {
+  background: var(--accentColor1);
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"].tts-slider::-moz-range-thumb {
+  background: var(--accentColor1);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tts-select {
+  background-color: var(--secondaryColor);
+  border-color: var(--accentColor1);
+  color: var(--textColor);
+}
+
+.tts-tab {
+  background-color: var(--secondaryColor);
+  border-color: var(--accentColor1);
+  color: var(--textColor);
+}
+
+.tts-btn {
+  background-color: var(--secondaryColor);
+  border: 1px solid var(--accentColor1);
+  color: var(--textColor);
+}
+
+.tts-tab.active {
+  background-color: var(--accentColor2);
+}
+
+.tts-toggle-container {
+  border-color: var(--accentColor1);
+}
+
+.tts-boxed-container {
+  border-color: var(--accentColor1);
+}
+
+.tts-link {
+  border-color: var(--accentColor1);
+  background-color: var(--secondaryColor);
+  color: var(--textColor);
+}
+
+.tts-link:hover {
+  background-color: var(--secondaryColor);
+  color: var(--accentColor2);
+}
+
+.mo-modal-content {
+  background-color: var(--primaryColor);
+  border: 1px solid var(--accentColor1);
+}
+
+.mo-closer {
+  color: var(--textColor);
+}

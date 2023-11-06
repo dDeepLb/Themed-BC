@@ -1,0 +1,59 @@
+.bce-img {
+  border-color: var(--accentColor1);
+}
+
+#bce-instant-messenger {
+  top: 0%;
+  left: 0%;
+  background-color: var(--primaryColor);
+  color: var(--textColor);
+  border-color: var(--accentColor1);
+  max-width: 99.5%;
+  max-height: 85%;
+  min-width: 38%;
+  min-height: 30%;
+}
+
+.bce-friend-list-entry.bce-friend-list-selected {
+  border-top-color: var(--accentColor1);
+  border-bottom-color: var(--accentColor1);
+  background-color: var(--primaryColor);
+}
+
+.bce-friend-list-entry:hover {
+  background-color: var(--secondaryColor);
+}
+
+#bce-message-right-container {
+  border-left-color: var(--accentColor1);
+}
+
+#bce-message-input {
+  border-color: var(--accentColor1);
+  background-color: var(--primaryColor);
+  color: var(--textColor);
+}
+
+.bce-message-divider {
+  border-bottom-color: var(--accentColor1);
+}
+
+.bce-message-sender {
+  text-shadow: none;
+}
+
+.bce-message-Message .bce-message-sender {
+  text-shadow: none;
+}
+
+#bce-friend-search {
+  border-bottom-color: var(--accentColor1);
+  background-color: var(--primaryColor);
+  color: var(--textColor);
+}
+
+.bce-colors .bce-dark-input {
+  background-color: var(--primaryColor);
+  color: var(--textColor);
+  border: 1px solid var(--accentColor1);
+}

@@ -1,0 +1,58 @@
+#TextAreaChatLog[data-colortheme="dark"],
+#TextAreaChatLog[data-colortheme="dark2"] {
+  background-color: var(--primaryColor);
+  color: var(--textColor);
+  border-color: var(--accentColor1);
+}
+
+#TextAreaChatLog .ChatMessageName,
+#TextAreaChatLog[data-colortheme="dark"] .ChatMessageName,
+#TextAreaChatLog[data-colortheme="dark2"] .ChatMessageName {
+  text-shadow: none;
+}
+
+textarea {
+  background: var(--primaryColor);
+  color: var(--textColor);
+  border: 1px solid var(--accentColor1);
+}
+
+input {
+  background: var(--primaryColor);
+  color: var(--textColor);
+  border: 1px solid var(--accentColor1);
+}
+
+textarea:focus,
+input:focus {
+  outline: var(--accentColor1) solid 1px;
+}
+
+#FriendList {
+  border-color: var(--accentColor1);
+  background-color: var(--primaryColor);
+  padding: 0;
+  margin-top: 1%;
+  padding-bottom: 0%;
+}
+
+#TextAreaChatLog[data-colortheme="dark2"] .ChatMessage {
+  border-bottom: none;
+}
+
+::-webkit-scrollbar {
+  background-color: var(--scrollbar);
+}
+::-webkit-scrollbar-corner {
+  background-color: var(--scrollbar);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondaryColor);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accentColor2);
+}
+::selection {
+  background-color: var(--accentColor2);
+  color: var(--textColor);
+}

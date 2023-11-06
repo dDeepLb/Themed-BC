@@ -1,8 +1,8 @@
-# Dark BC
+# Themed BC
 ## Installation
 ### Tampermonkey
-https://github.com/dDeepLb/Dark-BC/raw/main/loader.user.js
+https://github.com/dDeepLb/Themed-BC/raw/main/loader.user.js
 ### Bookmark
 ``` javascript
-javascript:(()=>{fetch('https://ddeeplb.github.io/Dark-BC/dark-bc.js').then(r=>r.text()).then(r=>eval(r));})();
+javascript:(()=>{fetch('https://ddeeplb.github.io/Themed-BC/Themed-bc.js').then(r=>r.text()).then(r=>eval(r));})();
 ```
