@@ -19,6 +19,8 @@ const ENTextMap = {
   "settings.setting.themedEnabled.desc": "Enables features of Themed.",
   "settings.setting.doUseChatSpecialStyling.name": "Enable chat styling:",
   "settings.setting.doUseChatSpecialStyling.desc": "Enables chat messages styling like italic, bold, underlined, etc.",
+  "settings.setting.doShowLocaleTime.name": "Enable locale-based time format:",
+  "settings.setting.doShowLocaleTime.desc": "Displays time according to your PC's locale settings. Like 20:25 or 08:25 PM.",
   "settings.setting.doShowNewVersionMessage.name": "Enable new version message:",
   "settings.setting.doShowNewVersionMessage.desc": "Show message about new version of Themed, when it's out.",
 

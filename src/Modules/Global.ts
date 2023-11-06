@@ -28,11 +28,14 @@ export class GlobalModule extends BaseModule {
     return <GlobalSettingsModel>{
       themedEnabled: true,
       doUseChatSpecialStyling: true,
+      doShowLocaleTime: true,
       doShowNewVersionMessage: true
     };
   }
 
   Load(): void {
+    loadCommands();
+
     hookFunction(
       "ChatRoomSync",
       HookPriority.Observe,
@@ -44,7 +47,18 @@ export class GlobalModule extends BaseModule {
       ModuleCategory.Global
     );
 
-    loadCommands();
+    hookFunction(
+      "ChatRoomCurrentTime",
+      HookPriority.Observe,
+      (args, next) => {
+        if (!this.settings.doShowLocaleTime) return next(args);
+
+        const currentTime = new Date(Date.now());
+
+        return currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      },
+      ModuleCategory.Global
+    );
   }
 
   Run(): void {}

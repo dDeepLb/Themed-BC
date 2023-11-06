@@ -33,6 +33,13 @@ export class GuiGlobal extends GuiSubscreen {
       },
       <Setting>{
         type: "checkbox",
+        label: "settings.setting.doShowLocaleTime.name",
+        description: "settings.setting.doShowLocaleTime.desc",
+        setting: () => this.settings?.doShowLocaleTime ?? true,
+        setSetting: (val) => (this.settings.doShowLocaleTime = val)
+      },
+      <Setting>{
+        type: "checkbox",
         label: "settings.setting.doShowNewVersionMessage.name",
         description: "settings.setting.doShowNewVersionMessage.desc",
         setting: () => this.settings?.doShowNewVersionMessage ?? true,
