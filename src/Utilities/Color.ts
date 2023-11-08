@@ -1,4 +1,4 @@
-export class Color {
+export class _Color {
   static darken(hexColor: string, percentage: number): string {
     if (!hexColor) return;
     if (hexColor === "Default") return "#000000";

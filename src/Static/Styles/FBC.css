@@ -29,7 +29,8 @@
 }
 
 #bce-message-input {
-  border-color: var(--accentColor1);
+  border-top: 1px solid var(--accentColor1);
+  border-bottom: 1px solid var(--accentColor1);
   background-color: var(--primaryColor);
   color: var(--textColor);
 }

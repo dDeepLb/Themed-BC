@@ -3,7 +3,7 @@ import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
 import TTS from "../Static/Styles/TTS.css";
-import { Color } from "./Color";
+import { _Color } from "./Color";
 import { PlayerStorage } from "./Data";
 
 const styles = {
@@ -71,11 +71,12 @@ export function composeRootStyle() {
     :root {
       --primaryColor: ${colors?.primaryColor ?? "#202020"}; /*background*/
       --secondaryColor: ${colors?.secondaryColor ?? "#303030"}; /*inputs, buttons and shit*/
-      --textColor: ${colors?.textColor ?? "#eee"}; /*text obviously*/
+      --textColor: ${colors?.textColor ?? "#eeeeee"}; /*text obviously*/
+      --textShadowColor: ${_Color.darken(colors?.textColor ?? "#eeeeee", 50)};
       --accentColor1: ${colors?.accentColor1 ?? "#440171"}; /*borders for html and game drawn elements*/
       --accentColor2: ${colors?.accentColor2 ?? "#57276e"}; /*elements that should stand out, like thing on slider or button when hovered over*/
 
-      --scrollbar: ${Color.darken(colors?.primaryColor, 20)};
+      --scrollbar: ${_Color.darken(colors?.primaryColor, 20)};
     }
     `;
 }

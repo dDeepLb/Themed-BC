@@ -9,6 +9,7 @@ import Changelog from "../Static/HTML/Changelog.html";
 import { PlayerStorage } from "../Utilities/Data";
 import { Style } from "../Utilities/Style";
 import { loadCommands } from "../Utilities/Commands";
+import { loadGuiHooks } from "../Utilities/GuiHooks";
 
 export class GlobalModule extends BaseModule {
   static isItNewVersion: boolean = false;
@@ -27,6 +28,7 @@ export class GlobalModule extends BaseModule {
   get defaultSettings() {
     return <GlobalSettingsModel>{
       themedEnabled: true,
+      doVanillaGuiOverhaul: true,
       doUseChatSpecialStyling: true,
       doShowLocaleTime: true,
       doShowNewVersionMessage: true
@@ -35,6 +37,7 @@ export class GlobalModule extends BaseModule {
 
   Load(): void {
     loadCommands();
+    loadGuiHooks();
 
     hookFunction(
       "ChatRoomSync",

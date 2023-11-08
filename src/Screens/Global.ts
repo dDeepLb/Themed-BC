@@ -26,6 +26,13 @@ export class GuiGlobal extends GuiSubscreen {
       },
       <Setting>{
         type: "checkbox",
+        label: "settings.setting.doVanillaGuiOverhaul.name",
+        description: "settings.setting.doVanillaGuiOverhaul.desc",
+        setting: () => this.settings?.doVanillaGuiOverhaul ?? true,
+        setSetting: (val) => (this.settings.doVanillaGuiOverhaul = val)
+      },
+      <Setting>{
+        type: "checkbox",
         label: "settings.setting.doUseChatSpecialStyling.name",
         description: "settings.setting.doUseChatSpecialStyling.desc",
         setting: () => this.settings?.doUseChatSpecialStyling ?? true,

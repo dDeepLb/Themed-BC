@@ -13,10 +13,13 @@ const ENTextMap = {
   "MainMenu.title": "- Themed BC -",
   "mainmenu.button.Settings": "Settings",
   "mainmenu.button.Colors": "Color Settings",
+  "mainmenu.button.Integration": "Integration",
 
   "Settings.title": "- Settings -",
   "settings.setting.themedEnabled.name": "Enable Themed:",
   "settings.setting.themedEnabled.desc": "Enables features of Themed.",
+  "settings.setting.doVanillaGuiOverhaul.name": "Enable GUI Overhaul:",
+  "settings.setting.doVanillaGuiOverhaul.desc": "Redraws interface using colors selected in Color Settings.",
   "settings.setting.doUseChatSpecialStyling.name": "Enable chat styling:",
   "settings.setting.doUseChatSpecialStyling.desc": "Enables chat messages styling like italic, bold, underlined, etc.",
   "settings.setting.doShowLocaleTime.name": "Enable locale-based time format:",
@@ -37,6 +40,16 @@ const ENTextMap = {
   "settings.setting.accentColor1.desc": "",
   "settings.setting.accentColor2.name": "Second accent color:",
   "settings.setting.accentColor2.desc": "",
+
+  "Integration.title": "- Integration -",
+  "integration.setting.BC.name": "Enable BC \"integration\":",
+  "integration.setting.BC.desc": "Changes CSS styles of BC to use Color Settings. Changes chat, friend list, inputs and text selection along with scrollbar.",
+  "integration.setting.FBC.name": "Enable FBC \"integration\":",
+  "integration.setting.FBC.desc": "Changes CSS styles of FBC to use Color Settings. Mostly changes Instant Messenger colors.",
+  "integration.setting.FUSAM.name": "Enable FUSAM \"integration\":",
+  "integration.setting.FUSAM.desc": "Changes CSS styles of FUSAM to use Color Settings. Changes FUSAM button with settings interface.",
+  "integration.setting.TTS.name": "Enable TTS \"integration\":",
+  "integration.setting.TTS.desc": "Changes CSS styles of TTS to use Color Settings. Changes settings interface with task window,",
 
   // Support
   "support.title": "- Support -",
