@@ -18,7 +18,7 @@ textarea {
 }
 
 input {
-  background: var(--primaryColor);
+  background: var(--secondaryColor);
   color: var(--textColor);
   border: 1px solid var(--accentColor1);
 }

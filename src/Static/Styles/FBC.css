@@ -49,7 +49,7 @@
 
 #bce-friend-search {
   border-bottom-color: var(--accentColor1);
-  background-color: var(--primaryColor);
+  background-color: var(--secondaryColor);
   color: var(--textColor);
 }
 

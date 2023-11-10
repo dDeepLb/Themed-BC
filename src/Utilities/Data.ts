@@ -29,6 +29,6 @@ export function dataStore() {
 }
 
 export function dataErase() {
-  Player[ModName] = <SettingsModel>{};
+  Player[ModName].ColorsModule = <ColorsSettingsModel>{};
   dataStore();
 }

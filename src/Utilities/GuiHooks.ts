@@ -1,5 +1,5 @@
-import { GlobalModule } from "../Modules/Global";
 import { _Color } from "./Color";
+import { drawImageColorize } from "./Drawing";
 import { HookPriority, ModuleCategory, hookFunction } from "./SDK";
 
 export function loadGuiHooks() {
@@ -11,8 +11,6 @@ export function loadGuiHooks() {
 
       let time = args[0];
       const data = Player.Themed.ColorsModule;
-
-      next(args);
 
       // Gets the current screen background and draw it, it becomes darker in dialog mode or if the character is blindfolded
       let B = window[CurrentScreen + "Background"];
@@ -41,20 +39,20 @@ export function loadGuiHooks() {
     ModuleCategory.Global
   );
 
-  hookFunction("DrawButton", HookPriority.Observe, (args, next) => {
+  hookFunction("DrawButton", -1, (args, next) => {
     if (!Player.Themed.GlobalModule.doVanillaGuiOverhaul) return next(args);
 
     const [Left, Top, Width, Height, Label, Color, Image, HoveringText, Disabled] = args;
     const data = Player.Themed.ColorsModule;
-    const isHovering = !!(MouseX >= Left && MouseX <= Left + Width && MouseY >= Top && MouseY <= Top + Height && !CommonIsMobile)
-
+    const isHovering = !!(MouseX >= Left && MouseX <= Left + Width && MouseY >= Top && MouseY <= Top + Height && !CommonIsMobile);
+    const isWhite = _Color.getComputed(Color) === "rgb(255, 255, 255)";
 
     next(args);
 
     ControllerAddActiveArea(Left, Top);
 
     // Draw the button rectangle (makes the background color Dark Grey if the mouse is over it)
-    if (Color === "White") {
+    if (isWhite) {
       MainCanvas.beginPath();
       MainCanvas.rect(Left, Top, Width, Height);
       MainCanvas.fillStyle = isHovering && !Disabled ? _Color.darken(data.secondaryColor, 20) : data.secondaryColor;
@@ -65,10 +63,11 @@ export function loadGuiHooks() {
       MainCanvas.stroke();
       MainCanvas.closePath();
     }
-    if (Color !== "White") {
+    if (!isWhite) {
       MainCanvas.beginPath();
       MainCanvas.rect(Left, Top, Width, Height);
-      MainCanvas.fillStyle = isHovering && !Disabled ? _Color.darken(Color, 70) : _Color.darken(Color, 50);
+      MainCanvas.fillStyle =
+        isHovering && !Disabled ? _Color.darken(_Color.toDarkMode(Color, data.primaryColor), 20) : _Color.toDarkMode(Color, data.primaryColor);
       MainCanvas.fillRect(Left, Top, Width, Height);
       MainCanvas.fill();
       MainCanvas.lineWidth = 2;
@@ -77,12 +76,12 @@ export function loadGuiHooks() {
       MainCanvas.closePath();
     }
 
+    DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, Width - 4, "Black");
+    if (Image != null && Image != "") drawImageColorize(Image, Left + 2, Top + 2, data.accentColor1);
+
     // Draw the hovering text
     if (HoveringText != null && isHovering) {
       DrawHoverElements.push(() => DrawButtonHover(Left, Top, Width, Height, HoveringText));
     }
-    DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, Width - 4, "White");
-
-    if (Image != null && Image != "") DrawImage(Image, Left + 2, Top + 2);
   });
 }

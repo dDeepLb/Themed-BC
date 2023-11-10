@@ -1,6 +1,7 @@
 import { GuiSubscreen } from "../Base/BaseSetting";
 import { dataErase } from "../Utilities/Data";
 import { getText } from "../Translation";
+import { Style } from "../Utilities/Style";
 
 export class GuiReset extends GuiSubscreen {
   get name(): string {
@@ -12,12 +13,6 @@ export class GuiReset extends GuiSubscreen {
   }
 
   private allowedConfirmTime: number | null = 0;
-
-  private doResetForManualSettings: boolean = false;
-
-  private doResetSettings: boolean = true;
-  private doResetResponses: boolean = true;
-  private doResetProfiles: boolean = false;
 
   Load() {
     this.allowedConfirmTime = Date.now() + 10_000;
@@ -31,20 +26,20 @@ export class GuiReset extends GuiSubscreen {
     GuiSubscreen.START_X = 180;
     MainCanvas.textAlign = "center";
 
-    DrawText(getText(`reset.label.perma_reset_of_bcr_data`), 1000, 125, "Black");
+    DrawText(getText(`reset.label.perma_reset_of_mod_data`), 1000, 125, "Black");
 
     DrawText(getText(`reset.label.warning`), 1000, 225, "Black", "Black");
     DrawText(getText(`reset.label.if_u_confirm_perma_reset`), 1000, 325, "Black");
 
-    DrawText(getText(`reset.label.youll_able_to_use_bcr`), 1000, 375, "Gray");
+    DrawText(getText(`reset.label.youll_able_to_use_mod`), 1000, 550, "Gray");
 
-    DrawText(getText(`reset.label.action_cannot_be_undone`), 1000, 425, "Red", "Black");
+    DrawText(getText(`reset.label.action_cannot_be_undone`), 1000, 625, "Red", "Black");
 
     const now = Date.now();
     if (now < this.allowedConfirmTime) {
       DrawButton(
-        1000,
-        690,
+        300,
+        720,
         200,
         80,
         `${getText("reset.button.confirm")} (${Math.floor((this.allowedConfirmTime - now) / 1000)})`,
@@ -54,7 +49,7 @@ export class GuiReset extends GuiSubscreen {
         true
       );
     } else {
-      DrawButton(1000, 690, 200, 80, getText("reset.button.confirm"), "White");
+      DrawButton(300, 720, 200, 80, getText("reset.button.confirm"), "White");
     }
 
     DrawButton(1520, 690, 200, 80, getText("reset.button.cancel"), "White");
@@ -76,6 +71,7 @@ export class GuiReset extends GuiSubscreen {
     this.allowedConfirmTime = null;
 
     dataErase();
+    Style.reloadAll();
 
     this.setSubscreen(null);
   }

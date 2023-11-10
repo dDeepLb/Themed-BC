@@ -1,6 +1,6 @@
 .button {
   border-color: var(--accentColor1);
-  background-color: var(--primaryColor);
+  background-color: var(--secondaryColor);
   color: var(--textColor);
 }
 
@@ -14,10 +14,10 @@ select:focus {
 select,
 option {
   border-color: var(--accentColor1);
-  background-color: var(--primaryColor);
+  background-color: var(--secondaryColor);
   color: var(--textColor);
 }
 
 select:disabled:hover {
-  background-color: var(--primaryColor);
+  background-color: var(--secondaryColor);
 }
