@@ -31,9 +31,9 @@ export class GuiColors extends GuiSubscreen {
         },
         <Input>{
           type: "text",
-          id: "accentColor1",
-          label: "settings.setting.accentColor1.name",
-          description: "settings.setting.accentColor1.desc",
+          id: "accentColor",
+          label: "settings.setting.accentColor.name",
+          description: "settings.setting.accentColor.desc",
           setting: () => this.settings?.accentColor ?? true,
           setSetting: (val) => (this.settings.accentColor = val)
         },

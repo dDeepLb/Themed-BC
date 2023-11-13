@@ -34,16 +34,10 @@ const ENTextMap = {
   "Colors.title": "- Color Settings -",
   "settings.setting.primaryColor.name": "Primary color:",
   "settings.setting.primaryColor.desc": "",
-  "settings.setting.secondaryColor.name": "Secondary color:",
-  "settings.setting.secondaryColor.desc": "",
+  "settings.setting.accentColor.name": "Accent color:",
+  "settings.setting.accentColor.desc": "",
   "settings.setting.textColor.name": "Text color:",
   "settings.setting.textColor.desc": "",
-  "settings.setting.textShadowColor.name": "Text shadow color:",
-  "settings.setting.textShadowColor.desc": "",
-  "settings.setting.accentColor1.name": "First accent color:",
-  "settings.setting.accentColor1.desc": "",
-  "settings.setting.accentColor2.name": "Second accent color:",
-  "settings.setting.accentColor2.desc": "",
 
   /* Integration */
   "Integration.title": "- Integration -",

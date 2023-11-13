@@ -158,7 +158,7 @@ export function loadGuiHooks() {
       MainCanvas.closePath();
 
       // Draw the text or image
-      DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, isWhite ? colors.text : Color);
+      DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, isWhite(Color) ? colors.text : Color);
 
       if (Image != null && Image != "") {
         if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
@@ -291,10 +291,10 @@ export function loadGuiHooks() {
 
       if (isBlack(args[4])) {
         args[4] = colors.text;
-        args[5] = _Color.darken(args[4], 20);
+        args[5] = ""; //_Color.darken(args[4], 20);
       } else {
-        args[4] = _Color.lighten(_Color.toDarkMode(args[4], colors.background), 40);
-        args[5] = _Color.darken(args[4], 20);
+        args[4] = _Color.toDarkMode(args[4], colors.background);
+        args[5] = ""; //_Color.darken(args[4], 20);
       }
 
       return next(args);
@@ -310,10 +310,10 @@ export function loadGuiHooks() {
 
       if (isBlack(args[3])) {
         args[3] = colors.text;
-        args[4] = _Color.darken(args[3], 20);
+        args[4] = ""; //_Color.darken(args[3], 20);
       } else {
-        args[3] = _Color.lighten(_Color.toDarkMode(args[3], colors.background), 20);
-        args[4] = _Color.darken(args[3], 20);
+        args[3] = _Color.toDarkMode(args[3], colors.background);
+        args[4] = ""; //_Color.darken(args[3], 20);
       }
 
       return next(args);

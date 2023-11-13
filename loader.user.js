@@ -1,10 +1,15 @@
 // ==UserScript==
 // @name Themed BC
 // @namespace https://www.bondageprojects.com/
-// @version 0.0.1
+// @version 0.1.0
 // @description Bondage Club with themes!
 // @author  dDeepLb
-// @match /^https:\/\/(www\.)?bondage(?:projects\.elementfx|-europe)\.com\/R\d+\/(BondageClub|\d+)(\/)?(((index|\d+)\.html)?)?$/
+// @match https://bondageprojects.elementfx.com/*
+// @match https://www.bondageprojects.elementfx.com/*
+// @match https://bondage-europe.com/*
+// @match https://www.bondage-europe.com/*
+// @match http://localhost:*/*
+// @match http://127.0.0.1:*/*
 
 // @grant none
 // @run-at document-end
@@ -12,9 +17,9 @@
 
 (function () {
   "use strict";
-  if (typeof ThemedBCLoaded === "undefined") {
     const script = document.createElement("script");
-    script.src = `https://ddeeplb.github.io/Themed-BC/themed-bc.js?v=${Date.now()}`;
+    script.type = "module";
+    script.setAttribute("crossorigin", "anonymous");
+    script.src = `https://ddeeplb.github.io/Themed-BC/themed.js?v=${Date.now()}`;
     document.head.appendChild(script);
-  }
 })();

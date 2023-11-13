@@ -67,13 +67,14 @@ export class MainMenu extends GuiSubscreen {
       MainCanvas.textAlign = "left";
     }
 
-    DrawButton(1500, 630, 405, 80, "", "IndianRed");
+    // DrawButton(1500, 630, 405, 80, "", "IndianRed");
+    DrawButton(1500, 730, 405, 80, "", "IndianRed");
     DrawImageResize("Icons/ServiceBell.png", 1510, 640, 60, 60);
     DrawTextFit("Reset", 1580, 670, 320, "Black");
 
-    DrawButton(1500, 730, 405, 80, "", "#BDA203", "", "Open Responsive Wiki on GitHub.", false);
-    DrawImageResize("Icons/Introduction.png", 1510, 740, 60, 60);
-    DrawTextFit("Wiki", 1580, 770, 320, "Black");
+    // DrawButton(1500, 730, 405, 80, "", "#BDA203", "", "Open Themed Wiki on GitHub.", false);
+    // DrawImageResize("Icons/Introduction.png", 1510, 740, 60, 60);
+    // DrawTextFit("Wiki", 1580, 770, 320, "Black");
 
     DrawButton(1500, 830, 405, 80, "", "#49225C");
     DrawImageResize("Assets/Female3DCG/Emoticon/Coffee/Icon.png", 1510, 840, 60, 60);
@@ -104,16 +105,16 @@ export class MainMenu extends GuiSubscreen {
     }
     GuiSubscreen.START_X = tmp;
 
-    if (MouseIn(1500, 630, 405, 80)) this.setSubscreen(new GuiReset(getModule<GlobalModule>("GlobalModule")));
-    if (MouseIn(1500, 730, 400, 80)) window.open("https://github.com/dDeepLb/BC-Responsive/wiki/", "_blank");
+    //if (MouseIn(1500, 630, 405, 80)) this.setSubscreen(new GuiReset(getModule<GlobalModule>("GlobalModule")));
+    //if (MouseIn(1500, 730, 400, 80)) window.open("https://github.com/dDeepLb/Themed-BC/wiki/", "_blank");
+
+    if (MouseIn(1500, 730, 405, 80)) this.setSubscreen(new GuiReset(getModule<GlobalModule>("GlobalModule")));
     if (MouseIn(1500, 830, 400, 80)) this.setSubscreen(new GuiSupport(getModule<GlobalModule>("GlobalModule")));
   }
 
   Exit(): void {
     CharacterAppearanceForceUpCharacter = -1;
     CharacterLoadCanvas(Player);
-
-    _Style.reloadAll();
 
     this.setSubscreen(null);
   }
