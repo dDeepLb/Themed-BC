@@ -68,9 +68,12 @@ export class MainMenu extends GuiSubscreen {
     }
 
     // DrawButton(1500, 630, 405, 80, "", "IndianRed");
+    //DrawImageResize("Icons/ServiceBell.png", 1510, 640, 60, 60);
+    //DrawTextFit("Reset", 1580, 670, 320, "Black");
+
     DrawButton(1500, 730, 405, 80, "", "IndianRed");
-    DrawImageResize("Icons/ServiceBell.png", 1510, 640, 60, 60);
-    DrawTextFit("Reset", 1580, 670, 320, "Black");
+    DrawImageResize("Icons/ServiceBell.png", 1510, 740, 60, 60);
+    DrawTextFit("Reset", 1580, 770, 320, "Black");
 
     // DrawButton(1500, 730, 405, 80, "", "#BDA203", "", "Open Themed Wiki on GitHub.", false);
     // DrawImageResize("Icons/Introduction.png", 1510, 740, 60, 60);
