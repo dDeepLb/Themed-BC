@@ -6,6 +6,9 @@ import { dataStore } from "../Utilities/Data";
 import { TextMapKeys, getText } from "../Translation";
 import { BaseModule } from "./BaseModule";
 import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from "./SettingDefinitions";
+import { _Image } from "../Utilities/Drawing";
+import { _Style } from "../Utilities/Style";
+import { _Color } from "../Utilities/Color";
 
 export abstract class GuiSubscreen {
   static START_X: number = 180;
@@ -199,12 +202,22 @@ export abstract class GuiSubscreen {
     CharacterAppearanceForceUpCharacter = -1;
     CharacterLoadCanvas(Player);
 
+    if (this.areSettingsChanged()) {
+      _Color.recalculate();
+      _Style.reloadAll();
+      _Image.clearCache();
+    }
+
     setSubscreen("MainMenu");
     dataStore();
   }
 
   Unload() {
     // Empty
+  }
+
+  areSettingsChanged() {
+    return this.settings !== Player.Themed?.[this.constructor.name];
   }
 
   tooltip(text: string) {

@@ -3,7 +3,7 @@ import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
 import TTS from "../Static/Styles/TTS.css";
-import { _Color } from "./Color";
+import { _Color, colors } from "./Color";
 import { PlayerStorage } from "./Data";
 
 const styles = {
@@ -15,7 +15,7 @@ const styles = {
   Root: composeRootStyle()
 };
 
-export class Style {
+export class _Style {
   static inject(id: keyof typeof styles | string) {
     if (id == "Root") updateRootStyle();
 
@@ -39,44 +39,43 @@ export class Style {
   }
 
   static reload(id: keyof typeof styles | string) {
-    Style.eject(id);
-    Style.inject(id);
+    _Style.eject(id);
+    _Style.inject(id);
   }
 
   static injectAll() {
     const styleIDs = Object.keys(styles);
     styleIDs.forEach((id) => {
-      Style.inject(id);
+      _Style.inject(id);
     });
   }
 
   static ejectAll() {
     const styleIDs = Object.keys(styles);
     styleIDs.forEach((id) => {
-      Style.eject(id);
+      _Style.eject(id);
     });
   }
 
   static reloadAll() {
     const styleIDs = Object.keys(styles);
     styleIDs.forEach((id) => {
-      Style.reload(id);
+      _Style.reload(id);
     });
   }
 }
 
 export function composeRootStyle() {
-  const colors = PlayerStorage()?.ColorsModule;
   return /*css*/ `
     :root {
-      --primaryColor: ${colors?.primaryColor ?? "#202020"}; /*background*/
-      --secondaryColor: ${colors?.secondaryColor ?? "#303030"}; /*inputs, buttons and shit*/
-      --textColor: ${colors?.textColor ?? "#eeeeee"}; /*text obviously*/
-      --textShadowColor: ${_Color.darken(colors?.textColor ?? "#eeeeee", 50)};
-      --accentColor1: ${colors?.accentColor1 ?? "#440171"}; /*borders for html and game drawn elements*/
-      --accentColor2: ${colors?.accentColor2 ?? "#57276e"}; /*elements that should stand out, like thing on slider or button when hovered over*/
+      --primaryColor: ${colors?.background ?? "#202020"}; /*background*/
+      --secondaryColor: ${colors?.element ?? "#303030"}; /*inputs, buttons and shit*/
+      --textColor: ${colors?.text ?? "#eeeeee"}; /*text obviously*/
+      --textShadowColor: ${_Color.darken(colors?.text ?? "#eeeeee", 50)};
+      --accentColor1: ${colors?.border ?? "#440171"}; /*borders for html and game drawn elements*/
+      --accentColor2: ${colors?.elementHover ?? "#57276e"}; /*elements that should stand out, like thing on slider or button when hovered over*/
 
-      --scrollbar: ${_Color.darken(colors?.primaryColor, 20)};
+      --scrollbar: ${_Color.darken(colors?.border, 20)};
     }
     `;
 }

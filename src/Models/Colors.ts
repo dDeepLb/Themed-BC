@@ -2,9 +2,17 @@ import { BaseSettingsModel } from "./Global";
 
 export type ColorsSettingsModel = BaseSettingsModel & {
   primaryColor: string;
-  secondaryColor: string;
   textColor: string;
-  textShadowColor: string;
-  accentColor1: string;
-  accentColor2: string;
+  accentColor: string;
+};
+
+export type Colors = {
+  background: string;
+  element: string; // Buttons and HTML Elements
+  elementHover: string;
+  elementDisabled: string;
+  icon: string;
+  border: string;
+  borderHover: string;
+  text: string;
 };

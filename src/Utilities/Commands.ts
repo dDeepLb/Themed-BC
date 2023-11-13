@@ -1,23 +1,23 @@
-import { Style } from "./Style";
+import { _Style } from "./Style";
 
 export function loadCommands() {
   CommandCombine([
     {
       Tag: "reloadstyles",
       Action: () => {
-        Style.reloadAll();
+        _Style.reloadAll();
       }
     },
     {
       Tag: "ejectall",
       Action: () => {
-        Style.ejectAll();
+        _Style.ejectAll();
       }
     },
     {
       Tag: "injectall",
       Action: () => {
-        Style.injectAll();
+        _Style.injectAll();
       }
     }
   ]);

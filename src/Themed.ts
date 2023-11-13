@@ -7,8 +7,9 @@ import { conLog, conDebug } from "./Utilities/Console";
 import { dataTake, dataStore } from "./Utilities/Data";
 import { RibbonMenu } from "./Utilities/RibbonMenu";
 import { hookFunction } from "./Utilities/SDK";
-import { Style } from "./Utilities/Style";
+import { _Style } from "./Utilities/Style";
 import { IntegrationModule } from "./Modules/Integration";
+import { _Color } from "./Utilities/Color";
 
 function initWait() {
   conLog("Init wait");
@@ -43,7 +44,8 @@ export function init() {
 
   dataStore();
 
-  Style.injectAll();
+  _Color.recalculate();
+  _Style.injectAll();
 
   window.ThemedLoaded = true;
   conLog(`Loaded! Version: ${ModVersion}`);

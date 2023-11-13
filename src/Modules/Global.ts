@@ -7,7 +7,7 @@ import { sendLocalSmart } from "../Utilities/Other";
 import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
 import Changelog from "../Static/HTML/Changelog.html";
 import { PlayerStorage } from "../Utilities/Data";
-import { Style } from "../Utilities/Style";
+import { _Style } from "../Utilities/Style";
 import { loadCommands } from "../Utilities/Commands";
 import { loadGuiHooks } from "../Utilities/GuiHooks";
 
@@ -44,7 +44,7 @@ export class GlobalModule extends BaseModule {
       HookPriority.Observe,
       (args, next) => {
         next(args);
-        Style.reloadAll();
+        _Style.reloadAll();
         GlobalModule.sendNewVersionMessage();
       },
       ModuleCategory.Global

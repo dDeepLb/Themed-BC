@@ -1,7 +1,9 @@
 import { GuiSubscreen } from "../Base/BaseSetting";
 import { dataErase } from "../Utilities/Data";
 import { getText } from "../Translation";
-import { Style } from "../Utilities/Style";
+import { _Style } from "../Utilities/Style";
+import { getModule } from "../Base/Modules";
+import { ColorsModule } from "../Modules/Colors";
 
 export class GuiReset extends GuiSubscreen {
   get name(): string {
@@ -52,7 +54,7 @@ export class GuiReset extends GuiSubscreen {
       DrawButton(300, 720, 200, 80, getText("reset.button.confirm"), "White");
     }
 
-    DrawButton(1520, 690, 200, 80, getText("reset.button.cancel"), "White");
+    DrawButton(1520, 720, 200, 80, getText("reset.button.cancel"), "White");
 
     MainCanvas.textAlign = "left";
 
@@ -62,16 +64,17 @@ export class GuiReset extends GuiSubscreen {
   Click() {
     if (this.allowedConfirmTime === null) return;
 
-    if (MouseIn(1520, 690, 200, 80)) return this.Exit();
+    if (MouseIn(300, 720, 200, 80)) return this.Exit();
 
-    if (MouseIn(1000, 690, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
+    if (MouseIn(1000, 720, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
   }
 
   Confirm() {
     this.allowedConfirmTime = null;
 
     dataErase();
-    Style.reloadAll();
+    getModule("ColorsModule").registerDefaultSettings();
+    _Style.reloadAll();
 
     this.setSubscreen(null);
   }

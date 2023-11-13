@@ -3,7 +3,7 @@ import { getModule } from "../Base/Modules";
 import { GUI } from "../Base/SettingUtils";
 import { GlobalModule } from "../Modules/Global";
 import { getText } from "../Translation";
-import { Style } from "../Utilities/Style";
+import { _Style } from "../Utilities/Style";
 import { GuiReset } from "./Reset";
 import { GuiSupport } from "./Support";
 
@@ -113,7 +113,7 @@ export class MainMenu extends GuiSubscreen {
     CharacterAppearanceForceUpCharacter = -1;
     CharacterLoadCanvas(Player);
 
-    Style.reloadAll();
+    _Style.reloadAll();
 
     this.setSubscreen(null);
   }
