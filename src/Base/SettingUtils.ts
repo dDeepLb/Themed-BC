@@ -98,7 +98,7 @@ export class GUI extends BaseModule {
       next(args);
 
       RibbonMenu.drawModButton(modIndex, (modIndex) => {
-        DrawButton(1815, RibbonMenu.getYPos(modIndex), 90, 90, "", "White", "Icons/Arousal.png", getText("infosheet.button_popup"));
+        DrawButton(1815, RibbonMenu.getYPos(modIndex), 90, 90, "", "White", "Icons/ColorChange.png", getText("infosheet.button_popup"));
       });
     });
 
