@@ -3,7 +3,7 @@ import { _Image } from "./Drawing";
 import { HookPriority, ModuleCategory, hookFunction } from "./SDK";
 
 const doRedraw = () => {
-  return !Player.Themed?.GlobalModule?.themedEnabled || !Player.Themed?.GlobalModule?.doVanillaGuiOverhaul;
+  return Player.Themed?.GlobalModule?.themedEnabled || Player.Themed?.GlobalModule?.doVanillaGuiOverhaul;
 };
 
 const isWhite = (color: string) => _Color.getComputed(color) === "rgb(255, 255, 255)";
@@ -18,7 +18,7 @@ export function loadGuiHooks() {
     "DrawProcess",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args);
+      if (!doRedraw()) return next(args);
 
       let B = window[CurrentScreen + "Background"];
       if (B != "Sheet") return next(args);
@@ -51,7 +51,7 @@ export function loadGuiHooks() {
     "DrawButton",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args);
+      if (!doRedraw()) return next(args);
 
       const [Left, Top, Width, Height, Label, Color, Image, HoveringText, Disabled] = args;
       const isHovering = !!(MouseX >= Left && MouseX <= Left + Width && MouseY >= Top && MouseY <= Top + Height && !CommonIsMobile);
@@ -59,7 +59,7 @@ export function loadGuiHooks() {
       ControllerAddActiveArea(Left, Top);
 
       // Draw the button rectangle
-      if (isWhite) {
+      if (isWhite(Color)) {
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
         MainCanvas.fillStyle = isHovering && !Disabled ? colors.elementHover : !Disabled ? colors.element : colors.elementDisabled;
@@ -74,10 +74,10 @@ export function loadGuiHooks() {
         MainCanvas.rect(Left, Top, Width, Height);
         MainCanvas.fillStyle =
           isHovering && !Disabled
-            ? _Color.toDarkMode(Color, colors.elementHover)
+            ? _Color.darken(_Color.toDarkMode(Color, colors.elementHover), 30)
             : !Disabled
-            ? _Color.toDarkMode(Color, colors.element)
-            : _Color.darken(_Color.toDarkMode(Color, colors.element), 20);
+            ? _Color.darken(_Color.toDarkMode(Color, colors.element), 20)
+            : _Color.darken(_Color.toDarkMode(Color, colors.element), 40);
         MainCanvas.fillRect(Left, Top, Width, Height);
         MainCanvas.fill();
         MainCanvas.lineWidth = 2;
@@ -105,7 +105,7 @@ export function loadGuiHooks() {
     "DrawCheckbox",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = "Black", CheckImage = "Icons/Checked.png"] = args;
 
@@ -119,7 +119,7 @@ export function loadGuiHooks() {
     "DrawBackNextButton",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       let [Left, Top, Width, Height, Label, Color, Image, BackText, NextText, Disabled, ArrowWidth] = args;
 
@@ -201,7 +201,7 @@ export function loadGuiHooks() {
     "DrawImageResize",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
       if (!_Image.doDrawImage(args[0])) return next(args); // Skip hook if image shouldn't be colorized
 
       const [source, x, y, width, height] = args;
@@ -215,7 +215,7 @@ export function loadGuiHooks() {
     "DrawTextWrap",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
 
@@ -287,7 +287,7 @@ export function loadGuiHooks() {
     "DrawTextFit",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       if (isBlack(args[4])) {
         args[4] = colors.text;
@@ -306,7 +306,7 @@ export function loadGuiHooks() {
     "DrawText",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       if (isBlack(args[3])) {
         args[3] = colors.text;
@@ -325,7 +325,7 @@ export function loadGuiHooks() {
     "DrawButtonHover",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       let [Left, Top, Width, Height, HoveringText] = args;
 
@@ -351,7 +351,7 @@ export function loadGuiHooks() {
     "DrawPreviewBox",
     HookPriority.Observe,
     (args, next) => {
-      if (doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       const [X, Y, Path, Description, Options] = args;
 
