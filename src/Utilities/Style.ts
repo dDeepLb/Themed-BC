@@ -75,7 +75,7 @@ export function composeRootStyle() {
       --accentColor1: ${colors?.border ?? "#440171"}; /*borders for html and game drawn elements*/
       --accentColor2: ${colors?.elementHover ?? "#57276e"}; /*elements that should stand out, like thing on slider or button when hovered over*/
 
-      --scrollbar: ${_Color.darken(colors?.border, 20)};
+      --scrollbar: ${_Color.darken(colors?.element, 20)};
     }
     `;
 }
