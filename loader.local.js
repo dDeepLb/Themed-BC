@@ -32,7 +32,7 @@
       const script = document.createElement("script");
       script.type = "module";
       script.setAttribute("crossorigin", "anonymous");
-      script.src = `https://ddeeplb.github.io/Themed-BC/main.js?v=${Date.now()}`;
+      script.src = `https://ddeeplb.github.io/Themed-BC/themed.js?v=${Date.now()}`;
       document.head.appendChild(script);
     });
 })();
