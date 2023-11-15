@@ -2,8 +2,8 @@ import { _Color, colors } from "./Color";
 import { _Image } from "./Drawing";
 import { HookPriority, ModuleCategory, hookFunction } from "./SDK";
 
-const doRedraw = () => {
-  return Player.Themed?.GlobalModule?.themedEnabled || Player.Themed?.GlobalModule?.doVanillaGuiOverhaul;
+export const doRedraw = () => {
+  return Player.Themed?.GlobalModule?.themedEnabled && Player.Themed?.GlobalModule?.doVanillaGuiOverhaul;
 };
 
 const isWhite = (color: string) => _Color.getComputed(color) === "rgb(255, 255, 255)";
