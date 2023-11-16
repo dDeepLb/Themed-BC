@@ -8,7 +8,8 @@ import { BaseModule } from "./BaseModule";
 import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from "./SettingDefinitions";
 import { _Image } from "../Utilities/Drawing";
 import { _Style } from "../Utilities/Style";
-import { _Color } from "../Utilities/Color";
+import { _Color, color } from "../Utilities/Color";
+import { doRedraw } from "../Utilities/GuiHooks";
 
 export abstract class GuiSubscreen {
   static START_X: number = 180;
@@ -203,7 +204,7 @@ export abstract class GuiSubscreen {
     CharacterLoadCanvas(Player);
 
     if (this.areSettingsChanged()) {
-      _Color.recalculate();
+      _Color.composeRoot();
       _Style.reloadAll();
       _Image.clearCache();
     }
@@ -270,13 +271,13 @@ function drawTooltip(x: number, y: number, width: number, text: string, align: "
   canvas.textAlign = align;
   canvas.beginPath();
   canvas.rect(x, y, width, 65);
-  canvas.fillStyle = "#FFFF88";
+  canvas.fillStyle = doRedraw() ? color.elementBackground : "#FFFF88";
   canvas.fillRect(x, y, width, 65);
   canvas.fill();
   canvas.lineWidth = 2;
-  canvas.strokeStyle = "black";
+  canvas.strokeStyle = doRedraw() ? color.elementBorder : "black";
   canvas.stroke();
   canvas.closePath();
-  DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, "black");
+  DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? color.text : "black");
   canvas.textAlign = bak;
 }

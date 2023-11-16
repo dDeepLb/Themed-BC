@@ -1,6 +1,8 @@
-import { _Color, colors } from "./Color";
-import { _Image } from "./Drawing";
+import { _Color, color } from "./Color";
+import { _Image, drawRect } from "./Drawing";
 import { HookPriority, ModuleCategory, hookFunction } from "./SDK";
+
+// NOTE LSCG, BCTweaks, FBC are having elements that need some effort from their side.
 
 export const doRedraw = () => {
   return Player.Themed?.GlobalModule?.themedEnabled && Player.Themed?.GlobalModule?.doVanillaGuiOverhaul;
@@ -25,7 +27,7 @@ export function loadGuiHooks() {
 
       let time = args[0];
 
-      DrawRect(0, 0, 2000, 1000, colors.background);
+      DrawRect(0, 0, 2000, 1000, color.mainBackground);
 
       MainCanvas.filter = "none";
 
@@ -54,42 +56,35 @@ export function loadGuiHooks() {
       if (!doRedraw()) return next(args);
 
       const [Left, Top, Width, Height, Label, Color, Image, HoveringText, Disabled] = args;
-      const isHovering = !!(MouseX >= Left && MouseX <= Left + Width && MouseY >= Top && MouseY <= Top + Height && !CommonIsMobile);
+      const isHovering = MouseHovering(Left, Top, Width, Height);
 
       ControllerAddActiveArea(Left, Top);
 
       // Draw the button rectangle
       if (isWhite(Color)) {
-        MainCanvas.beginPath();
-        MainCanvas.rect(Left, Top, Width, Height);
-        MainCanvas.fillStyle = isHovering && !Disabled ? colors.elementHover : !Disabled ? colors.element : colors.elementDisabled;
-        MainCanvas.fillRect(Left, Top, Width, Height);
-        MainCanvas.fill();
-        MainCanvas.lineWidth = 2;
-        MainCanvas.strokeStyle = isHovering ? colors.borderHover : colors.border;
-        MainCanvas.stroke();
-        MainCanvas.closePath();
+        if (!isHovering && !Disabled) drawRect(Left, Top, Width, Height, color.elementBackground, color.elementBorder);
+        else if (isHovering && !Disabled) drawRect(Left, Top, Width, Height, color.elementBackgroundHover, color.elementBorderHover);
+        else if (Disabled) drawRect(Left, Top, Width, Height, color.elementBackgroundDisabled, color.elementBorder);
       } else {
-        MainCanvas.beginPath();
-        MainCanvas.rect(Left, Top, Width, Height);
-        MainCanvas.fillStyle =
-          isHovering && !Disabled
-            ? _Color.darken(_Color.toDarkMode(Color, colors.elementHover), 30)
-            : !Disabled
-            ? _Color.darken(_Color.toDarkMode(Color, colors.element), 20)
-            : _Color.darken(_Color.toDarkMode(Color, colors.element), 40);
-        MainCanvas.fillRect(Left, Top, Width, Height);
-        MainCanvas.fill();
-        MainCanvas.lineWidth = 2;
-        MainCanvas.strokeStyle = isHovering ? colors.borderHover : colors.border;
-        MainCanvas.stroke();
-        MainCanvas.closePath();
+        if (!isHovering && !Disabled)
+          drawRect(Left, Top, Width, Height, _Color.darken(_Color.toDarkMode(Color, color.elementBackground), 20), color.elementBorder);
+        else if (isHovering && !Disabled)
+          drawRect(
+            Left,
+            Top,
+            Width,
+            Height,
+            _Color.darken(_Color.toDarkMode(Color, color.elementBackgroundHover), 30),
+            color.elementBorderHover
+          );
+        else if (Disabled)
+          drawRect(Left, Top, Width, Height, _Color.darken(_Color.toDarkMode(Color, color.elementBackground), 40), color.elementBorder);
       }
 
-      DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, Width - 4, colors.text);
+      DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, Width - 4, color.text);
 
       if (Image != null && Image != "") {
-        if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
+        if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, color.icon, {});
         else DrawImage(Image, Left + 2, Top + 2);
       }
 
@@ -109,8 +104,18 @@ export function loadGuiHooks() {
 
       const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = "Black", CheckImage = "Icons/Checked.png"] = args;
 
-      DrawText(Text, Left + 100, Top + 33, colors.text, "");
-      DrawButton(Left, Top, Width, Height, "", Disabled ? colors.elementDisabled : colors.element, IsChecked ? CheckImage : "", null, Disabled);
+      DrawText(Text, Left + 100, Top + 33, color.text, "");
+      DrawButton(
+        Left,
+        Top,
+        Width,
+        Height,
+        "",
+        Disabled ? color.elementBackgroundDisabled : color.elementBackground,
+        IsChecked ? CheckImage : "",
+        null,
+        Disabled
+      );
     },
     ModuleCategory.Global
   );
@@ -135,10 +140,10 @@ export function loadGuiHooks() {
       // Draw the button rectangle
       MainCanvas.beginPath();
       MainCanvas.rect(Left, Top, Width, Height);
-      MainCanvas.fillStyle = colors.element;
+      MainCanvas.fillStyle = color.elementBackground;
       MainCanvas.fillRect(Left, Top, Width, Height);
       if (MouseIn(Left, Top, Width, Height) && !CommonIsMobile && !Disabled) {
-        MainCanvas.fillStyle = colors.elementHover;
+        MainCanvas.fillStyle = color.elementBackgroundHover;
         if (MouseX > RightSplit) {
           MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
         } else if (MouseX <= LeftSplit) {
@@ -148,20 +153,20 @@ export function loadGuiHooks() {
         }
       } else if (CommonIsMobile && ArrowWidth < Width / 2 && !Disabled) {
         // Fill in the arrow regions on mobile
-        MainCanvas.fillStyle = colors.elementDisabled;
+        MainCanvas.fillStyle = color.elementBackgroundDisabled;
         MainCanvas.fillRect(Left, Top, ArrowWidth, Height);
         MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
       }
       MainCanvas.lineWidth = 2;
-      MainCanvas.strokeStyle = colors.border;
+      MainCanvas.strokeStyle = color.elementBorder;
       MainCanvas.stroke();
       MainCanvas.closePath();
 
       // Draw the text or image
-      DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, isWhite(Color) ? colors.text : Color);
+      DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, isWhite(Color) ? color.text : Color);
 
       if (Image != null && Image != "") {
-        if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
+        if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, color.icon, {});
         else DrawImage(Image, Left + 2, Top + 2);
       }
 
@@ -206,7 +211,7 @@ export function loadGuiHooks() {
 
       const [source, x, y, width, height] = args;
 
-      _Image.drawColorized(source, x, y, colors.icon, { newWidth: width, newHeight: height });
+      _Image.drawColorized(source, x, y, color.icon, { newWidth: width, newHeight: height });
     },
     ModuleCategory.Global
   );
@@ -218,25 +223,28 @@ export function loadGuiHooks() {
       if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
+      const isHovering = MouseHovering(X, Y, Width, Height);
 
-      ForeColor = colors.text; // ForeColor arg - means text color, I think.
-      if (BackColor) BackColor = colors.element; // BackColor arg - means background color of the box, I think too
+      if (!Text) return;
 
       ControllerAddActiveArea(X, Y);
 
       // Draw the rectangle if we need too
       if (BackColor != null) {
-        MainCanvas.beginPath();
-        MainCanvas.rect(X, Y, Width, Height);
-        MainCanvas.fillStyle = BackColor;
-        MainCanvas.fillRect(X, Y, Width, Height);
-        MainCanvas.fill();
-        MainCanvas.lineWidth = 2;
-        MainCanvas.strokeStyle = colors.border;
-        MainCanvas.stroke();
-        MainCanvas.closePath();
+        if (isWhite(BackColor)) {
+          if (!isHovering) {
+            drawRect(X, Y, Width, Height, color.elementBackground, color.elementBorder);
+          } else {
+            drawRect(X, Y, Width, Height, color.elementBackgroundHover, color.elementBorder);
+          }
+        } else {
+          if (!isHovering) {
+            drawRect(X, Y, Width, Height, BackColor, color.elementBorder);
+          } else {
+            drawRect(X, Y, Width, Height, _Color.darken(BackColor, 20), color.elementBorder);
+          }
+        }
       }
-      if (!Text) return;
 
       // Sets the text size if there's a maximum number of lines
       let TextSize;
@@ -288,12 +296,13 @@ export function loadGuiHooks() {
     HookPriority.Observe,
     (args, next) => {
       if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (args[0].startsWith("Description")) return next(args); // Temporary "solution"
 
       if (isBlack(args[4])) {
-        args[4] = colors.text;
+        args[4] = color.text;
         args[5] = ""; //_Color.darken(args[4], 20);
       } else {
-        args[4] = _Color.toDarkMode(args[4], colors.background);
+        args[4] = _Color.toDarkMode(args[4], color.mainBackground);
         args[5] = ""; //_Color.darken(args[4], 20);
       }
 
@@ -309,14 +318,15 @@ export function loadGuiHooks() {
       if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
       if (isBlack(args[3])) {
-        args[3] = colors.text;
+        args[3] = color.text;
         args[4] = ""; //_Color.darken(args[3], 20);
       } else {
-        args[3] = _Color.toDarkMode(args[3], colors.background);
+        args[3] = _Color.toDarkMode(args[3], color.mainBackground);
         args[4] = ""; //_Color.darken(args[3], 20);
       }
 
-      return next(args);
+      next(args);
+      args[3] = "black";
     },
     ModuleCategory.Global
   );
@@ -329,20 +339,12 @@ export function loadGuiHooks() {
 
       let [Left, Top, Width, Height, HoveringText] = args;
 
-      if (HoveringText != null && HoveringText != "") {
-        Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
-        Top = Top + (Height - 65) / 2;
-        MainCanvas.beginPath();
-        MainCanvas.rect(Left, Top, 450, 65);
-        MainCanvas.fillStyle = colors.element;
-        MainCanvas.fillRect(Left, Top, 450, 65);
-        MainCanvas.fill();
-        MainCanvas.lineWidth = 2;
-        MainCanvas.strokeStyle = colors.border;
-        MainCanvas.stroke();
-        MainCanvas.closePath();
-        DrawTextFit(HoveringText, Left + 225, Top + 33, 444, colors.text);
-      }
+      if (HoveringText == null || HoveringText == "") return next(args);
+
+      Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
+      Top = Top + (Height - 65) / 2;
+      drawRect(Left, Top, 450, 65, color.elementBackground, color.elementBorder);
+      DrawTextFit(HoveringText, Left + 225, Top + 33, 444, "Black");
     },
     ModuleCategory.Global
   );
@@ -364,13 +366,13 @@ export function loadGuiHooks() {
       const TextGutter = Description ? 44 : 0;
 
       // Default background and foreground colors
-      Background = colors.element;
-      Foreground = colors.text;
-      Border = colors.border;
+      Background = color.elementBackground;
+      Foreground = color.text;
+      Border = color.elementBorder;
       Hover = MouseHovering(X, Y, Width, Height);
 
-      if (Disabled === true) Background = colors.elementDisabled;
-      else if (Hover) Background = colors.elementHover;
+      if (Disabled) Background = color.elementBackgroundDisabled;
+      else if (Hover) Background = color.elementBackgroundHover;
 
       // Do a bunch of math to keep the image scaled
       let ImageX = X + Padding;
@@ -399,8 +401,7 @@ export function loadGuiHooks() {
       // Now draw the preview box
       DrawRect(X, Y, Width, Height, Background);
       ControllerAddActiveArea(X, Y);
-      if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.borderHover : Border);
-      // DrawRect(ImageX, ImageY, ImageWidth, ImageHeight, "pink"); // Debug rect
+      if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? color.elementBorderHover : Border);
       if (Path !== "") DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
       DrawPreviewIcons(Icons, X, Y);
       if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);

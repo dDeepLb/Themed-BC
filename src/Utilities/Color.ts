@@ -9,13 +9,13 @@ type RGBColor = {
 
 let cachedColors = {};
 
-export const colors: Colors = {
-  background: "",
-  element: "",
-  elementHover: "",
-  elementDisabled: "",
-  border: "",
-  borderHover: "",
+export const color: Colors = {
+  mainBackground: "",
+  elementBackground: "",
+  elementBackgroundHover: "",
+  elementBackgroundDisabled: "",
+  elementBorder: "",
+  elementBorderHover: "",
   text: "",
   icon: ""
 };
@@ -163,17 +163,17 @@ export class _Color {
     return ret;
   }
 
-  static recalculate() {
+  static composeRoot() {
     const data = Player.Themed.ColorsModule;
 
-    colors.background = data.primaryColor;
-    colors.element = _Color.lighten(data.primaryColor, 10);
-    colors.elementDisabled = data.primaryColor;
-    colors.elementHover = data.accentColor;
-    colors.border = data.accentColor;
-    colors.borderHover = _Color.lighten(data.accentColor, 20);
-    colors.text = data.textColor;
-    colors.icon = data.accentColor;
+    color.mainBackground = data.primaryColor;
+    color.elementBackground = _Color.lighten(data.primaryColor, 10);
+    color.elementBackgroundDisabled = data.primaryColor;
+    color.elementBackgroundHover = data.accentColor;
+    color.elementBorder = data.accentColor;
+    color.elementBorderHover = _Color.lighten(data.accentColor, 20);
+    color.text = data.textColor;
+    color.icon = data.accentColor;
   }
 
   static setCache(key: string, value: string) {

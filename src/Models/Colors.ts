@@ -7,12 +7,12 @@ export type ColorsSettingsModel = BaseSettingsModel & {
 };
 
 export type Colors = {
-  background: string;
-  element: string; // Buttons and HTML Elements
-  elementHover: string;
-  elementDisabled: string;
+  mainBackground: string;
+  elementBackground: string; // Buttons and HTML Elements
+  elementBackgroundHover: string;
+  elementBackgroundDisabled: string;
   icon: string;
-  border: string;
-  borderHover: string;
+  elementBorder: string;
+  elementBorderHover: string;
   text: string;
 };

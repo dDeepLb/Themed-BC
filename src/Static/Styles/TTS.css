@@ -1,17 +1,17 @@
 .tts-dialog {
-  background-color: var(--primaryColor);
-  border: 2px solid var(--accentColor1);
+  background-color: var(--backgroundColor);
+  border: 2px solid var(--elementBorder);
   color: var(--textColor);
 }
 
 .tts-option {
-  background-color: var(--secondaryColor);
-  border-color: var(--accentColor1);
+  background-color: var(--elementBackgroundColor);
+  border-color: var(--elementBorder);
   color: var(--textColor);
 }
 
 input[type="range"].tts-slider {
-  background-color: var(--secondaryColor);
+  background-color: var(--elementBackgroundColor);
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -21,7 +21,7 @@ input[type="range"].tts-slider {
 }
 
 input[type="range"].tts-slider::-webkit-slider-thumb {
-  background: var(--accentColor1);
+  background: var(--accentColor);
   -webkit-appearance: none;
   appearance: none;
   width: 15px;
@@ -31,7 +31,7 @@ input[type="range"].tts-slider::-webkit-slider-thumb {
 }
 
 input[type="range"].tts-slider::-moz-range-thumb {
-  background: var(--accentColor1);
+  background: var(--accentColor);
   width: 15px;
   height: 15px;
   border-radius: 50%;
@@ -39,51 +39,58 @@ input[type="range"].tts-slider::-moz-range-thumb {
 }
 
 .tts-select {
-  background-color: var(--secondaryColor);
-  border-color: var(--accentColor1);
+  background-color: var(--elementBackgroundColor);
+  border-color: var(--elementBorder);
   color: var(--textColor);
 }
 
 .tts-tab {
-  background-color: var(--secondaryColor);
-  border-color: var(--accentColor1);
+  background-color: var(--elementBackgroundColor);
+  border-color: var(--elementBorder);
   color: var(--textColor);
 }
 
 .tts-btn {
-  background-color: var(--secondaryColor);
-  border: 1px solid var(--accentColor1);
+  background-color: var(--elementBackgroundColor);
+  border: 1px solid var(--elementBorder);
   color: var(--textColor);
 }
 
 .tts-tab.active {
-  background-color: var(--accentColor2);
+  background-color: var(--accentColor);
 }
 
 .tts-toggle-container {
-  border-color: var(--accentColor1);
+  border-color: var(--elementBorder);
 }
 
 .tts-boxed-container {
-  border-color: var(--accentColor1);
+  border-color: var(--elementBorder);
 }
 
 .tts-link {
-  border-color: var(--accentColor1);
-  background-color: var(--secondaryColor);
+  border-color: var(--elementBorder);
+  background-color: var(--elementBackgroundColor);
   color: var(--textColor);
 }
 
 .tts-link:hover {
-  background-color: var(--secondaryColor);
-  color: var(--accentColor2);
+  background-color: var(--elementBackgroundColor);
+  color: var(--accentColor);
 }
 
 .mo-modal-content {
-  background-color: var(--primaryColor);
-  border: 1px solid var(--accentColor1);
+  background-color: var(--backgroundColor);
+  border: 1px solid var(--elementBorder);
+  color: var(--textColor);
 }
 
 .mo-closer {
+  color: var(--textColor);
+}
+
+#mo_submitInput-1 {
+  background-color: var(--elementBackgroundColor);
+  border: 1px solid var(--elementBorder);
   color: var(--textColor);
 }

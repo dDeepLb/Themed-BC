@@ -44,7 +44,7 @@ export function init() {
 
   dataStore();
 
-  _Color.recalculate();
+  _Color.composeRoot();
   _Style.injectAll();
 
   window.ThemedLoaded = true;

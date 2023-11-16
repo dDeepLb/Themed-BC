@@ -1,13 +1,13 @@
 .bce-img {
-  border-color: var(--accentColor1);
+  border-color: var(--elementBorder);
 }
 
 #bce-instant-messenger {
   top: 0%;
   left: 0%;
-  background-color: var(--primaryColor);
+  background-color: var(--backgroundColor);
   color: var(--textColor);
-  border-color: var(--accentColor1);
+  border-color: var(--elementBorder);
   max-width: 99.5%;
   max-height: 85%;
   min-width: 38%;
@@ -15,28 +15,28 @@
 }
 
 .bce-friend-list-entry.bce-friend-list-selected {
-  border-top-color: var(--accentColor1);
-  border-bottom-color: var(--accentColor1);
-  background-color: var(--primaryColor);
+  border-top-color: var(--elementBorder);
+  border-bottom-color: var(--elementBorder);
+  background-color: var(--backgroundColor);
 }
 
 .bce-friend-list-entry:hover {
-  background-color: var(--secondaryColor);
+  background-color: var(--elementBackgroundHover);
 }
 
 #bce-message-right-container {
-  border-left-color: var(--accentColor1);
+  border-left-color: var(--elementBorder);
 }
 
 #bce-message-input {
-  border-top: 1px solid var(--accentColor1);
-  border-bottom: 1px solid var(--accentColor1);
-  background-color: var(--primaryColor);
+  border-top: 1px solid var(--elementBorder);
+  border-bottom: 1px solid var(--elementBorder);
+  background-color: var(--backgroundColor);
   color: var(--textColor);
 }
 
 .bce-message-divider {
-  border-bottom-color: var(--accentColor1);
+  border-bottom-color: var(--elementBorder);
 }
 
 .bce-message-sender {
@@ -48,13 +48,13 @@
 }
 
 #bce-friend-search {
-  border-bottom-color: var(--accentColor1);
-  background-color: var(--secondaryColor);
+  border-bottom-color: var(--elementBorder);
+  background-color: var(--elementBackgroundColor);
   color: var(--textColor);
 }
 
 .bce-colors .bce-dark-input {
-  background-color: var(--primaryColor);
+  background-color: var(--backgroundColor);
   color: var(--textColor);
-  border: 1px solid var(--accentColor1);
+  border: 1px solid var(--elementBorder);
 }

@@ -9,12 +9,12 @@
 
 #TextAreaChatLog[data-colortheme="dark"] div.ChatMessage.ThemedMessage,
 #TextAreaChatLog[data-colortheme="dark2"] div.ChatMessage.ThemedMessage {
-  background-color: #111;
-  border: 2px solid #0b090c;
+  background-color: var(--elementBackgroundColor);
+  border: 2px solid var(--accentColor);
   padding-left: 5px;
   display: block;
   white-space: wrap;
-  color: #eee;
+  color: var(--textColor);
 }
 
 #TextAreaChatLog div.ChatMessage.ThemedMessage {
@@ -30,7 +30,7 @@
 #TextAreaChatLog[data-colortheme="dark2"] a.ThemedText {
   cursor: pointer;
   font-weight: bold;
-  color: #eee;
+  color: var(--textColor);
 }
 
 #TextAreaChatLog a.ThemedText {

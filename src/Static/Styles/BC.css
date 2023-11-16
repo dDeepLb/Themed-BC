@@ -1,8 +1,8 @@
 #TextAreaChatLog[data-colortheme="dark"],
 #TextAreaChatLog[data-colortheme="dark2"] {
-  background-color: var(--primaryColor);
+  background-color: var(--backgroundColor);
   color: var(--textColor);
-  border-color: var(--accentColor1);
+  border-color: var(--elementBorder);
 }
 
 #TextAreaChatLog .ChatMessageName,
@@ -12,25 +12,25 @@
 }
 
 textarea {
-  background: var(--primaryColor);
+  background: var(--backgroundColor);
   color: var(--textColor);
-  border: 1px solid var(--accentColor1);
+  border: 1px solid var(--elementBorder);
 }
 
 input {
-  background: var(--secondaryColor);
+  background: var(--elementBackgroundColor);
   color: var(--textColor);
-  border: 1px solid var(--accentColor1);
+  border: 1px solid var(--elementBorder);
 }
 
 textarea:focus,
 input:focus {
-  outline: var(--accentColor1) solid 1px;
+  outline: var(--elementBorder) solid 1px;
 }
 
 #FriendList {
-  border-color: var(--accentColor1);
-  background-color: var(--primaryColor);
+  border-color: var(--elementBorder);
+  background-color: var(--backgroundColor);
   padding: 0;
   margin-top: 1%;
   padding-bottom: 0%;
@@ -47,12 +47,12 @@ input:focus {
   background-color: var(--scrollbar);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--secondaryColor);
+  background-color: var(--elementBackgroundHover);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--accentColor2);
+  background-color: var(--accentColor);
 }
 ::selection {
-  background-color: var(--accentColor2);
+  background-color: var(--accentColor);
   color: var(--textColor);
 }

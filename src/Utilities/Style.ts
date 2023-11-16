@@ -3,7 +3,7 @@ import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
 import TTS from "../Static/Styles/TTS.css";
-import { _Color, colors } from "./Color";
+import { _Color, color } from "./Color";
 import { PlayerStorage } from "./Data";
 
 const styles = {
@@ -12,7 +12,7 @@ const styles = {
   FUSAM: FUSAM,
   Themed: Themed,
   TTS: TTS,
-  Root: composeRootStyle()
+  Root: composeRoot()
 };
 
 export class _Style {
@@ -65,21 +65,27 @@ export class _Style {
   }
 }
 
-export function composeRootStyle() {
+export function composeRoot() {
   return /*css*/ `
     :root {
-      --primaryColor: ${colors?.background ?? "#202020"}; /*background*/
-      --secondaryColor: ${colors?.element ?? "#303030"}; /*inputs, buttons and shit*/
-      --textColor: ${colors?.text ?? "#eeeeee"}; /*text obviously*/
-      --textShadowColor: ${_Color.darken(colors?.text ?? "#eeeeee", 50)};
-      --accentColor1: ${colors?.border ?? "#440171"}; /*borders for html and game drawn elements*/
-      --accentColor2: ${colors?.elementHover ?? "#57276e"}; /*elements that should stand out, like thing on slider or button when hovered over*/
+      /*accent color*/
+      --accentColor: ${color?.elementBorder ?? "#440171"};
+      /*background*/
+      --backgroundColor: ${color?.mainBackground ?? "#202020"}; 
+      /*inputs, buttons and shit*/
+      --elementBackgroundColor: ${color?.elementBackground ?? "#303030"}; 
+       /*elements that should stand out, like thing on slider or button when hovered over*/
+      --elementBackgroundHover: ${color?.elementBackgroundHover ?? "#57276e"};
+      /*borders for html and game drawn elements*/
+      --elementBorder: var(--accentColor);
+      /*text obviously*/
+      --textColor: ${color?.text ?? "#eeeeee"}; 
 
-      --scrollbar: ${_Color.darken(colors?.element, 20)};
+      --scrollbar: ${_Color.darken(color?.elementBackground, 20)};
     }
     `;
 }
 
 export function updateRootStyle() {
-  styles.Root = composeRootStyle();
+  styles.Root = composeRoot();
 }
