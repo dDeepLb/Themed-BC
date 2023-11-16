@@ -366,7 +366,7 @@ export function loadGuiHooks() {
       const TextGutter = Description ? 44 : 0;
 
       // Default background and foreground colors
-      Background = color.elementBackground;
+      Background = isWhite(Background) ? color.elementBackground : _Color.darken(_Color.toDarkMode(Background, color.elementBackground), 50);
       Foreground = color.text;
       Border = color.elementBorder;
       Hover = MouseHovering(X, Y, Width, Height);

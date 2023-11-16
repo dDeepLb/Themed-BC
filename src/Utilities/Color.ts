@@ -146,7 +146,7 @@ export class _Color {
     }
   }
 
-  static getComputed(color: string) {
+  static getComputed(color: string): string {
     let cachedColor = _Color.getCache(`comp${color}`);
     if (cachedColor) return cachedColor;
 
@@ -163,17 +163,29 @@ export class _Color {
     return ret;
   }
 
+  static getHexComputed(color: string) {
+    color = _Color.getComputed(color);
+    const RGBA = _Color.extractFromRGBA(color);
+    const ret = _Color.rgbToHex(RGBA);
+
+    return ret;
+  }
+
   static composeRoot() {
     const data = Player.Themed.ColorsModule;
 
-    color.mainBackground = data.primaryColor;
-    color.elementBackground = _Color.lighten(data.primaryColor, 10);
-    color.elementBackgroundDisabled = data.primaryColor;
-    color.elementBackgroundHover = data.accentColor;
-    color.elementBorder = data.accentColor;
-    color.elementBorderHover = _Color.lighten(data.accentColor, 20);
-    color.text = data.textColor;
-    color.icon = data.accentColor;
+    const primaryColor = _Color.getHexComputed(data.primaryColor);
+    const accentColor = _Color.getHexComputed(data.accentColor);
+    const textColor = _Color.getHexComputed(data.textColor);
+
+    color.mainBackground = primaryColor;
+    color.elementBackground = _Color.lighten(primaryColor, 10);
+    color.elementBackgroundDisabled = primaryColor;
+    color.elementBackgroundHover = accentColor;
+    color.elementBorder = accentColor;
+    color.elementBorderHover = _Color.lighten(accentColor, 20);
+    color.text = textColor;
+    color.icon = accentColor;
   }
 
   static setCache(key: string, value: string) {

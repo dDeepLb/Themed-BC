@@ -4,6 +4,8 @@ import { getText } from "../Translation";
 import { _Style } from "../Utilities/Style";
 import { getModule } from "../Base/Modules";
 import { ColorsModule } from "../Modules/Colors";
+import { _Color } from "../Utilities/Color";
+import { _Image } from "../Utilities/Drawing";
 
 export class GuiReset extends GuiSubscreen {
   get name(): string {
@@ -64,9 +66,8 @@ export class GuiReset extends GuiSubscreen {
   Click() {
     if (this.allowedConfirmTime === null) return;
 
-    if (MouseIn(300, 720, 200, 80)) return this.Exit();
-
-    if (MouseIn(1000, 720, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
+    if (MouseIn(300, 720, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
+    if (MouseIn(1520, 720, 200, 80)) return this.Exit();
   }
 
   Confirm() {
@@ -74,7 +75,10 @@ export class GuiReset extends GuiSubscreen {
 
     dataErase();
     getModule("ColorsModule").registerDefaultSettings();
+
+    _Color.composeRoot();
     _Style.reloadAll();
+    _Image.clearCache();
 
     this.setSubscreen(null);
   }

@@ -16,7 +16,7 @@ export class ColorsModule extends BaseModule {
     return <ColorsSettingsModel>{
       primaryColor: "#202020",
       accentColor: "#440171",
-      textColor: "#eee"
+      textColor: "#ccc"
     };
   }
 
