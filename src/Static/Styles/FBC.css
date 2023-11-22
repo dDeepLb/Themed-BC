@@ -5,8 +5,8 @@
 #bce-instant-messenger {
   top: 0%;
   left: 0%;
-  background-color: var(--backgroundColor);
-  color: var(--textColor);
+  background-color: var(--background);
+  color: var(--text);
   border-color: var(--elementBorder);
   max-width: 99.5%;
   max-height: 85%;
@@ -17,7 +17,7 @@
 .bce-friend-list-entry.bce-friend-list-selected {
   border-top-color: var(--elementBorder);
   border-bottom-color: var(--elementBorder);
-  background-color: var(--backgroundColor);
+  background-color: var(--elementBackground);
 }
 
 .bce-friend-list-entry:hover {
@@ -31,8 +31,8 @@
 #bce-message-input {
   border-top: 1px solid var(--elementBorder);
   border-bottom: 1px solid var(--elementBorder);
-  background-color: var(--backgroundColor);
-  color: var(--textColor);
+  background-color: var(--background);
+  color: var(--text);
 }
 
 .bce-message-divider {
@@ -40,21 +40,21 @@
 }
 
 .bce-message-sender {
-  text-shadow: none;
+  text-shadow: 0.05em 0.05em var(--textShadow);
 }
 
 .bce-message-Message .bce-message-sender {
-  text-shadow: none;
+  text-shadow: 0.05em 0.05em var(--textShadow);
 }
 
 #bce-friend-search {
+  background-color: var(--background);
   border-bottom-color: var(--elementBorder);
-  background-color: var(--elementBackgroundColor);
-  color: var(--textColor);
+  color: var(--text);
 }
 
 .bce-colors .bce-dark-input {
-  background-color: var(--backgroundColor);
-  color: var(--textColor);
+  background-color: var(--elementBackground);
   border: 1px solid var(--elementBorder);
+  color: var(--text);
 }

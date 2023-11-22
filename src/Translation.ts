@@ -1,4 +1,4 @@
-import { DebugMode } from "./Utilities/Definition";
+import { DebugMode } from "./Utilities/ModDefinition";
 import { conDebug } from "./Utilities/Console";
 
 /*
@@ -41,8 +41,14 @@ const ENTextMap = {
 
   /* Integration */
   "Integration.title": "- Integration -",
-  "integration.setting.BC.name": "Enable BC \"integration\":",
-  "integration.setting.BC.desc": "Changes CSS styles of BC to use Color Settings. Changes chat, friend list, inputs and text selection along with scrollbar.",
+  "integration.setting.BC.name": "Enable BC Inputs \"integration\":",
+  "integration.setting.BC.desc": "Changes CSS styles of BC to use Color Settings. Changes inputs and other thingies where you could write text.",
+  "integration.setting.BC_Chat.name": "Enable BC Chat \"integration\":",
+  "integration.setting.BC_Chat.desc": "Changes CSS styles of BC to use Color Settings. Changes chat.",
+  "integration.setting.BC_FriendList.name": "Enable BC Friend List \"integration\":",
+  "integration.setting.BC_FriendList.desc": "Changes CSS styles of BC to use Color Settings. Changes background of friend list",
+  "integration.setting.BC_Other.name": "Enable BC Other \"integration\":",
+  "integration.setting.BC_Other.desc": "Changes CSS styles of BC to use Color Settings. Changes scroll bar and selection colors.",
   "integration.setting.FBC.name": "Enable FBC \"integration\":",
   "integration.setting.FBC.desc": "Changes CSS styles of FBC to use Color Settings. Mostly changes Instant Messenger colors.",
   "integration.setting.FUSAM.name": "Enable FUSAM \"integration\":",
@@ -53,8 +59,8 @@ const ENTextMap = {
   /* Reset */
   "reset.label.perma_reset_of_mod_data": "- Permanent reset of Themed data -",
   "reset.label.warning": "- Warning -",
-  "reset.label.if_u_confirm_perma_reset": "If you confirm, all Responsive data (including settings, responses and profiles) will be permanently reset!",
-  "reset.label.youll_able_to_use_mod": "You will be able to continue using Responsive, but all of your configuration will be reset to default!",
+  "reset.label.if_u_confirm_perma_reset": "If you confirm, all Themed data (including color settings) will be permanently reset!",
+  "reset.label.youll_able_to_use_mod": "You will be able to continue using Themed, but all of your configuration will be reset to default!",
   "reset.label.action_cannot_be_undone": "This action cannot be undone!",
 
   "reset.button.confirm": "Confirm",

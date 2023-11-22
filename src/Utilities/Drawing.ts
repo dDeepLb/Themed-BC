@@ -45,7 +45,10 @@ export class _Image {
     "Icons/Small/ColorChange.png",
     "Icons/Small/ColorChangeMulti.png",
     "Icons/Small/Naked.png",
-    "Icons/Small/Use.png"
+    "Icons/Small/Use.png",
+    "Icons/Small/YouTube.png",
+    "Assets/Female3DCG/ItemMisc/Preview/Best Friend Padlock.png",
+    "Assets/Female3DCG/ItemMisc/Preview/Best Friend Timer Padlock.png"
   ];
 
   static drawColorized(source: string, x: number, y: number, hexColor: string, { newWidth = null, newHeight = null }) {
@@ -156,13 +159,6 @@ export class _Image {
 }
 
 export function drawRect(x: number, y: number, width: number, height: number, backgroundColor: string, borderColor: string) {
-  MainCanvas.beginPath();
-  MainCanvas.rect(x, y, width, height);
-  MainCanvas.fillStyle = backgroundColor;
-  MainCanvas.fillRect(x, y, width, height);
-  MainCanvas.fill();
-  MainCanvas.lineWidth = 2;
-  MainCanvas.strokeStyle = borderColor;
-  MainCanvas.stroke();
-  MainCanvas.closePath();
+  DrawRect(x, y, width, height, backgroundColor);
+  DrawEmptyRect(x, y, width, height, borderColor, 2);
 }

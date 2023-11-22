@@ -1,4 +1,4 @@
-import { DebugMode } from "./Definition";
+import { DebugMode } from "./ModDefinition";
 
 const STYLES = {
   INFO: "color: #32CCCC",

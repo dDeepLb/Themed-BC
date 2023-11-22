@@ -1,21 +1,21 @@
 .button {
   border-color: var(--elementBorder);
-  background-color: var(--elementBackgroundColor);
-  color: var(--textColor);
+  background-color: var(--elementBackground);
+  color: var(--text);
 }
 
 .button:hover,
 .button:focus,
 select:hover,
 select:focus {
-  background-color: var(--accentColor);
+  background-color: var(--accent);
 }
 
 select,
 option {
   border-color: var(--elementBorder);
-  background-color: var(--elementBackgroundColor);
-  color: var(--textColor);
+  background-color: var(--elementBackground);
+  color: var(--text);
 }
 
 select:disabled:hover {

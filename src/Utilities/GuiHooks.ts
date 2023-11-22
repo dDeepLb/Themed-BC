@@ -2,7 +2,7 @@ import { _Color, color } from "./Color";
 import { _Image, drawRect } from "./Drawing";
 import { HookPriority, ModuleCategory, hookFunction } from "./SDK";
 
-// NOTE LSCG, BCTweaks, FBC are having elements that need some effort from their side.
+// NOTE LSCG, FBC are having elements that need some effort from their side.
 
 export const doRedraw = () => {
   return Player.Themed?.GlobalModule?.themedEnabled && Player.Themed?.GlobalModule?.doVanillaGuiOverhaul;
@@ -217,116 +217,79 @@ export function loadGuiHooks() {
   );
 
   hookFunction(
-    "DrawTextWrap",
+    "DrawRect",
     HookPriority.Observe,
     (args, next) => {
       if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
-      let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
-      const isHovering = MouseHovering(X, Y, Width, Height);
+      const [Left, Top, Width, Height]: number[] = args;
+      const Color: string = args[4];
 
-      if (!Text) return;
+      const drawRect = (color: string) => {
+        MainCanvas.beginPath();
+        MainCanvas.fillStyle = color;
+        MainCanvas.fillRect(Left, Top, Width, Height);
+        MainCanvas.fill();
+      };
 
-      ControllerAddActiveArea(X, Y);
+      switch (Color.toLowerCase()) {
+        case "white":
+        case "#eee":
+        case "#eeeeee":
+        case "#ddd":
+        case "#dddddd":
+        case "#ccc":
+        case "#cccccc":
+        case "#ffff88":
+        case "#ffffff":
+        case "#ffffff88":
+        case "#ffffffcc":
+          drawRect(color.elementBackground);
+          break;
 
-      // Draw the rectangle if we need too
-      if (BackColor != null) {
-        if (isWhite(BackColor)) {
-          if (!isHovering) {
-            drawRect(X, Y, Width, Height, color.elementBackground, color.elementBorder);
-          } else {
-            drawRect(X, Y, Width, Height, color.elementBackgroundHover, color.elementBorder);
-          }
-        } else {
-          if (!isHovering) {
-            drawRect(X, Y, Width, Height, BackColor, color.elementBorder);
-          } else {
-            drawRect(X, Y, Width, Height, _Color.darken(BackColor, 20), color.elementBorder);
-          }
-        }
+        case "#d8fed7":
+        case "#adcbac":
+          drawRect(_Color.darken(Color, 25));
+          break;
+
+        default:
+          next(args);
+          break;
       }
-
-      // Sets the text size if there's a maximum number of lines
-      let TextSize;
-      if (MaxLine != null) {
-        TextSize = MainCanvas.font;
-        GetWrapTextSize(Text, Width, MaxLine);
-      }
-
-      // Split the text if it wouldn't fit in the rectangle
-      MainCanvas.fillStyle = ForeColor;
-      if (MainCanvas.measureText(Text).width > Width) {
-        const words = fragmentText(Text, Width);
-        let line = "";
-
-        // Find the number of lines
-        let LineCount = 1;
-        for (let n = 0; n < words.length; n++) {
-          const testLine = line + words[n] + " ";
-          if (MainCanvas.measureText(testLine).width > Width && n > 0) {
-            line = words[n] + " ";
-            LineCount++;
-          } else line = testLine;
-        }
-
-        // Splits the words and draw the text
-        line = "";
-        Y = Y - (LineCount - 1) * LineSpacing + Height / 2;
-        for (let n = 0; n < words.length; n++) {
-          const testLine = line + words[n] + " ";
-          if (MainCanvas.measureText(testLine).width > Width && n > 0) {
-            MainCanvas.fillText(line, X + Width / 2, Y);
-            line = words[n] + " ";
-            Y += LineSpacing * 2;
-          } else {
-            line = testLine;
-          }
-        }
-        MainCanvas.fillText(line, X + Width / 2, Y);
-      } else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
-
-      // Resets the font text size
-      if (MaxLine != null && TextSize != null) MainCanvas.font = TextSize;
     },
     ModuleCategory.Global
   );
 
   hookFunction(
-    "DrawTextFit",
-    HookPriority.Observe,
-    (args, next) => {
-      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
-      if (args[0].startsWith("Description")) return next(args); // Temporary "solution"
-
-      if (isBlack(args[4])) {
-        args[4] = color.text;
-        args[5] = ""; //_Color.darken(args[4], 20);
-      } else {
-        args[4] = _Color.toDarkMode(args[4], color.mainBackground);
-        args[5] = ""; //_Color.darken(args[4], 20);
-      }
-
-      return next(args);
-    },
-    ModuleCategory.Global
-  );
-
-  hookFunction(
-    "DrawText",
+    "DrawEmptyRect",
     HookPriority.Observe,
     (args, next) => {
       if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
-      if (isBlack(args[3])) {
-        args[3] = color.text;
-        args[4] = ""; //_Color.darken(args[3], 20);
-      } else {
-        args[3] = _Color.toDarkMode(args[3], color.mainBackground);
-        args[4] = ""; //_Color.darken(args[3], 20);
-      }
+      const [Left, Top, Width, Height, , Thickness] = args;
+      const Color: string = args[4];
 
-      next(args);
-      args[3] = "black";
+      const drawEmptyRect = (color: string) => {
+        MainCanvas.beginPath();
+        MainCanvas.rect(Left, Top, Width, Height);
+        MainCanvas.lineWidth = Thickness;
+        MainCanvas.strokeStyle = color;
+        MainCanvas.stroke();
+      };
+
+      switch (Color.toLowerCase()) {
+        case "black":
+        case "white":
+        case "#ddd":
+        case "#000":
+        case "#000000":
+          drawEmptyRect(color.elementBorder);
+          break;
+
+        default:
+          next(args);
+          break;
+      }
     },
     ModuleCategory.Global
   );
@@ -343,7 +306,7 @@ export function loadGuiHooks() {
 
       Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
       Top = Top + (Height - 65) / 2;
-      drawRect(Left, Top, 450, 65, color.elementBackground, color.elementBorder);
+      drawRect(Left, Top, 450, 65, _Color.lighten(color.elementBackground, 25), color.elementBorder);
       DrawTextFit(HoveringText, Left + 225, Top + 33, 444, "Black");
     },
     ModuleCategory.Global
@@ -405,6 +368,120 @@ export function loadGuiHooks() {
       if (Path !== "") DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
       DrawPreviewIcons(Icons, X, Y);
       if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
+    },
+    ModuleCategory.Global
+  );
+
+  hookFunction(
+    "DrawTextWrap",
+    HookPriority.Observe,
+    (args, next) => {
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+
+      let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
+      const isHovering = MouseHovering(X, Y, Width, Height);
+
+      if (!Text) return;
+
+      ControllerAddActiveArea(X, Y);
+
+      // Draw the rectangle if we need too
+      if (BackColor != null) {
+        if (isWhite(BackColor)) {
+          if (!isHovering) {
+            drawRect(X, Y, Width, Height, color.elementBackground, color.elementBorder);
+          } else {
+            drawRect(X, Y, Width, Height, color.elementBackgroundHover, color.elementBorder);
+          }
+        } else {
+          if (!isHovering) {
+            drawRect(X, Y, Width, Height, BackColor, color.elementBorder);
+          } else {
+            drawRect(X, Y, Width, Height, _Color.darken(BackColor, 40), color.elementBorder);
+          }
+        }
+      }
+
+      // Sets the text size if there's a maximum number of lines
+      let TextSize;
+      if (MaxLine != null) {
+        TextSize = MainCanvas.font;
+        GetWrapTextSize(Text, Width, MaxLine);
+      }
+
+      // Split the text if it wouldn't fit in the rectangle
+      MainCanvas.fillStyle = isBlack(ForeColor) ? color.text : _Color.lighten(_Color.toDarkMode(ForeColor, color.elementBackground), 50);
+      if (MainCanvas.measureText(Text).width > Width) {
+        const words = fragmentText(Text, Width);
+        let line = "";
+
+        // Find the number of lines
+        let LineCount = 1;
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + " ";
+          if (MainCanvas.measureText(testLine).width > Width && n > 0) {
+            line = words[n] + " ";
+            LineCount++;
+          } else line = testLine;
+        }
+
+        // Splits the words and draw the text
+        line = "";
+        Y = Y - (LineCount - 1) * LineSpacing + Height / 2;
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + " ";
+          if (MainCanvas.measureText(testLine).width > Width && n > 0) {
+            MainCanvas.fillText(line, X + Width / 2, Y);
+            line = words[n] + " ";
+            Y += LineSpacing * 2;
+          } else {
+            line = testLine;
+          }
+        }
+        MainCanvas.fillText(line, X + Width / 2, Y);
+      } else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
+
+      // Resets the font text size
+      if (MaxLine != null && TextSize != null) MainCanvas.font = TextSize;
+    },
+    ModuleCategory.Global
+  );
+
+  hookFunction(
+    "DrawTextFit",
+    HookPriority.Observe,
+    (args, next) => {
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+      if (args[0]?.startsWith("Description")) return next(args); // NOTE Temporary "solution"
+
+      if (isBlack(args[4])) {
+        args[4] = color.text;
+        args[5] = ""; //_Color.darken(args[4], 20);
+      } else {
+        args[4] = _Color.toDarkMode(args[4], color.mainBackground);
+        args[5] = ""; //_Color.darken(args[4], 20);
+      }
+
+      return next(args);
+    },
+    ModuleCategory.Global
+  );
+
+  hookFunction(
+    "DrawText",
+    HookPriority.Observe,
+    (args, next) => {
+      if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+
+      if (isBlack(args[3])) {
+        args[3] = color.text;
+        args[4] = ""; //_Color.darken(args[3], 20);
+      } else {
+        args[3] = _Color.toDarkMode(args[3], color.mainBackground);
+        args[4] = ""; //_Color.darken(args[3], 20);
+      }
+
+      next(args);
     },
     ModuleCategory.Global
   );

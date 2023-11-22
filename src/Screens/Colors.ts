@@ -22,7 +22,7 @@ export class GuiColors extends GuiSubscreen {
     return [
       [
         <Input>{
-          type: "text",
+          type: "color",
           id: "primaryColor",
           label: "settings.setting.primaryColor.name",
           description: "settings.setting.primaryColor.desc",
@@ -30,7 +30,7 @@ export class GuiColors extends GuiSubscreen {
           setSetting: (val) => (this.settings.primaryColor = val)
         },
         <Input>{
-          type: "text",
+          type: "color",
           id: "accentColor",
           label: "settings.setting.accentColor.name",
           description: "settings.setting.accentColor.desc",
@@ -38,7 +38,7 @@ export class GuiColors extends GuiSubscreen {
           setSetting: (val) => (this.settings.accentColor = val)
         },
         <Input>{
-          type: "text",
+          type: "color",
           id: "textColor",
           label: "settings.setting.textColor.name",
           description: "settings.setting.textColor.desc",

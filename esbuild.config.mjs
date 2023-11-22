@@ -7,12 +7,14 @@ import { build } from "esbuild";
     await build({
       entryPoints: ["./src/Themed.ts"],
       bundle: true,
+      sourcemap: true,
       outfile: "./dist/themed.js",
       format: "iife",
       globalName: "Themed",
       loader: {
-        ".css": "text", // This tells esbuild to treat .css files as text files
-        ".html": "text"
+        ".html": "text",
+        ".css": "text",
+        ".png": "dataurl"
       },
       treeShaking: true,
       keepNames: true

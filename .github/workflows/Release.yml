@@ -1,8 +1,5 @@
 name: Release
 
-on:
-  workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
@@ -11,6 +8,11 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
 
 jobs:
   build:
@@ -31,13 +33,10 @@ jobs:
       - name: Build project
         run: npm run build --if-present
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1.0.8
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: themed.js
-          path: dist/
-
-      - name: Deploy GitHub Pages site
-        uses: actions/deploy-pages@v2.0.0
-        with:
-          artifact_name: themed.js
+          branch: main
+          folder: dist
+          git-config-name: github-actions[bot]
+          git-config-email: github-actions[bot]@users.noreply.github.com

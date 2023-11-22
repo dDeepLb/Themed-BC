@@ -1,4 +1,4 @@
-import { DebugMode, ModName } from "../Utilities/Definition";
+import { DebugMode, ModName } from "../Utilities/ModDefinition";
 import { MainMenu } from "../Screens/MainMenu";
 import { getText } from "../Translation";
 import { RibbonMenu } from "../Utilities/RibbonMenu";
@@ -7,6 +7,7 @@ import { BaseModule } from "./BaseModule";
 import { GuiSubscreen } from "./BaseSetting";
 import { modules } from "./Modules";
 import { setSubscreen, SETTING_NAME_PREFIX } from "./SettingDefinitions";
+import ButtonIcon from "../Static/Icons/IconThemed.png";
 
 export class GUI extends BaseModule {
   static instance: GUI | null = null;
@@ -82,7 +83,8 @@ export class GUI extends BaseModule {
 
     this._mainMenu.subscreens = this._subscreens;
 
-    let modIndex = RibbonMenu.getModIndex(ModName);
+    const modIndex = RibbonMenu.getModIndex(ModName);
+    const modYPos = RibbonMenu.getYPos(modIndex);
 
     hookFunction("PreferenceRun", HookPriority.OverrideBehavior, (args, next) => {
       if (this._currentSubscreen) {
@@ -98,7 +100,8 @@ export class GUI extends BaseModule {
       next(args);
 
       RibbonMenu.drawModButton(modIndex, (modIndex) => {
-        DrawButton(1815, RibbonMenu.getYPos(modIndex), 90, 90, "", "White", "Icons/ColorChange.png", getText("infosheet.button_popup"));
+        DrawButton(1815, modYPos, 90, 90, "", "White", "", getText("infosheet.button_popup"));
+        DrawImageResize(ButtonIcon, 1815 + 2, modYPos + 2, 85, 85);
       });
     });
 

@@ -1,6 +1,6 @@
 import { registerModule, modules } from "./Base/Modules";
 import { GUI } from "./Base/SettingUtils";
-import { ModName, ModVersion } from "./Utilities/Definition";
+import { ModName, ModVersion } from "./Utilities/ModDefinition";
 import { ColorsModule } from "./Modules/Colors";
 import { GlobalModule } from "./Modules/Global";
 import { conLog, conDebug } from "./Utilities/Console";

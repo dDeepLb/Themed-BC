@@ -1,3 +1,5 @@
+import { TextMapKeys, getText } from "../Translation";
+
 export type Setting = Button | Checkbox | Input | Label;
 
 export type Button = {
@@ -21,7 +23,7 @@ export type Checkbox = {
 };
 
 export type Input = {
-  type: "text" | "number";
+  type: "text" | "number" | "color";
   id: string;
   label: TextMapKeys;
   description: TextMapKeys;

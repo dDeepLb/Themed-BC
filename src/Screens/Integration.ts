@@ -26,6 +26,27 @@ export class GuiIntegration extends GuiSubscreen {
       },
       <Setting>{
         type: "checkbox",
+        label: "integration.setting.BC_Chat.name",
+        description: "integration.setting.BC_Chat.desc",
+        setting: () => this.settings?.BC_Chat ?? true,
+        setSetting: (val) => (this.settings.BC_Chat = val)
+      },
+      <Setting>{
+        type: "checkbox",
+        label: "integration.setting.BC_FriendList.name",
+        description: "integration.setting.BC_FriendList.desc",
+        setting: () => this.settings?.BC_FriendList ?? true,
+        setSetting: (val) => (this.settings.BC_FriendList = val)
+      },
+      <Setting>{
+        type: "checkbox",
+        label: "integration.setting.BC_Other.name",
+        description: "integration.setting.BC_Other.desc",
+        setting: () => this.settings?.BC_Other ?? true,
+        setSetting: (val) => (this.settings.BC_Other = val)
+      },
+      <Setting>{
+        type: "checkbox",
         label: "integration.setting.FBC.name",
         description: "integration.setting.FBC.desc",
         setting: () => this.settings?.FBC ?? true,

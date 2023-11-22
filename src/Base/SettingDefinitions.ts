@@ -3,7 +3,7 @@ import { GuiSubscreen } from "./BaseSetting";
 import { GUI } from "./SettingUtils";
 
 export const SETTING_FUNC_PREFIX: string = "PreferenceSubscreen";
-export const SETTING_NAME_PREFIX: string = "Themed_";
+export const SETTING_NAME_PREFIX: string = "Themed";
 export const SETTING_FUNC_NAMES: string[] = ["Load", "Run", "Click", "Unload", "Exit"];
 
 export type Subscreen = new (module: BaseModule) => GuiSubscreen;

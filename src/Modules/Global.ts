@@ -1,6 +1,6 @@
 import { BaseModule } from "../Base/BaseModule";
 import { Subscreen } from "../Base/SettingDefinitions";
-import { ModVersion } from "../Utilities/Definition";
+import { ModVersion } from "../Utilities/ModDefinition";
 import { GlobalSettingsModel } from "../Models/Global";
 import { GuiGlobal } from "../Screens/Global";
 import { sendLocalSmart } from "../Utilities/Other";
@@ -10,6 +10,7 @@ import { PlayerStorage } from "../Utilities/Data";
 import { _Style } from "../Utilities/Style";
 import { loadCommands } from "../Utilities/Commands";
 import { loadGuiHooks } from "../Utilities/GuiHooks";
+import { changeModColors } from "../Utilities/Integration";
 
 export class GlobalModule extends BaseModule {
   static isItNewVersion: boolean = false;
@@ -38,6 +39,7 @@ export class GlobalModule extends BaseModule {
   Load(): void {
     loadCommands();
     loadGuiHooks();
+    changeModColors();
 
     hookFunction(
       "ChatRoomSync",

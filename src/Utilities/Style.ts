@@ -1,4 +1,7 @@
-import BC from "../Static/Styles/BC.css";
+import BC_Inputs from "../Static/Styles/BC_Inputs.css";
+import BC_Chat from "../Static/Styles/BC_Chat.css";
+import BC_FriendList from "../Static/Styles/BC_FriendList.css";
+import BC_Other from "../Static/Styles/BC_Other.css";
 import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
@@ -7,12 +10,15 @@ import { _Color, color } from "./Color";
 import { PlayerStorage } from "./Data";
 
 const styles = {
-  BC: BC,
+  Root: composeRoot(),
+  Themed: Themed,
+  BC: BC_Inputs,
+  BC_Chat: BC_Chat,
+  BC_FriendList: BC_FriendList,
+  BC_Other: BC_Other,
   FBC: FBC,
   FUSAM: FUSAM,
-  Themed: Themed,
-  TTS: TTS,
-  Root: composeRoot()
+  TTS: TTS
 };
 
 export class _Style {
@@ -21,9 +27,10 @@ export class _Style {
 
     const styleSource = styles[id];
     const isStyleLoaded = document.getElementById(id);
+    const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
 
     if (isStyleLoaded) return;
-    if (!PlayerStorage().IntegrationModule[id] && id != "Themed" && id != "Root") return;
+    if (!isEnabled || (!PlayerStorage().IntegrationModule[id] && id != "Themed" && id != "Root")) return;
 
     const styleElement = document.createElement("style");
     styleElement.id = id;
@@ -69,19 +76,23 @@ export function composeRoot() {
   return /*css*/ `
     :root {
       /*accent color*/
-      --accentColor: ${color?.elementBorder ?? "#440171"};
+      --accent: ${color?.elementBorder || "#440171"};
       /*background*/
-      --backgroundColor: ${color?.mainBackground ?? "#202020"}; 
+      --background: ${color?.mainBackground || "#202020"}; 
       /*inputs, buttons and shit*/
-      --elementBackgroundColor: ${color?.elementBackground ?? "#303030"}; 
+      --elementBackground: ${color?.elementBackground || "#303030"}; 
        /*elements that should stand out, like thing on slider or button when hovered over*/
-      --elementBackgroundHover: ${color?.elementBackgroundHover ?? "#57276e"};
+      --elementBackgroundHover: ${color?.elementBackgroundHover || "#57276e"};
       /*borders for html and game drawn elements*/
-      --elementBorder: var(--accentColor);
+      --elementBorder: var(--accent);
       /*text obviously*/
-      --textColor: ${color?.text ?? "#eeeeee"}; 
+      --text: ${color?.text || "#eeeeee"}; 
+      /*obviously as well*/
+      --textShadow: ${_Color.darken(color?.elementBackground, 50) || "#cccccc"};
 
-      --scrollbar: ${_Color.darken(color?.elementBackground, 20)};
+      --scrollbar: ${_Color.darken(color?.elementBackground, 20) || "#454545"};
+
+      --friendlistBackground: ${color?.elementBackground + "80" || "#30303080"}
     }
     `;
 }

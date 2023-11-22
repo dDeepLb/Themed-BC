@@ -1,6 +1,6 @@
 import { Setting } from "../../.types/setting";
 import { BaseSettingsModel } from "../Models/Global";
-import { modules } from "./Modules";
+import { getModule, modules } from "./Modules";
 import { conDebug } from "../Utilities/Console";
 import { dataStore } from "../Utilities/Data";
 import { TextMapKeys, getText } from "../Translation";
@@ -10,6 +10,7 @@ import { _Image } from "../Utilities/Drawing";
 import { _Style } from "../Utilities/Style";
 import { _Color, color } from "../Utilities/Color";
 import { doRedraw } from "../Utilities/GuiHooks";
+import { changeModColors } from "../Utilities/Integration";
 
 export abstract class GuiSubscreen {
   static START_X: number = 180;
@@ -85,7 +86,7 @@ export abstract class GuiSubscreen {
     this.multipageStructure.forEach((item, ix, arr) => {
       if (ix != PreferencePageCurrent - 1) {
         item.forEach((setting) => {
-          if (setting.type == "text" || setting.type == "number") this.elementHide(setting.id);
+          if (setting.type == "text" || setting.type == "number" || setting.type == "color") this.elementHide(setting.id);
         });
       }
     });
@@ -107,6 +108,9 @@ export abstract class GuiSubscreen {
           case "number":
             ElementCreateInput(item.id, "number", item.setting(), "255");
             break;
+          case "color":
+            ElementCreateInput(item.id, "color", item.setting());
+            break;
         }
       })
     );
@@ -124,7 +128,7 @@ export abstract class GuiSubscreen {
     DrawCharacter(Player, 50, 50, 0.9, false);
     //@ts-ignore
     DrawText(getText(`${this.name}.title`), GuiSubscreen.START_X, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, "Black", "#D7F6E9");
-    DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png", "Responsive");
+    DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png", "Main Menu");
 
     if (this.multipageStructure.length > 1) {
       MainCanvas.textAlign = "center";
@@ -141,6 +145,7 @@ export abstract class GuiSubscreen {
           break;
         case "text":
         case "number":
+        case "color":
           this.elementPosition(item.id, item.label, item.description, ix, item.disabled);
           break;
         case "label":
@@ -193,6 +198,7 @@ export abstract class GuiSubscreen {
               break;
             }
           case "text":
+          case "color":
             item.setSetting(ElementValue(item.id));
             ElementRemove(item.id);
             break;
@@ -203,11 +209,10 @@ export abstract class GuiSubscreen {
     CharacterAppearanceForceUpCharacter = -1;
     CharacterLoadCanvas(Player);
 
-    if (this.areSettingsChanged()) {
-      _Color.composeRoot();
-      _Style.reloadAll();
-      _Image.clearCache();
-    }
+    _Color.composeRoot();
+    _Style.reloadAll();
+    changeModColors();
+    _Image.clearCache();
 
     setSubscreen("MainMenu");
     dataStore();
@@ -215,10 +220,6 @@ export abstract class GuiSubscreen {
 
   Unload() {
     // Empty
-  }
-
-  areSettingsChanged() {
-    return this.settings !== Player.Themed?.[this.constructor.name];
   }
 
   tooltip(text: string) {

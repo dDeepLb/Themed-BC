@@ -1,10 +1,11 @@
 import { Colors } from "../Models/Colors";
 
 // Define a type for RGB color
-type RGBColor = {
+type RGBAColor = {
   r: number;
   g: number;
   b: number;
+  a?: number;
 };
 
 let cachedColors = {};
@@ -31,13 +32,14 @@ export class _Color {
     const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
 
     // Calculate the new RGB values after darkening
-    const newRgbColor: RGBColor = { r: 0, g: 0, b: 0 };
+    const newRgbColor: RGBAColor = { r: 0, g: 0, b: 0 };
     newRgbColor.r = Math.max(0, color.r - Math.round((percentage / 100) * color.r));
     newRgbColor.g = Math.max(0, color.g - Math.round((percentage / 100) * color.g));
     newRgbColor.b = Math.max(0, color.b - Math.round((percentage / 100) * color.b));
+    newRgbColor.a = color.a;
 
     // Convert the new RGB values back to a hex string and cache it
-    const ret = _Color.rgbToHex(newRgbColor);
+    const ret = _Color.rgbaToHex(newRgbColor);
     _Color.setCache(`darker${hexColor}${percentage}`, ret);
 
     return ret;
@@ -53,13 +55,14 @@ export class _Color {
     const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
 
     // Calculate the new RGB values after lightening
-    const newRgbColor: RGBColor = { r: 0, g: 0, b: 0 };
+    const newRgbColor: RGBAColor = { r: 0, g: 0, b: 0 };
     newRgbColor.r = Math.min(255, color.r + Math.round((percentage / 100) * (255 - color.r)));
     newRgbColor.g = Math.min(255, color.g + Math.round((percentage / 100) * (255 - color.g)));
     newRgbColor.b = Math.min(255, color.b + Math.round((percentage / 100) * (255 - color.b)));
+    newRgbColor.a = color.a;
 
     // Convert the new RGB values back to a hex string and cache it
-    const ret = _Color.rgbToHex(newRgbColor);
+    const ret = _Color.rgbaToHex(newRgbColor);
     _Color.setCache(`lighter${hexColor}${percentage}`, ret);
 
     return ret;
@@ -81,23 +84,24 @@ export class _Color {
       lightColor.r = Math.min(lightColor.r + 30, 255);
       lightColor.g = Math.min(lightColor.g + 30, 255);
       lightColor.b = Math.min(lightColor.b + 30, 255);
+      lightColor.a = lightColor.a;
     }
 
     // Convert the new RGB values back to a hex string and cache it
-    const ret = _Color.rgbToHex(lightColor);
+    const ret = _Color.rgbaToHex(lightColor);
     _Color.setCache(`darkMode${colorHex}${backgroundColorHex}`, ret);
 
     return ret;
   }
 
-  static getContrastRatio(color1: RGBColor, color2: RGBColor) {
+  static getContrastRatio(color1: RGBAColor, color2: RGBAColor) {
     const luminance1 = _Color.calculateLuminance(color1);
     const luminance2 = _Color.calculateLuminance(color2);
 
     return (Math.max(luminance1, luminance2) + 0.05) / (Math.min(luminance1, luminance2) + 0.05);
   }
 
-  static calculateLuminance(color: RGBColor) {
+  static calculateLuminance(color: RGBAColor) {
     const r = color.r / 255;
     const g = color.g / 255;
     const b = color.b / 255;
@@ -109,19 +113,42 @@ export class _Color {
     return 0.2126 * gammaCorrectedR + 0.7152 * gammaCorrectedG + 0.0722 * gammaCorrectedB;
   }
 
-  static hexToRgb(hex: string): RGBColor {
+  static hexToRgba(hex: string): RGBAColor {
     hex = hex.replace(/^#/, ""); // Remove the "#" symbol if it exists
 
-    const bigint = parseInt(hex, 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
+    if (hex.length === 6) {
+      // If no alpha value exists, default alpha to fully opaque (1.0 or 255 in decimal)
+      return {
+        r: parseInt(hex.slice(0, 2), 16),
+        g: parseInt(hex.slice(2, 4), 16),
+        b: parseInt(hex.slice(4, 6), 16),
+        a: 1.0 // Fully opaque alpha
+      };
+    } else if (hex.length === 8) {
+      // If alpha value exists
+      return {
+        r: parseInt(hex.slice(0, 2), 16),
+        g: parseInt(hex.slice(2, 4), 16),
+        b: parseInt(hex.slice(4, 6), 16),
+        a: parseInt(hex.slice(6, 8), 16) / 255 // Convert alpha to range between 0 and 1
+      };
+    }
 
-    return { r, g, b };
+    // If the input format is invalid, return black with full opacity
+    return { r: 0, g: 0, b: 0, a: 1.0 };
   }
 
-  static rgbToHex(color: RGBColor): string {
-    const { r, g, b } = color;
+  static rgbaToHex(color: RGBAColor): string {
+    const { r, g, b, a } = color;
+
+    if (a !== undefined && a !== 1) {
+      const alphaHex = Math.round(a * 255)
+        .toString(16)
+        .toUpperCase()
+        .padStart(2, "0");
+      return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1).toUpperCase()}${alphaHex}`;
+    }
+
     return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1).toUpperCase()}`;
   }
 
@@ -166,7 +193,7 @@ export class _Color {
   static getHexComputed(color: string) {
     color = _Color.getComputed(color);
     const RGBA = _Color.extractFromRGBA(color);
-    const ret = _Color.rgbToHex(RGBA);
+    const ret = _Color.rgbaToHex(RGBA);
 
     return ret;
   }
