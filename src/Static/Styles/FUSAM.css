@@ -1,0 +1,23 @@
+.button {
+  border-color: var(--elementBorder);
+  background-color: var(--elementBackground);
+  color: var(--text);
+}
+
+.button:hover,
+.button:focus,
+select:hover,
+select:focus {
+  background-color: var(--accent);
+}
+
+select,
+option {
+  border-color: var(--elementBorder);
+  background-color: var(--elementBackground);
+  color: var(--text);
+}
+
+select:disabled:hover {
+  background-color: var(--elementBackgroundHover);
+}
