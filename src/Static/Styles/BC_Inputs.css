@@ -1,0 +1,16 @@
+textarea {
+  background: var(--elementBackground);
+  color: var(--text);
+  border: 1px solid var(--elementBorder);
+}
+
+input {
+  background: var(--elementBackground);
+  color: var(--text);
+  border: 1px solid var(--elementBorder);
+}
+
+textarea:focus,
+input:focus {
+  outline: var(--elementBorder) solid 1px;
+}
