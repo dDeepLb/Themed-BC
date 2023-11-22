@@ -211,7 +211,7 @@ export function loadGuiHooks() {
 
       const [source, x, y, width, height] = args;
 
-      _Image.drawColorized(source, x, y, color.icon, { newWidth: width, newHeight: height });
+      if (!_Image.drawColorized(source, x, y, color.icon, { newWidth: width, newHeight: height })) return next(args);
     },
     ModuleCategory.Global
   );

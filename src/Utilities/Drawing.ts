@@ -60,34 +60,37 @@ export class _Image {
       return true;
     }
 
-    // If not cached, load the original image
+    try {
+      // If not cached, load the original image
+      // Make sure that the starting image is loaded
+      if (!img.complete) return false;
+      if (!img.naturalWidth) return true;
 
-    // Make sure that the starting image is loaded
-    if (!img.complete) return false;
-    if (!img.naturalWidth) return true;
+      // Continue with the colorization process
+      const width = img.width;
+      const height = img.height;
 
-    // Continue with the colorization process
-    const width = img.width;
-    const height = img.height;
+      // Prepare a canvas to draw the colorized image
+      ColorCanvas.canvas.width = width;
+      ColorCanvas.canvas.height = height;
+      ColorCanvas.globalCompositeOperation = "copy";
+      ColorCanvas.drawImage(img, 0, 0);
 
-    // Prepare a canvas to draw the colorized image
-    ColorCanvas.canvas.width = width;
-    ColorCanvas.canvas.height = height;
-    ColorCanvas.globalCompositeOperation = "copy";
-    ColorCanvas.drawImage(img, 0, 0);
+      const imageData = ColorCanvas.getImageData(0, 0, width, height);
 
-    const imageData = ColorCanvas.getImageData(0, 0, width, height);
+      // Colorize the plain image
+      _Image.colorize(imageData, hexColor);
 
-    // Colorize the plain image
-    _Image.colorize(imageData, hexColor);
+      // Cache the colorized image
+      _Image.setCache(source, imageData);
 
-    // Cache the colorized image
-    _Image.setCache(source, imageData);
+      // Draw the colorized image
+      _Image.drawCached(source, x, y, img, { newWidth, newHeight });
 
-    // Draw the colorized image
-    _Image.drawCached(source, x, y, img, { newWidth, newHeight });
-
-    return true;
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   static colorize(imageData: ImageData, color: string) {
