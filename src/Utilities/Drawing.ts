@@ -6,7 +6,8 @@ export class _Image {
     "Backgrounds/",
     "Icons/Struggle/",
     "Screens/",
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyEAYAAABOr1TyAAABb2lDQ1BpY2MAACiRdZG9S0JRGMZ/"
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyEAYAAABOr1TyAAABb2lDQ1BpY2MAACiRdZG9S0JRGMZ/", // FBC's "FBC" overlay icon
+    "http" // Fix bug with recoloring of custom bgs
   ];
 
   static doNotDrawImages = [
