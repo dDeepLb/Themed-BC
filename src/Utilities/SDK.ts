@@ -25,7 +25,9 @@ export enum HookPriority {
 export enum ModuleCategory {
   Global = 0,
   Colors = 1,
-  Integration = 2
+  Integration = 2,
+  GuiRedraw = 3,
+  Version = 4
 }
 
 const patchedFunctions: Map<string, PatchedFunctionData> = new Map();

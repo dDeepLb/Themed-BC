@@ -10,6 +10,8 @@ import { hookFunction } from "./Utilities/SDK";
 import { _Style } from "./Utilities/Style";
 import { IntegrationModule } from "./Modules/Integration";
 import { _Color } from "./Utilities/Color";
+import { VersionModule } from "./Modules/Version";
+import { GuiRedrawModule } from "./Modules/GuiRedraw";
 
 function initWait() {
   conLog("Init wait");
@@ -40,7 +42,7 @@ export function init() {
     return;
   }
 
-  GlobalModule.checkIfNewVersion();
+  VersionModule.checkIfNewVersion();
 
   dataStore();
 
@@ -55,6 +57,8 @@ function initModules(): boolean {
   registerModule(new GUI());
   registerModule(new GlobalModule());
   registerModule(new ColorsModule());
+  registerModule(new VersionModule());
+  registerModule(new GuiRedrawModule());
   registerModule(new IntegrationModule());
 
   for (const m of modules()) {

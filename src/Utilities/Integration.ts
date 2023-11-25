@@ -1,5 +1,5 @@
-import { color } from "./Color";
-import { doRedraw } from "./GuiHooks";
+import { colors } from "./Color";
+import { doRedraw } from "../Modules/GuiRedraw";
 
 export function changeModColors() {
   if (doRedraw()) {
@@ -11,9 +11,9 @@ export function changeModColors() {
 
 function changeBctColors() {
   if (!!Player.BCT) {
-    BCT_API.HintBackColor = color.elementBackground;
-    BCT_API.HintBorderColor = color.elementBorder;
-    BCT_API.HintForeColor = color.text;
+    BCT_API.HintBackColor = colors.elementBackground;
+    BCT_API.HintBorderColor = colors.elementBorder;
+    BCT_API.HintForeColor = colors.text;
   }
 }
 

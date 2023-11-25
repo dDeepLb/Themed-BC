@@ -6,7 +6,7 @@ import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
 import TTS from "../Static/Styles/TTS.css";
-import { _Color, color } from "./Color";
+import { _Color, colors } from "./Color";
 import { PlayerStorage } from "./Data";
 
 const styles = {
@@ -76,23 +76,23 @@ export function composeRoot() {
   return /*css*/ `
     :root {
       /*accent color*/
-      --accent: ${color?.elementBorder || "#440171"};
+      --accent: ${colors?.elementBorder || "#440171"};
       /*background*/
-      --background: ${color?.mainBackground || "#202020"}; 
+      --background: ${colors?.mainBackground || "#202020"}; 
       /*inputs, buttons and shit*/
-      --elementBackground: ${color?.elementBackground || "#303030"}; 
+      --elementBackground: ${colors?.elementBackground || "#303030"}; 
        /*elements that should stand out, like thing on slider or button when hovered over*/
-      --elementBackgroundHover: ${color?.elementBackgroundHover || "#57276e"};
+      --elementBackgroundHover: ${colors?.elementBackgroundHover || "#57276e"};
       /*borders for html and game drawn elements*/
       --elementBorder: var(--accent);
       /*text obviously*/
-      --text: ${color?.text || "#eeeeee"}; 
+      --text: ${colors?.text || "#eeeeee"}; 
       /*obviously as well*/
-      --textShadow: ${_Color.darken(color?.elementBackground, 50) || "#cccccc"};
+      --textShadow: ${_Color.darken(colors?.elementBackground, 50) || "#cccccc"};
 
-      --scrollbar: ${_Color.darken(color?.elementBackground, 20) || "#454545"};
+      --scrollbar: ${_Color.darken(colors?.elementBackground, 20) || "#454545"};
 
-      --friendlistBackground: ${color?.elementBackground + "80" || "#30303080"}
+      --friendlistBackground: ${colors?.elementBackground + "80" || "#30303080"}
     }
     `;
 }

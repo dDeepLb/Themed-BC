@@ -8,8 +8,8 @@ import { BaseModule } from "./BaseModule";
 import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from "./SettingDefinitions";
 import { _Image } from "../Utilities/Drawing";
 import { _Style } from "../Utilities/Style";
-import { _Color, color } from "../Utilities/Color";
-import { doRedraw } from "../Utilities/GuiHooks";
+import { _Color, colors } from "../Utilities/Color";
+import { doRedraw } from "../Modules/GuiRedraw";
 import { changeModColors } from "../Utilities/Integration";
 
 export abstract class GuiSubscreen {
@@ -272,13 +272,13 @@ function drawTooltip(x: number, y: number, width: number, text: string, align: "
   canvas.textAlign = align;
   canvas.beginPath();
   canvas.rect(x, y, width, 65);
-  canvas.fillStyle = doRedraw() ? color.elementBackground : "#FFFF88";
+  canvas.fillStyle = doRedraw() ? colors.elementBackground : "#FFFF88";
   canvas.fillRect(x, y, width, 65);
   canvas.fill();
   canvas.lineWidth = 2;
-  canvas.strokeStyle = doRedraw() ? color.elementBorder : "black";
+  canvas.strokeStyle = doRedraw() ? colors.elementBorder : "black";
   canvas.stroke();
   canvas.closePath();
-  DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? color.text : "black");
+  DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? colors.text : "black");
   canvas.textAlign = bak;
 }
