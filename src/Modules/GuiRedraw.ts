@@ -16,9 +16,9 @@ const isBlack = (color: string) => _Color.getComputed(color) === "rgb(0, 0, 0)";
 export class GuiRedrawModule extends BaseModule {
   Load(): void {
     /* 
-  Has impact only on "Sheet" background.
-  Just replaces it will rectangle with user selected color
-  */
+    Has impact only on "Sheet" background.
+    Just replaces it will rectangle with user selected color
+    */
     hookFunction(
       "DrawProcess",
       HookPriority.Observe,

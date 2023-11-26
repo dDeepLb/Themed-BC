@@ -27,7 +27,8 @@ export enum ModuleCategory {
   Colors = 1,
   Integration = 2,
   GuiRedraw = 3,
-  Version = 4
+  Version = 4,
+  Markdown = 5
 }
 
 const patchedFunctions: Map<string, PatchedFunctionData> = new Map();

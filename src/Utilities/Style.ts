@@ -5,6 +5,7 @@ import BC_Other from "../Static/Styles/BC_Other.css";
 import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
+import Markdown from "../Static/Styles/Markdown.css";
 import TTS from "../Static/Styles/TTS.css";
 import { _Color, colors } from "./Color";
 import { PlayerStorage } from "./Data";
@@ -12,6 +13,7 @@ import { PlayerStorage } from "./Data";
 const styles = {
   Root: composeRoot(),
   Themed: Themed,
+  Markdown: Markdown,
   BC: BC_Inputs,
   BC_Chat: BC_Chat,
   BC_FriendList: BC_FriendList,
@@ -30,7 +32,8 @@ export class _Style {
     const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
 
     if (isStyleLoaded) return;
-    if (!isEnabled || (!PlayerStorage().IntegrationModule[id] && id != "Themed" && id != "Root")) return;
+    if (!isEnabled) return;
+    if (!PlayerStorage().IntegrationModule[id] && id != "Themed" && id != "Root" && id != "Markdown") return;
 
     const styleElement = document.createElement("style");
     styleElement.id = id;
@@ -92,7 +95,9 @@ export function composeRoot() {
 
       --scrollbar: ${_Color.darken(colors?.elementBackground, 20) || "#454545"};
 
-      --friendlistBackground: ${colors?.elementBackground + "80" || "#30303080"}
+      --friendlistBackground: ${colors?.elementBackground + "80" || "#30303080"};
+      
+      --codeBackground: ${_Color.lighten(colors?.elementBackground, 40) + "20" || "#aaaaaa20"};
     }
     `;
 }

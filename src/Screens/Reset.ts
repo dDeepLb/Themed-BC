@@ -1,11 +1,10 @@
 import { GuiSubscreen } from "../Base/BaseSetting";
-import { dataErase } from "../Utilities/Data";
-import { getText } from "../Translation";
-import { _Style } from "../Utilities/Style";
 import { getModule } from "../Base/Modules";
-import { ColorsModule } from "../Modules/Colors";
+import { getText } from "../Translation";
 import { _Color } from "../Utilities/Color";
+import { dataErase } from "../Utilities/Data";
 import { _Image } from "../Utilities/Drawing";
+import { _Style } from "../Utilities/Style";
 
 export class GuiReset extends GuiSubscreen {
   get name(): string {

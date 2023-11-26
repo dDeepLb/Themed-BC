@@ -1,16 +1,16 @@
 import { Setting } from "../../.types/setting";
 import { BaseSettingsModel } from "../Models/Global";
-import { getModule, modules } from "./Modules";
+import { doRedraw } from "../Modules/GuiRedraw";
+import { TextMapKeys, getText } from "../Translation";
+import { _Color, colors } from "../Utilities/Color";
 import { conDebug } from "../Utilities/Console";
 import { dataStore } from "../Utilities/Data";
-import { TextMapKeys, getText } from "../Translation";
-import { BaseModule } from "./BaseModule";
-import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from "./SettingDefinitions";
 import { _Image } from "../Utilities/Drawing";
-import { _Style } from "../Utilities/Style";
-import { _Color, colors } from "../Utilities/Color";
-import { doRedraw } from "../Modules/GuiRedraw";
 import { changeModColors } from "../Utilities/Integration";
+import { _Style } from "../Utilities/Style";
+import { BaseModule } from "./BaseModule";
+import { modules } from "./Modules";
+import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from "./SettingDefinitions";
 
 export abstract class GuiSubscreen {
   static START_X: number = 180;

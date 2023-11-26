@@ -2,10 +2,8 @@ import { BaseModule } from "../Base/BaseModule";
 import { Subscreen } from "../Base/SettingDefinitions";
 import { GlobalSettingsModel } from "../Models/Global";
 import { GuiGlobal } from "../Screens/Global";
-import { loadCommands } from "../Utilities/Commands";
 import { changeModColors } from "../Utilities/Integration";
 import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
-import { _Style } from "../Utilities/Style";
 
 export class GlobalModule extends BaseModule {
   static isItNewVersion: boolean = false;
@@ -29,18 +27,7 @@ export class GlobalModule extends BaseModule {
   }
 
   Load(): void {
-    loadCommands();
     changeModColors();
-
-    hookFunction(
-      "ChatRoomSync",
-      HookPriority.Observe,
-      (args, next) => {
-        next(args);
-        _Style.reloadAll();
-      },
-      ModuleCategory.Global
-    );
 
     hookFunction(
       "ChatRoomCurrentTime",
