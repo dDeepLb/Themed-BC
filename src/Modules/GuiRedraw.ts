@@ -4,10 +4,10 @@ import { PlayerStorage } from "../Utilities/Data";
 import { drawRect, _Image, drawButtonRect } from "../Utilities/Drawing";
 import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
 
-// NOTE LSCG, FBC are having elements that need some effort from their side.
+// NOTE FBC having elements that need some effort from its side.
 
 export const doRedraw = () => {
-  return PlayerStorage().GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
+  return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
 };
 
 const isWhite = (color: string) => _Color.getComputed(color) === "rgb(255, 255, 255)";
@@ -244,17 +244,14 @@ export class GuiRedrawModule extends BaseModule {
         };
 
         switch (Color.toLowerCase()) {
-          case "white":
-          case "#eee":
           case "#eeeeee":
-          case "#ddd":
           case "#dddddd":
-          case "#ccc":
           case "#cccccc":
-          case "#ffff88":
           case "#ffffff":
+          case "#ffff88":
           case "#ffffff88":
           case "#ffffffcc":
+          case "#d7f6e9": // LSCG Version Tooltip
             drawRect(colors.elementBackground);
             break;
 
