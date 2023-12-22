@@ -80,90 +80,10 @@ export class MarkdownModule extends BaseModule {
   static doMarkdown(msg: string) {
     let newMsg: string = msg;
 
-    let emoteRegex = /\*(.*?)\*/g;
-    let emoteMatch = newMsg.matchAll(emoteRegex);
+    let codeRegex = /`(.*?)`/g;
+    let codeMatch = Array.from(msg.matchAll(codeRegex));
 
-    if (emoteMatch) {
-      for (const match of emoteMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="ChatMessageEmote">* ${matchText} *</span>`);
-      }
-    }
-
-    let boldRegex = /\*\*(.*?)\*\*/g;
-    let boldMatch = newMsg.matchAll(boldRegex);
-
-    if (boldMatch) {
-      for (const match of boldMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageBold">${matchText}</span>`);
-      }
-    }
-
-    let italicRegex = /\_(.*?)\_/g;
-    let italicMatch = newMsg.matchAll(italicRegex);
-
-    if (italicMatch) {
-      for (const match of italicMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageItalic">${matchText}</span>`);
-      }
-    }
-
-    let underlineRegex = /\_\_(.*?)\_\_/g;
-    let underlineMatch = msg.matchAll(underlineRegex);
-
-    if (underlineMatch) {
-      for (const match of underlineMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageUnderlined">${matchText}</span>`);
-      }
-    }
-
-    let strikethroughRegex = /\-\-(.*?)\-\-/g;
-    let strikethroughMatch = msg.matchAll(strikethroughRegex);
-
-    if (strikethroughMatch) {
-      for (const match of strikethroughMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageStrikethrough">${matchText}</span>`);
-      }
-    }
-
-    let inlineLinkRegex = /\[(.*?)\]\((.*?)\)/g;
-    let inlineLinkMatch = msg.matchAll(inlineLinkRegex);
-
-    if (inlineLinkMatch) {
-      for (const match of inlineLinkMatch) {
-        const [wholeMatch, linkText, linkUrl] = match;
-
-        if (linkText == "" || linkUrl == "") continue;
-
-        if (!isValidURL(linkUrl)) continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<a href="${linkUrl}" class="MessageLink" target="_blank">${linkText}</a>`);
-      }
-    }
-
-    let codeRegex = /\`(.*?)\`/g;
-    let codeMatch = msg.matchAll(codeRegex);
-
-    if (codeMatch) {
+    if (codeMatch.length > 0) {
       for (const match of codeMatch) {
         const [wholeMatch, matchText] = match;
 
@@ -174,15 +94,110 @@ export class MarkdownModule extends BaseModule {
     }
 
     let codeBlockRegex = /```([\s\S]+?)```/g;
-    let codeBlockMatch = msg.matchAll(codeBlockRegex);
+    let codeBlockMatch = Array.from(msg.matchAll(codeBlockRegex));
 
-    if (codeBlockMatch) {
+    if (codeBlockMatch.length > 0) {
       for (const match of codeBlockMatch) {
         const [wholeMatch, matchText] = match;
 
         if (matchText == "") continue;
 
         newMsg = newMsg.replace(wholeMatch, `<span class="MessageCode">${matchText}</span>`);
+      }
+    }
+
+    let emoteRegex = /\*(.*?)\*/g;
+    let emoteMatch = Array.from(newMsg.matchAll(emoteRegex));
+
+    if (emoteMatch.length > 0) {
+      for (const match of emoteMatch) {
+        const [wholeMatch, matchText] = match;
+
+        if (matchText == "") continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<span class="ChatMessageEmote">* ${matchText} *</span>`);
+      }
+    }
+
+    let boldRegex = /\*\*(.*?)\*\*/g;
+    let boldMatch = Array.from(newMsg.matchAll(boldRegex));
+
+    if (boldMatch.length > 0) {
+      for (const match of boldMatch) {
+        const [wholeMatch, matchText] = match;
+
+        if (matchText == "") continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<span class="MessageBold">${matchText}</span>`);
+      }
+    }
+
+    let italicRegex = /\_(.*?)\_/g;
+    let italicMatch = Array.from(newMsg.matchAll(italicRegex));
+
+    if (italicMatch.length > 0) {
+      for (const match of italicMatch) {
+        const [wholeMatch, matchText] = match;
+
+        if (matchText == "") continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<span class="MessageItalic">${matchText}</span>`);
+      }
+    }
+
+    let underlineRegex = /\_\_(.*?)\_\_/g;
+    let underlineMatch = Array.from(msg.matchAll(underlineRegex));
+
+    if (underlineMatch.length > 0) {
+      for (const match of underlineMatch) {
+        const [wholeMatch, matchText] = match;
+
+        if (matchText == "") continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<span class="MessageUnderlined">${matchText}</span>`);
+      }
+    }
+
+    let strikethroughRegex = /\-\-(.*?)\-\-/g;
+    let strikethroughMatch = Array.from(msg.matchAll(strikethroughRegex));
+
+    if (strikethroughMatch.length > 0) {
+      for (const match of strikethroughMatch) {
+        const [wholeMatch, matchText] = match;
+
+        if (matchText == "") continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<span class="MessageStrikethrough">${matchText}</span>`);
+      }
+    }
+
+    let inlineLinkRegex = /\[(.*?)\]\((.*?)\)/g;
+    let inlineLinkMatch = Array.from(msg.matchAll(inlineLinkRegex));
+
+    if (inlineLinkMatch.length > 0) {
+      for (const match of inlineLinkMatch) {
+        const [wholeMatch, linkText, linkUrl] = match;
+
+        if (linkText == "" || linkUrl == "") continue;
+
+        if (!isValidURL(linkUrl)) continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<a href="${linkUrl}" title="${linkUrl}" class="MessageLink" target="_blank">${linkText}</a>`);
+      }
+    }
+
+    let plainLinkRegex = /(.*?)/g;
+    let plainLinkMatch = Array.from(msg.matchAll(plainLinkRegex));
+
+    if (plainLinkMatch.length > 0) {
+      for (const match of plainLinkMatch) {
+        const [wholeMatch, linkUrl] = match;
+
+        if (linkUrl == "") continue;
+
+        if (!isValidURL(linkUrl)) continue;
+
+        newMsg = newMsg.replace(wholeMatch, `<a href="${linkUrl}" title="${linkUrl}" class="MessageLink" target="_blank">${linkUrl}</a>`);
       }
     }
 
