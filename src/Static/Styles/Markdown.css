@@ -23,13 +23,21 @@
   a:visited {
     color: #380091;
   }
+
+  p {
+    display: inline;
+  }
 }
 
-.MessageCode {
+code {
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 0.85em;
-  white-space: break-spaces;
+  white-space: pre-wrap;
   background-color: var(--codeBackground);
   border-radius: 5px;
+}
+
+pre > code {
+  display: block;
 }

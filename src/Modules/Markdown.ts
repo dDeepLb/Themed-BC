@@ -1,11 +1,17 @@
 import { BaseModule } from "../Base/BaseModule";
 import { PlayerStorage } from "../Utilities/Data";
-import { isValidURL } from "../Utilities/Other";
-import { HookPriority, ModuleCategory, hookFunction } from "../Utilities/SDK";
-import { GlobalModule } from "./Global";
+import { ModuleCategory, hookFunction } from "../Utilities/SDK";
+import markdownIt from "markdown-it";
+// import { fromHighlighter } from "markdown-it-shikiji/core";
+// import { getHighlighterCore } from "shikiji/core";
+// import { getWasmInlined } from "shikiji/wasm";
+
+const md = markdownIt({ linkify: true, typographer: true });
 
 export class MarkdownModule extends BaseModule {
   Load(): void {
+    //MarkdownModule.loadHighlighter();
+
     hookFunction(
       "ChatRoomMessageDisplay",
       -1,
@@ -31,9 +37,9 @@ export class MarkdownModule extends BaseModule {
             senderTag += metadata.senderName;
             senderTag += ":</span> ";
 
-            let clearedMessage = ChatRoomHTMLEntities(msg);
+            //let clearedMessage = ChatRoomHTMLEntities(msg);
 
-            let markdownedMessage = MarkdownModule.doMarkdown(clearedMessage);
+            let markdownedMessage = MarkdownModule.doMarkdown(msg);
 
             msg = senderTag + markdownedMessage;
             break;
@@ -75,133 +81,39 @@ export class MarkdownModule extends BaseModule {
     );
   }
 
-  Run(): void {}
+  // static async loadHighlighter() {
+  //   const highlighter = await getHighlighterCore({
+  //     themes: [import("shikiji/themes/dark-plus.mjs")],
+  //     langs: [import("shikiji/langs/javascript.mjs")],
+  //     loadWasm: getWasmInlined
+  //   });
 
-  static doMarkdown(msg: string) {
-    let newMsg: string = msg;
+  //   md.use(fromHighlighter(highlighter, { theme: "dark-plus" }));
+  // }
 
-    let codeRegex = /`(.*?)`/g;
-    let codeMatch = Array.from(msg.matchAll(codeRegex));
+  // private static overrideMarked() {
+  //   // Override function
+  //   const tokenizer = {
+  //     code(src: string) {
+  //       const match = src.match(/^\$+([^\$\n]+?)\$+/);
+  //       if (match) {
+  //         return {
+  //           type: "code",
+  //           raw: match[0],
+  //           text: match[1].trim()
+  //         };
+  //       }
 
-    if (codeMatch.length > 0) {
-      for (const match of codeMatch) {
-        const [wholeMatch, matchText] = match;
+  //       // return false to use original codespan tokenizer
+  //       return false;
+  //     }
+  //   };
 
-        if (matchText == "") continue;
+  //   marked.use({ tokenizer });
+  // }
 
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageCode">${matchText}</span>`);
-      }
-    }
-
-    let codeBlockRegex = /```([\s\S]+?)```/g;
-    let codeBlockMatch = Array.from(msg.matchAll(codeBlockRegex));
-
-    if (codeBlockMatch.length > 0) {
-      for (const match of codeBlockMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageCode">${matchText}</span>`);
-      }
-    }
-
-    let emoteRegex = /\*(.*?)\*/g;
-    let emoteMatch = Array.from(newMsg.matchAll(emoteRegex));
-
-    if (emoteMatch.length > 0) {
-      for (const match of emoteMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="ChatMessageEmote">* ${matchText} *</span>`);
-      }
-    }
-
-    let boldRegex = /\*\*(.*?)\*\*/g;
-    let boldMatch = Array.from(newMsg.matchAll(boldRegex));
-
-    if (boldMatch.length > 0) {
-      for (const match of boldMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageBold">${matchText}</span>`);
-      }
-    }
-
-    let italicRegex = /\_(.*?)\_/g;
-    let italicMatch = Array.from(newMsg.matchAll(italicRegex));
-
-    if (italicMatch.length > 0) {
-      for (const match of italicMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageItalic">${matchText}</span>`);
-      }
-    }
-
-    let underlineRegex = /\_\_(.*?)\_\_/g;
-    let underlineMatch = Array.from(msg.matchAll(underlineRegex));
-
-    if (underlineMatch.length > 0) {
-      for (const match of underlineMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageUnderlined">${matchText}</span>`);
-      }
-    }
-
-    let strikethroughRegex = /\-\-(.*?)\-\-/g;
-    let strikethroughMatch = Array.from(msg.matchAll(strikethroughRegex));
-
-    if (strikethroughMatch.length > 0) {
-      for (const match of strikethroughMatch) {
-        const [wholeMatch, matchText] = match;
-
-        if (matchText == "") continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<span class="MessageStrikethrough">${matchText}</span>`);
-      }
-    }
-
-    let inlineLinkRegex = /\[(.*?)\]\((.*?)\)/g;
-    let inlineLinkMatch = Array.from(msg.matchAll(inlineLinkRegex));
-
-    if (inlineLinkMatch.length > 0) {
-      for (const match of inlineLinkMatch) {
-        const [wholeMatch, linkText, linkUrl] = match;
-
-        if (linkText == "" || linkUrl == "") continue;
-
-        if (!isValidURL(linkUrl)) continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<a href="${linkUrl}" title="${linkUrl}" class="MessageLink" target="_blank">${linkText}</a>`);
-      }
-    }
-
-    let plainLinkRegex = /(.*?)/g;
-    let plainLinkMatch = Array.from(msg.matchAll(plainLinkRegex));
-
-    if (plainLinkMatch.length > 0) {
-      for (const match of plainLinkMatch) {
-        const [wholeMatch, linkUrl] = match;
-
-        if (linkUrl == "") continue;
-
-        if (!isValidURL(linkUrl)) continue;
-
-        newMsg = newMsg.replace(wholeMatch, `<a href="${linkUrl}" title="${linkUrl}" class="MessageLink" target="_blank">${linkUrl}</a>`);
-      }
-    }
-
-    return `<span>${newMsg}</span>`;
+  private static doMarkdown(msg: string) {
+    return md.render(msg);
   }
 }
 

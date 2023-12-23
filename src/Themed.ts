@@ -60,7 +60,7 @@ function initModules(): boolean {
   registerModule(new ColorsModule());
   registerModule(new GuiRedrawModule());
   registerModule(new IntegrationModule());
-  registerModule(new MarkdownModule());
+  //registerModule(new MarkdownModule());
   registerModule(new VersionModule());
 
   for (const m of modules()) {
