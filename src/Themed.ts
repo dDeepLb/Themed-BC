@@ -7,9 +7,12 @@ import { conLog, conDebug } from "./Utilities/Console";
 import { dataTake, dataStore } from "./Utilities/Data";
 import { RibbonMenu } from "./Utilities/RibbonMenu";
 import { hookFunction } from "./Utilities/SDK";
-import { _Style } from "./Utilities/Style";
 import { IntegrationModule } from "./Modules/Integration";
 import { _Color } from "./Utilities/Color";
+import { VersionModule } from "./Modules/Version";
+import { GuiRedrawModule } from "./Modules/GuiRedraw";
+import { MarkdownModule } from "./Modules/Markdown";
+import { _Style } from "./Utilities/Style";
 
 function initWait() {
   conLog("Init wait");
@@ -40,7 +43,7 @@ export function init() {
     return;
   }
 
-  GlobalModule.checkIfNewVersion();
+  VersionModule.checkIfNewVersion();
 
   dataStore();
 
@@ -55,7 +58,10 @@ function initModules(): boolean {
   registerModule(new GUI());
   registerModule(new GlobalModule());
   registerModule(new ColorsModule());
+  registerModule(new GuiRedrawModule());
   registerModule(new IntegrationModule());
+  //registerModule(new MarkdownModule());
+  registerModule(new VersionModule());
 
   for (const m of modules()) {
     m.Init();

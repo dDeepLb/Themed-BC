@@ -166,3 +166,22 @@ export function drawRect(x: number, y: number, width: number, height: number, ba
   DrawRect(x, y, width, height, backgroundColor);
   DrawEmptyRect(x, y, width, height, borderColor, 2);
 }
+
+export function drawButtonRect(
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  backgroundColor: string,
+  backgroundHoverColor: string,
+  backgroundDisabledColor: string,
+  borderColor: string,
+  borderHoverColor: string,
+  borderDisabledColor: string,
+  isHovering: boolean,
+  disabled: boolean
+) {
+  if (!isHovering && !disabled) drawRect(x, y, width, height, backgroundColor, borderColor);
+  else if (isHovering && !disabled) drawRect(x, y, width, height, backgroundHoverColor, borderHoverColor);
+  else if (disabled) drawRect(x, y, width, height, backgroundDisabledColor, borderDisabledColor);
+}

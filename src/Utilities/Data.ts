@@ -7,14 +7,15 @@ export const PlayerStorage = () => Player?.[ModName];
 export const ExtensionStorage = () => Player.ExtensionSettings[ModName];
 
 export function dataTake() {
-  try {
+  if (ExtensionStorage()) {
     Player[ModName] = JSON.parse(LZString.decompressFromBase64(ExtensionStorage())) as SettingsModel;
-  } catch (error) {
-    Player[ModName] = JSON.parse(LZString.decompressFromBase64(Player.OnlineSettings[ModName])) || <SettingsModel>{};
-    if (Player.OnlineSettings[ModName]) {
-      delete Player.OnlineSettings[ModName];
-      window.ServerAccountUpdate.QueueData({ OnlineSettings: Player.OnlineSettings });
-    }
+  } else if (Player.OnlineSettings[ModName]) {
+    Player[ModName] = JSON.parse(LZString.decompressFromBase64(Player.OnlineSettings[ModName]));
+    
+    delete Player.OnlineSettings[ModName];
+    window.ServerAccountUpdate.QueueData({ OnlineSettings: Player.OnlineSettings });
+  } else {
+    Player[ModName] = <SettingsModel>{};
   }
 }
 

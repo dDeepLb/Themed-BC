@@ -10,7 +10,7 @@ type RGBAColor = {
 
 let cachedColors = {};
 
-export const color: Colors = {
+export const colors: Colors = {
   mainBackground: "",
   elementBackground: "",
   elementBackgroundHover: "",
@@ -205,14 +205,14 @@ export class _Color {
     const accentColor = _Color.getHexComputed(data.accentColor);
     const textColor = _Color.getHexComputed(data.textColor);
 
-    color.mainBackground = primaryColor;
-    color.elementBackground = _Color.lighten(primaryColor, 10);
-    color.elementBackgroundDisabled = primaryColor;
-    color.elementBackgroundHover = accentColor;
-    color.elementBorder = accentColor;
-    color.elementBorderHover = _Color.lighten(accentColor, 20);
-    color.text = textColor;
-    color.icon = accentColor;
+    colors.mainBackground = primaryColor;
+    colors.elementBackground = _Color.lighten(primaryColor, 10);
+    colors.elementBackgroundDisabled = primaryColor;
+    colors.elementBackgroundHover = accentColor;
+    colors.elementBorder = accentColor;
+    colors.elementBorderHover = _Color.lighten(accentColor, 20);
+    colors.text = textColor;
+    colors.icon = accentColor;
   }
 
   static setCache(key: string, value: string) {

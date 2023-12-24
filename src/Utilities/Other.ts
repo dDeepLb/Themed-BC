@@ -13,3 +13,12 @@ export function sendLocalSmart(id: string, message: string, timeoutInSeconds?: n
   if (!timeoutInSeconds) return;
   setTimeout(() => div?.remove(), timeoutInSeconds * 1000);
 }
+
+export function isValidURL(urlString: string) {
+  try {
+    new URL(urlString);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}

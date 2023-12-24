@@ -18,7 +18,7 @@ export class RibbonMenu {
    */
   static registerMod(modName: string): void {
     if (!window.RibbonMenuMods) window.RibbonMenuMods = [];
-    if (window.RibbonMenuMods.length >= 6) return console.warn(`${modName} can't be added to Ribbon Menu. Is is full`);
+    if (window.RibbonMenuMods.length >= 6) return console.warn(`${modName} can't be added to Ribbon Menu. It is full`);
     window.RibbonMenuMods.push(modName);
   }
 

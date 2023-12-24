@@ -31,14 +31,13 @@ export class GuiGlobal extends GuiSubscreen {
         setting: () => this.settings?.doVanillaGuiOverhaul ?? true,
         setSetting: (val) => (this.settings.doVanillaGuiOverhaul = val)
       },
-      // NOTE NYI
-      // <Setting>{
-      //   type: "checkbox",
-      //   label: "settings.setting.doUseChatSpecialStyling.name",
-      //   description: "settings.setting.doUseChatSpecialStyling.desc",
-      //   setting: () => this.settings?.doUseChatSpecialStyling ?? true,
-      //   setSetting: (val) => (this.settings.doUseChatSpecialStyling = val)
-      // },
+      <Setting>{
+        type: "checkbox",
+        label: "settings.setting.doUseChatSpecialStyling.name",
+        description: "settings.setting.doUseChatSpecialStyling.desc",
+        setting: () => this.settings?.doUseChatSpecialStyling ?? true,
+        setSetting: (val) => (this.settings.doUseChatSpecialStyling = val)
+      },
       <Setting>{
         type: "checkbox",
         label: "settings.setting.doShowLocaleTime.name",
