@@ -5,7 +5,6 @@ import BC_Other from "../Static/Styles/BC_Other.css";
 import FBC from "../Static/Styles/FBC.css";
 import FUSAM from "../Static/Styles/FUSAM.css";
 import Themed from "../Static/Styles/Themed.css";
-import Markdown from "../Static/Styles/Markdown.css";
 import TTS from "../Static/Styles/TTS.css";
 import { _Color, colors } from "./Color";
 import { PlayerStorage } from "./Data";
@@ -13,7 +12,6 @@ import { PlayerStorage } from "./Data";
 const styles = {
   Root: composeRoot(),
   Themed: Themed,
-  Markdown: Markdown,
   BC: BC_Inputs,
   BC_Chat: BC_Chat,
   BC_FriendList: BC_FriendList,
