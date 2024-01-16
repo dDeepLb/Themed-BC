@@ -135,6 +135,7 @@ export class _Image {
 
     // Check if the image is in any excluded folder
     for (const folderPrefix of _Image.doNotDrawImageFolders) {
+      if (typeof source !== "string") break;
       if (source.startsWith(folderPrefix)) {
         skipDrawing = true; // Do not draw if it starts with any excluded path
         break;
