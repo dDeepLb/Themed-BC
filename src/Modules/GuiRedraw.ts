@@ -4,8 +4,6 @@ import { PlayerStorage } from "../Utilities/Data";
 import { drawRect, _Image, drawButtonRect } from "../Utilities/Drawing";
 import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
 
-// NOTE FBC having elements that need some effort from its side.
-
 export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
 };
