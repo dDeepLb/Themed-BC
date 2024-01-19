@@ -2,7 +2,7 @@
 infosheet.button_popup = Themed Settings
 
 # Main Menu
-MainMenu.title = - Themed BC -
+MainMenu.title = - Themed BC v$ModVersion -
 mainmenu.button.Settings = Settings
 mainmenu.button.Colors = Color Settings
 mainmenu.button.Integration = Integration
