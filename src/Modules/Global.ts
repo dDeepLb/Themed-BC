@@ -1,13 +1,11 @@
-import { BaseModule } from "../Base/BaseModule";
-import { Subscreen } from "../Base/SettingDefinitions";
-import { GlobalSettingsModel } from "../Models/Global";
-import { GuiGlobal } from "../Screens/Global";
-import { changeModColors } from "../Utilities/Integration";
-import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
+import { BaseModule } from '../Base/BaseModule';
+import { Subscreen } from '../Base/SettingDefinitions';
+import { GlobalSettingsModel } from '../Models/Global';
+import { GuiGlobal } from '../Screens/Global';
+import { changeModColors } from '../Utilities/Integration';
+import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 
 export class GlobalModule extends BaseModule {
-  static isItNewVersion: boolean = false;
-
   get settingsScreen(): Subscreen | null {
     return GuiGlobal;
   }
@@ -30,14 +28,14 @@ export class GlobalModule extends BaseModule {
     changeModColors();
 
     hookFunction(
-      "ChatRoomCurrentTime",
+      'ChatRoomCurrentTime',
       HookPriority.Observe,
       (args, next) => {
         if (!this.settings.doShowLocaleTime) return next(args);
 
         const currentTime = new Date(Date.now());
 
-        return currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        return currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       },
       ModuleCategory.Global
     );

@@ -1,15 +1,15 @@
-import { BaseModule } from "../Base/BaseModule";
-import { colors, _Color } from "../Utilities/Color";
-import { PlayerStorage } from "../Utilities/Data";
-import { drawRect, _Image, drawButtonRect } from "../Utilities/Drawing";
-import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
+import { BaseModule } from '../Base/BaseModule';
+import { colors, _Color } from '../Utilities/Color';
+import { PlayerStorage } from '../Utilities/Data';
+import { drawRect, _Image, drawButtonRect } from '../Utilities/Drawing';
+import { hookFunction, HookPriority, ModuleCategory, patchFunction } from '../Utilities/SDK';
 
 export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
 };
 
-const isWhite = (color: string) => _Color.getComputed(color) === "rgb(255, 255, 255)";
-const isBlack = (color: string) => _Color.getComputed(color) === "rgb(0, 0, 0)";
+const isWhite = (color: string) => _Color.getComputed(color) === 'rgb(255, 255, 255)';
+const isBlack = (color: string) => _Color.getComputed(color) === 'rgb(0, 0, 0)';
 
 export class GuiRedrawModule extends BaseModule {
   Load(): void {
@@ -18,19 +18,19 @@ export class GuiRedrawModule extends BaseModule {
     Just replaces it will rectangle with user selected color
     */
     hookFunction(
-      "DrawProcess",
+      'DrawProcess',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
 
-        let B = window[CurrentScreen + "Background"];
-        if (B != "Sheet") return next(args);
+        let B = window[CurrentScreen + 'Background'];
+        if (B != 'Sheet') return next(args);
 
         let time = args[0];
 
         DrawRect(0, 0, 2000, 1000, colors.mainBackground);
 
-        MainCanvas.filter = "none";
+        MainCanvas.filter = 'none';
 
         // Draws the dialog screen or current screen if there's no loaded character
         if (CurrentCharacter != null) DialogDraw();
@@ -44,14 +44,14 @@ export class GuiRedrawModule extends BaseModule {
 
         // Draw a marker for the controller's position
         if (ControllerIsActive()) {
-          DrawRect(MouseX - 5, MouseY - 5, 10, 10, "Red");
+          DrawRect(MouseX - 5, MouseY - 5, 10, 10, 'Red');
         }
       },
       ModuleCategory.GuiRedraw
     );
 
     hookFunction(
-      "DrawButton",
+      'DrawButton',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
@@ -62,10 +62,10 @@ export class GuiRedrawModule extends BaseModule {
         ControllerAddActiveArea(x, y);
 
         // Draw the button rectangle
-        switch (_Color.getHexComputed(color)) {
-          case "#ffffff":
-          case "#dddddd":
-          case "#eeeeee":
+        switch (_Color.getHexComputed(color).toLowerCase()) {
+          case '#ffffff':
+          case '#dddddd':
+          case '#eeeeee':
             drawButtonRect(
               x,
               y,
@@ -102,7 +102,7 @@ export class GuiRedrawModule extends BaseModule {
 
         DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, color.text);
 
-        if (image != null && image != "") {
+        if (image != null && image != '') {
           if (_Image.doDrawImage(image)) _Image.drawColorized(image, x + 2, y + 2, colors.icon, {});
           else DrawImage(image, x + 2, y + 2);
         }
@@ -116,21 +116,21 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      "DrawCheckbox",
+      'DrawCheckbox',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
-        const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = "Black", CheckImage = "Icons/Checked.png"] = args;
+        const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = 'Black', CheckImage = 'Icons/Checked.png'] = args;
 
-        DrawText(Text, Left + 100, Top + 33, TextColor, "");
-        DrawButton(Left, Top, Width, Height, "", "White", IsChecked ? CheckImage : "", null, Disabled);
+        DrawText(Text, Left + 100, Top + 33, TextColor, '');
+        DrawButton(Left, Top, Width, Height, '', 'White', IsChecked ? CheckImage : '', null, Disabled);
       },
       ModuleCategory.GuiRedraw
     );
 
     hookFunction(
-      "DrawBackNextButton",
+      'DrawBackNextButton',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
@@ -174,7 +174,7 @@ export class GuiRedrawModule extends BaseModule {
         // Draw the text or image
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color);
 
-        if (Image != null && Image != "") {
+        if (Image != null && Image != '') {
           if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
           else DrawImage(Image, Left + 2, Top + 2);
         }
@@ -183,7 +183,7 @@ export class GuiRedrawModule extends BaseModule {
 
         // Draw the back arrow
         MainCanvas.beginPath();
-        MainCanvas.fillStyle = "Black";
+        MainCanvas.fillStyle = 'Black';
         MainCanvas.moveTo(Left + 15, Top + Height / 5);
         MainCanvas.lineTo(Left + 5, Top + Height / 2);
         MainCanvas.lineTo(Left + 15, Top + Height - Height / 5);
@@ -192,7 +192,7 @@ export class GuiRedrawModule extends BaseModule {
 
         // Draw the next arrow
         MainCanvas.beginPath();
-        MainCanvas.fillStyle = "Black";
+        MainCanvas.fillStyle = 'Black';
         MainCanvas.moveTo(Left + Width - 15, Top + Height / 5);
         MainCanvas.lineTo(Left + Width - 5, Top + Height / 2);
         MainCanvas.lineTo(Left + Width - 15, Top + Height - Height / 5);
@@ -201,18 +201,18 @@ export class GuiRedrawModule extends BaseModule {
 
         // Draw the hovering text on the PC
         if (CommonIsMobile) return;
-        if (BackText == null) BackText = () => "MISSING VALUE FOR: BACK TEXT";
-        if (NextText == null) NextText = () => "MISSING VALUE FOR: NEXT TEXT";
+        if (BackText == null) BackText = () => 'MISSING VALUE FOR: BACK TEXT';
+        if (NextText == null) NextText = () => 'MISSING VALUE FOR: NEXT TEXT';
         if (MouseX >= Left && MouseX <= Left + Width && MouseY >= Top && MouseY <= Top + Height && !Disabled)
           DrawHoverElements.push(() => {
-            DrawButtonHover(Left, Top, Width, Height, MouseX < LeftSplit ? BackText() : MouseX >= RightSplit ? NextText() : "");
+            DrawButtonHover(Left, Top, Width, Height, MouseX < LeftSplit ? BackText() : MouseX >= RightSplit ? NextText() : '');
           });
       },
       ModuleCategory.GuiRedraw
     );
 
     hookFunction(
-      "DrawImageResize",
+      'DrawImageResize',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
@@ -226,7 +226,7 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      "DrawRect",
+      'DrawRect',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
@@ -241,39 +241,62 @@ export class GuiRedrawModule extends BaseModule {
           MainCanvas.fill();
         };
 
-        switch (Color.toLowerCase()) {
-          case "#eeeeee":
-          case "#dddddd":
-          case "#cccccc":
-          case "#ffffff":
-          case "#ffff88":
-          case "#ffffff88":
-          case "#ffffffcc":
-          case "#d7f6e9": // LSCG Version Tooltip
-            drawRect(colors.elementBackground);
-            break;
+        if (Color.startsWith('%')) {
+          switch (Color.substring(1).toLowerCase()) {
+            case 'disabled':
+              drawRect(colors.elementBackgroundDisabled);
+              break;
 
-          case "#d8fed7":
-          case "#adcbac":
-            drawRect(_Color.darken(Color, 25));
-            break;
+            case 'hover':
+              drawRect(colors.elementBackgroundHover);
+              break;
 
-          default:
-            next(args);
-            break;
+            case 'background':
+              drawRect(colors.elementBackground);
+              break;
+
+            case 'friendhint':
+              drawRect(colors.elementHoverHint);
+
+            default:
+              next(args);
+              break;
+          }
+        } else {
+          switch (_Color.getHexComputed(Color).toLowerCase()) {
+            case '#eeeeee':
+            case '#dddddd':
+            case '#cccccc':
+            case '#ffffff':
+            case '#ffff88':
+            case '#ffffff88':
+            case '#ffffffcc':
+            case '#d7f6e9': // LSCG Version Tooltip
+              drawRect(colors.elementBackground);
+              break;
+
+            // case '#d8fed7':
+            // case '#adcbac':
+            //   drawRect(_Color.darken(Color, 25));
+            //   break;
+
+            default:
+              next(args);
+              break;
+          }
         }
       },
       ModuleCategory.GuiRedraw
     );
 
     hookFunction(
-      "DrawEmptyRect",
+      'DrawEmptyRect',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
         const [Left, Top, Width, Height, , Thickness] = args;
-        const Color: string = args[4] || "black";
+        const Color: string = args[4] || 'black';
 
         const drawEmptyRect = (color: string) => {
           MainCanvas.beginPath();
@@ -283,41 +306,53 @@ export class GuiRedrawModule extends BaseModule {
           MainCanvas.stroke();
         };
 
-        switch (_Color.getHexComputed(Color).toLowerCase()) {
-          case "#ffffff":
-          case "#dddddd":
-          case "#000000":
-            drawEmptyRect(colors.elementBorder);
-            break;
+        if (Color.startsWith('%')) {
+          switch (Color.substring(1).toLowerCase()) {
+            case 'border':
+              drawEmptyRect(colors.elementBorder);
+              break;
 
-          default:
-            next(args);
-            break;
+            default:
+              next(args);
+              break;
+          }
+        } else {
+          switch (_Color.getHexComputed(Color).toLowerCase()) {
+            case '#ffffff':
+            case '#dddddd':
+            case '#000000':
+              drawEmptyRect(colors.elementBorder);
+              break;
+
+            default:
+              next(args);
+              break;
+          }
         }
       },
       ModuleCategory.GuiRedraw
     );
 
     hookFunction(
-      "DrawButtonHover",
+      'DrawButtonHover',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
         let [Left, Top, Width, Height, HoveringText] = args;
 
-        if (HoveringText == null || HoveringText == "") return next(args);
+        if (HoveringText == null || HoveringText == '') return next(args);
 
         Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
         Top = Top + (Height - 65) / 2;
-        drawRect(Left, Top, 450, 65, _Color.lighten(colors.elementBackground, 25), colors.elementBorder);
-        DrawTextFit(HoveringText, Left + 225, Top + 33, 444, "Black");
+        drawRect(Left, Top, 450, 65, colors.elementHoverHint, colors.elementBorder);
+        DrawTextFit(HoveringText, Left + 225, Top + 33, 444, 'Black');
       },
       ModuleCategory.GuiRedraw
     );
 
     hookFunction(
-      "DrawPreviewBox",
+      'DrawPreviewBox',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
@@ -369,7 +404,7 @@ export class GuiRedrawModule extends BaseModule {
         DrawRect(X, Y, Width, Height, Background);
         ControllerAddActiveArea(X, Y);
         if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : Border);
-        if (Path !== "") DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
+        if (Path !== '') DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
         DrawPreviewIcons(Icons, X, Y);
         if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
       },
@@ -377,7 +412,7 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      "DrawTextWrap",
+      'DrawTextWrap',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
@@ -391,18 +426,10 @@ export class GuiRedrawModule extends BaseModule {
 
         // Draw the rectangle if we need too
         if (BackColor != null) {
-          if (isWhite(BackColor)) {
-            if (!isHovering) {
-              drawRect(X, Y, Width, Height, colors.elementBackground, colors.elementBorder);
-            } else {
-              drawRect(X, Y, Width, Height, colors.elementBackgroundHover, colors.elementBorder);
-            }
+          if (!isHovering) {
+            drawRect(X, Y, Width, Height, BackColor, colors.elementBorder);
           } else {
-            if (!isHovering) {
-              drawRect(X, Y, Width, Height, BackColor, colors.elementBorder);
-            } else {
-              drawRect(X, Y, Width, Height, _Color.darken(BackColor, 40), colors.elementBorder);
-            }
+            drawRect(X, Y, Width, Height, _Color.darken(BackColor, 40), colors.elementBorder);
           }
         }
 
@@ -417,26 +444,26 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.fillStyle = isBlack(ForeColor) ? colors.text : _Color.lighten(_Color.toDarkMode(ForeColor, colors.elementBackground), 50);
         if (MainCanvas.measureText(Text).width > Width) {
           const words = fragmentText(Text, Width);
-          let line = "";
+          let line = '';
 
           // Find the number of lines
           let LineCount = 1;
           for (let n = 0; n < words.length; n++) {
-            const testLine = line + words[n] + " ";
+            const testLine = line + words[n] + ' ';
             if (MainCanvas.measureText(testLine).width > Width && n > 0) {
-              line = words[n] + " ";
+              line = words[n] + ' ';
               LineCount++;
             } else line = testLine;
           }
 
           // Splits the words and draw the text
-          line = "";
+          line = '';
           Y = Y - (LineCount - 1) * LineSpacing + Height / 2;
           for (let n = 0; n < words.length; n++) {
-            const testLine = line + words[n] + " ";
+            const testLine = line + words[n] + ' ';
             if (MainCanvas.measureText(testLine).width > Width && n > 0) {
               MainCanvas.fillText(line, X + Width / 2, Y);
-              line = words[n] + " ";
+              line = words[n] + ' ';
               Y += LineSpacing * 2;
             } else {
               line = testLine;
@@ -452,17 +479,17 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      "DrawTextFit",
+      'DrawTextFit',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
         if (isBlack(args[4])) {
           args[4] = colors.text;
-          args[5] = ""; //_Color.darken(args[4], 20);
+          //args[5] = ''; //_Color.darken(args[4], 20);
         } else {
           args[4] = _Color.toDarkMode(args[4], colors.mainBackground);
-          args[5] = ""; //_Color.darken(args[4], 20);
+          //args[5] = ''; //_Color.darken(args[4], 20);
         }
 
         return next(args);
@@ -471,24 +498,38 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      "DrawText",
+      'DrawText',
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
 
         if (isBlack(args[3])) {
           args[3] = colors.text;
-          args[4] = ""; //_Color.darken(args[3], 20);
+          args[4] = ''; //_Color.darken(args[3], 20);
         } else {
           args[3] = _Color.toDarkMode(args[3], colors.mainBackground);
-          args[4] = ""; //_Color.darken(args[3], 20);
+          args[4] = ''; //_Color.darken(args[3], 20);
         }
 
         next(args);
       },
       ModuleCategory.GuiRedraw
     );
-  }
 
-  Run(): void {}
+    patchFunction('ChatSearchNormalDraw', {
+      'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);':
+        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#4d1b1b" : HasBlock ? "#6e0c0c" : HasFriends && IsFull ? "#225c30" : HasFriends ? "#4d854d" : IsFull ? "#444" : "White"), null, null, IsFull);',
+      'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);':
+        'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
+      'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);':
+        'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
+      'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FF9999", 1);':
+        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#6e0c0c", 1);'
+    });
+
+    patchFunction('DialogDraw', {
+      'DrawRect(1087 + offset, 600, 225, 275, bgColor);':
+        'DrawRect(1087 + offset, 600, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 600, 225, 275, "%border");'
+    });
+  }
 }

@@ -1,26 +1,27 @@
-import { registerModule, modules } from "./Base/Modules";
-import { GUI } from "./Base/SettingUtils";
-import { ModName, ModVersion } from "./Utilities/ModDefinition";
-import { ColorsModule } from "./Modules/Colors";
-import { GlobalModule } from "./Modules/Global";
-import { conLog, conDebug } from "./Utilities/Console";
-import { dataTake, dataStore } from "./Utilities/Data";
-import { RibbonMenu } from "./Utilities/RibbonMenu";
-import { hookFunction } from "./Utilities/SDK";
-import { IntegrationModule } from "./Modules/Integration";
-import { _Color } from "./Utilities/Color";
-import { VersionModule } from "./Modules/Version";
-import { GuiRedrawModule } from "./Modules/GuiRedraw";
-import { _Style } from "./Utilities/Style";
+import { registerModule, modules } from './Base/Modules';
+import { GUI } from './Base/SettingUtils';
+import { ModName, ModVersion } from './Utilities/ModDefinition';
+import { ColorsModule } from './Modules/Colors';
+import { GlobalModule } from './Modules/Global';
+import { conLog, conDebug } from './Utilities/Console';
+import { dataTake, dataStore } from './Utilities/Data';
+import { RibbonMenu } from './Utilities/RibbonMenu';
+import { hookFunction } from './Utilities/SDK';
+import { IntegrationModule } from './Modules/Integration';
+import { _Color } from './Utilities/Color';
+import { VersionModule } from './Modules/Version';
+import { GuiRedrawModule } from './Modules/GuiRedraw';
+import { _Style } from './Utilities/Style';
+import { Localization } from './Translation';
 
 function initWait() {
-  conLog("Init wait");
-  if (CurrentScreen == null || CurrentScreen === "Login") {
-    hookFunction("LoginResponse", 0, (args, next) => {
+  conLog('Init wait');
+  if (CurrentScreen == null || CurrentScreen === 'Login') {
+    hookFunction('LoginResponse', 0, (args, next) => {
       conDebug(`Init! LoginResponse caught: `, args);
       next(args);
       const response = args[0];
-      if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
+      if (response && typeof response.Name === 'string' && typeof response.AccountName === 'string') {
         init();
       }
     });
@@ -32,6 +33,8 @@ function initWait() {
 
 export function init() {
   if (window.ThemedLoaded) return;
+
+  Localization.load();
 
   RibbonMenu.registerMod(ModName);
 
@@ -73,7 +76,7 @@ function initModules(): boolean {
     m.Run();
   }
 
-  conLog("Modules Loaded.");
+  conLog('Modules Loaded.');
   return true;
 }
 
@@ -81,7 +84,7 @@ export function unload(): true {
   unloadModules();
 
   delete window.ThemedLoaded;
-  conLog("Unloaded.");
+  conLog('Unloaded.');
   return true;
 }
 

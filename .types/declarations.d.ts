@@ -3,17 +3,19 @@ interface Window {
   RibbonMenuMods?: string[];
 }
 
-declare module "*.html" {
+declare const serverUrl: string;
+
+declare module '*.html' {
   const value: string;
   export = value;
 }
 
-declare module "*.css" {
+declare module '*.css' {
   const value: string;
   export = value;
 }
 
-declare module "*.png" {
+declare module '*.png' {
   const value: string;
   export = value;
 }

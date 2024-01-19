@@ -53,6 +53,7 @@ export class _Image {
   ];
 
   static drawColorized(source: string, x: number, y: number, hexColor: string, { newWidth = null, newHeight = null }) {
+    if (typeof source != "string") return;
     const img = DrawGetImage(source);
 
     // Check if the colorized image is already cached

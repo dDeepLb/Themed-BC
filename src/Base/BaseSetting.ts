@@ -1,16 +1,16 @@
-import { Setting } from "../../.types/setting";
-import { BaseSettingsModel } from "../Models/Global";
-import { doRedraw } from "../Modules/GuiRedraw";
-import { TextMapKeys, getText } from "../Translation";
-import { _Color, colors } from "../Utilities/Color";
-import { conDebug } from "../Utilities/Console";
-import { dataStore } from "../Utilities/Data";
-import { _Image } from "../Utilities/Drawing";
-import { changeModColors } from "../Utilities/Integration";
-import { _Style } from "../Utilities/Style";
-import { BaseModule } from "./BaseModule";
-import { modules } from "./Modules";
-import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from "./SettingDefinitions";
+import { Setting } from '../../.types/setting';
+import { BaseSettingsModel } from '../Models/Global';
+import { doRedraw } from '../Modules/GuiRedraw';
+import { getText } from '../Translation';
+import { _Color, colors } from '../Utilities/Color';
+import { conDebug } from '../Utilities/Console';
+import { dataStore } from '../Utilities/Data';
+import { _Image } from '../Utilities/Drawing';
+import { changeModColors } from '../Utilities/Integration';
+import { _Style } from '../Utilities/Style';
+import { BaseModule } from './BaseModule';
+import { modules } from './Modules';
+import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from './SettingDefinitions';
 
 export abstract class GuiSubscreen {
   static START_X: number = 180;
@@ -27,7 +27,7 @@ export abstract class GuiSubscreen {
     // create each handler for a new preference subscreen
     SETTING_FUNC_NAMES.forEach((name) => {
       const fName = SETTING_FUNC_PREFIX + SETTING_NAME_PREFIX + this.name + name;
-      if (typeof (<any>this)[name] === "function" && typeof (<any>window)[fName] !== "function")
+      if (typeof (<any>this)[name] === 'function' && typeof (<any>window)[fName] !== 'function')
         (<any>window)[fName] = () => {
           (<any>this)[name]();
         };
@@ -35,15 +35,15 @@ export abstract class GuiSubscreen {
   }
 
   get name(): string {
-    return "UNKNOWN";
+    return 'UNKNOWN';
   }
 
   get icon(): string {
-    return "";
+    return '';
   }
 
   get label(): string {
-    return "UNDEFINED SETTING SCREEN";
+    return 'UNDEFINED SETTING SCREEN';
   }
 
   get message(): string {
@@ -86,7 +86,7 @@ export abstract class GuiSubscreen {
     this.multipageStructure.forEach((item, ix, arr) => {
       if (ix != PreferencePageCurrent - 1) {
         item.forEach((setting) => {
-          if (setting.type == "text" || setting.type == "number" || setting.type == "color") this.elementHide(setting.id);
+          if (setting.type == 'text' || setting.type == 'number' || setting.type == 'color') this.elementHide(setting.id);
         });
       }
     });
@@ -101,15 +101,15 @@ export abstract class GuiSubscreen {
     this.multipageStructure.forEach((s) =>
       s.forEach((item) => {
         switch (item.type) {
-          case "text":
-            let input = ElementCreateInput(item.id, "text", item.setting(), "255");
-            input.setAttribute("autocomplete", "off");
+          case 'text':
+            let input = ElementCreateInput(item.id, 'text', item.setting(), '255');
+            input.setAttribute('autocomplete', 'off');
             break;
-          case "number":
-            ElementCreateInput(item.id, "number", item.setting(), "255");
+          case 'number':
+            ElementCreateInput(item.id, 'number', item.setting(), '255');
             break;
-          case "color":
-            ElementCreateInput(item.id, "color", item.setting());
+          case 'color':
+            ElementCreateInput(item.id, 'color', item.setting());
             break;
         }
       })
@@ -123,35 +123,35 @@ export abstract class GuiSubscreen {
     GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
 
     GuiSubscreen.START_X = 550;
-    MainCanvas.textAlign = "left";
+    MainCanvas.textAlign = 'left';
 
     DrawCharacter(Player, 50, 50, 0.9, false);
     //@ts-ignore
-    DrawText(getText(`${this.name}.title`), GuiSubscreen.START_X, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, "Black", "#D7F6E9");
-    DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png", "Main Menu");
+    DrawText(getText(`${this.name}.title`), GuiSubscreen.START_X, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', '#D7F6E9');
+    DrawButton(1815, 75, 90, 90, '', 'White', 'Icons/Exit.png', 'Main Menu');
 
     if (this.multipageStructure.length > 1) {
-      MainCanvas.textAlign = "center";
+      MainCanvas.textAlign = 'center';
       PreferencePageChangeDraw(1595, 75, this.multipageStructure.length);
-      MainCanvas.textAlign = "left";
+      MainCanvas.textAlign = 'left';
     }
 
     this.hideElements();
 
     this.structure.forEach((item, ix, arr) => {
       switch (item.type) {
-        case "checkbox":
+        case 'checkbox':
           this.drawCheckbox(item.label, item.description, item.setting(), ix, item.disabled);
           break;
-        case "text":
-        case "number":
-        case "color":
+        case 'text':
+        case 'number':
+        case 'color':
           this.elementPosition(item.id, item.label, item.description, ix, item.disabled);
           break;
-        case "label":
+        case 'label':
           this.drawLabel(item.label, item.description, ix);
           break;
-        case "button":
+        case 'button':
           this.drawBetterButton(item.position, item.size, item.label, item.color, item.image, item.disabled);
           break;
       }
@@ -166,19 +166,19 @@ export abstract class GuiSubscreen {
     GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
 
     GuiSubscreen.START_X = 550;
-    MainCanvas.textAlign = "left";
+    MainCanvas.textAlign = 'left';
 
     if (MouseIn(1815, 75, 90, 90)) return this.Exit();
     if (this.multipageStructure.length > 1) PreferencePageChangeClick(1595, 75, this.multipageStructure.length);
 
     this.structure.forEach((item, ix, arr) => {
       switch (item.type) {
-        case "checkbox":
+        case 'checkbox':
           if (MouseIn(this.getXPos(ix) + 600, this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
             item.setSetting(!item.setting());
           }
           break;
-        case "button":
+        case 'button':
           if (MouseIn(item.position[0], item.position[1], item.size[0], item.size[1])) item.callback();
           break;
       }
@@ -192,13 +192,13 @@ export abstract class GuiSubscreen {
     this.multipageStructure.forEach((s) =>
       s.forEach((item) => {
         switch (item.type) {
-          case "number":
+          case 'number':
             if (!CommonIsNumeric(ElementValue(item.id))) {
               ElementRemove(item.id);
               break;
             }
-          case "text":
-          case "color":
+          case 'text':
+          case 'color':
             item.setSetting(ElementValue(item.id));
             ElementRemove(item.id);
             break;
@@ -214,7 +214,7 @@ export abstract class GuiSubscreen {
     changeModColors();
     _Image.clearCache();
 
-    setSubscreen("MainMenu");
+    setSubscreen('MainMenu');
     dataStore();
   }
 
@@ -223,62 +223,62 @@ export abstract class GuiSubscreen {
   }
 
   tooltip(text: string) {
-    drawTooltip(300, 850, 1400, text, "left");
+    drawTooltip(300, 850, 1400, text, 'left');
   }
 
-  drawCheckbox(label: TextMapKeys, description: TextMapKeys, value: boolean, order: number, disabled: boolean = false) {
+  drawCheckbox(label: string, description: string, value: boolean, order: number, disabled: boolean = false) {
     var isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-    DrawCheckbox(this.getXPos(order) + 600, this.getYPos(order) - 32, 64, 64, "", value ?? false, disabled);
+    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
+    DrawCheckbox(this.getXPos(order) + 600, this.getYPos(order) - 32, 64, 64, '', value ?? false, disabled);
     if (isHovering) this.tooltip(getText(description));
   }
 
-  drawBetterButton(position: number[], size: number[], label: TextMapKeys, color: string, image: string = "", disabled: boolean = false) {
+  drawBetterButton(position: number[], size: number[], label: string, color: string, image: string = '', disabled: boolean = false) {
     var isHovering = MouseIn(position[0], position[1] - 32, size[0], size[1]);
-    DrawButton(position[0], position[1], size[0], size[1], "", color, "", "", disabled);
+    DrawButton(position[0], position[1], size[0], size[1], '', color, '', '', disabled);
     DrawImageResize(image, position[0] + 10, position[1] + 10, 60, 60);
-    DrawTextFit(getText(label), position[0] + 80, position[1] + 40, 600, isHovering ? "Red" : "Black", "Gray");
+    DrawTextFit(getText(label), position[0] + 80, position[1] + 40, 600, isHovering ? 'Red' : 'Black', 'Gray');
   }
 
-  drawButton(label: TextMapKeys, color: string, order: number, XOffset: number, disabled: boolean = false) {
+  drawButton(label: string, color: string, order: number, XOffset: number, disabled: boolean = false) {
     var isHovering = MouseIn(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64);
-    DrawButton(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64, "", color, "", "", disabled);
-    DrawTextFit(getText(label), this.getXPos(order) + XOffset + 58, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+    DrawButton(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64, '', color, '', '', disabled);
+    DrawTextFit(getText(label), this.getXPos(order) + XOffset + 58, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
   }
 
   elementHide(elementId: string) {
     ElementPosition(elementId, -999, -999, 1, 1);
   }
 
-  elementPosition(elementId: string, label: TextMapKeys, description: TextMapKeys, order: number, disabled: boolean = false) {
+  elementPosition(elementId: string, label: string, description: string, order: number, disabled: boolean = false) {
     var isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
     ElementPosition(elementId, this.getXPos(order) + 750 + 225, this.getYPos(order), 800, 64);
-    if (disabled) ElementSetAttribute(elementId, "disabled", "true");
-    if (!disabled) document.getElementById(elementId)?.removeAttribute("disabled");
+    if (disabled) ElementSetAttribute(elementId, 'disabled', 'true');
+    if (!disabled) document.getElementById(elementId)?.removeAttribute('disabled');
     if (isHovering) this.tooltip(getText(description));
   }
 
-  drawLabel(label: TextMapKeys, description: TextMapKeys, order: number) {
+  drawLabel(label: string, description: string, order: number) {
     var isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
     if (isHovering) this.tooltip(getText(description));
   }
 }
 
-function drawTooltip(x: number, y: number, width: number, text: string, align: "left" | "center" | "right") {
+function drawTooltip(x: number, y: number, width: number, text: string, align: 'left' | 'center' | 'right') {
   const canvas = MainCanvas;
   const bak = canvas.textAlign;
   canvas.textAlign = align;
   canvas.beginPath();
   canvas.rect(x, y, width, 65);
-  canvas.fillStyle = doRedraw() ? colors.elementBackground : "#FFFF88";
+  canvas.fillStyle = doRedraw() ? colors.elementBackground : '#FFFF88';
   canvas.fillRect(x, y, width, 65);
   canvas.fill();
   canvas.lineWidth = 2;
-  canvas.strokeStyle = doRedraw() ? colors.elementBorder : "black";
+  canvas.strokeStyle = doRedraw() ? colors.elementBorder : 'black';
   canvas.stroke();
   canvas.closePath();
-  DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? colors.text : "black");
+  DrawTextFit(text, align === 'left' ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? colors.text : 'black');
   canvas.textAlign = bak;
 }
