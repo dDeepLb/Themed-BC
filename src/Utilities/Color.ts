@@ -1,4 +1,4 @@
-import { Colors } from "../Models/Colors";
+import { Colors } from '../Models/Colors';
 
 // Define a type for RGB color
 type RGBAColor = {
@@ -11,14 +11,15 @@ type RGBAColor = {
 let cachedColors = {};
 
 export const colors: Colors = {
-  mainBackground: "",
-  elementBackground: "",
-  elementBackgroundHover: "",
-  elementBackgroundDisabled: "",
-  elementBorder: "",
-  elementBorderHover: "",
-  text: "",
-  icon: ""
+  mainBackground: '',
+  elementBackground: '',
+  elementBackgroundHover: '',
+  elementBackgroundDisabled: '',
+  elementHoverHint: '',
+  elementBorder: '',
+  elementBorderHover: '',
+  text: '',
+  icon: ''
 };
 
 export class _Color {
@@ -114,7 +115,7 @@ export class _Color {
   }
 
   static hexToRgba(hex: string): RGBAColor {
-    hex = hex.replace(/^#/, ""); // Remove the "#" symbol if it exists
+    hex = hex.replace(/^#/, ''); // Remove the "#" symbol if it exists
 
     if (hex.length === 6) {
       // If no alpha value exists, default alpha to fully opaque (1.0 or 255 in decimal)
@@ -145,7 +146,7 @@ export class _Color {
       const alphaHex = Math.round(a * 255)
         .toString(16)
         .toUpperCase()
-        .padStart(2, "0");
+        .padStart(2, '0');
       return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1).toUpperCase()}${alphaHex}`;
     }
 
@@ -177,7 +178,7 @@ export class _Color {
     let cachedColor = _Color.getCache(`comp${color}`);
     if (cachedColor) return cachedColor;
 
-    const div = document.createElement("div");
+    const div = document.createElement('div');
     div.style.color = color;
     document.body.appendChild(div);
     const computedColor = getComputedStyle(div).color;
@@ -209,6 +210,7 @@ export class _Color {
     colors.elementBackground = _Color.lighten(primaryColor, 10);
     colors.elementBackgroundDisabled = primaryColor;
     colors.elementBackgroundHover = accentColor;
+    colors.elementHoverHint = _Color.lighten(colors.elementBackground, 20);
     colors.elementBorder = accentColor;
     colors.elementBorderHover = _Color.lighten(accentColor, 20);
     colors.text = textColor;

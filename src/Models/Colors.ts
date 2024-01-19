@@ -1,4 +1,4 @@
-import { BaseSettingsModel } from "./Global";
+import { BaseSettingsModel } from './Global';
 
 export type ColorsSettingsModel = BaseSettingsModel & {
   primaryColor: string;
@@ -11,6 +11,7 @@ export type Colors = {
   elementBackground: string; // Buttons and HTML Elements
   elementBackgroundHover: string;
   elementBackgroundDisabled: string;
+  elementHoverHint: string;
   icon: string;
   elementBorder: string;
   elementBorderHover: string;
