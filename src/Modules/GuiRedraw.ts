@@ -456,7 +456,6 @@ export class GuiRedrawModule extends BaseModule {
       HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args); // Skip hook if setting is disabled
-        if (args[0]?.startsWith("Description")) return next(args); // NOTE Temporary "solution"
 
         if (isBlack(args[4])) {
           args[4] = colors.text;
