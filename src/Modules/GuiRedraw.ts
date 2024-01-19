@@ -2,7 +2,7 @@ import { BaseModule } from "../Base/BaseModule";
 import { colors, _Color } from "../Utilities/Color";
 import { PlayerStorage } from "../Utilities/Data";
 import { drawRect, _Image, drawButtonRect } from "../Utilities/Drawing";
-import { hookFunction, HookPriority, ModuleCategory } from "../Utilities/SDK";
+import { hookFunction, HookPriority, ModuleCategory, patchFunction } from "../Utilities/SDK";
 
 export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
@@ -62,7 +62,7 @@ export class GuiRedrawModule extends BaseModule {
         ControllerAddActiveArea(x, y);
 
         // Draw the button rectangle
-        switch (_Color.getHexComputed(color)) {
+        switch (_Color.getHexComputed(color).toLowerCase()) {
           case "#ffffff":
           case "#dddddd":
           case "#eeeeee":
@@ -488,7 +488,10 @@ export class GuiRedrawModule extends BaseModule {
       },
       ModuleCategory.GuiRedraw
     );
-  }
 
-  Run(): void {}
+    patchFunction("ChatSearchNormalDraw", {
+      'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);':
+        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#4d1b1b" : HasBlock ? "#6e0c0c" : HasFriends && IsFull ? "#225c30" : HasFriends ? "#4d854d" : IsFull ? "#444" : "White"), null, null, IsFull);'
+    });
+  }
 }

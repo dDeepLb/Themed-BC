@@ -45,6 +45,10 @@ function initPatchableFunction(target: string): PatchedFunctionData {
   return result;
 }
 
+export function patchFunction(target: string, patches: Record<string, string>): void {
+  SDK.patchFunction(target, patches);
+}
+
 export function hookFunction(target: string, priority: number, hook: PatchHook, module: ModuleCategory | null = null): () => void {
   const data = initPatchableFunction(target);
 
