@@ -15,7 +15,7 @@
 #TextAreaChatLog .ChatMessageName,
 #TextAreaChatLog[data-colortheme="dark"] .ChatMessageName,
 #TextAreaChatLog[data-colortheme="dark2"] .ChatMessageName {
-  text-shadow: 0.05em 0.05em var(--textShadow);
+  text-shadow: 0 0 0.12em var(--textShadow);
 }
 
 #TextAreaChatLog[data-colortheme="dark2"] .ChatMessage {

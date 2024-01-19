@@ -486,10 +486,10 @@ export class GuiRedrawModule extends BaseModule {
 
         if (isBlack(args[4])) {
           args[4] = colors.text;
-          args[5] = ''; //_Color.darken(args[4], 20);
+          //args[5] = ''; //_Color.darken(args[4], 20);
         } else {
           args[4] = _Color.toDarkMode(args[4], colors.mainBackground);
-          args[5] = ''; //_Color.darken(args[4], 20);
+          //args[5] = ''; //_Color.darken(args[4], 20);
         }
 
         return next(args);
