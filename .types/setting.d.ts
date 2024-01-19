@@ -1,12 +1,12 @@
-import { TextMapKeys, getText } from "../Translation";
+import { getText } from '../Translation';
 
 export type Setting = Button | Checkbox | Input | Label;
 
 export type Button = {
-  type: "button";
+  type: 'button';
   position: number[];
   size: number[];
-  label: TextMapKeys;
+  label: string;
   color: string;
   image: string;
   disabled: boolean;
@@ -14,27 +14,27 @@ export type Button = {
 };
 
 export type Checkbox = {
-  type: "checkbox";
-  label: TextMapKeys;
-  description: TextMapKeys;
+  type: 'checkbox';
+  label: string;
+  description: string;
   disabled: boolean;
   setting(): any;
   setSetting(val: any): void;
 };
 
 export type Input = {
-  type: "text" | "number" | "color";
+  type: 'text' | 'number' | 'color';
   id: string;
-  label: TextMapKeys;
-  description: TextMapKeys;
+  label: string;
+  description: string;
   disabled: boolean;
   setting(): any;
   setSetting(val: any): void;
 };
 
 export type Label = {
-  type: "label";
-  label: TextMapKeys;
-  description: TextMapKeys;
+  type: 'label';
+  label: string;
+  description: string;
   disabled: boolean;
 };

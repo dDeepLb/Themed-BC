@@ -20,12 +20,13 @@ settings.setting.doShowNewVersionMessage.desc = Show message about new version o
 
 # Colors
 Colors.title = - Color Settings -
-settings.setting.primaryColor.name = Primary color:
-settings.setting.primaryColor.desc = Primary color used for main elements such as background and button colors
-settings.setting.accentColor.name = Accent color:
-settings.setting.accentColor.desc = Secondary color used for such detail elements as icon and border colors
-settings.setting.textColor.name = Text color:
-settings.setting.textColor.desc = Color used for most text, excluding other colors
+colors.setting.primaryColor.name = Primary color:
+colors.setting.primaryColor.desc = Primary color used for main elements such as background and button colors
+colors.setting.accentColor.name = Accent color:
+colors.setting.accentColor.desc = Secondary color used for such detail elements as icon and border colors
+colors.setting.textColor.name = Text color:
+colors.setting.textColor.desc = Color used for most text, excluding other colors
+colors.button.change_input_type = Change inputs type
 
 # Integration
 Integration.title = - Integration -
