@@ -11,7 +11,6 @@ import { IntegrationModule } from "./Modules/Integration";
 import { _Color } from "./Utilities/Color";
 import { VersionModule } from "./Modules/Version";
 import { GuiRedrawModule } from "./Modules/GuiRedraw";
-import { MarkdownModule } from "./Modules/Markdown";
 import { _Style } from "./Utilities/Style";
 
 function initWait() {
@@ -60,7 +59,6 @@ function initModules(): boolean {
   registerModule(new ColorsModule());
   registerModule(new GuiRedrawModule());
   registerModule(new IntegrationModule());
-  //registerModule(new MarkdownModule());
   registerModule(new VersionModule());
 
   for (const m of modules()) {
