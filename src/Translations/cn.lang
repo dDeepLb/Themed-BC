@@ -1,0 +1,62 @@
+# Mod Button
+infosheet.button_popup = 主题设置
+
+# Main Menu
+MainMenu.title = - BC主题 v$ModVersion -
+mainmenu.button.Settings = 设置
+mainmenu.button.Colors = 色彩设置
+mainmenu.button.Integration = 集成
+
+# Settings
+Settings.title = - 基础设置 -
+settings.setting.themedEnabled.name = 启用主题:
+settings.setting.themedEnabled.desc = 启用Mod相关功能.
+settings.setting.doVanillaGuiOverhaul.name = 启用GUI修改:
+settings.setting.doVanillaGuiOverhaul.desc = 使用 色彩设置 中所选择的颜色重新绘制界面.
+settings.setting.doShowLocaleTime.name = 启用基于地区的时间格式:
+settings.setting.doShowLocaleTime.desc = 根据PC的语言环境设置显示时间。20:25 或 晚上08:25。
+settings.setting.doShowNewVersionMessage.name = 启用新版本消息:
+settings.setting.doShowNewVersionMessage.desc = 当有新版本时显示关于主题的新版本的消息。
+
+# Colors
+Colors.title = - 色彩设置 -
+colors.setting.primaryColor.name = 首要颜色:
+colors.setting.primaryColor.desc = 首要颜色 用于主要元素，如背景和按钮的颜色
+colors.setting.accentColor.name = 强调颜色:
+colors.setting.accentColor.desc = 强调颜色 用于细节元素，如图标和边框颜色
+colors.setting.textColor.name = 文本颜色:
+colors.setting.textColor.desc = 除不分其他颜色外，用于大多数文本的颜色
+colors.button.change_input_type = 更改输入类型
+
+# Integration
+Integration.title = - 集成设置 -
+integration.setting.BC.name =启用BC输入 "集成":
+integration.setting.BC.desc = 更改BC的CSS样式以使用颜色设置。改变输入和其他你可以输入文本的东西。
+integration.setting.BC_Chat.name = 启用BC聊天室 "集成":
+integration.setting.BC_Chat.desc = 更改BC的CSS样式以在聊天室使用颜色与样式改动。
+integration.setting.BC_FriendList.name = 启用BC好友列表 "集成":
+integration.setting.BC_FriendList.desc = 更改BC的CSS样式以使用颜色设置。更改好友列表的背景
+integration.setting.BC_Other.name = 启用BC其他 "集成":
+integration.setting.BC_Other.desc = 更改BC的CSS样式以使用颜色设置。更改滚动条和选项颜色。
+integration.setting.FBC.name = 启用FBC "集成":
+integration.setting.FBC.desc = 改变CSS样式的FBC使用颜色设置。主要改变 即时通讯界面 的颜色。
+integration.setting.FUSAM.name = 启用 FUSAM "集成":
+integration.setting.FUSAM.desc = 改变CSS样式的FUSAM使用颜色设置。改变FUSAM按钮和设置界面。
+integration.setting.TTS.name = 启用 TTS "集成":
+integration.setting.TTS.desc = 改变CSS样式的TTS使用颜色设置。使用任务窗口更改设置界面;
+
+# Reset
+reset.label.perma_reset_of_mod_data = - 主题数据永久重置 -
+reset.label.warning = - 警告 -
+reset.label.if_u_confirm_perma_reset = 如果您确认，所有主题数据(包括颜色设置)将被永久重置!
+reset.label.youll_able_to_use_mod = 您将能够继续使用主题，但您的所有配置将重置为默认值!
+reset.label.action_cannot_be_undone = 这个动作不能撤销!
+
+reset.button.confirm = 确认
+reset.button.cancel = 取消
+
+# Support
+support.title = - 支持 -
+support.button.ko-fi = Ko-fi
+support.button.patreon = Patreon
+support.other.thankyou = 感谢"
