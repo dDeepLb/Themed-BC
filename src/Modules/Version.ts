@@ -1,6 +1,6 @@
 import { BaseModule } from '../Base/BaseModule';
 import { PlayerStorage } from '../Utilities/Data';
-import { ModVersion } from '../Utilities/ModDefinition';
+import { ModName, ModVersion } from '../Utilities/ModDefinition';
 import { sendLocalSmart } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 import { _Style } from '../Utilities/Style';
@@ -47,7 +47,7 @@ export class VersionModule extends BaseModule {
 
   static saveVersion() {
     if (PlayerStorage()) {
-      PlayerStorage().Version = ModVersion;
+      Player[ModName].Version = ModVersion;
     }
   }
 

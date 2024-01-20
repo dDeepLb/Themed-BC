@@ -13,6 +13,9 @@ import { VersionModule } from './Modules/Version';
 import { GuiRedrawModule } from './Modules/GuiRedraw';
 import { _Style } from './Utilities/Style';
 import { Localization } from './Translation';
+import { CommandsModule } from './Modules/Commands';
+import { ShareModule } from './Modules/Share';
+import { ProfilesModule } from './Modules/Profiles';
 
 function initWait() {
   conLog('Init wait');
@@ -62,6 +65,9 @@ function initModules(): boolean {
   registerModule(new ColorsModule());
   registerModule(new GuiRedrawModule());
   registerModule(new IntegrationModule());
+  registerModule(new ProfilesModule());
+  registerModule(new CommandsModule());
+  registerModule(new ShareModule());
   registerModule(new VersionModule());
 
   for (const m of modules()) {

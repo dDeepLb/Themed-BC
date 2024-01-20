@@ -1,11 +1,20 @@
 # Mod Button
 infosheet.button_popup = Themed Settings
 
+# Modal
+modal.button.accept = Accept
+modal.button.cancel = Cancel
+modal.button.show = Show
+
+modal.prompt.share = $Sender shares $SenderPronoun theme.<br>Do you want to load it?<br>(It's recommended to save your current settings!)
+modal.prompt.chat_share_notification = $Sender sent a Themed theme:
+
 # Main Menu
 MainMenu.title = - Themed BC v$ModVersion -
 mainmenu.button.Settings = Settings
 mainmenu.button.Colors = Color Settings
 mainmenu.button.Integration = Integration
+mainmenu.button.Profiles = Profiles
 
 # Settings
 Settings.title = - Settings -
@@ -43,7 +52,22 @@ integration.setting.FBC.desc = Changes CSS styles of FBC to use Color Settings. 
 integration.setting.FUSAM.name = Enable FUSAM "integration":
 integration.setting.FUSAM.desc = Changes CSS styles of FUSAM to use Color Settings. Changes FUSAM button with settings interface.
 integration.setting.TTS.name = Enable TTS "integration":
-integration.setting.TTS.desc = Changes CSS styles of TTS to use Color Settings. Changes settings interface with task window,
+integration.setting.TTS.desc = Changes CSS styles of TTS to use Color Settings. Changes settings interface with task window.
+
+# Profiles
+Profiles.title = - Profiles -
+
+profiles.button.save = Save
+profiles.button.load = Load
+profiles.button.delete = Delete
+
+profiles.prompt = Please, enter profile name.
+profiles.text.profile = Profile
+profiles.text.has_been_saved = has been saved!
+profiles.text.needs_to_be_saved = needs to be saved first!
+profiles.text.has_been_loaded = has been loaded!
+profiles.text.has_been_deleted = has been deleted!
+profiles.text.not_saved_or_already_deleted = is not saved or already deleted!
 
 # Reset
 reset.label.perma_reset_of_mod_data = - Permanent reset of Themed data -
