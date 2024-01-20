@@ -1,5 +1,6 @@
 import { Setting } from '../../.types/setting';
 import { BaseSettingsModel } from '../Models/Global';
+import { ColorsModule } from '../Modules/Colors';
 import { doRedraw } from '../Modules/GuiRedraw';
 import { getText } from '../Translation';
 import { _Color, colors } from '../Utilities/Color';
@@ -9,7 +10,7 @@ import { _Image } from '../Utilities/Drawing';
 import { changeModColors } from '../Utilities/Integration';
 import { _Style } from '../Utilities/Style';
 import { BaseModule } from './BaseModule';
-import { modules } from './Modules';
+import { getModule, modules } from './Modules';
 import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from './SettingDefinitions';
 
 export abstract class GuiSubscreen {
@@ -209,10 +210,7 @@ export abstract class GuiSubscreen {
     CharacterAppearanceForceUpCharacter = -1;
     CharacterLoadCanvas(Player);
 
-    _Color.composeRoot();
-    _Style.reloadAll();
-    changeModColors();
-    _Image.clearCache();
+    getModule<ColorsModule>('ColorsModule').reloadTheme();
 
     setSubscreen('MainMenu');
     dataStore();

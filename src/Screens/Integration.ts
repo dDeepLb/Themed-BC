@@ -8,7 +8,7 @@ export class GuiIntegration extends GuiSubscreen {
   }
 
   get icon(): string {
-    return 'Icons/Preference.png';
+    return 'Icons/Scripts.png';
   }
 
   get settings(): IntegrationSettingsModel {

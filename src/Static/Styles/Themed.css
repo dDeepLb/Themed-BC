@@ -1,3 +1,59 @@
+.themed-modal,
+.themed-chat-modal {
+  padding: 5px;
+
+  background-color: var(--elementBackground);
+  color: var(--text);
+
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.themed-modal {
+  position: absolute;
+  width: 25%;
+  top: 15%;
+  margin-left: 12.5%;
+
+  flex-direction: column;
+}
+
+.themed-chat-modal {
+  /* width: 80%; */
+  font-size: 0.8em;
+  position: relative;
+
+  flex-direction: row;
+}
+
+#modal-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0.5rem;
+}
+
+.modal-button {
+  width: auto;
+  padding: 5px;
+
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  transition: all 0.5s ease;
+}
+
+.modal-button:hover {
+  background-color: var(--elementBackgroundHover);
+  text-shadow: 0 0 0.12em var(--textShadow);
+  cursor: pointer;
+}
+
 .ThemedMessageContent {
   display: inline;
 }

@@ -1,4 +1,4 @@
-import { BaseModule } from "../Base/BaseModule";
+import { BaseModule } from '../Base/BaseModule';
 
 export class Module extends BaseModule {
   Load(): void {}
