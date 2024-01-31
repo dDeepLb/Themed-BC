@@ -3,7 +3,7 @@ import { ColorsSettingsModel } from '../Models/Colors';
 import { SettingsModel } from '../Models/Settings';
 import { _String } from './String';
 
-export const PlayerStorage = () => CommonCloneDeep(Player?.[ModName]);
+export const PlayerStorage = () => (typeof Player?.[ModName] === 'object' ? CommonCloneDeep(Player?.[ModName]) : undefined);
 export const ExtensionStorage = () => Player.ExtensionSettings[ModName];
 
 export function dataTake() {
