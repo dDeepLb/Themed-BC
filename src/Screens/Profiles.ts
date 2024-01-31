@@ -1,7 +1,9 @@
 import { GuiSubscreen } from '../Base/BaseSetting';
+import { getModule } from '../Base/Modules';
 import { ProfileEntryModel, ProfileNames, ProfileSaveModel, ProfilesSettingsModel } from '../Models/Profiles';
-import { conWarn } from '../Utilities/Console';
+import { ColorsModule } from '../Modules/Colors';
 import { getText } from '../Translation';
+import { conWarn } from '../Utilities/Console';
 import { PlayerStorage } from '../Utilities/Data';
 import { ModName } from '../Utilities/ModDefinition';
 
@@ -158,12 +160,14 @@ export class GuiProfiles extends GuiSubscreen {
         this.saveProfile(profileIndex, '');
         this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.has_been_saved')}`;
       }
+
       if (this.ProfileNames[formerIndex] !== '') {
         this.saveProfile(profileIndex, this.ProfileNames[formerIndex] as string);
         this.PreferenceText = `${getText('profiles.text.profile')} "${this.ProfileNames[formerIndex]}" ${getText(
           'profiles.text.has_been_saved'
         )}`;
       }
+
       return;
     }
   }
@@ -175,12 +179,16 @@ export class GuiProfiles extends GuiSubscreen {
         this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.needs_to_be_saved')}`;
         return;
       }
+
       if (this.ProfileNames[formerIndex] === '')
         this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.has_been_loaded')}`;
       if (this.ProfileNames[formerIndex] !== '')
         this.PreferenceText = `${getText('profiles.text.profile')} "${this.ProfileNames[formerIndex]}" ${getText(
           'profiles.text.has_been_loaded'
         )}`;
+
+      getModule<ColorsModule>('ColorsModule').reloadTheme();
+
       return;
     }
   }
