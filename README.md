@@ -1,6 +1,6 @@
 # Themed BC
 ## Installation
-### FUSAM (Recommended) (Not yet in there)
+### FUSAM (Recommended)
 https://sidiousious.gitlab.io/bc-addon-loader
 ### Tampermonkey
 https://github.com/dDeepLb/Themed-BC/raw/main/loader.user.js
