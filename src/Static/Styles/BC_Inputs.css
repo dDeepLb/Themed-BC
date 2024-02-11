@@ -1,13 +1,13 @@
 textarea {
   background: var(--elementBackground);
   color: var(--text);
-  border: 1px solid var(--elementBorder);
+  border: 2px solid var(--elementBorder);
 }
 
 input {
   background: var(--elementBackground);
   color: var(--text);
-  border: 1px solid var(--elementBorder);
+  border: 2px solid var(--elementBorder);
 }
 
 textarea:focus,
