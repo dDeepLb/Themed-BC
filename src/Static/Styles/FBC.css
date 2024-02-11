@@ -2,6 +2,12 @@
   border-color: var(--elementBorder);
 }
 
+#bceRichOnlineProfile {
+  background: var(--elementBackground) !important;
+  color: var(--text) !important;
+  border: 2px dashed var(--elementBorder) !important;
+}
+
 #bce-instant-messenger {
   top: 0%;
   left: 0%;
