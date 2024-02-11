@@ -30,19 +30,19 @@ colors.button.change_input_type = 更改输入类型
 
 # Integration
 Integration.title = - 集成设置 -
-integration.setting.BC.name =启用BC输入 "集成":
+integration.setting.BC.name =启用BC输入 集成:
 integration.setting.BC.desc = 更改BC的CSS样式以使用颜色设置。改变输入和其他你可以输入文本的东西。
-integration.setting.BC_Chat.name = 启用BC聊天室 "集成":
+integration.setting.BC_Chat.name = 启用BC聊天室 集成:
 integration.setting.BC_Chat.desc = 更改BC的CSS样式以在聊天室使用颜色与样式改动。
-integration.setting.BC_FriendList.name = 启用BC好友列表 "集成":
+integration.setting.BC_FriendList.name = 启用BC好友列表 集成:
 integration.setting.BC_FriendList.desc = 更改BC的CSS样式以使用颜色设置。更改好友列表的背景
-integration.setting.BC_Other.name = 启用BC其他 "集成":
+integration.setting.BC_Other.name = 启用BC其他 集成:
 integration.setting.BC_Other.desc = 更改BC的CSS样式以使用颜色设置。更改滚动条和选项颜色。
-integration.setting.FBC.name = 启用FBC "集成":
+integration.setting.FBC.name = 启用FBC 集成:
 integration.setting.FBC.desc = 改变CSS样式的FBC使用颜色设置。主要改变 即时通讯界面 的颜色。
-integration.setting.FUSAM.name = 启用 FUSAM "集成":
+integration.setting.FUSAM.name = 启用 FUSAM 集成:
 integration.setting.FUSAM.desc = 改变CSS样式的FUSAM使用颜色设置。改变FUSAM按钮和设置界面。
-integration.setting.TTS.name = 启用 TTS "集成":
+integration.setting.TTS.name = 启用 TTS 集成:
 integration.setting.TTS.desc = 改变CSS样式的TTS使用颜色设置。使用任务窗口更改设置界面;
 
 # Reset

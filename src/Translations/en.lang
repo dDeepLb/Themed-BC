@@ -39,19 +39,19 @@ colors.button.change_input_type = Change inputs type
 
 # Integration
 Integration.title = - Integration -
-integration.setting.BC.name = Enable BC Inputs "integration":
+integration.setting.BC.name = Enable BC Inputs integration:
 integration.setting.BC.desc = Changes CSS styles of BC to use Color Settings. Changes inputs and other thingies where you could write text.
-integration.setting.BC_Chat.name = Enable BC Chat "integration":
+integration.setting.BC_Chat.name = Enable BC Chat integration:
 integration.setting.BC_Chat.desc = Changes CSS styles of BC to use Color Settings. Changes chat.
-integration.setting.BC_FriendList.name = Enable BC Friend List "integration":
+integration.setting.BC_FriendList.name = Enable BC Friend List integration:
 integration.setting.BC_FriendList.desc = Changes CSS styles of BC to use Color Settings. Changes background of friend list
-integration.setting.BC_Other.name = Enable BC Other "integration":
+integration.setting.BC_Other.name = Enable BC Other integration:
 integration.setting.BC_Other.desc = Changes CSS styles of BC to use Color Settings. Changes scroll bar and selection colors.
-integration.setting.FBC.name = Enable FBC "integration":
+integration.setting.FBC.name = Enable FBC integration:
 integration.setting.FBC.desc = Changes CSS styles of FBC to use Color Settings. Mostly changes Instant Messenger colors.
-integration.setting.FUSAM.name = Enable FUSAM "integration":
+integration.setting.FUSAM.name = Enable FUSAM integration:
 integration.setting.FUSAM.desc = Changes CSS styles of FUSAM to use Color Settings. Changes FUSAM button with settings interface.
-integration.setting.TTS.name = Enable TTS "integration":
+integration.setting.TTS.name = Enable TTS integration:
 integration.setting.TTS.desc = Changes CSS styles of TTS to use Color Settings. Changes settings interface with task window.
 
 # Profiles
