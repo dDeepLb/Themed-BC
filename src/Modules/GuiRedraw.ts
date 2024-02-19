@@ -2,7 +2,7 @@ import { BaseModule } from '../Base/BaseModule';
 import { colors, _Color } from '../Utilities/Color';
 import { PlayerStorage } from '../Utilities/Data';
 import { drawRect, _Image, drawButtonRect } from '../Utilities/Drawing';
-import { hookFunction, HookPriority, ModuleCategory, patchFunction } from '../Utilities/SDK';
+import { hookFunction, HookPriority, ModuleCategory, patchFunction, unpatchFuntion } from '../Utilities/SDK';
 
 export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
@@ -12,6 +12,8 @@ const isWhite = (color: string) => _Color.getComputed(color) === 'rgb(255, 255, 
 const isBlack = (color: string) => _Color.getComputed(color) === 'rgb(0, 0, 0)';
 
 export class GuiRedrawModule extends BaseModule {
+  patched: boolean = false;
+
   Load(): void {
     /* 
     Has impact only on "Sheet" background.
@@ -512,6 +514,12 @@ export class GuiRedrawModule extends BaseModule {
       ModuleCategory.GuiRedraw
     );
 
+    if (doRedraw()) this.patchGui();
+  }
+
+  patchGui() {
+    if (this.patched) return false;
+
     patchFunction('ChatSearchNormalDraw', {
       'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);':
         'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#4d1b1b" : HasBlock ? "#6e0c0c" : HasFriends && IsFull ? "#225c30" : HasFriends ? "#4d854d" : IsFull ? "#444" : "White"), null, null, IsFull);',
@@ -527,5 +535,24 @@ export class GuiRedrawModule extends BaseModule {
       'DrawRect(1087 + offset, 600, 225, 275, bgColor);':
         'DrawRect(1087 + offset, 600, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 600, 225, 275, "%border");'
     });
+
+    this.patched = true;
+  }
+
+  unpatchGui() {
+    if (!this.patched) return false;
+
+    unpatchFuntion('ChatSearchNormalDraw');
+    unpatchFuntion('DialogDraw');
+
+    this.patched = false;
+  }
+
+  toggleGuiPatches() {
+    if (!doRedraw()) {
+      return this.unpatchGui();
+    } else {
+      return this.patchGui();
+    }
   }
 }

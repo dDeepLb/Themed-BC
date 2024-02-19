@@ -1,6 +1,6 @@
-import bcMod from "bondage-club-mod-sdk";
-import { conErr } from "./Console";
-import { ModName, FullModName, ModVersion, ModRepository } from "./ModDefinition";
+import bcMod from 'bondage-club-mod-sdk';
+import { conErr } from './Console';
+import { ModName, FullModName, ModVersion, ModRepository } from './ModDefinition';
 
 export const SDK = bcMod.registerMod(
   {
@@ -47,6 +47,10 @@ function initPatchableFunction(target: string): PatchedFunctionData {
 
 export function patchFunction(target: string, patches: Record<string, string>): void {
   SDK.patchFunction(target, patches);
+}
+
+export function unpatchFuntion(target: string) {
+  SDK.removePatches(target);
 }
 
 export function hookFunction(target: string, priority: number, hook: PatchHook, module: ModuleCategory | null = null): () => void {
