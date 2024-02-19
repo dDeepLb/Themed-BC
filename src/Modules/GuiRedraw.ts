@@ -257,6 +257,7 @@ export class GuiRedrawModule extends BaseModule {
 
             case 'friendhint':
               drawRect(colors.elementHoverHint);
+              break;
 
             default:
               next(args);
@@ -274,11 +275,6 @@ export class GuiRedrawModule extends BaseModule {
             case '#d7f6e9': // LSCG Version Tooltip
               drawRect(colors.elementBackground);
               break;
-
-            // case '#d8fed7':
-            // case '#adcbac':
-            //   drawRect(_Color.darken(Color, 25));
-            //   break;
 
             default:
               next(args);
