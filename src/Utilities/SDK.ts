@@ -53,7 +53,12 @@ export function unpatchFuntion(target: string) {
   SDK.removePatches(target);
 }
 
-export function hookFunction(target: string, priority: number, hook: PatchHook, module: ModuleCategory | null = null): () => void {
+export function hookFunction(
+  target: string,
+  priority: number,
+  hook: import('../../.types/bcmodsdk').PatchHook,
+  module: ModuleCategory | null = null
+): () => void {
   const data = initPatchableFunction(target);
 
   if (data.hooks.some((h) => h.hook === hook)) {
@@ -61,7 +66,7 @@ export function hookFunction(target: string, priority: number, hook: PatchHook, 
     return () => null;
   }
 
-  const removeCallback = SDK.hookFunction(target, priority, hook);
+  const removeCallback = SDK.hookFunction(target, priority, hook as any);
 
   data.hooks.push({
     hook,
