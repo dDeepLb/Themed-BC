@@ -6,6 +6,7 @@ import FBC from '../Static/Styles/FBC.css';
 import FUSAM from '../Static/Styles/FUSAM.css';
 import Themed from '../Static/Styles/Themed.css';
 import TTS from '../Static/Styles/TTS.css';
+import MBS from '../Static/Styles/MBS.css';
 import { _Color, colors } from './Color';
 import { PlayerStorage } from './Data';
 
@@ -18,7 +19,8 @@ const styles = {
   BC_Other: BC_Other,
   FBC: FBC,
   FUSAM: FUSAM,
-  TTS: TTS
+  TTS: TTS,
+  MBS: MBS
 };
 
 export class _Style {
@@ -31,7 +33,7 @@ export class _Style {
 
     if (isStyleLoaded) return;
     if (!isEnabled) return;
-    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root' && id != 'Markdown') return;
+    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root') return;
 
     const styleElement = document.createElement('style');
     styleElement.id = id;

@@ -1,0 +1,7 @@
+:root {
+  --mbs-background-color: var(--elementBackground) !important;
+  --mbs-hover-color: var(--elementBackgroundHover) !important;
+  --mbs-tooltip-color: var(--accent) !important;
+  --mbs-border-color: var(--elementBorder) !important;
+  --mbs-text-color: var(--text) !important;
+}
