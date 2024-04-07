@@ -18,7 +18,7 @@ export class GlobalModule extends BaseModule {
     return <GlobalSettingsModel>{
       themedEnabled: true,
       doVanillaGuiOverhaul: true,
-      doUseChatSpecialStyling: true,
+      doUseFlatColor: true,
       doShowLocaleTime: true,
       doShowNewVersionMessage: true
     };
