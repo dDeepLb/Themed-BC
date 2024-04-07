@@ -15,38 +15,23 @@ export class GuiRedrawModule extends BaseModule {
   patched: boolean = false;
 
   Load(): void {
-    /* 
-    Has impact only on "Sheet" background.
-    Just replaces it will rectangle with user selected color
-    */
     hookFunction(
-      'DrawProcess',
+      'DrawRoomBackground',
       HookPriority.Observe,
-      (args, next) => {
-        if (!doRedraw()) return next(args);
+      ([URL, ...args], next) => {
+        if (!doRedraw()) return next([URL, ...args]);
 
-        let B = window[CurrentScreen + 'Background'];
-        if (B != 'Sheet') return next(args);
-
-        let time = args[0];
-
-        DrawRect(0, 0, 2000, 1000, colors.mainBackground);
-
-        MainCanvas.filter = 'none';
-
-        // Draws the dialog screen or current screen if there's no loaded character
-        if (CurrentCharacter != null) DialogDraw();
-        else CurrentScreenFunctions.Run(time);
-
-        // Draw Hovering text so they can be above everything else
-        DrawProcessHoverElements();
-
-        // Draws beep from online player sent by the server
-        ServerDrawBeep();
-
-        // Draw a marker for the controller's position
-        if (ControllerIsActive()) {
-          DrawRect(MouseX - 5, MouseY - 5, 10, 10, 'Red');
+        if (URL.includes('Sheet.jpg')) {
+          if (PlayerStorage().GlobalModule.doUseFlatColor) {
+            DrawRect(0, 0, 2000, 1000, colors.mainBackground);
+          } else {
+            next([URL, ...args]);
+            MainCanvas.globalCompositeOperation = 'multiply';
+            DrawRect(0, 0, 2000, 1000, colors.mainBackground);
+            MainCanvas.globalCompositeOperation = 'source-over';
+          }
+        } else {
+          next([URL, ...args]);
         }
       },
       ModuleCategory.GuiRedraw
@@ -63,7 +48,6 @@ export class GuiRedrawModule extends BaseModule {
 
         ControllerAddActiveArea(x, y);
 
-        // Draw the button rectangle
         switch (_Color.getHexComputed(color).toLowerCase()) {
           case '#ffffff':
           case '#dddddd':
@@ -109,7 +93,6 @@ export class GuiRedrawModule extends BaseModule {
           else DrawImage(image, x + 2, y + 2);
         }
 
-        // Draw the hovering text
         if (hoveringText != null && isHovering) {
           DrawHoverElements.push(() => DrawButtonHover(x, y, width, height, hoveringText));
         }
@@ -121,7 +104,7 @@ export class GuiRedrawModule extends BaseModule {
       'DrawCheckbox',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = 'Black', CheckImage = 'Icons/Checked.png'] = args;
 
@@ -135,12 +118,10 @@ export class GuiRedrawModule extends BaseModule {
       'DrawBackNextButton',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         let [Left, Top, Width, Height, Label, Color, Image, BackText, NextText, Disabled, ArrowWidth] = args;
 
-        // Set the widths of the previous/next sections to be colored cyan when hovering over them
-        // By default each covers half the width, together covering the whole button
         if (ArrowWidth == null || ArrowWidth > Width / 2) ArrowWidth = Width / 2;
         const LeftSplit = Left + ArrowWidth;
         const RightSplit = Left + Width - ArrowWidth;
@@ -148,7 +129,6 @@ export class GuiRedrawModule extends BaseModule {
         ControllerAddActiveArea(Left, Top);
         ControllerAddActiveArea(Left + Width - ArrowWidth, Top);
 
-        // Draw the button rectangle
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
         MainCanvas.fillStyle = colors.elementBackground;
@@ -163,7 +143,6 @@ export class GuiRedrawModule extends BaseModule {
             MainCanvas.fillRect(Left + ArrowWidth, Top, Width - ArrowWidth * 2, Height);
           }
         } else if (CommonIsMobile && ArrowWidth < Width / 2 && !Disabled) {
-          // Fill in the arrow regions on mobile
           MainCanvas.fillStyle = colors.elementBackgroundDisabled;
           MainCanvas.fillRect(Left, Top, ArrowWidth, Height);
           MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
@@ -173,7 +152,6 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.stroke();
         MainCanvas.closePath();
 
-        // Draw the text or image
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color);
 
         if (Image != null && Image != '') {
@@ -183,7 +161,6 @@ export class GuiRedrawModule extends BaseModule {
 
         ControllerAddActiveArea(Left + Width / 2, Top);
 
-        // Draw the back arrow
         MainCanvas.beginPath();
         MainCanvas.fillStyle = 'Black';
         MainCanvas.moveTo(Left + 15, Top + Height / 5);
@@ -192,7 +169,6 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.stroke();
         MainCanvas.closePath();
 
-        // Draw the next arrow
         MainCanvas.beginPath();
         MainCanvas.fillStyle = 'Black';
         MainCanvas.moveTo(Left + Width - 15, Top + Height / 5);
@@ -201,7 +177,6 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.stroke();
         MainCanvas.closePath();
 
-        // Draw the hovering text on the PC
         if (CommonIsMobile) return;
         if (BackText == null) BackText = () => 'MISSING VALUE FOR: BACK TEXT';
         if (NextText == null) NextText = () => 'MISSING VALUE FOR: NEXT TEXT';
@@ -217,8 +192,8 @@ export class GuiRedrawModule extends BaseModule {
       'DrawImageResize',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
-        if (!_Image.doDrawImage(args[0])) return next(args); // Skip hook if image shouldn't be colorized
+        if (!doRedraw()) return next(args);
+        if (!_Image.doDrawImage(args[0])) return next(args);
 
         const [source, x, y, width, height] = args;
 
@@ -231,7 +206,7 @@ export class GuiRedrawModule extends BaseModule {
       'DrawRect',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         const [Left, Top, Width, Height]: number[] = args;
         const Color: string = args[4];
@@ -291,7 +266,7 @@ export class GuiRedrawModule extends BaseModule {
       'DrawEmptyRect',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         const [Left, Top, Width, Height, , Thickness] = args;
         const Color: string = args[4] || 'black';
@@ -335,7 +310,7 @@ export class GuiRedrawModule extends BaseModule {
       'DrawButtonHover',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         let [Left, Top, Width, Height, HoveringText] = args;
 
@@ -353,7 +328,7 @@ export class GuiRedrawModule extends BaseModule {
       'DrawPreviewBox',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         const [X, Y, Path, Description, Options] = args;
 
@@ -362,10 +337,8 @@ export class GuiRedrawModule extends BaseModule {
         Height = Height || DrawAssetPreviewDefaultHeight;
 
         const Padding = 2;
-        // Only reserve space if we have text to draw
         const TextGutter = Description ? 44 : 0;
 
-        // Default background and foreground colors
         Background = isWhite(Background) ? colors.elementBackground : _Color.darken(_Color.toDarkMode(Background, colors.elementBackground), 50);
         Foreground = colors.text;
         Border = colors.elementBorder;
@@ -374,7 +347,6 @@ export class GuiRedrawModule extends BaseModule {
         if (Disabled) Background = colors.elementBackgroundDisabled;
         else if (Hover) Background = colors.elementBackgroundHover;
 
-        // Do a bunch of math to keep the image scaled
         let ImageX = X + Padding;
         let ImageY = Y + Padding;
         let ImageWidth = Width;
@@ -398,7 +370,6 @@ export class GuiRedrawModule extends BaseModule {
           ImageY += 1 + Math.floor(Math.random() * 3);
         }
 
-        // Now draw the preview box
         DrawRect(X, Y, Width, Height, Background);
         ControllerAddActiveArea(X, Y);
         if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : Border);
@@ -413,7 +384,7 @@ export class GuiRedrawModule extends BaseModule {
       'DrawTextWrap',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
         const isHovering = MouseHovering(X, Y, Width, Height);
@@ -422,7 +393,6 @@ export class GuiRedrawModule extends BaseModule {
 
         ControllerAddActiveArea(X, Y);
 
-        // Draw the rectangle if we need too
         if (BackColor != null) {
           if (!isHovering) {
             drawRect(X, Y, Width, Height, BackColor, colors.elementBorder);
@@ -431,20 +401,17 @@ export class GuiRedrawModule extends BaseModule {
           }
         }
 
-        // Sets the text size if there's a maximum number of lines
         let TextSize;
         if (MaxLine != null) {
           TextSize = MainCanvas.font;
           GetWrapTextSize(Text, Width, MaxLine);
         }
 
-        // Split the text if it wouldn't fit in the rectangle
         MainCanvas.fillStyle = isBlack(ForeColor) ? colors.text : _Color.lighten(_Color.toDarkMode(ForeColor, colors.elementBackground), 50);
         if (MainCanvas.measureText(Text).width > Width) {
           const words = fragmentText(Text, Width);
           let line = '';
 
-          // Find the number of lines
           let LineCount = 1;
           for (let n = 0; n < words.length; n++) {
             const testLine = line + words[n] + ' ';
@@ -454,7 +421,6 @@ export class GuiRedrawModule extends BaseModule {
             } else line = testLine;
           }
 
-          // Splits the words and draw the text
           line = '';
           Y = Y - (LineCount - 1) * LineSpacing + Height / 2;
           for (let n = 0; n < words.length; n++) {
@@ -470,7 +436,6 @@ export class GuiRedrawModule extends BaseModule {
           MainCanvas.fillText(line, X + Width / 2, Y);
         } else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
 
-        // Resets the font text size
         if (MaxLine != null && TextSize != null) MainCanvas.font = TextSize;
       },
       ModuleCategory.GuiRedraw
@@ -480,14 +445,12 @@ export class GuiRedrawModule extends BaseModule {
       'DrawTextFit',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         if (isBlack(args[4])) {
           args[4] = colors.text;
-          //args[5] = ''; //_Color.darken(args[4], 20);
         } else {
           args[4] = _Color.toDarkMode(args[4], colors.mainBackground);
-          //args[5] = ''; //_Color.darken(args[4], 20);
         }
 
         return next(args);
@@ -499,14 +462,14 @@ export class GuiRedrawModule extends BaseModule {
       'DrawText',
       HookPriority.Observe,
       (args, next) => {
-        if (!doRedraw()) return next(args); // Skip hook if setting is disabled
+        if (!doRedraw()) return next(args);
 
         if (isBlack(args[3])) {
           args[3] = colors.text;
-          args[4] = ''; //_Color.darken(args[3], 20);
+          args[4] = '';
         } else {
           args[3] = _Color.toDarkMode(args[3], colors.mainBackground);
-          args[4] = ''; //_Color.darken(args[3], 20);
+          args[4] = '';
         }
 
         next(args);
