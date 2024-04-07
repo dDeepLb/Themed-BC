@@ -1,13 +1,18 @@
 export class Localization {
   private static Translation = new Object();
+  private static FallbackTranslation = new Object();
 
   static async load() {
     const lang = TranslationLanguage.toLowerCase();
     this.Translation = await Localization.fetchLanguageFile(lang);
+    if (lang == 'en') {
+      return;
+    }
+    this.FallbackTranslation = await Localization.fetchLanguageFile('en');
   }
 
   static getText(srcTag: string) {
-    return this.Translation[srcTag] || srcTag || '';
+    return this.Translation[srcTag] || this.FallbackTranslation?.[srcTag] || srcTag || '';
   }
 
   private static async fetchLanguageFile(lang: string) {
