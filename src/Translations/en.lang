@@ -55,6 +55,8 @@ integration.setting.FUSAM.name = Enable FUSAM integration:
 integration.setting.FUSAM.desc = Changes CSS styles of FUSAM to use Color Settings. Changes FUSAM button with settings interface.
 integration.setting.TTS.name = Enable TTS integration:
 integration.setting.TTS.desc = Changes CSS styles of TTS to use Color Settings. Changes settings interface with task window.
+integration.setting.MBS.name = Enable MBS integration:
+integration.setting.MBS.desc = Changes CSS styles of MBS to use Color Settings. Changes settings interface in a whole.
 
 # Profiles
 Profiles.title = - Profiles -

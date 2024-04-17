@@ -27,7 +27,8 @@ export class _Style {
     if (id == 'Root') updateRootStyle();
     else if (id == 'MBS') {
       if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-        mbs.css.setStyle({
+        if (!PlayerStorage().IntegrationModule[id]) return;
+        return mbs.css.setStyle({
           backgroundColor: colors.mainBackground,
           buttonColor: colors.elementBackground,
           buttonHoverColor: colors.elementBackgroundHover,
@@ -53,9 +54,16 @@ export class _Style {
   }
 
   static eject(id: keyof typeof styles | string) {
-    if (id == 'MBC') {
+    if (id == 'MBS') {
       if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-        mbs.css.setStyle(mbs.css.DEFAULT_STYLE);
+        mbs.css.setStyle({
+          backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
+          buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
+          buttonHoverColor: mbs.css.DEFAULT_STYLE.buttonHoverColor,
+          borderColor: mbs.css.DEFAULT_STYLE.borderColor,
+          tooltipColor: mbs.css.DEFAULT_STYLE.tooltipColor,
+          textColor: mbs.css.DEFAULT_STYLE.textColor
+        });
       }
     }
 
