@@ -6,7 +6,6 @@ import FBC from '../Static/Styles/FBC.css';
 import FUSAM from '../Static/Styles/FUSAM.css';
 import Themed from '../Static/Styles/Themed.css';
 import TTS from '../Static/Styles/TTS.css';
-import MBS from '../Static/Styles/MBS.css';
 import { _Color, colors } from './Color';
 import { PlayerStorage } from './Data';
 
@@ -20,12 +19,24 @@ const styles = {
   FBC: FBC,
   FUSAM: FUSAM,
   TTS: TTS,
-  MBS: MBS
+  MBS: 'MBS'
 };
 
 export class _Style {
   static inject(id: keyof typeof styles | string) {
     if (id == 'Root') updateRootStyle();
+    else if (id == 'MBS') {
+      if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
+        mbs.css.setStyle({
+          backgroundColor: colors.mainBackground,
+          buttonColor: colors.elementBackground,
+          buttonHoverColor: colors.elementBackgroundHover,
+          borderColor: colors.elementBorder,
+          tooltipColor: colors.elementHoverHint,
+          textColor: colors.text
+        });
+      }
+    }
 
     const styleSource = styles[id];
     const isStyleLoaded = document.getElementById(id);
@@ -42,6 +53,12 @@ export class _Style {
   }
 
   static eject(id: keyof typeof styles | string) {
+    if (id == 'MBC') {
+      if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
+        mbs.css.setStyle(mbs.css.DEFAULT_STYLE);
+      }
+    }
+
     const style = document.getElementById(id);
     if (!style) return;
 

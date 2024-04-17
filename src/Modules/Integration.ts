@@ -22,7 +22,8 @@ export class IntegrationModule extends BaseModule {
       BC_Other: true,
       FBC: true,
       FUSAM: true,
-      TTS: true
+      TTS: true,
+      MBS: true
     };
   }
 
