@@ -1,4 +1,4 @@
-import { BaseSettingsModel } from "./Global";
+import { BaseSettingsModel } from './Global';
 
 export type IntegrationSettingsModel = BaseSettingsModel & {
   BC: boolean;
@@ -8,4 +8,5 @@ export type IntegrationSettingsModel = BaseSettingsModel & {
   FBC: boolean;
   FUSAM: boolean;
   TTS: boolean;
+  MBS: boolean;
 };

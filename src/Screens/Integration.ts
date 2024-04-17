@@ -65,6 +65,13 @@ export class GuiIntegration extends GuiSubscreen {
         description: 'integration.setting.TTS.desc',
         setting: () => this.settings?.TTS ?? true,
         setSetting: (val) => (this.settings.TTS = val)
+      },
+      <Setting>{
+        type: 'checkbox',
+        label: 'integration.setting.MBS.name',
+        description: 'integration.setting.MBS.desc',
+        setting: () => this.settings?.MBS ?? true,
+        setSetting: (val) => (this.settings.MBS = val)
       }
     ];
   }
