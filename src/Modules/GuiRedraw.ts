@@ -1,8 +1,8 @@
 import { BaseModule } from '../Base/BaseModule';
-import { colors, _Color } from '../Utilities/Color';
+import { _Color, colors } from '../Utilities/Color';
 import { PlayerStorage } from '../Utilities/Data';
-import { drawRect, _Image, drawButtonRect } from '../Utilities/Drawing';
-import { hookFunction, HookPriority, ModuleCategory, patchFunction, unpatchFuntion } from '../Utilities/SDK';
+import { _Image, drawButtonRect, drawRect } from '../Utilities/Drawing';
+import { HookPriority, ModuleCategory, hookFunction, patchFunction, unpatchFuntion } from '../Utilities/SDK';
 
 export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
@@ -129,6 +129,9 @@ export class GuiRedrawModule extends BaseModule {
         ControllerAddActiveArea(Left, Top);
         ControllerAddActiveArea(Left + Width - ArrowWidth, Top);
 
+        MainCanvas.save();
+        MainCanvas.textAlign = "center";
+
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
         MainCanvas.fillStyle = colors.elementBackground;
@@ -153,6 +156,7 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.closePath();
 
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color);
+        DrawTextFit(Label, Left + Width / 2, Top + (Height / 2) + 1, (CommonIsMobile) ? Width - 6 : Width - 36, "Black");
 
         if (Image != null && Image != '') {
           if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
@@ -176,6 +180,8 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.lineTo(Left + Width - 15, Top + Height - Height / 5);
         MainCanvas.stroke();
         MainCanvas.closePath();
+
+        MainCanvas.restore();
 
         if (CommonIsMobile) return;
         if (BackText == null) BackText = () => 'MISSING VALUE FOR: BACK TEXT';
@@ -318,8 +324,11 @@ export class GuiRedrawModule extends BaseModule {
 
         Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
         Top = Top + (Height - 65) / 2;
+        MainCanvas.save();
+        MainCanvas.textAlign = "center";
         drawRect(Left, Top, 450, 65, colors.elementHoverHint, colors.elementBorder);
         DrawTextFit(HoveringText, Left + 225, Top + 33, 444, 'Black');
+        MainCanvas.restore();
       },
       ModuleCategory.GuiRedraw
     );
