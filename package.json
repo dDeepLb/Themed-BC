@@ -4,8 +4,7 @@
   "description": "Bondage Club now with themes!",
   "main": "dist/themed.js",
   "scripts": {
-    "build": "node build.prod.mjs",
-    "devtest": "node build.dev.mjs"
+    "build": "node build.prod.mjs"
   },
   "repository": {
     "type": "git",

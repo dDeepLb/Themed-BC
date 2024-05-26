@@ -1,11 +1,22 @@
 import { build } from 'esbuild';
+import copy from 'esbuild-copy-files-plugin';
 import progress from 'esbuild-plugin-progress';
 import time from 'esbuild-plugin-time';
-import copy from 'esbuild-copy-files-plugin';
 import fs from 'fs';
 
 (async () => {
-  const serverPath = 'https://ddeeplb.github.io/Themed-BC';
+  const testPath = 'http://127.0.0.1:1001/dist';
+  const prodPath = 'https://ddeeplb.github.io/Themed-BC';
+  /** @type {boolean | undefined} */
+  let isTestServerUp = undefined;
+
+  await new Promise((resolve) => {
+    fetch(testPath)
+      .then(() => resolve(true))
+      .catch(() => resolve(false));
+  }).then((result) => {
+    isTestServerUp = result;
+  });
 
   await build({
     entryPoints: ['./src/Themed.ts'],
@@ -13,6 +24,7 @@ import fs from 'fs';
     format: 'iife',
     globalName: 'Themed',
     bundle: true,
+    sourcemap: isTestServerUp,
     loader: {
       ".html": "text",
       ".css": "text",
@@ -33,7 +45,7 @@ import fs from 'fs';
     let bundleContent = fs.readFileSync('./dist/themed.js', 'utf-8');
     bundleContent = bundleContent.replace(
       '(() => {',
-      `(() => {\nconst serverUrl = '${serverPath}';`
+      `(() => {\nconst serverUrl = '${isTestServerUp ? testPath : prodPath}';`
     );
     fs.writeFileSync('./dist/themed.js', bundleContent);
   }).catch((error) => {
