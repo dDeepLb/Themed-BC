@@ -21,7 +21,7 @@ function initWait() {
   conLog('Init wait');
   if (CurrentScreen == null || CurrentScreen === 'Login') {
     hookFunction('LoginResponse', 0, (args, next) => {
-      conDebug(`Init! LoginResponse caught: `, args);
+      conDebug('Init! LoginResponse caught: ', args);
       next(args);
       const response = args[0];
       if (response && typeof response.Name === 'string' && typeof response.AccountName === 'string') {
@@ -29,7 +29,7 @@ function initWait() {
       }
     });
   } else {
-    conLog(`Already logged in, init`);
+    conLog('Already logged in, init');
     init();
   }
 }

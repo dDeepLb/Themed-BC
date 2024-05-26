@@ -36,7 +36,7 @@ export function sendAction(msg: string) {
 }
 
 export function useLgcModal(prompt: string, acceptCallbackFn: () => void, cancelCallbackFn: () => void) {
-  if (!!document.getElementById('themed-modal')) return false;
+  if (document.getElementById('themed-modal')) return false;
 
   const modal = document.createElement('div');
   const modalTitle = document.createElement('div');

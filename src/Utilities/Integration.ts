@@ -1,5 +1,5 @@
-import { doRedraw } from "../Modules/GuiRedraw";
-import { colors } from "./Color";
+import { doRedraw } from '../Modules/GuiRedraw';
+import { colors } from './Color';
 import { PlayerStorage } from './Data';
 
 export function changeModColors() {
@@ -11,7 +11,7 @@ export function changeModColors() {
 }
 
 function changeBctColors() {
-  if (!!Player.BCT) {
+  if (Player.BCT) {
     BCT_API.HintBackColor = colors.elementBackground;
     BCT_API.HintBorderColor = colors.elementBorder;
     BCT_API.HintForeColor = colors.text;
@@ -19,10 +19,10 @@ function changeBctColors() {
 }
 
 function resetBctColors() {
-  if (!!Player.BCT) {
-    BCT_API.HintBackColor = "yellow";
-    BCT_API.HintBorderColor = "black";
-    BCT_API.HintForeColor = "black";
+  if (Player.BCT) {
+    BCT_API.HintBackColor = 'yellow';
+    BCT_API.HintBorderColor = 'black';
+    BCT_API.HintForeColor = 'black';
   }
 }
 

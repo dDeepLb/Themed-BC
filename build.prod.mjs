@@ -26,9 +26,9 @@ import fs from 'fs';
     bundle: true,
     sourcemap: isTestServerUp,
     loader: {
-      ".html": "text",
-      ".css": "text",
-      ".png": "dataurl"
+      '.html': 'text',
+      '.css': 'text',
+      '.png': 'dataurl'
     },
     treeShaking: true,
     keepNames: true,
@@ -49,6 +49,7 @@ import fs from 'fs';
     );
     fs.writeFileSync('./dist/themed.js', bundleContent);
   }).catch((error) => {
+    console.error(error);
     process.exit(1);
   });
 })();

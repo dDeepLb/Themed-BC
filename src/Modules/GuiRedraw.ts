@@ -130,7 +130,7 @@ export class GuiRedrawModule extends BaseModule {
         ControllerAddActiveArea(Left + Width - ArrowWidth, Top);
 
         MainCanvas.save();
-        MainCanvas.textAlign = "center";
+        MainCanvas.textAlign = 'center';
 
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
@@ -156,7 +156,7 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.closePath();
 
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color);
-        DrawTextFit(Label, Left + Width / 2, Top + (Height / 2) + 1, (CommonIsMobile) ? Width - 6 : Width - 36, "Black");
+        DrawTextFit(Label, Left + Width / 2, Top + (Height / 2) + 1, (CommonIsMobile) ? Width - 6 : Width - 36, 'Black');
 
         if (Image != null && Image != '') {
           DrawImage(Image, Left + 2, Top + 2);
@@ -202,7 +202,8 @@ export class GuiRedrawModule extends BaseModule {
         if (!_Image.doDrawImage(args[0])) return next(args);
 
         const [Source, Canvas, X, Y, Options] = args;
-        const colorizedImage = _Image.getColorized(Source, colors.icon);
+        const color = args[4].HexColor ?? colors.icon;
+        const colorizedImage = _Image.getColorized(Source, color);
 
         if (!colorizedImage) return next(args);
 
@@ -325,7 +326,7 @@ export class GuiRedrawModule extends BaseModule {
         Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
         Top = Top + (Height - 65) / 2;
         MainCanvas.save();
-        MainCanvas.textAlign = "center";
+        MainCanvas.textAlign = 'center';
         drawRect(Left, Top, 450, 65, colors.elementHoverHint, colors.elementBorder);
         DrawTextFit(HoveringText, Left + 225, Top + 33, 444, 'Black');
         MainCanvas.restore();

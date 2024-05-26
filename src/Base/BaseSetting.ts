@@ -81,7 +81,7 @@ export abstract class GuiSubscreen {
   }
 
   hideElements() {
-    this.multipageStructure.forEach((item, ix, arr) => {
+    this.multipageStructure.forEach((item, ix) => {
       if (ix != PreferencePageCurrent - 1) {
         item.forEach((setting) => {
           if (setting.type == 'text' || setting.type == 'number' || setting.type == 'color') this.elementHide(setting.id);
@@ -100,7 +100,7 @@ export abstract class GuiSubscreen {
       s.forEach((item) => {
         switch (item.type) {
           case 'text':
-            let input = ElementCreateInput(item.id, 'text', item.setting(), '255');
+            const input = ElementCreateInput(item.id, 'text', item.setting(), '255');
             input.setAttribute('autocomplete', 'off');
             break;
           case 'number':
@@ -222,21 +222,21 @@ export abstract class GuiSubscreen {
   }
 
   drawCheckbox(label: string, description: string, value: boolean, order: number, disabled: boolean = false) {
-    var isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
+    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
     DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
     DrawCheckbox(this.getXPos(order) + 600, this.getYPos(order) - 32, 64, 64, '', value ?? false, disabled);
     if (isHovering) this.tooltip(getText(description));
   }
 
   drawBetterButton(position: number[], size: number[], label: string, color: string, image: string = '', disabled: boolean = false) {
-    var isHovering = MouseIn(position[0], position[1] - 32, size[0], size[1]);
+    const isHovering = MouseIn(position[0], position[1] - 32, size[0], size[1]);
     DrawButton(position[0], position[1], size[0], size[1], '', color, '', '', disabled);
     DrawImageResize(image, position[0] + 10, position[1] + 10, 60, 60);
     DrawTextFit(getText(label), position[0] + 80, position[1] + 40, 600, isHovering ? 'Red' : 'Black', 'Gray');
   }
 
   drawButton(label: string, color: string, order: number, XOffset: number, disabled: boolean = false) {
-    var isHovering = MouseIn(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64);
+    const isHovering = MouseIn(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64);
     DrawButton(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64, '', color, '', '', disabled);
     DrawTextFit(getText(label), this.getXPos(order) + XOffset + 58, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
   }
@@ -246,7 +246,7 @@ export abstract class GuiSubscreen {
   }
 
   elementPosition(elementId: string, label: string, description: string, order: number, disabled: boolean = false) {
-    var isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
+    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
     DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
     ElementPosition(elementId, this.getXPos(order) + 750 + 225, this.getYPos(order), 800, 64);
     if (disabled) ElementSetAttribute(elementId, 'disabled', 'true');
@@ -255,7 +255,7 @@ export abstract class GuiSubscreen {
   }
 
   drawLabel(label: string, description: string, order: number) {
-    var isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
+    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
     DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
     if (isHovering) this.tooltip(getText(description));
   }

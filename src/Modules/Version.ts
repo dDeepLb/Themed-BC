@@ -57,7 +57,7 @@ export class VersionModule extends BaseModule {
   }
 
   static checkIfNewVersion() {
-    let LoadedVersion = VersionModule.loadVersion();
+    const LoadedVersion = VersionModule.loadVersion();
     if (VersionModule.isNewVersion(LoadedVersion, ModVersion)) {
       VersionModule.isItNewVersion = true;
     }

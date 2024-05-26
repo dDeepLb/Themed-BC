@@ -1,18 +1,18 @@
-import { GuiSubscreen } from "../Base/BaseSetting";
-import { getModule } from "../Base/Modules";
-import { getText } from "../Translation";
-import { _Color } from "../Utilities/Color";
-import { dataErase } from "../Utilities/Data";
-import { _Image } from "../Utilities/Drawing";
-import { BcStyle } from "../Utilities/Style";
+import { GuiSubscreen } from '../Base/BaseSetting';
+import { getModule } from '../Base/Modules';
+import { getText } from '../Translation';
+import { _Color } from '../Utilities/Color';
+import { dataErase } from '../Utilities/Data';
+import { _Image } from '../Utilities/Drawing';
+import { BcStyle } from '../Utilities/Style';
 
 export class GuiReset extends GuiSubscreen {
   get name(): string {
-    return "Reset";
+    return 'Reset';
   }
 
   get icon(): string {
-    return "";
+    return '';
   }
 
   private allowedConfirmTime: number | null = 0;
@@ -27,16 +27,16 @@ export class GuiReset extends GuiSubscreen {
     GuiSubscreen.START_X = 180;
 
     MainCanvas.save();
-    MainCanvas.textAlign = "center";
+    MainCanvas.textAlign = 'center';
 
-    DrawText(getText(`reset.label.perma_reset_of_mod_data`), 1000, 125, "Black");
+    DrawText(getText('reset.label.perma_reset_of_mod_data'), 1000, 125, 'Black');
 
-    DrawText(getText(`reset.label.warning`), 1000, 225, "Black", "Black");
-    DrawText(getText(`reset.label.if_u_confirm_perma_reset`), 1000, 325, "Black");
+    DrawText(getText('reset.label.warning'), 1000, 225, 'Black', 'Black');
+    DrawText(getText('reset.label.if_u_confirm_perma_reset'), 1000, 325, 'Black');
 
-    DrawText(getText(`reset.label.youll_able_to_use_mod`), 1000, 550, "Gray");
+    DrawText(getText('reset.label.youll_able_to_use_mod'), 1000, 550, 'Gray');
 
-    DrawText(getText(`reset.label.action_cannot_be_undone`), 1000, 625, "Red", "Black");
+    DrawText(getText('reset.label.action_cannot_be_undone'), 1000, 625, 'Red', 'Black');
 
     const now = Date.now();
     if (now < this.allowedConfirmTime) {
@@ -45,17 +45,17 @@ export class GuiReset extends GuiSubscreen {
         720,
         200,
         80,
-        `${getText("reset.button.confirm")} (${Math.floor((this.allowedConfirmTime - now) / 1000)})`,
-        "#ddd",
+        `${getText('reset.button.confirm')} (${Math.floor((this.allowedConfirmTime - now) / 1000)})`,
+        '#ddd',
         undefined,
         undefined,
         true
       );
     } else {
-      DrawButton(300, 720, 200, 80, getText("reset.button.confirm"), "White");
+      DrawButton(300, 720, 200, 80, getText('reset.button.confirm'), 'White');
     }
 
-    DrawButton(1520, 720, 200, 80, getText("reset.button.cancel"), "White");
+    DrawButton(1520, 720, 200, 80, getText('reset.button.cancel'), 'White');
 
     MainCanvas.restore();
   }
@@ -71,7 +71,7 @@ export class GuiReset extends GuiSubscreen {
     this.allowedConfirmTime = null;
 
     dataErase();
-    getModule("ColorsModule").registerDefaultSettings();
+    getModule('ColorsModule').registerDefaultSettings();
 
     _Color.composeRoot();
     BcStyle.reloadAll();

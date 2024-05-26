@@ -1,4 +1,3 @@
-import { getText } from '../Translation';
 
 export type Setting = Button | Checkbox | Input | Label;
 
@@ -17,7 +16,7 @@ export type Checkbox = {
   type: 'checkbox';
   label: string;
   description: string;
-  disabled: boolean;
+  disabled?: boolean;
   setting(): any;
   setSetting(val: any): void;
 };

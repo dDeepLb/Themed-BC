@@ -29,7 +29,7 @@ export class GuiProfiles extends GuiSubscreen {
     super.Load();
 
     for (let i = 0; i < 3; i++) {
-      let profileIndex = i + 1;
+      const profileIndex = i + 1;
       if (!PlayerStorage()?.ProfilesModule?.[profileIndex]) {
         Player[ModName].ProfilesModule[profileIndex] = {
           data: <ProfileSaveModel>{},
@@ -43,12 +43,12 @@ export class GuiProfiles extends GuiSubscreen {
   }
 
   Run() {
-    let prev = MainCanvas.textAlign;
+    const prev = MainCanvas.textAlign;
     super.Run();
     MainCanvas.textAlign = 'left';
 
     for (let i = 0; i < 3; i++) {
-      let profileIndex = i + 1;
+      const profileIndex = i + 1;
 
       if (this.ProfileNames[i] === '')
         DrawText(getText('profiles.text.profile') + ` ${profileIndex}`, this.getXPos(profileIndex), this.getYPos(profileIndex), 'Black', 'Gray');
@@ -70,7 +70,7 @@ export class GuiProfiles extends GuiSubscreen {
     super.Click();
 
     for (let i = 0; i < 3; i++) {
-      let profileIndex = i + 1;
+      const profileIndex = i + 1;
 
       this.handleProfilesSaving(profileIndex);
       this.handleProfilesLoading(profileIndex);
@@ -95,7 +95,7 @@ export class GuiProfiles extends GuiSubscreen {
       Player[ModName].ProfilesModule[profileId] = <ProfileEntryModel>{};
     }
 
-    let saveData: ProfileSaveModel = {
+    const saveData: ProfileSaveModel = {
       GlobalModule: PlayerStorage().GlobalModule,
       ColorsModule: PlayerStorage().ColorsModule,
       IntegrationModule: PlayerStorage().IntegrationModule
@@ -119,7 +119,7 @@ export class GuiProfiles extends GuiSubscreen {
       return false;
     }
 
-    let data = PlayerStorage().ProfilesModule[profileId].data;
+    const data = PlayerStorage().ProfilesModule[profileId].data;
     if (!data) {
       return false;
     }
@@ -150,9 +150,9 @@ export class GuiProfiles extends GuiSubscreen {
   }
 
   handleProfilesSaving(profileIndex: number) {
-    let formerIndex = profileIndex - 1;
+    const formerIndex = profileIndex - 1;
     if (MouseIn(this.getXPos(profileIndex) + 250, this.getYPos(profileIndex) - 32, 200, 64)) {
-      let promptedName = prompt(getText('profiles.prompt'));
+      const promptedName = prompt(getText('profiles.prompt'));
 
       if (promptedName === null) return;
       this.ProfileNames[formerIndex] = promptedName;
@@ -173,7 +173,7 @@ export class GuiProfiles extends GuiSubscreen {
   }
 
   handleProfilesLoading(profileIndex: number) {
-    let formerIndex = profileIndex - 1;
+    const formerIndex = profileIndex - 1;
     if (MouseIn(this.getXPos(profileIndex) + 500, this.getYPos(profileIndex) - 32, 200, 64)) {
       if (!this.loadProfile(profileIndex)) {
         this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.needs_to_be_saved')}`;
@@ -194,7 +194,7 @@ export class GuiProfiles extends GuiSubscreen {
   }
 
   handleProfilesDeleting(profileIndex: number) {
-    let formerIndex = profileIndex - 1;
+    const formerIndex = profileIndex - 1;
     if (MouseIn(this.getXPos(profileIndex) + 750, this.getYPos(profileIndex) - 32, 200, 64)) {
       if (this.ProfileNames[formerIndex] === null) return;
 

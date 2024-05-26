@@ -1,6 +1,6 @@
-import { BaseSettingsModel } from "../Models/Global";
-import { SettingsModel } from "../Models/Settings";
-import { Subscreen } from "./SettingDefinitions";
+import { BaseSettingsModel } from '../Models/Global';
+import { SettingsModel } from '../Models/Settings';
+import { Subscreen } from './SettingDefinitions';
 
 export abstract class BaseModule {
   get settingsScreen(): Subscreen | null {
@@ -34,7 +34,7 @@ export abstract class BaseModule {
     return (
       Player.Themed.GlobalModule.themedEnabled &&
       this.settings.themedEnabled &&
-      (ServerPlayerIsInChatRoom() || (CurrentModule == "Room" && CurrentScreen == "Crafting"))
+      (ServerPlayerIsInChatRoom() || (CurrentModule == 'Room' && CurrentScreen == 'Crafting'))
     );
   }
 
@@ -54,7 +54,7 @@ export abstract class BaseModule {
     return null;
   }
 
-  Load() {}
+  Load() { }
 
   Run() {
     // Empty

@@ -26,7 +26,7 @@ export const _Color = {
     if (!hexColor) return;
 
     // Return color if it's cached
-    let cacheColor = _Color.getCache(`darker${hexColor}${percentage}`);
+    const cacheColor = _Color.getCache(`darker${hexColor}${percentage}`);
     if (cacheColor) return cacheColor;
 
     const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
@@ -49,7 +49,7 @@ export const _Color = {
     if (!hexColor) return;
 
     // Return color if it's cached
-    let cacheColor = _Color.getCache(`lighter${hexColor}${percentage}`);
+    const cacheColor = _Color.getCache(`lighter${hexColor}${percentage}`);
     if (cacheColor) return cacheColor;
 
     const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
@@ -70,7 +70,7 @@ export const _Color = {
 
   toDarkMode(colorHex: string, backgroundColorHex: string) {
     // Return color if it's cached
-    let cacheColor = _Color.getCache(`darkMode${colorHex}${backgroundColorHex}`);
+    const cacheColor = _Color.getCache(`darkMode${colorHex}${backgroundColorHex}`);
     if (cacheColor) return cacheColor;
 
     const lightColor = _Color.extractFromRGBA(_Color.getComputed(colorHex));
@@ -174,7 +174,7 @@ export const _Color = {
   },
 
   getComputed(color: string): string {
-    let cachedColor = _Color.getCache(`comp${color}`);
+    const cachedColor = _Color.getCache(`comp${color}`);
     if (cachedColor) return cachedColor;
 
     const div = document.createElement('div');

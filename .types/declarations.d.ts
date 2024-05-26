@@ -1,5 +1,5 @@
 declare global {
-  var bcModSdk: import('./bcmodsdk').ModSDKGlobalAPI;
+  let bcModSdk: import('./bcmodsdk').ModSDKGlobalAPI;
 }
 
 declare interface Window {

@@ -1,13 +1,13 @@
-import { DebugMode, ModName } from "../Utilities/ModDefinition";
-import { MainMenu } from "../Screens/MainMenu";
-import { getText } from "../Translation";
-import { RibbonMenu } from "../Utilities/RibbonMenu";
-import { hookFunction, HookPriority } from "../Utilities/SDK";
-import { BaseModule } from "./BaseModule";
-import { GuiSubscreen } from "./BaseSetting";
-import { modules } from "./Modules";
-import { setSubscreen, SETTING_NAME_PREFIX } from "./SettingDefinitions";
-import ButtonIcon from "../Static/Icons/IconThemed.png";
+import { DebugMode, ModName } from '../Utilities/ModDefinition';
+import { MainMenu } from '../Screens/MainMenu';
+import { getText } from '../Translation';
+import { RibbonMenu } from '../Utilities/RibbonMenu';
+import { hookFunction, HookPriority } from '../Utilities/SDK';
+import { BaseModule } from './BaseModule';
+import { GuiSubscreen } from './BaseSetting';
+import { modules } from './Modules';
+import { setSubscreen, SETTING_NAME_PREFIX } from './SettingDefinitions';
+import ButtonIcon from '../Static/Icons/IconThemed.png';
 
 export class GUI extends BaseModule {
   static instance: GUI | null = null;
@@ -32,7 +32,7 @@ export class GUI extends BaseModule {
     if (this._currentSubscreen) {
       this._currentSubscreen.Unload();
     }
-    if (typeof subscreen === "string") {
+    if (typeof subscreen === 'string') {
       const scr = this._subscreens?.find((s) => s.name === subscreen);
       if (!scr) throw `Failed to find screen name ${subscreen}`;
       this._currentSubscreen = scr;
@@ -40,10 +40,10 @@ export class GUI extends BaseModule {
       this._currentSubscreen = subscreen;
     }
 
-    PreferenceMessage = "";
+    PreferenceMessage = '';
     PreferencePageCurrent = 1;
 
-    let subscreenName = "";
+    let subscreenName = '';
     if (this._currentSubscreen) {
       subscreenName = SETTING_NAME_PREFIX + this._currentSubscreen?.name;
       this._currentSubscreen.Load();
@@ -60,7 +60,7 @@ export class GUI extends BaseModule {
   constructor() {
     super();
     if (GUI.instance) {
-      throw new Error("Duplicate initialization");
+      throw new Error('Duplicate initialization');
     }
 
     this._mainMenu = new MainMenu(this);
@@ -86,11 +86,11 @@ export class GUI extends BaseModule {
     const modIndex = RibbonMenu.getModIndex(ModName);
     const modYPos = RibbonMenu.getYPos(modIndex);
 
-    hookFunction("PreferenceRun", HookPriority.OverrideBehavior, (args, next) => {
+    hookFunction('PreferenceRun', HookPriority.OverrideBehavior, (args, next) => {
       if (this._currentSubscreen) {
-        MainCanvas.textAlign = "left";
+        MainCanvas.textAlign = 'left';
         this._currentSubscreen.Run();
-        MainCanvas.textAlign = "center";
+        MainCanvas.textAlign = 'center';
 
         this.drawDebug();
 
@@ -99,13 +99,13 @@ export class GUI extends BaseModule {
 
       next(args);
 
-      RibbonMenu.drawModButton(modIndex, (modIndex) => {
-        DrawButton(1815, modYPos, 90, 90, "", "White", "", getText("infosheet.button_popup"));
+      RibbonMenu.drawModButton(modIndex, () => {
+        DrawButton(1815, modYPos, 90, 90, '', 'White', '', getText('infosheet.button_popup'));
         DrawImageResize(ButtonIcon, 1815 + 2, modYPos + 2, 85, 85);
       });
     });
 
-    hookFunction("PreferenceClick", HookPriority.OverrideBehavior, (args, next) => {
+    hookFunction('PreferenceClick', HookPriority.OverrideBehavior, (args, next) => {
       if (this._currentSubscreen) {
         this._currentSubscreen.Click();
         return;
@@ -118,7 +118,7 @@ export class GUI extends BaseModule {
       });
     });
 
-    hookFunction("InformationSheetExit", HookPriority.OverrideBehavior, (args, next) => {
+    hookFunction('InformationSheetExit', HookPriority.OverrideBehavior, (args, next) => {
       if (this._currentSubscreen) {
         this._currentSubscreen.Exit();
         return;
@@ -132,18 +132,18 @@ export class GUI extends BaseModule {
       if (MouseX > 0 || MouseY > 0) {
         MainCanvas.save();
         MainCanvas.lineWidth = 1;
-        MainCanvas.strokeStyle = "red";
+        MainCanvas.strokeStyle = 'red';
         MainCanvas.beginPath();
         MainCanvas.moveTo(0, MouseY);
         MainCanvas.lineTo(2000, MouseY);
         MainCanvas.moveTo(MouseX, 0);
         MainCanvas.lineTo(MouseX, 1000);
         MainCanvas.stroke();
-        MainCanvas.fillStyle = "black";
-        MainCanvas.strokeStyle = "white";
+        MainCanvas.fillStyle = 'black';
+        MainCanvas.strokeStyle = 'white';
         MainCanvas.fillRect(0, 950, 250, 50);
         MainCanvas.strokeRect(0, 950, 250, 50);
-        DrawText(`X: ${MouseX} Y: ${MouseY}`, 125, 975, "white");
+        DrawText(`X: ${MouseX} Y: ${MouseY}`, 125, 975, 'white');
         MainCanvas.restore();
       }
     }

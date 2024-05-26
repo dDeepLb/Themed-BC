@@ -2,58 +2,58 @@ let cachedImages = {};
 
 export const _Image = {
   doNotDrawImageFolders: [
-    "Assets/Female3DCG/",
-    "Backgrounds/",
-    "Icons/Struggle/",
-    "Screens/",
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyEAYAAABOr1TyAAABb2lDQ1BpY2MAACiRdZG9S0JRGMZ/", // FBC's "FBC" overlay icon
-    "http" // Fix bug with recoloring of custom bgs
+    'Assets/Female3DCG/',
+    'Backgrounds/',
+    'Icons/Struggle/',
+    'Screens/',
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyEAYAAABOr1TyAAABb2lDQ1BpY2MAACiRdZG9S0JRGMZ/', // FBC's "FBC" overlay icon
+    'http' // Fix bug with recoloring of custom bgs
   ],
 
   doNotDrawImages: [
-    "Icons/Accept.png",
-    "Icons/Activity.png",
-    "Icons/Arousal.png",
-    "Icons/Audio.png",
-    "Icons/BlindToggle2.png",
-    "Icons/Cancel.png",
-    "Icons/Cell.png",
-    "Icons/Checked.png",
-    "Icons/ClubCard.png",
-    "Icons/Controller.png",
-    "Icons/Crafting.png",
-    "Icons/Exit.png",
-    "Icons/Explore.png",
-    "Icons/Gavel.png",
-    "Icons/Gender.png",
-    "Icons/Infiltration.png",
-    "Icons/Lock.png",
-    "Icons/LockMenu.png",
-    "Icons/MagicSchool.png",
-    "Icons/Online.png",
-    "Icons/Platform.png",
-    "Icons/Poker.png",
-    "Icons/Search.png",
-    "Icons/Security.png",
-    "Icons/ServiceBell.png",
-    "Icons/Title.png",
-    "Icons/Use.png",
-    "Icons/WinkNone.png",
-    "Icons/Color.png",
-    "Icons/ColorChange.png",
-    "Icons/ColorChangeMulti.png",
-    "Icons/Small/ColorBlocked.png",
-    "Icons/Small/ColorChange.png",
-    "Icons/Small/ColorChangeMulti.png",
-    "Icons/Small/Naked.png",
-    "Icons/Small/Use.png",
-    "Icons/Small/YouTube.png",
-    "Assets/Female3DCG/ItemMisc/Preview/Best Friend Padlock.png",
-    "Assets/Female3DCG/ItemMisc/Preview/Best Friend Timer Padlock.png"
+    'Icons/Accept.png',
+    'Icons/Activity.png',
+    'Icons/Arousal.png',
+    'Icons/Audio.png',
+    'Icons/BlindToggle2.png',
+    'Icons/Cancel.png',
+    'Icons/Cell.png',
+    'Icons/Checked.png',
+    'Icons/ClubCard.png',
+    'Icons/Controller.png',
+    'Icons/Crafting.png',
+    'Icons/Exit.png',
+    'Icons/Explore.png',
+    'Icons/Gavel.png',
+    'Icons/Gender.png',
+    'Icons/Infiltration.png',
+    'Icons/Lock.png',
+    'Icons/LockMenu.png',
+    'Icons/MagicSchool.png',
+    'Icons/Online.png',
+    'Icons/Platform.png',
+    'Icons/Poker.png',
+    'Icons/Search.png',
+    'Icons/Security.png',
+    'Icons/ServiceBell.png',
+    'Icons/Title.png',
+    'Icons/Use.png',
+    'Icons/WinkNone.png',
+    'Icons/Color.png',
+    'Icons/ColorChange.png',
+    'Icons/ColorChangeMulti.png',
+    'Icons/Small/ColorBlocked.png',
+    'Icons/Small/ColorChange.png',
+    'Icons/Small/ColorChangeMulti.png',
+    'Icons/Small/Naked.png',
+    'Icons/Small/Use.png',
+    'Icons/Small/YouTube.png',
+    'Assets/Female3DCG/ItemMisc/Preview/Best Friend Padlock.png',
+    'Assets/Female3DCG/ItemMisc/Preview/Best Friend Timer Padlock.png'
   ],
 
   getColorized(source: string, hexColor: string) {
-    if (typeof source != "string") return;
+    if (typeof source != 'string') return;
     const img = DrawGetImage(source);
 
     if (!!_Image.getCache(source)) {
@@ -69,7 +69,7 @@ export const _Image = {
 
       ColorCanvas.canvas.width = width;
       ColorCanvas.canvas.height = height;
-      ColorCanvas.globalCompositeOperation = "copy";
+      ColorCanvas.globalCompositeOperation = 'copy';
       ColorCanvas.drawImage(img, 0, 0);
 
       const imageData = ColorCanvas.getImageData(0, 0, width, height);
@@ -85,12 +85,12 @@ export const _Image = {
   },
 
   turnToBase64(imageData: ImageData) {
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = imageData.width;
     canvas.height = imageData.height;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     ctx.putImageData(imageData, 0, 0);
-    return canvas.toDataURL("image/png");
+    return canvas.toDataURL('image/png');
   },
 
   colorize(imageData: ImageData, hexColor: string) {
@@ -113,7 +113,7 @@ export const _Image = {
     let skipDrawing = false;
 
     for (const folderPrefix of _Image.doNotDrawImageFolders) {
-      if (typeof source !== "string") break;
+      if (typeof source !== 'string') break;
       if (source.startsWith(folderPrefix)) {
         skipDrawing = true;
         break;
