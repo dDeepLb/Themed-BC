@@ -42,7 +42,7 @@ export class ShareModule extends BaseModule {
           () => {
             this.acceptShare(theme);
           },
-          () => {}
+          () => { }
         );
       });
 
@@ -50,6 +50,7 @@ export class ShareModule extends BaseModule {
 
       const chat = document.getElementById('TextAreaChatLog');
       chat.append(message);
+      ElementScrollToEnd('TextAreaChatLog');
     });
   }
 
