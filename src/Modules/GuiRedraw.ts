@@ -18,7 +18,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawRoomBackground',
       HookPriority.Observe,
-      ([URL, ...args], next) => {
+      ([URL, ...args]: Parameters<typeof DrawRoomBackground>, next: (args: Parameters<typeof DrawRoomBackground>) => ReturnType<typeof DrawRoomBackground>) => {
         if (!doRedraw()) return next([URL, ...args]);
 
         if (URL.includes('Sheet.jpg')) {
@@ -41,7 +41,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawButton',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawButton>, next: (args: Parameters<typeof DrawButton>) => ReturnType<typeof DrawButton>) => {
         if (!doRedraw()) return next(args);
 
         const [x, y, width, height, label, color, image, hoveringText, isDisabled] = args;
@@ -103,7 +103,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawCheckbox',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawCheckbox>, next: (args: Parameters<typeof DrawCheckbox>) => ReturnType<typeof DrawCheckbox>) => {
         if (!doRedraw()) return next(args);
 
         const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = 'Black', CheckImage = 'Icons/Checked.png'] = args;
@@ -117,7 +117,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawBackNextButton',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawBackNextButton>, next: (args: Parameters<typeof DrawBackNextButton>) => ReturnType<typeof DrawBackNextButton>) => {
         if (!doRedraw()) return next(args);
 
         let [Left, Top, Width, Height, Label, Color, Image, BackText, NextText, Disabled, ArrowWidth] = args;
@@ -213,11 +213,10 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawRect',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawRect>, next: (args: Parameters<typeof DrawRect>) => ReturnType<typeof DrawRect>) => {
         if (!doRedraw()) return next(args);
 
-        const [Left, Top, Width, Height]: number[] = args;
-        const Color: string = args[4];
+        const [Left, Top, Width, Height, Color] = args;
 
         const drawRect = (color: string) => {
           MainCanvas.beginPath();
@@ -273,11 +272,10 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawEmptyRect',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawEmptyRect>, next: (args: Parameters<typeof DrawEmptyRect>) => ReturnType<typeof DrawEmptyRect>) => {
         if (!doRedraw()) return next(args);
 
-        const [Left, Top, Width, Height, , Thickness] = args;
-        const Color: string = args[4] || 'black';
+        const [Left, Top, Width, Height, Color, Thickness] = args;
 
         const drawEmptyRect = (color: string) => {
           MainCanvas.beginPath();
@@ -317,7 +315,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawButtonHover',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawButtonHover>, next: (args: Parameters<typeof DrawButtonHover>) => ReturnType<typeof DrawButtonHover>) => {
         if (!doRedraw()) return next(args);
 
         let [Left, Top, Width, Height, HoveringText] = args;
@@ -338,7 +336,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawPreviewBox',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawPreviewBox>, next: (args: Parameters<typeof DrawPreviewBox>) => ReturnType<typeof DrawPreviewBox>) => {
         if (!doRedraw()) return next(args);
 
         const [X, Y, Path, Description, Options] = args;
@@ -394,7 +392,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawTextWrap',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawTextWrap>, next: (args: Parameters<typeof DrawTextWrap>) => ReturnType<typeof DrawTextWrap>) => {
         if (!doRedraw()) return next(args);
 
         let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
@@ -455,7 +453,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawTextFit',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawTextFit>, next: (args: Parameters<typeof DrawTextFit>) => ReturnType<typeof DrawTextFit>) => {
         if (!doRedraw()) return next(args);
 
         if (isBlack(args[4])) {
@@ -472,7 +470,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawText',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawText>, next: (args: Parameters<typeof DrawText>) => ReturnType<typeof DrawText>) => {
         if (!doRedraw()) return next(args);
 
         if (isBlack(args[3])) {
