@@ -1,4 +1,4 @@
-import { Setting } from '../../.types/setting';
+import { Checkbox, Setting } from '../../.types/setting';
 import { GuiSubscreen } from '../Base/BaseSetting';
 import { GlobalSettingsModel } from '../Models/Global';
 
@@ -16,43 +16,17 @@ export class GuiGlobal extends GuiSubscreen {
   }
 
   get structure(): Setting[] {
-    return [
-      <Setting>{
+    const struct: Checkbox[] = [];
+    Object.keys(this.settings).forEach((key) => {
+      struct.push({
         type: 'checkbox',
-        label: 'settings.setting.themedEnabled.name',
-        description: 'settings.setting.themedEnabled.desc',
-        setting: () => this.settings?.themedEnabled ?? true,
-        setSetting: (val) => (this.settings.themedEnabled = val)
-      },
-      <Setting>{
-        type: 'checkbox',
-        label: 'settings.setting.doVanillaGuiOverhaul.name',
-        description: 'settings.setting.doVanillaGuiOverhaul.desc',
-        setting: () => this.settings?.doVanillaGuiOverhaul ?? true,
-        setSetting: (val) => (this.settings.doVanillaGuiOverhaul = val)
-      },
-      <Setting>{
-        type: 'checkbox',
-        label: 'settings.setting.doUseFlatColor.name',
-        description: 'settings.setting.doUseFlatColor.desc',
-        setting: () => this.settings?.doUseFlatColor ?? true,
-        setSetting: (val) => (this.settings.doUseFlatColor = val)
-      },
-      <Setting>{
-        type: 'checkbox',
-        label: 'settings.setting.doShowLocaleTime.name',
-        description: 'settings.setting.doShowLocaleTime.desc',
-        setting: () => this.settings?.doShowLocaleTime ?? true,
-        setSetting: (val) => (this.settings.doShowLocaleTime = val)
-      },
-      <Setting>{
-        type: 'checkbox',
-        label: 'settings.setting.doShowNewVersionMessage.name',
-        description: 'settings.setting.doShowNewVersionMessage.desc',
-        setting: () => this.settings?.doShowNewVersionMessage ?? true,
-        setSetting: (val) => (this.settings.doShowNewVersionMessage = val)
-      }
-    ];
+        label: `settings.setting.${key}.name`,
+        description: `settings.setting.${key}.desc`,
+        setting: () => this.settings?.[key] ?? true,
+        setSetting: (val) => (this.settings[key] = val)
+      });
+    });
+    return struct;
   }
 
   Load(): void {
