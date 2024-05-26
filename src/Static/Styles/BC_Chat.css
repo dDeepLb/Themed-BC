@@ -3,21 +3,32 @@
   background-color: var(--background);
   color: var(--text);
   border-color: var(--elementBorder);
-}
 
-#TextAreaChatLog[data-colortheme="dark"]~#InputChat,
-#TextAreaChatLog[data-colortheme="dark2"]~#InputChat {
-  background-color: var(--background);
-  color: var(--text);
-  border-color: var(--elementBorder);
-}
+  ~#InputChat {
+    background-color: var(--background);
+    color: var(--text);
+    border-color: var(--elementBorder);
+  }
 
-#TextAreaChatLog .ChatMessageName,
-#TextAreaChatLog[data-colortheme="dark"] .ChatMessageName,
-#TextAreaChatLog[data-colortheme="dark2"] .ChatMessageName {
-  text-shadow: 0 0 0.12em var(--textShadow);
-}
+  .ChatMessageName {
+    text-shadow: 0 0 0.12em var(--textShadow);
+  }
 
-#TextAreaChatLog[data-colortheme="dark2"] .ChatMessage {
-  border-bottom: none;
+  .ChatMessage {
+    border-bottom: none;
+  }
+
+  .chat-room-sep {
+    --base-color: var(--background) !important;
+    border-bottom: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;
+  }
+
+  .chat-room-sep-collapse {
+    border-right: min(0.4vh, 0.2vw) var(--elementBorder) solid;
+    color: var(--text);
+  }
+
+  .chat-room-sep-header {
+    color: var(--text);
+  }
 }
