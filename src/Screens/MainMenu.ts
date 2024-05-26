@@ -4,7 +4,6 @@ import { GUI } from '../Base/SettingUtils';
 import { GlobalModule } from '../Modules/Global';
 import { getText } from '../Translation';
 import { ModVersion } from '../Utilities/ModDefinition';
-import { _Style } from '../Utilities/Style';
 import { GuiReset } from './Reset';
 import { GuiSupport } from './Support';
 

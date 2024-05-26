@@ -4,7 +4,7 @@ import { getText } from "../Translation";
 import { _Color } from "../Utilities/Color";
 import { dataErase } from "../Utilities/Data";
 import { _Image } from "../Utilities/Drawing";
-import { _Style } from "../Utilities/Style";
+import { BcStyle } from "../Utilities/Style";
 
 export class GuiReset extends GuiSubscreen {
   get name(): string {
@@ -76,7 +76,7 @@ export class GuiReset extends GuiSubscreen {
     getModule("ColorsModule").registerDefaultSettings();
 
     _Color.composeRoot();
-    _Style.reloadAll();
+    BcStyle.reloadAll();
     _Image.clearCache();
 
     this.setSubscreen(null);

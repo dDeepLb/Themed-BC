@@ -6,7 +6,7 @@ import { GuiColors } from '../Screens/Colors';
 import { _Color } from '../Utilities/Color';
 import { _Image } from '../Utilities/Drawing';
 import { changeModColors } from '../Utilities/Integration';
-import { _Style } from '../Utilities/Style';
+import { BcStyle } from '../Utilities/Style';
 import { GuiRedrawModule } from './GuiRedraw';
 
 export class ColorsModule extends BaseModule {
@@ -28,7 +28,7 @@ export class ColorsModule extends BaseModule {
 
   reloadTheme(): void {
     _Color.composeRoot();
-    _Style.reloadAll();
+    BcStyle.reloadAll();
     changeModColors();
     _Image.clearCache();
     getModule<GuiRedrawModule>('GuiRedrawModule').toggleGuiPatches();

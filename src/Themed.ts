@@ -1,21 +1,21 @@
-import { registerModule, modules } from './Base/Modules';
+import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
-import { ModName, ModVersion } from './Utilities/ModDefinition';
 import { ColorsModule } from './Modules/Colors';
+import { CommandsModule } from './Modules/Commands';
 import { GlobalModule } from './Modules/Global';
-import { conLog, conDebug } from './Utilities/Console';
-import { dataTake, dataStore } from './Utilities/Data';
+import { GuiRedrawModule } from './Modules/GuiRedraw';
+import { IntegrationModule } from './Modules/Integration';
+import { ProfilesModule } from './Modules/Profiles';
+import { ShareModule } from './Modules/Share';
+import { VersionModule } from './Modules/Version';
+import { Localization } from './Translation';
+import { _Color } from './Utilities/Color';
+import { conDebug, conLog } from './Utilities/Console';
+import { dataStore, dataTake } from './Utilities/Data';
+import { ModName, ModVersion } from './Utilities/ModDefinition';
 import { RibbonMenu } from './Utilities/RibbonMenu';
 import { hookFunction } from './Utilities/SDK';
-import { IntegrationModule } from './Modules/Integration';
-import { _Color } from './Utilities/Color';
-import { VersionModule } from './Modules/Version';
-import { GuiRedrawModule } from './Modules/GuiRedraw';
-import { _Style } from './Utilities/Style';
-import { Localization } from './Translation';
-import { CommandsModule } from './Modules/Commands';
-import { ShareModule } from './Modules/Share';
-import { ProfilesModule } from './Modules/Profiles';
+import { BcStyle } from './Utilities/Style';
 
 function initWait() {
   conLog('Init wait');
@@ -53,7 +53,7 @@ export function init() {
   dataStore();
 
   _Color.composeRoot();
-  _Style.injectAll();
+  BcStyle.injectAll();
 
   window.ThemedLoaded = true;
   conLog(`Loaded! Version: ${ModVersion}`);

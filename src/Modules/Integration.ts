@@ -3,7 +3,7 @@ import { Subscreen } from '../Base/SettingDefinitions';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { GuiIntegration } from '../Screens/Integration';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
-import { _Style } from '../Utilities/Style';
+import { BcStyle } from '../Utilities/Style';
 
 export class IntegrationModule extends BaseModule {
   get settingsScreen(): Subscreen | null {
@@ -33,7 +33,7 @@ export class IntegrationModule extends BaseModule {
       HookPriority.Observe,
       (args, next) => {
         next(args);
-        _Style.reloadAll();
+        BcStyle.reloadAll();
       },
       ModuleCategory.Integration
     );
