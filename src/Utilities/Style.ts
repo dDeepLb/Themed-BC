@@ -73,8 +73,8 @@ export const BcStyle = {
   },
 
   reload(id: keyof typeof styles | string) {
-    const styleSource = styles[id];
-    Style.reload(id, styleSource);
+    BcStyle.eject(id);
+    BcStyle.inject(id);
   },
 
   injectAll() {
