@@ -48,8 +48,7 @@ export class ShareModule extends BaseModule {
 
       message.append(text, button);
 
-      const chat = document.getElementById('TextAreaChatLog');
-      chat.append(message);
+      ChatRoomAppendChat(message);
       ElementScrollToEnd('TextAreaChatLog');
     });
   }
@@ -63,7 +62,7 @@ export class ShareModule extends BaseModule {
   share(): void {
     sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, 'Possessive', false)} Themed theme!`);
 
-    const packet = <ServerChatRoomMessage>{
+    const packet = <ServerChatRoomMessage><unknown>{
       Type: 'Hidden',
       Content: 'ThemedTheme',
       Sender: Player.MemberNumber,
