@@ -194,18 +194,21 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      'DrawImageResize',
+      'DrawImageEx',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawImageEx>, next: (args: Parameters<typeof DrawImageEx>) => ReturnType<typeof DrawImageEx>) => {
         if (!doRedraw()) return next(args);
+        if (typeof args[0] !== 'string') return next(args);
         if (!_Image.doDrawImage(args[0])) return next(args);
 
-        const [source, x, y, width, height] = args;
+        const [Source, Canvas, X, Y, Options] = args;
+        const colorizedImage = _Image.getColorized(Source, colors.icon);
 
-        if (!_Image.drawColorized(source, x, y, colors.icon, { newWidth: width, newHeight: height })) return next(args);
-      },
-      ModuleCategory.GuiRedraw
-    );
+        if (!colorizedImage) return next(args);
+
+        const imageSource = _Image.turnToBase64(colorizedImage);
+        next([imageSource ?? Source, Canvas, X, Y, Options]);
+      }, ModuleCategory.GuiRedraw);
 
     hookFunction(
       'DrawRect',
