@@ -26,9 +26,10 @@ export class GuiRedrawModule extends BaseModule {
             DrawRect(0, 0, 2000, 1000, colors.mainBackground);
           } else {
             next([URL, ...args]);
+            MainCanvas.save();
             MainCanvas.globalCompositeOperation = 'multiply';
             DrawRect(0, 0, 2000, 1000, colors.mainBackground);
-            MainCanvas.globalCompositeOperation = 'source-over';
+            MainCanvas.restore();
           }
         } else {
           next([URL, ...args]);
@@ -86,11 +87,10 @@ export class GuiRedrawModule extends BaseModule {
             break;
         }
 
-        DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, color.text);
+        DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, colors.text);
 
         if (image != null && image != '') {
-          if (_Image.doDrawImage(image)) _Image.drawColorized(image, x + 2, y + 2, colors.icon, {});
-          else DrawImage(image, x + 2, y + 2);
+          DrawImage(image, x + 2, y + 2);
         }
 
         if (hoveringText != null && isHovering) {
@@ -159,8 +159,7 @@ export class GuiRedrawModule extends BaseModule {
         DrawTextFit(Label, Left + Width / 2, Top + (Height / 2) + 1, (CommonIsMobile) ? Width - 6 : Width - 36, "Black");
 
         if (Image != null && Image != '') {
-          if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
-          else DrawImage(Image, Left + 2, Top + 2);
+          DrawImage(Image, Left + 2, Top + 2);
         }
 
         ControllerAddActiveArea(Left + Width / 2, Top);
@@ -348,9 +347,9 @@ export class GuiRedrawModule extends BaseModule {
         const Padding = 2;
         const TextGutter = Description ? 44 : 0;
 
-        Background = isWhite(Background) ? colors.elementBackground : _Color.darken(_Color.toDarkMode(Background, colors.elementBackground), 50);
+        Background = colors.elementBackground;
         Foreground = colors.text;
-        Border = colors.elementBorder;
+        Border = true;
         Hover = MouseHovering(X, Y, Width, Height);
 
         if (Disabled) Background = colors.elementBackgroundDisabled;
@@ -381,7 +380,7 @@ export class GuiRedrawModule extends BaseModule {
 
         DrawRect(X, Y, Width, Height, Background);
         ControllerAddActiveArea(X, Y);
-        if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : Border);
+        if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : colors.elementBorder);
         if (Path !== '') DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
         DrawPreviewIcons(Icons, X, Y);
         if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
@@ -504,8 +503,8 @@ export class GuiRedrawModule extends BaseModule {
     });
 
     patchFunction('DialogDraw', {
-      'DrawRect(1087 + offset, 600, 225, 275, bgColor);':
-        'DrawRect(1087 + offset, 600, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 600, 225, 275, "%border");'
+      'DrawRect(1087 + offset, 550, 225, 275, bgColor);':
+        'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
     });
 
     this.patched = true;

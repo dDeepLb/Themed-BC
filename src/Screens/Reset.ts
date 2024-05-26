@@ -24,9 +24,9 @@ export class GuiReset extends GuiSubscreen {
 
   Run() {
     GuiSubscreen.POS_BAK = GuiSubscreen.START_X;
-    GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
-
     GuiSubscreen.START_X = 180;
+
+    MainCanvas.save();
     MainCanvas.textAlign = "center";
 
     DrawText(getText(`reset.label.perma_reset_of_mod_data`), 1000, 125, "Black");
@@ -57,9 +57,7 @@ export class GuiReset extends GuiSubscreen {
 
     DrawButton(1520, 720, 200, 80, getText("reset.button.cancel"), "White");
 
-    MainCanvas.textAlign = "left";
-
-    MainCanvas.textAlign = GuiSubscreen.TEXT_ALIGN_BAK;
+    MainCanvas.restore();
   }
 
   Click() {
