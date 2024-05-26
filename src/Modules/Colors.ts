@@ -6,6 +6,7 @@ import { GuiColors } from '../Screens/Colors';
 import { _Color } from '../Utilities/Color';
 import { _Image } from '../Utilities/Drawing';
 import { changeModColors } from '../Utilities/Integration';
+import { mergeMatchingProperties } from '../Utilities/Other';
 import { BcStyle } from '../Utilities/Style';
 import { GuiRedrawModule } from './GuiRedraw';
 
@@ -18,12 +19,20 @@ export class ColorsModule extends BaseModule {
     return super.settings as ColorsSettingsModel;
   }
 
+  set settings(val) {
+    super.settings = val;
+  }
+
   get defaultSettings() {
     return <ColorsSettingsModel>{
       primaryColor: '#202020',
       accentColor: '#440171',
       textColor: '#ccc'
     };
+  }
+
+  Load(): void {
+    this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
   }
 
   reloadTheme(): void {

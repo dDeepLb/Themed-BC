@@ -74,3 +74,14 @@ export function useLgcModal(prompt: string, acceptCallbackFn: () => void, cancel
 
   document.body.append(modal);
 }
+
+export function mergeMatchingProperties(mergeTo, mergeFrom) {
+  const mergedObject = mergeTo;
+  for (const key of Object.keys(mergeFrom)) {
+    if (key in mergeTo) {
+      mergedObject[key] = mergeFrom[key];
+    }
+  }
+
+  return mergedObject;
+}

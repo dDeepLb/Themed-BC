@@ -3,6 +3,7 @@ import { Subscreen } from '../Base/SettingDefinitions';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GuiGlobal } from '../Screens/Global';
 import { changeModColors } from '../Utilities/Integration';
+import { mergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 
 export class GlobalModule extends BaseModule {
@@ -12,6 +13,10 @@ export class GlobalModule extends BaseModule {
 
   get settings(): GlobalSettingsModel {
     return super.settings as GlobalSettingsModel;
+  }
+
+  set settings(val) {
+    super.settings = val;
   }
 
   get defaultSettings() {
@@ -25,6 +30,7 @@ export class GlobalModule extends BaseModule {
   }
 
   Load(): void {
+    this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
     changeModColors();
 
     hookFunction(

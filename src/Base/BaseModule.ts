@@ -18,7 +18,15 @@ export abstract class BaseModule {
       Player.Themed = <SettingsModel>{};
       this.registerDefaultSettings();
     } else if (!(<any>Player.Themed)[this.settingsStorage]) this.registerDefaultSettings();
-    return (<any>Player.Themed)[this.settingsStorage];
+    return Player.Themed[this.settingsStorage];
+  }
+
+  set settings(val) {
+    if (!Player.Themed) {
+      Player.Themed = <SettingsModel>{};
+      this.registerDefaultSettings();
+    } else if (!(<any>Player.Themed)[this.settingsStorage]) this.registerDefaultSettings();
+    Player.Themed[this.settingsStorage] = val;
   }
 
   get enabled(): boolean {
