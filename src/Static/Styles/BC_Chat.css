@@ -1,5 +1,5 @@
-#TextAreaChatLog[data-colortheme="dark"],
-#TextAreaChatLog[data-colortheme="dark2"] {
+#TextAreaChatLog[data-colortheme="dark"]~#InputChat,
+#TextAreaChatLog[data-colortheme="dark2"]~#InputChat {
   background-color: var(--background);
   color: var(--text);
   border-color: var(--elementBorder);
