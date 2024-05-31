@@ -7,7 +7,7 @@ export class CommandsModule extends BaseModule {
     CommandCombine([
       {
         Tag: 'share-theme',
-        Description: ': Shares your there with other people that have Themed installed!',
+        Description: ': Shares your theme with other people that have Themed installed!',
         Action() {
           getModule<ShareModule>('ShareModule').share();
         }
@@ -15,5 +15,5 @@ export class CommandsModule extends BaseModule {
     ]);
   }
 
-  Run(): void {}
+  Run(): void { }
 }
