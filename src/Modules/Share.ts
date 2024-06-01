@@ -53,8 +53,8 @@ export class ShareModule extends BaseModule {
     });
   }
 
-  acceptShare(data: {}): void {
-    Player.Themed.ColorsModule = <ColorsSettingsModel>data;
+  acceptShare(data: ColorsSettingsModel): void {
+    Player.Themed.ColorsModule = data;
 
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }
