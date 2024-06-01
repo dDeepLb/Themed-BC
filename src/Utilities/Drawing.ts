@@ -56,8 +56,8 @@ export const _Image = {
     if (typeof source != 'string') return;
     const img = DrawGetImage(source);
 
-    if (!!_Image.getCache(source)) {
-      return _Image.getCache(source);
+    if (_Image.getCache(`${source}&${hexColor}`)) {
+      return _Image.getCache(`${source}&${hexColor}`);
     }
 
     try {
@@ -76,7 +76,7 @@ export const _Image = {
 
       const colorizedData = _Image.colorize(imageData, hexColor);
 
-      _Image.setCache(source, colorizedData);
+      _Image.setCache(`${source}&${hexColor}`, colorizedData);
 
       return colorizedData;
     } catch (e) {
