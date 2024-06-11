@@ -8,7 +8,6 @@ export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
 };
 
-const isWhite = (color: string) => _Color.getComputed(color) === 'rgb(255, 255, 255)';
 const isBlack = (color: string) => _Color.getComputed(color) === 'rgb(0, 0, 0)';
 
 export class GuiRedrawModule extends BaseModule {
@@ -120,7 +119,8 @@ export class GuiRedrawModule extends BaseModule {
       (args: Parameters<typeof DrawBackNextButton>, next: (args: Parameters<typeof DrawBackNextButton>) => ReturnType<typeof DrawBackNextButton>) => {
         if (!doRedraw()) return next(args);
 
-        let [Left, Top, Width, Height, Label, Color, Image, BackText, NextText, Disabled, ArrowWidth] = args;
+        const [Left, Top, Width, Height, Label, Color, Image, , , Disabled] = args;
+        let [, , , , , , , BackText, NextText, , ArrowWidth] = args;
 
         if (ArrowWidth == null || ArrowWidth > Width / 2) ArrowWidth = Width / 2;
         const LeftSplit = Left + ArrowWidth;
@@ -319,7 +319,8 @@ export class GuiRedrawModule extends BaseModule {
       (args: Parameters<typeof DrawButtonHover>, next: (args: Parameters<typeof DrawButtonHover>) => ReturnType<typeof DrawButtonHover>) => {
         if (!doRedraw()) return next(args);
 
-        let [Left, Top, Width, Height, HoveringText] = args;
+        const [, , Width, Height, HoveringText] = args;
+        let [Left, Top] = args;
 
         if (HoveringText == null || HoveringText == '') return next(args);
 
@@ -342,7 +343,8 @@ export class GuiRedrawModule extends BaseModule {
 
         const [X, Y, Path, Description, Options] = args;
 
-        let { Background, Foreground, Vibrating, Border, Hover, HoverBackground, Disabled, Icons, Width, Height } = Options || {};
+        const { Vibrating, Disabled, Icons } = Options || {};
+        let { Background, Foreground, Border, Hover, Width, Height } = Options || {};
         Width = Width || DrawAssetPreviewDefaultWidth;
         Height = Height || DrawAssetPreviewDefaultHeight;
 
@@ -396,7 +398,8 @@ export class GuiRedrawModule extends BaseModule {
       (args: Parameters<typeof DrawTextWrap>, next: (args: Parameters<typeof DrawTextWrap>) => ReturnType<typeof DrawTextWrap>) => {
         if (!doRedraw()) return next(args);
 
-        let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
+        const [Text, X, , Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
+        let [, , Y, , ,] = args;
         const isHovering = MouseHovering(X, Y, Width, Height);
 
         if (!Text) return;
