@@ -38,7 +38,7 @@ export class RibbonMenu {
    * @returns nothing
    */
   static drawModButton(modIndex: number | undefined, callback: (modIndex: number) => void): void {
-    if (PreferenceSubscreen === "" && modIndex !== undefined) callback(modIndex as number);
+    if (PreferenceSubscreen === '' && modIndex !== undefined) callback(modIndex as number);
     return;
   }
 
@@ -49,7 +49,7 @@ export class RibbonMenu {
    * @returns nothing
    */
   static handleModClick(modIndex: number | undefined, callback: (modIndex: number) => void): void {
-    if (PreferenceSubscreen === "" && modIndex !== undefined)
+    if (PreferenceSubscreen === '' && modIndex !== undefined)
       if (MouseIn(1815, RibbonMenu.getYPos(modIndex), 90, 90)) callback(modIndex as number);
     return;
   }

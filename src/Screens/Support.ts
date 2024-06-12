@@ -55,7 +55,7 @@ export class GuiSupport extends GuiSubscreen {
     GuiSupport.doNextThankYou();
 
     ElementCreateDiv('ResponsiveGratitude');
-    let elm = document.getElementById('ResponsiveGratitude');
+    const elm = document.getElementById('ResponsiveGratitude');
     ElementContent('ResponsiveGratitude', gratitudeHtml);
 
     const font =
@@ -74,7 +74,7 @@ export class GuiSupport extends GuiSubscreen {
   Run() {
     super.Run();
 
-    let tmp = GuiSubscreen.START_X;
+    const tmp = GuiSubscreen.START_X;
     GuiSubscreen.START_X = 550;
 
     DrawText(GuiSupport.getSupporter(), GuiSubscreen.START_X + 300, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', '#D7F6E9');

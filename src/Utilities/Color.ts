@@ -1,14 +1,11 @@
 import { Colors } from '../Models/Colors';
 
-// Define a type for RGB color
 type RGBAColor = {
   r: number;
   g: number;
   b: number;
   a?: number;
 };
-
-let cachedColors = {};
 
 export const colors: Colors = {
   mainBackground: '',
@@ -22,12 +19,14 @@ export const colors: Colors = {
   icon: ''
 };
 
-export class _Color {
-  static darken(hexColor: string, percentage: number): string {
+let cachedColors = {};
+
+export const _Color = {
+  darken(hexColor: string, percentage: number): string {
     if (!hexColor) return;
 
     // Return color if it's cached
-    let cacheColor = _Color.getCache(`darker${hexColor}${percentage}`);
+    const cacheColor = _Color.getCache(`darker${hexColor}${percentage}`);
     if (cacheColor) return cacheColor;
 
     const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
@@ -44,13 +43,13 @@ export class _Color {
     _Color.setCache(`darker${hexColor}${percentage}`, ret);
 
     return ret;
-  }
+  },
 
-  static lighten(hexColor: string, percentage: number): string {
+  lighten(hexColor: string, percentage: number): string {
     if (!hexColor) return;
 
     // Return color if it's cached
-    let cacheColor = _Color.getCache(`lighter${hexColor}${percentage}`);
+    const cacheColor = _Color.getCache(`lighter${hexColor}${percentage}`);
     if (cacheColor) return cacheColor;
 
     const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
@@ -67,11 +66,11 @@ export class _Color {
     _Color.setCache(`lighter${hexColor}${percentage}`, ret);
 
     return ret;
-  }
+  },
 
-  static toDarkMode(colorHex: string, backgroundColorHex: string) {
+  toDarkMode(colorHex: string, backgroundColorHex: string) {
     // Return color if it's cached
-    let cacheColor = _Color.getCache(`darkMode${colorHex}${backgroundColorHex}`);
+    const cacheColor = _Color.getCache(`darkMode${colorHex}${backgroundColorHex}`);
     if (cacheColor) return cacheColor;
 
     const lightColor = _Color.extractFromRGBA(_Color.getComputed(colorHex));
@@ -93,16 +92,16 @@ export class _Color {
     _Color.setCache(`darkMode${colorHex}${backgroundColorHex}`, ret);
 
     return ret;
-  }
+  },
 
-  static getContrastRatio(color1: RGBAColor, color2: RGBAColor) {
+  getContrastRatio(color1: RGBAColor, color2: RGBAColor) {
     const luminance1 = _Color.calculateLuminance(color1);
     const luminance2 = _Color.calculateLuminance(color2);
 
     return (Math.max(luminance1, luminance2) + 0.05) / (Math.min(luminance1, luminance2) + 0.05);
-  }
+  },
 
-  static calculateLuminance(color: RGBAColor) {
+  calculateLuminance(color: RGBAColor) {
     const r = color.r / 255;
     const g = color.g / 255;
     const b = color.b / 255;
@@ -112,9 +111,9 @@ export class _Color {
     const gammaCorrectedB = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
 
     return 0.2126 * gammaCorrectedR + 0.7152 * gammaCorrectedG + 0.0722 * gammaCorrectedB;
-  }
+  },
 
-  static hexToRgba(hex: string): RGBAColor {
+  hexToRgba(hex: string): RGBAColor {
     hex = hex.replace(/^#/, ''); // Remove the "#" symbol if it exists
 
     if (hex.length === 6) {
@@ -137,9 +136,9 @@ export class _Color {
 
     // If the input format is invalid, return black with full opacity
     return { r: 0, g: 0, b: 0, a: 1.0 };
-  }
+  },
 
-  static rgbaToHex(color: RGBAColor): string {
+  rgbaToHex(color: RGBAColor): string {
     const { r, g, b, a } = color;
 
     if (a !== undefined && a !== 1) {
@@ -151,9 +150,9 @@ export class _Color {
     }
 
     return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1).toUpperCase()}`;
-  }
+  },
 
-  static extractFromRGBA(rgbaString: string) {
+  extractFromRGBA(rgbaString: string) {
     const rgbaRegex = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)$/;
     const match = rgbaString.match(rgbaRegex);
 
@@ -172,10 +171,10 @@ export class _Color {
     } else {
       return null;
     }
-  }
+  },
 
-  static getComputed(color: string): string {
-    let cachedColor = _Color.getCache(`comp${color}`);
+  getComputed(color: string): string {
+    const cachedColor = _Color.getCache(`comp${color}`);
     if (cachedColor) return cachedColor;
 
     const div = document.createElement('div');
@@ -189,17 +188,17 @@ export class _Color {
     _Color.setCache(`comp${color}`, ret);
 
     return ret;
-  }
+  },
 
-  static getHexComputed(color: string) {
+  getHexComputed(color: string) {
     color = _Color.getComputed(color);
     const RGBA = _Color.extractFromRGBA(color);
     const ret = _Color.rgbaToHex(RGBA);
 
     return ret;
-  }
+  },
 
-  static composeRoot() {
+  composeRoot() {
     const data = Player.Themed.ColorsModule;
 
     const primaryColor = _Color.getHexComputed(data.primaryColor);
@@ -215,17 +214,17 @@ export class _Color {
     colors.elementBorderHover = _Color.lighten(accentColor, 20);
     colors.text = textColor;
     colors.icon = accentColor;
-  }
+  },
 
-  static setCache(key: string, value: string) {
+  setCache(key: string, value: string) {
     cachedColors[key] = value;
-  }
+  },
 
-  static getCache(key: string) {
+  getCache(key: string) {
     return cachedColors[key];
-  }
+  },
 
-  static clearCache() {
+  clearCache() {
     cachedColors = {};
-  }
-}
+  },
+};

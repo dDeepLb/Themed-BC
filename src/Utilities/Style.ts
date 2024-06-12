@@ -1,13 +1,14 @@
-import BC_Inputs from '../Static/Styles/BC_Inputs.css';
 import BC_Chat from '../Static/Styles/BC_Chat.css';
 import BC_FriendList from '../Static/Styles/BC_FriendList.css';
+import BC_Inputs from '../Static/Styles/BC_Inputs.css';
 import BC_Other from '../Static/Styles/BC_Other.css';
 import FBC from '../Static/Styles/FBC.css';
 import FUSAM from '../Static/Styles/FUSAM.css';
-import Themed from '../Static/Styles/Themed.css';
 import TTS from '../Static/Styles/TTS.css';
+import Themed from '../Static/Styles/Themed.css';
 import { _Color, colors } from './Color';
 import { PlayerStorage } from './Data';
+import { changeMbsColors, resetMbsColors } from './Integration';
 
 const styles = {
   Root: composeRoot(),
@@ -22,83 +23,81 @@ const styles = {
   MBS: 'MBS'
 };
 
-export class _Style {
-  static inject(id: keyof typeof styles | string) {
-    if (id == 'Root') updateRootStyle();
-    else if (id == 'MBS') {
-      if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-        if (!PlayerStorage().IntegrationModule[id]) return;
-        return mbs.css.setStyle({
-          backgroundColor: colors.mainBackground,
-          buttonColor: colors.elementBackground,
-          buttonHoverColor: colors.elementBackgroundHover,
-          borderColor: colors.elementBorder,
-          tooltipColor: colors.elementHoverHint,
-          textColor: colors.text
-        });
-      }
-    }
-
-    const styleSource = styles[id];
-    const isStyleLoaded = document.getElementById(id);
-    const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
+export const Style = {
+  inject(styleId: string, styleSource: string) {
+    const isStyleLoaded = document.getElementById(styleId);
 
     if (isStyleLoaded) return;
-    if (!isEnabled) return;
-    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root') return;
 
     const styleElement = document.createElement('style');
-    styleElement.id = id;
+    styleElement.id = styleId;
     styleElement.appendChild(document.createTextNode(styleSource));
     document.head.appendChild(styleElement);
-  }
+  },
 
-  static eject(id: keyof typeof styles | string) {
-    if (id == 'MBS') {
-      if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-        mbs.css.setStyle({
-          backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
-          buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
-          buttonHoverColor: mbs.css.DEFAULT_STYLE.buttonHoverColor,
-          borderColor: mbs.css.DEFAULT_STYLE.borderColor,
-          tooltipColor: mbs.css.DEFAULT_STYLE.tooltipColor,
-          textColor: mbs.css.DEFAULT_STYLE.textColor
-        });
-      }
-    }
-
+  eject(id: string) {
     const style = document.getElementById(id);
     if (!style) return;
 
     style.remove();
-  }
+  },
 
-  static reload(id: keyof typeof styles | string) {
-    _Style.eject(id);
-    _Style.inject(id);
-  }
+  reload(styleId: string, styleSource: string) {
+    Style.eject(styleId);
+    Style.inject(styleId, styleSource);
+  },
+};
 
-  static injectAll() {
+export const BcStyle = {
+  inject(id: keyof typeof styles | string) {
+    if (id == 'Root') updateRootStyle();
+    else if (id == 'MBS') {
+      changeMbsColors();
+    }
+
+    const styleSource = styles[id];
+    const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
+
+    if (!isEnabled) return;
+    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root') return;
+
+    Style.inject(id, styleSource);
+  },
+
+  eject(id: keyof typeof styles | string) {
+    if (id == 'MBS') {
+      resetMbsColors();
+    }
+
+    Style.eject(id);
+  },
+
+  reload(id: keyof typeof styles | string) {
+    BcStyle.eject(id);
+    BcStyle.inject(id);
+  },
+
+  injectAll() {
     const styleIDs = Object.keys(styles);
     styleIDs.forEach((id) => {
-      _Style.inject(id);
+      BcStyle.inject(id);
     });
-  }
+  },
 
-  static ejectAll() {
+  ejectAll() {
     const styleIDs = Object.keys(styles);
     styleIDs.forEach((id) => {
-      _Style.eject(id);
+      BcStyle.eject(id);
     });
-  }
+  },
 
-  static reloadAll() {
+  reloadAll() {
     const styleIDs = Object.keys(styles);
     styleIDs.forEach((id) => {
-      _Style.reload(id);
+      BcStyle.reload(id);
     });
   }
-}
+};
 
 export function composeRoot() {
   return /*css*/ `

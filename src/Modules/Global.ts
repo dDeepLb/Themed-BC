@@ -3,9 +3,12 @@ import { Subscreen } from '../Base/SettingDefinitions';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GuiGlobal } from '../Screens/Global';
 import { changeModColors } from '../Utilities/Integration';
+import { mergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 
 export class GlobalModule extends BaseModule {
+  private static transparentCharacters: number[] = [];
+
   get settingsScreen(): Subscreen | null {
     return GuiGlobal;
   }
@@ -14,17 +17,23 @@ export class GlobalModule extends BaseModule {
     return super.settings as GlobalSettingsModel;
   }
 
+  set settings(val) {
+    super.settings = val;
+  }
+
   get defaultSettings() {
     return <GlobalSettingsModel>{
       themedEnabled: true,
       doVanillaGuiOverhaul: true,
       doUseFlatColor: true,
       doShowLocaleTime: true,
+      doIndicateCharacterAbsence: true,
       doShowNewVersionMessage: true
     };
   }
 
   Load(): void {
+    this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
     changeModColors();
 
     hookFunction(
@@ -39,7 +48,98 @@ export class GlobalModule extends BaseModule {
       },
       ModuleCategory.Global
     );
+
+    hookFunction(
+      'DialogDraw',
+      HookPriority.Observe,
+      (args: Parameters<typeof DialogDraw>, next: (args: Parameters<typeof DialogDraw>) => ReturnType<typeof DialogDraw>) => {
+        if (!this.settings.doIndicateCharacterAbsence) return next(args);
+        if (!(CurrentScreen == 'ChatRoom')) return next(args);
+
+        next(args);
+
+        if (CurrentCharacter.IsPlayer()) return;
+        if (ChatRoomCharacter.includes(CurrentCharacter)) {
+          if (GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
+            CurrentCharacter.Canvas.getContext('2d').globalAlpha = 1.0;
+            CurrentCharacter.CanvasBlink.getContext('2d').globalAlpha = 1.0;
+            CharacterAppearanceBuildCanvas(CurrentCharacter);
+            GlobalModule.transparentCharacters.filter((x) => x !== CurrentCharacter.MemberNumber);
+          }
+        } else {
+          MainCanvas.save();
+          MainCanvas.globalCompositeOperation = 'multiply';
+          MainCanvas.beginPath();
+          MainCanvas.fillStyle = 'gray';
+          MainCanvas.fillRect(500, 0, 500, 1000);
+          MainCanvas.fill();
+          MainCanvas.restore();
+
+          if (!GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
+            CurrentCharacter.Canvas.getContext('2d').globalAlpha = 0.2;
+            CurrentCharacter.CanvasBlink.getContext('2d').globalAlpha = 0.2;
+            CharacterAppearanceBuildCanvas(CurrentCharacter);
+            GlobalModule.transparentCharacters.push(CurrentCharacter.MemberNumber);
+          }
+
+          DrawImageEx('Icons/Warning.svg', MainCanvas, 500 + 125, 125, { Width: 250, Height: 250, HexColor: '#ff0000', FullAlpha: true });
+        }
+
+
+      },
+      ModuleCategory.Global
+    );
+
+    hookFunction(
+      'AppearanceRun',
+      HookPriority.Observe,
+      (args: Parameters<typeof AppearanceRun>, next: (args: Parameters<typeof AppearanceRun>) => ReturnType<typeof AppearanceRun>) => {
+        if (!this.settings.doIndicateCharacterAbsence) return next(args);
+        if (!(CurrentScreen == 'Appearance')) return next(args);
+
+        next(args);
+
+        if (ChatRoomCharacter.includes(CharacterAppearanceSelection)) {
+          if (GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
+            CharacterAppearanceSelection.Canvas.getContext('2d').globalAlpha = 1.0;
+            CharacterAppearanceSelection.CanvasBlink.getContext('2d').globalAlpha = 1.0;
+            CharacterAppearanceBuildCanvas(CharacterAppearanceSelection);
+            GlobalModule.transparentCharacters.filter((x) => x !== CharacterAppearanceSelection.MemberNumber);
+          }
+        } else {
+          MainCanvas.save();
+          MainCanvas.globalCompositeOperation = 'multiply';
+          MainCanvas.beginPath();
+          MainCanvas.fillStyle = 'gray';
+          MainCanvas.fillRect(660, 0, 500, 1000);
+          MainCanvas.fill();
+          MainCanvas.restore();
+
+          if (!GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
+            CharacterAppearanceSelection.Canvas.getContext('2d').globalAlpha = 0.2;
+            CharacterAppearanceSelection.CanvasBlink.getContext('2d').globalAlpha = 0.2;
+            CharacterAppearanceBuildCanvas(CharacterAppearanceSelection);
+            GlobalModule.transparentCharacters.push(CharacterAppearanceSelection.MemberNumber);
+          }
+
+          DrawImageEx('Icons/Warning.svg', MainCanvas, 660 + 125, 125, { Width: 250, Height: 250, HexColor: '#ff0000' });
+        }
+      },
+      ModuleCategory.Global
+    );
+
+    hookFunction(
+      'ChatRoomSync',
+      HookPriority.Observe,
+      (args: Parameters<typeof ChatRoomSync>, next: (args: Parameters<typeof ChatRoomSync>) => ReturnType<typeof ChatRoomSync>) => {
+        Character.filter(character => GlobalModule.transparentCharacters?.includes(character.MemberNumber));
+
+        return next(args);
+
+      },
+      ModuleCategory.Global
+    );
   }
 
-  Run(): void {}
+  Run(): void { }
 }

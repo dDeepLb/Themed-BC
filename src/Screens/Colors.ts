@@ -1,10 +1,7 @@
 import { Input, Setting } from '../../.types/setting';
 import { GuiSubscreen } from '../Base/BaseSetting';
 import { ColorsSettingsModel } from '../Models/Colors';
-import { GlobalSettingsModel } from '../Models/Global';
 import { getText } from '../Translation';
-import { _Image } from '../Utilities/Drawing';
-import { _Style } from '../Utilities/Style';
 
 export class GuiColors extends GuiSubscreen {
   get name(): string {

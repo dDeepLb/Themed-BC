@@ -8,7 +8,6 @@ export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
 };
 
-const isWhite = (color: string) => _Color.getComputed(color) === 'rgb(255, 255, 255)';
 const isBlack = (color: string) => _Color.getComputed(color) === 'rgb(0, 0, 0)';
 
 export class GuiRedrawModule extends BaseModule {
@@ -18,7 +17,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawRoomBackground',
       HookPriority.Observe,
-      ([URL, ...args], next) => {
+      ([URL, ...args]: Parameters<typeof DrawRoomBackground>, next: (args: Parameters<typeof DrawRoomBackground>) => ReturnType<typeof DrawRoomBackground>) => {
         if (!doRedraw()) return next([URL, ...args]);
 
         if (URL.includes('Sheet.jpg')) {
@@ -26,9 +25,10 @@ export class GuiRedrawModule extends BaseModule {
             DrawRect(0, 0, 2000, 1000, colors.mainBackground);
           } else {
             next([URL, ...args]);
+            MainCanvas.save();
             MainCanvas.globalCompositeOperation = 'multiply';
             DrawRect(0, 0, 2000, 1000, colors.mainBackground);
-            MainCanvas.globalCompositeOperation = 'source-over';
+            MainCanvas.restore();
           }
         } else {
           next([URL, ...args]);
@@ -40,7 +40,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawButton',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawButton>, next: (args: Parameters<typeof DrawButton>) => ReturnType<typeof DrawButton>) => {
         if (!doRedraw()) return next(args);
 
         const [x, y, width, height, label, color, image, hoveringText, isDisabled] = args;
@@ -86,11 +86,10 @@ export class GuiRedrawModule extends BaseModule {
             break;
         }
 
-        DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, color.text);
+        DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, colors.text);
 
         if (image != null && image != '') {
-          if (_Image.doDrawImage(image)) _Image.drawColorized(image, x + 2, y + 2, colors.icon, {});
-          else DrawImage(image, x + 2, y + 2);
+          DrawImage(image, x + 2, y + 2);
         }
 
         if (hoveringText != null && isHovering) {
@@ -103,7 +102,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawCheckbox',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawCheckbox>, next: (args: Parameters<typeof DrawCheckbox>) => ReturnType<typeof DrawCheckbox>) => {
         if (!doRedraw()) return next(args);
 
         const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = 'Black', CheckImage = 'Icons/Checked.png'] = args;
@@ -117,10 +116,11 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawBackNextButton',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawBackNextButton>, next: (args: Parameters<typeof DrawBackNextButton>) => ReturnType<typeof DrawBackNextButton>) => {
         if (!doRedraw()) return next(args);
 
-        let [Left, Top, Width, Height, Label, Color, Image, BackText, NextText, Disabled, ArrowWidth] = args;
+        const [Left, Top, Width, Height, Label, Color, Image, , , Disabled] = args;
+        let [, , , , , , , BackText, NextText, , ArrowWidth] = args;
 
         if (ArrowWidth == null || ArrowWidth > Width / 2) ArrowWidth = Width / 2;
         const LeftSplit = Left + ArrowWidth;
@@ -130,7 +130,7 @@ export class GuiRedrawModule extends BaseModule {
         ControllerAddActiveArea(Left + Width - ArrowWidth, Top);
 
         MainCanvas.save();
-        MainCanvas.textAlign = "center";
+        MainCanvas.textAlign = 'center';
 
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
@@ -156,11 +156,10 @@ export class GuiRedrawModule extends BaseModule {
         MainCanvas.closePath();
 
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color);
-        DrawTextFit(Label, Left + Width / 2, Top + (Height / 2) + 1, (CommonIsMobile) ? Width - 6 : Width - 36, "Black");
+        DrawTextFit(Label, Left + Width / 2, Top + (Height / 2) + 1, (CommonIsMobile) ? Width - 6 : Width - 36, 'Black');
 
         if (Image != null && Image != '') {
-          if (_Image.doDrawImage(Image)) _Image.drawColorized(Image, Left + 2, Top + 2, colors.icon, {});
-          else DrawImage(Image, Left + 2, Top + 2);
+          DrawImage(Image, Left + 2, Top + 2);
         }
 
         ControllerAddActiveArea(Left + Width / 2, Top);
@@ -195,27 +194,30 @@ export class GuiRedrawModule extends BaseModule {
     );
 
     hookFunction(
-      'DrawImageResize',
+      'DrawImageEx',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawImageEx>, next: (args: Parameters<typeof DrawImageEx>) => ReturnType<typeof DrawImageEx>) => {
         if (!doRedraw()) return next(args);
+        if (typeof args[0] !== 'string') return next(args);
         if (!_Image.doDrawImage(args[0])) return next(args);
 
-        const [source, x, y, width, height] = args;
+        const [Source, Canvas, X, Y, Options] = args;
+        const color = args[4].HexColor ?? colors.icon;
+        const colorizedImage = _Image.getColorized(Source, color);
 
-        if (!_Image.drawColorized(source, x, y, colors.icon, { newWidth: width, newHeight: height })) return next(args);
-      },
-      ModuleCategory.GuiRedraw
-    );
+        if (!colorizedImage) return next(args);
+
+        const imageSource = _Image.turnToBase64(colorizedImage, `${Source}${args[4].HexColor}`);
+        next([imageSource ?? Source, Canvas, X, Y, Options]);
+      }, ModuleCategory.GuiRedraw);
 
     hookFunction(
       'DrawRect',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawRect>, next: (args: Parameters<typeof DrawRect>) => ReturnType<typeof DrawRect>) => {
         if (!doRedraw()) return next(args);
 
-        const [Left, Top, Width, Height]: number[] = args;
-        const Color: string = args[4];
+        const [Left, Top, Width, Height, Color] = args;
 
         const drawRect = (color: string) => {
           MainCanvas.beginPath();
@@ -271,11 +273,10 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawEmptyRect',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawEmptyRect>, next: (args: Parameters<typeof DrawEmptyRect>) => ReturnType<typeof DrawEmptyRect>) => {
         if (!doRedraw()) return next(args);
 
-        const [Left, Top, Width, Height, , Thickness] = args;
-        const Color: string = args[4] || 'black';
+        const [Left, Top, Width, Height, Color, Thickness] = args;
 
         const drawEmptyRect = (color: string) => {
           MainCanvas.beginPath();
@@ -315,17 +316,18 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawButtonHover',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawButtonHover>, next: (args: Parameters<typeof DrawButtonHover>) => ReturnType<typeof DrawButtonHover>) => {
         if (!doRedraw()) return next(args);
 
-        let [Left, Top, Width, Height, HoveringText] = args;
+        const [, , Width, Height, HoveringText] = args;
+        let [Left, Top] = args;
 
         if (HoveringText == null || HoveringText == '') return next(args);
 
         Left = MouseX > 1000 ? Left - 475 : Left + Width + 25;
         Top = Top + (Height - 65) / 2;
         MainCanvas.save();
-        MainCanvas.textAlign = "center";
+        MainCanvas.textAlign = 'center';
         drawRect(Left, Top, 450, 65, colors.elementHoverHint, colors.elementBorder);
         DrawTextFit(HoveringText, Left + 225, Top + 33, 444, 'Black');
         MainCanvas.restore();
@@ -336,21 +338,22 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawPreviewBox',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawPreviewBox>, next: (args: Parameters<typeof DrawPreviewBox>) => ReturnType<typeof DrawPreviewBox>) => {
         if (!doRedraw()) return next(args);
 
         const [X, Y, Path, Description, Options] = args;
 
-        let { Background, Foreground, Vibrating, Border, Hover, HoverBackground, Disabled, Icons, Width, Height } = Options || {};
+        const { Vibrating, Disabled, Icons } = Options || {};
+        let { Background, Foreground, Border, Hover, Width, Height } = Options || {};
         Width = Width || DrawAssetPreviewDefaultWidth;
         Height = Height || DrawAssetPreviewDefaultHeight;
 
         const Padding = 2;
         const TextGutter = Description ? 44 : 0;
 
-        Background = isWhite(Background) ? colors.elementBackground : _Color.darken(_Color.toDarkMode(Background, colors.elementBackground), 50);
+        Background = colors.elementBackground;
         Foreground = colors.text;
-        Border = colors.elementBorder;
+        Border = true;
         Hover = MouseHovering(X, Y, Width, Height);
 
         if (Disabled) Background = colors.elementBackgroundDisabled;
@@ -381,7 +384,7 @@ export class GuiRedrawModule extends BaseModule {
 
         DrawRect(X, Y, Width, Height, Background);
         ControllerAddActiveArea(X, Y);
-        if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : Border);
+        if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : colors.elementBorder);
         if (Path !== '') DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
         DrawPreviewIcons(Icons, X, Y);
         if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
@@ -392,10 +395,11 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawTextWrap',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawTextWrap>, next: (args: Parameters<typeof DrawTextWrap>) => ReturnType<typeof DrawTextWrap>) => {
         if (!doRedraw()) return next(args);
 
-        let [Text, X, Y, Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
+        const [Text, X, , Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
+        let [, , Y, , ,] = args;
         const isHovering = MouseHovering(X, Y, Width, Height);
 
         if (!Text) return;
@@ -453,7 +457,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawTextFit',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawTextFit>, next: (args: Parameters<typeof DrawTextFit>) => ReturnType<typeof DrawTextFit>) => {
         if (!doRedraw()) return next(args);
 
         if (isBlack(args[4])) {
@@ -470,7 +474,7 @@ export class GuiRedrawModule extends BaseModule {
     hookFunction(
       'DrawText',
       HookPriority.Observe,
-      (args, next) => {
+      (args: Parameters<typeof DrawText>, next: (args: Parameters<typeof DrawText>) => ReturnType<typeof DrawText>) => {
         if (!doRedraw()) return next(args);
 
         if (isBlack(args[3])) {
@@ -504,8 +508,8 @@ export class GuiRedrawModule extends BaseModule {
     });
 
     patchFunction('DialogDraw', {
-      'DrawRect(1087 + offset, 600, 225, 275, bgColor);':
-        'DrawRect(1087 + offset, 600, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 600, 225, 275, "%border");'
+      'DrawRect(1087 + offset, 550, 225, 275, bgColor);':
+        'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
     });
 
     this.patched = true;

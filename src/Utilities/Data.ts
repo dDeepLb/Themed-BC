@@ -21,7 +21,7 @@ export function dataTake() {
 
 export function dataStore() {
   if (!ExtensionStorage()) Player.ExtensionSettings[ModName] = '';
-  let Data: SettingsModel = {
+  const Data: SettingsModel = {
     Version: PlayerStorage().Version,
     GlobalModule: PlayerStorage().GlobalModule,
     ColorsModule: PlayerStorage().ColorsModule,

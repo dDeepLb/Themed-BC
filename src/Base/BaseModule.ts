@@ -1,6 +1,6 @@
-import { BaseSettingsModel } from "../Models/Global";
-import { SettingsModel } from "../Models/Settings";
-import { Subscreen } from "./SettingDefinitions";
+import { BaseSettingsModel } from '../Models/Global';
+import { SettingsModel } from '../Models/Settings';
+import { Subscreen } from './SettingDefinitions';
 
 export abstract class BaseModule {
   get settingsScreen(): Subscreen | null {
@@ -18,7 +18,15 @@ export abstract class BaseModule {
       Player.Themed = <SettingsModel>{};
       this.registerDefaultSettings();
     } else if (!(<any>Player.Themed)[this.settingsStorage]) this.registerDefaultSettings();
-    return (<any>Player.Themed)[this.settingsStorage];
+    return Player.Themed[this.settingsStorage];
+  }
+
+  set settings(val) {
+    if (!Player.Themed) {
+      Player.Themed = <SettingsModel>{};
+      this.registerDefaultSettings();
+    } else if (!(<any>Player.Themed)[this.settingsStorage]) this.registerDefaultSettings();
+    Player.Themed[this.settingsStorage] = val;
   }
 
   get enabled(): boolean {
@@ -26,7 +34,7 @@ export abstract class BaseModule {
     return (
       Player.Themed.GlobalModule.themedEnabled &&
       this.settings.themedEnabled &&
-      (ServerPlayerIsInChatRoom() || (CurrentModule == "Room" && CurrentScreen == "Crafting"))
+      (ServerPlayerIsInChatRoom() || (CurrentModule == 'Room' && CurrentScreen == 'Crafting'))
     );
   }
 
@@ -46,7 +54,7 @@ export abstract class BaseModule {
     return null;
   }
 
-  Load() {}
+  Load() { }
 
   Run() {
     // Empty

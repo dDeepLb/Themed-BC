@@ -42,19 +42,19 @@ export class ShareModule extends BaseModule {
           () => {
             this.acceptShare(theme);
           },
-          () => {}
+          () => { }
         );
       });
 
       message.append(text, button);
 
-      const chat = document.getElementById('TextAreaChatLog');
-      chat.append(message);
+      ChatRoomAppendChat(message);
+      ElementScrollToEnd('TextAreaChatLog');
     });
   }
 
-  acceptShare(data: {}): void {
-    Player.Themed.ColorsModule = <ColorsSettingsModel>data;
+  acceptShare(data: ColorsSettingsModel): void {
+    Player.Themed.ColorsModule = data;
 
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }
@@ -62,7 +62,7 @@ export class ShareModule extends BaseModule {
   share(): void {
     sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, 'Possessive', false)} Themed theme!`);
 
-    const packet = <ServerChatRoomMessage>{
+    const packet = <ServerChatRoomMessage><unknown>{
       Type: 'Hidden',
       Content: 'ThemedTheme',
       Sender: Player.MemberNumber,

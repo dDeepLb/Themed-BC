@@ -2,8 +2,9 @@ import { BaseModule } from '../Base/BaseModule';
 import { Subscreen } from '../Base/SettingDefinitions';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { GuiIntegration } from '../Screens/Integration';
+import { mergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
-import { _Style } from '../Utilities/Style';
+import { BcStyle } from '../Utilities/Style';
 
 export class IntegrationModule extends BaseModule {
   get settingsScreen(): Subscreen | null {
@@ -12,6 +13,10 @@ export class IntegrationModule extends BaseModule {
 
   get settings(): IntegrationSettingsModel {
     return super.settings as IntegrationSettingsModel;
+  }
+
+  set settings(val) {
+    super.settings = val;
   }
 
   get defaultSettings() {
@@ -28,12 +33,13 @@ export class IntegrationModule extends BaseModule {
   }
 
   Load(): void {
+    this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
     hookFunction(
       'ChatRoomSync',
       HookPriority.Observe,
       (args, next) => {
         next(args);
-        _Style.reloadAll();
+        BcStyle.reloadAll();
       },
       ModuleCategory.Integration
     );

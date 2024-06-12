@@ -4,7 +4,6 @@ import { GUI } from '../Base/SettingUtils';
 import { GlobalModule } from '../Modules/Global';
 import { getText } from '../Translation';
 import { ModVersion } from '../Utilities/ModDefinition';
-import { _Style } from '../Utilities/Style';
 import { GuiReset } from './Reset';
 import { GuiSupport } from './Support';
 
@@ -31,8 +30,8 @@ export class MainMenu extends GuiSubscreen {
   }
 
   Run() {
-    let tmp = GuiSubscreen.START_X;
-    var prev = MainCanvas.textAlign;
+    const tmp = GuiSubscreen.START_X;
+    const prev = MainCanvas.textAlign;
 
     GuiSubscreen.START_X = 550;
     MainCanvas.textAlign = 'left';
@@ -83,7 +82,7 @@ export class MainMenu extends GuiSubscreen {
   Click() {
     if (MouseIn(1815, 75, 90, 90)) return this.Exit();
 
-    let tmp = GuiSubscreen.START_X;
+    const tmp = GuiSubscreen.START_X;
     GuiSubscreen.START_X = 550;
     let i = 0;
     for (const screen of this.subscreens) {

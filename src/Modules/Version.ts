@@ -1,11 +1,9 @@
 import { BaseModule } from '../Base/BaseModule';
+import Changelog from '../Static/HTML/Changelog.html';
 import { PlayerStorage } from '../Utilities/Data';
 import { ModName, ModVersion } from '../Utilities/ModDefinition';
 import { sendLocalSmart } from '../Utilities/Other';
-import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
-import { _Style } from '../Utilities/Style';
-import { GlobalModule } from './Global';
-import Changelog from '../Static/HTML/Changelog.html';
+import { HookPriority, ModuleCategory, hookFunction } from '../Utilities/SDK';
 
 export class VersionModule extends BaseModule {
   static isItNewVersion: boolean = false;
@@ -59,12 +57,12 @@ export class VersionModule extends BaseModule {
   }
 
   static checkIfNewVersion() {
-    let LoadedVersion = VersionModule.loadVersion();
+    const LoadedVersion = VersionModule.loadVersion();
     if (VersionModule.isNewVersion(LoadedVersion, ModVersion)) {
       VersionModule.isItNewVersion = true;
     }
     VersionModule.saveVersion();
   }
 
-  Run(): void {}
+  Run(): void { }
 }
