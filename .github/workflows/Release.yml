@@ -28,10 +28,10 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Build project
-        run: npm run build --if-present
+        run: pnpm run build --if-present
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.8
