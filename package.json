@@ -1,6 +1,6 @@
 {
   "name": "themed-bc",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Bondage Club now with themes!",
   "main": "dist/themed.js",
   "scripts": {
