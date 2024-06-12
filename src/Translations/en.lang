@@ -26,6 +26,8 @@ settings.setting.doUseFlatColor.name = Use flat color:
 settings.setting.doUseFlatColor.desc = Uses flat color in settings instead of coloring sheet.
 settings.setting.doShowLocaleTime.name = Enable locale-based time format:
 settings.setting.doShowLocaleTime.desc = Displays time according to your PC's locale settings. Like 20:25 or 08:25 PM.
+settings.setting.doIndicateCharacterAbsence.name = Enable indication when character is absent:
+settings.setting.doIndicateCharacterAbsence.desc = Indicates that character is not in chatroom. For example when changing someone's clothes and they leave or disconnect.
 settings.setting.doShowNewVersionMessage.name = Enable new version message:
 settings.setting.doShowNewVersionMessage.desc = Show message about new version of Themed, when it's out.
 
