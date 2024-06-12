@@ -53,11 +53,14 @@ export class GlobalModule extends BaseModule {
       'DialogDraw',
       HookPriority.Observe,
       (args: Parameters<typeof DialogDraw>, next: (args: Parameters<typeof DialogDraw>) => ReturnType<typeof DialogDraw>) => {
+        if (!this.settings.themedEnabled) return next(args);
         if (!this.settings.doIndicateCharacterAbsence) return next(args);
         if (!(CurrentScreen == 'ChatRoom')) return next(args);
+        if (!CurrentCharacter) return next(args);
 
         next(args);
 
+        if (CurrentCharacter === null) return;
         if (CurrentCharacter.IsPlayer()) return;
         if (ChatRoomCharacter.includes(CurrentCharacter)) {
           if (GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
@@ -84,8 +87,6 @@ export class GlobalModule extends BaseModule {
 
           DrawImageEx('Icons/Warning.svg', MainCanvas, 500 + 125, 125, { Width: 250, Height: 250, HexColor: '#ff0000', FullAlpha: true });
         }
-
-
       },
       ModuleCategory.Global
     );
@@ -94,11 +95,15 @@ export class GlobalModule extends BaseModule {
       'AppearanceRun',
       HookPriority.Observe,
       (args: Parameters<typeof AppearanceRun>, next: (args: Parameters<typeof AppearanceRun>) => ReturnType<typeof AppearanceRun>) => {
+        if (!this.settings.themedEnabled) return next(args);
         if (!this.settings.doIndicateCharacterAbsence) return next(args);
         if (!(CurrentScreen == 'Appearance')) return next(args);
+        if (!CharacterAppearanceSelection) return next(args);
 
         next(args);
 
+        if (CharacterAppearanceSelection === null) return;
+        if (CharacterAppearanceSelection.IsPlayer()) return;
         if (ChatRoomCharacter.includes(CharacterAppearanceSelection)) {
           if (GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
             CharacterAppearanceSelection.Canvas.getContext('2d').globalAlpha = 1.0;
@@ -135,7 +140,6 @@ export class GlobalModule extends BaseModule {
         Character.filter(character => GlobalModule.transparentCharacters?.includes(character.MemberNumber));
 
         return next(args);
-
       },
       ModuleCategory.Global
     );
