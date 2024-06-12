@@ -1,4 +1,10 @@
-let cachedImages = {};
+let cachedImageData: {
+  [index: string]: ImageData;
+} = {};
+
+let cachedBase64Data: {
+  [index: string]: string;
+} = {};
 
 export const _Image = {
   doNotDrawImageFolders: [
@@ -52,17 +58,17 @@ export const _Image = {
     'Assets/Female3DCG/ItemMisc/Preview/Best Friend Timer Padlock.png'
   ],
 
-  getColorized(source: string, hexColor: string) {
+  getColorized(source: string, hexColor: string): ImageData | undefined {
     if (typeof source != 'string') return;
     const img = DrawGetImage(source);
 
-    if (_Image.getCache(`${source}&${hexColor}`)) {
-      return _Image.getCache(`${source}&${hexColor}`);
+    if (_Image.getImageDataCache(`${source}&${hexColor}`)) {
+      return _Image.getImageDataCache(`${source}&${hexColor}`);
     }
 
     try {
-      if (!img.complete) return false;
-      if (!img.naturalWidth) return false;
+      if (!img.complete) return undefined;
+      if (!img.naturalWidth) return undefined;
 
       const width = img.width;
       const height = img.height;
@@ -76,21 +82,26 @@ export const _Image = {
 
       const colorizedData = _Image.colorize(imageData, hexColor);
 
-      _Image.setCache(`${source}&${hexColor}`, colorizedData);
+      _Image.setImageDataCache(`${source}&${hexColor}`, colorizedData);
 
       return colorizedData;
     } catch (e) {
-      return false;
+      return undefined;
     }
   },
 
-  turnToBase64(imageData: ImageData) {
+  turnToBase64(imageData: ImageData, cacheKey: string) {
+    if (_Image.getBase64DataCache(`${cacheKey}`)) return _Image.getBase64DataCache(`${cacheKey}`);
     const canvas = document.createElement('canvas');
     canvas.width = imageData.width;
     canvas.height = imageData.height;
     const ctx = canvas.getContext('2d');
     ctx.putImageData(imageData, 0, 0);
-    return canvas.toDataURL('image/png');
+    const base64Data = canvas.toDataURL('image/png');
+    canvas.remove();
+    _Image.setBase64DataCache(cacheKey, base64Data);
+
+    return base64Data;
   },
 
   colorize(imageData: ImageData, hexColor: string) {
@@ -127,16 +138,25 @@ export const _Image = {
     return !skipDrawing;
   },
 
-  setCache(key: string, data: ImageData): void {
-    cachedImages[key] = data;
+  setImageDataCache(key: string, data: ImageData): void {
+    cachedImageData[key] = data;
   },
 
-  getCache(key: string): ImageData {
-    return cachedImages[key];
+  getImageDataCache(key: string): ImageData {
+    return cachedImageData[key];
+  },
+
+  setBase64DataCache(key: string, data: string): void {
+    cachedBase64Data[key] = data;
+  },
+
+  getBase64DataCache(key: string): string {
+    return cachedBase64Data[key];
   },
 
   clearCache(): void {
-    cachedImages = {};
+    cachedImageData = {};
+    cachedBase64Data = {};
   },
 };
 

@@ -207,7 +207,7 @@ export class GuiRedrawModule extends BaseModule {
 
         if (!colorizedImage) return next(args);
 
-        const imageSource = _Image.turnToBase64(colorizedImage);
+        const imageSource = _Image.turnToBase64(colorizedImage, `${Source}${args[4].HexColor}`);
         next([imageSource ?? Source, Canvas, X, Y, Options]);
       }, ModuleCategory.GuiRedraw);
 
