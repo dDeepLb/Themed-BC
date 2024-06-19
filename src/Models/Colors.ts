@@ -11,9 +11,12 @@ export type Colors = {
   elementBackground: string; // Buttons and HTML Elements
   elementBackgroundHover: string;
   elementBackgroundDisabled: string;
-  elementHoverHint: string;
-  icon: string;
   elementBorder: string;
   elementBorderHover: string;
+  // elementBorderDisabled: string;
+  elementHint: string;
   text: string;
+  icon: string;
+  // iconHover: string;
+  // iconDisabled: string;
 };

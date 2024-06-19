@@ -12,12 +12,17 @@ export const colors: Colors = {
   elementBackground: '',
   elementBackgroundHover: '',
   elementBackgroundDisabled: '',
-  elementHoverHint: '',
+  elementHint: '',
   elementBorder: '',
   elementBorderHover: '',
+  // elementBorderDisabled: '',
   text: '',
-  icon: ''
+  icon: '',
+  // iconHover: '',
+  // iconDisabled: '',
 };
+
+export const isBlack = (color: string) => _Color.getComputed(color) === 'rgb(0, 0, 0)';
 
 let cachedColors = {};
 
@@ -84,7 +89,6 @@ export const _Color = {
       lightColor.r = Math.min(lightColor.r + 30, 255);
       lightColor.g = Math.min(lightColor.g + 30, 255);
       lightColor.b = Math.min(lightColor.b + 30, 255);
-      lightColor.a = lightColor.a;
     }
 
     // Convert the new RGB values back to a hex string and cache it
@@ -209,7 +213,7 @@ export const _Color = {
     colors.elementBackground = _Color.lighten(primaryColor, 10);
     colors.elementBackgroundDisabled = primaryColor;
     colors.elementBackgroundHover = accentColor;
-    colors.elementHoverHint = _Color.lighten(colors.elementBackground, 20);
+    colors.elementHint = _Color.lighten(colors.elementBackground, 20);
     colors.elementBorder = accentColor;
     colors.elementBorderHover = _Color.lighten(accentColor, 20);
     colors.text = textColor;

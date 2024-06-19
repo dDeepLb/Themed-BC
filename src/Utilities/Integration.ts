@@ -34,7 +34,7 @@ export function changeMbsColors() {
       buttonColor: colors.elementBackground,
       buttonHoverColor: colors.elementBackgroundHover,
       borderColor: colors.elementBorder,
-      tooltipColor: colors.elementHoverHint,
+      tooltipColor: colors.elementHint,
       textColor: colors.text
     });
   }
