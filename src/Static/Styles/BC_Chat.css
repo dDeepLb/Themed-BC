@@ -4,12 +4,6 @@
   color: var(--text);
   border-color: var(--elementBorder);
 
-  ~#InputChat {
-    background-color: var(--background);
-    color: var(--text);
-    border-color: var(--elementBorder);
-  }
-
   .ChatMessageName {
     text-shadow: 0 0 0.12em var(--textShadow);
   }
@@ -18,17 +12,48 @@
     border-bottom: none;
   }
 
+  .ChatMessageActivity,
+  .ChatMessageAction,
+  .ChatMessageEmote {
+    --base-color: var(--background);
+  }
+
   .chat-room-sep {
     --base-color: var(--background) !important;
     border-bottom: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;
+    border-top: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;
   }
 
   .chat-room-sep-collapse {
-    border-right: min(0.4vh, 0.2vw) var(--elementBorder) solid;
+    border-right: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;
     color: var(--text);
   }
 
   .chat-room-sep-header {
     color: var(--text);
+  }
+
+  ~#chat-room-bot {
+    --button-color: var(--elementBackground);
+    background-color: var(--background);
+    border-color: rgba(0, 0, 0, 0.25);
+    color: var(--text);
+
+    &:has(#InputChat:focus) {
+      outline: 2px solid var(--elementBackgroundHover);
+      box-shadow: 0 0 0 3px var(--background);
+    }
+
+    #InputChat {
+      background-color: var(--background);
+      color: var(--text);
+      border-color: var(--elementBorder);
+      outline: var(--elementBorder) solid 1px;
+    }
+
+    #chat-room-buttons-collapse:hover,
+    .chat-room-button:hover:before {
+      background-color: var(--elementBackgroundHover) !important;
+    }
   }
 }
