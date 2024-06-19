@@ -14,3 +14,11 @@ textarea:focus,
 input:focus {
   outline: var(--elementBorder) solid 1px;
 }
+
+.button-touch,
+.button-touch:before,
+.button:hover {
+  background-color: var(--elementBackgroundHover);
+  border-color: var(--elementBorderHover);
+  color: var(--text);
+}
