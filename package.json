@@ -2,9 +2,10 @@
   "name": "themed-bc",
   "version": "1.3.2",
   "description": "Bondage Club now with themes!",
-  "main": "dist/themed.js",
+  "private": true,
   "scripts": {
-    "build": "node build.prod.mjs"
+    "build": "node build.mjs",
+    "dev": "node build.mjs --dev"
   },
   "repository": {
     "type": "git",
