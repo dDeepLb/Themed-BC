@@ -1,13 +1,11 @@
-import { DebugMode, ModName } from '../Utilities/ModDefinition';
 import { MainMenu } from '../Screens/MainMenu';
+import ButtonIcon from '../Static/Icons/IconThemed.png';
 import { getText } from '../Translation';
-import { RibbonMenu } from '../Utilities/RibbonMenu';
-import { hookFunction, HookPriority } from '../Utilities/SDK';
+import { DebugMode } from '../Utilities/ModDefinition';
 import { BaseModule } from './BaseModule';
 import { GuiSubscreen } from './BaseSetting';
 import { modules } from './Modules';
 import { setSubscreen, SETTING_NAME_PREFIX } from './SettingDefinitions';
-import ButtonIcon from '../Static/Icons/IconThemed.png';
 
 export class GUI extends BaseModule {
   static instance: GUI | null = null;
@@ -50,7 +48,7 @@ export class GUI extends BaseModule {
     }
 
     // Get BC to render the new screen
-    PreferenceSubscreen = subscreenName as PreferenceSubscreenName;
+    PreferenceSubscreen = subscreenName as PreferenceSubscreenName || 'Extensions';
   }
 
   get currentCharacter(): Character {
@@ -82,48 +80,32 @@ export class GUI extends BaseModule {
     }
 
     this._mainMenu.subscreens = this._subscreens;
-
-    const modIndex = RibbonMenu.getModIndex(ModName);
-    const modYPos = RibbonMenu.getYPos(modIndex);
-
-    hookFunction('PreferenceRun', HookPriority.OverrideBehavior, (args, next) => {
-      if (this._currentSubscreen) {
-        MainCanvas.textAlign = 'left';
-        this._currentSubscreen.Run();
-        MainCanvas.textAlign = 'center';
-
-        this.drawDebug();
-
-        return;
-      }
-
-      next(args);
-
-      RibbonMenu.drawModButton(modIndex, () => {
-        DrawButton(1815, modYPos, 90, 90, '', 'White', '', getText('infosheet.button_popup'));
-        DrawImageResize(ButtonIcon, 1815 + 2, modYPos + 2, 85, 85);
-      });
-    });
-
-    hookFunction('PreferenceClick', HookPriority.OverrideBehavior, (args, next) => {
-      if (this._currentSubscreen) {
-        this._currentSubscreen.Click();
-        return;
-      }
-
-      next(args);
-
-      RibbonMenu.handleModClick(modIndex, (modIndex) => {
+    PreferenceRegisterExtensionSetting({
+      Identifier: 'TMD',
+      ButtonText: getText('infosheet.button_text'),
+      Image: ButtonIcon,
+      load: () => {
         setSubscreen(new MainMenu(this));
-      });
-    });
-
-    hookFunction('InformationSheetExit', HookPriority.OverrideBehavior, (args, next) => {
-      if (this._currentSubscreen) {
-        this._currentSubscreen.Exit();
-        return;
-      }
-      return next(args);
+      },
+      run: () => {
+        if (this._currentSubscreen) {
+          MainCanvas.textAlign = 'left';
+          this._currentSubscreen.Run();
+          MainCanvas.textAlign = 'center';
+  
+          this.drawDebug();
+        }
+      },
+      click: () => {
+        if (this._currentSubscreen) {
+          this._currentSubscreen.Click();
+        }
+      },
+      exit: () => {
+        if (this._currentSubscreen) {
+          this._currentSubscreen.Exit();
+        }
+      },
     });
   }
 

@@ -112,5 +112,6 @@ export class MainMenu extends GuiSubscreen {
     CharacterLoadCanvas(Player);
 
     this.setSubscreen(null);
+    PreferenceSubscreenExtensionsClear();
   }
 }

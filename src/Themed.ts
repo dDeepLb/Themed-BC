@@ -34,12 +34,10 @@ function initWait() {
   }
 }
 
-export function init() {
+export async function init() {
   if (window.ThemedLoaded) return;
 
-  Localization.load();
-
-  RibbonMenu.registerMod(ModName);
+  await Localization.load();
 
   dataTake();
 

@@ -1,5 +1,5 @@
 # Mod Button
-infosheet.button_popup = Themed Settings
+infosheet.button_text = Themed
 
 # Modal
 modal.button.accept = Accept
