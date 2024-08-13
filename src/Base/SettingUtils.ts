@@ -1,6 +1,7 @@
 import { MainMenu } from '../Screens/MainMenu';
 import { getText } from '../Translation';
 import { DebugMode } from '../Utilities/ModDefinition';
+import { hookFunction, HookPriority } from '../Utilities/SDK';
 import { BaseModule } from './BaseModule';
 import { GuiSubscreen } from './BaseSetting';
 import { modules } from './Modules';
@@ -105,6 +106,15 @@ export class GUI extends BaseModule {
           this._currentSubscreen.Exit();
         }
       },
+    });
+
+    hookFunction('DrawButton', HookPriority.Observe, (args: Parameters<typeof DrawButton>, next: (args: Parameters<typeof DrawButton>) => ReturnType<typeof DrawButton>) => {
+      const [x, y, h, w, text, color, icon] = args;
+      if (icon !== `${PUBLIC_URL}/icons/mod.png`) return next(args);
+
+      next([x, y, h, w, text, color, null]);
+      
+      DrawImageResize(icon, x + 2, y + 2, 86, 86);
     });
   }
 
