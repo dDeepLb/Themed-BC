@@ -58,7 +58,6 @@ export class MainMenu extends GuiSubscreen {
       DrawImageResize(screen.icon, GuiSubscreen.START_X + 430 * PX + 10, 190 + 120 * PY + 10, 70, 70);
 
       MainCanvas.textAlign = 'left';
-      //@ts-ignore
       DrawTextFit(getText(`mainmenu.button.${screen.name}`), GuiSubscreen.START_X + 100 + 430 * PX, 235 + 120 * PY, 340, 'Black');
       MainCanvas.textAlign = 'center';
 
@@ -99,9 +98,6 @@ export class MainMenu extends GuiSubscreen {
       i++;
     }
     GuiSubscreen.START_X = tmp;
-
-    //if (MouseIn(1500, 630, 405, 80)) this.setSubscreen(new GuiReset(getModule<GlobalModule>("GlobalModule")));
-    //if (MouseIn(1500, 730, 400, 80)) window.open("https://github.com/dDeepLb/Themed-BC/wiki/", "_blank");
 
     if (MouseIn(1500, 730, 405, 80)) this.setSubscreen(new GuiReset(getModule<GlobalModule>('GlobalModule')));
     if (MouseIn(1500, 830, 400, 80)) this.setSubscreen(new GuiSupport(getModule<GlobalModule>('GlobalModule')));

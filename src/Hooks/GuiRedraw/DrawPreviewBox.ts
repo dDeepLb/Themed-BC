@@ -11,8 +11,8 @@ export function hookDrawPreviewBox() {
 
       const [X, Y, Path, Description, Options] = args;
 
-      const { Vibrating, Disabled, Icons } = Options || {};
-      let { Background, Foreground, Border, Hover, Width, Height } = Options || {};
+      const { Vibrating, Background, Icons } = Options || {};
+      let { Foreground, Border, Hover, Width, Height } = Options || {};
       Width = Width || DrawAssetPreviewDefaultWidth;
       Height = Height || DrawAssetPreviewDefaultHeight;
 

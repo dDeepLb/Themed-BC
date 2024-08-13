@@ -99,10 +99,11 @@ export abstract class GuiSubscreen {
     this.multipageStructure.forEach((s) =>
       s.forEach((item) => {
         switch (item.type) {
-          case 'text':
+          case 'text': {
             const input = ElementCreateInput(item.id, 'text', item.setting(), '255');
             input.setAttribute('autocomplete', 'off');
             break;
+          }
           case 'number':
             ElementCreateInput(item.id, 'number', item.setting(), '255');
             break;
@@ -124,7 +125,6 @@ export abstract class GuiSubscreen {
     MainCanvas.textAlign = 'left';
 
     DrawCharacter(Player, 50, 50, 0.9, false);
-    //@ts-ignore
     DrawText(getText(`${this.name}.title`), GuiSubscreen.START_X, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', '#D7F6E9');
     DrawButton(1815, 75, 90, 90, '', 'White', 'Icons/Exit.png', 'Main Menu');
 
@@ -136,7 +136,7 @@ export abstract class GuiSubscreen {
 
     this.hideElements();
 
-    this.structure.forEach((item, ix, arr) => {
+    this.structure.forEach((item, ix) => {
       switch (item.type) {
         case 'checkbox':
           this.drawCheckbox(item.label, item.description, item.setting(), ix, item.disabled);
@@ -169,7 +169,7 @@ export abstract class GuiSubscreen {
     if (MouseIn(1815, 75, 90, 90)) return this.Exit();
     if (this.multipageStructure.length > 1) PreferencePageChangeClick(1595, 75, this.multipageStructure.length);
 
-    this.structure.forEach((item, ix, arr) => {
+    this.structure.forEach((item, ix) => {
       switch (item.type) {
         case 'checkbox':
           if (MouseIn(this.getXPos(ix) + 600, this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
@@ -193,8 +193,8 @@ export abstract class GuiSubscreen {
           case 'number':
             if (!CommonIsNumeric(ElementValue(item.id))) {
               ElementRemove(item.id);
-              break;
             }
+            break;
           case 'text':
           case 'color':
             item.setSetting(ElementValue(item.id));
