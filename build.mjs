@@ -9,7 +9,7 @@ import time from 'esbuild-plugin-time';
   const devPath = `http://${HOST}:${PORT}`;
   const prodPath = 'https://ddeeplb.github.io/Themed-BC';
   const isDev = process.argv.includes('--dev');
-  const PUBLIC_URL = isDev ? devPath : prodPath;
+  const PUBLIC_URL = `${isDev ? devPath : prodPath}/public`;
 
   const ctx = await (isDev ? context : build)({
     entryPoints: ['./src/Themed.ts'],
@@ -22,13 +22,12 @@ import time from 'esbuild-plugin-time';
     loader: {
       '.html': 'text',
       '.css': 'text',
-      '.png': 'dataurl'
     },
     treeShaking: true,
-    define: { serverUrl: JSON.stringify(PUBLIC_URL) },
+    define: { PUBLIC_URL: JSON.stringify(PUBLIC_URL) },
     plugins: [
       copy({
-        source: ['./src/Translations'],
+        source: ['./public/'],
         target: './dist/',
         copyWithFolder: true
       }),

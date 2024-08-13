@@ -1,5 +1,4 @@
 import { BaseModule } from '../Base/BaseModule';
-import Changelog from '../Static/HTML/Changelog.html';
 import { PlayerStorage } from '../Utilities/Data';
 import { ModName, ModVersion } from '../Utilities/ModDefinition';
 import { sendLocalSmart } from '../Utilities/Other';
@@ -37,9 +36,10 @@ export class VersionModule extends BaseModule {
     return false;
   }
 
-  static sendNewVersionMessage() {
+  static async sendNewVersionMessage() {
     if (PlayerStorage().GlobalModule.doShowNewVersionMessage && VersionModule.isItNewVersion) {
-      sendLocalSmart('ThemedNewVersion', Changelog);
+      const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`).then((res) => res.text());
+      sendLocalSmart('ThemedNewVersion', changelog);
     }
   }
 

@@ -1,5 +1,4 @@
 import { MainMenu } from '../Screens/MainMenu';
-import ButtonIcon from '../Static/Icons/IconThemed.png';
 import { getText } from '../Translation';
 import { DebugMode } from '../Utilities/ModDefinition';
 import { BaseModule } from './BaseModule';
@@ -83,7 +82,7 @@ export class GUI extends BaseModule {
     PreferenceRegisterExtensionSetting({
       Identifier: 'TMD',
       ButtonText: getText('infosheet.button_text'),
-      Image: ButtonIcon,
+      Image: `${PUBLIC_URL}/icons/mod.png`,
       load: () => {
         setSubscreen(new MainMenu(this));
       },
