@@ -8,7 +8,7 @@ export type Button = {
   label: string;
   color: string;
   image: string;
-  disabled: boolean;
+  disabled?: boolean;
   callback(): void;
 };
 
@@ -26,7 +26,7 @@ export type Input = {
   id: string;
   label: string;
   description: string;
-  disabled: boolean;
+  disabled?: boolean;
   setting(): any;
   setSetting(val: any): void;
 };
@@ -35,5 +35,5 @@ export type Label = {
   type: 'label';
   label: string;
   description: string;
-  disabled: boolean;
+  disabled?: boolean;
 };
