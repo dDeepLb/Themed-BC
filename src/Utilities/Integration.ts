@@ -1,12 +1,14 @@
 import { doRedraw } from '../Modules/GuiRedraw';
-import { colors } from './Color';
+import { plainColors } from './Color';
 import { PlayerStorage } from './Data';
 
 export function changeModColors() {
   if (doRedraw()) {
     changeBctColors();
+    changeMbsColors();
   } else {
     resetBctColors();
+    resetMbsColors();
   }
 }
 
@@ -26,7 +28,7 @@ function resetBctColors() {
   }
 }
 
-export function changeMbsColors() {
+function changeMbsColors() {
   if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
     if (!PlayerStorage().IntegrationModule.MBS) return;
     return mbs.css.setStyle({
@@ -40,7 +42,7 @@ export function changeMbsColors() {
   }
 }
 
-export function resetMbsColors() {
+function resetMbsColors() {
   if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
     if (!PlayerStorage().IntegrationModule.MBS)
       mbs.css.setStyle({
