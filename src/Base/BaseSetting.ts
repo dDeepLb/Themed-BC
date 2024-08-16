@@ -172,7 +172,7 @@ export abstract class GuiSubscreen {
     this.structure.forEach((item, ix) => {
       switch (item.type) {
         case 'checkbox':
-          if (MouseIn(this.getXPos(ix) + 600, this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
+          if (MouseIn(this.getXPos(ix), this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
             item.setSetting(!item.setting());
           }
           break;
@@ -222,9 +222,11 @@ export abstract class GuiSubscreen {
   }
 
   drawCheckbox(label: string, description: string, value: boolean, order: number, disabled: boolean = false) {
-    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
-    DrawCheckbox(this.getXPos(order) + 600, this.getYPos(order) - 32, 64, 64, '', value ?? false, disabled);
+    const checkboxSize = 64;
+    const labelOffset = checkboxSize + 30;
+    const isHovering = MouseIn(this.getXPos(order) + labelOffset, this.getYPos(order) - 32, 600, checkboxSize);
+    DrawTextFit(getText(label), this.getXPos(order) + labelOffset, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
+    DrawCheckbox(this.getXPos(order), this.getYPos(order) - 32, checkboxSize, checkboxSize, '', value ?? false, disabled);
     if (isHovering) this.tooltip(getText(description));
   }
 
@@ -246,11 +248,11 @@ export abstract class GuiSubscreen {
   }
 
   elementPosition(elementId: string, label: string, description: string, order: number, disabled: boolean = false) {
-    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
-    ElementPosition(elementId, this.getXPos(order) + 750 + 225, this.getYPos(order), 800, 64);
+    const isHovering = MouseIn(this.getXPos(order) + 450, this.getYPos(order) - 32, 600, 64);
+    DrawTextFit(getText(label), this.getXPos(order) + 450, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
+    ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400, 64);
     if (disabled) ElementSetAttribute(elementId, 'disabled', 'true');
-    if (!disabled) document.getElementById(elementId)?.removeAttribute('disabled');
+    if (!disabled) ElementRemoveAttribute(elementId, 'disabled');
     if (isHovering) this.tooltip(getText(description));
   }
 
