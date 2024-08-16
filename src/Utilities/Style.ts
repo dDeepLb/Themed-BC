@@ -1,4 +1,4 @@
-import { _Color, colors } from './Color';
+import { _Color, plainColors, specialColors } from './Color';
 import { PlayerStorage } from './Data';
 
 const styles = {
@@ -96,28 +96,22 @@ export const BcStyle = {
 };
 
 export function composeRoot() {
+  let genedColors = '';
+
+  Object.keys(plainColors).forEach((key) => {
+    genedColors += `--${key}: ${plainColors[key]};`;
+  });
+  Object.keys(specialColors).forEach((key) => {
+    genedColors += `--${key}: ${specialColors[key][0]};`;
+    genedColors += `--${key}Hover: ${specialColors[key][1]};`;
+  });
+  
   return /*css*/ `
     :root {
-      /*accent color*/
-      --accent: ${colors?.elementBorder || '#440171'};
-      /*background*/
-      --background: ${colors?.mainBackground || '#202020'}; 
-      /*inputs, buttons and shit*/
-      --elementBackground: ${colors?.elementBackground || '#303030'}; 
-       /*elements that should stand out, like thing on slider or button when hovered over*/
-      --elementBackgroundHover: ${colors?.elementBackgroundHover || '#57276e'};
-      /*borders for html and game drawn elements*/
-      --elementBorder: var(--accent);
-      /*text obviously*/
-      --text: ${colors?.text || '#eeeeee'}; 
-      /*obviously as well*/
-      --textShadow: ${'#eeeeee80'};
+      ${genedColors}
 
-      --scrollbar: ${_Color.darken(colors?.elementBackground, 20) || '#454545'};
-
-      --friendlistBackground: ${colors?.elementBackground + '80' || '#30303080'};
-      
-      --codeBackground: ${_Color.lighten(colors?.elementBackground, 40) + '20' || '#aaaaaa20'};
+      --scrollbar: ${_Color.darken(plainColors?.element, 20) || '#454545'};
+      --friendlistBackground: ${plainColors?.element + '80' || '#30303080'};
     }
     `;
 }
