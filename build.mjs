@@ -24,6 +24,7 @@ import time from 'esbuild-plugin-time';
       '.css': 'text',
     },
     treeShaking: true,
+    keepNames: true,
     define: { PUBLIC_URL: JSON.stringify(PUBLIC_URL) },
     plugins: [
       copy({
