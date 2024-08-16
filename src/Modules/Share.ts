@@ -2,6 +2,7 @@ import { BaseModule } from '../Base/BaseModule';
 import { getModule } from '../Base/Modules';
 import { ColorsSettingsModel } from '../Models/Colors';
 import { getText } from '../Translation';
+import { dataStore } from '../Utilities/Data';
 import { sendAction, useLgcModal } from '../Utilities/Other';
 import { HookPriority, hookFunction } from '../Utilities/SDK';
 import { ColorsModule } from './Colors';
@@ -55,6 +56,7 @@ export class ShareModule extends BaseModule {
 
   acceptShare(data: ColorsSettingsModel): void {
     Player.Themed.ColorsModule = data;
+    dataStore();
 
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }
