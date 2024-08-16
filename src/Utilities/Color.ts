@@ -1,4 +1,5 @@
-import { Colors } from '../Models/Colors';
+import Color from 'color';
+import { ColorsModel } from '../Models/Colors';
 
 type RGBAColor = {
   r: number;
@@ -7,22 +8,28 @@ type RGBAColor = {
   a?: number;
 };
 
-export const colors: Colors = {
-  mainBackground: '',
-  elementBackground: '',
-  elementBackgroundHover: '',
-  elementBackgroundDisabled: '',
+export const plainColors: ColorsModel = {
+  main: '',
+  element: '',
+  elementHover: '',
+  elementDisabled: '',
   elementHint: '',
-  elementBorder: '',
-  elementBorderHover: '',
-  // elementBorderDisabled: '',
   text: '',
-  icon: '',
-  // iconHover: '',
-  // iconDisabled: '',
+  textShadow: '',
+  accent: '',
+  accentHover: '',
+  accentDisabled: '',
 };
 
-export const isBlack = (color: string) => _Color.getComputed(color) === 'rgb(0, 0, 0)';
+export const specialColors = {
+  equipped: ['', ''],
+  disabled: ['', ''],
+  crafted: ['', ''],
+  blocked: ['', ''],
+  limited: ['', ''],
+  allowed: ['', ''],
+  friendRoom: ['', ''],
+};
 
 let cachedColors = {};
 
@@ -203,21 +210,35 @@ export const _Color = {
   },
 
   composeRoot() {
-    const data = Player.Themed.ColorsModule;
+    const colorSettings = Player.Themed.ColorsModule;
+    const globalSettings = Player.Themed.GlobalModule;
 
-    const primaryColor = _Color.getHexComputed(data.primaryColor);
-    const accentColor = _Color.getHexComputed(data.accentColor);
-    const textColor = _Color.getHexComputed(data.textColor);
+    Object.keys(colorSettings.special).forEach((key) => {
+      const clr = Color(colorSettings.special[key]);
+      specialColors[key] = [clr.hex(), clr.lighten(0.2).hex()];
+    });
+    
+    if (globalSettings.doUseAdvancedColoring) {
+      Object.keys(colorSettings.advanced).forEach(key => {
+        plainColors[key] = colorSettings.advanced[key];
+      });
+    } else {
+      const primaryColor = _Color.getHexComputed(colorSettings.base.main);
+      const elementColor = _Color.lighten(primaryColor, 20);
+      const accentColor = _Color.getHexComputed(colorSettings.base.accent);
+      const textColor = _Color.getHexComputed(colorSettings.base.text);
 
-    colors.mainBackground = primaryColor;
-    colors.elementBackground = _Color.lighten(primaryColor, 10);
-    colors.elementBackgroundDisabled = primaryColor;
-    colors.elementBackgroundHover = accentColor;
-    colors.elementHint = _Color.lighten(colors.elementBackground, 20);
-    colors.elementBorder = accentColor;
-    colors.elementBorderHover = _Color.lighten(accentColor, 20);
-    colors.text = textColor;
-    colors.icon = accentColor;
+      plainColors.main = primaryColor;
+      plainColors.element = elementColor;
+      plainColors.elementHover = _Color.lighten(elementColor, 20);
+      plainColors.elementDisabled = _Color.darken(elementColor, 20);
+      plainColors.elementHint = _Color.lighten(elementColor, 20);
+      plainColors.text = textColor;
+      plainColors.accent = accentColor;
+      plainColors.accentHover = _Color.lighten(accentColor, 20);
+      plainColors.accentDisabled = _Color.darken(accentColor, 20);
+    }
+    plainColors.textShadow = _Color.getHexComputed('rgba(0,0,0,0.5)');
   },
 
   setCache(key: string, value: string) {
