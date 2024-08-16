@@ -1,22 +1,34 @@
 import { BaseSettingsModel } from './Global';
 
-export type ColorsSettingsModel = BaseSettingsModel & {
-  primaryColor: string;
-  textColor: string;
-  accentColor: string;
+export type ColorsSettingsModel = BaseSettingsModel &  {
+  base: BaseColors;
+  advanced: AdvancedColors;
+  special: SpecialColorsModel;
 };
 
-export type Colors = {
-  mainBackground: string;
-  elementBackground: string; // Buttons and HTML Elements
-  elementBackgroundHover: string;
-  elementBackgroundDisabled: string;
-  elementBorder: string;
-  elementBorderHover: string;
-  // elementBorderDisabled: string;
+export type BaseColors = Pick<ColorsModel, 'main' | 'text' | 'accent'>;
+
+export type AdvancedColors = Pick<ColorsModel, keyof ColorsModel>;
+
+export type ColorsModel = {
+  main: string;
+  accent: string;
+  accentHover: string;
+  accentDisabled: string;
+  element: string;
+  elementHover: string;
+  elementDisabled: string;
   elementHint: string;
   text: string;
-  icon: string;
-  // iconHover: string;
-  // iconDisabled: string;
+  textShadow: string;
+};
+
+export type SpecialColorsModel = {
+  equipped: string;
+  disabled: string;
+  crafted: string;
+  blocked: string;
+  limited: string;
+  allowed: string;
+  friendRoom: string;
 };
