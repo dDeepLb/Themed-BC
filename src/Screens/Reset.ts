@@ -18,7 +18,7 @@ export class GuiReset extends GuiSubscreen {
   private allowedConfirmTime: number | null = 0;
 
   Load() {
-    this.allowedConfirmTime = Date.now() + 10_000;
+    this.allowedConfirmTime = Date.now() + 5_000;
     super.Load();
   }
 
@@ -78,5 +78,6 @@ export class GuiReset extends GuiSubscreen {
     _Image.clearCache();
 
     this.setSubscreen(null);
+    PreferenceSubscreenExtensionsClear();
   }
 }
