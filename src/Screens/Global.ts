@@ -22,7 +22,7 @@ export class GuiGlobal extends GuiSubscreen {
         type: 'checkbox',
         label: `settings.setting.${key}.name`,
         description: `settings.setting.${key}.desc`,
-        setting: () => this.settings?.[key] ?? true,
+        setting: () => this.settings[key] ?? true,
         setSetting: (val) => (this.settings[key] = val)
       });
     });

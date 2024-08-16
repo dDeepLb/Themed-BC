@@ -30,7 +30,7 @@ export abstract class BaseModule {
   }
 
   get enabled(): boolean {
-    if (!Player?.Themed?.GlobalModule) return false;
+    if (!Player.Themed.GlobalModule) return false;
     return (
       Player.Themed.GlobalModule.themedEnabled &&
       this.settings.themedEnabled &&
@@ -47,7 +47,7 @@ export abstract class BaseModule {
     const defaults = this.defaultSettings;
     if (!storage || !defaults) return;
 
-    (<any>Player.Themed)[storage] = Object.assign(defaults, (<any>Player.Themed)[storage] ?? {});
+    Player.Themed[storage] = Object.assign(defaults, Player.Themed[storage] ?? {});
   }
 
   get defaultSettings(): BaseSettingsModel | null {
