@@ -48,12 +48,12 @@ export class GuiColors extends GuiSubscreen {
   }
 
   Run(): void {
-    DrawButton(1715, 75, 90, 90, '', 'White', 'Icons/Reset.png', getText('colors.button.change_input_type'));
+    DrawButton(1495, 75, 90, 90, '', 'White', 'Icons/Swap.png', getText('colors.button.change_input_type'));
     super.Run();
   }
 
   Click(): void {
-    if (MouseIn(1715, 75, 90, 90)) {
+    if (MouseIn(1495, 75, 90, 90)) {
       this.multipageStructure.forEach((page) => {
         page.forEach((elm) => {
           if (elm.type == 'color' || elm.type == 'text') {
@@ -68,6 +68,7 @@ export class GuiColors extends GuiSubscreen {
           }
         });
       });
+      return;
     }
 
     super.Click();
