@@ -3,7 +3,7 @@ import { BaseSettingsModel } from '../Models/Global';
 import { ColorsModule } from '../Modules/Colors';
 import { doRedraw } from '../Modules/GuiRedraw';
 import { getText } from '../Translation';
-import { colors } from '../Utilities/Color';
+import { plainColors } from '../Utilities/Color';
 import { conDebug } from '../Utilities/Console';
 import { dataStore } from '../Utilities/Data';
 import { BaseModule } from './BaseModule';
@@ -269,13 +269,13 @@ function drawTooltip(x: number, y: number, width: number, text: string, align: '
   canvas.textAlign = align;
   canvas.beginPath();
   canvas.rect(x, y, width, 65);
-  canvas.fillStyle = doRedraw() ? colors.elementBackground : '#FFFF88';
+  canvas.fillStyle = doRedraw() ? plainColors.element : '#FFFF88';
   canvas.fillRect(x, y, width, 65);
   canvas.fill();
   canvas.lineWidth = 2;
-  canvas.strokeStyle = doRedraw() ? colors.elementBorder : 'black';
+  canvas.strokeStyle = doRedraw() ? plainColors.accent : 'black';
   canvas.stroke();
   canvas.closePath();
-  DrawTextFit(text, align === 'left' ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? colors.text : 'black');
+  DrawTextFit(text, align === 'left' ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? plainColors.text : 'black');
   canvas.textAlign = bak;
 }

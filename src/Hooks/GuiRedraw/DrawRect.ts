@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, colors } from '../../Utilities/Color';
+import { _Color, plainColors } from '../../Utilities/Color';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
 export function hookDrawRect() {
@@ -21,19 +21,19 @@ export function hookDrawRect() {
       if (Color?.startsWith('%')) {
         switch (Color.substring(1).toLowerCase()) {
           case 'disabled':
-            drawRect(colors.elementBackgroundDisabled);
+            drawRect(plainColors.elementDisabled);
             break;
 
           case 'hover':
-            drawRect(colors.elementBackgroundHover);
+            drawRect(plainColors.elementHover);
             break;
 
           case 'background':
-            drawRect(colors.elementBackground);
+            drawRect(plainColors.element);
             break;
 
           case 'friendhint':
-            drawRect(colors.elementHint);
+            drawRect(plainColors.elementHint);
             break;
 
           default:
@@ -50,7 +50,7 @@ export function hookDrawRect() {
           case '#ffffff88':
           case '#ffffffcc':
           case '#d7f6e9': // LSCG Version Tooltip
-            drawRect(colors.elementBackground);
+            drawRect(plainColors.element);
             break;
 
           default:

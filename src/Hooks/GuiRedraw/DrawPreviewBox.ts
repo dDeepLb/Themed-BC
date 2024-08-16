@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { colors } from '../../Utilities/Color';
+import { plainColors } from '../../Utilities/Color';
 import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
 
 export function hookDrawPreviewBox() {
@@ -19,7 +19,7 @@ export function hookDrawPreviewBox() {
       const Padding = 2;
       const TextGutter = Description ? 44 : 0;
 
-      Foreground = colors.text;
+      Foreground = plainColors.text;
       Border = true;
       Hover = MouseHovering(X, Y, Width, Height);
 
@@ -48,7 +48,7 @@ export function hookDrawPreviewBox() {
 
       DrawRect(X, Y, Width, Height, Background);
       ControllerAddActiveArea(X, Y);
-      if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : colors.elementBorder);
+      if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? plainColors.accentHover : plainColors.accent);
       if (Path !== '') DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
       DrawPreviewIcons(Icons, X, Y);
       if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);

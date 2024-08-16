@@ -1,5 +1,6 @@
+import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, colors, isBlack } from '../../Utilities/Color';
+import { _Color, plainColors } from '../../Utilities/Color';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
 export function hookDrawText() {
@@ -9,11 +10,11 @@ export function hookDrawText() {
     (args: Parameters<typeof DrawText>, next: (args: Parameters<typeof DrawText>) => ReturnType<typeof DrawText>) => {
       if (!doRedraw()) return next(args);
 
-      if (isBlack(args[3])) {
-        args[3] = colors.text;
+      if (Color(args[3].toLowerCase()).isDark()) {
+        args[3] = plainColors.text;
         args[4] = '';
       } else {
-        args[3] = _Color.toDarkMode(args[3], colors.mainBackground);
+        args[3] = _Color.toDarkMode(args[3], plainColors.main);
         args[4] = '';
       }
 
