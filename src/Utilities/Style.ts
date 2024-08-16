@@ -1,26 +1,16 @@
-import BC_Chat from '../Static/Styles/BC_Chat.css';
-import BC_FriendList from '../Static/Styles/BC_FriendList.css';
-import BC_Inputs from '../Static/Styles/BC_Inputs.css';
-import BC_Other from '../Static/Styles/BC_Other.css';
-import FBC from '../Static/Styles/FBC.css';
-import FUSAM from '../Static/Styles/FUSAM.css';
-import TTS from '../Static/Styles/TTS.css';
-import Themed from '../Static/Styles/Themed.css';
 import { _Color, colors } from './Color';
 import { PlayerStorage } from './Data';
-import { changeMbsColors, resetMbsColors } from './Integration';
 
 const styles = {
   Root: composeRoot(),
-  Themed: Themed,
-  BC: BC_Inputs,
-  BC_Chat: BC_Chat,
-  BC_FriendList: BC_FriendList,
-  BC_Other: BC_Other,
-  FBC: FBC,
-  FUSAM: FUSAM,
-  TTS: TTS,
-  MBS: 'MBS'
+  Themed: '',
+  BC_Inputs: '',
+  BC_Chat: '',
+  BC_FriendList: '',
+  BC_Other: '',
+  FBC: '',
+  FUSAM: '',
+  TTS: '',
 };
 
 export const Style = {
@@ -46,53 +36,59 @@ export const Style = {
     Style.eject(styleId);
     Style.inject(styleId, styleSource);
   },
+
+  async fetch(link: string) {
+    return fetch(link).then((res) => res.text());
+  }
 };
 
 export const BcStyle = {
-  inject(id: keyof typeof styles | string) {
-    if (id == 'Root') updateRootStyle();
-    else if (id == 'MBS') {
-      changeMbsColors();
-    }
+  async inject(id: keyof typeof styles): Promise<void> {
 
-    const styleSource = styles[id];
     const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
 
     if (!isEnabled) return;
-    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root') return;
+    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root') return (() => {
+      styles[id] = '';
+    })();
+    const styleSource = await (async () => {
+      if (id === 'Root') return styles[id] = composeRoot();
+      if (styles[id]) {
+        return styles[id];
+      } else {
+        return styles[id] = await Style.fetch(`${PUBLIC_URL}/styles/${id}.css`);
+      }
+    })();
 
     Style.inject(id, styleSource);
   },
 
-  eject(id: keyof typeof styles | string) {
-    if (id == 'MBS') {
-      resetMbsColors();
-    }
+  eject(id: keyof typeof styles) {
 
     Style.eject(id);
   },
 
-  reload(id: keyof typeof styles | string) {
+  reload(id: keyof typeof styles) {
     BcStyle.eject(id);
     BcStyle.inject(id);
   },
 
   injectAll() {
-    const styleIDs = Object.keys(styles);
+    const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
       BcStyle.inject(id);
     });
   },
 
   ejectAll() {
-    const styleIDs = Object.keys(styles);
+    const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
       BcStyle.eject(id);
     });
   },
 
   reloadAll() {
-    const styleIDs = Object.keys(styles);
+    const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
       BcStyle.reload(id);
     });
@@ -124,8 +120,4 @@ export function composeRoot() {
       --codeBackground: ${_Color.lighten(colors?.elementBackground, 40) + '20' || '#aaaaaa20'};
     }
     `;
-}
-
-export function updateRootStyle() {
-  styles.Root = composeRoot();
 }
