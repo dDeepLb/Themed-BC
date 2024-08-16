@@ -4,7 +4,7 @@ import { GlobalSettingsModel } from '../Models/Global';
 
 export class GuiGlobal extends GuiSubscreen {
   get name(): string {
-    return 'Settings';
+    return 'Global';
   }
 
   get icon(): string {
