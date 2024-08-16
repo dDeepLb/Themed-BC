@@ -1,6 +1,8 @@
-import { Input, Setting } from '../../.types/setting';
+import { Setting } from '../../.types/setting';
 import { GuiSubscreen } from '../Base/BaseSetting';
+import { getModule } from '../Base/Modules';
 import { ColorsSettingsModel } from '../Models/Colors';
+import { ColorsModule } from '../Modules/Colors';
 import { getText } from '../Translation';
 
 export class GuiColors extends GuiSubscreen {
@@ -17,34 +19,27 @@ export class GuiColors extends GuiSubscreen {
   }
 
   get multipageStructure(): Setting[][] {
-    return [
-      [
-        <Input>{
-          type: 'color',
-          id: 'primaryColor',
-          label: 'colors.setting.primaryColor.name',
-          description: 'colors.setting.primaryColor.desc',
-          setting: () => this.settings?.primaryColor ?? '',
-          setSetting: (val) => (this.settings.primaryColor = val)
-        },
-        <Input>{
-          type: 'color',
-          id: 'accentColor',
-          label: 'colors.setting.accentColor.name',
-          description: 'colors.setting.accentColor.desc',
-          setting: () => this.settings?.accentColor ?? '',
-          setSetting: (val) => (this.settings.accentColor = val)
-        },
-        <Input>{
-          type: 'color',
-          id: 'textColor',
-          label: 'colors.setting.textColor.name',
-          description: 'colors.setting.textColor.desc',
-          setting: () => this.settings?.textColor ?? '',
-          setSetting: (val) => (this.settings.textColor = val)
-        }
-      ]
-    ];
+    const defaultSettings = getModule<ColorsModule>('ColorsModule').defaultSettings;
+    const isAdvMode = Player.Themed.GlobalModule.doUseAdvancedColoring;
+    const settings = isAdvMode ? this.settings.advanced : this.settings.base;
+    const modeDefaults = isAdvMode ? defaultSettings.advanced : defaultSettings.base;
+
+    return [Object.entries(settings).map(([key, value]) => ({
+      type: 'color',
+      id: key,
+      label: `settings.setting.${key}.name`,
+      description: `settings.setting.${key}.desc`,
+      setting: () => value ?? modeDefaults[key],
+      setSetting: (val) => (settings[key] = val)
+    })),
+    Object.entries(this.settings.special).map(([key, value]) => ({
+      type: 'color',
+      id: key,
+      label: `settings.setting.${key}.name`,
+      description: `settings.setting.${key}.desc`,
+      setting: () => value ?? defaultSettings.special[key],
+      setSetting: (val) => (settings[key] = val)
+    }))];
   }
 
   Run(): void {
