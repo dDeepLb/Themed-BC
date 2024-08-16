@@ -26,6 +26,7 @@ export class GlobalModule extends BaseModule {
       themedEnabled: true,
       doVanillaGuiOverhaul: true,
       doUseAdvancedColoring: false,
+      doUseFlatColor: false,
       doShowLocaleTime: true,
       doIndicateCharacterAbsence: true,
       doShowNewVersionMessage: true
