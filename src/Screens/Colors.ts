@@ -38,7 +38,7 @@ export class GuiColors extends GuiSubscreen {
       label: `colors.setting.${key}.name`,
       description: `colors.setting.${key}.desc`,
       setting: () => value ?? defaultSettings.special[key],
-      setSetting: (val) => (settings[key] = val)
+      setSetting: (val) => (this.settings.special[key] = val)
     }))];
   }
 
