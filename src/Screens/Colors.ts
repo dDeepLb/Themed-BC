@@ -27,16 +27,16 @@ export class GuiColors extends GuiSubscreen {
     return [Object.entries(settings).map(([key, value]) => ({
       type: 'color',
       id: key,
-      label: `settings.setting.${key}.name`,
-      description: `settings.setting.${key}.desc`,
+      label: `colors.setting.${key}.name`,
+      description: `colors.setting.${key}.desc`,
       setting: () => value ?? modeDefaults[key],
       setSetting: (val) => (settings[key] = val)
     })),
     Object.entries(this.settings.special).map(([key, value]) => ({
       type: 'color',
       id: key,
-      label: `settings.setting.${key}.name`,
-      description: `settings.setting.${key}.desc`,
+      label: `colors.setting.${key}.name`,
+      description: `colors.setting.${key}.desc`,
       setting: () => value ?? defaultSettings.special[key],
       setSetting: (val) => (settings[key] = val)
     }))];
