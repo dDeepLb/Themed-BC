@@ -35,12 +35,38 @@ settings.setting.doShowNewVersionMessage.desc = Show message about new version o
 
 # Colors
 Colors.title = - Color Settings -
-colors.setting.primaryColor.name = Primary color
-colors.setting.primaryColor.desc = Primary color used for main elements such as background and button colors
-colors.setting.accentColor.name = Accent color
-colors.setting.accentColor.desc = Secondary color used for such detail elements as icon and border colors
-colors.setting.textColor.name = Text color
-colors.setting.textColor.desc = Color used for most text, excluding other colors
+colors.setting.main.name = Main color
+colors.setting.main.desc = Used for main background and maybe somewhere else^^.
+colors.setting.element.name = Element color
+colors.setting.element.desc = Used for coloring all kinds of elements. For example, buttons, checkboxes, inputs etc.
+colors.setting.elementHover.name = Element hover color
+colors.setting.elementHover.desc = Used for elements when you hover over them.
+colors.setting.elementDisabled.name = Element disabled color
+colors.setting.elementDisabled.desc = Used to color disabled, unusable elements.
+colors.setting.elementHint.name = Element hint color
+colors.setting.elementHint.desc = Used to color hint elements. For example, when hovering over button with a tooltip.
+colors.setting.accent.name = Accent color
+colors.setting.accent.desc = Used for such detail elements as icon and border colors.
+colors.setting.accentHover.name = Accent hover color
+colors.setting.accentHover.desc = Used for detail elements when you hover over them.
+colors.setting.accentDisabled.name = Accent disabled color
+colors.setting.accentDisabled.desc = Used for disabled detail elements.
+colors.setting.text.name = Text color
+colors.setting.text.desc = Used for most text, excluding other colors.
+
+colors.setting.equipped.name = Equipped color
+colors.setting.equipped.desc = Used for indicating equipped items in inventory.
+colors.setting.crafted.name = Crafted color
+colors.setting.crafted.desc = Used for indicating crafted items in inventory.
+colors.setting.blocked.name = Blocked color
+colors.setting.blocked.desc = Used for indicating blocked elements.
+colors.setting.limited.name = Limited color
+colors.setting.limited.desc = Used for indicating limited items in inventory.
+colors.setting.allowed.name = Allowed color
+colors.setting.allowed.desc = Secondary color used for such detail elements as icon and border colors.
+colors.setting.friendRoom.name = Friend Room color
+colors.setting.friendRoom.desc = Secondary color used for such detail elements as icon and border Colors.
+
 colors.button.change_input_type = Change inputs type
 
 # Integration
@@ -50,7 +76,7 @@ integration.setting.BC.desc = Changes CSS styles of BC to use Color Settings. Ch
 integration.setting.BC_Chat.name = Enable BC Chat integration
 integration.setting.BC_Chat.desc = Changes CSS styles of BC to use Color Settings. Changes chat.
 integration.setting.BC_FriendList.name = Enable BC Friend List integration
-integration.setting.BC_FriendList.desc = Changes CSS styles of BC to use Color Settings. Changes background of friend list
+integration.setting.BC_FriendList.desc = Changes CSS styles of BC to use Color Settings. Changes background of friend list.
 integration.setting.BC_Other.name = Enable BC Other integration
 integration.setting.BC_Other.desc = Changes CSS styles of BC to use Color Settings. Changes scroll bar and selection colors.
 integration.setting.FBC.name = Enable FBC integration
