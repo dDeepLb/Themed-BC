@@ -29,8 +29,8 @@ import time from 'esbuild-plugin-time';
     plugins: [
       copy({
         source: ['./public/'],
-        target: './dist/',
-        copyWithFolder: true
+        target: './dist/public/',
+        copyWithFolder: false
       }),
       progress(),
       time(),
