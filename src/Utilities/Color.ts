@@ -23,12 +23,13 @@ export const plainColors: ColorsModel = {
 
 export const specialColors = {
   equipped: ['', ''],
-  disabled: ['', ''],
   crafted: ['', ''],
   blocked: ['', ''],
   limited: ['', ''],
   allowed: ['', ''],
-  friendRoom: ['', ''],
+  roomFriend: ['', ''],
+  roomBlocked: ['', ''],
+  roomGame: ['', ''],
 };
 
 let cachedColors = {};

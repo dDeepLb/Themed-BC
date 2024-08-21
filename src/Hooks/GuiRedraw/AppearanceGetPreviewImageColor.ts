@@ -25,7 +25,7 @@ export function hookAppearanceGetPreviewImageColor() {
         if (blocked) return specialColors.blocked[hover ? 1 : 0];
         else if (item.Worn) return specialColors.equipped[hover ? 1 : 0];
         else if ((item.Craft != null) && (item.Craft.Name != null)) return specialColors.crafted[hover ? 1 : 0];
-        else if (unusable) return specialColors.disabled[hover ? 1 : 0];
+        else if (unusable) return plainColors.elementDisabled;
         else if (limited) return specialColors.limited[hover ? 1 : 0];
         else return hover ? plainColors.elementHover : plainColors.element;
       }

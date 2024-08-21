@@ -16,13 +16,14 @@ const elementColor = primaryColor.lighten(0.2);
 const accentColor = Color('#440171');
 const textColor = Color('#cccccc');
 const specialColors = {
-  equipped: Color('#ADD8E6'),
-  disabled: Color('#808080'),
-  crafted: Color('#FFFFAF'),
-  blocked: Color('#b81010'),
-  limited: Color('#ffA500'),
-  allowed: Color('#00FF00'),
-  friendRoom: Color('#00FF00'),
+  equipped: Color('#3575b5'),
+  crafted: Color('#aaa235'),
+  blocked: Color('#870c0c'),
+  limited: Color('#9d6600'),
+  allowed: Color('#008800'),
+  roomFriend: Color('#008800'),
+  roomBlocked: Color('#870c0c'),
+  roomGame: Color('#3575b5'),
 };
 
 export class ColorsModule extends BaseModule {
@@ -48,22 +49,23 @@ export class ColorsModule extends BaseModule {
       advanced: {
         main: primaryColor.hex(),
         element: elementColor.hex(),
-        elementHover: elementColor.lighten(0.2).hex(),
+        elementHover: elementColor.lighten(0.3).hex(),
         elementDisabled: elementColor.darken(0.2).hex(),
-        elementHint: elementColor.lighten(0.2).hex(),
+        elementHint: elementColor.lighten(0.3).hex(),
         accent: accentColor.hex(),
-        accentHover: accentColor.lighten(0.2).hex(),
+        accentHover: accentColor.lighten(0.3).hex(),
         accentDisabled: accentColor.darken(0.2).hex(),
         text: textColor.hex(),
       },
       special: {
         equipped: specialColors.equipped.hex(),
-        disabled: specialColors.disabled.hex(),
         crafted: specialColors.crafted.hex(),
         blocked: specialColors.blocked.hex(),
         limited: specialColors.limited.hex(),
         allowed: specialColors.allowed.hex(),
-        friendRoom: specialColors.friendRoom.hex(),
+        roomFriend: specialColors.roomFriend.hex(),
+        roomBlocked: specialColors.roomBlocked.hex(),
+        roomGame: specialColors.roomGame.hex(),
       },
     };
   }

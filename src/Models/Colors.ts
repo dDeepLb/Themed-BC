@@ -25,10 +25,11 @@ export type ColorsModel = {
 
 export type SpecialColorsModel = {
   equipped: string;
-  disabled: string;
   crafted: string;
   blocked: string;
   limited: string;
   allowed: string;
-  friendRoom: string;
+  roomFriend: string;
+  roomBlocked: string;
+  roomGame: string;
 };
