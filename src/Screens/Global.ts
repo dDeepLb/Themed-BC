@@ -1,6 +1,8 @@
-import { Checkbox, Setting } from '../../.types/setting';
+import { Setting } from '../../.types/setting';
 import { GuiSubscreen } from '../Base/BaseSetting';
+import { getModule } from '../Base/Modules';
 import { GlobalSettingsModel } from '../Models/Global';
+import { GlobalModule } from '../Modules/Global';
 
 export class GuiGlobal extends GuiSubscreen {
   get name(): string {
@@ -16,17 +18,15 @@ export class GuiGlobal extends GuiSubscreen {
   }
 
   get structure(): Setting[] {
-    const struct: Checkbox[] = [];
-    Object.keys(this.settings).forEach((key) => {
-      struct.push({
-        type: 'checkbox',
-        label: `settings.setting.${key}.name`,
-        description: `settings.setting.${key}.desc`,
-        setting: () => this.settings[key] ?? true,
-        setSetting: (val) => (this.settings[key] = val)
-      });
-    });
-    return struct;
+    const defaultSettings = getModule<GlobalModule>('GlobalModule').defaultSettings;
+
+    return Object.entries(this.settings).map(([key, value]) => ({
+      type: 'checkbox',
+      label: `settings.setting.${key}.name`,
+      description: `settings.setting.${key}.desc`,
+      setting: () => value ?? defaultSettings[key],
+      setSetting: (val) => (this.settings[key] = val)
+    }));
   }
 
   Load(): void {
