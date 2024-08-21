@@ -1,5 +1,6 @@
+import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, plainColors } from '../../Utilities/Color';
+import { _Color, plainColors, specialColors } from '../../Utilities/Color';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
 export function hookDrawRect() {
@@ -9,17 +10,16 @@ export function hookDrawRect() {
     (args: Parameters<typeof DrawRect>, next: (args: Parameters<typeof DrawRect>) => ReturnType<typeof DrawRect>) => {
       if (!doRedraw()) return next(args);
 
-      const [Left, Top, Width, Height, Color] = args;
+      const [Left, Top, Width, Height, color] = args;
 
       const drawRect = (color: string) => {
-        MainCanvas.beginPath();
-        MainCanvas.fillStyle = color;
-        MainCanvas.fillRect(Left, Top, Width, Height);
-        MainCanvas.fill();
+        DrawRect(Left, Top, Width, Height, color);
       };
 
-      if (Color?.startsWith('%')) {
-        switch (Color.substring(1).toLowerCase()) {
+      const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
+
+      if (color?.startsWith('%')) {
+        switch (color.substring(1)) {
           case 'disabled':
             drawRect(plainColors.elementDisabled);
             break;
@@ -36,12 +36,40 @@ export function hookDrawRect() {
             drawRect(plainColors.elementHint);
             break;
 
+          case 'searchFullBlock':
+            drawRect(Color(specialColors.blocked[hover]).mix(Color(specialColors.roomBlocked[hover]), 0.5).hex());
+            break;
+
+          case 'searchBlock':
+            drawRect(specialColors.roomBlocked[hover]);
+            break;
+
+          case 'searchFullFriend':
+            drawRect(Color(specialColors.roomFriend[hover]).mix(Color(plainColors.elementDisabled), 0.5).hex());
+            break;
+
+          case 'searchFriend':
+            drawRect(specialColors.roomFriend[hover]);
+            break;
+
+          case 'searchFull':
+            drawRect(plainColors.elementDisabled);
+            break;
+
+          case 'searchGame':
+            drawRect(specialColors.roomGame[hover]);
+            break;
+
+          case 'allowed':
+            drawRect(specialColors.allowed[hover]);
+            break;
+
           default:
             next(args);
             break;
         }
       } else {
-        switch (_Color.getHexComputed(Color).toLowerCase()) {
+        switch (_Color.getHexComputed(color).toLowerCase()) {
           case '#eeeeee':
           case '#dddddd':
           case '#cccccc':
