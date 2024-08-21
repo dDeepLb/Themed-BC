@@ -63,9 +63,13 @@ colors.setting.blocked.desc = Used for indicating blocked elements.
 colors.setting.limited.name = Limited color
 colors.setting.limited.desc = Used for indicating limited items in inventory.
 colors.setting.allowed.name = Allowed color
-colors.setting.allowed.desc = Secondary color used for such detail elements as icon and border colors.
-colors.setting.friendRoom.name = Friend Room color
-colors.setting.friendRoom.desc = Secondary color used for such detail elements as icon and border Colors.
+colors.setting.allowed.desc = Used for indicating allowed permissions.
+colors.setting.roomFriend.name = Room Friend color
+colors.setting.roomFriend.desc = Indicates room where friend is present.
+colors.setting.roomBlocked.name = Room Block color
+colors.setting.roomBlocked.desc = Indicates rooms that have blocked categories.
+colors.setting.roomGame.name = Room Game color
+colors.setting.roomGame.desc = Colors tooltip, that shows game in a room.
 
 colors.button.change_input_type = Change inputs type
 
