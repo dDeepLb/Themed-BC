@@ -7,6 +7,7 @@ const styles = {
   BC_Inputs: '',
   BC_Chat: '',
   BC_FriendList: '',
+  FriendListBlur: '',
   BC_Other: '',
   FBC: '',
   FUSAM: '',
