@@ -1,9 +1,11 @@
+import { IntegrationSettingsModel } from '../Models/Integration';
 import { _Color, plainColors, specialColors } from './Color';
 import { PlayerStorage } from './Data';
 
-const styles = {
-  Root: composeRoot(),
-  Themed: '',
+type styles = {
+  [key in keyof Omit<IntegrationSettingsModel, 'themedEnabled' | 'MBS'>]: string;
+};
+const styles: styles = {
   inputs: '',
   chat: '',
   WCE: '',
@@ -56,6 +58,9 @@ export const BcStyle = {
   injectAll() {
     const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
 
+    Style.injectInline('root', composeRoot());
+    Style.injectEmbed('themed', `${PUBLIC_URL}/styles/themed.css`);
+    
     if (!isEnabled) return;
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
@@ -66,6 +71,9 @@ export const BcStyle = {
   },
 
   ejectAll() {
+    Style.eject('root');
+    Style.eject('themed');
+
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
       Style.eject(id);
