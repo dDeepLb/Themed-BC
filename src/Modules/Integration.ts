@@ -26,7 +26,7 @@ export class IntegrationModule extends BaseModule {
       BC_FriendList: true,
       FriendListBlur: false,
       BC_Other: true,
-      FBC: true,
+      WCE: true,
       FUSAM: true,
       TTS: true,
       MBS: true

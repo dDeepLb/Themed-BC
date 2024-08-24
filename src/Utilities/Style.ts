@@ -6,10 +6,7 @@ const styles = {
   Themed: '',
   inputs: '',
   chat: '',
-  BC_FriendList: '',
-  FriendListBlur: '',
-  BC_Other: '',
-  FBC: '',
+  WCE: '',
   FUSAM: '',
   TTS: '',
 };
