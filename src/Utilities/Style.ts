@@ -5,7 +5,7 @@ const styles = {
   Root: composeRoot(),
   Themed: '',
   inputs: '',
-  BC_Chat: '',
+  chat: '',
   BC_FriendList: '',
   FriendListBlur: '',
   BC_Other: '',

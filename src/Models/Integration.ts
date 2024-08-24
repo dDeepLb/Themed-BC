@@ -2,7 +2,7 @@ import { BaseSettingsModel } from './Global';
 
 export type IntegrationSettingsModel = BaseSettingsModel & {
   inputs: boolean;
-  BC_Chat: boolean;
+  chat: boolean;
   BC_FriendList: boolean;
   FriendListBlur: boolean;
   BC_Other: boolean;

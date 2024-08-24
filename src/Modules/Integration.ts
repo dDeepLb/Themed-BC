@@ -22,7 +22,7 @@ export class IntegrationModule extends BaseModule {
   get defaultSettings() {
     return <IntegrationSettingsModel>{
       inputs: true,
-      BC_Chat: true,
+      chat: true,
       BC_FriendList: true,
       FriendListBlur: false,
       BC_Other: true,
