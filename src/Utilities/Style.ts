@@ -15,7 +15,7 @@ const styles = {
 };
 
 export const Style = {
-  inject(styleId: string, styleSource: string) {
+  injectInline(styleId: string, styleSource: string) {
     const isStyleLoaded = document.getElementById(styleId);
 
     if (isStyleLoaded) return;
@@ -23,6 +23,18 @@ export const Style = {
     const styleElement = document.createElement('style');
     styleElement.id = styleId;
     styleElement.appendChild(document.createTextNode(styleSource));
+    document.head.appendChild(styleElement);
+  },
+
+  injectEmbed(styleId: string, styleLink: string) {
+    const isStyleLoaded = document.getElementById(styleId);
+
+    if (isStyleLoaded) return;
+
+    const styleElement = document.createElement('link');
+    styleElement.id = styleId;
+    styleElement.rel = 'stylesheet';
+    styleElement.href = styleLink;
     document.head.appendChild(styleElement);
   },
 
@@ -35,7 +47,7 @@ export const Style = {
 
   reload(styleId: string, styleSource: string) {
     Style.eject(styleId);
-    Style.inject(styleId, styleSource);
+    Style.injectInline(styleId, styleSource);
   },
 
   async fetch(link: string) {
@@ -44,55 +56,28 @@ export const Style = {
 };
 
 export const BcStyle = {
-  async inject(id: keyof typeof styles): Promise<void> {
-
+  injectAll() {
     const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
 
     if (!isEnabled) return;
-    if (!PlayerStorage().IntegrationModule[id] && id != 'Themed' && id != 'Root') return (() => {
-      styles[id] = '';
-    })();
-    const styleSource = await (async () => {
-      if (id === 'Root') return styles[id] = composeRoot();
-      if (styles[id]) {
-        return styles[id];
-      } else {
-        return styles[id] = await Style.fetch(`${PUBLIC_URL}/styles/${id}.css`);
-      }
-    })();
 
-    Style.inject(id, styleSource);
-  },
-
-  eject(id: keyof typeof styles) {
-
-    Style.eject(id);
-  },
-
-  reload(id: keyof typeof styles) {
-    BcStyle.eject(id);
-    BcStyle.inject(id);
-  },
-
-  injectAll() {
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
-      BcStyle.inject(id);
+      if (!PlayerStorage().IntegrationModule[id]) return;
+      Style.injectEmbed(id, `${PUBLIC_URL}/styles/${id}.css`);
     });
   },
 
   ejectAll() {
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
-      BcStyle.eject(id);
+      Style.eject(id);
     });
   },
 
   reloadAll() {
-    const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
-    styleIDs.forEach((id) => {
-      BcStyle.reload(id);
-    });
+    BcStyle.ejectAll();
+    BcStyle.injectAll();
   }
 };
 
@@ -100,19 +85,18 @@ export function composeRoot() {
   let genedColors = '';
 
   Object.keys(plainColors).forEach((key) => {
-    genedColors += `--${key}: ${plainColors[key]};`;
+    genedColors += `--${key}: ${plainColors[key]};\n\t`;
   });
   Object.keys(specialColors).forEach((key) => {
-    genedColors += `--${key}: ${specialColors[key][0]};`;
-    genedColors += `--${key}Hover: ${specialColors[key][1]};`;
+    genedColors += `--${key}: ${specialColors[key][0]};\n\t`;
+    genedColors += `--${key}Hover: ${specialColors[key][1]};\n\t`;
   });
   
   return /*css*/ `
     :root {
       ${genedColors}
-
       --scrollbar: ${_Color.darken(plainColors?.element, 20) || '#454545'};
       --friendlistBackground: ${plainColors?.element + '80' || '#30303080'};
     }
-    `;
+    `.replace(/\t+/g, '\t').replace(/\n\s*/g, '\t');
 }
