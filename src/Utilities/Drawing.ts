@@ -7,16 +7,19 @@ let cachedBase64Data: {
 } = {};
 
 export const _Image = {
-  doNotDrawImageFolders: [
+  doNotColorizeImageIncludes: [
     'Assets/Female3DCG/',
     'Backgrounds/',
     'Icons/Struggle/',
     'Screens/',
-    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyEAYAAABOr1TyAAABb2lDQ1BpY2MAACiRdZG9S0JRGMZ/', // FBC's "FBC" overlay icon
-    'http' // Fix bug with recoloring of custom bgs
+    'http'
   ],
 
-  doNotDrawImages: [
+  doColorizeImageIncludes: [
+    PUBLIC_URL
+  ],
+
+  doNotColorizeImages: [
     'Icons/Accept.png',
     'Icons/Activity.png',
     'Icons/Arousal.png',
@@ -54,8 +57,9 @@ export const _Image = {
     'Icons/Small/Naked.png',
     'Icons/Small/Use.png',
     'Icons/Small/YouTube.png',
-    'Assets/Female3DCG/ItemMisc/Preview/Best Friend Padlock.png',
-    'Assets/Female3DCG/ItemMisc/Preview/Best Friend Timer Padlock.png'
+  ],
+
+  doColorizeImages: [
   ],
 
   getColorized(source: string, hexColor: string): ImageData | undefined {
@@ -121,21 +125,27 @@ export const _Image = {
   },
 
   doDrawImage(source: string) {
-    let skipDrawing = false;
+    if (!source) return false;
+    if (typeof source !== 'string') return false;
+    let doDraw = true;
 
-    for (const folderPrefix of _Image.doNotDrawImageFolders) {
-      if (typeof source !== 'string') break;
-      if (source.startsWith(folderPrefix)) {
-        skipDrawing = true;
-        break;
+    if (doDraw) {
+      const includesFolder = _Image.doNotColorizeImageIncludes.some(prefix => source.startsWith(prefix));
+      const includesFile = _Image.doNotColorizeImages.includes(source);
+      if (includesFolder || includesFile) {
+        doDraw = false;
       }
     }
 
-    if (!skipDrawing && _Image.doNotDrawImages.includes(source)) {
-      skipDrawing = true;
+    if (!doDraw) {
+      const includesFolder = _Image.doColorizeImageIncludes.some(prefix => source.startsWith(prefix));
+      const includesFile = _Image.doColorizeImages.includes(source);
+      if (includesFolder || includesFile) {
+        doDraw = true;
+      }
     }
 
-    return !skipDrawing;
+    return doDraw;
   },
 
   setImageDataCache(key: string, data: ImageData): void {
