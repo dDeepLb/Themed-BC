@@ -15,10 +15,22 @@ input:focus {
   outline: var(--accent) solid 1px;
 }
 
-.button-touch,
-.button-touch:before,
-.button:hover {
-  background-color: var(--elementHover);
+.button {
+  --button-color: var(--element);
+  --disabled-color: var(--elementDisabled);
+  --hover-color: var(--elementHover);
+}
+
+.button-styling {
+  border-color: var(--accent);
+}
+
+.button-styling:hover {
   border-color: var(--accentHover);
+}
+
+.button-tooltip {
+  background-color: var(--elementHint);
   color: var(--text);
+  border-color: var(--accent);
 }
