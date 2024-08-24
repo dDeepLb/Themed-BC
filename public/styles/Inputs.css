@@ -1,0 +1,24 @@
+textarea {
+  background: var(--element);
+  color: var(--text);
+  border: 2px solid var(--accent);
+}
+
+input {
+  background: var(--element);
+  color: var(--text);
+  border: 2px solid var(--accent);
+}
+
+textarea:focus,
+input:focus {
+  outline: var(--accent) solid 1px;
+}
+
+.button-touch,
+.button-touch:before,
+.button:hover {
+  background-color: var(--elementHover);
+  border-color: var(--accentHover);
+  color: var(--text);
+}

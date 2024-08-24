@@ -4,7 +4,7 @@ import { PlayerStorage } from './Data';
 const styles = {
   Root: composeRoot(),
   Themed: '',
-  BC_Inputs: '',
+  inputs: '',
   BC_Chat: '',
   BC_FriendList: '',
   FriendListBlur: '',
