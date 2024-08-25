@@ -120,7 +120,7 @@ reset.button.confirm = Confirm
 reset.button.cancel = Cancel
 
 # Support
-support.title = - Support -
+Support.title = - Support -
 support.button.ko-fi = Ko-fi
 support.button.patreon = Patreon
 support.other.thankyou = Thank you
