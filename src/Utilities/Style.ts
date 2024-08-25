@@ -1,5 +1,5 @@
 import { IntegrationSettingsModel } from '../Models/Integration';
-import { _Color, plainColors, specialColors } from './Color';
+import { plainColors, specialColors } from './Color';
 import { PlayerStorage } from './Data';
 
 type styles = {
@@ -104,8 +104,6 @@ export function composeRoot() {
   return /*css*/ `
     :root {
       ${genedColors}
-      --scrollbar: ${_Color.darken(plainColors?.element, 20) || '#454545'};
-      --friendlistBackground: ${plainColors?.element + '80' || '#30303080'};
     }
-    `.replace(/\t+/g, '\t').replace(/\n\s*/g, '\t');
+    `.replace(/\t+|\n\s*/g, '\t');
 }
