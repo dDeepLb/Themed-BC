@@ -8,6 +8,8 @@ type styles = {
 const styles: styles = {
   inputs: '',
   chat: '',
+  friendList: '',
+  friendListBlur: '',
   WCE: '',
   FUSAM: '',
   TTS: '',

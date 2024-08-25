@@ -23,9 +23,8 @@ export class IntegrationModule extends BaseModule {
     return <IntegrationSettingsModel>{
       inputs: true,
       chat: true,
-      BC_FriendList: true,
-      FriendListBlur: false,
-      BC_Other: true,
+      friendList: true,
+      friendListBlur: false,
       WCE: true,
       FUSAM: true,
       TTS: true,
