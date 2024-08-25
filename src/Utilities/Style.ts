@@ -10,6 +10,8 @@ const styles: styles = {
   chat: '',
   friendList: '',
   friendListBlur: '',
+  scrollbar: '',
+  selection: '',
   WCE: '',
   FUSAM: '',
   TTS: '',

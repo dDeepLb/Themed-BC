@@ -25,6 +25,8 @@ export class IntegrationModule extends BaseModule {
       chat: true,
       friendList: true,
       friendListBlur: false,
+      scrollbar: true,
+      selection: true,
       WCE: true,
       FUSAM: true,
       TTS: true,

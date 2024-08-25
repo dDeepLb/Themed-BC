@@ -5,6 +5,8 @@ export type IntegrationSettingsModel = BaseSettingsModel & {
   chat: boolean;
   friendList: boolean;
   friendListBlur: boolean;
+  scrollbar: boolean;
+  selection: boolean;
   WCE: boolean;
   FUSAM: boolean;
   TTS: boolean;

@@ -13,8 +13,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--accent);
 }
-
-::selection {
-  background-color: var(--accent);
-  color: var(--text);
-}
