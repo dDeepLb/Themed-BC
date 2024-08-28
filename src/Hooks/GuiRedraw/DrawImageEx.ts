@@ -13,13 +13,10 @@ export function hookDrawImageEx() {
       if (!_Image.doDrawImage(args[0])) return next(args);
 
       const [Source, Canvas, X, Y, Options] = args;
-      const color = args[4].HexColor ?? plainColors.accent;
-      const colorizedImage = _Image.getColorized(Source, color);
+      Options.HexColor = plainColors.accent;
+      Options.FullAlpha = true;
 
-      if (!colorizedImage) return next(args);
-
-      const imageSource = _Image.turnToBase64(colorizedImage, `${Source}${args[4].HexColor}`);
-      next([imageSource ?? Source, Canvas, X, Y, Options]);
+      next([Source, Canvas, X, Y, Options]);
     },
     ModuleCategory.GuiRedraw
   );
