@@ -1,7 +1,7 @@
 import { BaseModule } from '../Base/BaseModule';
 import { BaseMigrator } from '../Migrators/BaseMigrator';
 import { conInfo } from '../Utilities/Console';
-import { dataStore, PlayerStorage } from '../Utilities/Data';
+import { PlayerStorage, settingsSave } from '../Utilities/Data';
 import { ModName, ModVersion } from '../Utilities/ModDefinition';
 import { sendLocalSmart } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
@@ -80,7 +80,7 @@ export class VersionModule extends BaseModule {
     }
 
     if (saveRequired) {
-      dataStore();
+      settingsSave();
     }
   }
 

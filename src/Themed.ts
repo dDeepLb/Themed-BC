@@ -12,7 +12,7 @@ import { VersionModule } from './Modules/Version';
 import { Localization } from './Translation';
 import { _Color } from './Utilities/Color';
 import { conDebug, conLog } from './Utilities/Console';
-import { dataTake } from './Utilities/Data';
+import { settingsLoad } from './Utilities/Data';
 import { ModVersion } from './Utilities/ModDefinition';
 import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
@@ -39,7 +39,7 @@ export async function init() {
 
   await Localization.load();
 
-  dataTake();
+  settingsLoad();
 
   if (!initModules()) {
     unload();

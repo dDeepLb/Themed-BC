@@ -2,8 +2,7 @@ import { GuiSubscreen } from '../Base/BaseSetting';
 import { getModule } from '../Base/Modules';
 import { getText } from '../Translation';
 import { _Color } from '../Utilities/Color';
-import { dataErase } from '../Utilities/Data';
-import { _Image } from '../Utilities/Drawing';
+import { settingsReset } from '../Utilities/Data';
 import { BcStyle } from '../Utilities/Style';
 
 export class GuiReset extends GuiSubscreen {
@@ -70,12 +69,11 @@ export class GuiReset extends GuiSubscreen {
   Confirm() {
     this.allowedConfirmTime = null;
 
-    dataErase();
+    settingsReset();
     getModule('ColorsModule').registerDefaultSettings();
 
     _Color.composeRoot();
     BcStyle.reloadAll();
-    _Image.clearCache();
 
     this.setSubscreen(null);
     PreferenceSubscreenExtensionsClear();

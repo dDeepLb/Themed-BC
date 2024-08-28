@@ -5,7 +5,7 @@ import { doRedraw } from '../Modules/GuiRedraw';
 import { getText } from '../Translation';
 import { plainColors } from '../Utilities/Color';
 import { conDebug } from '../Utilities/Console';
-import { dataStore } from '../Utilities/Data';
+import { settingsSave } from '../Utilities/Data';
 import { BaseModule } from './BaseModule';
 import { getModule, modules } from './Modules';
 import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from './SettingDefinitions';
@@ -210,7 +210,7 @@ export abstract class GuiSubscreen {
     getModule<ColorsModule>('ColorsModule').reloadTheme();
 
     setSubscreen('MainMenu');
-    dataStore();
+    settingsSave();
   }
 
   Unload() {
