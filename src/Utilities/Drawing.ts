@@ -1,11 +1,3 @@
-let cachedImageData: {
-  [index: string]: ImageData;
-} = {};
-
-let cachedBase64Data: {
-  [index: string]: string;
-} = {};
-
 export const _Image = {
   doNotColorizeImageIncludes: [
     'Assets/Female3DCG/',
@@ -62,13 +54,9 @@ export const _Image = {
   doColorizeImages: [
   ],
 
-  getColorized(source: string, hexColor: string): ImageData | undefined {
+  getColorized: CommonMemoize((source: string, hexColor: string): ImageData | undefined => {
     if (typeof source != 'string') return;
     const img = DrawGetImage(source);
-
-    if (_Image.getImageDataCache(`${source}&${hexColor}`)) {
-      return _Image.getImageDataCache(`${source}&${hexColor}`);
-    }
 
     try {
       if (!img.complete) return undefined;
@@ -86,16 +74,13 @@ export const _Image = {
 
       const colorizedData = _Image.colorize(imageData, hexColor);
 
-      _Image.setImageDataCache(`${source}&${hexColor}`, colorizedData);
-
       return colorizedData;
     } catch (e) {
       return undefined;
     }
-  },
+  }),
 
-  turnToBase64(imageData: ImageData, cacheKey: string) {
-    if (_Image.getBase64DataCache(`${cacheKey}`)) return _Image.getBase64DataCache(`${cacheKey}`);
+  turnToBase64: CommonMemoize((imageData: ImageData) => {
     const canvas = document.createElement('canvas');
     canvas.width = imageData.width;
     canvas.height = imageData.height;
@@ -103,10 +88,9 @@ export const _Image = {
     ctx.putImageData(imageData, 0, 0);
     const base64Data = canvas.toDataURL('image/png');
     canvas.remove();
-    _Image.setBase64DataCache(cacheKey, base64Data);
 
     return base64Data;
-  },
+  }),
 
   colorize(imageData: ImageData, hexColor: string) {
     const data = imageData.data;
@@ -146,27 +130,6 @@ export const _Image = {
     }
 
     return doDraw;
-  },
-
-  setImageDataCache(key: string, data: ImageData): void {
-    cachedImageData[key] = data;
-  },
-
-  getImageDataCache(key: string): ImageData {
-    return cachedImageData[key];
-  },
-
-  setBase64DataCache(key: string, data: string): void {
-    cachedBase64Data[key] = data;
-  },
-
-  getBase64DataCache(key: string): string {
-    return cachedBase64Data[key];
-  },
-
-  clearCache(): void {
-    cachedImageData = {};
-    cachedBase64Data = {};
   },
 };
 
