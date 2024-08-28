@@ -77,14 +77,14 @@ export function useLgcModal(prompt: string, acceptCallbackFn: () => void, cancel
 }
 
 /** Merges matching properties from `mergeFrom` into `mergeTo`. */
-export function deepMergeMatchingProperties(mergeTo: object, mergeFrom: object) {
+export function deepMergeMatchingProperties<T extends object>(mergeTo: T, mergeFrom: T): T  {
   const mergedObject = { ...mergeTo };
 
   for (const key in mergeFrom) {
     if (mergeFrom[key] !== null && typeof mergeFrom[key] === 'object') {
-      mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      (mergedObject as any)[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
     } else if (key in mergedObject) {
-      mergedObject[key] = mergeFrom[key];
+      (mergedObject as any)[key] = mergeFrom[key];
     }
   }
 
