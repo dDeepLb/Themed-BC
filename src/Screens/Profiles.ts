@@ -37,7 +37,7 @@ export class GuiProfiles extends GuiSubscreen {
   }
 
   Run() {
-    const prev = MainCanvas.textAlign;
+    MainCanvas.save();
     super.Run();
     MainCanvas.textAlign = 'left';
 
@@ -57,7 +57,7 @@ export class GuiProfiles extends GuiSubscreen {
     if (this.PreferenceText)
       DrawText(this.PreferenceText, GuiSubscreen.START_X + 250, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', 'Gray');
 
-    MainCanvas.textAlign = prev;
+    MainCanvas.restore();
   }
 
   Click() {

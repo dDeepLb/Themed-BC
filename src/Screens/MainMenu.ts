@@ -31,7 +31,7 @@ export class MainMenu extends GuiSubscreen {
 
   Run() {
     const tmp = GuiSubscreen.START_X;
-    const prev = MainCanvas.textAlign;
+    MainCanvas.save();
 
     GuiSubscreen.START_X = 550;
     MainCanvas.textAlign = 'left';
@@ -75,7 +75,7 @@ export class MainMenu extends GuiSubscreen {
     DrawTextFit('Support Me❤', 1580, 870, 320, 'Black');
 
     GuiSubscreen.START_X = tmp;
-    MainCanvas.textAlign = prev;
+    MainCanvas.restore();
   }
 
   Click() {

@@ -119,7 +119,7 @@ export abstract class GuiSubscreen {
 
   Run() {
     GuiSubscreen.POS_BAK = GuiSubscreen.START_X;
-    GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
+    MainCanvas.save();
 
     GuiSubscreen.START_X = 550;
     MainCanvas.textAlign = 'left';
@@ -156,7 +156,7 @@ export abstract class GuiSubscreen {
     });
 
     GuiSubscreen.START_X = GuiSubscreen.POS_BAK;
-    MainCanvas.textAlign = GuiSubscreen.TEXT_ALIGN_BAK;
+    MainCanvas.restore();
   }
 
   Click() {
