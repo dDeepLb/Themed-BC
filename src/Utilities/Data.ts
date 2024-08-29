@@ -1,4 +1,3 @@
-import { ColorsSettingsModel } from '../Models/Colors';
 import { SettingsModel } from '../Models/Settings';
 import { ModName } from './ModDefinition';
 import { _String } from './String';
@@ -33,6 +32,6 @@ export function settingsSave() {
 }
 
 export function settingsReset() {
-  Player[ModName].ColorsModule = <ColorsSettingsModel>{};
+  Player[ModName] = <SettingsModel>{};
   settingsSave();
 }

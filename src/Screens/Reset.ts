@@ -1,5 +1,5 @@
 import { GuiSubscreen } from '../Base/BaseSetting';
-import { getModule } from '../Base/Modules';
+import { modules } from '../Base/Modules';
 import { getText } from '../Translation';
 import { _Color } from '../Utilities/Color';
 import { settingsReset } from '../Utilities/Data';
@@ -70,7 +70,10 @@ export class GuiReset extends GuiSubscreen {
     this.allowedConfirmTime = null;
 
     settingsReset();
-    getModule('ColorsModule').registerDefaultSettings();
+    
+    for (const module of modules()) {
+      module.registerDefaultSettings();
+    }
 
     _Color.composeRoot();
     BcStyle.reloadAll();
