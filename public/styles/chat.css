@@ -21,7 +21,8 @@
 
   .ChatMessageActivity,
   .ChatMessageAction,
-  .ChatMessageEmote {
+  .ChatMessageEmote,
+  .ChatMessageLocalMessage {
     --base-color: var(--main);
     color: var(--text);
 
