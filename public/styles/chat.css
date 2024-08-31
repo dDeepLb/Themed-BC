@@ -23,6 +23,12 @@
   .ChatMessageAction,
   .ChatMessageEmote {
     --base-color: var(--main);
+    color: var(--text);
+
+    &::before,
+    &::after {
+      color: var(--text);
+    }
   }
 
   .chat-room-sep {
