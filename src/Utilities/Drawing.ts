@@ -3,6 +3,8 @@ export const _Image = {
     'Assets/Female3DCG/',
     'Backgrounds/',
     'Icons/Struggle/',
+    'Icons/LARP/',
+    'Icons/MagicBattle/',
     'Screens/',
     'http'
   ],
