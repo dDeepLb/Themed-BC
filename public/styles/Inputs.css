@@ -10,6 +10,10 @@ input:not([type="range"]) {
   border: 2px solid var(--accent);
 }
 
+input[type="color"] {
+  padding: 0px;
+}
+
 textarea:focus,
 input:focus {
   outline: var(--accent) solid 1px;
