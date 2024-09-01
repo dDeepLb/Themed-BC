@@ -10,7 +10,9 @@ export class _String {
     try {
       const decoded = JSON.parse(d as string);
       data = decoded;
-    } catch {}
+    } catch {
+      /* ... */
+    }
     if (data) return data;
   }
 }
