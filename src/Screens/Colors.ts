@@ -1,6 +1,8 @@
-import { Input, Setting } from '../../.types/setting';
+import { Input } from '../../.types/setting';
 import { GuiSubscreen } from '../Base/BaseSetting';
-import { ColorsSettingsModel } from '../Models/Colors';
+import { getModule } from '../Base/Modules';
+import { BaseColorsModel, ColorsSettingsModel } from '../Models/Colors';
+import { ColorsModule } from '../Modules/Colors';
 import { getText } from '../Translation';
 
 export class GuiColors extends GuiSubscreen {
@@ -16,44 +18,37 @@ export class GuiColors extends GuiSubscreen {
     return super.settings as ColorsSettingsModel;
   }
 
-  get multipageStructure(): Setting[][] {
-    return [
-      [
-        <Input>{
-          type: 'color',
-          id: 'primaryColor',
-          label: 'colors.setting.primaryColor.name',
-          description: 'colors.setting.primaryColor.desc',
-          setting: () => this.settings?.primaryColor ?? '',
-          setSetting: (val) => (this.settings.primaryColor = val)
-        },
-        <Input>{
-          type: 'color',
-          id: 'accentColor',
-          label: 'colors.setting.accentColor.name',
-          description: 'colors.setting.accentColor.desc',
-          setting: () => this.settings?.accentColor ?? '',
-          setSetting: (val) => (this.settings.accentColor = val)
-        },
-        <Input>{
-          type: 'color',
-          id: 'textColor',
-          label: 'colors.setting.textColor.name',
-          description: 'colors.setting.textColor.desc',
-          setting: () => this.settings?.textColor ?? '',
-          setSetting: (val) => (this.settings.textColor = val)
-        }
-      ]
-    ];
+  get multipageStructure(): Input[][] {
+    const defaultSettings = getModule<ColorsModule>('ColorsModule').defaultSettings;
+    const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
+    const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
+
+    return [Object.entries(this.settings.base).map(([key, value]: [keyof BaseColorsModel, string]) => ({
+      type: 'color',
+      id: key,
+      label: `colors.setting.${key}.name`,
+      description: `colors.setting.${key}.desc`,
+      setting: () => value ?? defaultSettings.base[key],
+      setSetting: (val) => (this.settings.base[key] = val),
+      disabled: isBaseMode && !baseModeKey(key)
+    })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)) as Input[],
+    Object.entries(this.settings.special).map(([key, value]) => ({
+      type: 'color',
+      id: key,
+      label: `colors.setting.${key}.name`,
+      description: `colors.setting.${key}.desc`,
+      setting: () => value ?? defaultSettings.special[key],
+      setSetting: (val) => (this.settings.special[key] = val)
+    }))];
   }
 
   Run(): void {
-    DrawButton(1715, 75, 90, 90, '', 'White', 'Icons/Reset.png', getText('colors.button.change_input_type'));
+    DrawButton(1495, 75, 90, 90, '', 'White', 'Icons/Swap.png', getText('colors.button.change_input_type'));
     super.Run();
   }
 
   Click(): void {
-    if (MouseIn(1715, 75, 90, 90)) {
+    if (MouseIn(1495, 75, 90, 90)) {
       this.multipageStructure.forEach((page) => {
         page.forEach((elm) => {
           if (elm.type == 'color' || elm.type == 'text') {
@@ -68,6 +63,7 @@ export class GuiColors extends GuiSubscreen {
           }
         });
       });
+      return;
     }
 
     super.Click();

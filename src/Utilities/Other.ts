@@ -1,4 +1,5 @@
 import { getText } from '../Translation';
+import { DebugMode } from './ModDefinition';
 
 export function sendLocalSmart(id: string, message: string, timeoutInSeconds?: number) {
   const div = document.createElement('div');
@@ -75,13 +76,23 @@ export function useLgcModal(prompt: string, acceptCallbackFn: () => void, cancel
   document.body.append(modal);
 }
 
-export function mergeMatchingProperties(mergeTo, mergeFrom) {
-  const mergedObject = mergeTo;
-  for (const key of Object.keys(mergeFrom)) {
-    if (key in mergeTo) {
-      mergedObject[key] = mergeFrom[key];
+/** Merges matching properties from `mergeFrom` into `mergeTo`. */
+export function deepMergeMatchingProperties<T extends object>(mergeTo: T, mergeFrom: T): T  {
+  const mergedObject = { ...mergeTo };
+
+  for (const key in mergeFrom) {
+    if (mergeFrom[key] !== null && typeof mergeFrom[key] === 'object') {
+      (mergedObject as any)[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+    } else if (key in mergedObject) {
+      (mergedObject as any)[key] = mergeFrom[key];
     }
   }
 
   return mergedObject;
+}
+
+export function exposeItem(item: any, name?: string, devExpose?: boolean) {
+  if (devExpose && !DebugMode) return;
+  if (!window['TMD']) window['TMD'] = {};
+  window['TMD'][name || item.name || item] = item;
 }

@@ -1,0 +1,52 @@
+#friend-list-subscreen {
+  --border-color: var(--accent);
+  --image-color: var(--accent);
+  --text-color: var(--text);
+  --button-color: var(--element);
+  --inactive-button-color: var(--elementDisabled);
+}
+
+#friend-list-beep-dialog {
+  background-color: color-mix(in srgb, var(--element) 80%, #ffffffaa 40%);
+  color: var(--text);
+}
+
+#friend-list-subscreen,
+#friend-list-beep-dialog {
+  textarea {
+    background: var(--element);
+    color: var(--text);
+    border: 2px solid var(--accent);
+  }
+
+  input {
+    background: var(--element);
+    color: var(--text);
+    border: 2px solid var(--accent);
+  }
+
+  textarea:focus,
+  input:focus {
+    outline: var(--accent) solid 1px;
+  }
+
+  .button {
+    --button-color: var(--element);
+    --disabled-color: var(--elementDisabled);
+    --hover-color: var(--elementHover);
+  }
+
+  .button-styling {
+    border-color: var(--accent);
+  }
+
+  .button-styling:hover {
+    border-color: var(--accentHover);
+  }
+
+  .button-tooltip {
+    background-color: var(--elementHint);
+    color: var(--text);
+    border-color: var(--accent);
+  }
+}

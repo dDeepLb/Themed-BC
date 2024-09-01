@@ -54,9 +54,9 @@ export class GuiSupport extends GuiSubscreen {
   Load() {
     GuiSupport.doNextThankYou();
 
-    ElementCreateDiv('ResponsiveGratitude');
-    const elm = document.getElementById('ResponsiveGratitude');
-    ElementContent('ResponsiveGratitude', gratitudeHtml);
+    ElementCreateDiv('ThemedGratitude');
+    const elm = document.getElementById('ThemedGratitude');
+    ElementContent('ThemedGratitude', gratitudeHtml);
 
     const font =
       MainCanvas.canvas.clientWidth <= MainCanvas.canvas.clientHeight * 2
@@ -87,26 +87,26 @@ export class GuiSupport extends GuiSubscreen {
   }
 
   Exit() {
-    ElementRemove('ResponsiveGratitude');
+    ElementRemove('ThemedGratitude');
     super.Exit();
   }
 }
 
 const gratitudeHtml = /*html*/ `
-<h1 class="ResponsiveH">Dear Supporters!</h1>
-<p class="ResponsiveP">
+<h1 class="ThemedH">Dear Supporters!</h1>
+<p class="ThemedP">
   I want to take a moment to express my heartfelt gratitude for considering supporting me. Your willingness to stand by
   my side in this creative journey means the world to me, and I am truly humbled by your generosity.
 </p>
-<p class="ResponsiveP">
+<p class="ThemedP">
   Your support goes far beyond the financial contributions; it represents belief in my work and a shared passion for
   what I do. Your encouragement inspires me to continue developing.
 </p>
-<p class="ResponsiveP">
+<p class="ThemedP">
   Your support not only helps me sustain and grow as a developer, but also enables me to dedicate more time and
   resources to producing high-quality mods. It allows me to explore new ideas, enhance my skills, and bring even more
   meaningful and enjoyable content to you.
 </p>
-<p class="ResponsiveP">Thank you all~</p>
-<p class="ResponsiveP">With love, Monikka♥</p>
+<p class="ThemedP">Thank you all~</p>
+<p class="ThemedP">With love, Monikka♥</p>
 `;

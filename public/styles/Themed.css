@@ -2,7 +2,7 @@
 .themed-chat-modal {
   padding: 5px;
 
-  background-color: var(--elementBackground);
+  background-color: var(--element);
   color: var(--text);
 
   border: 2px solid var(--accent);
@@ -24,7 +24,6 @@
 }
 
 .themed-chat-modal {
-  /* width: 80%; */
   font-size: 0.8em;
   position: relative;
 
@@ -49,9 +48,20 @@
 }
 
 .modal-button:hover {
-  background-color: var(--elementBackgroundHover);
+  background-color: var(--elementHover);
   text-shadow: 0 0 0.12em var(--textShadow);
   cursor: pointer;
+}
+
+.tmd-color-picker:disabled {
+  border: var(--blocked) solid 2px;
+  cursor: not-allowed;
+}
+
+code {
+  background-color: #ffffff20;
+  border-radius: 8px;
+  padding: 0px 5px;
 }
 
 .ThemedMessageContent {
@@ -65,7 +75,7 @@
 
 #TextAreaChatLog[data-colortheme='dark'] div.ChatMessage.ThemedMessage,
 #TextAreaChatLog[data-colortheme='dark2'] div.ChatMessage.ThemedMessage {
-  background-color: var(--elementBackground);
+  background-color: var(--element);
   border: 2px solid var(--accent);
   color: var(--text);
 }
@@ -102,16 +112,16 @@
 
 .ThemedH {
   font-size: 1em;
-  color: #333;
+  color: var(--text);
 }
 
 .ThemedP {
   font-size: 0.6em;
-  color: #555;
+  color: var(--text);
   line-height: 1.5;
 }
 
 .ThemedP:last-child {
   font-size: 0.8em;
-  color: #ff69b4;
+  color: color-mix(in srgb, var(--accentHover) 50%, var(--text) 50%);
 }

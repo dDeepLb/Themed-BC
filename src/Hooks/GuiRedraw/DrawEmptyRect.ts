@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, colors } from '../../Utilities/Color';
+import { _Color, plainColors } from '../../Utilities/Color';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
 export function hookDrawEmptyRect() {
@@ -22,7 +22,7 @@ export function hookDrawEmptyRect() {
       if (Color?.startsWith('%')) {
         switch (Color.substring(1).toLowerCase()) {
           case 'border':
-            drawEmptyRect(colors.elementBorder);
+            drawEmptyRect(plainColors.accent);
             break;
 
           default:
@@ -34,7 +34,7 @@ export function hookDrawEmptyRect() {
           case '#ffffff':
           case '#dddddd':
           case '#000000':
-            drawEmptyRect(colors.elementBorder);
+            drawEmptyRect(plainColors.accent);
             break;
 
           default:
