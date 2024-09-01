@@ -9,7 +9,9 @@ export function hookDrawTextFit() {
     HookPriority.Observe,
     (args: Parameters<typeof DrawTextFit>, next: (args: Parameters<typeof DrawTextFit>) => ReturnType<typeof DrawTextFit>) => {
       if (!doRedraw()) return next(args);
-
+      if (!args[0]) return next(args);
+      if (!args[4]) return next(args);
+      
       if (Color(args[4].toLowerCase()).hex() === '#000000') {
         args[4] = plainColors.text;
       }

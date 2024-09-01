@@ -9,6 +9,9 @@ export function hookDrawText() {
     HookPriority.Observe,
     (args: Parameters<typeof DrawText>, next: (args: Parameters<typeof DrawText>) => ReturnType<typeof DrawText>) => {
       if (!doRedraw()) return next(args);
+      if (!args[0]) return next(args);
+      if (!args[3]) return next(args);
+      
 
       if (Color(args[3].toLowerCase()).hex() === '#000000') {
         args[3] = plainColors.text;

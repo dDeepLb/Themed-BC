@@ -10,6 +10,9 @@ export function hookDrawTextWrap() {
     HookPriority.Observe,
     (args: Parameters<typeof DrawTextWrap>, next: (args: Parameters<typeof DrawTextWrap>) => ReturnType<typeof DrawTextWrap>) => {
       if (!doRedraw()) return next(args);
+      if (!args[0]) return next(args);
+      if (!args[5]) return next(args);
+      
 
       const [Text, X, , Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
       let [, , Y, , ,] = args;
