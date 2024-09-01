@@ -14,6 +14,7 @@ import { _Color } from './Utilities/Color';
 import { conDebug, conLog } from './Utilities/Console';
 import { settingsLoad } from './Utilities/Data';
 import { ModVersion } from './Utilities/ModDefinition';
+import { deepMergeMatchingProperties, hasSetter } from './Utilities/Other';
 import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
 
@@ -46,9 +47,14 @@ export async function init() {
     return;
   }
 
-  VersionModule.checkIfNewVersion();
   VersionModule.registerMigrator(new ColorModelMigrator);
   VersionModule.checkVersionMigration();
+  VersionModule.checkIfNewVersion();
+
+  for (const m of modules()) {
+    if (m.defaultSettings && hasSetter(m, 'defaultSettings'))
+      m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+  }
 
   _Color.composeRoot();
   BcStyle.injectAll();

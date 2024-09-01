@@ -71,9 +71,9 @@ export class VersionModule extends BaseModule {
     const PreviousVersion = VersionModule.loadVersion();
 
     let saveRequired = false;
+
     for (const migrator of VersionModule.Migrators) {
-      // if (VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
-      if (VersionModule.isItNewVersion) {
+      if (VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
         saveRequired = saveRequired || migrator.Migrate();
         conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
       }
