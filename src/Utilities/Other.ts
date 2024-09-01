@@ -96,3 +96,11 @@ export function exposeItem(item: any, name?: string, devExpose?: boolean) {
   if (!window['TMD']) window['TMD'] = {};
   window['TMD'][name || item.name || item] = item;
 }
+
+export function hasGetter<T extends object>(obj: T, prop: keyof T) {
+  return !!Object.getOwnPropertyDescriptor(obj, prop)?.['get'];
+}
+
+export function hasSetter<T extends object>(obj: T, prop: keyof T) {
+  return !!Object.getOwnPropertyDescriptor(obj, prop)?.['set'];
+}
