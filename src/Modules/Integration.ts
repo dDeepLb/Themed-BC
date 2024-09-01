@@ -2,7 +2,6 @@ import { BaseModule } from '../Base/BaseModule';
 import { Subscreen } from '../Base/SettingDefinitions';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { GuiIntegration } from '../Screens/Integration';
-import { deepMergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 import { BcStyle } from '../Utilities/Style';
 
@@ -35,7 +34,6 @@ export class IntegrationModule extends BaseModule {
   }
 
   Load(): void {
-    this.settings = deepMergeMatchingProperties(this.defaultSettings, this.settings) as IntegrationSettingsModel;
     hookFunction(
       'ChatRoomSync',
       HookPriority.Observe,

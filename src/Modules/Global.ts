@@ -3,7 +3,6 @@ import { Subscreen } from '../Base/SettingDefinitions';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GuiGlobal } from '../Screens/Global';
 import { changeModColors } from '../Utilities/Integration';
-import { deepMergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 
 export class GlobalModule extends BaseModule {
@@ -34,7 +33,6 @@ export class GlobalModule extends BaseModule {
   }
 
   Load(): void {
-    this.settings = deepMergeMatchingProperties(this.defaultSettings, this.settings) as GlobalSettingsModel;
     changeModColors();
 
     hookFunction(
