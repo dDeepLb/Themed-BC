@@ -16,7 +16,7 @@ import { PlayerStorage } from '../Utilities/Data';
 import { patchFunction, unpatchFuntion } from '../Utilities/SDK';
 
 export const doRedraw = () => {
-  return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
+  return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== 'ClubCard';
 };
 
 export class GuiRedrawModule extends BaseModule {
