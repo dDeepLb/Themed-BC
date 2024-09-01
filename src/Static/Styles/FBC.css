@@ -1,0 +1,66 @@
+.bce-img {
+  border-color: var(--elementBorder);
+}
+
+#bceRichOnlineProfile {
+  background: var(--elementBackground) !important;
+  color: var(--text) !important;
+  border: 2px dashed var(--elementBorder) !important;
+}
+
+#bce-instant-messenger {
+  top: 0%;
+  left: 0%;
+  background-color: var(--background);
+  color: var(--text);
+  border-color: var(--elementBorder);
+  max-width: 99.5%;
+  max-height: 85%;
+  min-width: 38%;
+  min-height: 30%;
+}
+
+.bce-friend-list-entry.bce-friend-list-selected {
+  border-top-color: var(--elementBorder);
+  border-bottom-color: var(--elementBorder);
+  background-color: var(--elementBackground);
+}
+
+.bce-friend-list-entry:hover {
+  background-color: var(--elementBackgroundHover);
+}
+
+#bce-message-right-container {
+  border-left-color: var(--elementBorder);
+}
+
+#bce-message-input {
+  border-top: 1px solid var(--elementBorder);
+  border-bottom: 1px solid var(--elementBorder);
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.bce-message-divider {
+  border-bottom-color: var(--elementBorder);
+}
+
+.bce-message-sender {
+  text-shadow: 0.05em 0.05em var(--textShadow);
+}
+
+.bce-message-Message .bce-message-sender {
+  text-shadow: 0.05em 0.05em var(--textShadow);
+}
+
+#bce-friend-search {
+  background-color: var(--background);
+  border-bottom-color: var(--elementBorder);
+  color: var(--text);
+}
+
+.bce-colors .bce-dark-input {
+  background-color: var(--elementBackground);
+  border: 1px solid var(--elementBorder);
+  color: var(--text);
+}

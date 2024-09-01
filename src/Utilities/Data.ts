@@ -1,11 +1,12 @@
-import { SettingsModel } from '../Models/Settings';
 import { ModName } from './ModDefinition';
+import { ColorsSettingsModel } from '../Models/Colors';
+import { SettingsModel } from '../Models/Settings';
 import { _String } from './String';
 
 export const PlayerStorage = () => (typeof Player?.[ModName] === 'object' ? CommonCloneDeep(Player?.[ModName]) : undefined);
 export const ExtensionStorage = () => Player.ExtensionSettings[ModName];
 
-export function settingsLoad() {
+export function dataTake() {
   if (ExtensionStorage()) {
     Player[ModName] = JSON.parse(LZString.decompressFromBase64(ExtensionStorage())) as SettingsModel;
   } else if (Player.OnlineSettings[ModName]) {
@@ -18,7 +19,7 @@ export function settingsLoad() {
   }
 }
 
-export function settingsSave() {
+export function dataStore() {
   if (!ExtensionStorage()) Player.ExtensionSettings[ModName] = '';
   const Data: SettingsModel = {
     Version: PlayerStorage().Version,
@@ -31,7 +32,7 @@ export function settingsSave() {
   ServerPlayerExtensionSettingsSync(ModName);
 }
 
-export function settingsReset() {
-  Player[ModName] = <SettingsModel>{};
-  settingsSave();
+export function dataErase() {
+  Player[ModName].ColorsModule = <ColorsSettingsModel>{};
+  dataStore();
 }

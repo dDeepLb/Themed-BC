@@ -1,13 +1,11 @@
 import { BaseSettingsModel } from './Global';
 
 export type IntegrationSettingsModel = BaseSettingsModel & {
-  inputs: boolean;
-  chat: boolean;
-  friendList: boolean;
-  friendListBlur: boolean;
-  scrollbar: boolean;
-  selection: boolean;
-  WCE: boolean;
+  BC: boolean;
+  BC_Chat: boolean;
+  BC_FriendList: boolean;
+  BC_Other: boolean;
+  FBC: boolean;
   FUSAM: boolean;
   TTS: boolean;
   MBS: boolean;

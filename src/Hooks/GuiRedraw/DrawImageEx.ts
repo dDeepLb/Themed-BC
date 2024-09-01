@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { plainColors } from '../../Utilities/Color';
+import { colors } from '../../Utilities/Color';
 import { _Image } from '../../Utilities/Drawing';
 import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
 
@@ -13,10 +13,13 @@ export function hookDrawImageEx() {
       if (!_Image.doDrawImage(args[0])) return next(args);
 
       const [Source, Canvas, X, Y, Options] = args;
-      Options.HexColor = plainColors.accent;
-      Options.FullAlpha = true;
+      const color = args[4].HexColor ?? colors.icon;
+      const colorizedImage = _Image.getColorized(Source, color);
 
-      next([Source, Canvas, X, Y, Options]);
+      if (!colorizedImage) return next(args);
+
+      const imageSource = _Image.turnToBase64(colorizedImage, `${Source}${args[4].HexColor}`);
+      next([imageSource ?? Source, Canvas, X, Y, Options]);
     },
     ModuleCategory.GuiRedraw
   );
