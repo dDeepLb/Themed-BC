@@ -58,6 +58,12 @@
   cursor: not-allowed;
 }
 
+code {
+  background-color: #ffffff20;
+  border-radius: 8px;
+  padding: 0px 5px;
+}
+
 .ThemedMessageContent {
   display: inline;
 }
