@@ -32,7 +32,7 @@ export class ProfilesModule extends BaseModule {
     
     for (let i = 0; i < 3; i++) {
       const profileIndex = i + 1;
-      if (!PlayerStorage()?.ProfilesModule?.[profileIndex]) {
+      if (!PlayerStorage()?.ProfilesModule?.[profileIndex] || Object.keys(PlayerStorage()?.ProfilesModule?.[profileIndex]).length === 0) {
         Player[ModName].ProfilesModule[profileIndex] = {
           data: <ProfileSaveModel>{},
           name: ''
