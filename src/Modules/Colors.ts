@@ -42,11 +42,6 @@ export class ColorsModule extends BaseModule {
     return <ColorsSettingsModel>{
       base: {
         main: primaryColor.hex(),
-        accent: accentColor.hex(),
-        text: textColor.hex(),
-      },
-      advanced: {
-        main: primaryColor.hex(),
         element: elementColor.hex(),
         elementHover: elementColor.lighten(0.3).hex(),
         elementDisabled: elementColor.darken(0.2).hex(),

@@ -1,7 +1,7 @@
-import { Setting } from '../../.types/setting';
+import { Input } from '../../.types/setting';
 import { GuiSubscreen } from '../Base/BaseSetting';
 import { getModule } from '../Base/Modules';
-import { ColorsSettingsModel } from '../Models/Colors';
+import { BaseColorsModel, ColorsSettingsModel } from '../Models/Colors';
 import { ColorsModule } from '../Modules/Colors';
 import { getText } from '../Translation';
 
@@ -18,20 +18,20 @@ export class GuiColors extends GuiSubscreen {
     return super.settings as ColorsSettingsModel;
   }
 
-  get multipageStructure(): Setting[][] {
+  get multipageStructure(): Input[][] {
     const defaultSettings = getModule<ColorsModule>('ColorsModule').defaultSettings;
-    const isAdvMode = Player.Themed.GlobalModule.doUseAdvancedColoring;
-    const settings = isAdvMode ? this.settings.advanced : this.settings.base;
-    const modeDefaults = isAdvMode ? defaultSettings.advanced : defaultSettings.base;
+    const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
+    const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
 
-    return [Object.entries(settings).map(([key, value]) => ({
+    return [Object.entries(this.settings.base).map(([key, value]: [keyof BaseColorsModel, string]) => ({
       type: 'color',
       id: key,
       label: `colors.setting.${key}.name`,
       description: `colors.setting.${key}.desc`,
-      setting: () => value ?? modeDefaults[key],
-      setSetting: (val) => (settings[key] = val)
-    })),
+      setting: () => value ?? defaultSettings.base[key],
+      setSetting: (val) => (this.settings.base[key] = val),
+      disabled: isBaseMode && !baseModeKey(key)
+    })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)) as Input[],
     Object.entries(this.settings.special).map(([key, value]) => ({
       type: 'color',
       id: key,

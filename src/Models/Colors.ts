@@ -1,16 +1,11 @@
 import { BaseSettingsModel } from './Global';
 
 export type ColorsSettingsModel = BaseSettingsModel &  {
-  base: BaseColors;
-  advanced: AdvancedColors;
+  base: BaseColorsModel;
   special: SpecialColorsModel;
 };
 
-export type BaseColors = Pick<ColorsModel, 'main' | 'text' | 'accent'>;
-
-export type AdvancedColors = Pick<ColorsModel, keyof ColorsModel>;
-
-export type ColorsModel = {
+export type BaseColorsModel = {
   main: string;
   accent: string;
   accentHover: string;

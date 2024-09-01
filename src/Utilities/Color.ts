@@ -1,7 +1,7 @@
 import Color from 'color';
-import { ColorsModel } from '../Models/Colors';
+import { BaseColorsModel } from '../Models/Colors';
 
-export const plainColors: ColorsModel = {
+export const plainColors: BaseColorsModel = {
   main: '',
   element: '',
   elementHover: '',
@@ -50,8 +50,8 @@ export const _Color = {
     });
 
     if (globalSettings.doUseAdvancedColoring) {
-      Object.keys(colorSettings.advanced).forEach(key => {
-        plainColors[key] = colorSettings.advanced[key];
+      Object.keys(colorSettings.base).forEach(key => {
+        plainColors[key] = colorSettings.base[key];
       });
     } else {
       const primaryColor = _Color.getHexComputed(colorSettings.base.main);
