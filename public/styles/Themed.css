@@ -53,6 +53,11 @@
   cursor: pointer;
 }
 
+.tmd-color-picker:disabled {
+  border: var(--blocked) solid 2px;
+  cursor: not-allowed;
+}
+
 .ThemedMessageContent {
   display: inline;
 }

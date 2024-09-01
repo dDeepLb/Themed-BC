@@ -107,9 +107,11 @@ export abstract class GuiSubscreen {
           case 'number':
             ElementCreateInput(item.id, 'number', item.setting(), '255');
             break;
-          case 'color':
-            ElementCreateInput(item.id, 'color', item.setting());
+          case 'color': {
+            const elm = ElementCreateInput(item.id, 'color', item.setting());
+            elm.classList.add('tmd-color-picker');
             break;
+          }
         }
       })
     );
