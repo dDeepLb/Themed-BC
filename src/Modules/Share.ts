@@ -3,7 +3,7 @@ import { getModule } from '../Base/Modules';
 import { ColorsSettingsModel } from '../Models/Colors';
 import { getText } from '../Translation';
 import { settingsSave } from '../Utilities/Data';
-import { sendAction, useLgcModal } from '../Utilities/Other';
+import { sendAction, sendLocalSmart, useLgcModal } from '../Utilities/Other';
 import { HookPriority, hookFunction } from '../Utilities/SDK';
 import { ColorsModule } from './Colors';
 
@@ -35,9 +35,17 @@ export class ShareModule extends BaseModule {
       text.classList.add('modal-prompt');
       button.classList.add('modal-button');
 
-      const theme = data.Dictionary[0]['ThemedMessage'].Theme;
+      const messageData = data.Dictionary[0]['ThemedMessage'];
+
+      const theme = messageData.Theme;
+      const version = messageData.ThemeVersion;
 
       button.addEventListener('click', () => {
+        if (!version || version !== Player.Themed.Version) {
+          sendLocalSmart('theme-not-up-to-date', 'Theme sent by ' + senderName + ' is not up-to-date!');
+          return;
+        }
+        
         useLgcModal(
           prompt,
           () => {
@@ -68,7 +76,7 @@ export class ShareModule extends BaseModule {
       Type: 'Hidden',
       Content: 'ThemedTheme',
       Sender: Player.MemberNumber,
-      Dictionary: [<ThemedMessageDictionaryEntry>{ ThemedMessage: { Theme: Player.Themed.ColorsModule } }]
+      Dictionary: [<ThemedMessageDictionaryEntry>{ ThemedMessage: { ThemeVersion: Player.Themed.Version, Theme: Player.Themed.ColorsModule } }]
     };
 
     ServerSend('ChatRoomChat', packet);
