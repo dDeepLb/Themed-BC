@@ -1,8 +1,9 @@
 import { GuiSubscreen } from '../Base/BaseSetting';
-import { modules } from '../Base/Modules';
+import { getModule } from '../Base/Modules';
 import { getText } from '../Translation';
 import { _Color } from '../Utilities/Color';
-import { settingsReset } from '../Utilities/Data';
+import { dataErase } from '../Utilities/Data';
+import { _Image } from '../Utilities/Drawing';
 import { BcStyle } from '../Utilities/Style';
 
 export class GuiReset extends GuiSubscreen {
@@ -17,7 +18,7 @@ export class GuiReset extends GuiSubscreen {
   private allowedConfirmTime: number | null = 0;
 
   Load() {
-    this.allowedConfirmTime = Date.now() + 5_000;
+    this.allowedConfirmTime = Date.now() + 10_000;
     super.Load();
   }
 
@@ -69,16 +70,13 @@ export class GuiReset extends GuiSubscreen {
   Confirm() {
     this.allowedConfirmTime = null;
 
-    settingsReset();
-    
-    for (const module of modules()) {
-      module.registerDefaultSettings();
-    }
+    dataErase();
+    getModule('ColorsModule').registerDefaultSettings();
 
     _Color.composeRoot();
     BcStyle.reloadAll();
+    _Image.clearCache();
 
     this.setSubscreen(null);
-    PreferenceSubscreenExtensionsClear();
   }
 }

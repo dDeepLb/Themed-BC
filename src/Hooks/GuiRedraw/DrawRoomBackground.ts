@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { plainColors } from '../../Utilities/Color';
+import { colors } from '../../Utilities/Color';
 import { PlayerStorage } from '../../Utilities/Data';
 import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
 
@@ -12,12 +12,12 @@ export function hookDrawRoomBackground() {
 
       if (URL.includes('Sheet.jpg')) {
         if (PlayerStorage().GlobalModule.doUseFlatColor) {
-          DrawRect(0, 0, 2000, 1000, plainColors.main);
+          DrawRect(0, 0, 2000, 1000, colors.mainBackground);
         } else {
           next([URL, ...args]);
           MainCanvas.save();
           MainCanvas.globalCompositeOperation = 'multiply';
-          DrawRect(0, 0, 2000, 1000, plainColors.main);
+          DrawRect(0, 0, 2000, 1000, colors.mainBackground);
           MainCanvas.restore();
         }
       } else {

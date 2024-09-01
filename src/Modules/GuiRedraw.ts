@@ -16,7 +16,7 @@ import { PlayerStorage } from '../Utilities/Data';
 import { patchFunction, unpatchFuntion } from '../Utilities/SDK';
 
 export const doRedraw = () => {
-  return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== 'ClubCard';
+  return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
 };
 
 export class GuiRedrawModule extends BaseModule {
@@ -44,29 +44,14 @@ export class GuiRedrawModule extends BaseModule {
     if (this.patched) return false;
 
     patchFunction('ChatSearchNormalDraw', {
-      // button patch
       'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);':
-        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "%searchFullBlock" : HasBlock ? "%searchBlock" : HasFriends && IsFull ? "%searchFullFriend" : HasFriends ? "%searchFriend" : IsFull ? "%searchFull" : "White"), null, null, IsFull);',
-      // friend in room patch
+        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#4d1b1b" : HasBlock ? "#6e0c0c" : HasFriends && IsFull ? "#225c30" : HasFriends ? "#4d854d" : IsFull ? "#444" : "White"), null, null, IsFull);',
       'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);':
         'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-      // room friend title patch
       'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);':
         'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-      // game hint patch
-      'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#9999FF", 1);': 
-        'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchGame", 1);',
-      // block hint patch
       'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FF9999", 1);':
-        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchBlock", 1);'
-    });
-
-    patchFunction('ChatSearchPermissionDraw', {
-      'DrawRect(X, Y, 630, 85, Hover ? "green" : "lime");':
-        'DrawRect(X, Y, 630, 85, "%allowed");',
-        
-      'DrawRect(X, Y, 630, 85, Hover ? "red" : "pink");':
-      'DrawRect(X, Y, 630, 85, "%searchBlock");'
+        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#6e0c0c", 1);'
     });
 
     patchFunction('DialogDraw', {
@@ -81,7 +66,6 @@ export class GuiRedrawModule extends BaseModule {
     if (!this.patched) return false;
 
     unpatchFuntion('ChatSearchNormalDraw');
-    unpatchFuntion('ChatSearchPermissionDraw');
     unpatchFuntion('DialogDraw');
 
     this.patched = false;

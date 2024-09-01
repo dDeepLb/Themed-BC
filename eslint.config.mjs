@@ -7,6 +7,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    files: ['src/**/*', '.types/**/*', 'build.prod.mjs'],
     ignores: ['dist/**/*', 'node_modules/**/*'],
     plugins: { 'style': stylistic },
     rules: {

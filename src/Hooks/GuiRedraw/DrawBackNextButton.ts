@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { plainColors } from '../../Utilities/Color';
+import { colors } from '../../Utilities/Color';
 import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
 
 export function hookDrawBackNextButton() {
@@ -24,10 +24,10 @@ export function hookDrawBackNextButton() {
 
       MainCanvas.beginPath();
       MainCanvas.rect(Left, Top, Width, Height);
-      MainCanvas.fillStyle = plainColors.element;
+      MainCanvas.fillStyle = colors.elementBackground;
       MainCanvas.fillRect(Left, Top, Width, Height);
       if (MouseIn(Left, Top, Width, Height) && !CommonIsMobile && !Disabled) {
-        MainCanvas.fillStyle = plainColors.elementHover;
+        MainCanvas.fillStyle = colors.elementBackgroundHover;
         if (MouseX > RightSplit) {
           MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
         } else if (MouseX <= LeftSplit) {
@@ -36,12 +36,12 @@ export function hookDrawBackNextButton() {
           MainCanvas.fillRect(Left + ArrowWidth, Top, Width - ArrowWidth * 2, Height);
         }
       } else if (CommonIsMobile && ArrowWidth < Width / 2 && !Disabled) {
-        MainCanvas.fillStyle = plainColors.elementDisabled;
+        MainCanvas.fillStyle = colors.elementBackgroundDisabled;
         MainCanvas.fillRect(Left, Top, ArrowWidth, Height);
         MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
       }
       MainCanvas.lineWidth = 2;
-      MainCanvas.strokeStyle = plainColors.accent;
+      MainCanvas.strokeStyle = colors.elementBorder;
       MainCanvas.stroke();
       MainCanvas.closePath();
 

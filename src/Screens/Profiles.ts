@@ -30,6 +30,12 @@ export class GuiProfiles extends GuiSubscreen {
 
     for (let i = 0; i < 3; i++) {
       const profileIndex = i + 1;
+      if (!PlayerStorage()?.ProfilesModule?.[profileIndex]) {
+        Player[ModName].ProfilesModule[profileIndex] = {
+          data: <ProfileSaveModel>{},
+          name: ''
+        };
+      }
       this.ProfileNames[i] = PlayerStorage()?.ProfilesModule?.[profileIndex]?.name ?? '';
     }
 
@@ -37,7 +43,7 @@ export class GuiProfiles extends GuiSubscreen {
   }
 
   Run() {
-    MainCanvas.save();
+    const prev = MainCanvas.textAlign;
     super.Run();
     MainCanvas.textAlign = 'left';
 
@@ -57,7 +63,7 @@ export class GuiProfiles extends GuiSubscreen {
     if (this.PreferenceText)
       DrawText(this.PreferenceText, GuiSubscreen.START_X + 250, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', 'Gray');
 
-    MainCanvas.restore();
+    MainCanvas.textAlign = prev;
   }
 
   Click() {
@@ -109,12 +115,12 @@ export class GuiProfiles extends GuiSubscreen {
       return false;
     }
 
-    if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length < 1) {
+    if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
       return false;
     }
 
     const data = PlayerStorage().ProfilesModule[profileId].data;
-    if (Object.keys(data).length < 1) {
+    if (!data) {
       return false;
     }
 
@@ -137,8 +143,10 @@ export class GuiProfiles extends GuiSubscreen {
       return false;
     }
 
-    Player[ModName].ProfilesModule[profileId] = <ProfileEntryModel>{};
-    return true;
+    if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
+      Player[ModName].ProfilesModule[profileId] = <ProfileEntryModel>{};
+      return true;
+    }
   }
 
   handleProfilesSaving(profileIndex: number) {
@@ -188,7 +196,7 @@ export class GuiProfiles extends GuiSubscreen {
   handleProfilesDeleting(profileIndex: number) {
     const formerIndex = profileIndex - 1;
     if (MouseIn(this.getXPos(profileIndex) + 750, this.getYPos(profileIndex) - 32, 200, 64)) {
-      if (!this.ProfileNames[formerIndex]) return;
+      if (this.ProfileNames[formerIndex] === null) return;
 
       if (this.deleteProfile(profileIndex)) {
         if (this.ProfileNames[formerIndex] === '') {
