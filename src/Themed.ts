@@ -1,6 +1,6 @@
 import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
-import { V140Migrator } from './Migrators/ColorModelMigrator';
+import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
 import { GlobalModule } from './Modules/Global';
