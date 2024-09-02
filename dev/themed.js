@@ -3484,30 +3484,56 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_BaseMigrator, "BaseMigrator");
   var BaseMigrator = _BaseMigrator;
 
-  // src/Migrators/ColorModelMigrator.ts
-  var _ColorModelMigrator = class _ColorModelMigrator extends BaseMigrator {
+  // src/Migrators/V140Migrator.ts
+  var _V140Migrator = class _V140Migrator extends BaseMigrator {
     get MigrationVersion() {
       return "1.4.0";
     }
     Migrate() {
-      if (!Player.Themed.ColorsModule) return false;
-      if (Player.Themed.ColorsModule["primaryColor"]) {
-        Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
-        delete Player.Themed.ColorsModule["primaryColor"];
+      const colorsData = Player.Themed.ColorsModule;
+      const integrationsData = Player.Themed.IntegrationModule;
+      if (colorsData) {
+        if (Player.Themed.ColorsModule["primaryColor"]) {
+          Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
+          delete Player.Themed.ColorsModule["primaryColor"];
+        }
+        if (Player.Themed.ColorsModule["accentColor"]) {
+          Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
+          delete Player.Themed.ColorsModule["accentColor"];
+        }
+        if (Player.Themed.ColorsModule["textColor"]) {
+          Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
+          delete Player.Themed.ColorsModule["textColor"];
+        }
       }
-      if (Player.Themed.ColorsModule["accentColor"]) {
-        Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
-        delete Player.Themed.ColorsModule["accentColor"];
-      }
-      if (Player.Themed.ColorsModule["textColor"]) {
-        Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
-        delete Player.Themed.ColorsModule["textColor"];
+      if (integrationsData) {
+        if (Player.Themed.IntegrationModule["BC"]) {
+          Player.Themed.IntegrationModule.inputs = Player.Themed.IntegrationModule["BC"];
+          delete Player.Themed.IntegrationModule["BC"];
+        }
+        if (Player.Themed.IntegrationModule["BC_Chat"]) {
+          Player.Themed.IntegrationModule.chat = Player.Themed.IntegrationModule["BC_Chat"];
+          delete Player.Themed.IntegrationModule["BC_Chat"];
+        }
+        if (Player.Themed.IntegrationModule["BC_FriendList"]) {
+          Player.Themed.IntegrationModule.friendList = Player.Themed.IntegrationModule["BC_FriendList"];
+          delete Player.Themed.IntegrationModule["BC_FriendList"];
+        }
+        if (Player.Themed.IntegrationModule["BC_Other"]) {
+          Player.Themed.IntegrationModule.scrollbar = Player.Themed.IntegrationModule["BC_Other"];
+          Player.Themed.IntegrationModule.selection = Player.Themed.IntegrationModule["BC_Other"];
+          delete Player.Themed.IntegrationModule["BC_Other"];
+        }
+        if (Player.Themed.IntegrationModule["FBC"]) {
+          Player.Themed.IntegrationModule.WCE = Player.Themed.IntegrationModule["FBC"];
+          delete Player.Themed.IntegrationModule["FBC"];
+        }
       }
       return true;
     }
   };
-  __name(_ColorModelMigrator, "ColorModelMigrator");
-  var ColorModelMigrator = _ColorModelMigrator;
+  __name(_V140Migrator, "V140Migrator");
+  var V140Migrator = _V140Migrator;
 
   // src/Modules/Colors.ts
   var import_color6 = __toESM(require_color());
@@ -4376,7 +4402,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       unload();
       return;
     }
-    VersionModule.registerMigrator(new ColorModelMigrator());
+    VersionModule.registerMigrator(new V140Migrator());
     VersionModule.checkVersionMigration();
     VersionModule.checkIfNewVersion();
     for (const m of modules()) {
