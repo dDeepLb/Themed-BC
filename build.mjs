@@ -4,14 +4,22 @@ import progress from 'esbuild-plugin-progress';
 import time from 'esbuild-plugin-time';
 
 (async () => {
+  /* if built on GitHub */
+  const isRemote = !!process.env.environment;
+  const isDev = process.env.environment === 'development';
+  const prodPath = 'https://ddeeplb.github.io/Themed-BC';
+  const devPath = `${prodPath}/dev`;
+  const remotePath = isDev ? devPath : prodPath;
+
   const PORT = 1001;
   const HOST = 'localhost';
-  const devPath = `http://${HOST}:${PORT}`;
-  const prodPath = 'https://ddeeplb.github.io/Themed-BC';
-  const isDev = process.argv.includes('--dev');
-  const PUBLIC_URL = `${isDev ? devPath : prodPath}/public`;
+  const localPath = `http://${HOST}:${PORT}`;
+  const isLocal = process.argv.includes('--dev') || !isRemote;
 
-  const ctx = await (isDev ? context : build)({
+  const PUBLIC_URL = `${isLocal ? localPath : remotePath}/public`;
+
+  /** @type {import('esbuild').BuildOptions} */
+  const buildOptions = {
     entryPoints: ['./src/Themed.ts'],
     outfile: './dist/themed.js',
     format: 'iife',
@@ -35,16 +43,27 @@ import time from 'esbuild-plugin-time';
       progress(),
       time(),
     ],
-  }).catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+  };
 
-  if (isDev) {
+  if (isRemote) {
+    await build(buildOptions)
+      .catch((err) => {
+        console.error(err);
+        process.exit(1);
+      });
+
+    return;
+  } else if (isLocal) {
+    const ctx = await context(buildOptions);
+
     await ctx.watch();
     console.info('Watching for changes...');
 
     const server = await ctx.serve({ host: HOST, port: PORT, servedir: 'dist' });
     console.info(`Server running at ${server.host}:${server.port}`);
+
+    return;
   }
+
+  throw new Error('Unknown environment. Shit happens.');
 })();
