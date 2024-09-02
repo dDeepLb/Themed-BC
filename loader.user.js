@@ -35,6 +35,6 @@
   const script = document.createElement('script');
   script.type = 'module';
   script.setAttribute('crossorigin', 'anonymous');
-  script.src = `${modLink}${ending}${isPublic ? '' : '?' + Date.now()}`;
+  script.src = `${modLink}${ending}${isPublic ? '?' + Date.now() : ''}`;
   document.head.appendChild(script);
 })();
