@@ -25,6 +25,7 @@
   .ChatMessageLocalMessage {
     --base-color: var(--main);
     color: var(--text);
+    color: color-mix(in srgb, var(--text) 50%, gray 50%);
 
     &::before,
     &::after {
