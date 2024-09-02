@@ -3,7 +3,6 @@ import { Subscreen } from '../Base/SettingDefinitions';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GuiGlobal } from '../Screens/Global';
 import { changeModColors } from '../Utilities/Integration';
-import { mergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 
 export class GlobalModule extends BaseModule {
@@ -25,7 +24,8 @@ export class GlobalModule extends BaseModule {
     return <GlobalSettingsModel>{
       themedEnabled: true,
       doVanillaGuiOverhaul: true,
-      doUseFlatColor: true,
+      doUseAdvancedColoring: false,
+      doUseFlatColor: false,
       doShowLocaleTime: true,
       doIndicateCharacterAbsence: true,
       doShowNewVersionMessage: true
@@ -33,7 +33,6 @@ export class GlobalModule extends BaseModule {
   }
 
   Load(): void {
-    this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
     changeModColors();
 
     hookFunction(

@@ -1,5 +1,6 @@
 import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
+import { ColorModelMigrator } from './Migrators/ColorModelMigrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
 import { GlobalModule } from './Modules/Global';
@@ -11,9 +12,9 @@ import { VersionModule } from './Modules/Version';
 import { Localization } from './Translation';
 import { _Color } from './Utilities/Color';
 import { conDebug, conLog } from './Utilities/Console';
-import { dataStore, dataTake } from './Utilities/Data';
-import { ModName, ModVersion } from './Utilities/ModDefinition';
-import { RibbonMenu } from './Utilities/RibbonMenu';
+import { settingsLoad } from './Utilities/Data';
+import { ModVersion } from './Utilities/ModDefinition';
+import { deepMergeMatchingProperties, hasSetter } from './Utilities/Other';
 import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
 
@@ -34,23 +35,26 @@ function initWait() {
   }
 }
 
-export function init() {
+export async function init() {
   if (window.ThemedLoaded) return;
 
-  Localization.load();
+  await Localization.load();
 
-  RibbonMenu.registerMod(ModName);
-
-  dataTake();
+  settingsLoad();
 
   if (!initModules()) {
     unload();
     return;
   }
 
+  VersionModule.registerMigrator(new ColorModelMigrator);
+  VersionModule.checkVersionMigration();
   VersionModule.checkIfNewVersion();
 
-  dataStore();
+  for (const m of modules()) {
+    if (m.defaultSettings && hasSetter(m, 'defaultSettings'))
+      m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+  }
 
   _Color.composeRoot();
   BcStyle.injectAll();

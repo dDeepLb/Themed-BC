@@ -7,7 +7,7 @@ declare interface Window {
   RibbonMenuMods: string[];
 }
 
-declare const serverUrl: string;
+declare const PUBLIC_URL: string;
 
 declare module '*.html' {
   const value: string;

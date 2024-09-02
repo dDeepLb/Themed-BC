@@ -1,0 +1,94 @@
+.tts-dialog {
+  background-color: var(--main);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.tts-option {
+  background-color: var(--element);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.tts-select {
+  background-color: var(--element);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.tts-tab {
+  background-color: var(--element);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.tts-btn {
+  background-color: var(--element);
+  border: 1px solid var(--accent);
+  color: var(--text);
+}
+
+.tts-tab.active {
+  background-color: var(--accent);
+}
+
+.tts-toggle-container {
+  border-color: var(--accent);
+}
+
+.tts-boxed-container {
+  border-color: var(--accent);
+}
+
+.tts-link {
+  border-color: var(--accent);
+  background-color: var(--element);
+  color: var(--text);
+}
+
+.tts-link:hover {
+  background-color: var(--element);
+  color: var(--accent);
+}
+
+.mo-modal-content {
+  background-color: var(--main);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  font-size: min(3dvh, 1.5dvw);
+}
+
+.mo-closer {
+  color: var(--text);
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: var(--element);
+  border: 2px solid var(--accent);
+  aspect-ratio: 1 / 1;
+  display: block;
+  width: min(3dvh, 1.5dvw);
+  text-align: center;
+}
+
+.mo-closer+div {
+  margin-right: min(3dvh, 1.5dvw);
+  margin-bottom: min(3dvh, 1.5dvw);
+}
+
+label[for^="mo_userInput"] {
+  color: var(--text);
+  font-size: min(3dvh, 1.5dvw);
+}
+
+input[id^="mo_userInput"] {
+  font-size: min(3dvh, 1.5dvw);
+}
+
+button[id^="mo_submitInput"] {
+  background-color: var(--element);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  font-size: min(3dvh, 1.5dvw);
+}

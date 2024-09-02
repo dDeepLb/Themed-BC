@@ -2,7 +2,6 @@ import { BaseModule } from '../Base/BaseModule';
 import { Subscreen } from '../Base/SettingDefinitions';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { GuiIntegration } from '../Screens/Integration';
-import { mergeMatchingProperties } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 import { BcStyle } from '../Utilities/Style';
 
@@ -21,11 +20,13 @@ export class IntegrationModule extends BaseModule {
 
   get defaultSettings() {
     return <IntegrationSettingsModel>{
-      BC: true,
-      BC_Chat: true,
-      BC_FriendList: true,
-      BC_Other: true,
-      FBC: true,
+      inputs: true,
+      chat: true,
+      friendList: true,
+      friendListBlur: false,
+      scrollbar: true,
+      selection: true,
+      WCE: true,
       FUSAM: true,
       TTS: true,
       MBS: true
@@ -33,7 +34,6 @@ export class IntegrationModule extends BaseModule {
   }
 
   Load(): void {
-    this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
     hookFunction(
       'ChatRoomSync',
       HookPriority.Observe,

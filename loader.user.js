@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Themed BC
 // @namespace https://www.bondageprojects.com/
-// @version 1.3.2
+// @version 1.4.0
 // @description Bondage Club with themes!
 // @author  dDeepLb
 // @match https://bondageprojects.elementfx.com/*
@@ -10,7 +10,7 @@
 // @match https://www.bondage-europe.com/*
 // @match https://bondageprojects.com/*
 // @match https://www.bondageprojects.com/*
-// @match http://localhost:55555/*
+// @match http://localhost:*/*
 // @match http://localhost/BondageClub/*
 
 // @grant none
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 (function () {
-  "use strict";
+  'use strict';
   const ending = 'themed.js';
   const prodPath = 'https://ddeeplb.github.io/Themed-BC/';
   const devPath = `${prodPath}dev/`;
@@ -32,9 +32,9 @@
   if (isDev) modLink = devPath;
   else if (isLocal) modLink = localPath;
 
-  const script = document.createElement("script");
-  script.type = "module";
-  script.setAttribute("crossorigin", "anonymous");
-  script.src = `${modLink}${ending}${isPublic ? '' : '?' + Date.now()}`;
+  const script = document.createElement('script');
+  script.type = 'module';
+  script.setAttribute('crossorigin', 'anonymous');
+  script.src = `${modLink}${ending}${isPublic ? '?' + Date.now() : ''}`;
   document.head.appendChild(script);
 })();
