@@ -6,6 +6,7 @@ var Themed = (() => {
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
@@ -31,6 +32,1593 @@ var Themed = (() => {
     mod
   ));
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+
+  // node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js
+  var require_color_name = __commonJS({
+    "node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js"(exports, module) {
+      "use strict";
+      module.exports = {
+        "aliceblue": [240, 248, 255],
+        "antiquewhite": [250, 235, 215],
+        "aqua": [0, 255, 255],
+        "aquamarine": [127, 255, 212],
+        "azure": [240, 255, 255],
+        "beige": [245, 245, 220],
+        "bisque": [255, 228, 196],
+        "black": [0, 0, 0],
+        "blanchedalmond": [255, 235, 205],
+        "blue": [0, 0, 255],
+        "blueviolet": [138, 43, 226],
+        "brown": [165, 42, 42],
+        "burlywood": [222, 184, 135],
+        "cadetblue": [95, 158, 160],
+        "chartreuse": [127, 255, 0],
+        "chocolate": [210, 105, 30],
+        "coral": [255, 127, 80],
+        "cornflowerblue": [100, 149, 237],
+        "cornsilk": [255, 248, 220],
+        "crimson": [220, 20, 60],
+        "cyan": [0, 255, 255],
+        "darkblue": [0, 0, 139],
+        "darkcyan": [0, 139, 139],
+        "darkgoldenrod": [184, 134, 11],
+        "darkgray": [169, 169, 169],
+        "darkgreen": [0, 100, 0],
+        "darkgrey": [169, 169, 169],
+        "darkkhaki": [189, 183, 107],
+        "darkmagenta": [139, 0, 139],
+        "darkolivegreen": [85, 107, 47],
+        "darkorange": [255, 140, 0],
+        "darkorchid": [153, 50, 204],
+        "darkred": [139, 0, 0],
+        "darksalmon": [233, 150, 122],
+        "darkseagreen": [143, 188, 143],
+        "darkslateblue": [72, 61, 139],
+        "darkslategray": [47, 79, 79],
+        "darkslategrey": [47, 79, 79],
+        "darkturquoise": [0, 206, 209],
+        "darkviolet": [148, 0, 211],
+        "deeppink": [255, 20, 147],
+        "deepskyblue": [0, 191, 255],
+        "dimgray": [105, 105, 105],
+        "dimgrey": [105, 105, 105],
+        "dodgerblue": [30, 144, 255],
+        "firebrick": [178, 34, 34],
+        "floralwhite": [255, 250, 240],
+        "forestgreen": [34, 139, 34],
+        "fuchsia": [255, 0, 255],
+        "gainsboro": [220, 220, 220],
+        "ghostwhite": [248, 248, 255],
+        "gold": [255, 215, 0],
+        "goldenrod": [218, 165, 32],
+        "gray": [128, 128, 128],
+        "green": [0, 128, 0],
+        "greenyellow": [173, 255, 47],
+        "grey": [128, 128, 128],
+        "honeydew": [240, 255, 240],
+        "hotpink": [255, 105, 180],
+        "indianred": [205, 92, 92],
+        "indigo": [75, 0, 130],
+        "ivory": [255, 255, 240],
+        "khaki": [240, 230, 140],
+        "lavender": [230, 230, 250],
+        "lavenderblush": [255, 240, 245],
+        "lawngreen": [124, 252, 0],
+        "lemonchiffon": [255, 250, 205],
+        "lightblue": [173, 216, 230],
+        "lightcoral": [240, 128, 128],
+        "lightcyan": [224, 255, 255],
+        "lightgoldenrodyellow": [250, 250, 210],
+        "lightgray": [211, 211, 211],
+        "lightgreen": [144, 238, 144],
+        "lightgrey": [211, 211, 211],
+        "lightpink": [255, 182, 193],
+        "lightsalmon": [255, 160, 122],
+        "lightseagreen": [32, 178, 170],
+        "lightskyblue": [135, 206, 250],
+        "lightslategray": [119, 136, 153],
+        "lightslategrey": [119, 136, 153],
+        "lightsteelblue": [176, 196, 222],
+        "lightyellow": [255, 255, 224],
+        "lime": [0, 255, 0],
+        "limegreen": [50, 205, 50],
+        "linen": [250, 240, 230],
+        "magenta": [255, 0, 255],
+        "maroon": [128, 0, 0],
+        "mediumaquamarine": [102, 205, 170],
+        "mediumblue": [0, 0, 205],
+        "mediumorchid": [186, 85, 211],
+        "mediumpurple": [147, 112, 219],
+        "mediumseagreen": [60, 179, 113],
+        "mediumslateblue": [123, 104, 238],
+        "mediumspringgreen": [0, 250, 154],
+        "mediumturquoise": [72, 209, 204],
+        "mediumvioletred": [199, 21, 133],
+        "midnightblue": [25, 25, 112],
+        "mintcream": [245, 255, 250],
+        "mistyrose": [255, 228, 225],
+        "moccasin": [255, 228, 181],
+        "navajowhite": [255, 222, 173],
+        "navy": [0, 0, 128],
+        "oldlace": [253, 245, 230],
+        "olive": [128, 128, 0],
+        "olivedrab": [107, 142, 35],
+        "orange": [255, 165, 0],
+        "orangered": [255, 69, 0],
+        "orchid": [218, 112, 214],
+        "palegoldenrod": [238, 232, 170],
+        "palegreen": [152, 251, 152],
+        "paleturquoise": [175, 238, 238],
+        "palevioletred": [219, 112, 147],
+        "papayawhip": [255, 239, 213],
+        "peachpuff": [255, 218, 185],
+        "peru": [205, 133, 63],
+        "pink": [255, 192, 203],
+        "plum": [221, 160, 221],
+        "powderblue": [176, 224, 230],
+        "purple": [128, 0, 128],
+        "rebeccapurple": [102, 51, 153],
+        "red": [255, 0, 0],
+        "rosybrown": [188, 143, 143],
+        "royalblue": [65, 105, 225],
+        "saddlebrown": [139, 69, 19],
+        "salmon": [250, 128, 114],
+        "sandybrown": [244, 164, 96],
+        "seagreen": [46, 139, 87],
+        "seashell": [255, 245, 238],
+        "sienna": [160, 82, 45],
+        "silver": [192, 192, 192],
+        "skyblue": [135, 206, 235],
+        "slateblue": [106, 90, 205],
+        "slategray": [112, 128, 144],
+        "slategrey": [112, 128, 144],
+        "snow": [255, 250, 250],
+        "springgreen": [0, 255, 127],
+        "steelblue": [70, 130, 180],
+        "tan": [210, 180, 140],
+        "teal": [0, 128, 128],
+        "thistle": [216, 191, 216],
+        "tomato": [255, 99, 71],
+        "turquoise": [64, 224, 208],
+        "violet": [238, 130, 238],
+        "wheat": [245, 222, 179],
+        "white": [255, 255, 255],
+        "whitesmoke": [245, 245, 245],
+        "yellow": [255, 255, 0],
+        "yellowgreen": [154, 205, 50]
+      };
+    }
+  });
+
+  // node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js
+  var require_is_arrayish = __commonJS({
+    "node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js"(exports, module) {
+      module.exports = /* @__PURE__ */ __name(function isArrayish(obj) {
+        if (!obj || typeof obj === "string") {
+          return false;
+        }
+        return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== "String");
+      }, "isArrayish");
+    }
+  });
+
+  // node_modules/.pnpm/simple-swizzle@0.2.2/node_modules/simple-swizzle/index.js
+  var require_simple_swizzle = __commonJS({
+    "node_modules/.pnpm/simple-swizzle@0.2.2/node_modules/simple-swizzle/index.js"(exports, module) {
+      "use strict";
+      var isArrayish = require_is_arrayish();
+      var concat = Array.prototype.concat;
+      var slice = Array.prototype.slice;
+      var swizzle = module.exports = /* @__PURE__ */ __name(function swizzle2(args) {
+        var results = [];
+        for (var i = 0, len = args.length; i < len; i++) {
+          var arg = args[i];
+          if (isArrayish(arg)) {
+            results = concat.call(results, slice.call(arg));
+          } else {
+            results.push(arg);
+          }
+        }
+        return results;
+      }, "swizzle");
+      swizzle.wrap = function(fn) {
+        return function() {
+          return fn(swizzle(arguments));
+        };
+      };
+    }
+  });
+
+  // node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js
+  var require_color_string = __commonJS({
+    "node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js"(exports, module) {
+      var colorNames = require_color_name();
+      var swizzle = require_simple_swizzle();
+      var hasOwnProperty = Object.hasOwnProperty;
+      var reverseNames = /* @__PURE__ */ Object.create(null);
+      for (name in colorNames) {
+        if (hasOwnProperty.call(colorNames, name)) {
+          reverseNames[colorNames[name]] = name;
+        }
+      }
+      var name;
+      var cs = module.exports = {
+        to: {},
+        get: {}
+      };
+      cs.get = function(string) {
+        var prefix = string.substring(0, 3).toLowerCase();
+        var val;
+        var model;
+        switch (prefix) {
+          case "hsl":
+            val = cs.get.hsl(string);
+            model = "hsl";
+            break;
+          case "hwb":
+            val = cs.get.hwb(string);
+            model = "hwb";
+            break;
+          default:
+            val = cs.get.rgb(string);
+            model = "rgb";
+            break;
+        }
+        if (!val) {
+          return null;
+        }
+        return { model, value: val };
+      };
+      cs.get.rgb = function(string) {
+        if (!string) {
+          return null;
+        }
+        var abbr = /^#([a-f0-9]{3,4})$/i;
+        var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
+        var rgba = /^rgba?\(\s*([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
+        var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
+        var keyword = /^(\w+)$/;
+        var rgb = [0, 0, 0, 1];
+        var match;
+        var i;
+        var hexAlpha;
+        if (match = string.match(hex)) {
+          hexAlpha = match[2];
+          match = match[1];
+          for (i = 0; i < 3; i++) {
+            var i2 = i * 2;
+            rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
+          }
+          if (hexAlpha) {
+            rgb[3] = parseInt(hexAlpha, 16) / 255;
+          }
+        } else if (match = string.match(abbr)) {
+          match = match[1];
+          hexAlpha = match[3];
+          for (i = 0; i < 3; i++) {
+            rgb[i] = parseInt(match[i] + match[i], 16);
+          }
+          if (hexAlpha) {
+            rgb[3] = parseInt(hexAlpha + hexAlpha, 16) / 255;
+          }
+        } else if (match = string.match(rgba)) {
+          for (i = 0; i < 3; i++) {
+            rgb[i] = parseInt(match[i + 1], 0);
+          }
+          if (match[4]) {
+            if (match[5]) {
+              rgb[3] = parseFloat(match[4]) * 0.01;
+            } else {
+              rgb[3] = parseFloat(match[4]);
+            }
+          }
+        } else if (match = string.match(per)) {
+          for (i = 0; i < 3; i++) {
+            rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);
+          }
+          if (match[4]) {
+            if (match[5]) {
+              rgb[3] = parseFloat(match[4]) * 0.01;
+            } else {
+              rgb[3] = parseFloat(match[4]);
+            }
+          }
+        } else if (match = string.match(keyword)) {
+          if (match[1] === "transparent") {
+            return [0, 0, 0, 0];
+          }
+          if (!hasOwnProperty.call(colorNames, match[1])) {
+            return null;
+          }
+          rgb = colorNames[match[1]];
+          rgb[3] = 1;
+          return rgb;
+        } else {
+          return null;
+        }
+        for (i = 0; i < 3; i++) {
+          rgb[i] = clamp(rgb[i], 0, 255);
+        }
+        rgb[3] = clamp(rgb[3], 0, 1);
+        return rgb;
+      };
+      cs.get.hsl = function(string) {
+        if (!string) {
+          return null;
+        }
+        var hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d\.]+)%\s*,?\s*([+-]?[\d\.]+)%\s*(?:[,|\/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
+        var match = string.match(hsl);
+        if (match) {
+          var alpha = parseFloat(match[4]);
+          var h = (parseFloat(match[1]) % 360 + 360) % 360;
+          var s = clamp(parseFloat(match[2]), 0, 100);
+          var l = clamp(parseFloat(match[3]), 0, 100);
+          var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
+          return [h, s, l, a];
+        }
+        return null;
+      };
+      cs.get.hwb = function(string) {
+        if (!string) {
+          return null;
+        }
+        var hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
+        var match = string.match(hwb);
+        if (match) {
+          var alpha = parseFloat(match[4]);
+          var h = (parseFloat(match[1]) % 360 + 360) % 360;
+          var w = clamp(parseFloat(match[2]), 0, 100);
+          var b = clamp(parseFloat(match[3]), 0, 100);
+          var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
+          return [h, w, b, a];
+        }
+        return null;
+      };
+      cs.to.hex = function() {
+        var rgba = swizzle(arguments);
+        return "#" + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : "");
+      };
+      cs.to.rgb = function() {
+        var rgba = swizzle(arguments);
+        return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ")" : "rgba(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ", " + rgba[3] + ")";
+      };
+      cs.to.rgb.percent = function() {
+        var rgba = swizzle(arguments);
+        var r = Math.round(rgba[0] / 255 * 100);
+        var g = Math.round(rgba[1] / 255 * 100);
+        var b = Math.round(rgba[2] / 255 * 100);
+        return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + r + "%, " + g + "%, " + b + "%)" : "rgba(" + r + "%, " + g + "%, " + b + "%, " + rgba[3] + ")";
+      };
+      cs.to.hsl = function() {
+        var hsla = swizzle(arguments);
+        return hsla.length < 4 || hsla[3] === 1 ? "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)" : "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, " + hsla[3] + ")";
+      };
+      cs.to.hwb = function() {
+        var hwba = swizzle(arguments);
+        var a = "";
+        if (hwba.length >= 4 && hwba[3] !== 1) {
+          a = ", " + hwba[3];
+        }
+        return "hwb(" + hwba[0] + ", " + hwba[1] + "%, " + hwba[2] + "%" + a + ")";
+      };
+      cs.to.keyword = function(rgb) {
+        return reverseNames[rgb.slice(0, 3)];
+      };
+      function clamp(num, min, max) {
+        return Math.min(Math.max(min, num), max);
+      }
+      __name(clamp, "clamp");
+      function hexDouble(num) {
+        var str = Math.round(num).toString(16).toUpperCase();
+        return str.length < 2 ? "0" + str : str;
+      }
+      __name(hexDouble, "hexDouble");
+    }
+  });
+
+  // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js
+  var require_conversions = __commonJS({
+    "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js"(exports, module) {
+      var cssKeywords = require_color_name();
+      var reverseKeywords = {};
+      for (const key of Object.keys(cssKeywords)) {
+        reverseKeywords[cssKeywords[key]] = key;
+      }
+      var convert = {
+        rgb: { channels: 3, labels: "rgb" },
+        hsl: { channels: 3, labels: "hsl" },
+        hsv: { channels: 3, labels: "hsv" },
+        hwb: { channels: 3, labels: "hwb" },
+        cmyk: { channels: 4, labels: "cmyk" },
+        xyz: { channels: 3, labels: "xyz" },
+        lab: { channels: 3, labels: "lab" },
+        lch: { channels: 3, labels: "lch" },
+        hex: { channels: 1, labels: ["hex"] },
+        keyword: { channels: 1, labels: ["keyword"] },
+        ansi16: { channels: 1, labels: ["ansi16"] },
+        ansi256: { channels: 1, labels: ["ansi256"] },
+        hcg: { channels: 3, labels: ["h", "c", "g"] },
+        apple: { channels: 3, labels: ["r16", "g16", "b16"] },
+        gray: { channels: 1, labels: ["gray"] }
+      };
+      module.exports = convert;
+      for (const model of Object.keys(convert)) {
+        if (!("channels" in convert[model])) {
+          throw new Error("missing channels property: " + model);
+        }
+        if (!("labels" in convert[model])) {
+          throw new Error("missing channel labels property: " + model);
+        }
+        if (convert[model].labels.length !== convert[model].channels) {
+          throw new Error("channel and label counts mismatch: " + model);
+        }
+        const { channels, labels } = convert[model];
+        delete convert[model].channels;
+        delete convert[model].labels;
+        Object.defineProperty(convert[model], "channels", { value: channels });
+        Object.defineProperty(convert[model], "labels", { value: labels });
+      }
+      convert.rgb.hsl = function(rgb) {
+        const r = rgb[0] / 255;
+        const g = rgb[1] / 255;
+        const b = rgb[2] / 255;
+        const min = Math.min(r, g, b);
+        const max = Math.max(r, g, b);
+        const delta = max - min;
+        let h;
+        let s;
+        if (max === min) {
+          h = 0;
+        } else if (r === max) {
+          h = (g - b) / delta;
+        } else if (g === max) {
+          h = 2 + (b - r) / delta;
+        } else if (b === max) {
+          h = 4 + (r - g) / delta;
+        }
+        h = Math.min(h * 60, 360);
+        if (h < 0) {
+          h += 360;
+        }
+        const l = (min + max) / 2;
+        if (max === min) {
+          s = 0;
+        } else if (l <= 0.5) {
+          s = delta / (max + min);
+        } else {
+          s = delta / (2 - max - min);
+        }
+        return [h, s * 100, l * 100];
+      };
+      convert.rgb.hsv = function(rgb) {
+        let rdif;
+        let gdif;
+        let bdif;
+        let h;
+        let s;
+        const r = rgb[0] / 255;
+        const g = rgb[1] / 255;
+        const b = rgb[2] / 255;
+        const v = Math.max(r, g, b);
+        const diff = v - Math.min(r, g, b);
+        const diffc = /* @__PURE__ */ __name(function(c) {
+          return (v - c) / 6 / diff + 1 / 2;
+        }, "diffc");
+        if (diff === 0) {
+          h = 0;
+          s = 0;
+        } else {
+          s = diff / v;
+          rdif = diffc(r);
+          gdif = diffc(g);
+          bdif = diffc(b);
+          if (r === v) {
+            h = bdif - gdif;
+          } else if (g === v) {
+            h = 1 / 3 + rdif - bdif;
+          } else if (b === v) {
+            h = 2 / 3 + gdif - rdif;
+          }
+          if (h < 0) {
+            h += 1;
+          } else if (h > 1) {
+            h -= 1;
+          }
+        }
+        return [
+          h * 360,
+          s * 100,
+          v * 100
+        ];
+      };
+      convert.rgb.hwb = function(rgb) {
+        const r = rgb[0];
+        const g = rgb[1];
+        let b = rgb[2];
+        const h = convert.rgb.hsl(rgb)[0];
+        const w = 1 / 255 * Math.min(r, Math.min(g, b));
+        b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
+        return [h, w * 100, b * 100];
+      };
+      convert.rgb.cmyk = function(rgb) {
+        const r = rgb[0] / 255;
+        const g = rgb[1] / 255;
+        const b = rgb[2] / 255;
+        const k = Math.min(1 - r, 1 - g, 1 - b);
+        const c = (1 - r - k) / (1 - k) || 0;
+        const m = (1 - g - k) / (1 - k) || 0;
+        const y = (1 - b - k) / (1 - k) || 0;
+        return [c * 100, m * 100, y * 100, k * 100];
+      };
+      function comparativeDistance(x, y) {
+        return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+      }
+      __name(comparativeDistance, "comparativeDistance");
+      convert.rgb.keyword = function(rgb) {
+        const reversed = reverseKeywords[rgb];
+        if (reversed) {
+          return reversed;
+        }
+        let currentClosestDistance = Infinity;
+        let currentClosestKeyword;
+        for (const keyword of Object.keys(cssKeywords)) {
+          const value = cssKeywords[keyword];
+          const distance = comparativeDistance(rgb, value);
+          if (distance < currentClosestDistance) {
+            currentClosestDistance = distance;
+            currentClosestKeyword = keyword;
+          }
+        }
+        return currentClosestKeyword;
+      };
+      convert.keyword.rgb = function(keyword) {
+        return cssKeywords[keyword];
+      };
+      convert.rgb.xyz = function(rgb) {
+        let r = rgb[0] / 255;
+        let g = rgb[1] / 255;
+        let b = rgb[2] / 255;
+        r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
+        g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
+        b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
+        const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
+        const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+        const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+        return [x * 100, y * 100, z * 100];
+      };
+      convert.rgb.lab = function(rgb) {
+        const xyz = convert.rgb.xyz(rgb);
+        let x = xyz[0];
+        let y = xyz[1];
+        let z = xyz[2];
+        x /= 95.047;
+        y /= 100;
+        z /= 108.883;
+        x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+        y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+        z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+        const l = 116 * y - 16;
+        const a = 500 * (x - y);
+        const b = 200 * (y - z);
+        return [l, a, b];
+      };
+      convert.hsl.rgb = function(hsl) {
+        const h = hsl[0] / 360;
+        const s = hsl[1] / 100;
+        const l = hsl[2] / 100;
+        let t2;
+        let t3;
+        let val;
+        if (s === 0) {
+          val = l * 255;
+          return [val, val, val];
+        }
+        if (l < 0.5) {
+          t2 = l * (1 + s);
+        } else {
+          t2 = l + s - l * s;
+        }
+        const t1 = 2 * l - t2;
+        const rgb = [0, 0, 0];
+        for (let i = 0; i < 3; i++) {
+          t3 = h + 1 / 3 * -(i - 1);
+          if (t3 < 0) {
+            t3++;
+          }
+          if (t3 > 1) {
+            t3--;
+          }
+          if (6 * t3 < 1) {
+            val = t1 + (t2 - t1) * 6 * t3;
+          } else if (2 * t3 < 1) {
+            val = t2;
+          } else if (3 * t3 < 2) {
+            val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
+          } else {
+            val = t1;
+          }
+          rgb[i] = val * 255;
+        }
+        return rgb;
+      };
+      convert.hsl.hsv = function(hsl) {
+        const h = hsl[0];
+        let s = hsl[1] / 100;
+        let l = hsl[2] / 100;
+        let smin = s;
+        const lmin = Math.max(l, 0.01);
+        l *= 2;
+        s *= l <= 1 ? l : 2 - l;
+        smin *= lmin <= 1 ? lmin : 2 - lmin;
+        const v = (l + s) / 2;
+        const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
+        return [h, sv * 100, v * 100];
+      };
+      convert.hsv.rgb = function(hsv) {
+        const h = hsv[0] / 60;
+        const s = hsv[1] / 100;
+        let v = hsv[2] / 100;
+        const hi = Math.floor(h) % 6;
+        const f = h - Math.floor(h);
+        const p = 255 * v * (1 - s);
+        const q = 255 * v * (1 - s * f);
+        const t = 255 * v * (1 - s * (1 - f));
+        v *= 255;
+        switch (hi) {
+          case 0:
+            return [v, t, p];
+          case 1:
+            return [q, v, p];
+          case 2:
+            return [p, v, t];
+          case 3:
+            return [p, q, v];
+          case 4:
+            return [t, p, v];
+          case 5:
+            return [v, p, q];
+        }
+      };
+      convert.hsv.hsl = function(hsv) {
+        const h = hsv[0];
+        const s = hsv[1] / 100;
+        const v = hsv[2] / 100;
+        const vmin = Math.max(v, 0.01);
+        let sl;
+        let l;
+        l = (2 - s) * v;
+        const lmin = (2 - s) * vmin;
+        sl = s * vmin;
+        sl /= lmin <= 1 ? lmin : 2 - lmin;
+        sl = sl || 0;
+        l /= 2;
+        return [h, sl * 100, l * 100];
+      };
+      convert.hwb.rgb = function(hwb) {
+        const h = hwb[0] / 360;
+        let wh = hwb[1] / 100;
+        let bl = hwb[2] / 100;
+        const ratio = wh + bl;
+        let f;
+        if (ratio > 1) {
+          wh /= ratio;
+          bl /= ratio;
+        }
+        const i = Math.floor(6 * h);
+        const v = 1 - bl;
+        f = 6 * h - i;
+        if ((i & 1) !== 0) {
+          f = 1 - f;
+        }
+        const n = wh + f * (v - wh);
+        let r;
+        let g;
+        let b;
+        switch (i) {
+          default:
+          case 6:
+          case 0:
+            r = v;
+            g = n;
+            b = wh;
+            break;
+          case 1:
+            r = n;
+            g = v;
+            b = wh;
+            break;
+          case 2:
+            r = wh;
+            g = v;
+            b = n;
+            break;
+          case 3:
+            r = wh;
+            g = n;
+            b = v;
+            break;
+          case 4:
+            r = n;
+            g = wh;
+            b = v;
+            break;
+          case 5:
+            r = v;
+            g = wh;
+            b = n;
+            break;
+        }
+        return [r * 255, g * 255, b * 255];
+      };
+      convert.cmyk.rgb = function(cmyk) {
+        const c = cmyk[0] / 100;
+        const m = cmyk[1] / 100;
+        const y = cmyk[2] / 100;
+        const k = cmyk[3] / 100;
+        const r = 1 - Math.min(1, c * (1 - k) + k);
+        const g = 1 - Math.min(1, m * (1 - k) + k);
+        const b = 1 - Math.min(1, y * (1 - k) + k);
+        return [r * 255, g * 255, b * 255];
+      };
+      convert.xyz.rgb = function(xyz) {
+        const x = xyz[0] / 100;
+        const y = xyz[1] / 100;
+        const z = xyz[2] / 100;
+        let r;
+        let g;
+        let b;
+        r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+        g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+        b = x * 0.0557 + y * -0.204 + z * 1.057;
+        r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
+        g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
+        b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
+        r = Math.min(Math.max(0, r), 1);
+        g = Math.min(Math.max(0, g), 1);
+        b = Math.min(Math.max(0, b), 1);
+        return [r * 255, g * 255, b * 255];
+      };
+      convert.xyz.lab = function(xyz) {
+        let x = xyz[0];
+        let y = xyz[1];
+        let z = xyz[2];
+        x /= 95.047;
+        y /= 100;
+        z /= 108.883;
+        x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+        y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+        z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+        const l = 116 * y - 16;
+        const a = 500 * (x - y);
+        const b = 200 * (y - z);
+        return [l, a, b];
+      };
+      convert.lab.xyz = function(lab) {
+        const l = lab[0];
+        const a = lab[1];
+        const b = lab[2];
+        let x;
+        let y;
+        let z;
+        y = (l + 16) / 116;
+        x = a / 500 + y;
+        z = y - b / 200;
+        const y2 = y ** 3;
+        const x2 = x ** 3;
+        const z2 = z ** 3;
+        y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
+        x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
+        z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
+        x *= 95.047;
+        y *= 100;
+        z *= 108.883;
+        return [x, y, z];
+      };
+      convert.lab.lch = function(lab) {
+        const l = lab[0];
+        const a = lab[1];
+        const b = lab[2];
+        let h;
+        const hr = Math.atan2(b, a);
+        h = hr * 360 / 2 / Math.PI;
+        if (h < 0) {
+          h += 360;
+        }
+        const c = Math.sqrt(a * a + b * b);
+        return [l, c, h];
+      };
+      convert.lch.lab = function(lch) {
+        const l = lch[0];
+        const c = lch[1];
+        const h = lch[2];
+        const hr = h / 360 * 2 * Math.PI;
+        const a = c * Math.cos(hr);
+        const b = c * Math.sin(hr);
+        return [l, a, b];
+      };
+      convert.rgb.ansi16 = function(args, saturation = null) {
+        const [r, g, b] = args;
+        let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
+        value = Math.round(value / 50);
+        if (value === 0) {
+          return 30;
+        }
+        let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
+        if (value === 2) {
+          ansi += 60;
+        }
+        return ansi;
+      };
+      convert.hsv.ansi16 = function(args) {
+        return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
+      };
+      convert.rgb.ansi256 = function(args) {
+        const r = args[0];
+        const g = args[1];
+        const b = args[2];
+        if (r === g && g === b) {
+          if (r < 8) {
+            return 16;
+          }
+          if (r > 248) {
+            return 231;
+          }
+          return Math.round((r - 8) / 247 * 24) + 232;
+        }
+        const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
+        return ansi;
+      };
+      convert.ansi16.rgb = function(args) {
+        let color = args % 10;
+        if (color === 0 || color === 7) {
+          if (args > 50) {
+            color += 3.5;
+          }
+          color = color / 10.5 * 255;
+          return [color, color, color];
+        }
+        const mult = (~~(args > 50) + 1) * 0.5;
+        const r = (color & 1) * mult * 255;
+        const g = (color >> 1 & 1) * mult * 255;
+        const b = (color >> 2 & 1) * mult * 255;
+        return [r, g, b];
+      };
+      convert.ansi256.rgb = function(args) {
+        if (args >= 232) {
+          const c = (args - 232) * 10 + 8;
+          return [c, c, c];
+        }
+        args -= 16;
+        let rem;
+        const r = Math.floor(args / 36) / 5 * 255;
+        const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
+        const b = rem % 6 / 5 * 255;
+        return [r, g, b];
+      };
+      convert.rgb.hex = function(args) {
+        const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
+        const string = integer.toString(16).toUpperCase();
+        return "000000".substring(string.length) + string;
+      };
+      convert.hex.rgb = function(args) {
+        const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+        if (!match) {
+          return [0, 0, 0];
+        }
+        let colorString = match[0];
+        if (match[0].length === 3) {
+          colorString = colorString.split("").map((char) => {
+            return char + char;
+          }).join("");
+        }
+        const integer = parseInt(colorString, 16);
+        const r = integer >> 16 & 255;
+        const g = integer >> 8 & 255;
+        const b = integer & 255;
+        return [r, g, b];
+      };
+      convert.rgb.hcg = function(rgb) {
+        const r = rgb[0] / 255;
+        const g = rgb[1] / 255;
+        const b = rgb[2] / 255;
+        const max = Math.max(Math.max(r, g), b);
+        const min = Math.min(Math.min(r, g), b);
+        const chroma = max - min;
+        let grayscale;
+        let hue;
+        if (chroma < 1) {
+          grayscale = min / (1 - chroma);
+        } else {
+          grayscale = 0;
+        }
+        if (chroma <= 0) {
+          hue = 0;
+        } else if (max === r) {
+          hue = (g - b) / chroma % 6;
+        } else if (max === g) {
+          hue = 2 + (b - r) / chroma;
+        } else {
+          hue = 4 + (r - g) / chroma;
+        }
+        hue /= 6;
+        hue %= 1;
+        return [hue * 360, chroma * 100, grayscale * 100];
+      };
+      convert.hsl.hcg = function(hsl) {
+        const s = hsl[1] / 100;
+        const l = hsl[2] / 100;
+        const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
+        let f = 0;
+        if (c < 1) {
+          f = (l - 0.5 * c) / (1 - c);
+        }
+        return [hsl[0], c * 100, f * 100];
+      };
+      convert.hsv.hcg = function(hsv) {
+        const s = hsv[1] / 100;
+        const v = hsv[2] / 100;
+        const c = s * v;
+        let f = 0;
+        if (c < 1) {
+          f = (v - c) / (1 - c);
+        }
+        return [hsv[0], c * 100, f * 100];
+      };
+      convert.hcg.rgb = function(hcg) {
+        const h = hcg[0] / 360;
+        const c = hcg[1] / 100;
+        const g = hcg[2] / 100;
+        if (c === 0) {
+          return [g * 255, g * 255, g * 255];
+        }
+        const pure = [0, 0, 0];
+        const hi = h % 1 * 6;
+        const v = hi % 1;
+        const w = 1 - v;
+        let mg = 0;
+        switch (Math.floor(hi)) {
+          case 0:
+            pure[0] = 1;
+            pure[1] = v;
+            pure[2] = 0;
+            break;
+          case 1:
+            pure[0] = w;
+            pure[1] = 1;
+            pure[2] = 0;
+            break;
+          case 2:
+            pure[0] = 0;
+            pure[1] = 1;
+            pure[2] = v;
+            break;
+          case 3:
+            pure[0] = 0;
+            pure[1] = w;
+            pure[2] = 1;
+            break;
+          case 4:
+            pure[0] = v;
+            pure[1] = 0;
+            pure[2] = 1;
+            break;
+          default:
+            pure[0] = 1;
+            pure[1] = 0;
+            pure[2] = w;
+        }
+        mg = (1 - c) * g;
+        return [
+          (c * pure[0] + mg) * 255,
+          (c * pure[1] + mg) * 255,
+          (c * pure[2] + mg) * 255
+        ];
+      };
+      convert.hcg.hsv = function(hcg) {
+        const c = hcg[1] / 100;
+        const g = hcg[2] / 100;
+        const v = c + g * (1 - c);
+        let f = 0;
+        if (v > 0) {
+          f = c / v;
+        }
+        return [hcg[0], f * 100, v * 100];
+      };
+      convert.hcg.hsl = function(hcg) {
+        const c = hcg[1] / 100;
+        const g = hcg[2] / 100;
+        const l = g * (1 - c) + 0.5 * c;
+        let s = 0;
+        if (l > 0 && l < 0.5) {
+          s = c / (2 * l);
+        } else if (l >= 0.5 && l < 1) {
+          s = c / (2 * (1 - l));
+        }
+        return [hcg[0], s * 100, l * 100];
+      };
+      convert.hcg.hwb = function(hcg) {
+        const c = hcg[1] / 100;
+        const g = hcg[2] / 100;
+        const v = c + g * (1 - c);
+        return [hcg[0], (v - c) * 100, (1 - v) * 100];
+      };
+      convert.hwb.hcg = function(hwb) {
+        const w = hwb[1] / 100;
+        const b = hwb[2] / 100;
+        const v = 1 - b;
+        const c = v - w;
+        let g = 0;
+        if (c < 1) {
+          g = (v - c) / (1 - c);
+        }
+        return [hwb[0], c * 100, g * 100];
+      };
+      convert.apple.rgb = function(apple) {
+        return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
+      };
+      convert.rgb.apple = function(rgb) {
+        return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
+      };
+      convert.gray.rgb = function(args) {
+        return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
+      };
+      convert.gray.hsl = function(args) {
+        return [0, 0, args[0]];
+      };
+      convert.gray.hsv = convert.gray.hsl;
+      convert.gray.hwb = function(gray) {
+        return [0, 100, gray[0]];
+      };
+      convert.gray.cmyk = function(gray) {
+        return [0, 0, 0, gray[0]];
+      };
+      convert.gray.lab = function(gray) {
+        return [gray[0], 0, 0];
+      };
+      convert.gray.hex = function(gray) {
+        const val = Math.round(gray[0] / 100 * 255) & 255;
+        const integer = (val << 16) + (val << 8) + val;
+        const string = integer.toString(16).toUpperCase();
+        return "000000".substring(string.length) + string;
+      };
+      convert.rgb.gray = function(rgb) {
+        const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
+        return [val / 255 * 100];
+      };
+    }
+  });
+
+  // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js
+  var require_route = __commonJS({
+    "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js"(exports, module) {
+      var conversions = require_conversions();
+      function buildGraph() {
+        const graph = {};
+        const models = Object.keys(conversions);
+        for (let len = models.length, i = 0; i < len; i++) {
+          graph[models[i]] = {
+            // http://jsperf.com/1-vs-infinity
+            // micro-opt, but this is simple.
+            distance: -1,
+            parent: null
+          };
+        }
+        return graph;
+      }
+      __name(buildGraph, "buildGraph");
+      function deriveBFS(fromModel) {
+        const graph = buildGraph();
+        const queue = [fromModel];
+        graph[fromModel].distance = 0;
+        while (queue.length) {
+          const current = queue.pop();
+          const adjacents = Object.keys(conversions[current]);
+          for (let len = adjacents.length, i = 0; i < len; i++) {
+            const adjacent = adjacents[i];
+            const node = graph[adjacent];
+            if (node.distance === -1) {
+              node.distance = graph[current].distance + 1;
+              node.parent = current;
+              queue.unshift(adjacent);
+            }
+          }
+        }
+        return graph;
+      }
+      __name(deriveBFS, "deriveBFS");
+      function link(from, to) {
+        return function(args) {
+          return to(from(args));
+        };
+      }
+      __name(link, "link");
+      function wrapConversion(toModel, graph) {
+        const path = [graph[toModel].parent, toModel];
+        let fn = conversions[graph[toModel].parent][toModel];
+        let cur = graph[toModel].parent;
+        while (graph[cur].parent) {
+          path.unshift(graph[cur].parent);
+          fn = link(conversions[graph[cur].parent][cur], fn);
+          cur = graph[cur].parent;
+        }
+        fn.conversion = path;
+        return fn;
+      }
+      __name(wrapConversion, "wrapConversion");
+      module.exports = function(fromModel) {
+        const graph = deriveBFS(fromModel);
+        const conversion = {};
+        const models = Object.keys(graph);
+        for (let len = models.length, i = 0; i < len; i++) {
+          const toModel = models[i];
+          const node = graph[toModel];
+          if (node.parent === null) {
+            continue;
+          }
+          conversion[toModel] = wrapConversion(toModel, graph);
+        }
+        return conversion;
+      };
+    }
+  });
+
+  // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js
+  var require_color_convert = __commonJS({
+    "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js"(exports, module) {
+      var conversions = require_conversions();
+      var route = require_route();
+      var convert = {};
+      var models = Object.keys(conversions);
+      function wrapRaw(fn) {
+        const wrappedFn = /* @__PURE__ */ __name(function(...args) {
+          const arg0 = args[0];
+          if (arg0 === void 0 || arg0 === null) {
+            return arg0;
+          }
+          if (arg0.length > 1) {
+            args = arg0;
+          }
+          return fn(args);
+        }, "wrappedFn");
+        if ("conversion" in fn) {
+          wrappedFn.conversion = fn.conversion;
+        }
+        return wrappedFn;
+      }
+      __name(wrapRaw, "wrapRaw");
+      function wrapRounded(fn) {
+        const wrappedFn = /* @__PURE__ */ __name(function(...args) {
+          const arg0 = args[0];
+          if (arg0 === void 0 || arg0 === null) {
+            return arg0;
+          }
+          if (arg0.length > 1) {
+            args = arg0;
+          }
+          const result = fn(args);
+          if (typeof result === "object") {
+            for (let len = result.length, i = 0; i < len; i++) {
+              result[i] = Math.round(result[i]);
+            }
+          }
+          return result;
+        }, "wrappedFn");
+        if ("conversion" in fn) {
+          wrappedFn.conversion = fn.conversion;
+        }
+        return wrappedFn;
+      }
+      __name(wrapRounded, "wrapRounded");
+      models.forEach((fromModel) => {
+        convert[fromModel] = {};
+        Object.defineProperty(convert[fromModel], "channels", { value: conversions[fromModel].channels });
+        Object.defineProperty(convert[fromModel], "labels", { value: conversions[fromModel].labels });
+        const routes = route(fromModel);
+        const routeModels = Object.keys(routes);
+        routeModels.forEach((toModel) => {
+          const fn = routes[toModel];
+          convert[fromModel][toModel] = wrapRounded(fn);
+          convert[fromModel][toModel].raw = wrapRaw(fn);
+        });
+      });
+      module.exports = convert;
+    }
+  });
+
+  // node_modules/.pnpm/color@4.2.3/node_modules/color/index.js
+  var require_color = __commonJS({
+    "node_modules/.pnpm/color@4.2.3/node_modules/color/index.js"(exports, module) {
+      var colorString = require_color_string();
+      var convert = require_color_convert();
+      var skippedModels = [
+        // To be honest, I don't really feel like keyword belongs in color convert, but eh.
+        "keyword",
+        // Gray conflicts with some method names, and has its own method defined.
+        "gray",
+        // Shouldn't really be in color-convert either...
+        "hex"
+      ];
+      var hashedModelKeys = {};
+      for (const model of Object.keys(convert)) {
+        hashedModelKeys[[...convert[model].labels].sort().join("")] = model;
+      }
+      var limiters = {};
+      function Color7(object, model) {
+        if (!(this instanceof Color7)) {
+          return new Color7(object, model);
+        }
+        if (model && model in skippedModels) {
+          model = null;
+        }
+        if (model && !(model in convert)) {
+          throw new Error("Unknown model: " + model);
+        }
+        let i;
+        let channels;
+        if (object == null) {
+          this.model = "rgb";
+          this.color = [0, 0, 0];
+          this.valpha = 1;
+        } else if (object instanceof Color7) {
+          this.model = object.model;
+          this.color = [...object.color];
+          this.valpha = object.valpha;
+        } else if (typeof object === "string") {
+          const result = colorString.get(object);
+          if (result === null) {
+            throw new Error("Unable to parse color from string: " + object);
+          }
+          this.model = result.model;
+          channels = convert[this.model].channels;
+          this.color = result.value.slice(0, channels);
+          this.valpha = typeof result.value[channels] === "number" ? result.value[channels] : 1;
+        } else if (object.length > 0) {
+          this.model = model || "rgb";
+          channels = convert[this.model].channels;
+          const newArray = Array.prototype.slice.call(object, 0, channels);
+          this.color = zeroArray(newArray, channels);
+          this.valpha = typeof object[channels] === "number" ? object[channels] : 1;
+        } else if (typeof object === "number") {
+          this.model = "rgb";
+          this.color = [
+            object >> 16 & 255,
+            object >> 8 & 255,
+            object & 255
+          ];
+          this.valpha = 1;
+        } else {
+          this.valpha = 1;
+          const keys = Object.keys(object);
+          if ("alpha" in object) {
+            keys.splice(keys.indexOf("alpha"), 1);
+            this.valpha = typeof object.alpha === "number" ? object.alpha : 0;
+          }
+          const hashedKeys = keys.sort().join("");
+          if (!(hashedKeys in hashedModelKeys)) {
+            throw new Error("Unable to parse color from object: " + JSON.stringify(object));
+          }
+          this.model = hashedModelKeys[hashedKeys];
+          const { labels } = convert[this.model];
+          const color = [];
+          for (i = 0; i < labels.length; i++) {
+            color.push(object[labels[i]]);
+          }
+          this.color = zeroArray(color);
+        }
+        if (limiters[this.model]) {
+          channels = convert[this.model].channels;
+          for (i = 0; i < channels; i++) {
+            const limit = limiters[this.model][i];
+            if (limit) {
+              this.color[i] = limit(this.color[i]);
+            }
+          }
+        }
+        this.valpha = Math.max(0, Math.min(1, this.valpha));
+        if (Object.freeze) {
+          Object.freeze(this);
+        }
+      }
+      __name(Color7, "Color");
+      Color7.prototype = {
+        toString() {
+          return this.string();
+        },
+        toJSON() {
+          return this[this.model]();
+        },
+        string(places) {
+          let self = this.model in colorString.to ? this : this.rgb();
+          self = self.round(typeof places === "number" ? places : 1);
+          const args = self.valpha === 1 ? self.color : [...self.color, this.valpha];
+          return colorString.to[self.model](args);
+        },
+        percentString(places) {
+          const self = this.rgb().round(typeof places === "number" ? places : 1);
+          const args = self.valpha === 1 ? self.color : [...self.color, this.valpha];
+          return colorString.to.rgb.percent(args);
+        },
+        array() {
+          return this.valpha === 1 ? [...this.color] : [...this.color, this.valpha];
+        },
+        object() {
+          const result = {};
+          const { channels } = convert[this.model];
+          const { labels } = convert[this.model];
+          for (let i = 0; i < channels; i++) {
+            result[labels[i]] = this.color[i];
+          }
+          if (this.valpha !== 1) {
+            result.alpha = this.valpha;
+          }
+          return result;
+        },
+        unitArray() {
+          const rgb = this.rgb().color;
+          rgb[0] /= 255;
+          rgb[1] /= 255;
+          rgb[2] /= 255;
+          if (this.valpha !== 1) {
+            rgb.push(this.valpha);
+          }
+          return rgb;
+        },
+        unitObject() {
+          const rgb = this.rgb().object();
+          rgb.r /= 255;
+          rgb.g /= 255;
+          rgb.b /= 255;
+          if (this.valpha !== 1) {
+            rgb.alpha = this.valpha;
+          }
+          return rgb;
+        },
+        round(places) {
+          places = Math.max(places || 0, 0);
+          return new Color7([...this.color.map(roundToPlace(places)), this.valpha], this.model);
+        },
+        alpha(value) {
+          if (value !== void 0) {
+            return new Color7([...this.color, Math.max(0, Math.min(1, value))], this.model);
+          }
+          return this.valpha;
+        },
+        // Rgb
+        red: getset("rgb", 0, maxfn(255)),
+        green: getset("rgb", 1, maxfn(255)),
+        blue: getset("rgb", 2, maxfn(255)),
+        hue: getset(["hsl", "hsv", "hsl", "hwb", "hcg"], 0, (value) => (value % 360 + 360) % 360),
+        saturationl: getset("hsl", 1, maxfn(100)),
+        lightness: getset("hsl", 2, maxfn(100)),
+        saturationv: getset("hsv", 1, maxfn(100)),
+        value: getset("hsv", 2, maxfn(100)),
+        chroma: getset("hcg", 1, maxfn(100)),
+        gray: getset("hcg", 2, maxfn(100)),
+        white: getset("hwb", 1, maxfn(100)),
+        wblack: getset("hwb", 2, maxfn(100)),
+        cyan: getset("cmyk", 0, maxfn(100)),
+        magenta: getset("cmyk", 1, maxfn(100)),
+        yellow: getset("cmyk", 2, maxfn(100)),
+        black: getset("cmyk", 3, maxfn(100)),
+        x: getset("xyz", 0, maxfn(95.047)),
+        y: getset("xyz", 1, maxfn(100)),
+        z: getset("xyz", 2, maxfn(108.833)),
+        l: getset("lab", 0, maxfn(100)),
+        a: getset("lab", 1),
+        b: getset("lab", 2),
+        keyword(value) {
+          if (value !== void 0) {
+            return new Color7(value);
+          }
+          return convert[this.model].keyword(this.color);
+        },
+        hex(value) {
+          if (value !== void 0) {
+            return new Color7(value);
+          }
+          return colorString.to.hex(this.rgb().round().color);
+        },
+        hexa(value) {
+          if (value !== void 0) {
+            return new Color7(value);
+          }
+          const rgbArray = this.rgb().round().color;
+          let alphaHex = Math.round(this.valpha * 255).toString(16).toUpperCase();
+          if (alphaHex.length === 1) {
+            alphaHex = "0" + alphaHex;
+          }
+          return colorString.to.hex(rgbArray) + alphaHex;
+        },
+        rgbNumber() {
+          const rgb = this.rgb().color;
+          return (rgb[0] & 255) << 16 | (rgb[1] & 255) << 8 | rgb[2] & 255;
+        },
+        luminosity() {
+          const rgb = this.rgb().color;
+          const lum = [];
+          for (const [i, element] of rgb.entries()) {
+            const chan = element / 255;
+            lum[i] = chan <= 0.04045 ? chan / 12.92 : ((chan + 0.055) / 1.055) ** 2.4;
+          }
+          return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
+        },
+        contrast(color2) {
+          const lum1 = this.luminosity();
+          const lum2 = color2.luminosity();
+          if (lum1 > lum2) {
+            return (lum1 + 0.05) / (lum2 + 0.05);
+          }
+          return (lum2 + 0.05) / (lum1 + 0.05);
+        },
+        level(color2) {
+          const contrastRatio = this.contrast(color2);
+          if (contrastRatio >= 7) {
+            return "AAA";
+          }
+          return contrastRatio >= 4.5 ? "AA" : "";
+        },
+        isDark() {
+          const rgb = this.rgb().color;
+          const yiq = (rgb[0] * 2126 + rgb[1] * 7152 + rgb[2] * 722) / 1e4;
+          return yiq < 128;
+        },
+        isLight() {
+          return !this.isDark();
+        },
+        negate() {
+          const rgb = this.rgb();
+          for (let i = 0; i < 3; i++) {
+            rgb.color[i] = 255 - rgb.color[i];
+          }
+          return rgb;
+        },
+        lighten(ratio) {
+          const hsl = this.hsl();
+          hsl.color[2] += hsl.color[2] * ratio;
+          return hsl;
+        },
+        darken(ratio) {
+          const hsl = this.hsl();
+          hsl.color[2] -= hsl.color[2] * ratio;
+          return hsl;
+        },
+        saturate(ratio) {
+          const hsl = this.hsl();
+          hsl.color[1] += hsl.color[1] * ratio;
+          return hsl;
+        },
+        desaturate(ratio) {
+          const hsl = this.hsl();
+          hsl.color[1] -= hsl.color[1] * ratio;
+          return hsl;
+        },
+        whiten(ratio) {
+          const hwb = this.hwb();
+          hwb.color[1] += hwb.color[1] * ratio;
+          return hwb;
+        },
+        blacken(ratio) {
+          const hwb = this.hwb();
+          hwb.color[2] += hwb.color[2] * ratio;
+          return hwb;
+        },
+        grayscale() {
+          const rgb = this.rgb().color;
+          const value = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
+          return Color7.rgb(value, value, value);
+        },
+        fade(ratio) {
+          return this.alpha(this.valpha - this.valpha * ratio);
+        },
+        opaquer(ratio) {
+          return this.alpha(this.valpha + this.valpha * ratio);
+        },
+        rotate(degrees) {
+          const hsl = this.hsl();
+          let hue = hsl.color[0];
+          hue = (hue + degrees) % 360;
+          hue = hue < 0 ? 360 + hue : hue;
+          hsl.color[0] = hue;
+          return hsl;
+        },
+        mix(mixinColor, weight) {
+          if (!mixinColor || !mixinColor.rgb) {
+            throw new Error('Argument to "mix" was not a Color instance, but rather an instance of ' + typeof mixinColor);
+          }
+          const color1 = mixinColor.rgb();
+          const color2 = this.rgb();
+          const p = weight === void 0 ? 0.5 : weight;
+          const w = 2 * p - 1;
+          const a = color1.alpha() - color2.alpha();
+          const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2;
+          const w2 = 1 - w1;
+          return Color7.rgb(
+            w1 * color1.red() + w2 * color2.red(),
+            w1 * color1.green() + w2 * color2.green(),
+            w1 * color1.blue() + w2 * color2.blue(),
+            color1.alpha() * p + color2.alpha() * (1 - p)
+          );
+        }
+      };
+      for (const model of Object.keys(convert)) {
+        if (skippedModels.includes(model)) {
+          continue;
+        }
+        const { channels } = convert[model];
+        Color7.prototype[model] = function(...args) {
+          if (this.model === model) {
+            return new Color7(this);
+          }
+          if (args.length > 0) {
+            return new Color7(args, model);
+          }
+          return new Color7([...assertArray(convert[this.model][model].raw(this.color)), this.valpha], model);
+        };
+        Color7[model] = function(...args) {
+          let color = args[0];
+          if (typeof color === "number") {
+            color = zeroArray(args, channels);
+          }
+          return new Color7(color, model);
+        };
+      }
+      function roundTo(number, places) {
+        return Number(number.toFixed(places));
+      }
+      __name(roundTo, "roundTo");
+      function roundToPlace(places) {
+        return function(number) {
+          return roundTo(number, places);
+        };
+      }
+      __name(roundToPlace, "roundToPlace");
+      function getset(model, channel, modifier) {
+        model = Array.isArray(model) ? model : [model];
+        for (const m of model) {
+          (limiters[m] || (limiters[m] = []))[channel] = modifier;
+        }
+        model = model[0];
+        return function(value) {
+          let result;
+          if (value !== void 0) {
+            if (modifier) {
+              value = modifier(value);
+            }
+            result = this[model]();
+            result.color[channel] = value;
+            return result;
+          }
+          result = this[model]().color[channel];
+          if (modifier) {
+            result = modifier(result);
+          }
+          return result;
+        };
+      }
+      __name(getset, "getset");
+      function maxfn(max) {
+        return function(v) {
+          return Math.max(0, Math.min(max, v));
+        };
+      }
+      __name(maxfn, "maxfn");
+      function assertArray(value) {
+        return Array.isArray(value) ? value : [value];
+      }
+      __name(assertArray, "assertArray");
+      function zeroArray(array, length) {
+        for (let i = 0; i < length; i++) {
+          if (typeof array[i] !== "number") {
+            array[i] = 0;
+          }
+        }
+        return array;
+      }
+      __name(zeroArray, "zeroArray");
+      module.exports = Color7;
+    }
+  });
 
   // node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js
   var require_bcmodsdk = __commonJS({
@@ -229,18 +1817,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(getModule, "getModule");
 
-  // src/Utilities/ModDefinition.ts
-  var ModName = "Themed";
-  var FullModName = "BC Themed";
-  var ModVersion = "1.3.2";
-  var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var DebugMode = false;
-
   // src/Base/BaseModule.ts
-  var BaseModule = class {
-    static {
-      __name(this, "BaseModule");
-    }
+  var _BaseModule = class _BaseModule {
     get settingsScreen() {
       return null;
     }
@@ -264,7 +1842,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       Player.Themed[this.settingsStorage] = val;
     }
     get enabled() {
-      if (!Player?.Themed?.GlobalModule) return false;
+      if (!Player.Themed.GlobalModule) return false;
       return Player.Themed.GlobalModule.themedEnabled && this.settings.themedEnabled && (ServerPlayerIsInChatRoom() || CurrentModule == "Room" && CurrentScreen == "Crafting");
     }
     Init() {
@@ -286,9 +1864,84 @@ One of mods you are using is using an old version of SDK. It will work for now b
     Unload() {
     }
   };
+  __name(_BaseModule, "BaseModule");
+  var BaseModule = _BaseModule;
+
+  // src/Utilities/Color.ts
+  var import_color = __toESM(require_color());
+  var plainColors = {
+    main: "",
+    element: "",
+    elementHover: "",
+    elementDisabled: "",
+    elementHint: "",
+    text: "",
+    textShadow: "",
+    accent: "",
+    accentHover: "",
+    accentDisabled: ""
+  };
+  var specialColors = {
+    equipped: ["", ""],
+    crafted: ["", ""],
+    blocked: ["", ""],
+    limited: ["", ""],
+    allowed: ["", ""],
+    roomFriend: ["", ""],
+    roomBlocked: ["", ""],
+    roomGame: ["", ""]
+  };
+  var _Color = {
+    getComputed: CommonMemoize((color) => {
+      const div = document.createElement("div");
+      div.style.color = color;
+      document.body.appendChild(div);
+      const computedColor = getComputedStyle(div).color;
+      div.remove();
+      return computedColor;
+    }),
+    getHexComputed: CommonMemoize((color) => {
+      return (0, import_color.default)(_Color.getComputed(color)).hex();
+    }),
+    composeRoot() {
+      const colorSettings = Player.Themed.ColorsModule;
+      const globalSettings = Player.Themed.GlobalModule;
+      Object.keys(colorSettings.special).forEach((key) => {
+        const clr = (0, import_color.default)(colorSettings.special[key]);
+        specialColors[key] = [clr.hex(), clr.lighten(0.2).hex()];
+      });
+      if (globalSettings.doUseAdvancedColoring) {
+        Object.keys(colorSettings.base).forEach((key) => {
+          plainColors[key] = colorSettings.base[key];
+        });
+      } else {
+        const primaryColor2 = _Color.getHexComputed(colorSettings.base.main);
+        const elementColor2 = (0, import_color.default)(primaryColor2).lighten(0.2).hex();
+        const accentColor2 = _Color.getHexComputed(colorSettings.base.accent);
+        const textColor2 = _Color.getHexComputed(colorSettings.base.text);
+        plainColors.main = primaryColor2;
+        plainColors.element = elementColor2;
+        plainColors.elementHover = (0, import_color.default)(elementColor2).lighten(0.2).hex();
+        plainColors.elementDisabled = (0, import_color.default)(elementColor2).darken(0.2).hex();
+        plainColors.elementHint = (0, import_color.default)(elementColor2).lighten(0.2).hex();
+        plainColors.text = textColor2;
+        plainColors.accent = accentColor2;
+        plainColors.accentHover = (0, import_color.default)(accentColor2).lighten(0.2).hex();
+        plainColors.accentDisabled = (0, import_color.default)(accentColor2).darken(0.2).hex();
+      }
+      plainColors.textShadow = _Color.getHexComputed("rgba(0,0,0,0.5)");
+    }
+  };
 
   // src/Utilities/SDK.ts
   var import_bondage_club_mod_sdk = __toESM(require_bcmodsdk());
+
+  // src/Utilities/ModDefinition.ts
+  var ModName = "Themed";
+  var FullModName = "BC Themed";
+  var ModVersion = "1.4.0";
+  var ModRepository = "https://github.com/dDeepLb/Themed-BC";
+  var DebugMode = false;
 
   // src/Utilities/Console.ts
   var STYLES = {
@@ -297,6 +1950,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
     DEBUG: "color: #9E4BCF"
   };
   var cmdPrefix = "Themed";
+  function conInfo(...args) {
+    if (typeof args[0] === "string") console.info(`%c${cmdPrefix}: ${args[0]}`, STYLES.INFO, ...args.slice(1));
+    else console.info(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
+  }
+  __name(conInfo, "conInfo");
   function conLog(...args) {
     if (typeof args[0] === "string") console.log(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
     else console.log(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
@@ -372,15 +2030,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookFunction, "hookFunction");
 
   // src/Hooks/GuiRedraw/AppearanceGetPreviewImageColor.ts
-  var itemPreviewColors = {
-    base: ["%background", "%hover"],
-    worn: ["lightblue", "lightskyblue"],
-    unusable: ["gray", "gray"],
-    crafted: ["#FFFFAF", "palegoldenrod"],
-    blocked: ["#b81010", "red"],
-    limited: ["orange", "#fcae55"],
-    allowed: ["green", "limegreen"]
-  };
   function hookAppearanceGetPreviewImageColor() {
     hookFunction(
       "AppearanceGetPreviewImageColor",
@@ -392,190 +2041,23 @@ One of mods you are using is using an old version of SDK. It will work for now b
           let permission = "allowed";
           if (InventoryIsPermissionBlocked(c, item.Asset.Name, item.Asset.Group.Name)) permission = "blocked";
           else if (InventoryIsPermissionLimited(c, item.Asset.Name, item.Asset.Group.Name)) permission = "limited";
-          return item.Worn ? "gray" : itemPreviewColors[permission][hover ? 1 : 0];
+          return item.Worn ? specialColors.equipped[hover ? 1 : 0] : specialColors[permission][hover ? 1 : 0];
         } else {
           const unusable = item.SortOrder.startsWith(DialogSortOrder.Unusable.toString()) || item.SortOrder.startsWith(DialogSortOrder.TargetFavoriteUnusable.toString()) || item.SortOrder.startsWith(DialogSortOrder.PlayerFavoriteUnusable.toString());
           const blocked = item.SortOrder.startsWith(DialogSortOrder.Blocked.toString());
           const limited = item.Icons.includes("AllowedLimited");
-          if (blocked) return itemPreviewColors["blocked"][hover ? 1 : 0];
-          else if (item.Worn) return itemPreviewColors["worn"][hover ? 1 : 0];
-          else if (item.Craft != null && item.Craft.Name != null) return itemPreviewColors["crafted"][hover ? 1 : 0];
-          else if (unusable) return itemPreviewColors["unusable"][hover ? 1 : 0];
-          else if (limited) return itemPreviewColors["limited"][hover ? 1 : 0];
-          else return itemPreviewColors["base"][hover ? 1 : 0];
+          if (blocked) return specialColors.blocked[hover ? 1 : 0];
+          else if (item.Worn) return specialColors.equipped[hover ? 1 : 0];
+          else if (item.Craft != null && item.Craft.Name != null) return specialColors.crafted[hover ? 1 : 0];
+          else if (unusable) return plainColors.elementDisabled;
+          else if (limited) return specialColors.limited[hover ? 1 : 0];
+          else return hover ? plainColors.elementHover : plainColors.element;
         }
       },
       3 /* GuiRedraw */
     );
   }
   __name(hookAppearanceGetPreviewImageColor, "hookAppearanceGetPreviewImageColor");
-
-  // src/Utilities/Color.ts
-  var colors = {
-    mainBackground: "",
-    elementBackground: "",
-    elementBackgroundHover: "",
-    elementBackgroundDisabled: "",
-    elementHint: "",
-    elementBorder: "",
-    elementBorderHover: "",
-    // elementBorderDisabled: '',
-    text: "",
-    icon: ""
-    // iconHover: '',
-    // iconDisabled: '',
-  };
-  var isBlack = /* @__PURE__ */ __name((color) => _Color.getComputed(color) === "rgb(0, 0, 0)", "isBlack");
-  var cachedColors = {};
-  var _Color = {
-    darken(hexColor, percentage) {
-      if (!hexColor) return;
-      const cacheColor = _Color.getCache(`darker${hexColor}${percentage}`);
-      if (cacheColor) return cacheColor;
-      const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
-      const newRgbColor = { r: 0, g: 0, b: 0 };
-      newRgbColor.r = Math.max(0, color.r - Math.round(percentage / 100 * color.r));
-      newRgbColor.g = Math.max(0, color.g - Math.round(percentage / 100 * color.g));
-      newRgbColor.b = Math.max(0, color.b - Math.round(percentage / 100 * color.b));
-      newRgbColor.a = color.a;
-      const ret = _Color.rgbaToHex(newRgbColor);
-      _Color.setCache(`darker${hexColor}${percentage}`, ret);
-      return ret;
-    },
-    lighten(hexColor, percentage) {
-      if (!hexColor) return;
-      const cacheColor = _Color.getCache(`lighter${hexColor}${percentage}`);
-      if (cacheColor) return cacheColor;
-      const color = _Color.extractFromRGBA(_Color.getComputed(hexColor));
-      const newRgbColor = { r: 0, g: 0, b: 0 };
-      newRgbColor.r = Math.min(255, color.r + Math.round(percentage / 100 * (255 - color.r)));
-      newRgbColor.g = Math.min(255, color.g + Math.round(percentage / 100 * (255 - color.g)));
-      newRgbColor.b = Math.min(255, color.b + Math.round(percentage / 100 * (255 - color.b)));
-      newRgbColor.a = color.a;
-      const ret = _Color.rgbaToHex(newRgbColor);
-      _Color.setCache(`lighter${hexColor}${percentage}`, ret);
-      return ret;
-    },
-    toDarkMode(colorHex, backgroundColorHex) {
-      const cacheColor = _Color.getCache(`darkMode${colorHex}${backgroundColorHex}`);
-      if (cacheColor) return cacheColor;
-      const lightColor = _Color.extractFromRGBA(_Color.getComputed(colorHex));
-      const backgroundColor = _Color.extractFromRGBA(_Color.getComputed(backgroundColorHex));
-      const contrastRatio = _Color.getContrastRatio(lightColor, backgroundColor);
-      if (contrastRatio < 4.5) {
-        lightColor.r = Math.min(lightColor.r + 30, 255);
-        lightColor.g = Math.min(lightColor.g + 30, 255);
-        lightColor.b = Math.min(lightColor.b + 30, 255);
-      }
-      const ret = _Color.rgbaToHex(lightColor);
-      _Color.setCache(`darkMode${colorHex}${backgroundColorHex}`, ret);
-      return ret;
-    },
-    getContrastRatio(color1, color2) {
-      const luminance1 = _Color.calculateLuminance(color1);
-      const luminance2 = _Color.calculateLuminance(color2);
-      return (Math.max(luminance1, luminance2) + 0.05) / (Math.min(luminance1, luminance2) + 0.05);
-    },
-    calculateLuminance(color) {
-      const r = color.r / 255;
-      const g = color.g / 255;
-      const b = color.b / 255;
-      const gammaCorrectedR = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
-      const gammaCorrectedG = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
-      const gammaCorrectedB = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
-      return 0.2126 * gammaCorrectedR + 0.7152 * gammaCorrectedG + 0.0722 * gammaCorrectedB;
-    },
-    hexToRgba(hex) {
-      hex = hex.replace(/^#/, "");
-      if (hex.length === 6) {
-        return {
-          r: parseInt(hex.slice(0, 2), 16),
-          g: parseInt(hex.slice(2, 4), 16),
-          b: parseInt(hex.slice(4, 6), 16),
-          a: 1
-          // Fully opaque alpha
-        };
-      } else if (hex.length === 8) {
-        return {
-          r: parseInt(hex.slice(0, 2), 16),
-          g: parseInt(hex.slice(2, 4), 16),
-          b: parseInt(hex.slice(4, 6), 16),
-          a: parseInt(hex.slice(6, 8), 16) / 255
-          // Convert alpha to range between 0 and 1
-        };
-      }
-      return { r: 0, g: 0, b: 0, a: 1 };
-    },
-    rgbaToHex(color) {
-      const { r, g, b, a } = color;
-      if (a !== void 0 && a !== 1) {
-        const alphaHex = Math.round(a * 255).toString(16).toUpperCase().padStart(2, "0");
-        return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase()}${alphaHex}`;
-      }
-      return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase()}`;
-    },
-    extractFromRGBA(rgbaString) {
-      const rgbaRegex = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)$/;
-      const match = rgbaString.match(rgbaRegex);
-      if (match) {
-        const [, tempR, tempG, tempB, tempA] = match;
-        const r = parseInt(tempR, 10);
-        const g = parseInt(tempG, 10);
-        const b = parseInt(tempB, 10);
-        const a = tempA ? parseFloat(tempA) : 1;
-        return {
-          r,
-          g,
-          b,
-          a
-        };
-      } else {
-        return null;
-      }
-    },
-    getComputed(color) {
-      const cachedColor = _Color.getCache(`comp${color}`);
-      if (cachedColor) return cachedColor;
-      const div = document.createElement("div");
-      div.style.color = color;
-      document.body.appendChild(div);
-      const computedColor = getComputedStyle(div).color;
-      div.remove();
-      const ret = computedColor;
-      _Color.setCache(`comp${color}`, ret);
-      return ret;
-    },
-    getHexComputed(color) {
-      color = _Color.getComputed(color);
-      const RGBA = _Color.extractFromRGBA(color);
-      const ret = _Color.rgbaToHex(RGBA);
-      return ret;
-    },
-    composeRoot() {
-      const data = Player.Themed.ColorsModule;
-      const primaryColor = _Color.getHexComputed(data.primaryColor);
-      const accentColor = _Color.getHexComputed(data.accentColor);
-      const textColor = _Color.getHexComputed(data.textColor);
-      colors.mainBackground = primaryColor;
-      colors.elementBackground = _Color.lighten(primaryColor, 10);
-      colors.elementBackgroundDisabled = primaryColor;
-      colors.elementBackgroundHover = accentColor;
-      colors.elementHint = _Color.lighten(colors.elementBackground, 20);
-      colors.elementBorder = accentColor;
-      colors.elementBorderHover = _Color.lighten(accentColor, 20);
-      colors.text = textColor;
-      colors.icon = accentColor;
-    },
-    setCache(key, value) {
-      cachedColors[key] = value;
-    },
-    getCache(key) {
-      return cachedColors[key];
-    },
-    clearCache() {
-      cachedColors = {};
-    }
-  };
 
   // src/Hooks/GuiRedraw/DrawBackNextButton.ts
   function hookDrawBackNextButton() {
@@ -584,7 +2066,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [Left, Top, Width, Height, Label, Color, Image, , , Disabled] = args;
+        const [Left, Top, Width, Height, Label, Color7, Image, , , Disabled] = args;
         let [, , , , , , , BackText, NextText, , ArrowWidth] = args;
         if (ArrowWidth == null || ArrowWidth > Width / 2) ArrowWidth = Width / 2;
         const LeftSplit = Left + ArrowWidth;
@@ -595,10 +2077,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
         MainCanvas.textAlign = "center";
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
-        MainCanvas.fillStyle = colors.elementBackground;
+        MainCanvas.fillStyle = plainColors.element;
         MainCanvas.fillRect(Left, Top, Width, Height);
         if (MouseIn(Left, Top, Width, Height) && !CommonIsMobile && !Disabled) {
-          MainCanvas.fillStyle = colors.elementBackgroundHover;
+          MainCanvas.fillStyle = plainColors.elementHover;
           if (MouseX > RightSplit) {
             MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
           } else if (MouseX <= LeftSplit) {
@@ -607,15 +2089,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
             MainCanvas.fillRect(Left + ArrowWidth, Top, Width - ArrowWidth * 2, Height);
           }
         } else if (CommonIsMobile && ArrowWidth < Width / 2 && !Disabled) {
-          MainCanvas.fillStyle = colors.elementBackgroundDisabled;
+          MainCanvas.fillStyle = plainColors.elementDisabled;
           MainCanvas.fillRect(Left, Top, ArrowWidth, Height);
           MainCanvas.fillRect(RightSplit, Top, ArrowWidth, Height);
         }
         MainCanvas.lineWidth = 2;
-        MainCanvas.strokeStyle = colors.elementBorder;
+        MainCanvas.strokeStyle = plainColors.accent;
         MainCanvas.stroke();
         MainCanvas.closePath();
-        DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color);
+        DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color7);
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, "Black");
         if (Image != null && Image != "") {
           DrawImage(Image, Left + 2, Top + 2);
@@ -650,20 +2132,20 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawBackNextButton, "hookDrawBackNextButton");
 
   // src/Utilities/Drawing.ts
-  var cachedImageData = {};
-  var cachedBase64Data = {};
   var _Image = {
-    doNotDrawImageFolders: [
+    doNotColorizeImageIncludes: [
       "Assets/Female3DCG/",
       "Backgrounds/",
       "Icons/Struggle/",
+      "Icons/LARP/",
+      "Icons/MagicBattle/",
       "Screens/",
-      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyEAYAAABOr1TyAAABb2lDQ1BpY2MAACiRdZG9S0JRGMZ/",
-      // FBC's "FBC" overlay icon
       "http"
-      // Fix bug with recoloring of custom bgs
     ],
-    doNotDrawImages: [
+    doColorizeImageIncludes: [
+      "https://ddeeplb.github.io/Themed-BC/dev/public"
+    ],
+    doNotColorizeImages: [
       "Icons/Accept.png",
       "Icons/Activity.png",
       "Icons/Arousal.png",
@@ -700,86 +2182,28 @@ One of mods you are using is using an old version of SDK. It will work for now b
       "Icons/Small/ColorChangeMulti.png",
       "Icons/Small/Naked.png",
       "Icons/Small/Use.png",
-      "Icons/Small/YouTube.png",
-      "Assets/Female3DCG/ItemMisc/Preview/Best Friend Padlock.png",
-      "Assets/Female3DCG/ItemMisc/Preview/Best Friend Timer Padlock.png"
+      "Icons/Small/YouTube.png"
     ],
-    getColorized(source, hexColor) {
-      if (typeof source != "string") return;
-      const img = DrawGetImage(source);
-      if (_Image.getImageDataCache(`${source}&${hexColor}`)) {
-        return _Image.getImageDataCache(`${source}&${hexColor}`);
-      }
-      try {
-        if (!img.complete) return void 0;
-        if (!img.naturalWidth) return void 0;
-        const width = img.width;
-        const height = img.height;
-        ColorCanvas.canvas.width = width;
-        ColorCanvas.canvas.height = height;
-        ColorCanvas.globalCompositeOperation = "copy";
-        ColorCanvas.drawImage(img, 0, 0);
-        const imageData = ColorCanvas.getImageData(0, 0, width, height);
-        const colorizedData = _Image.colorize(imageData, hexColor);
-        _Image.setImageDataCache(`${source}&${hexColor}`, colorizedData);
-        return colorizedData;
-      } catch (e) {
-        return void 0;
-      }
-    },
-    turnToBase64(imageData, cacheKey) {
-      if (_Image.getBase64DataCache(`${cacheKey}`)) return _Image.getBase64DataCache(`${cacheKey}`);
-      const canvas = document.createElement("canvas");
-      canvas.width = imageData.width;
-      canvas.height = imageData.height;
-      const ctx = canvas.getContext("2d");
-      ctx.putImageData(imageData, 0, 0);
-      const base64Data = canvas.toDataURL("image/png");
-      canvas.remove();
-      _Image.setBase64DataCache(cacheKey, base64Data);
-      return base64Data;
-    },
-    colorize(imageData, hexColor) {
-      const data = imageData.data;
-      const rgbColor = DrawHexToRGB(hexColor);
-      for (let pixelData = 0, len = data.length; pixelData < len; pixelData += 4) {
-        if (data[pixelData + 3] == 0) continue;
-        const transparency = (data[pixelData] + data[pixelData + 1] + data[pixelData + 2]) / 383;
-        data[pixelData + 0] = rgbColor.r * transparency;
-        data[pixelData + 1] = rgbColor.g * transparency;
-        data[pixelData + 2] = rgbColor.b * transparency;
-      }
-      return imageData;
-    },
+    doColorizeImages: [],
     doDrawImage(source) {
-      let skipDrawing = false;
-      for (const folderPrefix of _Image.doNotDrawImageFolders) {
-        if (typeof source !== "string") break;
-        if (source.startsWith(folderPrefix)) {
-          skipDrawing = true;
-          break;
+      if (!source) return false;
+      if (typeof source !== "string") return false;
+      let doDraw = true;
+      if (doDraw) {
+        const includesFolder = _Image.doNotColorizeImageIncludes.some((prefix) => source.startsWith(prefix));
+        const includesFile = _Image.doNotColorizeImages.includes(source);
+        if (includesFolder || includesFile) {
+          doDraw = false;
         }
       }
-      if (!skipDrawing && _Image.doNotDrawImages.includes(source)) {
-        skipDrawing = true;
+      if (!doDraw) {
+        const includesFolder = _Image.doColorizeImageIncludes.some((prefix) => source.startsWith(prefix));
+        const includesFile = _Image.doColorizeImages.includes(source);
+        if (includesFolder || includesFile) {
+          doDraw = true;
+        }
       }
-      return !skipDrawing;
-    },
-    setImageDataCache(key, data) {
-      cachedImageData[key] = data;
-    },
-    getImageDataCache(key) {
-      return cachedImageData[key];
-    },
-    setBase64DataCache(key, data) {
-      cachedBase64Data[key] = data;
-    },
-    getBase64DataCache(key) {
-      return cachedBase64Data[key];
-    },
-    clearCache() {
-      cachedImageData = {};
-      cachedBase64Data = {};
+      return doDraw;
     }
   };
   function drawRect(x, y, width, height, backgroundColor, borderColor) {
@@ -813,12 +2237,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
               y,
               width,
               height,
-              colors.elementBackground,
-              colors.elementBackgroundHover,
-              colors.elementBackgroundDisabled,
-              colors.elementBorder,
-              colors.elementBorderHover,
-              colors.elementBorder,
+              plainColors.element,
+              plainColors.elementHover,
+              plainColors.elementDisabled,
+              plainColors.accent,
+              plainColors.accentHover,
+              plainColors.accentDisabled,
               isHovering,
               isDisabled
             );
@@ -829,18 +2253,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
               y,
               width,
               height,
-              _Color.darken(_Color.toDarkMode(color, colors.elementBackground), 20),
-              _Color.darken(_Color.toDarkMode(color, colors.elementBackgroundHover), 30),
-              _Color.darken(_Color.toDarkMode(color, colors.elementBackground), 40),
-              colors.elementBorder,
-              colors.elementBorderHover,
-              colors.elementBorder,
+              color,
+              color,
+              color,
+              plainColors.accent,
+              plainColors.accentHover,
+              plainColors.accentDisabled,
               isHovering,
               isDisabled
             );
             break;
         }
-        DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, colors.text);
+        DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, plainColors.text);
         if (image != null && image != "") {
           DrawImage(image, x + 2, y + 2);
         }
@@ -867,7 +2291,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         Top = Top + (Height - 65) / 2;
         MainCanvas.save();
         MainCanvas.textAlign = "center";
-        drawRect(Left, Top, 450, 65, colors.elementHint, colors.elementBorder);
+        drawRect(Left, Top, 450, 65, plainColors.elementHint, plainColors.accent);
         DrawTextFit(HoveringText, Left + 225, Top + 33, 444, "Black");
         MainCanvas.restore();
       },
@@ -899,7 +2323,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [Left, Top, Width, Height, Color, Thickness] = args;
+        const [Left, Top, Width, Height, Color7, Thickness] = args;
         const drawEmptyRect = /* @__PURE__ */ __name((color) => {
           MainCanvas.beginPath();
           MainCanvas.rect(Left, Top, Width, Height);
@@ -907,21 +2331,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
           MainCanvas.strokeStyle = color;
           MainCanvas.stroke();
         }, "drawEmptyRect");
-        if (Color?.startsWith("%")) {
-          switch (Color.substring(1).toLowerCase()) {
+        if (Color7?.startsWith("%")) {
+          switch (Color7.substring(1).toLowerCase()) {
             case "border":
-              drawEmptyRect(colors.elementBorder);
+              drawEmptyRect(plainColors.accent);
               break;
             default:
               next(args);
               break;
           }
         } else {
-          switch (_Color.getHexComputed(Color).toLowerCase()) {
+          switch (_Color.getHexComputed(Color7).toLowerCase()) {
             case "#ffffff":
             case "#dddddd":
             case "#000000":
-              drawEmptyRect(colors.elementBorder);
+              drawEmptyRect(plainColors.accent);
               break;
             default:
               next(args);
@@ -944,11 +2368,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (typeof args[0] !== "string") return next(args);
         if (!_Image.doDrawImage(args[0])) return next(args);
         const [Source, Canvas, X, Y, Options] = args;
-        const color = args[4].HexColor ?? colors.icon;
-        const colorizedImage = _Image.getColorized(Source, color);
-        if (!colorizedImage) return next(args);
-        const imageSource = _Image.turnToBase64(colorizedImage, `${Source}${args[4].HexColor}`);
-        next([imageSource ?? Source, Canvas, X, Y, Options]);
+        Options.HexColor = plainColors.accent;
+        Options.FullAlpha = true;
+        next([Source, Canvas, X, Y, Options]);
       },
       3 /* GuiRedraw */
     );
@@ -963,15 +2385,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [X, Y, Path, Description, Options] = args;
-        const { Vibrating, Disabled, Icons } = Options || {};
-        let { Background, Foreground, Border, Hover, Width, Height } = Options || {};
+        const { Vibrating, Icons, Disabled } = Options || {};
+        let { Foreground, Background, Width, Height } = Options || {};
         Width = Width || DrawAssetPreviewDefaultWidth;
         Height = Height || DrawAssetPreviewDefaultHeight;
         const Padding = 2;
         const TextGutter = Description ? 44 : 0;
-        Foreground = colors.text;
-        Border = true;
-        Hover = MouseHovering(X, Y, Width, Height);
+        Foreground = plainColors.text;
+        Background = Background || plainColors.element;
+        const hover = MouseHovering(X, Y, Width, Height);
+        if (hover) Background = Background || plainColors.elementHover;
+        if (Disabled) Background = Background || plainColors.elementDisabled;
         let ImageX = X + Padding;
         let ImageY = Y + Padding;
         let ImageWidth = Width;
@@ -993,7 +2417,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         DrawRect(X, Y, Width, Height, Background);
         ControllerAddActiveArea(X, Y);
-        if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : colors.elementBorder);
+        DrawEmptyRect(X, Y, Width, Height, hover ? plainColors.accentHover : plainColors.accent);
         if (Path !== "") DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
         DrawPreviewIcons(Icons, X, Y);
         if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
@@ -1004,39 +2428,59 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawPreviewBox, "hookDrawPreviewBox");
 
   // src/Hooks/GuiRedraw/DrawRect.ts
+  var import_color2 = __toESM(require_color());
   function hookDrawRect() {
     hookFunction(
       "DrawRect",
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [Left, Top, Width, Height, Color] = args;
-        const drawRect2 = /* @__PURE__ */ __name((color) => {
-          MainCanvas.beginPath();
-          MainCanvas.fillStyle = color;
-          MainCanvas.fillRect(Left, Top, Width, Height);
-          MainCanvas.fill();
+        const [Left, Top, Width, Height, color] = args;
+        const drawRect2 = /* @__PURE__ */ __name((color2) => {
+          DrawRect(Left, Top, Width, Height, color2);
         }, "drawRect");
-        if (Color?.startsWith("%")) {
-          switch (Color.substring(1).toLowerCase()) {
+        const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
+        if (color?.startsWith("%")) {
+          switch (color.substring(1)) {
             case "disabled":
-              drawRect2(colors.elementBackgroundDisabled);
+              drawRect2(plainColors.elementDisabled);
               break;
             case "hover":
-              drawRect2(colors.elementBackgroundHover);
+              drawRect2(plainColors.elementHover);
               break;
             case "background":
-              drawRect2(colors.elementBackground);
+              drawRect2(plainColors.element);
               break;
             case "friendhint":
-              drawRect2(colors.elementHint);
+              drawRect2(plainColors.elementHint);
+              break;
+            case "searchFullBlock":
+              drawRect2((0, import_color2.default)(specialColors.blocked[hover]).mix((0, import_color2.default)(specialColors.roomBlocked[hover]), 0.5).hex());
+              break;
+            case "searchBlock":
+              drawRect2(specialColors.roomBlocked[hover]);
+              break;
+            case "searchFullFriend":
+              drawRect2((0, import_color2.default)(specialColors.roomFriend[hover]).mix((0, import_color2.default)(plainColors.elementDisabled), 0.5).hex());
+              break;
+            case "searchFriend":
+              drawRect2(specialColors.roomFriend[hover]);
+              break;
+            case "searchFull":
+              drawRect2(plainColors.elementDisabled);
+              break;
+            case "searchGame":
+              drawRect2(specialColors.roomGame[hover]);
+              break;
+            case "allowed":
+              drawRect2(specialColors.allowed[hover]);
               break;
             default:
               next(args);
               break;
           }
         } else {
-          switch (_Color.getHexComputed(Color).toLowerCase()) {
+          switch (_Color.getHexComputed(color).toLowerCase()) {
             case "#eeeeee":
             case "#dddddd":
             case "#cccccc":
@@ -1045,7 +2489,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "#ffffff88":
             case "#ffffffcc":
             case "#d7f6e9":
-              drawRect2(colors.elementBackground);
+              drawRect2(plainColors.element);
               break;
             default:
               next(args);
@@ -1059,10 +2503,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawRect, "hookDrawRect");
 
   // src/Utilities/String.ts
-  var _String = class {
-    static {
-      __name(this, "_String");
-    }
+  var __String = class __String {
     static encode(string) {
       return LZString.compressToBase64(JSON.stringify(string));
     }
@@ -1077,11 +2518,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (data) return data;
     }
   };
+  __name(__String, "_String");
+  var _String = __String;
 
   // src/Utilities/Data.ts
   var PlayerStorage = /* @__PURE__ */ __name(() => typeof Player?.[ModName] === "object" ? CommonCloneDeep(Player?.[ModName]) : void 0, "PlayerStorage");
   var ExtensionStorage = /* @__PURE__ */ __name(() => Player.ExtensionSettings[ModName], "ExtensionStorage");
-  function dataTake() {
+  function settingsLoad() {
     if (ExtensionStorage()) {
       Player[ModName] = JSON.parse(LZString.decompressFromBase64(ExtensionStorage()));
     } else if (Player.OnlineSettings[ModName]) {
@@ -1092,8 +2535,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
       Player[ModName] = {};
     }
   }
-  __name(dataTake, "dataTake");
-  function dataStore() {
+  __name(settingsLoad, "settingsLoad");
+  function settingsSave() {
     if (!ExtensionStorage()) Player.ExtensionSettings[ModName] = "";
     const Data = {
       Version: PlayerStorage().Version,
@@ -1105,12 +2548,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
     Player.ExtensionSettings[ModName] = _String.encode(Data);
     ServerPlayerExtensionSettingsSync(ModName);
   }
-  __name(dataStore, "dataStore");
-  function dataErase() {
-    Player[ModName].ColorsModule = {};
-    dataStore();
+  __name(settingsSave, "settingsSave");
+  function settingsReset() {
+    Player[ModName] = {};
+    settingsSave();
   }
-  __name(dataErase, "dataErase");
+  __name(settingsReset, "settingsReset");
 
   // src/Hooks/GuiRedraw/DrawRoomBackground.ts
   function hookDrawRoomBackground() {
@@ -1121,12 +2564,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (!doRedraw()) return next([URL, ...args]);
         if (URL.includes("Sheet.jpg")) {
           if (PlayerStorage().GlobalModule.doUseFlatColor) {
-            DrawRect(0, 0, 2e3, 1e3, colors.mainBackground);
+            DrawRect(0, 0, 2e3, 1e3, plainColors.main);
           } else {
             next([URL, ...args]);
             MainCanvas.save();
             MainCanvas.globalCompositeOperation = "multiply";
-            DrawRect(0, 0, 2e3, 1e3, colors.mainBackground);
+            DrawRect(0, 0, 2e3, 1e3, plainColors.main);
             MainCanvas.restore();
           }
         } else {
@@ -1139,17 +2582,19 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawRoomBackground, "hookDrawRoomBackground");
 
   // src/Hooks/GuiRedraw/DrawText.ts
+  var import_color3 = __toESM(require_color());
   function hookDrawText() {
     hookFunction(
       "DrawText",
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        if (isBlack(args[3])) {
-          args[3] = colors.text;
+        if (!args[0]) return next(args);
+        if (!args[3]) return next(args);
+        if ((0, import_color3.default)(args[3].toLowerCase()).hex() === "#000000") {
+          args[3] = plainColors.text;
           args[4] = "";
         } else {
-          args[3] = _Color.toDarkMode(args[3], colors.mainBackground);
           args[4] = "";
         }
         next(args);
@@ -1160,16 +2605,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawText, "hookDrawText");
 
   // src/Hooks/GuiRedraw/DrawTextFit.ts
+  var import_color4 = __toESM(require_color());
   function hookDrawTextFit() {
     hookFunction(
       "DrawTextFit",
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        if (isBlack(args[4])) {
-          args[4] = colors.text;
-        } else {
-          args[4] = _Color.toDarkMode(args[4], colors.mainBackground);
+        if (!args[0]) return next(args);
+        if (!args[4]) return next(args);
+        if ((0, import_color4.default)(args[4].toLowerCase()).hex() === "#000000") {
+          args[4] = plainColors.text;
         }
         return next(args);
       },
@@ -1179,12 +2625,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawTextFit, "hookDrawTextFit");
 
   // src/Hooks/GuiRedraw/DrawTextWrap.ts
+  var import_color5 = __toESM(require_color());
   function hookDrawTextWrap() {
     hookFunction(
       "DrawTextWrap",
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
+        if (!args[0]) return next(args);
+        if (!args[5]) return next(args);
         const [Text, X, , Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
         let [, , Y, , ,] = args;
         const isHovering = MouseHovering(X, Y, Width, Height);
@@ -1192,9 +2641,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         ControllerAddActiveArea(X, Y);
         if (BackColor != null) {
           if (!isHovering) {
-            drawRect(X, Y, Width, Height, BackColor, colors.elementBorder);
+            drawRect(X, Y, Width, Height, BackColor, plainColors.accent);
           } else {
-            drawRect(X, Y, Width, Height, _Color.darken(BackColor, 40), colors.elementBorder);
+            drawRect(X, Y, Width, Height, plainColors.elementHover, plainColors.accentHover);
           }
         }
         let TextSize;
@@ -1202,7 +2651,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           TextSize = MainCanvas.font;
           GetWrapTextSize(Text, Width, MaxLine);
         }
-        MainCanvas.fillStyle = isBlack(ForeColor) ? colors.text : _Color.lighten(_Color.toDarkMode(ForeColor, colors.elementBackground), 50);
+        MainCanvas.fillStyle = (0, import_color5.default)(ForeColor.toLowerCase()).hex() === "#000000" ? plainColors.text : ForeColor;
         if (MainCanvas.measureText(Text).width > Width) {
           const words = fragmentText(Text, Width);
           let line = "";
@@ -1237,13 +2686,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Modules/GuiRedraw.ts
   var doRedraw = /* @__PURE__ */ __name(() => {
-    return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul;
+    return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== "ClubCard";
   }, "doRedraw");
-  var GuiRedrawModule = class extends BaseModule {
-    static {
-      __name(this, "GuiRedrawModule");
+  var _GuiRedrawModule = class _GuiRedrawModule extends BaseModule {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "patched", false);
     }
-    patched = false;
     Load() {
       hookDrawRoomBackground();
       hookDrawButton();
@@ -1263,10 +2712,20 @@ One of mods you are using is using an old version of SDK. It will work for now b
     patchGui() {
       if (this.patched) return false;
       patchFunction("ChatSearchNormalDraw", {
-        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);': 'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#4d1b1b" : HasBlock ? "#6e0c0c" : HasFriends && IsFull ? "#225c30" : HasFriends ? "#4d854d" : IsFull ? "#444" : "White"), null, null, IsFull);',
+        // button patch
+        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);': 'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "%searchFullBlock" : HasBlock ? "%searchBlock" : HasFriends && IsFull ? "%searchFullFriend" : HasFriends ? "%searchFriend" : IsFull ? "%searchFull" : "White"), null, null, IsFull);',
+        // friend in room patch
         'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);': 'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
+        // room friend title patch
         'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);': 'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FF9999", 1);': 'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#6e0c0c", 1);'
+        // game hint patch
+        'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#9999FF", 1);': 'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchGame", 1);',
+        // block hint patch
+        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FF9999", 1);': 'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchBlock", 1);'
+      });
+      patchFunction("ChatSearchPermissionDraw", {
+        'DrawRect(X, Y, 630, 85, Hover ? "green" : "lime");': 'DrawRect(X, Y, 630, 85, "%allowed");',
+        'DrawRect(X, Y, 630, 85, Hover ? "red" : "pink");': 'DrawRect(X, Y, 630, 85, "%searchBlock");'
       });
       patchFunction("DialogDraw", {
         "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
@@ -1276,6 +2735,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     unpatchGui() {
       if (!this.patched) return false;
       unpatchFuntion("ChatSearchNormalDraw");
+      unpatchFuntion("ChatSearchPermissionDraw");
       unpatchFuntion("DialogDraw");
       this.patched = false;
     }
@@ -1287,14 +2747,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
     }
   };
+  __name(_GuiRedrawModule, "GuiRedrawModule");
+  var GuiRedrawModule = _GuiRedrawModule;
 
   // src/Translation.ts
-  var Localization = class _Localization {
-    static {
-      __name(this, "Localization");
-    }
-    static Translation = new Object();
-    static FallbackTranslation = new Object();
+  var _Localization = class _Localization {
     static async load() {
       const lang = TranslationLanguage.toLowerCase();
       this.Translation = await _Localization.fetchLanguageFile(lang);
@@ -1307,7 +2764,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return this.Translation[srcTag] || this.FallbackTranslation?.[srcTag] || srcTag || "";
     }
     static async fetchLanguageFile(lang) {
-      const response = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev"}/translations/${lang}.lang`);
+      const response = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/i18n/${lang}.lang`);
       if (lang != "en" && !response.ok) {
         return _Localization.fetchLanguageFile("en");
       }
@@ -1327,6 +2784,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return translations;
     }
   };
+  __name(_Localization, "Localization");
+  __publicField(_Localization, "Translation", new Object());
+  __publicField(_Localization, "FallbackTranslation", new Object());
+  var Localization = _Localization;
   var getText = /* @__PURE__ */ __name((string) => Localization.getText(string), "getText");
 
   // src/Base/SettingDefinitions.ts
@@ -1343,18 +2804,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(setSubscreen, "setSubscreen");
 
   // src/Base/BaseSetting.ts
-  var GuiSubscreen = class _GuiSubscreen {
-    static {
-      __name(this, "GuiSubscreen");
-    }
-    static START_X = 180;
-    static START_Y = 205;
-    static X_MOD = 950;
-    static Y_MOD = 75;
-    static POS_BAK = _GuiSubscreen.START_X;
-    static TEXT_ALIGN_BAK;
-    module;
+  var _GuiSubscreen = class _GuiSubscreen {
     constructor(module) {
+      __publicField(this, "module");
       this.module = module;
       SETTING_FUNC_NAMES.forEach((name) => {
         const fName = SETTING_FUNC_PREFIX + SETTING_NAME_PREFIX + this.name + name;
@@ -1418,16 +2870,19 @@ One of mods you are using is using an old version of SDK. It will work for now b
       this.multipageStructure.forEach(
         (s) => s.forEach((item) => {
           switch (item.type) {
-            case "text":
+            case "text": {
               const input = ElementCreateInput(item.id, "text", item.setting(), "255");
               input.setAttribute("autocomplete", "off");
               break;
+            }
             case "number":
               ElementCreateInput(item.id, "number", item.setting(), "255");
               break;
-            case "color":
-              ElementCreateInput(item.id, "color", item.setting());
+            case "color": {
+              const elm = ElementCreateInput(item.id, "color", item.setting());
+              elm.classList.add("tmd-color-picker");
               break;
+            }
           }
         })
       );
@@ -1435,7 +2890,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     Run() {
       _GuiSubscreen.POS_BAK = _GuiSubscreen.START_X;
-      _GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
+      MainCanvas.save();
       _GuiSubscreen.START_X = 550;
       MainCanvas.textAlign = "left";
       DrawCharacter(Player, 50, 50, 0.9, false);
@@ -1447,7 +2902,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         MainCanvas.textAlign = "left";
       }
       this.hideElements();
-      this.structure.forEach((item, ix, arr) => {
+      this.structure.forEach((item, ix) => {
         switch (item.type) {
           case "checkbox":
             this.drawCheckbox(item.label, item.description, item.setting(), ix, item.disabled);
@@ -1466,7 +2921,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
       });
       _GuiSubscreen.START_X = _GuiSubscreen.POS_BAK;
-      MainCanvas.textAlign = _GuiSubscreen.TEXT_ALIGN_BAK;
+      MainCanvas.restore();
     }
     Click() {
       _GuiSubscreen.POS_BAK = _GuiSubscreen.START_X;
@@ -1475,10 +2930,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       MainCanvas.textAlign = "left";
       if (MouseIn(1815, 75, 90, 90)) return this.Exit();
       if (this.multipageStructure.length > 1) PreferencePageChangeClick(1595, 75, this.multipageStructure.length);
-      this.structure.forEach((item, ix, arr) => {
+      this.structure.forEach((item, ix) => {
         switch (item.type) {
           case "checkbox":
-            if (MouseIn(this.getXPos(ix) + 600, this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
+            if (MouseIn(this.getXPos(ix), this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
               item.setSetting(!item.setting());
             }
             break;
@@ -1497,8 +2952,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "number":
               if (!CommonIsNumeric(ElementValue(item.id))) {
                 ElementRemove(item.id);
-                break;
               }
+              break;
             case "text":
             case "color":
               item.setSetting(ElementValue(item.id));
@@ -1511,7 +2966,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       CharacterLoadCanvas(Player);
       getModule("ColorsModule").reloadTheme();
       setSubscreen("MainMenu");
-      dataStore();
+      settingsSave();
     }
     Unload() {
     }
@@ -1519,9 +2974,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       drawTooltip(300, 850, 1400, text, "left");
     }
     drawCheckbox(label, description, value, order, disabled = false) {
-      const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      DrawCheckbox(this.getXPos(order) + 600, this.getYPos(order) - 32, 64, 64, "", value ?? false, disabled);
+      const checkboxSize = 64;
+      const labelOffset = checkboxSize + 30;
+      const isHovering = MouseIn(this.getXPos(order) + labelOffset, this.getYPos(order) - 32, 600, checkboxSize);
+      DrawTextFit(getText(label), this.getXPos(order) + labelOffset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+      DrawCheckbox(this.getXPos(order), this.getYPos(order) - 32, checkboxSize, checkboxSize, "", value ?? false, disabled);
       if (isHovering) this.tooltip(getText(description));
     }
     drawBetterButton(position, size, label, color, image = "", disabled = false) {
@@ -1539,11 +2996,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       ElementPosition(elementId, -999, -999, 1, 1);
     }
     elementPosition(elementId, label, description, order, disabled = false) {
-      const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      ElementPosition(elementId, this.getXPos(order) + 750 + 225, this.getYPos(order), 800, 64);
+      const isHovering = MouseIn(this.getXPos(order) + 450, this.getYPos(order) - 32, 600, 64);
+      DrawTextFit(getText(label), this.getXPos(order) + 450, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400, 64);
       if (disabled) ElementSetAttribute(elementId, "disabled", "true");
-      if (!disabled) document.getElementById(elementId)?.removeAttribute("disabled");
+      if (!disabled) ElementRemoveAttribute(elementId, "disabled");
       if (isHovering) this.tooltip(getText(description));
     }
     drawLabel(label, description, order) {
@@ -1552,122 +3009,60 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (isHovering) this.tooltip(getText(description));
     }
   };
+  __name(_GuiSubscreen, "GuiSubscreen");
+  __publicField(_GuiSubscreen, "START_X", 180);
+  __publicField(_GuiSubscreen, "START_Y", 205);
+  __publicField(_GuiSubscreen, "X_MOD", 950);
+  __publicField(_GuiSubscreen, "Y_MOD", 75);
+  __publicField(_GuiSubscreen, "POS_BAK", _GuiSubscreen.START_X);
+  __publicField(_GuiSubscreen, "TEXT_ALIGN_BAK");
+  var GuiSubscreen = _GuiSubscreen;
   function drawTooltip(x, y, width, text, align) {
     const canvas = MainCanvas;
     const bak = canvas.textAlign;
     canvas.textAlign = align;
     canvas.beginPath();
     canvas.rect(x, y, width, 65);
-    canvas.fillStyle = doRedraw() ? colors.elementBackground : "#FFFF88";
+    canvas.fillStyle = doRedraw() ? plainColors.element : "#FFFF88";
     canvas.fillRect(x, y, width, 65);
     canvas.fill();
     canvas.lineWidth = 2;
-    canvas.strokeStyle = doRedraw() ? colors.elementBorder : "black";
+    canvas.strokeStyle = doRedraw() ? plainColors.accent : "black";
     canvas.stroke();
     canvas.closePath();
-    DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? colors.text : "black");
+    DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? plainColors.text : "black");
     canvas.textAlign = bak;
   }
   __name(drawTooltip, "drawTooltip");
 
-  // src/Static/Styles/BC_Chat.css
-  var BC_Chat_default = '#TextAreaChatLog[data-colortheme="dark"],\n#TextAreaChatLog[data-colortheme="dark2"] {\n  background-color: var(--background);\n  color: var(--text);\n  border-color: var(--elementBorder);\n\n  .ChatMessageName {\n    text-shadow: 0 0 0.12em var(--textShadow);\n  }\n\n  .ChatMessage {\n    border-bottom: none;\n  }\n\n  .ChatMessageActivity,\n  .ChatMessageAction,\n  .ChatMessageEmote {\n    --base-color: var(--background);\n  }\n\n  .chat-room-sep {\n    --base-color: var(--background) !important;\n    border-bottom: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;\n    border-top: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;\n  }\n\n  .chat-room-sep-collapse {\n    border-right: min(0.4vh, 0.2vw) var(--elementBorder) solid !important;\n    color: var(--text);\n  }\n\n  .chat-room-sep-header {\n    color: var(--text);\n  }\n\n  ~#chat-room-bot {\n    --button-color: var(--elementBackground);\n    background-color: var(--background);\n    border-color: rgba(0, 0, 0, 0.25);\n    color: var(--text);\n\n    &:has(#InputChat:focus) {\n      outline: 2px solid var(--elementBackgroundHover);\n      box-shadow: 0 0 0 3px var(--background);\n    }\n\n    #InputChat {\n      background-color: var(--background);\n      color: var(--text);\n      border-color: var(--elementBorder);\n      outline: var(--elementBorder) solid 1px;\n    }\n\n    #chat-room-buttons-collapse:hover,\n    .chat-room-button:hover:before {\n      background-color: var(--elementBackgroundHover) !important;\n    }\n  }\n}\n';
-
-  // src/Static/Styles/BC_FriendList.css
-  var BC_FriendList_default = "#FriendList {\n  background-color: var(--friendlistBackground);\n  border-color: var(--elementBorder);\n  padding: 0;\n  margin-top: 1%;\n  padding-bottom: 0%;\n}\n";
-
-  // src/Static/Styles/BC_Inputs.css
-  var BC_Inputs_default = "textarea {\n  background: var(--elementBackground);\n  color: var(--text);\n  border: 2px solid var(--elementBorder);\n}\n\ninput {\n  background: var(--elementBackground);\n  color: var(--text);\n  border: 2px solid var(--elementBorder);\n}\n\ntextarea:focus,\ninput:focus {\n  outline: var(--elementBorder) solid 1px;\n}\n\n.button-touch,\n.button-touch:before,\n.button:hover {\n  background-color: var(--elementBackgroundHover);\n  border-color: var(--elementBorderHover);\n  color: var(--text);\n}\n";
-
-  // src/Static/Styles/BC_Other.css
-  var BC_Other_default = "::-webkit-scrollbar {\n  background-color: var(--scrollbar);\n}\n\n::-webkit-scrollbar-corner {\n  background-color: var(--scrollbar);\n}\n\n::-webkit-scrollbar-thumb {\n  background-color: var(--elementBackground);\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background-color: var(--accent);\n}\n\n::selection {\n  background-color: var(--accent);\n  color: var(--text);\n}\n";
-
-  // src/Static/Styles/FBC.css
-  var FBC_default = ".bce-img {\n  border-color: var(--elementBorder);\n}\n\n#bceRichOnlineProfile {\n  background: var(--elementBackground) !important;\n  color: var(--text) !important;\n  border: 2px dashed var(--elementBorder) !important;\n}\n\n#bce-instant-messenger {\n  top: 0%;\n  left: 0%;\n  background-color: var(--background);\n  color: var(--text);\n  border-color: var(--elementBorder);\n  max-width: 99.5%;\n  max-height: 85%;\n  min-width: 38%;\n  min-height: 30%;\n}\n\n.bce-friend-list-entry.bce-friend-list-selected {\n  border-top-color: var(--elementBorder);\n  border-bottom-color: var(--elementBorder);\n  background-color: var(--elementBackground);\n}\n\n.bce-friend-list-entry:hover {\n  background-color: var(--elementBackgroundHover);\n}\n\n#bce-message-right-container {\n  border-left-color: var(--elementBorder);\n}\n\n#bce-message-input {\n  border-top: 1px solid var(--elementBorder);\n  border-bottom: 1px solid var(--elementBorder);\n  background-color: var(--background);\n  color: var(--text);\n}\n\n.bce-message-divider {\n  border-bottom-color: var(--elementBorder);\n}\n\n.bce-message-sender {\n  text-shadow: 0.05em 0.05em var(--textShadow);\n}\n\n.bce-message-Message .bce-message-sender {\n  text-shadow: 0.05em 0.05em var(--textShadow);\n}\n\n#bce-friend-search {\n  background-color: var(--background);\n  border-bottom-color: var(--elementBorder);\n  color: var(--text);\n}\n\n.bce-colors .bce-dark-input {\n  background-color: var(--elementBackground);\n  border: 1px solid var(--elementBorder);\n  color: var(--text);\n}\n";
-
-  // src/Static/Styles/FUSAM.css
-  var FUSAM_default = "#fusam-addon-manager-container {\n  color: var(--text);\n  background-color: var(--background);\n}\n\n.fusam.button,\n.fusam .button {\n  border-color: var(--elementBorder);\n  background-color: var(--elementBackground);\n  color: var(--text);\n}\n\n.fusam.button:hover,\n.fusam .button:hover,\n.fusam.button:focus,\n.fusam .button:focus,\n.fusam select:hover,\n.fusam select:focus {\n  background-color: var(--accent);\n}\n\n.fusam select,\n.fusam option {\n  border-color: var(--elementBorder);\n  background-color: var(--elementBackground);\n  color: var(--text);\n}\n\n.fusam select:disabled:hover {\n  background-color: var(--elementBackgroundHover);\n}\n";
-
-  // src/Static/Styles/TTS.css
-  var TTS_default = '.tts-dialog {\n  background-color: var(--background);\n  border: 2px solid var(--elementBorder);\n  color: var(--text);\n}\n\n.tts-option {\n  background-color: var(--elementBackground);\n  border-color: var(--elementBorder);\n  color: var(--text);\n}\n\ninput[type="range"].tts-slider {\n  background-color: var(--elementBackground);\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 15px;\n  outline: none;\n  border-radius: 50px;\n}\n\ninput[type="range"].tts-slider::-webkit-slider-thumb {\n  background: var(--accent);\n  -webkit-appearance: none;\n  appearance: none;\n  width: 15px;\n  height: 15px;\n  border-radius: 50%;\n  cursor: pointer;\n}\n\ninput[type="range"].tts-slider::-moz-range-thumb {\n  background: var(--accent);\n  width: 15px;\n  height: 15px;\n  border-radius: 50%;\n  cursor: pointer;\n}\n\n.tts-select {\n  background-color: var(--elementBackground);\n  border-color: var(--elementBorder);\n  color: var(--text);\n}\n\n.tts-tab {\n  background-color: var(--elementBackground);\n  border-color: var(--elementBorder);\n  color: var(--text);\n}\n\n.tts-btn {\n  background-color: var(--elementBackground);\n  border: 1px solid var(--elementBorder);\n  color: var(--text);\n}\n\n.tts-tab.active {\n  background-color: var(--accent);\n}\n\n.tts-toggle-container {\n  border-color: var(--elementBorder);\n}\n\n.tts-boxed-container {\n  border-color: var(--elementBorder);\n}\n\n.tts-link {\n  border-color: var(--elementBorder);\n  background-color: var(--elementBackground);\n  color: var(--text);\n}\n\n.tts-link:hover {\n  background-color: var(--elementBackground);\n  color: var(--accent);\n}\n\n.mo-modal-content {\n  background-color: var(--background);\n  border: 1px solid var(--elementBorder);\n  color: var(--text);\n}\n\n.mo-closer {\n  color: var(--text);\n}\n\n#mo_submitInput-1 {\n  background-color: var(--elementBackground);\n  border: 1px solid var(--elementBorder);\n  color: var(--text);\n}\n';
-
-  // src/Static/Styles/Themed.css
-  var Themed_default = ".themed-modal,\n.themed-chat-modal {\n  padding: 5px;\n\n  background-color: var(--elementBackground);\n  color: var(--text);\n\n  border: 2px solid var(--accent);\n  border-radius: 10px;\n\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 0.8rem;\n}\n\n.themed-modal {\n  position: absolute;\n  width: 25%;\n  top: 15%;\n  margin-left: 12.5%;\n\n  flex-direction: column;\n}\n\n.themed-chat-modal {\n  /* width: 80%; */\n  font-size: 0.8em;\n  position: relative;\n\n  flex-direction: row;\n}\n\n#modal-buttons {\n  width: 100%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-evenly;\n  margin: 0.5rem;\n}\n\n.modal-button {\n  width: auto;\n  padding: 5px;\n\n  border: 2px solid var(--accent);\n  border-radius: 10px;\n  transition: all 0.5s ease;\n}\n\n.modal-button:hover {\n  background-color: var(--elementBackgroundHover);\n  text-shadow: 0 0 0.12em var(--textShadow);\n  cursor: pointer;\n}\n\n.ThemedMessageContent {\n  display: inline;\n}\n\n.ThemedVersion {\n  font-weight: bold;\n  color: rgb(203, 185, 23);\n}\n\n#TextAreaChatLog[data-colortheme='dark'] div.ChatMessage.ThemedMessage,\n#TextAreaChatLog[data-colortheme='dark2'] div.ChatMessage.ThemedMessage {\n  background-color: var(--elementBackground);\n  border: 2px solid var(--accent);\n  color: var(--text);\n}\n\n#TextAreaChatLog div.ChatMessage.ThemedMessage {\n  background-color: #eee;\n  border: 2px solid #440171;\n  padding-left: 5px;\n  display: block;\n  white-space: normal;\n  color: #111;\n}\n\n#TextAreaChatLog[data-colortheme='dark'] a.ThemedText,\n#TextAreaChatLog[data-colortheme='dark2'] a.ThemedText {\n  cursor: pointer;\n  font-weight: bold;\n  color: var(--text);\n}\n\n#TextAreaChatLog a.ThemedText {\n  cursor: pointer;\n  font-weight: bold;\n  color: #111;\n}\n\n#ThemedGratitude {\n  position: fixed;\n  width: 25%;\n  height: 50%;\n  top: 15%;\n  left: 50%;\n}\n\n.ThemedH {\n  font-size: 1em;\n  color: #333;\n}\n\n.ThemedP {\n  font-size: 0.6em;\n  color: #555;\n  line-height: 1.5;\n}\n\n.ThemedP:last-child {\n  font-size: 0.8em;\n  color: #ff69b4;\n}\n";
-
-  // src/Utilities/Integration.ts
-  function changeModColors() {
-    if (doRedraw()) {
-      changeBctColors();
-    } else {
-      resetBctColors();
-    }
-  }
-  __name(changeModColors, "changeModColors");
-  function changeBctColors() {
-    if (Player.BCT) {
-      BCT_API.HintBackColor = colors.elementBackground;
-      BCT_API.HintBorderColor = colors.elementBorder;
-      BCT_API.HintForeColor = colors.text;
-    }
-  }
-  __name(changeBctColors, "changeBctColors");
-  function resetBctColors() {
-    if (Player.BCT) {
-      BCT_API.HintBackColor = "yellow";
-      BCT_API.HintBorderColor = "black";
-      BCT_API.HintForeColor = "black";
-    }
-  }
-  __name(resetBctColors, "resetBctColors");
-  function changeMbsColors() {
-    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-      if (!PlayerStorage().IntegrationModule.MBS) return;
-      return mbs.css.setStyle({
-        backgroundColor: colors.mainBackground,
-        buttonColor: colors.elementBackground,
-        buttonHoverColor: colors.elementBackgroundHover,
-        borderColor: colors.elementBorder,
-        tooltipColor: colors.elementHint,
-        textColor: colors.text
-      });
-    }
-  }
-  __name(changeMbsColors, "changeMbsColors");
-  function resetMbsColors() {
-    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-      if (!PlayerStorage().IntegrationModule.MBS)
-        mbs.css.setStyle({
-          backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
-          buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
-          buttonHoverColor: mbs.css.DEFAULT_STYLE.buttonHoverColor,
-          borderColor: mbs.css.DEFAULT_STYLE.borderColor,
-          tooltipColor: mbs.css.DEFAULT_STYLE.tooltipColor,
-          textColor: mbs.css.DEFAULT_STYLE.textColor
-        });
-    }
-  }
-  __name(resetMbsColors, "resetMbsColors");
-
   // src/Utilities/Style.ts
   var styles = {
-    Root: composeRoot(),
-    Themed: Themed_default,
-    BC: BC_Inputs_default,
-    BC_Chat: BC_Chat_default,
-    BC_FriendList: BC_FriendList_default,
-    BC_Other: BC_Other_default,
-    FBC: FBC_default,
-    FUSAM: FUSAM_default,
-    TTS: TTS_default,
-    MBS: "MBS"
+    inputs: "",
+    chat: "",
+    friendList: "",
+    friendListBlur: "",
+    scrollbar: "",
+    selection: "",
+    WCE: "",
+    FUSAM: "",
+    TTS: ""
   };
   var Style = {
-    inject(styleId, styleSource) {
+    injectInline(styleId, styleSource) {
       const isStyleLoaded = document.getElementById(styleId);
       if (isStyleLoaded) return;
       const styleElement = document.createElement("style");
       styleElement.id = styleId;
       styleElement.appendChild(document.createTextNode(styleSource));
+      document.head.appendChild(styleElement);
+    },
+    injectEmbed(styleId, styleLink) {
+      const isStyleLoaded = document.getElementById(styleId);
+      if (isStyleLoaded) return;
+      const styleElement = document.createElement("link");
+      styleElement.id = styleId;
+      styleElement.rel = "stylesheet";
+      styleElement.href = styleLink;
       document.head.appendChild(styleElement);
     },
     eject(id) {
@@ -1677,89 +3072,65 @@ One of mods you are using is using an old version of SDK. It will work for now b
     },
     reload(styleId, styleSource) {
       Style.eject(styleId);
-      Style.inject(styleId, styleSource);
+      Style.injectInline(styleId, styleSource);
+    },
+    async fetch(link) {
+      return fetch(link).then((res) => res.text());
     }
   };
   var BcStyle = {
-    inject(id) {
-      if (id == "Root") updateRootStyle();
-      else if (id == "MBS") {
-        changeMbsColors();
-      }
-      const styleSource = styles[id];
-      const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
-      if (!isEnabled) return;
-      if (!PlayerStorage().IntegrationModule[id] && id != "Themed" && id != "Root") return;
-      Style.inject(id, styleSource);
-    },
-    eject(id) {
-      if (id == "MBS") {
-        resetMbsColors();
-      }
-      Style.eject(id);
-    },
-    reload(id) {
-      BcStyle.eject(id);
-      BcStyle.inject(id);
-    },
     injectAll() {
+      const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
+      Style.injectInline("root", composeRoot());
+      Style.injectEmbed("themed", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/themed.css`);
+      if (!isEnabled) return;
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
-        BcStyle.inject(id);
+        if (!PlayerStorage().IntegrationModule[id]) return;
+        Style.injectEmbed(id, `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/${id}.css`);
       });
     },
     ejectAll() {
+      Style.eject("root");
+      Style.eject("themed");
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
-        BcStyle.eject(id);
+        Style.eject(id);
       });
     },
     reloadAll() {
-      const styleIDs = Object.keys(styles);
-      styleIDs.forEach((id) => {
-        BcStyle.reload(id);
-      });
+      BcStyle.ejectAll();
+      BcStyle.injectAll();
     }
   };
   function composeRoot() {
+    let genedColors = "";
+    Object.keys(plainColors).forEach((key) => {
+      genedColors += `--${key}: ${plainColors[key]};
+	`;
+    });
+    Object.keys(specialColors).forEach((key) => {
+      genedColors += `--${key}: ${specialColors[key][0]};
+	`;
+      genedColors += `--${key}Hover: ${specialColors[key][1]};
+	`;
+    });
     return (
       /*css*/
       `
     :root {
-      /*accent color*/
-      --accent: ${colors?.elementBorder || "#440171"};
-      /*background*/
-      --background: ${colors?.mainBackground || "#202020"}; 
-      /*inputs, buttons and shit*/
-      --elementBackground: ${colors?.elementBackground || "#303030"}; 
-       /*elements that should stand out, like thing on slider or button when hovered over*/
-      --elementBackgroundHover: ${colors?.elementBackgroundHover || "#57276e"};
-      /*borders for html and game drawn elements*/
-      --elementBorder: var(--accent);
-      /*text obviously*/
-      --text: ${colors?.text || "#eeeeee"}; 
-      /*obviously as well*/
-      --textShadow: ${"#eeeeee80"};
-
-      --scrollbar: ${_Color.darken(colors?.elementBackground, 20) || "#454545"};
-
-      --friendlistBackground: ${colors?.elementBackground + "80" || "#30303080"};
-      
-      --codeBackground: ${_Color.lighten(colors?.elementBackground, 40) + "20" || "#aaaaaa20"};
+      ${genedColors}
     }
-    `
+    `.replace(/\t+|\n\s*/g, "	")
     );
   }
   __name(composeRoot, "composeRoot");
-  function updateRootStyle() {
-    styles.Root = composeRoot();
-  }
-  __name(updateRootStyle, "updateRootStyle");
 
   // src/Screens/Reset.ts
-  var GuiReset = class extends GuiSubscreen {
-    static {
-      __name(this, "GuiReset");
+  var _GuiReset = class _GuiReset extends GuiSubscreen {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "allowedConfirmTime", 0);
     }
     get name() {
       return "Reset";
@@ -1767,9 +3138,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     get icon() {
       return "";
     }
-    allowedConfirmTime = 0;
     Load() {
-      this.allowedConfirmTime = Date.now() + 1e4;
+      this.allowedConfirmTime = Date.now() + 5e3;
       super.Load();
     }
     Run() {
@@ -1808,23 +3178,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     Confirm() {
       this.allowedConfirmTime = null;
-      dataErase();
-      getModule("ColorsModule").registerDefaultSettings();
+      settingsReset();
+      for (const module of modules()) {
+        module.registerDefaultSettings();
+      }
       _Color.composeRoot();
       BcStyle.reloadAll();
-      _Image.clearCache();
       this.setSubscreen(null);
+      PreferenceSubscreenExtensionsClear();
     }
   };
+  __name(_GuiReset, "GuiReset");
+  var GuiReset = _GuiReset;
 
   // src/Screens/Support.ts
-  var GuiSupport = class _GuiSupport extends GuiSubscreen {
-    static {
-      __name(this, "GuiSupport");
-    }
-    static thankYouList = ["Ellena", "weboos", "Jamie"];
-    static thankYouNext = 0;
-    static thankYou = "";
+  var _GuiSupport = class _GuiSupport extends GuiSubscreen {
     get name() {
       return "Support";
     }
@@ -1867,9 +3235,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     Load() {
       _GuiSupport.doNextThankYou();
-      ElementCreateDiv("ResponsiveGratitude");
-      const elm = document.getElementById("ResponsiveGratitude");
-      ElementContent("ResponsiveGratitude", gratitudeHtml);
+      ElementCreateDiv("ThemedGratitude");
+      const elm = document.getElementById("ThemedGratitude");
+      ElementContent("ThemedGratitude", gratitudeHtml);
       const font = MainCanvas.canvas.clientWidth <= MainCanvas.canvas.clientHeight * 2 ? MainCanvas.canvas.clientWidth / 50 : MainCanvas.canvas.clientHeight / 25;
       Object.assign(elm.style, {
         fontFamily: CommonGetFontName(),
@@ -1888,44 +3256,46 @@ One of mods you are using is using an old version of SDK. It will work for now b
       super.Click();
     }
     Exit() {
-      ElementRemove("ResponsiveGratitude");
+      ElementRemove("ThemedGratitude");
       super.Exit();
     }
   };
+  __name(_GuiSupport, "GuiSupport");
+  __publicField(_GuiSupport, "thankYouList", ["Ellena", "weboos", "Jamie"]);
+  __publicField(_GuiSupport, "thankYouNext", 0);
+  __publicField(_GuiSupport, "thankYou", "");
+  var GuiSupport = _GuiSupport;
   var gratitudeHtml = (
     /*html*/
     `
-<h1 class="ResponsiveH">Dear Supporters!</h1>
-<p class="ResponsiveP">
+<h1 class="ThemedH">Dear Supporters!</h1>
+<p class="ThemedP">
   I want to take a moment to express my heartfelt gratitude for considering supporting me. Your willingness to stand by
   my side in this creative journey means the world to me, and I am truly humbled by your generosity.
 </p>
-<p class="ResponsiveP">
+<p class="ThemedP">
   Your support goes far beyond the financial contributions; it represents belief in my work and a shared passion for
   what I do. Your encouragement inspires me to continue developing.
 </p>
-<p class="ResponsiveP">
+<p class="ThemedP">
   Your support not only helps me sustain and grow as a developer, but also enables me to dedicate more time and
   resources to producing high-quality mods. It allows me to explore new ideas, enhance my skills, and bring even more
   meaningful and enjoyable content to you.
 </p>
-<p class="ResponsiveP">Thank you all~</p>
-<p class="ResponsiveP">With love, Monikka\u2665</p>
+<p class="ThemedP">Thank you all~</p>
+<p class="ThemedP">With love, Monikka\u2665</p>
 `
   );
 
   // src/Screens/MainMenu.ts
-  var MainMenu = class extends GuiSubscreen {
-    static {
-      __name(this, "MainMenu");
-    }
-    subscreens = [];
-    get name() {
-      return "MainMenu";
-    }
+  var _MainMenu = class _MainMenu extends GuiSubscreen {
     constructor(module) {
       super(module);
+      __publicField(this, "subscreens", []);
       this.subscreens = module.subscreens;
+    }
+    get name() {
+      return "MainMenu";
     }
     Load() {
       if (!GUI.instance?.currentSubscreen) {
@@ -1936,7 +3306,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     Run() {
       const tmp = GuiSubscreen.START_X;
-      const prev = MainCanvas.textAlign;
+      MainCanvas.save();
       GuiSubscreen.START_X = 550;
       MainCanvas.textAlign = "left";
       DrawCharacter(Player, 50, 50, 0.9, false);
@@ -1969,7 +3339,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       DrawImageResize("Assets/Female3DCG/Emoticon/Coffee/Icon.png", 1510, 840, 60, 60);
       DrawTextFit("Support Me\u2764", 1580, 870, 320, "Black");
       GuiSubscreen.START_X = tmp;
-      MainCanvas.textAlign = prev;
+      MainCanvas.restore();
     }
     Click() {
       if (MouseIn(1815, 75, 90, 90)) return this.Exit();
@@ -1994,78 +3364,26 @@ One of mods you are using is using an old version of SDK. It will work for now b
       CharacterAppearanceForceUpCharacter = -1;
       CharacterLoadCanvas(Player);
       this.setSubscreen(null);
+      PreferenceSubscreenExtensionsClear();
     }
   };
-
-  // src/Utilities/RibbonMenu.ts
-  var RibbonMenu = class _RibbonMenu {
-    static {
-      __name(this, "RibbonMenu");
-    }
-    static START_Y = 820;
-    static MOD_Y = 110;
-    /**
-     * Calculates button Y position using mod index.
-     * @param modIndex Mod index. Can be obtained calling `GetModIndex`.
-     * @returns position
-     */
-    static getYPos(modIndex) {
-      return this.START_Y - this.MOD_Y * (modIndex % 6);
-    }
-    /**
-     * Registers `modName` in the Ribbon Menu. Handles when Ribbon Menu is full.
-     * @param modName Mod name itself that will be registered in Ribbon Menu
-     * @returns nothing
-     */
-    static registerMod(modName) {
-      if (!window.RibbonMenuMods) window.RibbonMenuMods = [];
-      if (window.RibbonMenuMods.length >= 6) return console.warn(`${modName} can't be added to Ribbon Menu. It is full`);
-      window.RibbonMenuMods.push(modName);
-    }
-    /**
-     * Returns mod index from Ribbon menu.
-     * @param modName Mod name registered in Ribbon Menu
-     * @returns modIndex or undefined
-     */
-    static getModIndex(modName) {
-      return window.RibbonMenuMods?.indexOf(modName);
-    }
-    /**
-     * Draws button in Ribbon Menu using `callback`.
-     * @param modIndex Mod index obtained with `GetModIndex`.
-     * @param callback Function that will be executed on click.
-     * @returns nothing
-     */
-    static drawModButton(modIndex, callback) {
-      if (PreferenceSubscreen === "" && modIndex !== void 0) callback(modIndex);
-      return;
-    }
-    /**
-     * Handles click on button in Ribbon Menu using `callback`.
-     * @param modIndex Mod index obtained with `GetModIndex`.
-     * @param callback Function that will be executed on click.
-     * @returns nothing
-     */
-    static handleModClick(modIndex, callback) {
-      if (PreferenceSubscreen === "" && modIndex !== void 0) {
-        if (MouseIn(1815, _RibbonMenu.getYPos(modIndex), 90, 90)) callback(modIndex);
-      }
-      return;
-    }
-  };
-
-  // src/Static/Icons/IconThemed.png
-  var IconThemed_default = "data:image/png;base64,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";
+  __name(_MainMenu, "MainMenu");
+  var MainMenu = _MainMenu;
 
   // src/Base/SettingUtils.ts
-  var GUI = class _GUI extends BaseModule {
-    static {
-      __name(this, "GUI");
+  var _GUI = class _GUI extends BaseModule {
+    constructor() {
+      super();
+      __publicField(this, "_subscreens");
+      __publicField(this, "_mainMenu");
+      __publicField(this, "_currentSubscreen", null);
+      if (_GUI.instance) {
+        throw new Error("Duplicate initialization");
+      }
+      this._mainMenu = new MainMenu(this);
+      this._subscreens = [this._mainMenu];
+      _GUI.instance = this;
     }
-    static instance = null;
-    _subscreens;
-    _mainMenu;
-    _currentSubscreen = null;
     get subscreens() {
       return this._subscreens;
     }
@@ -2093,19 +3411,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
         subscreenName = SETTING_NAME_PREFIX + this._currentSubscreen?.name;
         this._currentSubscreen.Load();
       }
-      PreferenceSubscreen = subscreenName;
+      PreferenceSubscreen = subscreenName || "Extensions";
     }
     get currentCharacter() {
       return Player;
-    }
-    constructor() {
-      super();
-      if (_GUI.instance) {
-        throw new Error("Duplicate initialization");
-      }
-      this._mainMenu = new MainMenu(this);
-      this._subscreens = [this._mainMenu];
-      _GUI.instance = this;
     }
     get defaultSettings() {
       return null;
@@ -2116,38 +3425,31 @@ One of mods you are using is using an old version of SDK. It will work for now b
         this._subscreens.push(new module.settingsScreen(module));
       }
       this._mainMenu.subscreens = this._subscreens;
-      const modIndex = RibbonMenu.getModIndex(ModName);
-      const modYPos = RibbonMenu.getYPos(modIndex);
-      hookFunction("PreferenceRun", 10 /* OverrideBehavior */, (args, next) => {
-        if (this._currentSubscreen) {
-          MainCanvas.textAlign = "left";
-          this._currentSubscreen.Run();
-          MainCanvas.textAlign = "center";
-          this.drawDebug();
-          return;
-        }
-        next(args);
-        RibbonMenu.drawModButton(modIndex, () => {
-          DrawButton(1815, modYPos, 90, 90, "", "White", "", getText("infosheet.button_popup"));
-          DrawImageResize(IconThemed_default, 1815 + 2, modYPos + 2, 85, 85);
-        });
-      });
-      hookFunction("PreferenceClick", 10 /* OverrideBehavior */, (args, next) => {
-        if (this._currentSubscreen) {
-          this._currentSubscreen.Click();
-          return;
-        }
-        next(args);
-        RibbonMenu.handleModClick(modIndex, (modIndex2) => {
+      PreferenceRegisterExtensionSetting({
+        Identifier: "TMD",
+        ButtonText: getText("infosheet.button_text"),
+        Image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/icons/mod.png`,
+        load: /* @__PURE__ */ __name(() => {
           setSubscreen(new MainMenu(this));
-        });
-      });
-      hookFunction("InformationSheetExit", 10 /* OverrideBehavior */, (args, next) => {
-        if (this._currentSubscreen) {
-          this._currentSubscreen.Exit();
-          return;
-        }
-        return next(args);
+        }, "load"),
+        run: /* @__PURE__ */ __name(() => {
+          if (this._currentSubscreen) {
+            MainCanvas.textAlign = "left";
+            this._currentSubscreen.Run();
+            MainCanvas.textAlign = "center";
+            this.drawDebug();
+          }
+        }, "run"),
+        click: /* @__PURE__ */ __name(() => {
+          if (this._currentSubscreen) {
+            this._currentSubscreen.Click();
+          }
+        }, "click"),
+        exit: /* @__PURE__ */ __name(() => {
+          if (this._currentSubscreen) {
+            this._currentSubscreen.Exit();
+          }
+        }, "exit")
       });
     }
     drawDebug() {
@@ -2172,12 +3474,46 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
     }
   };
+  __name(_GUI, "GUI");
+  __publicField(_GUI, "instance", null);
+  var GUI = _GUI;
+
+  // src/Migrators/BaseMigrator.ts
+  var _BaseMigrator = class _BaseMigrator {
+  };
+  __name(_BaseMigrator, "BaseMigrator");
+  var BaseMigrator = _BaseMigrator;
+
+  // src/Migrators/ColorModelMigrator.ts
+  var _ColorModelMigrator = class _ColorModelMigrator extends BaseMigrator {
+    get MigrationVersion() {
+      return "1.4.0";
+    }
+    Migrate() {
+      if (!Player.Themed.ColorsModule) return false;
+      if (Player.Themed.ColorsModule["primaryColor"]) {
+        Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
+        delete Player.Themed.ColorsModule["primaryColor"];
+      }
+      if (Player.Themed.ColorsModule["accentColor"]) {
+        Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
+        delete Player.Themed.ColorsModule["accentColor"];
+      }
+      if (Player.Themed.ColorsModule["textColor"]) {
+        Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
+        delete Player.Themed.ColorsModule["textColor"];
+      }
+      return true;
+    }
+  };
+  __name(_ColorModelMigrator, "ColorModelMigrator");
+  var ColorModelMigrator = _ColorModelMigrator;
+
+  // src/Modules/Colors.ts
+  var import_color6 = __toESM(require_color());
 
   // src/Screens/Colors.ts
-  var GuiColors = class extends GuiSubscreen {
-    static {
-      __name(this, "GuiColors");
-    }
+  var _GuiColors = class _GuiColors extends GuiSubscreen {
     get name() {
       return "Colors";
     }
@@ -2188,41 +3524,35 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return super.settings;
     }
     get multipageStructure() {
+      const defaultSettings = getModule("ColorsModule").defaultSettings;
+      const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
+      const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
       return [
-        [
-          {
-            type: "color",
-            id: "primaryColor",
-            label: "colors.setting.primaryColor.name",
-            description: "colors.setting.primaryColor.desc",
-            setting: /* @__PURE__ */ __name(() => this.settings?.primaryColor ?? "", "setting"),
-            setSetting: /* @__PURE__ */ __name((val) => this.settings.primaryColor = val, "setSetting")
-          },
-          {
-            type: "color",
-            id: "accentColor",
-            label: "colors.setting.accentColor.name",
-            description: "colors.setting.accentColor.desc",
-            setting: /* @__PURE__ */ __name(() => this.settings?.accentColor ?? "", "setting"),
-            setSetting: /* @__PURE__ */ __name((val) => this.settings.accentColor = val, "setSetting")
-          },
-          {
-            type: "color",
-            id: "textColor",
-            label: "colors.setting.textColor.name",
-            description: "colors.setting.textColor.desc",
-            setting: /* @__PURE__ */ __name(() => this.settings?.textColor ?? "", "setting"),
-            setSetting: /* @__PURE__ */ __name((val) => this.settings.textColor = val, "setSetting")
-          }
-        ]
+        Object.entries(this.settings.base).map(([key, value]) => ({
+          type: "color",
+          id: key,
+          label: `colors.setting.${key}.name`,
+          description: `colors.setting.${key}.desc`,
+          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[key], "setting"),
+          setSetting: /* @__PURE__ */ __name((val) => this.settings.base[key] = val, "setSetting"),
+          disabled: isBaseMode && !baseModeKey(key)
+        })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
+        Object.entries(this.settings.special).map(([key, value]) => ({
+          type: "color",
+          id: key,
+          label: `colors.setting.${key}.name`,
+          description: `colors.setting.${key}.desc`,
+          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting"),
+          setSetting: /* @__PURE__ */ __name((val) => this.settings.special[key] = val, "setSetting")
+        }))
       ];
     }
     Run() {
-      DrawButton(1715, 75, 90, 90, "", "White", "Icons/Reset.png", getText("colors.button.change_input_type"));
+      DrawButton(1495, 75, 90, 90, "", "White", "Icons/Swap.png", getText("colors.button.change_input_type"));
       super.Run();
     }
     Click() {
-      if (MouseIn(1715, 75, 90, 90)) {
+      if (MouseIn(1495, 75, 90, 90)) {
         this.multipageStructure.forEach((page) => {
           page.forEach((elm) => {
             if (elm.type == "color" || elm.type == "text") {
@@ -2236,90 +3566,86 @@ One of mods you are using is using an old version of SDK. It will work for now b
             }
           });
         });
+        return;
       }
       super.Click();
     }
   };
+  __name(_GuiColors, "GuiColors");
+  var GuiColors = _GuiColors;
 
-  // src/Utilities/Other.ts
-  function sendLocalSmart(id, message, timeoutInSeconds) {
-    const div = document.createElement("div");
-    div.id = id;
-    div.setAttribute("class", "ChatMessage ThemedMessage");
-    div.setAttribute("data-time", ChatRoomCurrentTime());
-    div.setAttribute("data-sender", Player?.MemberNumber + "");
-    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
-    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
-    ChatRoomAppendChat(div);
-    if (!timeoutInSeconds) return;
-    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
-  }
-  __name(sendLocalSmart, "sendLocalSmart");
-  function sendAction(msg) {
-    ServerSend("ChatRoomChat", {
-      Content: "Beep",
-      Type: "Action",
-      Dictionary: [
-        // EN
-        { Tag: "Beep", Text: "msg" },
-        // CN
-        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
-        // DE
-        { Tag: "Biep", Text: "msg" },
-        // FR
-        { Tag: "Sonner", Text: "msg" },
-        // Message itself
-        { Tag: "msg", Text: msg }
-      ]
-    });
-  }
-  __name(sendAction, "sendAction");
-  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
-    if (document.getElementById("themed-modal")) return false;
-    const modal = document.createElement("div");
-    const modalTitle = document.createElement("div");
-    const modalButtons = document.createElement("div");
-    const modalAcceptButton = document.createElement("div");
-    const modalCancelButton = document.createElement("div");
-    modal.classList.add("themed-modal");
-    modalTitle.id = "modal-prompt";
-    modalButtons.id = "modal-buttons";
-    modalAcceptButton.id = "modal-button-accept";
-    modalCancelButton.id = "modal-button-cancel";
-    modalAcceptButton.classList.add("modal-button");
-    modalCancelButton.classList.add("modal-button");
-    modalTitle.innerHTML = prompt2;
-    modalAcceptButton.innerText = getText("modal.button.accept");
-    modalCancelButton.innerText = getText("modal.button.cancel");
-    modalAcceptButton.addEventListener("click", () => {
-      acceptCallbackFn();
-      modal.remove();
-    });
-    modalCancelButton.addEventListener("click", () => {
-      cancelCallbackFn();
-      modal.remove();
-    });
-    modalButtons.append(modalAcceptButton, modalCancelButton);
-    modal.append(modalTitle, modalButtons);
-    document.body.append(modal);
-  }
-  __name(useLgcModal, "useLgcModal");
-  function mergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = mergeTo;
-    for (const key of Object.keys(mergeFrom)) {
-      if (key in mergeTo) {
-        mergedObject[key] = mergeFrom[key];
-      }
+  // src/Utilities/Integration.ts
+  function changeModColors() {
+    if (doRedraw()) {
+      changeBctColors();
+      changeMbsColors();
+    } else {
+      resetBctColors();
+      resetMbsColors();
     }
-    return mergedObject;
   }
-  __name(mergeMatchingProperties, "mergeMatchingProperties");
+  __name(changeModColors, "changeModColors");
+  function changeBctColors() {
+    if (Player.BCT) {
+      BCT_API.HintBackColor = plainColors.element;
+      BCT_API.HintBorderColor = plainColors.accent;
+      BCT_API.HintForeColor = plainColors.text;
+    }
+  }
+  __name(changeBctColors, "changeBctColors");
+  function resetBctColors() {
+    if (Player.BCT) {
+      BCT_API.HintBackColor = "yellow";
+      BCT_API.HintBorderColor = "black";
+      BCT_API.HintForeColor = "black";
+    }
+  }
+  __name(resetBctColors, "resetBctColors");
+  function changeMbsColors() {
+    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
+      if (!PlayerStorage().IntegrationModule.MBS) return;
+      return mbs.css.setStyle({
+        backgroundColor: plainColors.main,
+        buttonColor: plainColors.element,
+        buttonHoverColor: plainColors.elementHover,
+        borderColor: plainColors.accent,
+        tooltipColor: plainColors.elementHint,
+        textColor: plainColors.text
+      });
+    }
+  }
+  __name(changeMbsColors, "changeMbsColors");
+  function resetMbsColors() {
+    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
+      if (!PlayerStorage().IntegrationModule.MBS)
+        mbs.css.setStyle({
+          backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
+          buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
+          buttonHoverColor: mbs.css.DEFAULT_STYLE.buttonHoverColor,
+          borderColor: mbs.css.DEFAULT_STYLE.borderColor,
+          tooltipColor: mbs.css.DEFAULT_STYLE.tooltipColor,
+          textColor: mbs.css.DEFAULT_STYLE.textColor
+        });
+    }
+  }
+  __name(resetMbsColors, "resetMbsColors");
 
   // src/Modules/Colors.ts
-  var ColorsModule = class extends BaseModule {
-    static {
-      __name(this, "ColorsModule");
-    }
+  var primaryColor = (0, import_color6.default)("#202020");
+  var elementColor = primaryColor.lighten(0.2);
+  var accentColor = (0, import_color6.default)("#440171");
+  var textColor = (0, import_color6.default)("#cccccc");
+  var specialColors2 = {
+    equipped: (0, import_color6.default)("#3575b5"),
+    crafted: (0, import_color6.default)("#aaa235"),
+    blocked: (0, import_color6.default)("#870c0c"),
+    limited: (0, import_color6.default)("#9d6600"),
+    allowed: (0, import_color6.default)("#008800"),
+    roomFriend: (0, import_color6.default)("#008800"),
+    roomBlocked: (0, import_color6.default)("#870c0c"),
+    roomGame: (0, import_color6.default)("#3575b5")
+  };
+  var _ColorsModule = class _ColorsModule extends BaseModule {
     get settingsScreen() {
       return GuiColors;
     }
@@ -2331,28 +3657,43 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     get defaultSettings() {
       return {
-        primaryColor: "#202020",
-        accentColor: "#440171",
-        textColor: "#ccc"
+        base: {
+          main: primaryColor.hex(),
+          element: elementColor.hex(),
+          elementHover: elementColor.lighten(0.3).hex(),
+          elementDisabled: elementColor.darken(0.2).hex(),
+          elementHint: elementColor.lighten(0.3).hex(),
+          accent: accentColor.hex(),
+          accentHover: accentColor.lighten(0.3).hex(),
+          accentDisabled: accentColor.darken(0.2).hex(),
+          text: textColor.hex()
+        },
+        special: {
+          equipped: specialColors2.equipped.hex(),
+          crafted: specialColors2.crafted.hex(),
+          blocked: specialColors2.blocked.hex(),
+          limited: specialColors2.limited.hex(),
+          allowed: specialColors2.allowed.hex(),
+          roomFriend: specialColors2.roomFriend.hex(),
+          roomBlocked: specialColors2.roomBlocked.hex(),
+          roomGame: specialColors2.roomGame.hex()
+        }
       };
     }
     Load() {
-      this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
     }
     reloadTheme() {
       _Color.composeRoot();
       BcStyle.reloadAll();
       changeModColors();
-      _Image.clearCache();
       getModule("GuiRedrawModule").toggleGuiPatches();
     }
   };
+  __name(_ColorsModule, "ColorsModule");
+  var ColorsModule = _ColorsModule;
 
   // src/Modules/Commands.ts
-  var CommandsModule = class extends BaseModule {
-    static {
-      __name(this, "CommandsModule");
-    }
+  var _CommandsModule = class _CommandsModule extends BaseModule {
     Load() {
       CommandCombine([
         {
@@ -2367,14 +3708,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
     Run() {
     }
   };
+  __name(_CommandsModule, "CommandsModule");
+  var CommandsModule = _CommandsModule;
 
   // src/Screens/Global.ts
-  var GuiGlobal = class extends GuiSubscreen {
-    static {
-      __name(this, "GuiGlobal");
-    }
+  var _GuiGlobal = class _GuiGlobal extends GuiSubscreen {
     get name() {
-      return "Settings";
+      return "Global";
     }
     get icon() {
       return "Icons/Preference.png";
@@ -2383,29 +3723,24 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return super.settings;
     }
     get structure() {
-      const struct = [];
-      Object.keys(this.settings).forEach((key) => {
-        struct.push({
-          type: "checkbox",
-          label: `settings.setting.${key}.name`,
-          description: `settings.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => this.settings?.[key] ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
-        });
-      });
-      return struct;
+      const defaultSettings = getModule("GlobalModule").defaultSettings;
+      return Object.entries(this.settings).map(([key, value]) => ({
+        type: "checkbox",
+        label: `settings.setting.${key}.name`,
+        description: `settings.setting.${key}.desc`,
+        setting: /* @__PURE__ */ __name(() => value ?? defaultSettings[key], "setting"),
+        setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
+      }));
     }
     Load() {
       super.Load();
     }
   };
+  __name(_GuiGlobal, "GuiGlobal");
+  var GuiGlobal = _GuiGlobal;
 
   // src/Modules/Global.ts
-  var GlobalModule = class _GlobalModule extends BaseModule {
-    static {
-      __name(this, "GlobalModule");
-    }
-    static transparentCharacters = [];
+  var _GlobalModule = class _GlobalModule extends BaseModule {
     get settingsScreen() {
       return GuiGlobal;
     }
@@ -2419,14 +3754,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return {
         themedEnabled: true,
         doVanillaGuiOverhaul: true,
-        doUseFlatColor: true,
+        doUseAdvancedColoring: false,
+        doUseFlatColor: false,
         doShowLocaleTime: true,
         doIndicateCharacterAbsence: true,
         doShowNewVersionMessage: true
       };
     }
     Load() {
-      this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
       changeModColors();
       hookFunction(
         "ChatRoomCurrentTime",
@@ -2525,12 +3860,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
     Run() {
     }
   };
+  __name(_GlobalModule, "GlobalModule");
+  __publicField(_GlobalModule, "transparentCharacters", []);
+  var GlobalModule = _GlobalModule;
 
   // src/Screens/Integration.ts
-  var GuiIntegration = class extends GuiSubscreen {
-    static {
-      __name(this, "GuiIntegration");
-    }
+  var _GuiIntegration = class _GuiIntegration extends GuiSubscreen {
     get name() {
       return "Integration";
     }
@@ -2541,75 +3876,24 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return super.settings;
     }
     get structure() {
-      return [
-        {
-          type: "checkbox",
-          label: "integration.setting.BC.name",
-          description: "integration.setting.BC.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.BC ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.BC = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.BC_Chat.name",
-          description: "integration.setting.BC_Chat.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.BC_Chat ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.BC_Chat = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.BC_FriendList.name",
-          description: "integration.setting.BC_FriendList.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.BC_FriendList ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.BC_FriendList = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.BC_Other.name",
-          description: "integration.setting.BC_Other.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.BC_Other ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.BC_Other = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.FBC.name",
-          description: "integration.setting.FBC.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.FBC ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.FBC = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.FUSAM.name",
-          description: "integration.setting.FUSAM.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.FUSAM ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.FUSAM = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.TTS.name",
-          description: "integration.setting.TTS.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.TTS ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.TTS = val, "setSetting")
-        },
-        {
-          type: "checkbox",
-          label: "integration.setting.MBS.name",
-          description: "integration.setting.MBS.desc",
-          setting: /* @__PURE__ */ __name(() => this.settings?.MBS ?? true, "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.MBS = val, "setSetting")
-        }
-      ];
+      const defaultSettings = getModule("IntegrationModule").defaultSettings;
+      return Object.entries(this.settings).map(([key, value]) => ({
+        type: "checkbox",
+        label: `integration.setting.${key}.name`,
+        description: `integration.setting.${key}.desc`,
+        setting: /* @__PURE__ */ __name(() => value ?? defaultSettings[key], "setting"),
+        setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
+      }));
     }
     Load() {
       super.Load();
     }
   };
+  __name(_GuiIntegration, "GuiIntegration");
+  var GuiIntegration = _GuiIntegration;
 
   // src/Modules/Integration.ts
-  var IntegrationModule = class extends BaseModule {
-    static {
-      __name(this, "IntegrationModule");
-    }
+  var _IntegrationModule = class _IntegrationModule extends BaseModule {
     get settingsScreen() {
       return GuiIntegration;
     }
@@ -2621,18 +3905,19 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     get defaultSettings() {
       return {
-        BC: true,
-        BC_Chat: true,
-        BC_FriendList: true,
-        BC_Other: true,
-        FBC: true,
+        inputs: true,
+        chat: true,
+        friendList: true,
+        friendListBlur: false,
+        scrollbar: true,
+        selection: true,
+        WCE: true,
         FUSAM: true,
         TTS: true,
         MBS: true
       };
     }
     Load() {
-      this.settings = mergeMatchingProperties(this.defaultSettings, this.settings);
       hookFunction(
         "ChatRoomSync",
         0 /* Observe */,
@@ -2644,14 +3929,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
       );
     }
   };
+  __name(_IntegrationModule, "IntegrationModule");
+  var IntegrationModule = _IntegrationModule;
 
   // src/Screens/Profiles.ts
-  var GuiProfiles = class extends GuiSubscreen {
-    static {
-      __name(this, "GuiProfiles");
+  var _GuiProfiles = class _GuiProfiles extends GuiSubscreen {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "PreferenceText", "");
+      __publicField(this, "ProfileNames", ["", "", ""]);
+      __publicField(this, "tmpGlbl", GuiSubscreen.START_X);
     }
-    PreferenceText = "";
-    ProfileNames = ["", "", ""];
     get name() {
       return "Profiles";
     }
@@ -2661,23 +3949,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
     get settings() {
       return super.settings;
     }
-    tmpGlbl = GuiSubscreen.START_X;
     Load() {
       super.Load();
       for (let i = 0; i < 3; i++) {
         const profileIndex = i + 1;
-        if (!PlayerStorage()?.ProfilesModule?.[profileIndex]) {
-          Player[ModName].ProfilesModule[profileIndex] = {
-            data: {},
-            name: ""
-          };
-        }
         this.ProfileNames[i] = PlayerStorage()?.ProfilesModule?.[profileIndex]?.name ?? "";
       }
       CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
     }
     Run() {
-      const prev = MainCanvas.textAlign;
+      MainCanvas.save();
       super.Run();
       MainCanvas.textAlign = "left";
       for (let i = 0; i < 3; i++) {
@@ -2692,7 +3973,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       if (this.PreferenceText)
         DrawText(this.PreferenceText, GuiSubscreen.START_X + 250, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, "Black", "Gray");
-      MainCanvas.textAlign = prev;
+      MainCanvas.restore();
     }
     Click() {
       super.Click();
@@ -2733,11 +4014,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
         conWarn(`Invalid profile id ${profileId}`);
         return false;
       }
-      if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
+      if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length < 1) {
         return false;
       }
       const data = PlayerStorage().ProfilesModule[profileId].data;
-      if (!data) {
+      if (Object.keys(data).length < 1) {
         return false;
       }
       if (data) {
@@ -2755,10 +4036,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
         return false;
       }
-      if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-        Player[ModName].ProfilesModule[profileId] = {};
-        return true;
-      }
+      Player[ModName].ProfilesModule[profileId] = {};
+      return true;
     }
     handleProfilesSaving(profileIndex) {
       const formerIndex = profileIndex - 1;
@@ -2799,7 +4078,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     handleProfilesDeleting(profileIndex) {
       const formerIndex = profileIndex - 1;
       if (MouseIn(this.getXPos(profileIndex) + 750, this.getYPos(profileIndex) - 32, 200, 64)) {
-        if (this.ProfileNames[formerIndex] === null) return;
+        if (!this.ProfileNames[formerIndex]) return;
         if (this.deleteProfile(profileIndex)) {
           if (this.ProfileNames[formerIndex] === "") {
             this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_deleted")}`;
@@ -2821,12 +4100,91 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
     }
   };
+  __name(_GuiProfiles, "GuiProfiles");
+  var GuiProfiles = _GuiProfiles;
+
+  // src/Utilities/Other.ts
+  function sendLocalSmart(id, message, timeoutInSeconds) {
+    const div = document.createElement("div");
+    div.id = id;
+    div.setAttribute("class", "ChatMessage ThemedMessage");
+    div.setAttribute("data-time", ChatRoomCurrentTime());
+    div.setAttribute("data-sender", Player?.MemberNumber + "");
+    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
+    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
+    ChatRoomAppendChat(div);
+    if (!timeoutInSeconds) return;
+    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
+  }
+  __name(sendLocalSmart, "sendLocalSmart");
+  function sendAction(msg) {
+    ServerSend("ChatRoomChat", {
+      Content: "Beep",
+      Type: "Action",
+      Dictionary: [
+        // EN
+        { Tag: "Beep", Text: "msg" },
+        // CN
+        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
+        // DE
+        { Tag: "Biep", Text: "msg" },
+        // FR
+        { Tag: "Sonner", Text: "msg" },
+        // Message itself
+        { Tag: "msg", Text: msg }
+      ]
+    });
+  }
+  __name(sendAction, "sendAction");
+  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
+    if (document.getElementById("themed-modal")) return false;
+    const modal = document.createElement("div");
+    const modalTitle = document.createElement("div");
+    const modalButtons = document.createElement("div");
+    const modalAcceptButton = document.createElement("div");
+    const modalCancelButton = document.createElement("div");
+    modal.classList.add("themed-modal");
+    modalTitle.id = "modal-prompt";
+    modalButtons.id = "modal-buttons";
+    modalAcceptButton.id = "modal-button-accept";
+    modalCancelButton.id = "modal-button-cancel";
+    modalAcceptButton.classList.add("modal-button");
+    modalCancelButton.classList.add("modal-button");
+    modalTitle.innerHTML = prompt2;
+    modalAcceptButton.innerText = getText("modal.button.accept");
+    modalCancelButton.innerText = getText("modal.button.cancel");
+    modalAcceptButton.addEventListener("click", () => {
+      acceptCallbackFn();
+      modal.remove();
+    });
+    modalCancelButton.addEventListener("click", () => {
+      cancelCallbackFn();
+      modal.remove();
+    });
+    modalButtons.append(modalAcceptButton, modalCancelButton);
+    modal.append(modalTitle, modalButtons);
+    document.body.append(modal);
+  }
+  __name(useLgcModal, "useLgcModal");
+  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
+    const mergedObject = { ...mergeTo };
+    for (const key in mergeFrom) {
+      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
+        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      } else if (key in mergedObject) {
+        mergedObject[key] = mergeFrom[key];
+      }
+    }
+    return mergedObject;
+  }
+  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  function hasSetter(obj, prop) {
+    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
+  }
+  __name(hasSetter, "hasSetter");
 
   // src/Modules/Profiles.ts
-  var ProfilesModule = class extends BaseModule {
-    static {
-      __name(this, "ProfilesModule");
-    }
+  var _ProfilesModule = class _ProfilesModule extends BaseModule {
     get settings() {
       return super.settings;
     }
@@ -2836,13 +4194,29 @@ One of mods you are using is using an old version of SDK. It will work for now b
     get defaultSettings() {
       return {};
     }
+    Load() {
+      const profileDefaults = {
+        GlobalModule: getModule("GlobalModule").defaultSettings,
+        ColorsModule: getModule("ColorsModule").defaultSettings,
+        IntegrationModule: getModule("IntegrationModule").defaultSettings
+      };
+      for (let i = 0; i < 3; i++) {
+        const profileIndex = i + 1;
+        if (!PlayerStorage()?.ProfilesModule?.[profileIndex] || Object.keys(PlayerStorage()?.ProfilesModule?.[profileIndex]).length === 0) {
+          Player[ModName].ProfilesModule[profileIndex] = {
+            data: {},
+            name: ""
+          };
+        }
+        if (Object.keys(Player[ModName].ProfilesModule[profileIndex].data).length > 0) Player[ModName].ProfilesModule[profileIndex].data = deepMergeMatchingProperties(profileDefaults, Player[ModName].ProfilesModule[profileIndex].data);
+      }
+    }
   };
+  __name(_ProfilesModule, "ProfilesModule");
+  var ProfilesModule = _ProfilesModule;
 
   // src/Modules/Share.ts
-  var ShareModule = class extends BaseModule {
-    static {
-      __name(this, "ShareModule");
-    }
+  var _ShareModule = class _ShareModule extends BaseModule {
     Load() {
       hookFunction("ChatRoomMessageProcessHidden", 0 /* Observe */, (args, next) => {
         const data = args[0];
@@ -2861,8 +4235,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
         button.innerHTML = getText("modal.button.show");
         text.classList.add("modal-prompt");
         button.classList.add("modal-button");
-        const theme = data.Dictionary[0]["ThemedMessage"].Theme;
+        const messageData = data.Dictionary[0]["ThemedMessage"];
+        const theme = messageData.Theme;
+        const version = messageData.ThemeVersion;
         button.addEventListener("click", () => {
+          if (!version || version !== Player.Themed.Version) {
+            sendLocalSmart("theme-not-up-to-date", "Theme sent by " + senderName + " is not up-to-date!");
+            return;
+          }
           useLgcModal(
             prompt2,
             () => {
@@ -2879,6 +4259,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     acceptShare(data) {
       Player.Themed.ColorsModule = data;
+      settingsSave();
       getModule("ColorsModule").reloadTheme();
     }
     share() {
@@ -2887,21 +4268,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
         Type: "Hidden",
         Content: "ThemedTheme",
         Sender: Player.MemberNumber,
-        Dictionary: [{ ThemedMessage: { Theme: Player.Themed.ColorsModule } }]
+        Dictionary: [{ ThemedMessage: { ThemeVersion: Player.Themed.Version, Theme: Player.Themed.ColorsModule } }]
       };
       ServerSend("ChatRoomChat", packet);
     }
   };
-
-  // src/Static/HTML/Changelog.html
-  var Changelog_default = '<div class="ThemedMessageContent">\n    <b style="color:#690092; text-shadow: 0.05em 0.05em #440171;">Themed BC: </b>\n    <b>New Version! [1.3.2]</b><br>\n    <br>\n    <b style="color:#CC3232; text-shadow: 0.05em 0.05em #920009;">Please, reload your page~</b>\n    <br>\n\n    <br><b class="ThemedVersion">1.3.2</b>\n    <br>\u2022 Fixed some chat elements not being colored.\n    <br>\u2022 Fixed item boxes not being colored.<br>\n\n    <br><b class="ThemedVersion">1.3.1</b>\n    <br>\u2022 Fixed crash when removing item<br>\n\n    <br><b class="ThemedVersion">1.3.0</b>\n    <br>\u2022 Added option to indicate absense of characters (when they leave room or disconnect).\n    <br>\u2022 Added coloring support to chat separator.\n    <br>\u2022 Fixed chat input not being colored.\n    <br>\u2022 Fixed chat menu button icons not being colored.\n    <br>\u2022 Fixed theme sharing not scrolling chat to end.<br>\n\n</div>\n\n<!--\n    \n    <br><b class="ThemedVersion">0.0.0</b>\n    <br>\u2022 <br>\n-->\n';
+  __name(_ShareModule, "ShareModule");
+  var ShareModule = _ShareModule;
 
   // src/Modules/Version.ts
-  var VersionModule = class _VersionModule extends BaseModule {
-    static {
-      __name(this, "VersionModule");
-    }
-    static isItNewVersion = false;
+  var _VersionModule = class _VersionModule extends BaseModule {
     Load() {
       hookFunction(
         "ChatRoomSync",
@@ -2928,9 +4304,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       return false;
     }
-    static sendNewVersionMessage() {
+    static async sendNewVersionMessage() {
       if (PlayerStorage().GlobalModule.doShowNewVersionMessage && _VersionModule.isItNewVersion) {
-        sendLocalSmart("ThemedNewVersion", Changelog_default);
+        const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/html/Changelog.html`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
+        sendLocalSmart("ThemedNewVersion", changelog);
       }
     }
     static saveVersion() {
@@ -2951,9 +4328,27 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       _VersionModule.saveVersion();
     }
-    Run() {
+    static checkVersionMigration() {
+      const PreviousVersion = _VersionModule.loadVersion();
+      let saveRequired = false;
+      for (const migrator of _VersionModule.Migrators) {
+        if (_VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
+          saveRequired = saveRequired || migrator.Migrate();
+          conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
+        }
+      }
+      if (saveRequired) {
+        settingsSave();
+      }
+    }
+    static registerMigrator(migrator) {
+      _VersionModule.Migrators.push(migrator);
     }
   };
+  __name(_VersionModule, "VersionModule");
+  __publicField(_VersionModule, "isItNewVersion", false);
+  __publicField(_VersionModule, "Migrators", []);
+  var VersionModule = _VersionModule;
 
   // src/Themed.ts
   function initWait() {
@@ -2973,17 +4368,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
   }
   __name(initWait, "initWait");
-  function init() {
+  async function init() {
     if (window.ThemedLoaded) return;
-    Localization.load();
-    RibbonMenu.registerMod(ModName);
-    dataTake();
+    await Localization.load();
+    settingsLoad();
     if (!initModules()) {
       unload();
       return;
     }
+    VersionModule.registerMigrator(new ColorModelMigrator());
+    VersionModule.checkVersionMigration();
     VersionModule.checkIfNewVersion();
-    dataStore();
+    for (const m of modules()) {
+      if (m.defaultSettings && hasSetter(m, "defaultSettings"))
+        m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+    }
     _Color.composeRoot();
     BcStyle.injectAll();
     window.ThemedLoaded = true;
