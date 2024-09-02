@@ -1,6 +1,6 @@
 import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
-import { ColorModelMigrator } from './Migrators/ColorModelMigrator';
+import { V140Migrator } from './Migrators/ColorModelMigrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
 import { GlobalModule } from './Modules/Global';
@@ -47,7 +47,7 @@ export async function init() {
     return;
   }
 
-  VersionModule.registerMigrator(new ColorModelMigrator);
+  VersionModule.registerMigrator(new V140Migrator);
   VersionModule.checkVersionMigration();
   VersionModule.checkIfNewVersion();
 
