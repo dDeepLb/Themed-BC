@@ -41,7 +41,9 @@ export class VersionModule extends BaseModule {
 
   static async sendNewVersionMessage() {
     if (PlayerStorage().GlobalModule.doShowNewVersionMessage && VersionModule.isItNewVersion) {
-      const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`).then((res) => res.text());
+      const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`)
+        .then((res) => res.text())
+        .then((text) => text.replace(/\r\n/g, '\n'));
       sendLocalSmart('ThemedNewVersion', changelog);
     }
   }
