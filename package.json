@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "build": "node build.mjs",
-    "dev": "node build.mjs --dev"
+    "dev": "node build.mjs --dev",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "repository": {
     "type": "git",
