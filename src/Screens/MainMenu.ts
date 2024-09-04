@@ -3,7 +3,7 @@ import { getModule } from '../Base/Modules';
 import { GUI } from '../Base/SettingUtils';
 import { GlobalModule } from '../Modules/Global';
 import { getText } from '../Translation';
-import { ModVersion } from '../Utilities/ModDefinition';
+import { MOD_VERSION_CAPTION } from '../Utilities/ModDefinition';
 import { GuiReset } from './Reset';
 import { GuiSupport } from './Support';
 
@@ -38,7 +38,7 @@ export class MainMenu extends GuiSubscreen {
 
     DrawCharacter(Player, 50, 50, 0.9, false);
     DrawText(
-      getText('MainMenu.title').replace('$ModVersion', ModVersion) + '  ' + GuiSupport.getSupporter(),
+      getText('MainMenu.title').replace('$ModVersion', MOD_VERSION_CAPTION) + '  ' + GuiSupport.getSupporter(),
       GuiSubscreen.START_X,
       GuiSubscreen.START_Y - GuiSubscreen.Y_MOD,
       'Black',

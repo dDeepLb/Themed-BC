@@ -2,6 +2,8 @@ import { build, context } from 'esbuild';
 import copy from 'esbuild-copy-files-plugin';
 import progress from 'esbuild-plugin-progress';
 import time from 'esbuild-plugin-time';
+import simpleGit from 'simple-git';
+import packageJson from './package.json' assert { type: 'json' };
 
 (async () => {
   /* if built on GitHub */
@@ -18,6 +20,12 @@ import time from 'esbuild-plugin-time';
 
   const PUBLIC_URL = `${isLocal ? localPath : remotePath}/public`;
 
+  const git = simpleGit();
+  const LAST_COMMIT_HASH = (await git.log({ maxCount: 1 }));
+  const VERSION_HASH = LAST_COMMIT_HASH.latest.hash.substring(0, 8);
+
+  const IS_DEVEL = isDev || isLocal;
+
   /** @type {import('esbuild').BuildOptions} */
   const buildOptions = {
     entryPoints: ['./src/Themed.ts'],
@@ -33,7 +41,13 @@ import time from 'esbuild-plugin-time';
     },
     treeShaking: true,
     keepNames: true,
-    define: { PUBLIC_URL: JSON.stringify(PUBLIC_URL) },
+    define: {
+      PUBLIC_URL: JSON.stringify(PUBLIC_URL),
+      MOD_VERSION: JSON.stringify(packageJson.version),
+      LAST_COMMIT_HASH: JSON.stringify(LAST_COMMIT_HASH),
+      VERSION_HASH: JSON.stringify(VERSION_HASH),
+      IS_DEVEL: JSON.stringify(IS_DEVEL),
+    },
     plugins: [
       copy({
         source: ['./public/'],

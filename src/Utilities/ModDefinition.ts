@@ -1,6 +1,4 @@
 export const ModName = 'Themed';
 export const FullModName = 'BC Themed';
-export const ModVersion = '1.4.0';
 export const ModRepository = 'https://github.com/dDeepLb/Themed-BC';
-
-export const DebugMode = false;
+export const MOD_VERSION_CAPTION = IS_DEVEL ? `${MOD_VERSION} - ${VERSION_HASH}` : MOD_VERSION;

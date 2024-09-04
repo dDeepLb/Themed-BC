@@ -1,5 +1,4 @@
 import { getText } from '../Translation';
-import { DebugMode } from './ModDefinition';
 
 export function sendLocalSmart(id: string, message: string, timeoutInSeconds?: number) {
   const div = document.createElement('div');
@@ -92,7 +91,7 @@ export function deepMergeMatchingProperties<T extends object>(mergeTo: T, mergeF
 }
 
 export function exposeItem(item: any, name?: string, devExpose?: boolean) {
-  if (devExpose && !DebugMode) return;
+  if (devExpose && !IS_DEVEL) return;
   if (!window['TMD']) window['TMD'] = {};
   window['TMD'][name || item.name || item] = item;
 }

@@ -13,7 +13,7 @@ import { Localization } from './Translation';
 import { _Color } from './Utilities/Color';
 import { conDebug, conLog } from './Utilities/Console';
 import { settingsLoad } from './Utilities/Data';
-import { ModVersion } from './Utilities/ModDefinition';
+import { MOD_VERSION_CAPTION } from './Utilities/ModDefinition';
 import { deepMergeMatchingProperties, hasSetter } from './Utilities/Other';
 import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
@@ -60,7 +60,7 @@ export async function init() {
   BcStyle.injectAll();
 
   window.ThemedLoaded = true;
-  conLog(`Loaded! Version: ${ModVersion}`);
+  conLog(`Loaded! Version: ${MOD_VERSION_CAPTION}`);
 }
 
 function initModules(): boolean {

@@ -1,6 +1,5 @@
 import { MainMenu } from '../Screens/MainMenu';
 import { getText } from '../Translation';
-import { DebugMode } from '../Utilities/ModDefinition';
 import { BaseModule } from './BaseModule';
 import { GuiSubscreen } from './BaseSetting';
 import { modules } from './Modules';
@@ -109,7 +108,7 @@ export class GUI extends BaseModule {
   }
 
   drawDebug() {
-    if (DebugMode) {
+    if (IS_DEVEL) {
       if (MouseX > 0 || MouseY > 0) {
         MainCanvas.save();
         MainCanvas.lineWidth = 1;

@@ -2,7 +2,7 @@ import { BaseModule } from '../Base/BaseModule';
 import { BaseMigrator } from '../Migrators/BaseMigrator';
 import { conInfo } from '../Utilities/Console';
 import { PlayerStorage, settingsSave } from '../Utilities/Data';
-import { ModName, ModVersion } from '../Utilities/ModDefinition';
+import { ModName } from '../Utilities/ModDefinition';
 import { sendLocalSmart } from '../Utilities/Other';
 import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
 
@@ -50,7 +50,7 @@ export class VersionModule extends BaseModule {
 
   static saveVersion() {
     if (PlayerStorage()) {
-      Player[ModName].Version = ModVersion;
+      Player[ModName].Version = MOD_VERSION;
     }
   }
 
@@ -63,7 +63,7 @@ export class VersionModule extends BaseModule {
 
   static checkIfNewVersion() {
     const LoadedVersion = VersionModule.loadVersion();
-    if (VersionModule.isNewVersion(LoadedVersion, ModVersion)) {
+    if (VersionModule.isNewVersion(LoadedVersion, MOD_VERSION)) {
       VersionModule.isItNewVersion = true;
     }
     VersionModule.saveVersion();
