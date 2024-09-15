@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { plainColors } from '../../Utilities/Color';
+import { colors } from '../../Utilities/Color';
 import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
 
 export function hookDrawPreviewBox() {
@@ -11,19 +11,17 @@ export function hookDrawPreviewBox() {
 
       const [X, Y, Path, Description, Options] = args;
 
-      const { Vibrating, Icons, Disabled } = Options || {};
-      let { Foreground, Background, Width, Height } = Options || {};
+      const { Vibrating, Disabled, Icons } = Options || {};
+      let { Background, Foreground, Border, Hover, Width, Height } = Options || {};
       Width = Width || DrawAssetPreviewDefaultWidth;
       Height = Height || DrawAssetPreviewDefaultHeight;
 
       const Padding = 2;
       const TextGutter = Description ? 44 : 0;
 
-      Foreground = plainColors.text;
-      Background = Background || plainColors.element;
-      const hover = MouseHovering(X, Y, Width, Height);
-      if (hover) Background = Background || plainColors.elementHover;
-      if (Disabled) Background = Background || plainColors.elementDisabled;
+      Foreground = colors.text;
+      Border = true;
+      Hover = MouseHovering(X, Y, Width, Height);
 
       let ImageX = X + Padding;
       let ImageY = Y + Padding;
@@ -50,7 +48,7 @@ export function hookDrawPreviewBox() {
 
       DrawRect(X, Y, Width, Height, Background);
       ControllerAddActiveArea(X, Y);
-      DrawEmptyRect(X, Y, Width, Height, hover ? plainColors.accentHover : plainColors.accent);
+      if (Border) DrawEmptyRect(X, Y, Width, Height, Hover ? colors.elementBorderHover : colors.elementBorder);
       if (Path !== '') DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
       DrawPreviewIcons(Icons, X, Y);
       if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);

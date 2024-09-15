@@ -1,6 +1,5 @@
 import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
-import { ColorModelMigrator } from './Migrators/ColorModelMigrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
 import { GlobalModule } from './Modules/Global';
@@ -12,8 +11,9 @@ import { VersionModule } from './Modules/Version';
 import { Localization } from './Translation';
 import { _Color } from './Utilities/Color';
 import { conDebug, conLog } from './Utilities/Console';
-import { settingsLoad } from './Utilities/Data';
-import { ModVersion } from './Utilities/ModDefinition';
+import { dataStore, dataTake } from './Utilities/Data';
+import { ModName, ModVersion } from './Utilities/ModDefinition';
+import { RibbonMenu } from './Utilities/RibbonMenu';
 import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
 
@@ -34,12 +34,14 @@ function initWait() {
   }
 }
 
-export async function init() {
+export function init() {
   if (window.ThemedLoaded) return;
 
-  await Localization.load();
+  Localization.load();
 
-  settingsLoad();
+  RibbonMenu.registerMod(ModName);
+
+  dataTake();
 
   if (!initModules()) {
     unload();
@@ -47,8 +49,8 @@ export async function init() {
   }
 
   VersionModule.checkIfNewVersion();
-  VersionModule.registerMigrator(new ColorModelMigrator);
-  VersionModule.checkVersionMigration();
+
+  dataStore();
 
   _Color.composeRoot();
   BcStyle.injectAll();

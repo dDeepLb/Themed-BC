@@ -1,6 +1,5 @@
-import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { plainColors } from '../../Utilities/Color';
+import { _Color, colors, isBlack } from '../../Utilities/Color';
 import { drawRect } from '../../Utilities/Drawing';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
@@ -21,9 +20,9 @@ export function hookDrawTextWrap() {
 
       if (BackColor != null) {
         if (!isHovering) {
-          drawRect(X, Y, Width, Height, BackColor, plainColors.accent);
+          drawRect(X, Y, Width, Height, BackColor, colors.elementBorder);
         } else {
-          drawRect(X, Y, Width, Height, plainColors.elementHover, plainColors.accentHover);
+          drawRect(X, Y, Width, Height, _Color.darken(BackColor, 40), colors.elementBorder);
         }
       }
 
@@ -33,7 +32,7 @@ export function hookDrawTextWrap() {
         GetWrapTextSize(Text, Width, MaxLine);
       }
 
-      MainCanvas.fillStyle = Color(ForeColor.toLowerCase()).hex() === '#000000' ? plainColors.text : ForeColor;
+      MainCanvas.fillStyle = isBlack(ForeColor) ? colors.text : _Color.lighten(_Color.toDarkMode(ForeColor, colors.elementBackground), 50);
       if (MainCanvas.measureText(Text).width > Width) {
         const words = fragmentText(Text, Width);
         let line = '';

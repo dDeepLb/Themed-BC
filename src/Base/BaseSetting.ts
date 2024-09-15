@@ -3,9 +3,9 @@ import { BaseSettingsModel } from '../Models/Global';
 import { ColorsModule } from '../Modules/Colors';
 import { doRedraw } from '../Modules/GuiRedraw';
 import { getText } from '../Translation';
-import { plainColors } from '../Utilities/Color';
+import { colors } from '../Utilities/Color';
 import { conDebug } from '../Utilities/Console';
-import { settingsSave } from '../Utilities/Data';
+import { dataStore } from '../Utilities/Data';
 import { BaseModule } from './BaseModule';
 import { getModule, modules } from './Modules';
 import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from './SettingDefinitions';
@@ -99,19 +99,16 @@ export abstract class GuiSubscreen {
     this.multipageStructure.forEach((s) =>
       s.forEach((item) => {
         switch (item.type) {
-          case 'text': {
+          case 'text':
             const input = ElementCreateInput(item.id, 'text', item.setting(), '255');
             input.setAttribute('autocomplete', 'off');
             break;
-          }
           case 'number':
             ElementCreateInput(item.id, 'number', item.setting(), '255');
             break;
-          case 'color': {
-            const elm = ElementCreateInput(item.id, 'color', item.setting());
-            elm.classList.add('tmd-color-picker');
+          case 'color':
+            ElementCreateInput(item.id, 'color', item.setting());
             break;
-          }
         }
       })
     );
@@ -121,12 +118,13 @@ export abstract class GuiSubscreen {
 
   Run() {
     GuiSubscreen.POS_BAK = GuiSubscreen.START_X;
-    MainCanvas.save();
+    GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
 
     GuiSubscreen.START_X = 550;
     MainCanvas.textAlign = 'left';
 
     DrawCharacter(Player, 50, 50, 0.9, false);
+    //@ts-ignore
     DrawText(getText(`${this.name}.title`), GuiSubscreen.START_X, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', '#D7F6E9');
     DrawButton(1815, 75, 90, 90, '', 'White', 'Icons/Exit.png', 'Main Menu');
 
@@ -138,7 +136,7 @@ export abstract class GuiSubscreen {
 
     this.hideElements();
 
-    this.structure.forEach((item, ix) => {
+    this.structure.forEach((item, ix, arr) => {
       switch (item.type) {
         case 'checkbox':
           this.drawCheckbox(item.label, item.description, item.setting(), ix, item.disabled);
@@ -158,7 +156,7 @@ export abstract class GuiSubscreen {
     });
 
     GuiSubscreen.START_X = GuiSubscreen.POS_BAK;
-    MainCanvas.restore();
+    MainCanvas.textAlign = GuiSubscreen.TEXT_ALIGN_BAK;
   }
 
   Click() {
@@ -171,10 +169,10 @@ export abstract class GuiSubscreen {
     if (MouseIn(1815, 75, 90, 90)) return this.Exit();
     if (this.multipageStructure.length > 1) PreferencePageChangeClick(1595, 75, this.multipageStructure.length);
 
-    this.structure.forEach((item, ix) => {
+    this.structure.forEach((item, ix, arr) => {
       switch (item.type) {
         case 'checkbox':
-          if (MouseIn(this.getXPos(ix), this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
+          if (MouseIn(this.getXPos(ix) + 600, this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
             item.setSetting(!item.setting());
           }
           break;
@@ -195,8 +193,8 @@ export abstract class GuiSubscreen {
           case 'number':
             if (!CommonIsNumeric(ElementValue(item.id))) {
               ElementRemove(item.id);
+              break;
             }
-            break;
           case 'text':
           case 'color':
             item.setSetting(ElementValue(item.id));
@@ -212,7 +210,7 @@ export abstract class GuiSubscreen {
     getModule<ColorsModule>('ColorsModule').reloadTheme();
 
     setSubscreen('MainMenu');
-    settingsSave();
+    dataStore();
   }
 
   Unload() {
@@ -224,11 +222,9 @@ export abstract class GuiSubscreen {
   }
 
   drawCheckbox(label: string, description: string, value: boolean, order: number, disabled: boolean = false) {
-    const checkboxSize = 64;
-    const labelOffset = checkboxSize + 30;
-    const isHovering = MouseIn(this.getXPos(order) + labelOffset, this.getYPos(order) - 32, 600, checkboxSize);
-    DrawTextFit(getText(label), this.getXPos(order) + labelOffset, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
-    DrawCheckbox(this.getXPos(order), this.getYPos(order) - 32, checkboxSize, checkboxSize, '', value ?? false, disabled);
+    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
+    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
+    DrawCheckbox(this.getXPos(order) + 600, this.getYPos(order) - 32, 64, 64, '', value ?? false, disabled);
     if (isHovering) this.tooltip(getText(description));
   }
 
@@ -250,11 +246,11 @@ export abstract class GuiSubscreen {
   }
 
   elementPosition(elementId: string, label: string, description: string, order: number, disabled: boolean = false) {
-    const isHovering = MouseIn(this.getXPos(order) + 450, this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order) + 450, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
-    ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400, 64);
+    const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
+    DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
+    ElementPosition(elementId, this.getXPos(order) + 750 + 225, this.getYPos(order), 800, 64);
     if (disabled) ElementSetAttribute(elementId, 'disabled', 'true');
-    if (!disabled) ElementRemoveAttribute(elementId, 'disabled');
+    if (!disabled) document.getElementById(elementId)?.removeAttribute('disabled');
     if (isHovering) this.tooltip(getText(description));
   }
 
@@ -271,13 +267,13 @@ function drawTooltip(x: number, y: number, width: number, text: string, align: '
   canvas.textAlign = align;
   canvas.beginPath();
   canvas.rect(x, y, width, 65);
-  canvas.fillStyle = doRedraw() ? plainColors.element : '#FFFF88';
+  canvas.fillStyle = doRedraw() ? colors.elementBackground : '#FFFF88';
   canvas.fillRect(x, y, width, 65);
   canvas.fill();
   canvas.lineWidth = 2;
-  canvas.strokeStyle = doRedraw() ? plainColors.accent : 'black';
+  canvas.strokeStyle = doRedraw() ? colors.elementBorder : 'black';
   canvas.stroke();
   canvas.closePath();
-  DrawTextFit(text, align === 'left' ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? plainColors.text : 'black');
+  DrawTextFit(text, align === 'left' ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? colors.text : 'black');
   canvas.textAlign = bak;
 }

@@ -1,14 +1,12 @@
 import { BaseModule } from '../Base/BaseModule';
-import { BaseMigrator } from '../Migrators/BaseMigrator';
-import { conInfo } from '../Utilities/Console';
-import { PlayerStorage, settingsSave } from '../Utilities/Data';
+import Changelog from '../Static/HTML/Changelog.html';
+import { PlayerStorage } from '../Utilities/Data';
 import { ModName, ModVersion } from '../Utilities/ModDefinition';
 import { sendLocalSmart } from '../Utilities/Other';
-import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
+import { HookPriority, ModuleCategory, hookFunction } from '../Utilities/SDK';
 
 export class VersionModule extends BaseModule {
   static isItNewVersion: boolean = false;
-  private static Migrators: BaseMigrator[] = [];
 
   Load(): void {
     hookFunction(
@@ -39,10 +37,9 @@ export class VersionModule extends BaseModule {
     return false;
   }
 
-  static async sendNewVersionMessage() {
+  static sendNewVersionMessage() {
     if (PlayerStorage().GlobalModule.doShowNewVersionMessage && VersionModule.isItNewVersion) {
-      const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`).then((res) => res.text());
-      sendLocalSmart('ThemedNewVersion', changelog);
+      sendLocalSmart('ThemedNewVersion', Changelog);
     }
   }
 
@@ -66,25 +63,6 @@ export class VersionModule extends BaseModule {
     }
     VersionModule.saveVersion();
   }
-  
-  static checkVersionMigration() {
-    const PreviousVersion = VersionModule.loadVersion();
 
-    let saveRequired = false;
-    for (const migrator of VersionModule.Migrators) {
-      // if (VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
-      if (VersionModule.isItNewVersion) {
-        saveRequired = saveRequired || migrator.Migrate();
-        conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
-      }
-    }
-
-    if (saveRequired) {
-      settingsSave();
-    }
-  }
-
-  static registerMigrator(migrator: BaseMigrator) {
-    VersionModule.Migrators.push(migrator);
-  }
+  Run(): void { }
 }
