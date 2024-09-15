@@ -48,8 +48,7 @@ export async function init() {
   }
 
   VersionModule.registerMigrator(new V140Migrator);
-  VersionModule.checkVersionMigration();
-  VersionModule.checkIfNewVersion();
+  VersionModule.check();
 
   for (const m of modules()) {
     if (m.defaultSettings && hasSetter(m, 'defaultSettings'))

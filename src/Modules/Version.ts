@@ -61,15 +61,14 @@ export class VersionModule extends BaseModule {
     return;
   }
 
-  static checkIfNewVersion() {
+  private static checkNewVersion() {
     const LoadedVersion = VersionModule.loadVersion();
     if (VersionModule.isNewVersion(LoadedVersion, MOD_VERSION)) {
       VersionModule.isItNewVersion = true;
     }
-    VersionModule.saveVersion();
   }
   
-  static checkVersionMigration() {
+  private static checkVersionMigration() {
     const PreviousVersion = VersionModule.loadVersion();
 
     let saveRequired = false;
@@ -80,6 +79,15 @@ export class VersionModule extends BaseModule {
         conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
       }
     }
+
+    return saveRequired;
+  }
+
+  static check() {
+    VersionModule.checkNewVersion();
+    const saveRequired = VersionModule.checkVersionMigration();
+    
+    VersionModule.saveVersion();
 
     if (saveRequired) {
       settingsSave();
