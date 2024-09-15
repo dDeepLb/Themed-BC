@@ -1,0 +1,94 @@
+#TextAreaChatLog[data-colortheme="light"],
+#TextAreaChatLog[data-colortheme="light2"],
+#TextAreaChatLog[data-colortheme="dark"],
+#TextAreaChatLog[data-colortheme="dark2"] {
+  background-color: var(--main);
+  color: var(--text);
+  border-color: var(--accent);
+
+  .ChatMessageName {
+    text-shadow: 0 0 0.12em var(--label-color);
+    transition: color 0.1s ease-in-out;
+  }
+
+  .ChatMessageName:hover {
+    color: var(--text);
+  }
+
+  .ChatMessage {
+    border-bottom: none;
+  }
+
+  .ChatMessageActivity,
+  .ChatMessageAction,
+  .ChatMessageEmote,
+  .ChatMessageLocalMessage {
+    --base-color: var(--main);
+    color: var(--text);
+    color: color-mix(in srgb, var(--text) 50%, gray 50%);
+
+    &::before,
+    &::after {
+      color: var(--text);
+    }
+  }
+
+  .chat-room-sep {
+    --base-color: var(--main) !important;
+    border-bottom: min(0.4vh, 0.2vw) var(--accent) solid !important;
+    border-top: min(0.4vh, 0.2vw) var(--accent) solid !important;
+  }
+
+  .chat-room-sep-collapse {
+    border-right: min(0.4vh, 0.2vw) var(--accent) solid !important;
+    color: var(--text);
+  }
+
+  .chat-room-sep-header:hover,
+  .chat-room-sep-collapse:hover {
+    color: color-mix(in srgb, var(--text) 80%, var(--accent) 80%);
+  }
+
+  .chat-room-sep-div>.button:active,
+  .chat-room-sep-div>.button[data-active] {
+    color: color-mix(in srgb, var(--text) 50%, var(--accent) 100%);
+  }
+
+  .chat-room-sep-header {
+    color: var(--text);
+  }
+
+  ~#chat-room-bot {
+    --button-color: var(--element);
+    background-color: var(--main);
+    border-color: rgba(0, 0, 0, 0.25);
+    color: var(--text);
+    border: var(--accent) solid 1px;
+
+
+    &:has(#InputChat:focus) {
+      outline: 2px solid var(--elementHover);
+      box-shadow: 0 0 0 3px var(--main);
+    }
+
+    #InputChat {
+      background-color: var(--main);
+      color: var(--text);
+      border-color: none;
+      outline: none;
+    }
+
+    #chat-room-buttons-div {
+      border-left-color: var(--accent);
+    }
+
+    #chat-room-buttons-collapse:hover,
+    .chat-room-button:hover:before {
+      background-color: var(--accentHover);
+    }
+
+    .chat-room-button:before {
+      background-color: var(--accent);
+    }
+  }
+}
