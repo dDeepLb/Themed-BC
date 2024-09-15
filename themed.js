@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.4.0"} - ${"1ceefdb4"}` : "1.4.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.4.0"} - ${"d7aa1ca9"}` : "1.4.0";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2487,7 +2487,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height, color] = args;
         const drawRect2 = /* @__PURE__ */ __name((color2) => {
-          DrawRect(Left, Top, Width, Height, color2);
+          next([Left, Top, Width, Height, color2]);
         }, "drawRect");
         const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
         if (color?.startsWith("%")) {
