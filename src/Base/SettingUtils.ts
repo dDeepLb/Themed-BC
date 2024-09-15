@@ -79,7 +79,7 @@ export class GUI extends BaseModule {
 
     this._mainMenu.subscreens = this._subscreens;
     PreferenceRegisterExtensionSetting({
-      Identifier: 'TMD',
+      Identifier: 'Themed',
       ButtonText: getText('infosheet.button_text'),
       Image: `${PUBLIC_URL}/icons/mod.png`,
       load: () => {
