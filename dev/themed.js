@@ -8,6 +8,9 @@ var Themed = (() => {
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -34,10 +37,17 @@ var Themed = (() => {
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
+  // <define:LAST_COMMIT_HASH>
+  var init_define_LAST_COMMIT_HASH = __esm({
+    "<define:LAST_COMMIT_HASH>"() {
+    }
+  });
+
   // node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js
   var require_color_name = __commonJS({
     "node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js"(exports, module) {
       "use strict";
+      init_define_LAST_COMMIT_HASH();
       module.exports = {
         "aliceblue": [240, 248, 255],
         "antiquewhite": [250, 235, 215],
@@ -194,6 +204,7 @@ var Themed = (() => {
   // node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js
   var require_is_arrayish = __commonJS({
     "node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js"(exports, module) {
+      init_define_LAST_COMMIT_HASH();
       module.exports = /* @__PURE__ */ __name(function isArrayish(obj) {
         if (!obj || typeof obj === "string") {
           return false;
@@ -207,6 +218,7 @@ var Themed = (() => {
   var require_simple_swizzle = __commonJS({
     "node_modules/.pnpm/simple-swizzle@0.2.2/node_modules/simple-swizzle/index.js"(exports, module) {
       "use strict";
+      init_define_LAST_COMMIT_HASH();
       var isArrayish = require_is_arrayish();
       var concat = Array.prototype.concat;
       var slice = Array.prototype.slice;
@@ -233,6 +245,7 @@ var Themed = (() => {
   // node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js
   var require_color_string = __commonJS({
     "node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js"(exports, module) {
+      init_define_LAST_COMMIT_HASH();
       var colorNames = require_color_name();
       var swizzle = require_simple_swizzle();
       var hasOwnProperty = Object.hasOwnProperty;
@@ -420,6 +433,7 @@ var Themed = (() => {
   // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js
   var require_conversions = __commonJS({
     "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js"(exports, module) {
+      init_define_LAST_COMMIT_HASH();
       var cssKeywords = require_color_name();
       var reverseKeywords = {};
       for (const key of Object.keys(cssKeywords)) {
@@ -1092,6 +1106,7 @@ var Themed = (() => {
   // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js
   var require_route = __commonJS({
     "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js"(exports, module) {
+      init_define_LAST_COMMIT_HASH();
       var conversions = require_conversions();
       function buildGraph() {
         const graph = {};
@@ -1166,6 +1181,7 @@ var Themed = (() => {
   // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js
   var require_color_convert = __commonJS({
     "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js"(exports, module) {
+      init_define_LAST_COMMIT_HASH();
       var conversions = require_conversions();
       var route = require_route();
       var convert = {};
@@ -1229,6 +1245,7 @@ var Themed = (() => {
   // node_modules/.pnpm/color@4.2.3/node_modules/color/index.js
   var require_color = __commonJS({
     "node_modules/.pnpm/color@4.2.3/node_modules/color/index.js"(exports, module) {
+      init_define_LAST_COMMIT_HASH();
       var colorString = require_color_string();
       var convert = require_color_convert();
       var skippedModels = [
@@ -1623,6 +1640,7 @@ var Themed = (() => {
   // node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js
   var require_bcmodsdk = __commonJS({
     "node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js"(exports) {
+      init_define_LAST_COMMIT_HASH();
       var bcModSdk = function() {
         "use strict";
         const o = "1.2.0";
@@ -1800,8 +1818,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
     init: () => init,
     unload: () => unload
   });
+  init_define_LAST_COMMIT_HASH();
 
   // src/Base/Modules.ts
+  init_define_LAST_COMMIT_HASH();
   var modulesMap = /* @__PURE__ */ new Map();
   function modules() {
     return [...modulesMap.values()];
@@ -1817,7 +1837,20 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(getModule, "getModule");
 
+  // src/Base/SettingUtils.ts
+  init_define_LAST_COMMIT_HASH();
+
+  // src/Screens/MainMenu.ts
+  init_define_LAST_COMMIT_HASH();
+
+  // src/Base/BaseSetting.ts
+  init_define_LAST_COMMIT_HASH();
+
+  // src/Modules/GuiRedraw.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Base/BaseModule.ts
+  init_define_LAST_COMMIT_HASH();
   var _BaseModule = class _BaseModule {
     get settingsScreen() {
       return null;
@@ -1867,7 +1900,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_BaseModule, "BaseModule");
   var BaseModule = _BaseModule;
 
+  // src/Hooks/GuiRedraw/AppearanceGetPreviewImageColor.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Utilities/Color.ts
+  init_define_LAST_COMMIT_HASH();
   var import_color = __toESM(require_color());
   var plainColors = {
     main: "",
@@ -1934,16 +1971,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   };
 
   // src/Utilities/SDK.ts
+  init_define_LAST_COMMIT_HASH();
   var import_bondage_club_mod_sdk = __toESM(require_bcmodsdk());
 
-  // src/Utilities/ModDefinition.ts
-  var ModName = "Themed";
-  var FullModName = "BC Themed";
-  var ModVersion = "1.4.0";
-  var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var DebugMode = false;
-
   // src/Utilities/Console.ts
+  init_define_LAST_COMMIT_HASH();
   var STYLES = {
     INFO: "color: #32CCCC",
     LOG: "color: #CCCC32",
@@ -1971,19 +2003,26 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(conErr, "conErr");
   function conDebug(...args) {
-    if (DebugMode) {
+    if (true) {
       if (typeof args[0] === "string") console.debug(`%c${cmdPrefix}: ${args[0]}`, STYLES.DEBUG, ...args.slice(1));
       else console.debug(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
     }
   }
   __name(conDebug, "conDebug");
 
+  // src/Utilities/ModDefinition.ts
+  init_define_LAST_COMMIT_HASH();
+  var ModName = "Themed";
+  var FullModName = "BC Themed";
+  var ModRepository = "https://github.com/dDeepLb/Themed-BC";
+  var MOD_VERSION_CAPTION = true ? `${"1.4.0"} - ${"62c9233e"}` : "1.4.0";
+
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
     {
       name: ModName,
       fullName: FullModName,
-      version: ModVersion,
+      version: MOD_VERSION_CAPTION,
       repository: ModRepository
     },
     {
@@ -2060,6 +2099,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookAppearanceGetPreviewImageColor, "hookAppearanceGetPreviewImageColor");
 
   // src/Hooks/GuiRedraw/DrawBackNextButton.ts
+  init_define_LAST_COMMIT_HASH();
   function hookDrawBackNextButton() {
     hookFunction(
       "DrawBackNextButton",
@@ -2131,7 +2171,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(hookDrawBackNextButton, "hookDrawBackNextButton");
 
+  // src/Hooks/GuiRedraw/DrawButton.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Utilities/Drawing.ts
+  init_define_LAST_COMMIT_HASH();
   var _Image = {
     doNotColorizeImageIncludes: [
       "Assets/Female3DCG/",
@@ -2278,6 +2322,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawButton, "hookDrawButton");
 
   // src/Hooks/GuiRedraw/DrawButtonHover.ts
+  init_define_LAST_COMMIT_HASH();
   function hookDrawButtonHover() {
     hookFunction(
       "DrawButtonHover",
@@ -2301,6 +2346,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawButtonHover, "hookDrawButtonHover");
 
   // src/Hooks/GuiRedraw/DrawCheckbox.ts
+  init_define_LAST_COMMIT_HASH();
   function hookDrawCheckbox() {
     hookFunction(
       "DrawCheckbox",
@@ -2317,6 +2363,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawCheckbox, "hookDrawCheckbox");
 
   // src/Hooks/GuiRedraw/DrawEmptyRect.ts
+  init_define_LAST_COMMIT_HASH();
   function hookDrawEmptyRect() {
     hookFunction(
       "DrawEmptyRect",
@@ -2359,6 +2406,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawEmptyRect, "hookDrawEmptyRect");
 
   // src/Hooks/GuiRedraw/DrawImageEx.ts
+  init_define_LAST_COMMIT_HASH();
   function hookDrawImageEx() {
     hookFunction(
       "DrawImageEx",
@@ -2378,6 +2426,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawImageEx, "hookDrawImageEx");
 
   // src/Hooks/GuiRedraw/DrawPreviewBox.ts
+  init_define_LAST_COMMIT_HASH();
   function hookDrawPreviewBox() {
     hookFunction(
       "DrawPreviewBox",
@@ -2428,6 +2477,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawPreviewBox, "hookDrawPreviewBox");
 
   // src/Hooks/GuiRedraw/DrawRect.ts
+  init_define_LAST_COMMIT_HASH();
   var import_color2 = __toESM(require_color());
   function hookDrawRect() {
     hookFunction(
@@ -2502,7 +2552,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(hookDrawRect, "hookDrawRect");
 
+  // src/Hooks/GuiRedraw/DrawRoomBackground.ts
+  init_define_LAST_COMMIT_HASH();
+
+  // src/Utilities/Data.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Utilities/String.ts
+  init_define_LAST_COMMIT_HASH();
   var __String = class __String {
     static encode(string) {
       return LZString.compressToBase64(JSON.stringify(string));
@@ -2582,6 +2639,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawRoomBackground, "hookDrawRoomBackground");
 
   // src/Hooks/GuiRedraw/DrawText.ts
+  init_define_LAST_COMMIT_HASH();
   var import_color3 = __toESM(require_color());
   function hookDrawText() {
     hookFunction(
@@ -2605,6 +2663,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawText, "hookDrawText");
 
   // src/Hooks/GuiRedraw/DrawTextFit.ts
+  init_define_LAST_COMMIT_HASH();
   var import_color4 = __toESM(require_color());
   function hookDrawTextFit() {
     hookFunction(
@@ -2625,6 +2684,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(hookDrawTextFit, "hookDrawTextFit");
 
   // src/Hooks/GuiRedraw/DrawTextWrap.ts
+  init_define_LAST_COMMIT_HASH();
   var import_color5 = __toESM(require_color());
   function hookDrawTextWrap() {
     hookFunction(
@@ -2751,6 +2811,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiRedrawModule = _GuiRedrawModule;
 
   // src/Translation.ts
+  init_define_LAST_COMMIT_HASH();
   var _Localization = class _Localization {
     static async load() {
       const lang = TranslationLanguage.toLowerCase();
@@ -2791,6 +2852,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var getText = /* @__PURE__ */ __name((string) => Localization.getText(string), "getText");
 
   // src/Base/SettingDefinitions.ts
+  init_define_LAST_COMMIT_HASH();
   var SETTING_FUNC_PREFIX = "PreferenceSubscreen";
   var SETTING_NAME_PREFIX = "Themed";
   var SETTING_FUNC_NAMES = ["Load", "Run", "Click", "Unload", "Exit"];
@@ -3035,7 +3097,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(drawTooltip, "drawTooltip");
 
+  // src/Screens/Reset.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Utilities/Style.ts
+  init_define_LAST_COMMIT_HASH();
   var styles = {
     inputs: "",
     chat: "",
@@ -3192,6 +3258,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiReset = _GuiReset;
 
   // src/Screens/Support.ts
+  init_define_LAST_COMMIT_HASH();
   var _GuiSupport = class _GuiSupport extends GuiSubscreen {
     get name() {
       return "Support";
@@ -3311,7 +3378,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       MainCanvas.textAlign = "left";
       DrawCharacter(Player, 50, 50, 0.9, false);
       DrawText(
-        getText("MainMenu.title").replace("$ModVersion", ModVersion) + "  " + GuiSupport.getSupporter(),
+        getText("MainMenu.title").replace("$ModVersion", MOD_VERSION_CAPTION) + "  " + GuiSupport.getSupporter(),
         GuiSubscreen.START_X,
         GuiSubscreen.START_Y - GuiSubscreen.Y_MOD,
         "Black",
@@ -3426,7 +3493,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       this._mainMenu.subscreens = this._subscreens;
       PreferenceRegisterExtensionSetting({
-        Identifier: "TMD",
+        Identifier: "Themed",
         ButtonText: getText("infosheet.button_text"),
         Image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/icons/mod.png`,
         load: /* @__PURE__ */ __name(() => {
@@ -3453,7 +3520,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       });
     }
     drawDebug() {
-      if (DebugMode) {
+      if (true) {
         if (MouseX > 0 || MouseY > 0) {
           MainCanvas.save();
           MainCanvas.lineWidth = 1;
@@ -3478,7 +3545,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __publicField(_GUI, "instance", null);
   var GUI = _GUI;
 
+  // src/Migrators/V140Migrator.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Migrators/BaseMigrator.ts
+  init_define_LAST_COMMIT_HASH();
   var _BaseMigrator = class _BaseMigrator {
   };
   __name(_BaseMigrator, "BaseMigrator");
@@ -3536,9 +3607,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var V140Migrator = _V140Migrator;
 
   // src/Modules/Colors.ts
+  init_define_LAST_COMMIT_HASH();
   var import_color6 = __toESM(require_color());
 
   // src/Screens/Colors.ts
+  init_define_LAST_COMMIT_HASH();
   var _GuiColors = class _GuiColors extends GuiSubscreen {
     get name() {
       return "Colors";
@@ -3601,6 +3674,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiColors = _GuiColors;
 
   // src/Utilities/Integration.ts
+  init_define_LAST_COMMIT_HASH();
   function changeModColors() {
     if (doRedraw()) {
       changeBctColors();
@@ -3719,6 +3793,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ColorsModule = _ColorsModule;
 
   // src/Modules/Commands.ts
+  init_define_LAST_COMMIT_HASH();
   var _CommandsModule = class _CommandsModule extends BaseModule {
     Load() {
       CommandCombine([
@@ -3737,7 +3812,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_CommandsModule, "CommandsModule");
   var CommandsModule = _CommandsModule;
 
+  // src/Modules/Global.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Screens/Global.ts
+  init_define_LAST_COMMIT_HASH();
   var _GuiGlobal = class _GuiGlobal extends GuiSubscreen {
     get name() {
       return "Global";
@@ -3890,7 +3969,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __publicField(_GlobalModule, "transparentCharacters", []);
   var GlobalModule = _GlobalModule;
 
+  // src/Modules/Integration.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Screens/Integration.ts
+  init_define_LAST_COMMIT_HASH();
   var _GuiIntegration = class _GuiIntegration extends GuiSubscreen {
     get name() {
       return "Integration";
@@ -3958,7 +4041,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_IntegrationModule, "IntegrationModule");
   var IntegrationModule = _IntegrationModule;
 
+  // src/Modules/Profiles.ts
+  init_define_LAST_COMMIT_HASH();
+
   // src/Screens/Profiles.ts
+  init_define_LAST_COMMIT_HASH();
   var _GuiProfiles = class _GuiProfiles extends GuiSubscreen {
     constructor() {
       super(...arguments);
@@ -4130,6 +4217,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiProfiles = _GuiProfiles;
 
   // src/Utilities/Other.ts
+  init_define_LAST_COMMIT_HASH();
   function sendLocalSmart(id, message, timeoutInSeconds) {
     const div = document.createElement("div");
     div.id = id;
@@ -4242,6 +4330,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ProfilesModule = _ProfilesModule;
 
   // src/Modules/Share.ts
+  init_define_LAST_COMMIT_HASH();
   var _ShareModule = class _ShareModule extends BaseModule {
     Load() {
       hookFunction("ChatRoomMessageProcessHidden", 0 /* Observe */, (args, next) => {
@@ -4303,6 +4392,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ShareModule = _ShareModule;
 
   // src/Modules/Version.ts
+  init_define_LAST_COMMIT_HASH();
   var _VersionModule = class _VersionModule extends BaseModule {
     Load() {
       hookFunction(
@@ -4338,7 +4428,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = ModVersion;
+        Player[ModName].Version = "1.4.0";
       }
     }
     static loadVersion() {
@@ -4347,12 +4437,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       return;
     }
-    static checkIfNewVersion() {
+    static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, ModVersion)) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.4.0")) {
         _VersionModule.isItNewVersion = true;
       }
-      _VersionModule.saveVersion();
     }
     static checkVersionMigration() {
       const PreviousVersion = _VersionModule.loadVersion();
@@ -4363,6 +4452,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
           conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
         }
       }
+      return saveRequired;
+    }
+    static check() {
+      _VersionModule.checkNewVersion();
+      const saveRequired = _VersionModule.checkVersionMigration();
+      _VersionModule.saveVersion();
       if (saveRequired) {
         settingsSave();
       }
@@ -4403,8 +4498,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return;
     }
     VersionModule.registerMigrator(new V140Migrator());
-    VersionModule.checkVersionMigration();
-    VersionModule.checkIfNewVersion();
+    VersionModule.check();
     for (const m of modules()) {
       if (m.defaultSettings && hasSetter(m, "defaultSettings"))
         m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
@@ -4412,7 +4506,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     _Color.composeRoot();
     BcStyle.injectAll();
     window.ThemedLoaded = true;
-    conLog(`Loaded! Version: ${ModVersion}`);
+    conLog(`Loaded! Version: ${MOD_VERSION_CAPTION}`);
   }
   __name(init, "init");
   function initModules() {
