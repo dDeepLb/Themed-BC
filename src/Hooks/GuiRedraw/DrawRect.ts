@@ -13,7 +13,7 @@ export function hookDrawRect() {
       const [Left, Top, Width, Height, color] = args;
 
       const drawRect = (color: string) => {
-        DrawRect(Left, Top, Width, Height, color);
+        next([Left, Top, Width, Height, color]);
       };
 
       const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
