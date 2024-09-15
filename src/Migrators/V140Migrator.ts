@@ -54,8 +54,6 @@ export class V140Migrator extends BaseMigrator {
       }
     }
 
-    
-
     return true;
   }
 }
