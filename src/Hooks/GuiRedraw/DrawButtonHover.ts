@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { colors } from '../../Utilities/Color';
+import { plainColors } from '../../Utilities/Color';
 import { drawRect } from '../../Utilities/Drawing';
 import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
 
@@ -19,7 +19,7 @@ export function hookDrawButtonHover() {
       Top = Top + (Height - 65) / 2;
       MainCanvas.save();
       MainCanvas.textAlign = 'center';
-      drawRect(Left, Top, 450, 65, colors.elementHint, colors.elementBorder);
+      drawRect(Left, Top, 450, 65, plainColors.elementHint, plainColors.accent);
       DrawTextFit(HoveringText, Left + 225, Top + 33, 444, 'Black');
       MainCanvas.restore();
     },

@@ -1,10 +1,13 @@
 {
   "name": "themed-bc",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Bondage Club now with themes!",
-  "main": "dist/themed.js",
+  "private": true,
   "scripts": {
-    "build": "node build.prod.mjs"
+    "build": "node build.mjs",
+    "dev": "node build.mjs --dev",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "repository": {
     "type": "git",
@@ -18,14 +21,18 @@
   },
   "homepage": "https://github.com/dDeepLb/Themed-BC#readme",
   "dependencies": {
-    "bondage-club-mod-sdk": "^1.2.0"
+    "bondage-club-mod-sdk": "^1.2.0",
+    "color": "^4.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
     "@stylistic/eslint-plugin": "^2.7.2",
+    "@types/color": "^3.0.6",
     "@types/core-js": "^2.5.8",
     "@types/lz-string": "1.3.34",
     "@types/node": "^20.16.3",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "bc-stubs": "~104.0.2",
     "esbuild": "^0.21.5",
     "esbuild-copy-files-plugin": "^1.2.0",
@@ -33,6 +40,7 @@
     "esbuild-plugin-time": "^1.0.0",
     "eslint": "^8.57.0",
     "globals": "^15.9.0",
+    "simple-git": "^3.26.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^7.18.0"
   }

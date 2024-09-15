@@ -1,12 +1,12 @@
 import bcMod from 'bondage-club-mod-sdk';
 import { conErr } from './Console';
-import { ModName, FullModName, ModVersion, ModRepository } from './ModDefinition';
+import { FullModName, MOD_VERSION_CAPTION, ModName, ModRepository } from './ModDefinition';
 
 export const SDK = bcMod.registerMod(
   {
     name: ModName,
     fullName: FullModName,
-    version: ModVersion,
+    version: MOD_VERSION_CAPTION,
     repository: ModRepository
   },
   {

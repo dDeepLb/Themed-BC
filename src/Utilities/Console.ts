@@ -1,5 +1,3 @@
-import { DebugMode } from './ModDefinition';
-
 const STYLES = {
   INFO: 'color: #32CCCC',
   LOG: 'color: #CCCC32',
@@ -29,7 +27,7 @@ export function conErr(...args: any[]) {
 }
 
 export function conDebug(...args: any[]) {
-  if (DebugMode) {
+  if (IS_DEVEL) {
     if (typeof args[0] === 'string') console.debug(`%c${cmdPrefix}: ${args[0]}`, STYLES.DEBUG, ...args.slice(1));
     else console.debug(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
   }

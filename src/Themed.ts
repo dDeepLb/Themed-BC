@@ -1,5 +1,6 @@
 import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
+import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
 import { GlobalModule } from './Modules/Global';
@@ -11,9 +12,9 @@ import { VersionModule } from './Modules/Version';
 import { Localization } from './Translation';
 import { _Color } from './Utilities/Color';
 import { conDebug, conLog } from './Utilities/Console';
-import { dataStore, dataTake } from './Utilities/Data';
-import { ModName, ModVersion } from './Utilities/ModDefinition';
-import { RibbonMenu } from './Utilities/RibbonMenu';
+import { settingsLoad } from './Utilities/Data';
+import { MOD_VERSION_CAPTION } from './Utilities/ModDefinition';
+import { deepMergeMatchingProperties, hasSetter } from './Utilities/Other';
 import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
 
@@ -34,29 +35,31 @@ function initWait() {
   }
 }
 
-export function init() {
+export async function init() {
   if (window.ThemedLoaded) return;
 
-  Localization.load();
+  await Localization.load();
 
-  RibbonMenu.registerMod(ModName);
-
-  dataTake();
+  settingsLoad();
 
   if (!initModules()) {
     unload();
     return;
   }
 
-  VersionModule.checkIfNewVersion();
+  VersionModule.registerMigrator(new V140Migrator);
+  VersionModule.check();
 
-  dataStore();
+  for (const m of modules()) {
+    if (m.defaultSettings && hasSetter(m, 'defaultSettings'))
+      m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+  }
 
   _Color.composeRoot();
   BcStyle.injectAll();
 
   window.ThemedLoaded = true;
-  conLog(`Loaded! Version: ${ModVersion}`);
+  conLog(`Loaded! Version: ${MOD_VERSION_CAPTION}`);
 }
 
 function initModules(): boolean {
