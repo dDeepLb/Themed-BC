@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.4.0"} - ${"d7aa1ca9"}` : "1.4.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.4.0"} - ${"38cbd04b"}` : "1.4.0";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2853,9 +2853,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Base/SettingDefinitions.ts
   init_define_LAST_COMMIT_HASH();
-  var SETTING_FUNC_PREFIX = "PreferenceSubscreen";
   var SETTING_NAME_PREFIX = "Themed";
-  var SETTING_FUNC_NAMES = ["Load", "Run", "Click", "Unload", "Exit"];
   function setSubscreen(subscreen) {
     if (!GUI.instance) {
       throw new Error("Attempt to set subscreen before init");
@@ -2870,13 +2868,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
     constructor(module) {
       __publicField(this, "module");
       this.module = module;
-      SETTING_FUNC_NAMES.forEach((name) => {
-        const fName = SETTING_FUNC_PREFIX + SETTING_NAME_PREFIX + this.name + name;
-        if (typeof this[name] === "function" && typeof window[fName] !== "function")
-          window[fName] = () => {
-            this[name]();
-          };
-      });
     }
     get name() {
       return "UNKNOWN";
@@ -2924,7 +2915,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
       });
     }
     Load() {
-      conDebug(`Loading ${PreferenceSubscreen} GUI`);
       for (const module of modules()) {
         if (!module.settingsScreen) continue;
         if (!Object.keys(module.settings).length) module.registerDefaultSettings();
@@ -3473,12 +3463,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       PreferenceMessage = "";
       PreferencePageCurrent = 1;
-      let subscreenName = "";
       if (this._currentSubscreen) {
-        subscreenName = SETTING_NAME_PREFIX + this._currentSubscreen?.name;
         this._currentSubscreen.Load();
       }
-      PreferenceSubscreen = subscreenName || "Extensions";
     }
     get currentCharacter() {
       return Player;
