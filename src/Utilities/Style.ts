@@ -62,10 +62,11 @@ export const BcStyle = {
   injectAll() {
     const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
 
-    Style.injectInline('root', composeRoot());
     Style.injectEmbed('themed', `${PUBLIC_URL}/styles/themed.css`);
     
     if (!isEnabled) return;
+
+    Style.injectInline('root', composeRoot());
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
