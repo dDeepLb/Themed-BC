@@ -39,6 +39,9 @@ input:focus {
   border-color: var(--accent);
 }
 
+.button-styling>.button-label {
+  color: var(--text);
+}
 
 input[type="checkbox"] {
   background-color: var(--element);

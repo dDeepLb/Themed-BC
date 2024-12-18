@@ -3,6 +3,7 @@ import { BaseSettingsModel } from './Global';
 export type IntegrationSettingsModel = BaseSettingsModel & {
   inputs: boolean;
   chat: boolean;
+  inventory: boolean;
   friendList: boolean;
   friendListBlur: boolean;
   scrollbar: boolean;

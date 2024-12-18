@@ -8,6 +8,7 @@ type styles = {
 const styles: styles = {
   inputs: '',
   chat: '',
+  inventory: '',
   friendList: '',
   friendListBlur: '',
   scrollbar: '',

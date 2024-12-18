@@ -1,0 +1,50 @@
+.dialog-icon {
+  --hover-color: var(--button-color);
+}
+
+.dialog-status {
+  color: white;
+}
+
+.dialog-grid-button:disabled[aria-checked="true"],
+.dialog-grid-button[aria-disabled="true"][aria-checked="true"] {
+  background-color: var(--disabled-color) !important;
+  background-color: color-mix(in srgb, var(--disabled-color) 50%, var(--hover-color) 50%) !important;
+}
+
+.dialog-grid-button:disabled[aria-checked="true"]>.button-label,
+.dialog-grid-button[aria-disabled="true"][aria-checked="true"]>.button-label {
+  background-color: var(--disabled-color) !important;
+  background-color: color-mix(in srgb,
+      color-mix(in srgb, var(--disabled-color) 50%, var(--hover-color) 50%) 50%,
+      transparent) !important;
+}
+
+.dialog-grid-button[data-craft]:not([aria-checked="true"]) {
+  --button-color: var(--crafted);
+  --hover-color: var(--craftedHover);
+}
+
+.dialog-grid-button[data-permission="Block"] {
+  --button-color: var(--blocked);
+  --hover-color: var(--blockedHover);
+}
+
+.dialog-grid-button[data-permission="Limited"] {
+  --button-color: var(--limited);
+  --hover-color: var(--limitedHover);
+}
+
+.dialog-grid-button[data-permission="Favorite"] {
+  --button-color: var(--allowed);
+  --hover-color: var(--allowedHover);
+}
+
+.dialog-crafted-info {
+  color: var(--text);
+}
+
+.dialog-grid-button.button-styling[aria-checked="true"] {
+  --button-color: var(--equipped);
+  --hover-color: var(--equippedHover);
+}

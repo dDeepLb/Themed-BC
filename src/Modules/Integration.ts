@@ -22,6 +22,7 @@ export class IntegrationModule extends BaseModule {
     return <IntegrationSettingsModel>{
       inputs: true,
       chat: true,
+      inventory: true,
       friendList: true,
       friendListBlur: false,
       scrollbar: true,
