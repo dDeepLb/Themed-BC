@@ -74,6 +74,14 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
     });
 
+    patchFunction('DrawProcessScreenFlash', {
+      'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 
+      'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+
+      'DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);':
+      'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
+    });
+
     this.patched = true;
   }
 
@@ -83,6 +91,7 @@ export class GuiRedrawModule extends BaseModule {
     unpatchFuntion('ChatSearchNormalDraw');
     unpatchFuntion('ChatSearchPermissionDraw');
     unpatchFuntion('DialogDraw');
+    unpatchFuntion('DrawProcessScreenFlash');
 
     this.patched = false;
   }
