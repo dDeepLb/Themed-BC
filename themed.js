@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.4.0"} - ${"38cbd04b"}` : "1.4.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.0"} - ${"86f49484"}` : "1.5.0";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2415,7 +2415,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (!doRedraw()) return next(args);
         if (typeof args[0] !== "string") return next(args);
         if (!_Image.doDrawImage(args[0])) return next(args);
-        const [Source, Canvas, X, Y, Options] = args;
+        const [Source, Canvas, X, Y] = args;
+        let Options = args[4];
+        Options ?? (Options = {});
         Options.HexColor = plainColors.accent;
         Options.FullAlpha = true;
         next([Source, Canvas, X, Y, Options]);
@@ -2490,6 +2492,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
           next([Left, Top, Width, Height, color2]);
         }, "drawRect");
         const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
+        if (color?.startsWith("!")) {
+          next([Left, Top, Width, Height, color.substring(1)]);
+        }
         if (color?.startsWith("%")) {
           switch (color.substring(1)) {
             case "disabled":
@@ -2790,6 +2795,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       patchFunction("DialogDraw", {
         "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
       });
+      patchFunction("DrawProcessScreenFlash", {
+        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+        "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
+      });
       this.patched = true;
     }
     unpatchGui() {
@@ -2797,6 +2806,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       unpatchFuntion("ChatSearchNormalDraw");
       unpatchFuntion("ChatSearchPermissionDraw");
       unpatchFuntion("DialogDraw");
+      unpatchFuntion("DrawProcessScreenFlash");
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -3095,6 +3105,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var styles = {
     inputs: "",
     chat: "",
+    inventory: "",
     friendList: "",
     friendListBlur: "",
     scrollbar: "",
@@ -3137,9 +3148,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var BcStyle = {
     injectAll() {
       const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
-      Style.injectInline("root", composeRoot());
       Style.injectEmbed("themed", `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/themed.css`);
       if (!isEnabled) return;
+      Style.injectInline("root", composeRoot());
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         if (!PlayerStorage().IntegrationModule[id]) return;
@@ -4003,6 +4014,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return {
         inputs: true,
         chat: true,
+        inventory: true,
         friendList: true,
         friendListBlur: false,
         scrollbar: true,
@@ -4415,7 +4427,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.4.0";
+        Player[ModName].Version = "1.5.0";
       }
     }
     static loadVersion() {
@@ -4426,7 +4438,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.4.0")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.0")) {
         _VersionModule.isItNewVersion = true;
       }
     }
