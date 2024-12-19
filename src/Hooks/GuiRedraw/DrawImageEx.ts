@@ -12,7 +12,9 @@ export function hookDrawImageEx() {
       if (typeof args[0] !== 'string') return next(args);
       if (!_Image.doDrawImage(args[0])) return next(args);
 
-      const [Source, Canvas, X, Y, Options] = args;
+      const [Source, Canvas, X, Y] = args;
+      let Options = args[4];
+      Options ??= {};
       Options.HexColor = plainColors.accent;
       Options.FullAlpha = true;
 
