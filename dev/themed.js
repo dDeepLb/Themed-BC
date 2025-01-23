@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.4.0"} - ${"6d7061e2"}` : "1.4.0";
+  var MOD_VERSION_CAPTION = true ? `${"1.4.1"} - ${"481f22e6"}` : "1.4.1";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2772,23 +2772,26 @@ One of mods you are using is using an old version of SDK. It will work for now b
     patchGui() {
       if (this.patched) return false;
       patchFunction("ChatSearchNormalDraw", {
-        // button patch
-        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);': 'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "%searchFullBlock" : HasBlock ? "%searchBlock" : HasFriends && IsFull ? "%searchFullFriend" : HasFriends ? "%searchFriend" : IsFull ? "%searchFull" : "White"), null, null, IsFull);',
-        // friend in room patch
-        'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);': 'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-        // room friend title patch
-        'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);': 'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-        // game hint patch
-        'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#9999FF", 1);': 'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchGame", 1);',
-        // block hint patch
-        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FF9999", 1);': 'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchBlock", 1);'
+        // isBlocked
+        'bgColor = isFull ? "#884444" : "#FF9999";': 'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
+        // hasFriends
+        'bgColor = isFull ? "#448855" : "#CFFFCF";': 'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
+        // else
+        'bgColor = isFull ? "#666" : "White";': 'bgColor = isFull ? "%searchFull" : "White";',
+        'blocksText.push({ text: friendsText, color: "#FFFF88"});': 'blocksText.push({ text: friendsText, color: "%friendhint"});',
+        'blocksText.push({ text: blockedText, color: "#FF9999" });': 'blocksText.push({ text: blockedText, color: "%searchBlock" });',
+        'blocksText.push({ text: gameText, color: "#9999FF"});': 'blocksText.push({ text: gameText, color: "%searchGame"});'
       });
       patchFunction("ChatSearchPermissionDraw", {
-        'DrawRect(X, Y, 630, 85, Hover ? "green" : "lime");': 'DrawRect(X, Y, 630, 85, "%allowed");',
-        'DrawRect(X, Y, 630, 85, Hover ? "red" : "pink");': 'DrawRect(X, Y, 630, 85, "%searchBlock");'
+        'bgColor = Hover ? "red" : "pink";': 'bgColor = "%allowed";',
+        'bgColor = Hover ? "green" : "lime";': 'bgColor = "%searchBlock";'
       });
       patchFunction("DialogDraw", {
         "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
+      });
+      patchFunction("DrawProcessScreenFlash", {
+        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+        "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
       this.patched = true;
     }
@@ -4428,7 +4431,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.4.0";
+        Player[ModName].Version = "1.4.1";
       }
     }
     static loadVersion() {
@@ -4439,28 +4442,24 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.4.0")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.4.1")) {
         _VersionModule.isItNewVersion = true;
       }
     }
     static checkVersionMigration() {
       const PreviousVersion = _VersionModule.loadVersion();
-      let saveRequired = false;
       for (const migrator of _VersionModule.Migrators) {
         if (_VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
-          saveRequired = saveRequired || migrator.Migrate();
+          migrator.Migrate();
           conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
         }
       }
-      return saveRequired;
     }
     static check() {
       _VersionModule.checkNewVersion();
-      const saveRequired = _VersionModule.checkVersionMigration();
+      _VersionModule.checkVersionMigration();
       _VersionModule.saveVersion();
-      if (saveRequired) {
-        settingsSave();
-      }
+      settingsSave();
     }
     static registerMigrator(migrator) {
       _VersionModule.Migrators.push(migrator);
