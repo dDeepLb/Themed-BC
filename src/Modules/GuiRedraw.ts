@@ -44,29 +44,32 @@ export class GuiRedrawModule extends BaseModule {
     if (this.patched) return false;
 
     patchFunction('ChatSearchNormalDraw', {
-      // button patch
-      'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "#884444" : HasBlock ? "#FF9999" : HasFriends && IsFull ? "#448855" : HasFriends ? "#CFFFCF" : IsFull ? "#666" : "White"), null, null, IsFull);':
-        'DrawButton(X, Y, 630, 85, "", (HasBlock && IsFull ? "%searchFullBlock" : HasBlock ? "%searchBlock" : HasFriends && IsFull ? "%searchFullFriend" : HasFriends ? "%searchFriend" : IsFull ? "%searchFull" : "White"), null, null, IsFull);',
-      // friend in room patch
-      'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);':
-        'DrawTextWrap(ChatSearchMuffle(ChatSearchResult[C].Friends[F].MemberName + " (" + ChatSearchResult[C].Friends[F].MemberNumber + ")"), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-      // room friend title patch
-      'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FFFF88", 1);':
-        'DrawTextWrap(TextGet("FriendsInRoom") + " " + ChatSearchMuffle(ChatSearchResult[C].DisplayName), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%friendhint", 1);',
-      // game hint patch
-      'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#9999FF", 1);': 
-        'DrawTextWrap(TextGet("GameLabel") + " " + TextGet("Game" + ChatSearchResult[C].Game), (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchGame", 1);',
-      // block hint patch
-      'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "#FF9999", 1);':
-        'DrawTextWrap(Block, (X > 1000) ? 685 : X + 660, ListY, 630, Height, "black", "%searchBlock", 1);'
+      // isBlocked
+      'bgColor = isFull ? "#884444" : "#FF9999";':
+        'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
+      // hasFriends
+      'bgColor = isFull ? "#448855" : "#CFFFCF";':
+        'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
+      // else
+      'bgColor = isFull ? "#666" : "White";':
+        'bgColor = isFull ? "%searchFull" : "White";',
+
+      'blocksText.push({ text: friendsText, color: "#FFFF88"});':
+        'blocksText.push({ text: friendsText, color: "%friendhint"});',
+
+      'blocksText.push({ text: blockedText, color: "#FF9999" });':
+        'blocksText.push({ text: blockedText, color: "%searchBlock" });',
+
+      'blocksText.push({ text: gameText, color: "#9999FF"});':
+        'blocksText.push({ text: gameText, color: "%searchGame"});',
     });
 
     patchFunction('ChatSearchPermissionDraw', {
-      'DrawRect(X, Y, 630, 85, Hover ? "green" : "lime");':
-        'DrawRect(X, Y, 630, 85, "%allowed");',
-        
-      'DrawRect(X, Y, 630, 85, Hover ? "red" : "pink");':
-      'DrawRect(X, Y, 630, 85, "%searchBlock");'
+      'bgColor = Hover ? "red" : "pink";':
+        'bgColor = "%allowed";',
+
+      'bgColor = Hover ? "green" : "lime";':
+        'bgColor = "%searchBlock";'
     });
 
     patchFunction('DialogDraw', {
@@ -74,6 +77,13 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
     });
 
+    patchFunction('DrawProcessScreenFlash', {
+      'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));':
+        'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+
+      'DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);':
+        'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
+    });
     this.patched = true;
   }
 
