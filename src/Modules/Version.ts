@@ -67,31 +67,25 @@ export class VersionModule extends BaseModule {
       VersionModule.isItNewVersion = true;
     }
   }
-  
+
   private static checkVersionMigration() {
     const PreviousVersion = VersionModule.loadVersion();
 
-    let saveRequired = false;
-
     for (const migrator of VersionModule.Migrators) {
       if (VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
-        saveRequired = saveRequired || migrator.Migrate();
+        migrator.Migrate();
         conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
       }
     }
-
-    return saveRequired;
   }
 
   static check() {
     VersionModule.checkNewVersion();
-    const saveRequired = VersionModule.checkVersionMigration();
-    
+    VersionModule.checkVersionMigration();
+
     VersionModule.saveVersion();
 
-    if (saveRequired) {
-      settingsSave();
-    }
+    settingsSave();
   }
 
   static registerMigrator(migrator: BaseMigrator) {

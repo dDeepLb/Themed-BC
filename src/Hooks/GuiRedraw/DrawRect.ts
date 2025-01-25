@@ -36,6 +36,10 @@ export function hookDrawRect() {
             drawRect(plainColors.element);
             break;
 
+          case 'accent':
+            drawRect(plainColors.accent);
+            break;
+
           case 'friendhint':
             drawRect(plainColors.elementHint);
             break;
@@ -66,6 +70,22 @@ export function hookDrawRect() {
 
           case 'allowed':
             drawRect(specialColors.allowed[hover]);
+            break;
+
+          case 'equipped':
+            drawRect(specialColors.equipped[hover]);
+            break;
+
+          case 'crafted':
+            drawRect(specialColors.crafted[hover]);
+            break;
+
+          case 'limited':
+            drawRect(specialColors.limited[hover]);
+            break;
+
+          case 'blocked':
+            drawRect(specialColors.blocked[hover]);
             break;
 
           default:

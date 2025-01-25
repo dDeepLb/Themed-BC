@@ -11,9 +11,17 @@ export function hookDrawText() {
       if (!doRedraw()) return next(args);
       if (!args[0]) return next(args);
       if (!args[3]) return next(args);
-      
+      const color = args[3];
 
-      if (Color(args[3].toLowerCase()).hex() === '#000000') {
+
+      let parsedColor = color;
+      try {
+        parsedColor = Color(color.toLowerCase()).hex();
+      } catch (e) {
+        parsedColor = color;
+      }
+
+      if (parsedColor === '#000000') {
         args[3] = plainColors.text;
         args[4] = '';
       } else {

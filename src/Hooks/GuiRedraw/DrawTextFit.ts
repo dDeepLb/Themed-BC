@@ -11,8 +11,15 @@ export function hookDrawTextFit() {
       if (!doRedraw()) return next(args);
       if (!args[0]) return next(args);
       if (!args[4]) return next(args);
-      
-      if (Color(args[4].toLowerCase()).hex() === '#000000') {
+
+      let parsedColor = args[4];
+      try {
+        parsedColor = Color(args[4].toLowerCase()).hex();
+      } catch (e) {
+        parsedColor = args[4];
+      }
+
+      if (parsedColor === '#000000') {
         args[4] = plainColors.text;
       }
 
