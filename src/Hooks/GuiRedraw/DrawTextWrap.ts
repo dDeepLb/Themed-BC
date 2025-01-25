@@ -36,7 +36,15 @@ export function hookDrawTextWrap() {
         GetWrapTextSize(Text, Width, MaxLine);
       }
 
-      MainCanvas.fillStyle = Color(ForeColor.toLowerCase()).hex() === '#000000' ? plainColors.text : ForeColor;
+      
+      let parsedForeColor = ForeColor;
+      try {
+        parsedForeColor = Color(ForeColor.toLowerCase()).hex();
+      } catch (e) {
+        parsedForeColor = ForeColor;
+      }
+
+      MainCanvas.fillStyle = parsedForeColor === '#000000' ? plainColors.text : ForeColor;
       if (MainCanvas.measureText(Text).width > Width) {
         const words = fragmentText(Text, Width);
         let line = '';

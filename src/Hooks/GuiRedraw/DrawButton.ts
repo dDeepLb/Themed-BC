@@ -15,7 +15,14 @@ export function hookDrawButton() {
 
       ControllerAddActiveArea(x, y);
 
-      switch (_Color.getHexComputed(color).toLowerCase()) {
+      let parsedColor = color;
+      try {
+        parsedColor = _Color.getHexComputed(color);
+      } catch (e) {
+        parsedColor = color;
+      }
+
+      switch (parsedColor.toLowerCase()) {
         case '#ffffff':
         case '#dddddd':
         case '#eeeeee':
