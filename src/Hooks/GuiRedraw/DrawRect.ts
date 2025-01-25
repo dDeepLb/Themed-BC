@@ -18,6 +18,10 @@ export function hookDrawRect() {
 
       const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
 
+      if (color?.startsWith('!')) {
+        next([Left, Top, Width, Height, color.substring(1)]);
+      }
+
       if (color?.startsWith('%')) {
         switch (color.substring(1)) {
           case 'disabled':

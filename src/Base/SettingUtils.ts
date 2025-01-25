@@ -3,7 +3,7 @@ import { getText } from '../Translation';
 import { BaseModule } from './BaseModule';
 import { GuiSubscreen } from './BaseSetting';
 import { modules } from './Modules';
-import { setSubscreen, SETTING_NAME_PREFIX } from './SettingDefinitions';
+import { setSubscreen } from './SettingDefinitions';
 
 export class GUI extends BaseModule {
   static instance: GUI | null = null;
@@ -39,14 +39,9 @@ export class GUI extends BaseModule {
     PreferenceMessage = '';
     PreferencePageCurrent = 1;
 
-    let subscreenName = '';
     if (this._currentSubscreen) {
-      subscreenName = SETTING_NAME_PREFIX + this._currentSubscreen?.name;
       this._currentSubscreen.Load();
     }
-
-    // Get BC to render the new screen
-    PreferenceSubscreen = subscreenName as PreferenceSubscreenName || 'Extensions';
   }
 
   get currentCharacter(): Character {

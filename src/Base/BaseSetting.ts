@@ -4,11 +4,10 @@ import { ColorsModule } from '../Modules/Colors';
 import { doRedraw } from '../Modules/GuiRedraw';
 import { getText } from '../Translation';
 import { plainColors } from '../Utilities/Color';
-import { conDebug } from '../Utilities/Console';
 import { settingsSave } from '../Utilities/Data';
 import { BaseModule } from './BaseModule';
 import { getModule, modules } from './Modules';
-import { SETTING_FUNC_NAMES, SETTING_FUNC_PREFIX, SETTING_NAME_PREFIX, setSubscreen } from './SettingDefinitions';
+import { SETTING_NAME_PREFIX, setSubscreen } from './SettingDefinitions';
 
 export abstract class GuiSubscreen {
   static START_X: number = 180;
@@ -21,15 +20,6 @@ export abstract class GuiSubscreen {
 
   constructor(module: BaseModule) {
     this.module = module;
-
-    // create each handler for a new preference subscreen
-    SETTING_FUNC_NAMES.forEach((name) => {
-      const fName = SETTING_FUNC_PREFIX + SETTING_NAME_PREFIX + this.name + name;
-      if (typeof (<any>this)[name] === 'function' && typeof (<any>window)[fName] !== 'function')
-        (<any>window)[fName] = () => {
-          (<any>this)[name]();
-        };
-    });
   }
 
   get name(): string {
@@ -91,7 +81,6 @@ export abstract class GuiSubscreen {
   }
 
   Load() {
-    conDebug(`Loading ${PreferenceSubscreen} GUI`);
     for (const module of modules()) {
       if (!module.settingsScreen) continue;
       if (!Object.keys(module.settings).length) module.registerDefaultSettings();
