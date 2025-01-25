@@ -2,10 +2,10 @@
 .themed-chat-modal {
   padding: 5px;
 
-  background-color: var(--element);
-  color: var(--text);
+  background-color: var(--element, white);
+  color: var(--text, black);
 
-  border: 2px solid var(--accent);
+  border: 2px solid var(--accent, black);
   border-radius: 10px;
 
   display: flex;
@@ -42,19 +42,19 @@
   width: auto;
   padding: 5px;
 
-  border: 2px solid var(--accent);
+  border: 2px solid var(--accent, black);
   border-radius: 10px;
   transition: all 0.5s ease;
 }
 
 .modal-button:hover {
-  background-color: var(--elementHover);
-  text-shadow: 0 0 0.12em var(--textShadow);
+  background-color: var(--elementHover, cyan);
+  text-shadow: 0 0 0.12em var(--textShadow, black);
   cursor: pointer;
 }
 
 .tmd-color-picker:disabled {
-  border: var(--blocked) solid 2px;
+  border: var(--blocked, red) solid 2px;
   cursor: not-allowed;
 }
 
@@ -75,9 +75,9 @@ code {
 
 #TextAreaChatLog[data-colortheme='dark'] div.ChatMessage.ThemedMessage,
 #TextAreaChatLog[data-colortheme='dark2'] div.ChatMessage.ThemedMessage {
-  background-color: var(--element);
-  border: 2px solid var(--accent);
-  color: var(--text);
+  background-color: var(--element, transparent);
+  border: 2px solid var(--accent, #440171);
+  color: var(--text, white);
 }
 
 #TextAreaChatLog div.ChatMessage.ThemedMessage {
@@ -93,7 +93,7 @@ code {
 #TextAreaChatLog[data-colortheme='dark2'] a.ThemedText {
   cursor: pointer;
   font-weight: bold;
-  color: var(--text);
+  color: var(--text, white);
 }
 
 #TextAreaChatLog a.ThemedText {
@@ -112,16 +112,16 @@ code {
 
 .ThemedH {
   font-size: 1em;
-  color: var(--text);
+  color: var(--text, black);
 }
 
 .ThemedP {
   font-size: 0.6em;
-  color: var(--text);
+  color: var(--text, black);
   line-height: 1.5;
 }
 
 .ThemedP:last-child {
   font-size: 0.8em;
-  color: color-mix(in srgb, var(--accentHover) 50%, var(--text) 50%);
+  color: color-mix(in srgb, var(--accentHover, #440171) 50%, var(--text, black) 50%);
 }

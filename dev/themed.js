@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.4.1"} - ${"0f6f61bc"}` : "1.4.1";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"2481eca1"}` : "1.5.1";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2440,7 +2440,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (!doRedraw()) return next(args);
         if (typeof args[0] !== "string") return next(args);
         if (!_Image.doDrawImage(args[0])) return next(args);
-        const [Source, Canvas, X, Y, Options] = args;
+        const [Source, Canvas, X, Y] = args;
+        let Options = args[4];
+        Options ?? (Options = {});
         Options.HexColor = plainColors.accent;
         Options.FullAlpha = true;
         next([Source, Canvas, X, Y, Options]);
@@ -2515,6 +2517,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
           next([Left, Top, Width, Height, color2]);
         }, "drawRect");
         const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
+        if (color?.startsWith("!")) {
+          next([Left, Top, Width, Height, color.substring(1)]);
+        }
         if (color?.startsWith("%")) {
           switch (color.substring(1)) {
             case "disabled":
@@ -2903,6 +2908,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       patchFunction("RelogRun", {
         'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
       });
+      patchFunction("DrawProcessScreenFlash", {
+        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+        "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
+      });
       this.patched = true;
     }
     unpatchGui() {
@@ -2976,9 +2985,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Base/SettingDefinitions.ts
   init_define_LAST_COMMIT_HASH();
-  var SETTING_FUNC_PREFIX = "PreferenceSubscreen";
   var SETTING_NAME_PREFIX = "Themed";
-  var SETTING_FUNC_NAMES = ["Load", "Run", "Click", "Unload", "Exit"];
   function setSubscreen(subscreen) {
     if (!GUI.instance) {
       throw new Error("Attempt to set subscreen before init");
@@ -2993,13 +3000,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
     constructor(module) {
       __publicField(this, "module");
       this.module = module;
-      SETTING_FUNC_NAMES.forEach((name) => {
-        const fName = SETTING_FUNC_PREFIX + SETTING_NAME_PREFIX + this.name + name;
-        if (typeof this[name] === "function" && typeof window[fName] !== "function")
-          window[fName] = () => {
-            this[name]();
-          };
-      });
     }
     get name() {
       return "UNKNOWN";
@@ -3047,7 +3047,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
       });
     }
     Load() {
-      conDebug(`Loading ${PreferenceSubscreen} GUI`);
       for (const module of modules()) {
         if (!module.settingsScreen) continue;
         if (!Object.keys(module.settings).length) module.registerDefaultSettings();
@@ -3228,6 +3227,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var styles = {
     inputs: "",
     chat: "",
+    inventory: "",
     friendList: "",
     friendListBlur: "",
     scrollbar: "",
@@ -3270,9 +3270,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var BcStyle = {
     injectAll() {
       const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
-      Style.injectInline("root", composeRoot());
       Style.injectEmbed("themed", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/themed.css`);
       if (!isEnabled) return;
+      Style.injectInline("root", composeRoot());
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         if (!PlayerStorage().IntegrationModule[id]) return;
@@ -3596,12 +3596,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       PreferenceMessage = "";
       PreferencePageCurrent = 1;
-      let subscreenName = "";
       if (this._currentSubscreen) {
-        subscreenName = SETTING_NAME_PREFIX + this._currentSubscreen?.name;
         this._currentSubscreen.Load();
       }
-      PreferenceSubscreen = subscreenName || "Extensions";
     }
     get currentCharacter() {
       return Player;
@@ -4139,6 +4136,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return {
         inputs: true,
         chat: true,
+        inventory: true,
         friendList: true,
         friendListBlur: false,
         scrollbar: true,
@@ -4551,7 +4549,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.4.1";
+        Player[ModName].Version = "1.5.1";
       }
     }
     static loadVersion() {
@@ -4562,7 +4560,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.4.1")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.1")) {
         _VersionModule.isItNewVersion = true;
       }
     }
