@@ -11,7 +11,7 @@ export function hookDrawTextFit() {
       if (!doRedraw()) return next(args);
       if (!args[0]) return next(args);
       if (!args[4]) return next(args);
-      
+
       let parsedColor = args[4];
       try {
         parsedColor = Color(args[4].toLowerCase()).hex();

@@ -26,6 +26,7 @@ export function hookDrawButton() {
         case '#ffffff':
         case '#dddddd':
         case '#eeeeee':
+        case '#808080':
           drawButtonRect(
             x,
             y,

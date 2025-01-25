@@ -1,5 +1,6 @@
 import { BaseModule } from '../Base/BaseModule';
 import { hookAppearanceGetPreviewImageColor } from '../Hooks/GuiRedraw/AppearanceGetPreviewImageColor';
+import { hookDialogGetMenuButtonColor } from '../Hooks/GuiRedraw/DialogGetMenuButtonColor';
 import { hookDrawBackNextButton } from '../Hooks/GuiRedraw/DrawBackNextButton';
 import { hookDrawButton } from '../Hooks/GuiRedraw/DrawButton';
 import { hookDrawButtonHover } from '../Hooks/GuiRedraw/DrawButtonHover';
@@ -36,6 +37,7 @@ export class GuiRedrawModule extends BaseModule {
     hookDrawTextWrap();
     hookDrawTextFit();
     hookDrawText();
+    hookDialogGetMenuButtonColor();
 
     if (doRedraw()) this.patchGui();
   }
@@ -74,7 +76,10 @@ export class GuiRedrawModule extends BaseModule {
 
     patchFunction('DialogDraw', {
       'DrawRect(1087 + offset, 550, 225, 275, bgColor);':
-        'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
+        'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
+
+      'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");':
+        'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");',
     });
 
     patchFunction('DrawProcessScreenFlash', {
@@ -84,6 +89,92 @@ export class GuiRedrawModule extends BaseModule {
       'DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);':
         'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
     });
+
+    if (GameVersion === 'R113') {
+      patchFunction('ChatAdminRun', {
+        'const ButtonBackground = canEdit ? "White" : "#ebebe4";':
+          'const ButtonBackground = canEdit ? "%background" : "%disabled";'
+      });
+    } else if (GameVersion === 'R112') {
+      patchFunction('ChatAdminRun', {
+        'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4";':
+          'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "%background" : "%disabled";'
+      });
+    }
+
+    patchFunction('AppearanceRun', {
+      'const ButtonColor = canAccess ? "White" : "#888";':
+        'const ButtonColor = canAccess ? "%background" : "%disabled";',
+      'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);':
+        'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
+      'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "#aaa", null, null, !CanCycleColors);':
+        'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "%disabled", null, null, !CanCycleColors);',
+      'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "#fff" : "#aaa", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);':
+        'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);',
+    });
+
+    patchFunction('DialogDrawExpressionMenu', {
+      'const color = (expression == FE.CurrentExpression ? "Pink" : (!allowed ? "#888" : "White"));':
+        'const color = (expression == FE.CurrentExpression ? "%accent" : (!allowed ? "%disabled" : "%background"));',
+      'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "Cyan" : "White", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");':
+        'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "%accent" : "%background", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");'
+    });
+
+    patchFunction('DialogDrawPoseMenu', {
+      'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "#888" : isActive ? "Pink" : "White", `Icons/Poses/${Name}.png`);':
+        'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "%disabled" : isActive ? "%accent" : "%background", `Icons/Poses/${Name}.png`);',
+    });
+
+    patchFunction('ExtendedItemGetButtonColor', {
+      'ButtonColor = "#888888";':
+        'ButtonColor = "%accent";',
+      'ButtonColor = Hover ? "red" : "pink";':
+        'ButtonColor = "%blocked";',
+      'ButtonColor = Hover ? "orange" : "#fed8b1";':
+        'ButtonColor = "%limited";',
+      'ButtonColor = Hover ? "green" : "lime";':
+        'ButtonColor = "%allowed";',
+
+      'ButtonColor = "Red";':
+        'ButtonColor = "%blocked";',
+      'ButtonColor = "Pink";':
+        'ButtonColor = "%limited";',
+      'ButtonColor = Hover ? "Cyan" : "LightGreen";':
+        'ButtonColor = "%allowed";',
+      'ButtonColor = Hover ? "Cyan" : "White";':
+        'ButtonColor = Hover ? "%hover" : "%background";',
+    });
+
+    patchFunction('PreferenceSubscreenDifficultyRun', {
+      'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "#DDFFDD" : "White", "");':
+        'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "%accent" : "%background", "");',
+      'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "White" : "#ebebe4", "");':
+        'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "%background" : "%disabled", "");'
+    });
+
+    patchFunction('ChatAdminRoomCustomizationRun', {
+      'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());':
+        'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
+      'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());':
+        'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
+    });
+
+    patchFunction('Shop2._AssetElementDraw', {
+      'options.Background = "cyan";':
+        'options.Background = "%hover";',
+      'options.Background = "white";':
+        'options.Background = "%background";',
+      'options.Background = "gray";':
+        'options.Background = "%disabled";',
+      'options.Background = "pink";':
+        'options.Background = "%equipped";',
+    });
+
+    patchFunction('RelogRun', {
+      'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");':
+        'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
+    });
+
     this.patched = true;
   }
 
@@ -93,6 +184,16 @@ export class GuiRedrawModule extends BaseModule {
     unpatchFuntion('ChatSearchNormalDraw');
     unpatchFuntion('ChatSearchPermissionDraw');
     unpatchFuntion('DialogDraw');
+    unpatchFuntion('DrawProcessScreenFlash');
+    unpatchFuntion('ChatAdminRun');
+    unpatchFuntion('AppearanceRun');
+    unpatchFuntion('DialogDrawExpressionMenu');
+    unpatchFuntion('DialogDrawPoseMenu');
+    unpatchFuntion('ExtendedItemGetButtonColor');
+    unpatchFuntion('PreferenceSubscreenDifficultyRun');
+    unpatchFuntion('ChatAdminRoomCustomizationRun');
+    unpatchFuntion('Shop2._AssetElementDraw');
+    unpatchFuntion('RelogRun');
 
     this.patched = false;
   }

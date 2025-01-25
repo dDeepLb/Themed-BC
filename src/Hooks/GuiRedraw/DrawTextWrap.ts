@@ -12,7 +12,7 @@ export function hookDrawTextWrap() {
       if (!doRedraw()) return next(args);
       if (!args[0]) return next(args);
       if (!args[5]) return next(args);
-      
+
 
       const [Text, X, , Width, Height, ForeColor, BackColor, MaxLine, LineSpacing = 23] = args;
       let [, , Y, , ,] = args;
@@ -36,7 +36,7 @@ export function hookDrawTextWrap() {
         GetWrapTextSize(Text, Width, MaxLine);
       }
 
-      
+
       let parsedForeColor = ForeColor;
       try {
         parsedForeColor = Color(ForeColor.toLowerCase()).hex();

@@ -10,8 +10,10 @@ export function hookDrawCheckbox() {
 
       const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = 'Black', CheckImage = 'Icons/Checked.png'] = args;
 
+      const backgroundColor = Disabled ? '%disabled' : '%background';
+
       DrawText(Text, Left + 100, Top + 33, TextColor, '');
-      DrawButton(Left, Top, Width, Height, '', 'White', IsChecked ? CheckImage : '', null, Disabled);
+      DrawButton(Left, Top, Width, Height, '', backgroundColor, IsChecked ? CheckImage : '', null, Disabled);
     },
     ModuleCategory.GuiRedraw
   );
