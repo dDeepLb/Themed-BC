@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.4.1"} - ${"481f22e6"}` : "1.4.1";
+  var MOD_VERSION_CAPTION = true ? `${"1.4.1"} - ${"241dff75"}` : "1.4.1";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2097,6 +2097,23 @@ One of mods you are using is using an old version of SDK. It will work for now b
     );
   }
   __name(hookAppearanceGetPreviewImageColor, "hookAppearanceGetPreviewImageColor");
+
+  // src/Hooks/GuiRedraw/DialogGetMenuButtonColor.ts
+  init_define_LAST_COMMIT_HASH();
+  function hookDialogGetMenuButtonColor() {
+    hookFunction("DialogGetMenuButtonColor", 0, (args, next) => {
+      if (!doRedraw()) return next(args);
+      const [buttonName] = args;
+      if (DialogIsMenuButtonDisabled(buttonName)) {
+        return "%disabled";
+      } else if (buttonName === "ColorDefault") {
+        return DialogColorSelect || "%background";
+      } else {
+        return "%background";
+      }
+    }, 3 /* GuiRedraw */);
+  }
+  __name(hookDialogGetMenuButtonColor, "hookDialogGetMenuButtonColor");
 
   // src/Hooks/GuiRedraw/DrawBackNextButton.ts
   init_define_LAST_COMMIT_HASH();
@@ -2272,10 +2289,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
         const [x, y, width, height, label, color, image, hoveringText, isDisabled] = args;
         const isHovering = MouseHovering(x, y, width, height);
         ControllerAddActiveArea(x, y);
-        switch (_Color.getHexComputed(color).toLowerCase()) {
+        let parsedColor = color;
+        try {
+          parsedColor = _Color.getHexComputed(color);
+        } catch (e) {
+          parsedColor = color;
+        }
+        switch (parsedColor.toLowerCase()) {
           case "#ffffff":
           case "#dddddd":
           case "#eeeeee":
+          case "#808080":
             drawButtonRect(
               x,
               y,
@@ -2354,8 +2378,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = "Black", CheckImage = "Icons/Checked.png"] = args;
+        const backgroundColor = Disabled ? "%disabled" : "%background";
         DrawText(Text, Left + 100, Top + 33, TextColor, "");
-        DrawButton(Left, Top, Width, Height, "", "White", IsChecked ? CheckImage : "", null, Disabled);
+        DrawButton(Left, Top, Width, Height, "", backgroundColor, IsChecked ? CheckImage : "", null, Disabled);
       },
       3 /* GuiRedraw */
     );
@@ -2501,6 +2526,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "background":
               drawRect2(plainColors.element);
               break;
+            case "accent":
+              drawRect2(plainColors.accent);
+              break;
             case "friendhint":
               drawRect2(plainColors.elementHint);
               break;
@@ -2524,6 +2552,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
               break;
             case "allowed":
               drawRect2(specialColors.allowed[hover]);
+              break;
+            case "equipped":
+              drawRect2(specialColors.equipped[hover]);
+              break;
+            case "crafted":
+              drawRect2(specialColors.crafted[hover]);
+              break;
+            case "limited":
+              drawRect2(specialColors.limited[hover]);
+              break;
+            case "blocked":
+              drawRect2(specialColors.blocked[hover]);
               break;
             default:
               next(args);
@@ -2649,7 +2689,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
         if (!args[3]) return next(args);
-        if ((0, import_color3.default)(args[3].toLowerCase()).hex() === "#000000") {
+        const color = args[3];
+        let parsedColor = color;
+        try {
+          parsedColor = (0, import_color3.default)(color.toLowerCase()).hex();
+        } catch (e) {
+          parsedColor = color;
+        }
+        if (parsedColor === "#000000") {
           args[3] = plainColors.text;
           args[4] = "";
         } else {
@@ -2673,7 +2720,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
         if (!args[4]) return next(args);
-        if ((0, import_color4.default)(args[4].toLowerCase()).hex() === "#000000") {
+        let parsedColor = args[4];
+        try {
+          parsedColor = (0, import_color4.default)(args[4].toLowerCase()).hex();
+        } catch (e) {
+          parsedColor = args[4];
+        }
+        if (parsedColor === "#000000") {
           args[4] = plainColors.text;
         }
         return next(args);
@@ -2711,7 +2764,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
           TextSize = MainCanvas.font;
           GetWrapTextSize(Text, Width, MaxLine);
         }
-        MainCanvas.fillStyle = (0, import_color5.default)(ForeColor.toLowerCase()).hex() === "#000000" ? plainColors.text : ForeColor;
+        let parsedForeColor = ForeColor;
+        try {
+          parsedForeColor = (0, import_color5.default)(ForeColor.toLowerCase()).hex();
+        } catch (e) {
+          parsedForeColor = ForeColor;
+        }
+        MainCanvas.fillStyle = parsedForeColor === "#000000" ? plainColors.text : ForeColor;
         if (MainCanvas.measureText(Text).width > Width) {
           const words = fragmentText(Text, Width);
           let line = "";
@@ -2767,6 +2826,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       hookDrawTextWrap();
       hookDrawTextFit();
       hookDrawText();
+      hookDialogGetMenuButtonColor();
       if (doRedraw()) this.patchGui();
     }
     patchGui() {
@@ -2787,11 +2847,61 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'bgColor = Hover ? "green" : "lime";': 'bgColor = "%searchBlock";'
       });
       patchFunction("DialogDraw", {
-        "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");'
+        "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
+        'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");': 'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");'
       });
       patchFunction("DrawProcessScreenFlash", {
         'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
+      });
+      if (GameVersion === "R113") {
+        patchFunction("ChatAdminRun", {
+          'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
+        });
+      } else if (GameVersion === "R112") {
+        patchFunction("ChatAdminRun", {
+          'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4";': 'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "%background" : "%disabled";'
+        });
+      }
+      patchFunction("AppearanceRun", {
+        'const ButtonColor = canAccess ? "White" : "#888";': 'const ButtonColor = canAccess ? "%background" : "%disabled";',
+        'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);': 'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
+        'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "#aaa", null, null, !CanCycleColors);': 'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "%disabled", null, null, !CanCycleColors);',
+        'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "#fff" : "#aaa", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);': 'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);'
+      });
+      patchFunction("DialogDrawExpressionMenu", {
+        'const color = (expression == FE.CurrentExpression ? "Pink" : (!allowed ? "#888" : "White"));': 'const color = (expression == FE.CurrentExpression ? "%accent" : (!allowed ? "%disabled" : "%background"));',
+        'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "Cyan" : "White", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");': 'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "%accent" : "%background", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");'
+      });
+      patchFunction("DialogDrawPoseMenu", {
+        'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "#888" : isActive ? "Pink" : "White", `Icons/Poses/${Name}.png`);': 'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "%disabled" : isActive ? "%accent" : "%background", `Icons/Poses/${Name}.png`);'
+      });
+      patchFunction("ExtendedItemGetButtonColor", {
+        'ButtonColor = "#888888";': 'ButtonColor = "%accent";',
+        'ButtonColor = Hover ? "red" : "pink";': 'ButtonColor = "%blocked";',
+        'ButtonColor = Hover ? "orange" : "#fed8b1";': 'ButtonColor = "%limited";',
+        'ButtonColor = Hover ? "green" : "lime";': 'ButtonColor = "%allowed";',
+        'ButtonColor = "Red";': 'ButtonColor = "%blocked";',
+        'ButtonColor = "Pink";': 'ButtonColor = "%limited";',
+        'ButtonColor = Hover ? "Cyan" : "LightGreen";': 'ButtonColor = "%allowed";',
+        'ButtonColor = Hover ? "Cyan" : "White";': 'ButtonColor = Hover ? "%hover" : "%background";'
+      });
+      patchFunction("PreferenceSubscreenDifficultyRun", {
+        'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "#DDFFDD" : "White", "");': 'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "%accent" : "%background", "");',
+        'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "White" : "#ebebe4", "");': 'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "%background" : "%disabled", "");'
+      });
+      patchFunction("ChatAdminRoomCustomizationRun", {
+        'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());': 'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
+        'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());': 'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());'
+      });
+      patchFunction("Shop2._AssetElementDraw", {
+        'options.Background = "cyan";': 'options.Background = "%hover";',
+        'options.Background = "white";': 'options.Background = "%background";',
+        'options.Background = "gray";': 'options.Background = "%disabled";',
+        'options.Background = "pink";': 'options.Background = "%equipped";'
+      });
+      patchFunction("RelogRun", {
+        'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
       });
       this.patched = true;
     }
@@ -2800,6 +2910,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
       unpatchFuntion("ChatSearchNormalDraw");
       unpatchFuntion("ChatSearchPermissionDraw");
       unpatchFuntion("DialogDraw");
+      unpatchFuntion("DrawProcessScreenFlash");
+      unpatchFuntion("ChatAdminRun");
+      unpatchFuntion("AppearanceRun");
+      unpatchFuntion("DialogDrawExpressionMenu");
+      unpatchFuntion("DialogDrawPoseMenu");
+      unpatchFuntion("ExtendedItemGetButtonColor");
+      unpatchFuntion("PreferenceSubscreenDifficultyRun");
+      unpatchFuntion("ChatAdminRoomCustomizationRun");
+      unpatchFuntion("Shop2._AssetElementDraw");
+      unpatchFuntion("RelogRun");
       this.patched = false;
     }
     toggleGuiPatches() {
