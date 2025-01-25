@@ -54,7 +54,7 @@ export class GuiRedrawModule extends BaseModule {
         'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
       // else
       'bgColor = isFull ? "#666" : "White";':
-        'bgColor = isFull ? "%searchFull" : "White";',
+        'bgColor = isFull ? "%searchFull" : "%background";',
 
       'blocksText.push({ text: friendsText, color: "#FFFF88"});':
         'blocksText.push({ text: friendsText, color: "%friendhint"});',
