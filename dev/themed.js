@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"2481eca1"}` : "1.5.1";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"8b0a024d"}` : "1.5.1";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2842,7 +2842,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         // hasFriends
         'bgColor = isFull ? "#448855" : "#CFFFCF";': 'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
         // else
-        'bgColor = isFull ? "#666" : "White";': 'bgColor = isFull ? "%searchFull" : "White";',
+        'bgColor = isFull ? "#666" : "White";': 'bgColor = isFull ? "%searchFull" : "%background";',
         'blocksText.push({ text: friendsText, color: "#FFFF88"});': 'blocksText.push({ text: friendsText, color: "%friendhint"});',
         'blocksText.push({ text: blockedText, color: "#FF9999" });': 'blocksText.push({ text: blockedText, color: "%searchBlock" });',
         'blocksText.push({ text: gameText, color: "#9999FF"});': 'blocksText.push({ text: gameText, color: "%searchGame"});'
