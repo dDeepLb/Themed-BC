@@ -1,6 +1,6 @@
 import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, plainColors, specialColors } from '../../Utilities/Color';
+import { ColorType, plainColors, specialColors } from '../../Utilities/Color';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
 export function hookDrawRect() {
@@ -10,7 +10,8 @@ export function hookDrawRect() {
     (args: Parameters<typeof DrawRect>, next: (args: Parameters<typeof DrawRect>) => ReturnType<typeof DrawRect>) => {
       if (!doRedraw()) return next(args);
 
-      const [Left, Top, Width, Height, color] = args;
+      const [Left, Top, Width, Height] = args;
+      let color = args[4];
 
       const drawRect = (color: string) => {
         next([Left, Top, Width, Height, color]);
@@ -18,82 +19,94 @@ export function hookDrawRect() {
 
       const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
 
-      if (color?.startsWith('!')) {
-        next([Left, Top, Width, Height, color.substring(1)]);
+      if (color?.startsWith(ColorType.NoDraw)) {
+        return next([Left, Top, Width, Height, color.substring(1)]);
       }
 
-      if (color?.startsWith('%')) {
+      const buttonStates = [ColorType.Hover, ColorType.Disabled, ColorType.Base];
+      let buttonStateSymbol = color[0] as ColorType;
+      if (color?.startsWith(ColorType.FromButton)) {
+        color = color.substring(1);
+        buttonStateSymbol = color[0] as ColorType;
+
+        if (buttonStates.includes(buttonStateSymbol)) {
+          color = color.substring(1);
+        }
+      }
+
+      if (color?.startsWith(ColorType.Custom)) {
         switch (color.substring(1)) {
           case 'disabled':
-            drawRect(plainColors.elementDisabled);
+            color = hover ? Color(plainColors.elementDisabled).lighten(0.2).hex()
+              : plainColors.elementDisabled;
             break;
 
           case 'hover':
-            drawRect(plainColors.elementHover);
+            color = plainColors.elementHover;
             break;
 
           case 'background':
-            drawRect(plainColors.element);
+            color = hover ? plainColors.elementHover
+              : plainColors.element;
             break;
 
           case 'accent':
-            drawRect(plainColors.accent);
+            color = hover ? plainColors.accentHover
+              : plainColors.accent;
             break;
 
           case 'friendhint':
-            drawRect(plainColors.elementHint);
+            color = plainColors.elementHint;
             break;
 
           case 'searchFullBlock':
-            drawRect(Color(specialColors.blocked[hover]).mix(Color(specialColors.roomBlocked[hover]), 0.5).hex());
+            color = Color(specialColors.blocked[hover]).mix(Color(specialColors.roomBlocked[hover]), 0.5).hex();
             break;
 
           case 'searchBlock':
-            drawRect(specialColors.roomBlocked[hover]);
+            color = specialColors.roomBlocked[hover];
             break;
 
           case 'searchFullFriend':
-            drawRect(Color(specialColors.roomFriend[hover]).mix(Color(plainColors.elementDisabled), 0.5).hex());
+            color = Color(specialColors.roomFriend[hover]).mix(Color(plainColors.elementDisabled), 0.5).hex();
             break;
 
           case 'searchFriend':
-            drawRect(specialColors.roomFriend[hover]);
+            color = specialColors.roomFriend[hover];
             break;
 
           case 'searchFull':
-            drawRect(plainColors.elementDisabled);
+            color = plainColors.elementDisabled;
             break;
 
           case 'searchGame':
-            drawRect(specialColors.roomGame[hover]);
+            color = specialColors.roomGame[hover];
             break;
 
           case 'allowed':
-            drawRect(specialColors.allowed[hover]);
-            break;
-
           case 'equipped':
-            drawRect(specialColors.equipped[hover]);
-            break;
-
           case 'crafted':
-            drawRect(specialColors.crafted[hover]);
-            break;
-
           case 'limited':
-            drawRect(specialColors.limited[hover]);
-            break;
-
           case 'blocked':
-            drawRect(specialColors.blocked[hover]);
+            color = specialColors[color.substring(1)][hover];
             break;
 
           default:
-            next(args);
+            return next(args);
             break;
         }
       } else {
-        switch (_Color.getHexComputed(color).toLowerCase()) {
+        let parsedColor: string | null = null;
+        try {
+          if ((color[0] === '#' && color.length === 9) || color.startsWith('rgba'))
+            parsedColor = Color(color.toLowerCase()).hexa().toLowerCase();
+          else
+            parsedColor = Color(color.toLowerCase()).hex().toLowerCase();
+        } catch (e) {
+          parsedColor = null;
+          return next(args);
+        }
+        switch (parsedColor) {
           case '#eeeeee':
           case '#dddddd':
           case '#cccccc':
@@ -102,14 +115,49 @@ export function hookDrawRect() {
           case '#ffffff88':
           case '#ffffffcc':
           case '#d7f6e9': // LSCG Version Tooltip
-            drawRect(plainColors.element);
+          case '#808080':
+            color = plainColors.element;
+            break;
+
+          case '#00ffff':
+            color = plainColors.elementHover;
+            break;
+
+          case '#ffc0cb':
+          case '#ddffdd':
+            color = plainColors.accent;
+            break;
+
+          case '#888888':
+          case '#ebebe4':
+            color = plainColors.elementDisabled;
             break;
 
           default:
-            next(args);
-            break;
+          // fallthrough
         }
       }
+
+      if (buttonStates.includes(buttonStateSymbol)) {
+        let parsedColor: Color | null = null;
+        try {
+          parsedColor = Color(color.toLowerCase());
+        } catch (e) {
+          parsedColor = null;
+        }
+
+        if (parsedColor !== null) {
+          if (buttonStateSymbol === ColorType.Hover) {
+            color = parsedColor.lighten(0.2).hex();
+          } else if (buttonStateSymbol === ColorType.Disabled) {
+            color = parsedColor.darken(0.2).hex();
+          }
+
+          return drawRect(color);
+        }
+      }
+
+      drawRect(color);
     },
     ModuleCategory.GuiRedraw
   );

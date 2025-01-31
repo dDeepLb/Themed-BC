@@ -209,6 +209,7 @@ export class GuiRedrawModule extends BaseModule {
     unpatchFuntion('ChatAdminRoomCustomizationRun');
     unpatchFuntion('Shop2._AssetElementDraw');
     unpatchFuntion('RelogRun');
+    unpatchFuntion('ChatRoomMenuDraw');
 
     this.patched = false;
   }
