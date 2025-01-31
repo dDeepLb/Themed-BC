@@ -183,6 +183,13 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
     });
 
+    patchFunction('ChatRoomMenuDraw', {
+      'let color = "White";': 'let color = "%background";',
+      'color = "Pink";': 'color = "%blocked";',
+      'color = "Yellow";': 'color = "%limited";',
+      'color = ChatRoomGetUpTimer === 0 ? "Yellow" : "Pink";': 'color = ChatRoomGetUpTimer === 0 ? "%limited" : "%blocked";',
+    });
+
     this.patched = true;
   }
 
