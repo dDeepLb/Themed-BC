@@ -185,9 +185,11 @@ export class GuiRedrawModule extends BaseModule {
 
     patchFunction('ChatRoomMenuDraw', {
       'let color = "White";': 'let color = "%background";',
+      'color = "White";': 'color = "%background";',
       'color = "Pink";': 'color = "%blocked";',
       'color = "Yellow";': 'color = "%limited";',
       'color = ChatRoomGetUpTimer === 0 ? "Yellow" : "Pink";': 'color = ChatRoomGetUpTimer === 0 ? "%limited" : "%blocked";',
+      'color = Player.IsSlow() ? "Yellow" : "White";': 'color = Player.IsSlow() ? "%limited" : "%background";',
     });
 
     this.patched = true;
