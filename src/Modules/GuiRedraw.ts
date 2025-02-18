@@ -90,17 +90,10 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
     });
 
-    if (GameVersion === 'R113') {
-      patchFunction('ChatAdminRun', {
-        'const ButtonBackground = canEdit ? "White" : "#ebebe4";':
-          'const ButtonBackground = canEdit ? "%background" : "%disabled";'
-      });
-    } else if (GameVersion === 'R112') {
-      patchFunction('ChatAdminRun', {
-        'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4";':
-          'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "%background" : "%disabled";'
-      });
-    }
+    patchFunction('ChatAdminRun', {
+      'const ButtonBackground = canEdit ? "White" : "#ebebe4";':
+        'const ButtonBackground = canEdit ? "%background" : "%disabled";'
+    });
 
     patchFunction('AppearanceRun', {
       'const ButtonColor = canAccess ? "White" : "#888";':
