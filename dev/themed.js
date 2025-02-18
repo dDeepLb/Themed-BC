@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"7f0bef6c"}` : "1.5.1";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.2"} - ${"8e432c72"}` : "1.5.2";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -4595,7 +4595,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.1";
+        Player[ModName].Version = "1.5.2";
       }
     }
     static loadVersion() {
@@ -4606,7 +4606,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.1")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.2")) {
         _VersionModule.isItNewVersion = true;
       }
     }
