@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.2"} - ${"8e432c72"}` : "1.5.2";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.2"} - ${"e96e2419"}` : "1.5.2";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2528,6 +2528,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "accent":
               color = hover ? plainColors.accentHover : plainColors.accent;
               break;
+            case "accent":
+              drawRect2(plainColors.accent);
+              break;
             case "friendhint":
               color = plainColors.elementHint;
               break;
@@ -2555,6 +2558,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "limited":
             case "blocked":
               color = specialColors[color.substring(1)][hover];
+              break;
+            case "equipped":
+              drawRect2(specialColors.equipped[hover]);
+              break;
+            case "crafted":
+              drawRect2(specialColors.crafted[hover]);
+              break;
+            case "limited":
+              drawRect2(specialColors.limited[hover]);
+              break;
+            case "blocked":
+              drawRect2(specialColors.blocked[hover]);
               break;
             default:
               return next(args);
