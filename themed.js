@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.1"} - ${"89a17721"}` : "1.5.1";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.2"} - ${"feaa0469"}` : "1.5.2";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2286,52 +2286,30 @@ One of mods you are using is using an old version of SDK. It will work for now b
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [x, y, width, height, label, color, image, hoveringText, isDisabled] = args;
+        const [x, y, width, height, label, , image, hoveringText, isDisabled] = args;
+        let color = args[5];
         const isHovering = MouseHovering(x, y, width, height);
+        const buttonStateSymbol = (() => {
+          if (isDisabled) return "=" /* Disabled */;
+          if (isHovering) return "-" /* Hover */;
+          return "~" /* Base */;
+        })();
+        color = "@" /* FromButton */ + buttonStateSymbol + color;
         ControllerAddActiveArea(x, y);
-        let parsedColor = color;
-        try {
-          parsedColor = _Color.getHexComputed(color);
-        } catch (e) {
-          parsedColor = color;
-        }
-        switch (parsedColor.toLowerCase()) {
-          case "#ffffff":
-          case "#dddddd":
-          case "#eeeeee":
-          case "#808080":
-            drawButtonRect(
-              x,
-              y,
-              width,
-              height,
-              plainColors.element,
-              plainColors.elementHover,
-              plainColors.elementDisabled,
-              plainColors.accent,
-              plainColors.accentHover,
-              plainColors.accentDisabled,
-              isHovering,
-              isDisabled
-            );
-            break;
-          default:
-            drawButtonRect(
-              x,
-              y,
-              width,
-              height,
-              color,
-              color,
-              color,
-              plainColors.accent,
-              plainColors.accentHover,
-              plainColors.accentDisabled,
-              isHovering,
-              isDisabled
-            );
-            break;
-        }
+        drawButtonRect(
+          x,
+          y,
+          width,
+          height,
+          color,
+          color,
+          color,
+          "%border",
+          "%hover",
+          "%disabled",
+          isHovering,
+          isDisabled
+        );
         DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, plainColors.text);
         if (image != null && image != "") {
           DrawImage(image, x + 2, y + 2);
@@ -2403,10 +2381,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
           MainCanvas.strokeStyle = color;
           MainCanvas.stroke();
         }, "drawEmptyRect");
-        if (Color7?.startsWith("%")) {
+        if (Color7?.startsWith("%" /* Custom */)) {
           switch (Color7.substring(1).toLowerCase()) {
             case "border":
               drawEmptyRect(plainColors.accent);
+              break;
+            case "hover":
+              drawEmptyRect(plainColors.accentHover);
+              break;
+            case "disabled":
+              drawEmptyRect(plainColors.accentDisabled);
               break;
             default:
               next(args);
@@ -2512,51 +2496,68 @@ One of mods you are using is using an old version of SDK. It will work for now b
       0 /* Observe */,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [Left, Top, Width, Height, color] = args;
+        const [Left, Top, Width, Height] = args;
+        let color = args[4];
         const drawRect2 = /* @__PURE__ */ __name((color2) => {
           next([Left, Top, Width, Height, color2]);
         }, "drawRect");
         const hover = MouseIn(Left, Top, Width, Height) ? 1 : 0;
-        if (color?.startsWith("!")) {
-          next([Left, Top, Width, Height, color.substring(1)]);
+        if (color?.startsWith("!" /* NoDraw */)) {
+          return next([Left, Top, Width, Height, color.substring(1)]);
         }
-        if (color?.startsWith("%")) {
+        const buttonStates = ["-" /* Hover */, "=" /* Disabled */, "~" /* Base */];
+        let buttonStateSymbol = color[0];
+        if (color?.startsWith("@" /* FromButton */)) {
+          color = color.substring(1);
+          buttonStateSymbol = color[0];
+          if (buttonStates.includes(buttonStateSymbol)) {
+            color = color.substring(1);
+          }
+        }
+        if (color?.startsWith("%" /* Custom */)) {
           switch (color.substring(1)) {
             case "disabled":
-              drawRect2(plainColors.elementDisabled);
+              color = hover ? (0, import_color2.default)(plainColors.elementDisabled).lighten(0.2).hex() : plainColors.elementDisabled;
               break;
             case "hover":
-              drawRect2(plainColors.elementHover);
+              color = plainColors.elementHover;
               break;
             case "background":
-              drawRect2(plainColors.element);
+              color = hover ? plainColors.elementHover : plainColors.element;
+              break;
+            case "accent":
+              color = hover ? plainColors.accentHover : plainColors.accent;
               break;
             case "accent":
               drawRect2(plainColors.accent);
               break;
             case "friendhint":
-              drawRect2(plainColors.elementHint);
+              color = plainColors.elementHint;
               break;
             case "searchFullBlock":
-              drawRect2((0, import_color2.default)(specialColors.blocked[hover]).mix((0, import_color2.default)(specialColors.roomBlocked[hover]), 0.5).hex());
+              color = (0, import_color2.default)(specialColors.blocked[hover]).mix((0, import_color2.default)(specialColors.roomBlocked[hover]), 0.5).hex();
               break;
             case "searchBlock":
-              drawRect2(specialColors.roomBlocked[hover]);
+              color = specialColors.roomBlocked[hover];
               break;
             case "searchFullFriend":
-              drawRect2((0, import_color2.default)(specialColors.roomFriend[hover]).mix((0, import_color2.default)(plainColors.elementDisabled), 0.5).hex());
+              color = (0, import_color2.default)(specialColors.roomFriend[hover]).mix((0, import_color2.default)(plainColors.elementDisabled), 0.5).hex();
               break;
             case "searchFriend":
-              drawRect2(specialColors.roomFriend[hover]);
+              color = specialColors.roomFriend[hover];
               break;
             case "searchFull":
-              drawRect2(plainColors.elementDisabled);
+              color = plainColors.elementDisabled;
               break;
             case "searchGame":
-              drawRect2(specialColors.roomGame[hover]);
+              color = specialColors.roomGame[hover];
               break;
             case "allowed":
-              drawRect2(specialColors.allowed[hover]);
+            case "equipped":
+            case "crafted":
+            case "limited":
+            case "blocked":
+              color = specialColors[color.substring(1)][hover];
               break;
             case "equipped":
               drawRect2(specialColors.equipped[hover]);
@@ -2571,11 +2572,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
               drawRect2(specialColors.blocked[hover]);
               break;
             default:
-              next(args);
+              return next(args);
               break;
           }
         } else {
-          switch (_Color.getHexComputed(color).toLowerCase()) {
+          let parsedColor = null;
+          try {
+            if (color[0] === "#" && color.length === 9 || color.startsWith("rgba"))
+              parsedColor = (0, import_color2.default)(color.toLowerCase()).hexa().toLowerCase();
+            else
+              parsedColor = (0, import_color2.default)(color.toLowerCase()).hex().toLowerCase();
+          } catch (e) {
+            parsedColor = null;
+            return next(args);
+          }
+          switch (parsedColor) {
             case "#eeeeee":
             case "#dddddd":
             case "#cccccc":
@@ -2584,13 +2595,40 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "#ffffff88":
             case "#ffffffcc":
             case "#d7f6e9":
-              drawRect2(plainColors.element);
+            case "#808080":
+              color = plainColors.element;
+              break;
+            case "#00ffff":
+              color = plainColors.elementHover;
+              break;
+            case "#ffc0cb":
+            case "#ddffdd":
+              color = plainColors.accent;
+              break;
+            case "#888888":
+            case "#ebebe4":
+              color = plainColors.elementDisabled;
               break;
             default:
-              next(args);
-              break;
           }
         }
+        if (buttonStates.includes(buttonStateSymbol)) {
+          let parsedColor = null;
+          try {
+            parsedColor = (0, import_color2.default)(color.toLowerCase());
+          } catch (e) {
+            parsedColor = null;
+          }
+          if (parsedColor !== null) {
+            if (buttonStateSymbol === "-" /* Hover */) {
+              color = parsedColor.lighten(0.2).hex();
+            } else if (buttonStateSymbol === "=" /* Disabled */) {
+              color = parsedColor.darken(0.2).hex();
+            }
+            return drawRect2(color);
+          }
+        }
+        drawRect2(color);
       },
       3 /* GuiRedraw */
     );
@@ -2859,15 +2897,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
-      if (GameVersion === "R113") {
-        patchFunction("ChatAdminRun", {
-          'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
-        });
-      } else if (GameVersion === "R112") {
-        patchFunction("ChatAdminRun", {
-          'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4";': 'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "%background" : "%disabled";'
-        });
-      }
+      patchFunction("ChatAdminRun", {
+        'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
+      });
       patchFunction("AppearanceRun", {
         'const ButtonColor = canAccess ? "White" : "#888";': 'const ButtonColor = canAccess ? "%background" : "%disabled";',
         'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);': 'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
@@ -2912,6 +2944,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
+      patchFunction("ChatRoomMenuDraw", {
+        'let color = "White";': 'let color = "%background";',
+        'color = "White";': 'color = "%background";',
+        'color = "Pink";': 'color = "%blocked";',
+        'color = "Yellow";': 'color = "%limited";',
+        'color = ChatRoomGetUpTimer === 0 ? "Yellow" : "Pink";': 'color = ChatRoomGetUpTimer === 0 ? "%limited" : "%blocked";',
+        'color = Player.IsSlow() ? "Yellow" : "White";': 'color = Player.IsSlow() ? "%limited" : "%background";'
+      });
       this.patched = true;
     }
     unpatchGui() {
@@ -2929,6 +2969,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       unpatchFuntion("ChatAdminRoomCustomizationRun");
       unpatchFuntion("Shop2._AssetElementDraw");
       unpatchFuntion("RelogRun");
+      unpatchFuntion("ChatRoomMenuDraw");
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -3914,14 +3955,105 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Modules/Commands.ts
   init_define_LAST_COMMIT_HASH();
+
+  // src/Utilities/Other.ts
+  init_define_LAST_COMMIT_HASH();
+  function sendLocalSmart(id, message, timeoutInSeconds) {
+    const div = document.createElement("div");
+    div.id = id;
+    div.setAttribute("class", "ChatMessage ThemedMessage");
+    div.setAttribute("data-time", ChatRoomCurrentTime());
+    div.setAttribute("data-sender", Player?.MemberNumber + "");
+    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
+    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
+    ChatRoomAppendChat(div);
+    if (!timeoutInSeconds) return;
+    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
+  }
+  __name(sendLocalSmart, "sendLocalSmart");
+  function sendAction(msg, target) {
+    ServerSend("ChatRoomChat", {
+      Content: "Beep",
+      Type: "Action",
+      Sender: Player.MemberNumber,
+      ...target ? { Target: target } : {},
+      Dictionary: [
+        // EN
+        { Tag: "Beep", Text: "msg" },
+        // CN
+        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
+        // DE
+        { Tag: "Biep", Text: "msg" },
+        // FR
+        { Tag: "Sonner", Text: "msg" },
+        // Message itself
+        { Tag: "msg", Text: msg }
+      ]
+    });
+  }
+  __name(sendAction, "sendAction");
+  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
+    if (document.getElementById("themed-modal")) return false;
+    const modal = document.createElement("div");
+    const modalTitle = document.createElement("div");
+    const modalButtons = document.createElement("div");
+    const modalAcceptButton = document.createElement("div");
+    const modalCancelButton = document.createElement("div");
+    modal.classList.add("themed-modal");
+    modalTitle.id = "modal-prompt";
+    modalButtons.id = "modal-buttons";
+    modalAcceptButton.id = "modal-button-accept";
+    modalCancelButton.id = "modal-button-cancel";
+    modalAcceptButton.classList.add("modal-button");
+    modalCancelButton.classList.add("modal-button");
+    modalTitle.innerHTML = prompt2;
+    modalAcceptButton.innerText = getText("modal.button.accept");
+    modalCancelButton.innerText = getText("modal.button.cancel");
+    modalAcceptButton.addEventListener("click", () => {
+      acceptCallbackFn();
+      modal.remove();
+    });
+    modalCancelButton.addEventListener("click", () => {
+      cancelCallbackFn();
+      modal.remove();
+    });
+    modalButtons.append(modalAcceptButton, modalCancelButton);
+    modal.append(modalTitle, modalButtons);
+    document.body.append(modal);
+  }
+  __name(useLgcModal, "useLgcModal");
+  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
+    const mergedObject = { ...mergeTo };
+    for (const key in mergeFrom) {
+      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
+        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      } else if (key in mergedObject) {
+        mergedObject[key] = mergeFrom[key];
+      }
+    }
+    return mergedObject;
+  }
+  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  function hasSetter(obj, prop) {
+    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
+  }
+  __name(hasSetter, "hasSetter");
+
+  // src/Modules/Commands.ts
   var _CommandsModule = class _CommandsModule extends BaseModule {
     Load() {
       CommandCombine([
         {
           Tag: "share-theme",
-          Description: ": Shares your theme with other people that have Themed installed!",
-          Action() {
-            getModule("ShareModule").share();
+          Description: "[member number]: Shares your theme with other people that have Themed installed!",
+          Action(args) {
+            if (!args) return getModule("ShareModule").share(null);
+            const targetNumber = parseInt(args, 10);
+            const target = ChatRoomCharacter.find((c) => c.MemberNumber == targetNumber);
+            if (!target)
+              sendLocalSmart("theme-share-error", `No character with MemberNumber ${targetNumber} found!`);
+            else
+              getModule("ShareModule").share(target.MemberNumber);
           }
         }
       ]);
@@ -4337,87 +4469,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_GuiProfiles, "GuiProfiles");
   var GuiProfiles = _GuiProfiles;
 
-  // src/Utilities/Other.ts
-  init_define_LAST_COMMIT_HASH();
-  function sendLocalSmart(id, message, timeoutInSeconds) {
-    const div = document.createElement("div");
-    div.id = id;
-    div.setAttribute("class", "ChatMessage ThemedMessage");
-    div.setAttribute("data-time", ChatRoomCurrentTime());
-    div.setAttribute("data-sender", Player?.MemberNumber + "");
-    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
-    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
-    ChatRoomAppendChat(div);
-    if (!timeoutInSeconds) return;
-    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
-  }
-  __name(sendLocalSmart, "sendLocalSmart");
-  function sendAction(msg) {
-    ServerSend("ChatRoomChat", {
-      Content: "Beep",
-      Type: "Action",
-      Dictionary: [
-        // EN
-        { Tag: "Beep", Text: "msg" },
-        // CN
-        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
-        // DE
-        { Tag: "Biep", Text: "msg" },
-        // FR
-        { Tag: "Sonner", Text: "msg" },
-        // Message itself
-        { Tag: "msg", Text: msg }
-      ]
-    });
-  }
-  __name(sendAction, "sendAction");
-  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
-    if (document.getElementById("themed-modal")) return false;
-    const modal = document.createElement("div");
-    const modalTitle = document.createElement("div");
-    const modalButtons = document.createElement("div");
-    const modalAcceptButton = document.createElement("div");
-    const modalCancelButton = document.createElement("div");
-    modal.classList.add("themed-modal");
-    modalTitle.id = "modal-prompt";
-    modalButtons.id = "modal-buttons";
-    modalAcceptButton.id = "modal-button-accept";
-    modalCancelButton.id = "modal-button-cancel";
-    modalAcceptButton.classList.add("modal-button");
-    modalCancelButton.classList.add("modal-button");
-    modalTitle.innerHTML = prompt2;
-    modalAcceptButton.innerText = getText("modal.button.accept");
-    modalCancelButton.innerText = getText("modal.button.cancel");
-    modalAcceptButton.addEventListener("click", () => {
-      acceptCallbackFn();
-      modal.remove();
-    });
-    modalCancelButton.addEventListener("click", () => {
-      cancelCallbackFn();
-      modal.remove();
-    });
-    modalButtons.append(modalAcceptButton, modalCancelButton);
-    modal.append(modalTitle, modalButtons);
-    document.body.append(modal);
-  }
-  __name(useLgcModal, "useLgcModal");
-  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = { ...mergeTo };
-    for (const key in mergeFrom) {
-      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
-        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
-      } else if (key in mergedObject) {
-        mergedObject[key] = mergeFrom[key];
-      }
-    }
-    return mergedObject;
-  }
-  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  function hasSetter(obj, prop) {
-    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
-  }
-  __name(hasSetter, "hasSetter");
-
   // src/Modules/Profiles.ts
   var _ProfilesModule = class _ProfilesModule extends BaseModule {
     get settings() {
@@ -4474,6 +4525,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         const messageData = data.Dictionary[0]["ThemedMessage"];
         const theme = messageData.Theme;
         const version = messageData.ThemeVersion;
+        const settings = Player.Themed.GlobalModule;
         button.addEventListener("click", () => {
           if (!version || version !== Player.Themed.Version) {
             sendLocalSmart("theme-not-up-to-date", "Theme sent by " + senderName + " is not up-to-date!");
@@ -4482,7 +4534,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           useLgcModal(
             prompt2,
             () => {
-              this.acceptShare(theme);
+              this.acceptShare(theme, settings);
             },
             () => {
             }
@@ -4493,18 +4545,27 @@ One of mods you are using is using an old version of SDK. It will work for now b
         ElementScrollToEnd("TextAreaChatLog");
       });
     }
-    acceptShare(data) {
+    acceptShare(data, settings) {
       Player.Themed.ColorsModule = data;
+      Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
       settingsSave();
       getModule("ColorsModule").reloadTheme();
     }
-    share() {
-      sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`);
+    share(target) {
+      sendLocalSmart("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
+      sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`, target);
       const packet = {
         Type: "Hidden",
         Content: "ThemedTheme",
         Sender: Player.MemberNumber,
-        Dictionary: [{ ThemedMessage: { ThemeVersion: Player.Themed.Version, Theme: Player.Themed.ColorsModule } }]
+        ...target ? { Target: target } : {},
+        Dictionary: [{
+          ThemedMessage: {
+            ThemeVersion: Player.Themed.Version,
+            Theme: Player.Themed.ColorsModule,
+            Settings: Player.Themed.GlobalModule
+          }
+        }]
       };
       ServerSend("ChatRoomChat", packet);
     }
@@ -4549,7 +4610,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.1";
+        Player[ModName].Version = "1.5.2";
       }
     }
     static loadVersion() {
@@ -4560,7 +4621,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.1")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.2")) {
         _VersionModule.isItNewVersion = true;
       }
     }
