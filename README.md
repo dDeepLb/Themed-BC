@@ -79,5 +79,4 @@
     
 </details>
 
-> [!NOTE]
-> You can support me on [Ko-fi](https://ko-fi.com/monikka_bc) and [Patreon](https://patreon.com/monikka_bc)
+> Huge thanks to Ellena, weboos and Jamie for support!
