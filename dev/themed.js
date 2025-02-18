@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"fff1e275"}` : "1.5.1";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"fd3a4dc9"}` : "1.5.1";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2937,9 +2937,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       });
       patchFunction("ChatRoomMenuDraw", {
         'let color = "White";': 'let color = "%background";',
+        'color = "White";': 'color = "%background";',
         'color = "Pink";': 'color = "%blocked";',
         'color = "Yellow";': 'color = "%limited";',
-        'color = ChatRoomGetUpTimer === 0 ? "Yellow" : "Pink";': 'color = ChatRoomGetUpTimer === 0 ? "%limited" : "%blocked";'
+        'color = ChatRoomGetUpTimer === 0 ? "Yellow" : "Pink";': 'color = ChatRoomGetUpTimer === 0 ? "%limited" : "%blocked";',
+        'color = Player.IsSlow() ? "Yellow" : "White";': 'color = Player.IsSlow() ? "%limited" : "%background";'
       });
       this.patched = true;
     }
