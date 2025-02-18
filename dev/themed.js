@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"fd3a4dc9"}` : "1.5.1";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.1"} - ${"7f0bef6c"}` : "1.5.1";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2882,15 +2882,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
-      if (GameVersion === "R113") {
-        patchFunction("ChatAdminRun", {
-          'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
-        });
-      } else if (GameVersion === "R112") {
-        patchFunction("ChatAdminRun", {
-          'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4";': 'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "%background" : "%disabled";'
-        });
-      }
+      patchFunction("ChatAdminRun", {
+        'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
+      });
       patchFunction("AppearanceRun", {
         'const ButtonColor = canAccess ? "White" : "#888";': 'const ButtonColor = canAccess ? "%background" : "%disabled";',
         'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);': 'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
