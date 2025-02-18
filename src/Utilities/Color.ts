@@ -25,6 +25,16 @@ export const specialColors = {
   roomGame: ['', ''],
 };
 
+export enum ColorType {
+  Base = '~',
+  Hover = '-',
+  Disabled = '=',
+  Active = '+',
+  NoDraw = '!',
+  Custom = '%',
+  FromButton = '@',
+}
+
 export const _Color = {
   getComputed: CommonMemoize((color: string): string => {
     const div = document.createElement('div');

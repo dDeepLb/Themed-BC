@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, plainColors } from '../../Utilities/Color';
+import { ColorType, plainColors } from '../../Utilities/Color';
 import { drawButtonRect } from '../../Utilities/Drawing';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
@@ -10,56 +10,33 @@ export function hookDrawButton() {
     (args: Parameters<typeof DrawButton>, next: (args: Parameters<typeof DrawButton>) => ReturnType<typeof DrawButton>) => {
       if (!doRedraw()) return next(args);
 
-      const [x, y, width, height, label, color, image, hoveringText, isDisabled] = args;
+      const [x, y, width, height, label, , image, hoveringText, isDisabled] = args;
+      let color = args[5];
       const isHovering = MouseHovering(x, y, width, height);
+
+      const buttonStateSymbol = (() => {
+        if (isDisabled) return ColorType.Disabled;
+        if (isHovering) return ColorType.Hover;
+        return ColorType.Base;
+      })();
+      color = ColorType.FromButton + buttonStateSymbol + color;
 
       ControllerAddActiveArea(x, y);
 
-      let parsedColor = color;
-      try {
-        parsedColor = _Color.getHexComputed(color);
-      } catch (e) {
-        parsedColor = color;
-      }
-
-      switch (parsedColor.toLowerCase()) {
-        case '#ffffff':
-        case '#dddddd':
-        case '#eeeeee':
-        case '#808080':
-          drawButtonRect(
-            x,
-            y,
-            width,
-            height,
-            plainColors.element,
-            plainColors.elementHover,
-            plainColors.elementDisabled,
-            plainColors.accent,
-            plainColors.accentHover,
-            plainColors.accentDisabled,
-            isHovering,
-            isDisabled
-          );
-          break;
-
-        default:
-          drawButtonRect(
-            x,
-            y,
-            width,
-            height,
-            color,
-            color,
-            color,
-            plainColors.accent,
-            plainColors.accentHover,
-            plainColors.accentDisabled,
-            isHovering,
-            isDisabled
-          );
-          break;
-      }
+      drawButtonRect(
+        x,
+        y,
+        width,
+        height,
+        color,
+        color,
+        color,
+        '%border',
+        '%hover',
+        '%disabled',
+        isHovering,
+        isDisabled
+      );
 
       DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, plainColors.text);
 

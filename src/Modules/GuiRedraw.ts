@@ -90,17 +90,10 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
     });
 
-    if (GameVersion === 'R113') {
-      patchFunction('ChatAdminRun', {
-        'const ButtonBackground = canEdit ? "White" : "#ebebe4";':
-          'const ButtonBackground = canEdit ? "%background" : "%disabled";'
-      });
-    } else if (GameVersion === 'R112') {
-      patchFunction('ChatAdminRun', {
-        'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4";':
-          'const ButtonBackground = ChatRoomPlayerIsAdmin() ? "%background" : "%disabled";'
-      });
-    }
+    patchFunction('ChatAdminRun', {
+      'const ButtonBackground = canEdit ? "White" : "#ebebe4";':
+        'const ButtonBackground = canEdit ? "%background" : "%disabled";'
+    });
 
     patchFunction('AppearanceRun', {
       'const ButtonColor = canAccess ? "White" : "#888";':
@@ -183,6 +176,15 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
     });
 
+    patchFunction('ChatRoomMenuDraw', {
+      'let color = "White";': 'let color = "%background";',
+      'color = "White";': 'color = "%background";',
+      'color = "Pink";': 'color = "%blocked";',
+      'color = "Yellow";': 'color = "%limited";',
+      'color = ChatRoomGetUpTimer === 0 ? "Yellow" : "Pink";': 'color = ChatRoomGetUpTimer === 0 ? "%limited" : "%blocked";',
+      'color = Player.IsSlow() ? "Yellow" : "White";': 'color = Player.IsSlow() ? "%limited" : "%background";',
+    });
+
     this.patched = true;
   }
 
@@ -202,6 +204,7 @@ export class GuiRedrawModule extends BaseModule {
     unpatchFuntion('ChatAdminRoomCustomizationRun');
     unpatchFuntion('Shop2._AssetElementDraw');
     unpatchFuntion('RelogRun');
+    unpatchFuntion('ChatRoomMenuDraw');
 
     this.patched = false;
   }

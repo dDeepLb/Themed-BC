@@ -16,10 +16,12 @@ export function sendLocalSmart(id: string, message: string, timeoutInSeconds?: n
   setTimeout(() => div?.remove(), timeoutInSeconds * 1000);
 }
 
-export function sendAction(msg: string) {
+export function sendAction(msg: string, target?: number) {
   ServerSend('ChatRoomChat', {
     Content: 'Beep',
     Type: 'Action',
+    Sender: Player.MemberNumber,
+    ...(target ? { Target: target } : {}),
     Dictionary: [
       // EN
       { Tag: 'Beep', Text: 'msg' },

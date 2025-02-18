@@ -10,11 +10,3 @@ interface OtherCharacter extends Character {
 interface ExtensionSettings {
   Themed: string;
 }
-
-type ThemedMessageDictionaryEntry = {
-  ThemedMessage: ThemedMessageModel;
-};
-
-interface ThemedMessageModel {
-  Theme: object;
-}

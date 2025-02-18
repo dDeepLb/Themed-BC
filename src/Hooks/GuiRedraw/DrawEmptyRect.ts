@@ -1,5 +1,5 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { _Color, plainColors } from '../../Utilities/Color';
+import { _Color, ColorType, plainColors } from '../../Utilities/Color';
 import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
 
 export function hookDrawEmptyRect() {
@@ -19,10 +19,18 @@ export function hookDrawEmptyRect() {
         MainCanvas.stroke();
       };
 
-      if (Color?.startsWith('%')) {
+      if (Color?.startsWith(ColorType.Custom)) {
         switch (Color.substring(1).toLowerCase()) {
           case 'border':
             drawEmptyRect(plainColors.accent);
+            break;
+
+          case 'hover':
+            drawEmptyRect(plainColors.accentHover);
+            break;
+
+          case 'disabled':
+            drawEmptyRect(plainColors.accentDisabled);
             break;
 
           default:
