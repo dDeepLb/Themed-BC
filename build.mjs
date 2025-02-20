@@ -59,15 +59,7 @@ import packageJson from './package.json' assert { type: 'json' };
     ],
   };
 
-  if (isRemote) {
-    await build(buildOptions)
-      .catch((err) => {
-        console.error(err);
-        process.exit(1);
-      });
-
-    return;
-  } else if (isLocal) {
+  if (isLocal && process.argv.includes('--dev')) {
     const ctx = await context(buildOptions);
 
     await ctx.watch();
@@ -78,6 +70,10 @@ import packageJson from './package.json' assert { type: 'json' };
 
     return;
   }
-
-  throw new Error('Unknown environment. Shit happens.');
+  
+  await build(buildOptions)
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
 })();

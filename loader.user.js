@@ -33,7 +33,7 @@
   else if (isLocal) modLink = localPath;
 
   const script = document.createElement('script');
-  script.type = 'module';
+  script.type = 'text/javascript';
   script.setAttribute('crossorigin', 'anonymous');
   script.src = `${modLink}${ending}${isPublic ? '?' + Date.now() : ''}`;
   document.head.appendChild(script);
