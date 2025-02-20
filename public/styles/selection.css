@@ -1,4 +1,4 @@
 ::selection {
-  background-color: var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-accent);
+  color: var(--tmd-text);
 }

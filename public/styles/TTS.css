@@ -1,71 +1,71 @@
 .tts-dialog {
-  background-color: var(--main);
-  border-color: var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-main);
+  border-color: var(--tmd-accent);
+  color: var(--tmd-text);
 }
 
 .tts-option {
-  background-color: var(--element);
-  border-color: var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border-color: var(--tmd-accent);
+  color: var(--tmd-text);
 }
 
 .tts-select {
-  background-color: var(--element);
-  border-color: var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border-color: var(--tmd-accent);
+  color: var(--tmd-text);
 }
 
 .tts-tab {
-  background-color: var(--element);
-  border-color: var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border-color: var(--tmd-accent);
+  color: var(--tmd-text);
 }
 
 .tts-btn {
-  background-color: var(--element);
-  border: 1px solid var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border: 1px solid var(--tmd-accent);
+  color: var(--tmd-text);
 }
 
 .tts-tab.active {
-  background-color: var(--accent);
+  background-color: var(--tmd-accent);
 }
 
 .tts-toggle-container {
-  border-color: var(--accent);
+  border-color: var(--tmd-accent);
 }
 
 .tts-boxed-container {
-  border-color: var(--accent);
+  border-color: var(--tmd-accent);
 }
 
 .tts-link {
-  border-color: var(--accent);
-  background-color: var(--element);
-  color: var(--text);
+  border-color: var(--tmd-accent);
+  background-color: var(--tmd-element);
+  color: var(--tmd-text);
 }
 
 .tts-link:hover {
-  background-color: var(--element);
-  color: var(--accent);
+  background-color: var(--tmd-element);
+  color: var(--tmd-accent);
 }
 
 .mo-modal-content {
-  background-color: var(--main);
-  border: 1px solid var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-main);
+  border: 1px solid var(--tmd-accent);
+  color: var(--tmd-text);
   font-size: min(3dvh, 1.5dvw);
 }
 
 .mo-closer {
-  color: var(--text);
+  color: var(--tmd-text);
   cursor: pointer;
   position: absolute;
   top: 0px;
   right: 0px;
-  background-color: var(--element);
-  border: 2px solid var(--accent);
+  background-color: var(--tmd-element);
+  border: 2px solid var(--tmd-accent);
   aspect-ratio: 1 / 1;
   display: block;
   width: min(3dvh, 1.5dvw);
@@ -78,7 +78,7 @@
 }
 
 label[for^="mo_userInput"] {
-  color: var(--text);
+  color: var(--tmd-text);
   font-size: min(3dvh, 1.5dvw);
 }
 
@@ -87,8 +87,8 @@ input[id^="mo_userInput"] {
 }
 
 button[id^="mo_submitInput"] {
-  background-color: var(--element);
-  border: 2px solid var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border: 2px solid var(--tmd-accent);
+  color: var(--tmd-text);
   font-size: min(3dvh, 1.5dvw);
 }

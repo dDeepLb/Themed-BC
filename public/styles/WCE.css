@@ -1,17 +1,17 @@
 .bce-img {
-  border-color: var(--accent);
+  border-color: var(--tmd-accent);
 }
 
 #bceRichOnlineProfile {
-  background: var(--element) !important;
-  color: var(--text) !important;
-  border: 2px dashed var(--accent) !important;
+  background: var(--tmd-element) !important;
+  color: var(--tmd-text) !important;
+  border: 2px dashed var(--tmd-accent) !important;
 }
 
 .bce-colors .bce-dark-input {
-  background-color: var(--element);
-  border: 1px solid var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border: 1px solid var(--tmd-accent);
+  color: var(--tmd-text);
 }
 
 /* #region IM */
@@ -19,9 +19,9 @@
   top: 0px;
   left: 0px;
   box-sizing: border-box;
-  background-color: var(--main);
-  color: var(--text);
-  border-color: var(--accent);
+  background-color: var(--tmd-main);
+  color: var(--tmd-text);
+  border-color: var(--tmd-accent);
   max-width: max(100dvw, 50dvh);
   max-height: min(90dvh, 45dvw);
   min-width: max(15dvh, 30dvw);
@@ -34,59 +34,59 @@
 }
 
 #bce-friend-search {
-  background-color: var(--element);
-  border-bottom-color: var(--accent);
-  color: var(--text);
+  background-color: var(--tmd-element);
+  border-bottom-color: var(--tmd-accent);
+  color: var(--tmd-text);
   height: min(3dvh, 1.5dvw);
   font-size: min(1.8dvh, 0.9dvw);
 }
 
 .bce-friend-list-entry.bce-friend-list-selected {
-  border-top-color: var(--accent);
-  border-bottom-color: var(--accent);
-  background-color: var(--element);
+  border-top-color: var(--tmd-accent);
+  border-bottom-color: var(--tmd-accent);
+  background-color: var(--tmd-element);
 }
 
 .bce-friend-list-entry:hover {
-  background-color: var(--elementHover);
+  background-color: var(--tmd-elementHover);
 }
 
 #bce-message-right-container {
-  border-left-color: var(--accent);
+  border-left-color: var(--tmd-accent);
 }
 
 #bce-message-input {
-  border-top: 1px solid var(--accent);
-  border-bottom: 1px solid var(--accent);
-  background-color: var(--element);
-  color: var(--text);
+  border-top: 1px solid var(--tmd-accent);
+  border-bottom: 1px solid var(--tmd-accent);
+  background-color: var(--tmd-element);
+  color: var(--tmd-text);
 }
 
 #bce-message-input:disabled {
-  border-top: 1px solid var(--accentDisabled);
-  border-bottom: 1px solid var(--accentDisabled);
-  background-color: var(--elementDisabled);
-  color: var(--text);
+  border-top: 1px solid var(--tmd-accentDisabled);
+  border-bottom: 1px solid var(--tmd-accentDisabled);
+  background-color: var(--tmd-elementDisabled);
+  color: var(--tmd-text);
 }
 
 .bce-message-divider {
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--tmd-accent);
 }
 
 .bce-message-sender {
-  text-shadow: 0.05em 0.05em var(--textShadow);
+  text-shadow: 0.05em 0.05em var(--tmd-textShadow);
 }
 
 .bce-message-Message .bce-message-sender {
-  text-shadow: 0.05em 0.05em var(--textShadow);
+  text-shadow: 0.05em 0.05em var(--tmd-textShadow);
 }
 
 /* #endregion */
 
 #TextAreaChatLog[data-colortheme^="dark"]+#chat-room-bot .wce-chat-room-select {
-  color: var(--text);
-  background-color: var(--element);
-  border-color: var(--accent);
+  color: var(--tmd-text);
+  background-color: var(--tmd-element);
+  border-color: var(--tmd-accent);
 }
 
 #TextAreaChatLog[data-colortheme^="dark"],
@@ -94,7 +94,7 @@
 .bce-message {
   a {
     color: #a9ceff;
-    text-shadow: 0 0 0.05em var(--text);
+    text-shadow: 0 0 0.05em var(--tmd-text);
   }
 
   a:visited {

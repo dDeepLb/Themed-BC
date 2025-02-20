@@ -21,30 +21,30 @@
 }
 
 .dialog-grid-button[data-craft]:not([aria-checked="true"]) {
-  --button-color: var(--crafted);
-  --hover-color: var(--craftedHover);
+  --button-color: var(--tmd-crafted);
+  --hover-color: var(--tmd-crafted-hover);
 }
 
 .dialog-grid-button[data-permission="Block"] {
-  --button-color: var(--blocked);
-  --hover-color: var(--blockedHover);
+  --button-color: var(--tmd-blocked);
+  --hover-color: var(--tmd-blocked-hover);
 }
 
 .dialog-grid-button[data-permission="Limited"] {
-  --button-color: var(--limited);
-  --hover-color: var(--limitedHover);
+  --button-color: var(--tmd-limited);
+  --hover-color: var(--tmd-limited-hover);
 }
 
 .dialog-grid-button[data-permission="Favorite"] {
-  --button-color: var(--allowed);
-  --hover-color: var(--allowedHover);
+  --button-color: var(--tmd-allowed);
+  --hover-color: var(--tmd-allowed-hover);
 }
 
 .dialog-crafted-info {
-  color: var(--text);
+  color: var(--tmd-text);
 }
 
 .dialog-grid-button.button-styling[aria-checked="true"] {
-  --button-color: var(--equipped);
-  --hover-color: var(--equippedHover);
+  --button-color: var(--tmd-equipped);
+  --hover-color: var(--tmd-equipped-hover);
 }

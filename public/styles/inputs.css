@@ -1,13 +1,13 @@
 textarea {
-  background: var(--element);
-  color: var(--text);
-  border: 2px solid var(--accent);
+  background: var(--tmd-element);
+  color: var(--tmd-text);
+  border: 2px solid var(--tmd-accent);
 }
 
 input:not([type="range"]) {
-  background: var(--element);
-  color: var(--text);
-  border: 2px solid var(--accent);
+  background: var(--tmd-element);
+  color: var(--tmd-text);
+  border: 2px solid var(--tmd-accent);
 }
 
 input[type="color"] {
@@ -16,57 +16,57 @@ input[type="color"] {
 
 textarea:focus,
 input:focus {
-  outline: var(--accent) solid 1px;
+  outline: var(--tmd-accent) solid 1px;
 }
 
 .button {
-  --button-color: var(--element);
-  --disabled-color: var(--elementDisabled);
-  --hover-color: var(--elementHover);
+  --button-color: var(--tmd-element);
+  --disabled-color: var(--tmd-element-disabled);
+  --hover-color: var(--tmd-element-hover);
 }
 
 .button-styling {
-  border-color: var(--accent);
+  border-color: var(--tmd-accent);
 }
 
 .button-styling:hover {
-  border-color: var(--accentHover);
+  border-color: var(--tmd-accent-hover);
 }
 
 .button-tooltip {
-  background-color: var(--elementHint);
-  color: var(--text);
-  border-color: var(--accent);
+  background-color: var(--tmd-element-hint);
+  color: var(--tmd-text);
+  border-color: var(--tmd-accent);
 }
 
 .button-styling>.button-label {
-  color: var(--text);
+  color: var(--tmd-text);
 }
 
 input[type="checkbox"] {
-  background-color: var(--element);
-  color: var(--text);
-  border-color: var(--accent);
+  background-color: var(--tmd-element);
+  color: var(--tmd-text);
+  border-color: var(--tmd-accent);
 }
 
 input[type="checkbox"]:hover {
-  background-color: var(--elementHover);
+  background-color: var(--tmd-element-hover);
 }
 
 input[type="checkbox"]:disabled {
-  background-color: var(--elementDisabled);
+  background-color: var(--tmd-element-disabled);
 }
 
 input[type="checkbox"]::before {
-  background-color: var(--accent);
+  background-color: var(--tmd-accent);
 }
 
 input[type=range]::-moz-range-track,
 input[type=range]::-webkit-slider-runnable-track {
-  background-color: var(--element);
+  background-color: var(--tmd-element);
 }
 
 input[type=range]::-moz-range-thumb,
 input[type=range]::-webkit-slider-thumb {
-  background-color: var(--accent);
+  background-color: var(--tmd-accent);
 }
