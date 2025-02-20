@@ -105,3 +105,10 @@ export function hasGetter<T extends object>(obj: T, prop: keyof T) {
 export function hasSetter<T extends object>(obj: T, prop: keyof T) {
   return !!Object.getOwnPropertyDescriptor(obj, prop)?.['set'];
 }
+
+export function camelToKebabCase(str: string) {
+  return str
+    .replace(/([A-Z])/g, '-$1')
+    .toLowerCase()
+    .replace(/^-/, '');
+}

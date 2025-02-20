@@ -1,6 +1,7 @@
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { plainColors, specialColors } from './Color';
 import { PlayerStorage } from './Data';
+import { camelToKebabCase } from './Other';
 
 type styles = {
   [key in keyof Omit<IntegrationSettingsModel, 'themedEnabled' | 'MBS'>]: string;
@@ -96,13 +97,13 @@ export function composeRoot() {
   let genedColors = '';
 
   Object.keys(plainColors).forEach((key) => {
-    genedColors += `--${key}: ${plainColors[key]};\n\t`;
+    genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[key]};\n\t`;
   });
   Object.keys(specialColors).forEach((key) => {
-    genedColors += `--${key}: ${specialColors[key][0]};\n\t`;
-    genedColors += `--${key}Hover: ${specialColors[key][1]};\n\t`;
+    genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[key][0]};\n\t`;
+    genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[key][1]};\n\t`;
   });
-  
+
   return /*css*/ `
     :root {
       ${genedColors}
