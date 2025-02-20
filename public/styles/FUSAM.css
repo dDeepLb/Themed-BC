@@ -1,13 +1,13 @@
 #fusam-addon-manager-container {
-  color: var(--text);
-  background-color: color-mix(in srgb, var(--main) 80%, rgba(0, 0, 0, 0.8) 100%);
+  color: var(--tmd-text);
+  background-color: color-mix(in srgb, var(--tmd-main) 80%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 .fusam.button,
 .fusam .button {
-  border-color: var(--accent);
-  background-color: var(--element);
-  color: var(--text);
+  border-color: var(--tmd-accent);
+  background-color: var(--tmd-element);
+  color: var(--tmd-text);
 }
 
 .fusam.button:hover,
@@ -16,16 +16,16 @@
 .fusam .button:focus,
 .fusam select:hover,
 .fusam select:focus {
-  background-color: var(--accent);
+  background-color: var(--tmd-accent);
 }
 
 .fusam select,
 .fusam option {
-  border-color: var(--accent);
-  background-color: var(--element);
-  color: var(--text);
+  border-color: var(--tmd-accent);
+  background-color: var(--tmd-element);
+  color: var(--tmd-text);
 }
 
 .fusam select:disabled:hover {
-  background-color: var(--elementDisabled);
+  background-color: var(--tmd-element-disabled);
 }

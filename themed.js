@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.2"} - ${"5508635b"}` : "1.5.2";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.2"} - ${"ad9b520b"}` : "1.5.2";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2528,9 +2528,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "accent":
               color = hover ? plainColors.accentHover : plainColors.accent;
               break;
-            case "accent":
-              drawRect2(plainColors.accent);
-              break;
             case "friendhint":
               color = plainColors.elementHint;
               break;
@@ -2559,21 +2556,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "blocked":
               color = specialColors[color.substring(1)][hover];
               break;
-            case "equipped":
-              drawRect2(specialColors.equipped[hover]);
-              break;
-            case "crafted":
-              drawRect2(specialColors.crafted[hover]);
-              break;
-            case "limited":
-              drawRect2(specialColors.limited[hover]);
-              break;
-            case "blocked":
-              drawRect2(specialColors.blocked[hover]);
-              break;
             default:
               return next(args);
-              break;
           }
         } else {
           let parsedColor = null;
@@ -3265,6 +3249,95 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Utilities/Style.ts
   init_define_LAST_COMMIT_HASH();
+
+  // src/Utilities/Other.ts
+  init_define_LAST_COMMIT_HASH();
+  function sendLocalSmart(id, message, timeoutInSeconds) {
+    const div = document.createElement("div");
+    div.id = id;
+    div.setAttribute("class", "ChatMessage ThemedMessage");
+    div.setAttribute("data-time", ChatRoomCurrentTime());
+    div.setAttribute("data-sender", Player?.MemberNumber + "");
+    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
+    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
+    ChatRoomAppendChat(div);
+    if (!timeoutInSeconds) return;
+    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
+  }
+  __name(sendLocalSmart, "sendLocalSmart");
+  function sendAction(msg, target) {
+    ServerSend("ChatRoomChat", {
+      Content: "Beep",
+      Type: "Action",
+      Sender: Player.MemberNumber,
+      ...target ? { Target: target } : {},
+      Dictionary: [
+        // EN
+        { Tag: "Beep", Text: "msg" },
+        // CN
+        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
+        // DE
+        { Tag: "Biep", Text: "msg" },
+        // FR
+        { Tag: "Sonner", Text: "msg" },
+        // Message itself
+        { Tag: "msg", Text: msg }
+      ]
+    });
+  }
+  __name(sendAction, "sendAction");
+  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
+    if (document.getElementById("themed-modal")) return false;
+    const modal = document.createElement("div");
+    const modalTitle = document.createElement("div");
+    const modalButtons = document.createElement("div");
+    const modalAcceptButton = document.createElement("div");
+    const modalCancelButton = document.createElement("div");
+    modal.classList.add("themed-modal");
+    modalTitle.id = "modal-prompt";
+    modalButtons.id = "modal-buttons";
+    modalAcceptButton.id = "modal-button-accept";
+    modalCancelButton.id = "modal-button-cancel";
+    modalAcceptButton.classList.add("modal-button");
+    modalCancelButton.classList.add("modal-button");
+    modalTitle.innerHTML = prompt2;
+    modalAcceptButton.innerText = getText("modal.button.accept");
+    modalCancelButton.innerText = getText("modal.button.cancel");
+    modalAcceptButton.addEventListener("click", () => {
+      acceptCallbackFn();
+      modal.remove();
+    });
+    modalCancelButton.addEventListener("click", () => {
+      cancelCallbackFn();
+      modal.remove();
+    });
+    modalButtons.append(modalAcceptButton, modalCancelButton);
+    modal.append(modalTitle, modalButtons);
+    document.body.append(modal);
+  }
+  __name(useLgcModal, "useLgcModal");
+  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
+    const mergedObject = { ...mergeTo };
+    for (const key in mergeFrom) {
+      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
+        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      } else if (key in mergedObject) {
+        mergedObject[key] = mergeFrom[key];
+      }
+    }
+    return mergedObject;
+  }
+  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  function hasSetter(obj, prop) {
+    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
+  }
+  __name(hasSetter, "hasSetter");
+  function camelToKebabCase(str) {
+    return str.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+  }
+  __name(camelToKebabCase, "camelToKebabCase");
+
+  // src/Utilities/Style.ts
   var styles = {
     inputs: "",
     chat: "",
@@ -3336,13 +3409,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
   function composeRoot() {
     let genedColors = "";
     Object.keys(plainColors).forEach((key) => {
-      genedColors += `--${key}: ${plainColors[key]};
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[key]};
 	`;
     });
     Object.keys(specialColors).forEach((key) => {
-      genedColors += `--${key}: ${specialColors[key][0]};
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[key][0]};
 	`;
-      genedColors += `--${key}Hover: ${specialColors[key][1]};
+      genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[key][1]};
 	`;
     });
     return (
@@ -3854,91 +3927,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Modules/Commands.ts
   init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Other.ts
-  init_define_LAST_COMMIT_HASH();
-  function sendLocalSmart(id, message, timeoutInSeconds) {
-    const div = document.createElement("div");
-    div.id = id;
-    div.setAttribute("class", "ChatMessage ThemedMessage");
-    div.setAttribute("data-time", ChatRoomCurrentTime());
-    div.setAttribute("data-sender", Player?.MemberNumber + "");
-    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
-    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
-    ChatRoomAppendChat(div);
-    if (!timeoutInSeconds) return;
-    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
-  }
-  __name(sendLocalSmart, "sendLocalSmart");
-  function sendAction(msg, target) {
-    ServerSend("ChatRoomChat", {
-      Content: "Beep",
-      Type: "Action",
-      Sender: Player.MemberNumber,
-      ...target ? { Target: target } : {},
-      Dictionary: [
-        // EN
-        { Tag: "Beep", Text: "msg" },
-        // CN
-        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
-        // DE
-        { Tag: "Biep", Text: "msg" },
-        // FR
-        { Tag: "Sonner", Text: "msg" },
-        // Message itself
-        { Tag: "msg", Text: msg }
-      ]
-    });
-  }
-  __name(sendAction, "sendAction");
-  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
-    if (document.getElementById("themed-modal")) return false;
-    const modal = document.createElement("div");
-    const modalTitle = document.createElement("div");
-    const modalButtons = document.createElement("div");
-    const modalAcceptButton = document.createElement("div");
-    const modalCancelButton = document.createElement("div");
-    modal.classList.add("themed-modal");
-    modalTitle.id = "modal-prompt";
-    modalButtons.id = "modal-buttons";
-    modalAcceptButton.id = "modal-button-accept";
-    modalCancelButton.id = "modal-button-cancel";
-    modalAcceptButton.classList.add("modal-button");
-    modalCancelButton.classList.add("modal-button");
-    modalTitle.innerHTML = prompt2;
-    modalAcceptButton.innerText = getText("modal.button.accept");
-    modalCancelButton.innerText = getText("modal.button.cancel");
-    modalAcceptButton.addEventListener("click", () => {
-      acceptCallbackFn();
-      modal.remove();
-    });
-    modalCancelButton.addEventListener("click", () => {
-      cancelCallbackFn();
-      modal.remove();
-    });
-    modalButtons.append(modalAcceptButton, modalCancelButton);
-    modal.append(modalTitle, modalButtons);
-    document.body.append(modal);
-  }
-  __name(useLgcModal, "useLgcModal");
-  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = { ...mergeTo };
-    for (const key in mergeFrom) {
-      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
-        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
-      } else if (key in mergedObject) {
-        mergedObject[key] = mergeFrom[key];
-      }
-    }
-    return mergedObject;
-  }
-  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  function hasSetter(obj, prop) {
-    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
-  }
-  __name(hasSetter, "hasSetter");
-
-  // src/Modules/Commands.ts
   var _CommandsModule = class _CommandsModule extends BaseModule {
     Load() {
       CommandCombine([
