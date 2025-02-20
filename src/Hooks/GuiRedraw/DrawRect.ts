@@ -55,10 +55,6 @@ export function hookDrawRect() {
               : plainColors.accent;
             break;
 
-          case 'accent':
-            drawRect(plainColors.accent);
-            break;
-
           case 'friendhint':
             color = plainColors.elementHint;
             break;
@@ -95,25 +91,8 @@ export function hookDrawRect() {
             color = specialColors[color.substring(1)][hover];
             break;
 
-          case 'equipped':
-            drawRect(specialColors.equipped[hover]);
-            break;
-
-          case 'crafted':
-            drawRect(specialColors.crafted[hover]);
-            break;
-
-          case 'limited':
-            drawRect(specialColors.limited[hover]);
-            break;
-
-          case 'blocked':
-            drawRect(specialColors.blocked[hover]);
-            break;
-
           default:
             return next(args);
-            break;
         }
       } else {
         let parsedColor: string | null = null;
