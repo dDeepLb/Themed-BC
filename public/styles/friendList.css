@@ -1,6 +1,6 @@
 #friend-list-subscreen {
-  --border-color: var(--tmd-tmd-tmd-accent);
-  --image-color: var(--tmd-tmd-accent);
+  --border-color: var(--tmd-accent);
+  --image-color: var(--tmd-accent);
   --text-color: var(--tmd-text);
   --button-color: var(--tmd-element);
   --inactive-button-color: var(--tmd-element-disabled);
