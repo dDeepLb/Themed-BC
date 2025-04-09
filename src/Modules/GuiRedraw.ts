@@ -106,17 +106,19 @@ export class GuiRedrawModule extends BaseModule {
         'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);',
     });
 
-    patchFunction('DialogDrawExpressionMenu', {
-      'const color = (expression == FE.CurrentExpression ? "Pink" : (!allowed ? "#888" : "White"));':
-        'const color = (expression == FE.CurrentExpression ? "%accent" : (!allowed ? "%disabled" : "%background"));',
-      'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "Cyan" : "White", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");':
-        'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "%accent" : "%background", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");'
-    });
+    if (GameVersion === 'R114') {
+      patchFunction('DialogDrawExpressionMenu', {
+        'const color = (expression == FE.CurrentExpression ? "Pink" : (!allowed ? "#888" : "White"));':
+          'const color = (expression == FE.CurrentExpression ? "%accent" : (!allowed ? "%disabled" : "%background"));',
+        'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "Cyan" : "White", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");':
+          'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "%accent" : "%background", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");'
+      });
 
-    patchFunction('DialogDrawPoseMenu', {
-      'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "#888" : isActive ? "Pink" : "White", `Icons/Poses/${Name}.png`);':
-        'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "%disabled" : isActive ? "%accent" : "%background", `Icons/Poses/${Name}.png`);',
-    });
+      patchFunction('DialogDrawPoseMenu', {
+        'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "#888" : isActive ? "Pink" : "White", `Icons/Poses/${Name}.png`);':
+          'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "%disabled" : isActive ? "%accent" : "%background", `Icons/Poses/${Name}.png`);',
+      });
+    }
 
     patchFunction('ExtendedItemGetButtonColor', {
       'ButtonColor = "#888888";':
@@ -197,14 +199,17 @@ export class GuiRedrawModule extends BaseModule {
     unpatchFuntion('DrawProcessScreenFlash');
     unpatchFuntion('ChatAdminRun');
     unpatchFuntion('AppearanceRun');
-    unpatchFuntion('DialogDrawExpressionMenu');
-    unpatchFuntion('DialogDrawPoseMenu');
+
     unpatchFuntion('ExtendedItemGetButtonColor');
     unpatchFuntion('PreferenceSubscreenDifficultyRun');
     unpatchFuntion('ChatAdminRoomCustomizationRun');
     unpatchFuntion('Shop2._AssetElementDraw');
     unpatchFuntion('RelogRun');
     unpatchFuntion('ChatRoomMenuDraw');
+    if (GameVersion === 'R114') {
+      unpatchFuntion('DialogDrawExpressionMenu');
+      unpatchFuntion('DialogDrawPoseMenu');
+    }
 
     this.patched = false;
   }
