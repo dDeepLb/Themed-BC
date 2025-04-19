@@ -43,6 +43,10 @@
     border-top: min(0.2dvh, 0.1dvw) var(--tmd-accent) solid !important;
   }
 
+  .chat-room-sep-div {
+    background-color: transparent;
+  }
+
   .chat-room-sep-collapse {
     border-right: min(0.2dvh, 0.1dvw) var(--tmd-accent) solid !important;
     color: var(--tmd-text);
