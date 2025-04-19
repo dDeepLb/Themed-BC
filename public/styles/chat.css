@@ -4,7 +4,7 @@
 #TextAreaChatLog[data-colortheme="dark2"] {
   background-color: var(--tmd-main);
   color: var(--tmd-text);
-  border-color: var(--tmd-accent);
+  border: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
 
   .ChatMessageName {
     text-shadow: 0 0 0.12em var(--label-color);
@@ -35,12 +35,12 @@
 
   .chat-room-sep {
     --base-color: var(--tmd-main) !important;
-    border-bottom: min(0.4vh, 0.2vw) var(--tmd-accent) solid !important;
-    border-top: min(0.4vh, 0.2vw) var(--tmd-accent) solid !important;
+    border-bottom: min(0.2dvh, 0.1dvw) var(--tmd-accent) solid !important;
+    border-top: min(0.2dvh, 0.1dvw) var(--tmd-accent) solid !important;
   }
 
   .chat-room-sep-collapse {
-    border-right: min(0.4vh, 0.2vw) var(--tmd-accent) solid !important;
+    border-right: min(0.2dvh, 0.1dvw) var(--tmd-accent) solid !important;
     color: var(--tmd-text);
   }
 
@@ -64,9 +64,7 @@
     background-color: var(--tmd-main);
     border-color: rgba(0, 0, 0, 0.25);
     color: var(--tmd-text);
-    border: var(--tmd-accent) solid 1px;
-
-
+    border: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
   }
 
   ~#chat-room-reply-indicator {
