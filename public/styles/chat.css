@@ -58,7 +58,8 @@
     color: var(--tmd-text);
   }
 
-  ~#chat-room-bot {
+  ~#chat-room-bot,
+  ~#chat-room-reply-indicator {
     --button-color: var(--tmd-element);
     background-color: var(--tmd-main);
     border-color: rgba(0, 0, 0, 0.25);
@@ -66,6 +67,20 @@
     border: var(--tmd-accent) solid 1px;
 
 
+  }
+
+  ~#chat-room-reply-indicator {
+    border-bottom: none;
+    margin-bottom: 0px;
+    position: relative;
+    z-index: 1;
+
+    & #chat-room-reply-indicator-text {
+      border-right: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
+    }
+  }
+
+  ~#chat-room-bot {
     &:has(#InputChat:focus) {
       outline: 2px solid var(--tmd-element-hover);
       box-shadow: 0 0 0 3px var(--tmd-main);
