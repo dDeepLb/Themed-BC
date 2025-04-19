@@ -22,7 +22,7 @@
   const ending = 'themed.js';
   const prodPath = 'https://ddeeplb.github.io/Themed-BC/';
   const devPath = `${prodPath}dev/`;
-  const localPath = 'http://localhost:1001/';
+  const localPath = 'http://localhost:45001/';
 
   const isDev = window.location.search.includes('TMD=dev');
   const isLocal = window.location.search.includes('TMD=local');
