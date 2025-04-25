@@ -2015,7 +2015,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.2"} - ${"ad6da474"}` : "1.5.2";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.3"} - ${"552f807d"}` : "1.5.3";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2890,15 +2890,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "#aaa", null, null, !CanCycleColors);': 'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "%disabled", null, null, !CanCycleColors);',
         'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "#fff" : "#aaa", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);': 'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);'
       });
-      if (GameVersion === "R114") {
-        patchFunction("DialogDrawExpressionMenu", {
-          'const color = (expression == FE.CurrentExpression ? "Pink" : (!allowed ? "#888" : "White"));': 'const color = (expression == FE.CurrentExpression ? "%accent" : (!allowed ? "%disabled" : "%background"));',
-          'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "Cyan" : "White", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");': 'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "%accent" : "%background", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");'
-        });
-        patchFunction("DialogDrawPoseMenu", {
-          'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "#888" : isActive ? "Pink" : "White", `Icons/Poses/${Name}.png`);': 'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "%disabled" : isActive ? "%accent" : "%background", `Icons/Poses/${Name}.png`);'
-        });
-      }
       patchFunction("ExtendedItemGetButtonColor", {
         'ButtonColor = "#888888";': 'ButtonColor = "%accent";',
         'ButtonColor = Hover ? "red" : "pink";': 'ButtonColor = "%blocked";',
@@ -2954,10 +2945,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
       unpatchFuntion("Shop2._AssetElementDraw");
       unpatchFuntion("RelogRun");
       unpatchFuntion("ChatRoomMenuDraw");
-      if (GameVersion === "R114") {
-        unpatchFuntion("DialogDrawExpressionMenu");
-        unpatchFuntion("DialogDrawPoseMenu");
-      }
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -4011,6 +3998,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     Load() {
       changeModColors();
+      setTimeout(changeModColors, 6e4);
+      setTimeout(changeModColors, 3e5);
       hookFunction(
         "ChatRoomCurrentTime",
         0 /* Observe */,
@@ -4501,7 +4490,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.2";
+        Player[ModName].Version = "1.5.3";
       }
     }
     static loadVersion() {
@@ -4512,7 +4501,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.2")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.3")) {
         _VersionModule.isItNewVersion = true;
       }
     }
