@@ -40,8 +40,8 @@ importers:
         specifier: ^7.18.0
         version: 7.18.0(eslint@8.57.0)(typescript@5.5.4)
       bc-stubs:
-        specifier: ~104.0.2
-        version: 104.0.2
+        specifier: ~115.0.1
+        version: 115.0.1
       esbuild:
         specifier: ^0.21.5
         version: 0.21.5
@@ -422,8 +422,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bc-stubs@104.0.2:
-    resolution: {integrity: sha512-67luM4SRlGQ0ZZDL9GV+jxYLTdN59QEioVEB1tI/Bt/7Nx6RPLy6YI6Av+FsUAa3vo0XWdiUO7P8zyaZi79bYg==}
+  bc-stubs@115.0.1:
+    resolution: {integrity: sha512-KG149guflhIWId/F6esiUlEzfR/qOmSino/vyfwB9f0OmCVYuL3PHaGpb6xkk0OEiqw8KWqPSgMlOfNpA3p1wQ==}
 
   bondage-club-mod-sdk@1.2.0:
     resolution: {integrity: sha512-S+li+PgX7Qo5yccS/R/eAXC4Opq8lc5AdhTPjC2XhWxDGTieUQKj3QJ4ZLgL8x0ySnK7h+DvlkRZd8+OT5JErQ==}
@@ -1286,9 +1286,8 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bc-stubs@104.0.2:
+  bc-stubs@115.0.1:
     dependencies:
-      '@types/lz-string': 1.3.34
       socket.io-client: 4.6.1
     transitivePeerDependencies:
       - bufferutil
