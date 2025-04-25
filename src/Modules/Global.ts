@@ -35,6 +35,11 @@ export class GlobalModule extends BaseModule {
   Load(): void {
     changeModColors();
 
+    // try to be sure that the colors are updated 
+    // even for mods that are loaded shortly after Themed
+    setTimeout(changeModColors, 60_000);
+    setTimeout(changeModColors, 300_000);
+
     hookFunction(
       'ChatRoomCurrentTime',
       HookPriority.Observe,
