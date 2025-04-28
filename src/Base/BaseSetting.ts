@@ -239,9 +239,16 @@ export abstract class GuiSubscreen {
   }
 
   elementPosition(elementId: string, label: string, description: string, order: number, disabled: boolean = false) {
-    const isHovering = MouseIn(this.getXPos(order) + 450, this.getYPos(order) - 32, 600, 64);
-    DrawTextFit(getText(label), this.getXPos(order) + 450, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
-    ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400, 64);
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    let offset = 0;
+    if ((element as HTMLInputElement)?.type === 'color') offset = -336;
+
+    const isHovering = MouseIn(this.getXPos(order) + 450 + offset, this.getYPos(order) - 32, 600, 64);
+
+    DrawTextFit(getText(label), this.getXPos(order) + 450 + offset, this.getYPos(order), 600, isHovering ? 'Red' : 'Black', 'Gray');
+    ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400 + offset, 64);
     if (disabled) ElementSetAttribute(elementId, 'disabled', 'true');
     if (!disabled) ElementRemoveAttribute(elementId, 'disabled');
     if (isHovering) this.tooltip(getText(description));
