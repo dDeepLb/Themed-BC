@@ -27,8 +27,8 @@ export type Input = {
   label: string;
   description: string;
   disabled?: boolean;
-  setting(): any;
-  setSetting(val: any): void;
+  setting?(): any;
+  setSetting?(val: any): void;
 };
 
 export type Label = {
