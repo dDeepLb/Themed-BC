@@ -89,15 +89,15 @@ export abstract class GuiSubscreen {
       s.forEach((item) => {
         switch (item.type) {
           case 'text': {
-            const input = ElementCreateInput(item.id, 'text', item.setting(), '255');
+            const input = ElementCreateInput(item.id, 'text', item.setting?.(), '255');
             input.setAttribute('autocomplete', 'off');
             break;
           }
           case 'number':
-            ElementCreateInput(item.id, 'number', item.setting(), '255');
+            ElementCreateInput(item.id, 'number', item.setting?.(), '255');
             break;
           case 'color': {
-            const elm = ElementCreateInput(item.id, 'color', item.setting());
+            const elm = ElementCreateInput(item.id, 'color', item.setting?.());
             elm.classList.add('tmd-color-picker');
             break;
           }
@@ -188,7 +188,7 @@ export abstract class GuiSubscreen {
             break;
           case 'text':
           case 'color':
-            item.setSetting(ElementValue(item.id));
+            item.setSetting?.(ElementValue(item.id));
             ElementRemove(item.id);
             break;
         }
