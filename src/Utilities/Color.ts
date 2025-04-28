@@ -50,6 +50,10 @@ export const _Color = {
     return Color(_Color.getComputed(color)).hex();
   }),
 
+  isValidHex(color: string) {
+    return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(color);
+  },
+
   composeRoot() {
     const colorSettings = Player.Themed.ColorsModule;
     const globalSettings = Player.Themed.GlobalModule;
