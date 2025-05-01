@@ -1940,6 +1940,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     getHexComputed: CommonMemoize((color) => {
       return (0, import_color.default)(_Color.getComputed(color)).hex();
     }),
+    isValidHex(color) {
+      return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(color);
+    },
     composeRoot() {
       const colorSettings = Player.Themed.ColorsModule;
       const globalSettings = Player.Themed.GlobalModule;
@@ -2015,7 +2018,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.3"} - ${"3944ba81"}` : "1.5.3";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.4"} - ${"fa454eb7"}` : "1.5.4";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2878,7 +2881,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");': 'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");'
       });
       patchFunction("DrawProcessScreenFlash", {
-        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
       patchFunction("ChatAdminRun", {
@@ -2916,10 +2919,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
       });
       patchFunction("RelogRun", {
         'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
-      });
-      patchFunction("DrawProcessScreenFlash", {
-        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
-        "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
       patchFunction("ChatRoomMenuDraw", {
         'let color = "White";': 'let color = "%background";',
@@ -3071,15 +3070,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
         (s) => s.forEach((item) => {
           switch (item.type) {
             case "text": {
-              const input = ElementCreateInput(item.id, "text", item.setting(), "255");
+              const input = ElementCreateInput(item.id, "text", item.setting?.(), "255");
               input.setAttribute("autocomplete", "off");
               break;
             }
             case "number":
-              ElementCreateInput(item.id, "number", item.setting(), "255");
+              ElementCreateInput(item.id, "number", item.setting?.(), "255");
               break;
             case "color": {
-              const elm = ElementCreateInput(item.id, "color", item.setting());
+              const elm = ElementCreateInput(item.id, "color", item.setting?.());
               elm.classList.add("tmd-color-picker");
               break;
             }
@@ -3156,7 +3155,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
               break;
             case "text":
             case "color":
-              item.setSetting(ElementValue(item.id));
+              item.setSetting?.(ElementValue(item.id));
               ElementRemove(item.id);
               break;
           }
@@ -3196,9 +3195,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
       ElementPosition(elementId, -999, -999, 1, 1);
     }
     elementPosition(elementId, label, description, order, disabled = false) {
-      const isHovering = MouseIn(this.getXPos(order) + 450, this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order) + 450, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400, 64);
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      let offset = 0;
+      if (element?.type === "color") offset = -336;
+      const isHovering = MouseIn(this.getXPos(order) + 450 + offset, this.getYPos(order) - 32, 600, 64);
+      DrawTextFit(getText(label), this.getXPos(order) + 450 + offset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400 + offset, 64);
       if (disabled) ElementSetAttribute(elementId, "disabled", "true");
       if (!disabled) ElementRemoveAttribute(elementId, "disabled");
       if (isHovering) this.tooltip(getText(description));
@@ -3737,6 +3740,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
   // src/Screens/Colors.ts
   init_define_LAST_COMMIT_HASH();
   var _GuiColors = class _GuiColors extends GuiSubscreen {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "settingsBackup");
+    }
     get name() {
       return "Colors";
     }
@@ -3757,7 +3764,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
           label: `colors.setting.${key}.name`,
           description: `colors.setting.${key}.desc`,
           setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[key], "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.base[key] = val, "setSetting"),
           disabled: isBaseMode && !baseModeKey(key)
         })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
         Object.entries(this.settings.special).map(([key, value]) => ({
@@ -3765,10 +3771,35 @@ One of mods you are using is using an old version of SDK. It will work for now b
           id: key,
           label: `colors.setting.${key}.name`,
           description: `colors.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.special[key] = val, "setSetting")
+          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting")
         }))
       ];
+    }
+    Load() {
+      super.Load();
+      this.settingsBackup = CommonCloneDeep(this.settings);
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        document.getElementById(key).addEventListener("input", function(ev) {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            settings.base[key] = this.value;
+          }
+          getModule("ColorsModule").reloadTheme();
+        });
+      }), Object.entries(this.settings.special).forEach(([key]) => {
+        document.getElementById(key).addEventListener("input", function(ev) {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            settings.special[key] = this.value;
+          }
+          getModule("ColorsModule").reloadTheme();
+        });
+      });
     }
     Run() {
       DrawButton(1495, 75, 90, 90, "", "White", "Icons/Swap.png", getText("colors.button.change_input_type"));
@@ -3792,6 +3823,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
         return;
       }
       super.Click();
+    }
+    Exit() {
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!_Color.isValidHex(input.value)) {
+          settings.base[key] = this.settingsBackup.base[key];
+        }
+      }), Object.entries(this.settings.special).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!_Color.isValidHex(input.value)) {
+          settings.special[key] = this.settingsBackup.special[key];
+        }
+      });
+      super.Exit();
     }
   };
   __name(_GuiColors, "GuiColors");
@@ -4490,7 +4536,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.3";
+        Player[ModName].Version = "1.5.4";
       }
     }
     static loadVersion() {
@@ -4501,7 +4547,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.3")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.4")) {
         _VersionModule.isItNewVersion = true;
       }
     }
