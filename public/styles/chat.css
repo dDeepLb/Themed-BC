@@ -68,11 +68,16 @@
 
   ~#chat-room-bot,
   ~#chat-room-reply-indicator {
-    --button-color: var(--tmd-element);
-    background-color: var(--tmd-main);
-    border-color: rgba(0, 0, 0, 0.25);
-    color: var(--tmd-text);
     border: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
+  }
+
+  ~#chat-room-bot,
+  ~#chat-room-reply-indicator > * {
+    --button-color: var(--tmd-element);
+    --base-color: var(--tmd-main);
+    --base-font-color: var(--tmd-text);
+    background-color: var(--tmd-main);
+    color: var(--tmd-text);
   }
 
   ~#chat-room-reply-indicator {
@@ -80,10 +85,13 @@
     margin-bottom: 0px;
     position: relative;
     z-index: 1;
+    gap: 0px;
 
     & #chat-room-reply-indicator-text {
       border-right: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
     }
+
+
   }
 
   ~#chat-room-bot {
@@ -112,4 +120,25 @@
       background-color: var(--tmd-accent);
     }
   }
+
+  .chat-room-message-popup {
+    background-color: var(--tmd-element);
+    border: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
+    border-right: none;
+
+    .chat-room-metadata .chat-room-time {
+      direction: ltr;
+    } 
+
+    button {
+      border-right: var(--tmd-accent) solid min(0.2dvh, 0.1dvw);
+    }
+  }
+}
+
+.ChatMessage:focus,
+.ChatMessage:has(:focus-visible),
+.chat-room-message-popup {
+  background-color: var(--tmd-element);
+  background-color: color-mix(in srgb, var(--tmd-element-hover) 90%, var(--label-color, var(--tmd-accent)) 10%);
 }
