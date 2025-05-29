@@ -14,7 +14,7 @@ import { hookDrawText } from '../Hooks/GuiRedraw/DrawText';
 import { hookDrawTextFit } from '../Hooks/GuiRedraw/DrawTextFit';
 import { hookDrawTextWrap } from '../Hooks/GuiRedraw/DrawTextWrap';
 import { PlayerStorage } from '../Utilities/Data';
-import { patchFunction, unpatchFuntion } from '../Utilities/SDK';
+import { patchFunction, unpatchFunction } from '../Utilities/SDK';
 
 export const doRedraw = () => {
   return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== 'ClubCard';
@@ -171,19 +171,19 @@ export class GuiRedrawModule extends BaseModule {
   unpatchGui() {
     if (!this.patched) return false;
 
-    unpatchFuntion('ChatSearchNormalDraw');
-    unpatchFuntion('ChatSearchPermissionDraw');
-    unpatchFuntion('DialogDraw');
-    unpatchFuntion('DrawProcessScreenFlash');
-    unpatchFuntion('ChatAdminRun');
-    unpatchFuntion('AppearanceRun');
+    unpatchFunction('ChatSearchNormalDraw');
+    unpatchFunction('ChatSearchPermissionDraw');
+    unpatchFunction('DialogDraw');
+    unpatchFunction('DrawProcessScreenFlash');
+    unpatchFunction('ChatAdminRun');
+    unpatchFunction('AppearanceRun');
 
-    unpatchFuntion('ExtendedItemGetButtonColor');
-    unpatchFuntion('PreferenceSubscreenDifficultyRun');
-    unpatchFuntion('ChatAdminRoomCustomizationRun');
-    unpatchFuntion('Shop2._AssetElementDraw');
-    unpatchFuntion('RelogRun');
-    unpatchFuntion('ChatRoomMenuDraw');
+    unpatchFunction('ExtendedItemGetButtonColor');
+    unpatchFunction('PreferenceSubscreenDifficultyRun');
+    unpatchFunction('ChatAdminRoomCustomizationRun');
+    unpatchFunction('Shop2._AssetElementDraw');
+    unpatchFunction('RelogRun');
+    unpatchFunction('ChatRoomMenuDraw');
 
     this.patched = false;
   }

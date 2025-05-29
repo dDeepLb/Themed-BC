@@ -49,7 +49,7 @@ export function patchFunction(target: string, patches: Record<string, string>): 
   SDK.patchFunction(target, patches);
 }
 
-export function unpatchFuntion(target: string) {
+export function unpatchFunction(target: string) {
   SDK.removePatches(target);
 }
 
