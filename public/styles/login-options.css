@@ -1,0 +1,20 @@
+#tmd-login-options-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#tmd-login-options-dialog-close {
+  height: 1.5em;
+  width: min(20dvh, 10dvw);
+  position: absolute;
+  bottom: min(3dvh, 1.5dvw);
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.tmd-login-options-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

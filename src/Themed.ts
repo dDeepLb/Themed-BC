@@ -1,5 +1,6 @@
 import { modules, registerModule } from './Base/Modules';
 import { GUI } from './Base/SettingUtils';
+import { loadLoginOptions } from './Hooks/login_options';
 import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
@@ -19,13 +20,18 @@ import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
 
 function initWait() {
+  if (window.ThemedLoaded) return;
+  
   conLog('Init wait');
   if (CurrentScreen == null || CurrentScreen === 'Login') {
+    const cleanup = loadLoginOptions();
+    
     hookFunction('LoginResponse', 0, (args, next) => {
       conDebug('Init! LoginResponse caught: ', args);
       next(args);
       const response = args[0];
       if (response && typeof response.Name === 'string' && typeof response.AccountName === 'string') {
+        cleanup();
         init();
       }
     });
@@ -36,8 +42,6 @@ function initWait() {
 }
 
 export async function init() {
-  if (window.ThemedLoaded) return;
-
   await Localization.load();
 
   settingsLoad();

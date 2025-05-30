@@ -3,7 +3,8 @@ declare global {
 }
 
 declare interface Window {
-  ThemedLoaded: boolean;
+  ThemedLoaded?: boolean;
+  ThemedLocalData?: import('../src/Models/local').LocalSettingsModel
 }
 
 declare const PUBLIC_URL: string;
