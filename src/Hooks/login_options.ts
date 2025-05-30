@@ -33,9 +33,10 @@ export function loadLoginOptions() {
   });
 
   return () => {
+    removeUI();
+    Style.eject(ids.optionsStyle);
     cleanup();
     unpatchLoginPage();
-    Style.eject(ids.optionsStyle);
   };
 }
 
@@ -87,6 +88,11 @@ function createUI() {
     ],
     parent: document.body
   });
+}
+
+function removeUI() {
+  document.getElementById(ids.optionsOpen)?.remove();
+  document.getElementById(ids.optionsSheet)?.remove();
 }
 
 function patchLoginPage() {
