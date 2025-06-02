@@ -2018,7 +2018,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.5"} - ${"31cecb02"}` : "1.5.5";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.6"} - ${"cc33d9a9"}` : "1.5.6";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2049,10 +2049,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
     SDK.patchFunction(target, patches);
   }
   __name(patchFunction, "patchFunction");
-  function unpatchFuntion(target) {
+  function unpatchFunction(target) {
     SDK.removePatches(target);
   }
-  __name(unpatchFuntion, "unpatchFuntion");
+  __name(unpatchFunction, "unpatchFunction");
   function hookFunction(target, priority, hook, module = null) {
     const data = initPatchableFunction(target);
     if (data.hooks.some((h) => h.hook === hook)) {
@@ -2681,6 +2681,25 @@ One of mods you are using is using an old version of SDK. It will work for now b
     settingsSave();
   }
   __name(settingsReset, "settingsReset");
+  function localSettingsLoad() {
+    const data = localStorage.getItem("ThemedLocalData");
+    if (data) {
+      window.ThemedLocalData = JSON.parse(data);
+    } else {
+      window.ThemedLocalData = {
+        loginOptions: {
+          hideDummy: false,
+          hideCredits: false
+        }
+      };
+      localSettingsSave();
+    }
+  }
+  __name(localSettingsLoad, "localSettingsLoad");
+  function localSettingsSave() {
+    localStorage.setItem("ThemedLocalData", JSON.stringify(window.ThemedLocalData));
+  }
+  __name(localSettingsSave, "localSettingsSave");
 
   // src/Hooks/GuiRedraw/DrawRoomBackground.ts
   function hookDrawRoomBackground() {
@@ -2932,18 +2951,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     unpatchGui() {
       if (!this.patched) return false;
-      unpatchFuntion("ChatSearchNormalDraw");
-      unpatchFuntion("ChatSearchPermissionDraw");
-      unpatchFuntion("DialogDraw");
-      unpatchFuntion("DrawProcessScreenFlash");
-      unpatchFuntion("ChatAdminRun");
-      unpatchFuntion("AppearanceRun");
-      unpatchFuntion("ExtendedItemGetButtonColor");
-      unpatchFuntion("PreferenceSubscreenDifficultyRun");
-      unpatchFuntion("ChatAdminRoomCustomizationRun");
-      unpatchFuntion("Shop2._AssetElementDraw");
-      unpatchFuntion("RelogRun");
-      unpatchFuntion("ChatRoomMenuDraw");
+      unpatchFunction("ChatSearchNormalDraw");
+      unpatchFunction("ChatSearchPermissionDraw");
+      unpatchFunction("DialogDraw");
+      unpatchFunction("DrawProcessScreenFlash");
+      unpatchFunction("ChatAdminRun");
+      unpatchFunction("AppearanceRun");
+      unpatchFunction("ExtendedItemGetButtonColor");
+      unpatchFunction("PreferenceSubscreenDifficultyRun");
+      unpatchFunction("ChatAdminRoomCustomizationRun");
+      unpatchFunction("Shop2._AssetElementDraw");
+      unpatchFunction("RelogRun");
+      unpatchFunction("ChatRoomMenuDraw");
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -3671,6 +3690,132 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_GUI, "GUI");
   __publicField(_GUI, "instance", null);
   var GUI = _GUI;
+
+  // src/Hooks/login_options.ts
+  init_define_LAST_COMMIT_HASH();
+  var ids = {
+    optionsOpen: "tmd-login-options-open",
+    optionsClose: "tmd-login-options-dialog-close",
+    optionsSheet: "tmd-login-options-dialog",
+    optionsContent: "tmd-login-options-dialog-content",
+    optionsStyle: "tmd-login-options-style"
+  };
+  var options = {
+    hideCredits: "Hide Credits",
+    hideDummy: "Hide Dummy"
+  };
+  function loadLoginOptions() {
+    localSettingsLoad();
+    patchLoginPage();
+    Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/login-options.css`);
+    createUI();
+    const cleanup = hookFunction("LoginRun", 0 /* Observe */, (args, next) => {
+      next(args);
+      ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
+      ElementSetSize(ids.optionsOpen, 90, 90);
+      ElementSetSize(ids.optionsSheet, 1e3, 500);
+    });
+    return () => {
+      removeUI();
+      Style.eject(ids.optionsStyle);
+      cleanup();
+      unpatchLoginPage();
+    };
+  }
+  __name(loadLoginOptions, "loadLoginOptions");
+  function createUI() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
+      tooltip: "[Themed] Login Options",
+      image: "./Icons/Preference.png"
+    });
+    document.body.appendChild(optionsButton);
+    const optionsSheet = ElementCreate({
+      tag: "dialog",
+      attributes: {
+        id: ids.optionsSheet
+      },
+      children: [
+        ElementCreate({
+          tag: "div",
+          attributes: {
+            id: ids.optionsContent
+          },
+          children: [
+            ...Array.from(Object.entries(options)).map(([key, value]) => {
+              return {
+                tag: "label",
+                classList: ["tmd-login-options-label"],
+                children: [
+                  ElementCheckbox.Create(
+                    `tmd-login-options-${key}`,
+                    () => {
+                      loginOptions[key] = !loginOptions[key];
+                      localSettingsSave();
+                      repatchLoginPage();
+                    },
+                    {
+                      checked: loginOptions[key]
+                    }
+                  ),
+                  value
+                ]
+              };
+            })
+          ]
+        }),
+        ElementButton.Create(
+          ids.optionsClose,
+          () => optionsSheet.close(),
+          {
+            label: "Close"
+          }
+        )
+      ],
+      parent: document.body
+    });
+  }
+  __name(createUI, "createUI");
+  function removeUI() {
+    document.getElementById(ids.optionsOpen)?.remove();
+    document.getElementById(ids.optionsSheet)?.remove();
+  }
+  __name(removeUI, "removeUI");
+  function patchLoginPage() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    if (loginOptions.hideDummy) {
+      patchFunction("LoginRun", {
+        "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
+      });
+      patchFunction("LoginDoNextThankYou", {
+        "CharacterRelease(LoginCharacter, false);": "",
+        "CharacterAppearanceFullRandom(LoginCharacter);": "",
+        'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
+        "CharacterFullRandomRestrain(LoginCharacter)": ""
+      });
+    }
+    if (loginOptions.hideCredits) {
+      patchFunction("LoginRun", {
+        "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
+        'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
+        'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
+      });
+      patchFunction("LoginDoNextThankYou", {
+        "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
+      });
+    }
+  }
+  __name(patchLoginPage, "patchLoginPage");
+  function unpatchLoginPage() {
+    unpatchFunction("LoginRun");
+    unpatchFunction("LoginDoNextThankYou");
+  }
+  __name(unpatchLoginPage, "unpatchLoginPage");
+  function repatchLoginPage() {
+    unpatchLoginPage();
+    patchLoginPage();
+  }
+  __name(repatchLoginPage, "repatchLoginPage");
 
   // src/Migrators/V140Migrator.ts
   init_define_LAST_COMMIT_HASH();
@@ -4536,7 +4681,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.5";
+        Player[ModName].Version = "1.5.6";
       }
     }
     static loadVersion() {
@@ -4547,7 +4692,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.5")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.6")) {
         _VersionModule.isItNewVersion = true;
       }
     }
@@ -4577,13 +4722,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Themed.ts
   function initWait() {
+    if (window.ThemedLoaded) return;
     conLog("Init wait");
     if (CurrentScreen == null || CurrentScreen === "Login") {
+      const cleanup = loadLoginOptions();
       hookFunction("LoginResponse", 0, (args, next) => {
         conDebug("Init! LoginResponse caught: ", args);
         next(args);
         const response = args[0];
         if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
+          cleanup();
           init();
         }
       });
@@ -4594,7 +4742,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(initWait, "initWait");
   async function init() {
-    if (window.ThemedLoaded) return;
     await Localization.load();
     settingsLoad();
     if (!initModules()) {
