@@ -2018,7 +2018,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.6"} - ${"cc33d9a9"}` : "1.5.6";
+  var MOD_VERSION_CAPTION = false ? `${"1.5.6"} - ${"1a8ca4a6"}` : "1.5.6";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(

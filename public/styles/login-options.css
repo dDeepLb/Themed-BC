@@ -1,3 +1,14 @@
+#tmd-login-options-dialog {
+  padding: min(3dvh, 1.5dvw);
+  margin: auto;
+  border-width: min(0.2dvh, 0.1dvw);
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+#tmd-login-options-dialog * {
+  border-radius: min(1dvh, 0.5dvw);
+}
+
 #tmd-login-options-dialog-content {
   display: flex;
   flex-direction: column;
