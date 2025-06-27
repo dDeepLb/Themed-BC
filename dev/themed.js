@@ -1940,6 +1940,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     getHexComputed: CommonMemoize((color) => {
       return (0, import_color.default)(_Color.getComputed(color)).hex();
     }),
+    isValidHex(color) {
+      return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(color);
+    },
     composeRoot() {
       const colorSettings = Player.Themed.ColorsModule;
       const globalSettings = Player.Themed.GlobalModule;
@@ -2015,7 +2018,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ModName = "Themed";
   var FullModName = "BC Themed";
   var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.2"} - ${"e96e2419"}` : "1.5.2";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"1a8ca4a6"}` : "1.5.6";
 
   // src/Utilities/SDK.ts
   var SDK = import_bondage_club_mod_sdk.default.registerMod(
@@ -2046,10 +2049,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
     SDK.patchFunction(target, patches);
   }
   __name(patchFunction, "patchFunction");
-  function unpatchFuntion(target) {
+  function unpatchFunction(target) {
     SDK.removePatches(target);
   }
-  __name(unpatchFuntion, "unpatchFuntion");
+  __name(unpatchFunction, "unpatchFunction");
   function hookFunction(target, priority, hook, module = null) {
     const data = initPatchableFunction(target);
     if (data.hooks.some((h) => h.hook === hook)) {
@@ -2528,9 +2531,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "accent":
               color = hover ? plainColors.accentHover : plainColors.accent;
               break;
-            case "accent":
-              drawRect2(plainColors.accent);
-              break;
             case "friendhint":
               color = plainColors.elementHint;
               break;
@@ -2559,21 +2559,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "blocked":
               color = specialColors[color.substring(1)][hover];
               break;
-            case "equipped":
-              drawRect2(specialColors.equipped[hover]);
-              break;
-            case "crafted":
-              drawRect2(specialColors.crafted[hover]);
-              break;
-            case "limited":
-              drawRect2(specialColors.limited[hover]);
-              break;
-            case "blocked":
-              drawRect2(specialColors.blocked[hover]);
-              break;
             default:
               return next(args);
-              break;
           }
         } else {
           let parsedColor = null;
@@ -2694,6 +2681,25 @@ One of mods you are using is using an old version of SDK. It will work for now b
     settingsSave();
   }
   __name(settingsReset, "settingsReset");
+  function localSettingsLoad() {
+    const data = localStorage.getItem("ThemedLocalData");
+    if (data) {
+      window.ThemedLocalData = JSON.parse(data);
+    } else {
+      window.ThemedLocalData = {
+        loginOptions: {
+          hideDummy: false,
+          hideCredits: false
+        }
+      };
+      localSettingsSave();
+    }
+  }
+  __name(localSettingsLoad, "localSettingsLoad");
+  function localSettingsSave() {
+    localStorage.setItem("ThemedLocalData", JSON.stringify(window.ThemedLocalData));
+  }
+  __name(localSettingsSave, "localSettingsSave");
 
   // src/Hooks/GuiRedraw/DrawRoomBackground.ts
   function hookDrawRoomBackground() {
@@ -2894,7 +2900,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");': 'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");'
       });
       patchFunction("DrawProcessScreenFlash", {
-        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
+        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
       patchFunction("ChatAdminRun", {
@@ -2905,13 +2911,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);': 'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
         'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "#aaa", null, null, !CanCycleColors);': 'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "%disabled", null, null, !CanCycleColors);',
         'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "#fff" : "#aaa", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);': 'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);'
-      });
-      patchFunction("DialogDrawExpressionMenu", {
-        'const color = (expression == FE.CurrentExpression ? "Pink" : (!allowed ? "#888" : "White"));': 'const color = (expression == FE.CurrentExpression ? "%accent" : (!allowed ? "%disabled" : "%background"));',
-        'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "Cyan" : "White", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");': 'DrawButton(20, OffsetY, 90, 90, "", i == DialogFacialExpressionsSelected ? "%accent" : "%background", "Assets/Female3DCG/" + FE.Group + (FE.CurrentExpression ? "/" + FE.CurrentExpression : "") + "/Icon.png");'
-      });
-      patchFunction("DialogDrawPoseMenu", {
-        'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "#888" : isActive ? "Pink" : "White", `Icons/Poses/${Name}.png`);': 'DrawButton(offsetX, offsetY, 90, 90, "", !Player.CanChangeToPose(Name) ? "%disabled" : isActive ? "%accent" : "%background", `Icons/Poses/${Name}.png`);'
       });
       patchFunction("ExtendedItemGetButtonColor", {
         'ButtonColor = "#888888";': 'ButtonColor = "%accent";',
@@ -2940,10 +2939,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
       patchFunction("RelogRun", {
         'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
       });
-      patchFunction("DrawProcessScreenFlash", {
-        'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime/Math.max(1, 4 - DrawLastDarkFactor)));',
-        "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
-      });
       patchFunction("ChatRoomMenuDraw", {
         'let color = "White";': 'let color = "%background";',
         'color = "White";': 'color = "%background";',
@@ -2956,20 +2951,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     unpatchGui() {
       if (!this.patched) return false;
-      unpatchFuntion("ChatSearchNormalDraw");
-      unpatchFuntion("ChatSearchPermissionDraw");
-      unpatchFuntion("DialogDraw");
-      unpatchFuntion("DrawProcessScreenFlash");
-      unpatchFuntion("ChatAdminRun");
-      unpatchFuntion("AppearanceRun");
-      unpatchFuntion("DialogDrawExpressionMenu");
-      unpatchFuntion("DialogDrawPoseMenu");
-      unpatchFuntion("ExtendedItemGetButtonColor");
-      unpatchFuntion("PreferenceSubscreenDifficultyRun");
-      unpatchFuntion("ChatAdminRoomCustomizationRun");
-      unpatchFuntion("Shop2._AssetElementDraw");
-      unpatchFuntion("RelogRun");
-      unpatchFuntion("ChatRoomMenuDraw");
+      unpatchFunction("ChatSearchNormalDraw");
+      unpatchFunction("ChatSearchPermissionDraw");
+      unpatchFunction("DialogDraw");
+      unpatchFunction("DrawProcessScreenFlash");
+      unpatchFunction("ChatAdminRun");
+      unpatchFunction("AppearanceRun");
+      unpatchFunction("ExtendedItemGetButtonColor");
+      unpatchFunction("PreferenceSubscreenDifficultyRun");
+      unpatchFunction("ChatAdminRoomCustomizationRun");
+      unpatchFunction("Shop2._AssetElementDraw");
+      unpatchFunction("RelogRun");
+      unpatchFunction("ChatRoomMenuDraw");
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -3096,15 +3089,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
         (s) => s.forEach((item) => {
           switch (item.type) {
             case "text": {
-              const input = ElementCreateInput(item.id, "text", item.setting(), "255");
+              const input = ElementCreateInput(item.id, "text", item.setting?.(), "255");
               input.setAttribute("autocomplete", "off");
               break;
             }
             case "number":
-              ElementCreateInput(item.id, "number", item.setting(), "255");
+              ElementCreateInput(item.id, "number", item.setting?.(), "255");
               break;
             case "color": {
-              const elm = ElementCreateInput(item.id, "color", item.setting());
+              const elm = ElementCreateInput(item.id, "color", item.setting?.());
               elm.classList.add("tmd-color-picker");
               break;
             }
@@ -3181,7 +3174,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
               break;
             case "text":
             case "color":
-              item.setSetting(ElementValue(item.id));
+              item.setSetting?.(ElementValue(item.id));
               ElementRemove(item.id);
               break;
           }
@@ -3221,9 +3214,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
       ElementPosition(elementId, -999, -999, 1, 1);
     }
     elementPosition(elementId, label, description, order, disabled = false) {
-      const isHovering = MouseIn(this.getXPos(order) + 450, this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order) + 450, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400, 64);
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      let offset = 0;
+      if (element?.type === "color") offset = -336;
+      const isHovering = MouseIn(this.getXPos(order) + 450 + offset, this.getYPos(order) - 32, 600, 64);
+      DrawTextFit(getText(label), this.getXPos(order) + 450 + offset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
+      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400 + offset, 64);
       if (disabled) ElementSetAttribute(elementId, "disabled", "true");
       if (!disabled) ElementRemoveAttribute(elementId, "disabled");
       if (isHovering) this.tooltip(getText(description));
@@ -3265,6 +3262,95 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Utilities/Style.ts
   init_define_LAST_COMMIT_HASH();
+
+  // src/Utilities/Other.ts
+  init_define_LAST_COMMIT_HASH();
+  function sendLocalSmart(id, message, timeoutInSeconds) {
+    const div = document.createElement("div");
+    div.id = id;
+    div.setAttribute("class", "ChatMessage ThemedMessage");
+    div.setAttribute("data-time", ChatRoomCurrentTime());
+    div.setAttribute("data-sender", Player?.MemberNumber + "");
+    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
+    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
+    ChatRoomAppendChat(div);
+    if (!timeoutInSeconds) return;
+    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
+  }
+  __name(sendLocalSmart, "sendLocalSmart");
+  function sendAction(msg, target) {
+    ServerSend("ChatRoomChat", {
+      Content: "Beep",
+      Type: "Action",
+      Sender: Player.MemberNumber,
+      ...target ? { Target: target } : {},
+      Dictionary: [
+        // EN
+        { Tag: "Beep", Text: "msg" },
+        // CN
+        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
+        // DE
+        { Tag: "Biep", Text: "msg" },
+        // FR
+        { Tag: "Sonner", Text: "msg" },
+        // Message itself
+        { Tag: "msg", Text: msg }
+      ]
+    });
+  }
+  __name(sendAction, "sendAction");
+  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
+    if (document.getElementById("themed-modal")) return false;
+    const modal = document.createElement("div");
+    const modalTitle = document.createElement("div");
+    const modalButtons = document.createElement("div");
+    const modalAcceptButton = document.createElement("div");
+    const modalCancelButton = document.createElement("div");
+    modal.classList.add("themed-modal");
+    modalTitle.id = "modal-prompt";
+    modalButtons.id = "modal-buttons";
+    modalAcceptButton.id = "modal-button-accept";
+    modalCancelButton.id = "modal-button-cancel";
+    modalAcceptButton.classList.add("modal-button");
+    modalCancelButton.classList.add("modal-button");
+    modalTitle.innerHTML = prompt2;
+    modalAcceptButton.innerText = getText("modal.button.accept");
+    modalCancelButton.innerText = getText("modal.button.cancel");
+    modalAcceptButton.addEventListener("click", () => {
+      acceptCallbackFn();
+      modal.remove();
+    });
+    modalCancelButton.addEventListener("click", () => {
+      cancelCallbackFn();
+      modal.remove();
+    });
+    modalButtons.append(modalAcceptButton, modalCancelButton);
+    modal.append(modalTitle, modalButtons);
+    document.body.append(modal);
+  }
+  __name(useLgcModal, "useLgcModal");
+  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
+    const mergedObject = { ...mergeTo };
+    for (const key in mergeFrom) {
+      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
+        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      } else if (key in mergedObject) {
+        mergedObject[key] = mergeFrom[key];
+      }
+    }
+    return mergedObject;
+  }
+  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  function hasSetter(obj, prop) {
+    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
+  }
+  __name(hasSetter, "hasSetter");
+  function camelToKebabCase(str) {
+    return str.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+  }
+  __name(camelToKebabCase, "camelToKebabCase");
+
+  // src/Utilities/Style.ts
   var styles = {
     inputs: "",
     chat: "",
@@ -3336,13 +3422,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
   function composeRoot() {
     let genedColors = "";
     Object.keys(plainColors).forEach((key) => {
-      genedColors += `--${key}: ${plainColors[key]};
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[key]};
 	`;
     });
     Object.keys(specialColors).forEach((key) => {
-      genedColors += `--${key}: ${specialColors[key][0]};
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[key][0]};
 	`;
-      genedColors += `--${key}Hover: ${specialColors[key][1]};
+      genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[key][1]};
 	`;
     });
     return (
@@ -3421,103 +3507,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_GuiReset, "GuiReset");
   var GuiReset = _GuiReset;
 
-  // src/Screens/Support.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiSupport = class _GuiSupport extends GuiSubscreen {
-    get name() {
-      return "Support";
-    }
-    get structure() {
-      return [
-        {
-          type: "button",
-          position: [GuiSubscreen.START_X, GuiSubscreen.START_Y],
-          size: [405, 80],
-          label: "support.button.ko-fi",
-          color: "#49225C",
-          image: "https://storage.ko-fi.com/cdn/nav-logo-stroke.png",
-          disabled: false,
-          callback() {
-            window.open("https://ko-fi.com/monikka_bc", "_blank");
-          }
-        },
-        {
-          type: "button",
-          position: [GuiSubscreen.START_X, GuiSubscreen.START_Y + GuiSubscreen.Y_MOD + 20],
-          size: [405, 80],
-          label: "support.button.patreon",
-          color: "#49225C",
-          image: "https://c5.patreon.com/external/favicon/rebrand/favicon-32.png?v=af5597c2ef",
-          disabled: false,
-          callback() {
-            window.open("https://patreon.com/monikka_bc", "_blank");
-          }
-        }
-      ];
-    }
-    static getSupporter() {
-      if (_GuiSupport.thankYouNext < CommonTime()) _GuiSupport.doNextThankYou();
-      return `${getText("support.other.thankyou")}, ${_GuiSupport.thankYou}`;
-    }
-    static doNextThankYou() {
-      if (_GuiSupport.thankYou && _GuiSupport.thankYouList.length < 2) return;
-      _GuiSupport.thankYou = CommonRandomItemFromList(_GuiSupport.thankYou, _GuiSupport.thankYouList);
-      _GuiSupport.thankYouNext = CommonTime() + 4e3;
-    }
-    Load() {
-      _GuiSupport.doNextThankYou();
-      ElementCreateDiv("ThemedGratitude");
-      const elm = document.getElementById("ThemedGratitude");
-      ElementContent("ThemedGratitude", gratitudeHtml);
-      const font = MainCanvas.canvas.clientWidth <= MainCanvas.canvas.clientHeight * 2 ? MainCanvas.canvas.clientWidth / 50 : MainCanvas.canvas.clientHeight / 25;
-      Object.assign(elm.style, {
-        fontFamily: CommonGetFontName(),
-        fontSize: font + "px"
-      });
-      super.Load();
-    }
-    Run() {
-      super.Run();
-      const tmp = GuiSubscreen.START_X;
-      GuiSubscreen.START_X = 550;
-      DrawText(_GuiSupport.getSupporter(), GuiSubscreen.START_X + 300, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, "Black", "#D7F6E9");
-      GuiSubscreen.START_X = tmp;
-    }
-    Click() {
-      super.Click();
-    }
-    Exit() {
-      ElementRemove("ThemedGratitude");
-      super.Exit();
-    }
-  };
-  __name(_GuiSupport, "GuiSupport");
-  __publicField(_GuiSupport, "thankYouList", ["Ellena", "weboos", "Jamie"]);
-  __publicField(_GuiSupport, "thankYouNext", 0);
-  __publicField(_GuiSupport, "thankYou", "");
-  var GuiSupport = _GuiSupport;
-  var gratitudeHtml = (
-    /*html*/
-    `
-<h1 class="ThemedH">Dear Supporters!</h1>
-<p class="ThemedP">
-  I want to take a moment to express my heartfelt gratitude for considering supporting me. Your willingness to stand by
-  my side in this creative journey means the world to me, and I am truly humbled by your generosity.
-</p>
-<p class="ThemedP">
-  Your support goes far beyond the financial contributions; it represents belief in my work and a shared passion for
-  what I do. Your encouragement inspires me to continue developing.
-</p>
-<p class="ThemedP">
-  Your support not only helps me sustain and grow as a developer, but also enables me to dedicate more time and
-  resources to producing high-quality mods. It allows me to explore new ideas, enhance my skills, and bring even more
-  meaningful and enjoyable content to you.
-</p>
-<p class="ThemedP">Thank you all~</p>
-<p class="ThemedP">With love, Monikka\u2665</p>
-`
-  );
-
   // src/Screens/MainMenu.ts
   var _MainMenu = class _MainMenu extends GuiSubscreen {
     constructor(module) {
@@ -3542,7 +3531,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       MainCanvas.textAlign = "left";
       DrawCharacter(Player, 50, 50, 0.9, false);
       DrawText(
-        getText("MainMenu.title").replace("$ModVersion", MOD_VERSION_CAPTION) + "  " + GuiSupport.getSupporter(),
+        getText("MainMenu.title").replace("$ModVersion", MOD_VERSION_CAPTION),
         GuiSubscreen.START_X,
         GuiSubscreen.START_Y - GuiSubscreen.Y_MOD,
         "Black",
@@ -3563,12 +3552,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         i++;
         MainCanvas.textAlign = "left";
       }
-      DrawButton(1500, 730, 405, 80, "", "IndianRed");
-      DrawImageResize("Icons/ServiceBell.png", 1510, 740, 60, 60);
-      DrawTextFit("Reset", 1580, 770, 320, "Black");
-      DrawButton(1500, 830, 405, 80, "", "#49225C");
-      DrawImageResize("Assets/Female3DCG/Emoticon/Coffee/Icon.png", 1510, 840, 60, 60);
-      DrawTextFit("Support Me\u2764", 1580, 870, 320, "Black");
+      DrawButton(1500, 830, 405, 80, "", "IndianRed");
+      DrawImageResize("Icons/ServiceBell.png", 1510, 840, 60, 60);
+      DrawTextFit("Reset", 1580, 870, 320, "Black");
       GuiSubscreen.START_X = tmp;
       MainCanvas.restore();
     }
@@ -3588,8 +3574,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         i++;
       }
       GuiSubscreen.START_X = tmp;
-      if (MouseIn(1500, 730, 405, 80)) this.setSubscreen(new GuiReset(getModule("GlobalModule")));
-      if (MouseIn(1500, 830, 400, 80)) this.setSubscreen(new GuiSupport(getModule("GlobalModule")));
+      if (MouseIn(1500, 830, 405, 80)) this.setSubscreen(new GuiReset(getModule("GlobalModule")));
     }
     Exit() {
       CharacterAppearanceForceUpCharacter = -1;
@@ -3706,6 +3691,132 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __publicField(_GUI, "instance", null);
   var GUI = _GUI;
 
+  // src/Hooks/login_options.ts
+  init_define_LAST_COMMIT_HASH();
+  var ids = {
+    optionsOpen: "tmd-login-options-open",
+    optionsClose: "tmd-login-options-dialog-close",
+    optionsSheet: "tmd-login-options-dialog",
+    optionsContent: "tmd-login-options-dialog-content",
+    optionsStyle: "tmd-login-options-style"
+  };
+  var options = {
+    hideCredits: "Hide Credits",
+    hideDummy: "Hide Dummy"
+  };
+  function loadLoginOptions() {
+    localSettingsLoad();
+    patchLoginPage();
+    Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/login-options.css`);
+    createUI();
+    const cleanup = hookFunction("LoginRun", 0 /* Observe */, (args, next) => {
+      next(args);
+      ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
+      ElementSetSize(ids.optionsOpen, 90, 90);
+      ElementSetSize(ids.optionsSheet, 1e3, 500);
+    });
+    return () => {
+      removeUI();
+      Style.eject(ids.optionsStyle);
+      cleanup();
+      unpatchLoginPage();
+    };
+  }
+  __name(loadLoginOptions, "loadLoginOptions");
+  function createUI() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
+      tooltip: "[Themed] Login Options",
+      image: "./Icons/Preference.png"
+    });
+    document.body.appendChild(optionsButton);
+    const optionsSheet = ElementCreate({
+      tag: "dialog",
+      attributes: {
+        id: ids.optionsSheet
+      },
+      children: [
+        ElementCreate({
+          tag: "div",
+          attributes: {
+            id: ids.optionsContent
+          },
+          children: [
+            ...Array.from(Object.entries(options)).map(([key, value]) => {
+              return {
+                tag: "label",
+                classList: ["tmd-login-options-label"],
+                children: [
+                  ElementCheckbox.Create(
+                    `tmd-login-options-${key}`,
+                    () => {
+                      loginOptions[key] = !loginOptions[key];
+                      localSettingsSave();
+                      repatchLoginPage();
+                    },
+                    {
+                      checked: loginOptions[key]
+                    }
+                  ),
+                  value
+                ]
+              };
+            })
+          ]
+        }),
+        ElementButton.Create(
+          ids.optionsClose,
+          () => optionsSheet.close(),
+          {
+            label: "Close"
+          }
+        )
+      ],
+      parent: document.body
+    });
+  }
+  __name(createUI, "createUI");
+  function removeUI() {
+    document.getElementById(ids.optionsOpen)?.remove();
+    document.getElementById(ids.optionsSheet)?.remove();
+  }
+  __name(removeUI, "removeUI");
+  function patchLoginPage() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    if (loginOptions.hideDummy) {
+      patchFunction("LoginRun", {
+        "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
+      });
+      patchFunction("LoginDoNextThankYou", {
+        "CharacterRelease(LoginCharacter, false);": "",
+        "CharacterAppearanceFullRandom(LoginCharacter);": "",
+        'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
+        "CharacterFullRandomRestrain(LoginCharacter)": ""
+      });
+    }
+    if (loginOptions.hideCredits) {
+      patchFunction("LoginRun", {
+        "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
+        'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
+        'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
+      });
+      patchFunction("LoginDoNextThankYou", {
+        "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
+      });
+    }
+  }
+  __name(patchLoginPage, "patchLoginPage");
+  function unpatchLoginPage() {
+    unpatchFunction("LoginRun");
+    unpatchFunction("LoginDoNextThankYou");
+  }
+  __name(unpatchLoginPage, "unpatchLoginPage");
+  function repatchLoginPage() {
+    unpatchLoginPage();
+    patchLoginPage();
+  }
+  __name(repatchLoginPage, "repatchLoginPage");
+
   // src/Migrators/V140Migrator.ts
   init_define_LAST_COMMIT_HASH();
 
@@ -3774,6 +3885,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
   // src/Screens/Colors.ts
   init_define_LAST_COMMIT_HASH();
   var _GuiColors = class _GuiColors extends GuiSubscreen {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "settingsBackup");
+    }
     get name() {
       return "Colors";
     }
@@ -3794,7 +3909,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
           label: `colors.setting.${key}.name`,
           description: `colors.setting.${key}.desc`,
           setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[key], "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.base[key] = val, "setSetting"),
           disabled: isBaseMode && !baseModeKey(key)
         })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
         Object.entries(this.settings.special).map(([key, value]) => ({
@@ -3802,10 +3916,35 @@ One of mods you are using is using an old version of SDK. It will work for now b
           id: key,
           label: `colors.setting.${key}.name`,
           description: `colors.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting"),
-          setSetting: /* @__PURE__ */ __name((val) => this.settings.special[key] = val, "setSetting")
+          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting")
         }))
       ];
+    }
+    Load() {
+      super.Load();
+      this.settingsBackup = CommonCloneDeep(this.settings);
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        document.getElementById(key).addEventListener("input", function(ev) {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            settings.base[key] = this.value;
+          }
+          getModule("ColorsModule").reloadTheme();
+        });
+      }), Object.entries(this.settings.special).forEach(([key]) => {
+        document.getElementById(key).addEventListener("input", function(ev) {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            settings.special[key] = this.value;
+          }
+          getModule("ColorsModule").reloadTheme();
+        });
+      });
     }
     Run() {
       DrawButton(1495, 75, 90, 90, "", "White", "Icons/Swap.png", getText("colors.button.change_input_type"));
@@ -3829,6 +3968,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
         return;
       }
       super.Click();
+    }
+    Exit() {
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!_Color.isValidHex(input.value)) {
+          settings.base[key] = this.settingsBackup.base[key];
+        }
+      }), Object.entries(this.settings.special).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!_Color.isValidHex(input.value)) {
+          settings.special[key] = this.settingsBackup.special[key];
+        }
+      });
+      super.Exit();
     }
   };
   __name(_GuiColors, "GuiColors");
@@ -3955,91 +4109,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Modules/Commands.ts
   init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Other.ts
-  init_define_LAST_COMMIT_HASH();
-  function sendLocalSmart(id, message, timeoutInSeconds) {
-    const div = document.createElement("div");
-    div.id = id;
-    div.setAttribute("class", "ChatMessage ThemedMessage");
-    div.setAttribute("data-time", ChatRoomCurrentTime());
-    div.setAttribute("data-sender", Player?.MemberNumber + "");
-    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
-    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
-    ChatRoomAppendChat(div);
-    if (!timeoutInSeconds) return;
-    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
-  }
-  __name(sendLocalSmart, "sendLocalSmart");
-  function sendAction(msg, target) {
-    ServerSend("ChatRoomChat", {
-      Content: "Beep",
-      Type: "Action",
-      Sender: Player.MemberNumber,
-      ...target ? { Target: target } : {},
-      Dictionary: [
-        // EN
-        { Tag: "Beep", Text: "msg" },
-        // CN
-        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
-        // DE
-        { Tag: "Biep", Text: "msg" },
-        // FR
-        { Tag: "Sonner", Text: "msg" },
-        // Message itself
-        { Tag: "msg", Text: msg }
-      ]
-    });
-  }
-  __name(sendAction, "sendAction");
-  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
-    if (document.getElementById("themed-modal")) return false;
-    const modal = document.createElement("div");
-    const modalTitle = document.createElement("div");
-    const modalButtons = document.createElement("div");
-    const modalAcceptButton = document.createElement("div");
-    const modalCancelButton = document.createElement("div");
-    modal.classList.add("themed-modal");
-    modalTitle.id = "modal-prompt";
-    modalButtons.id = "modal-buttons";
-    modalAcceptButton.id = "modal-button-accept";
-    modalCancelButton.id = "modal-button-cancel";
-    modalAcceptButton.classList.add("modal-button");
-    modalCancelButton.classList.add("modal-button");
-    modalTitle.innerHTML = prompt2;
-    modalAcceptButton.innerText = getText("modal.button.accept");
-    modalCancelButton.innerText = getText("modal.button.cancel");
-    modalAcceptButton.addEventListener("click", () => {
-      acceptCallbackFn();
-      modal.remove();
-    });
-    modalCancelButton.addEventListener("click", () => {
-      cancelCallbackFn();
-      modal.remove();
-    });
-    modalButtons.append(modalAcceptButton, modalCancelButton);
-    modal.append(modalTitle, modalButtons);
-    document.body.append(modal);
-  }
-  __name(useLgcModal, "useLgcModal");
-  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = { ...mergeTo };
-    for (const key in mergeFrom) {
-      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
-        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
-      } else if (key in mergedObject) {
-        mergedObject[key] = mergeFrom[key];
-      }
-    }
-    return mergedObject;
-  }
-  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  function hasSetter(obj, prop) {
-    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
-  }
-  __name(hasSetter, "hasSetter");
-
-  // src/Modules/Commands.ts
   var _CommandsModule = class _CommandsModule extends BaseModule {
     Load() {
       CommandCombine([
@@ -4120,6 +4189,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     Load() {
       changeModColors();
+      setTimeout(changeModColors, 6e4);
+      setTimeout(changeModColors, 3e5);
       hookFunction(
         "ChatRoomCurrentTime",
         0 /* Observe */,
@@ -4610,7 +4681,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static saveVersion() {
       if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.2";
+        Player[ModName].Version = "1.5.6";
       }
     }
     static loadVersion() {
@@ -4621,7 +4692,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     static checkNewVersion() {
       const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.2")) {
+      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.6")) {
         _VersionModule.isItNewVersion = true;
       }
     }
@@ -4651,13 +4722,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Themed.ts
   function initWait() {
+    if (window.ThemedLoaded) return;
     conLog("Init wait");
     if (CurrentScreen == null || CurrentScreen === "Login") {
+      const cleanup = loadLoginOptions();
       hookFunction("LoginResponse", 0, (args, next) => {
         conDebug("Init! LoginResponse caught: ", args);
         next(args);
         const response = args[0];
         if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
+          cleanup();
           init();
         }
       });
@@ -4668,7 +4742,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(initWait, "initWait");
   async function init() {
-    if (window.ThemedLoaded) return;
     await Localization.load();
     settingsLoad();
     if (!initModules()) {

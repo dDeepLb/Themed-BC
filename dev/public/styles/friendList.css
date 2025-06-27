@@ -1,52 +1,52 @@
 #friend-list-subscreen {
-  --border-color: var(--accent);
-  --image-color: var(--accent);
-  --text-color: var(--text);
-  --button-color: var(--element);
-  --inactive-button-color: var(--elementDisabled);
+  --border-color: var(--tmd-accent);
+  --image-color: var(--tmd-accent);
+  --text-color: var(--tmd-text);
+  --button-color: var(--tmd-element);
+  --inactive-button-color: var(--tmd-element-disabled);
 }
 
 #friend-list-beep-dialog {
-  background-color: color-mix(in srgb, var(--element) 80%, #ffffffaa 40%);
-  color: var(--text);
+  background-color: color-mix(in srgb, var(--tmd-element) 80%, #ffffffaa 40%);
+  color: var(--tmd-text);
 }
 
 #friend-list-subscreen,
 #friend-list-beep-dialog {
   textarea {
-    background: var(--element);
-    color: var(--text);
-    border: 2px solid var(--accent);
+    background: var(--tmd-element);
+    color: var(--tmd-text);
+    border: 2px solid var(--tmd-accent);
   }
 
   input {
-    background: var(--element);
-    color: var(--text);
-    border: 2px solid var(--accent);
+    background: var(--tmd-element);
+    color: var(--tmd-text);
+    border: 2px solid var(--tmd-accent);
   }
 
   textarea:focus,
   input:focus {
-    outline: var(--accent) solid 1px;
+    outline: var(--tmd-accent) solid 1px;
   }
 
   .button {
-    --button-color: var(--element);
-    --disabled-color: var(--elementDisabled);
-    --hover-color: var(--elementHover);
+    --button-color: var(--tmd-element);
+    --disabled-color: var(--tmd-element-disabled);
+    --hover-color: var(--tmd-element-hover);
   }
 
   .button-styling {
-    border-color: var(--accent);
+    border-color: var(--tmd-accent);
   }
 
   .button-styling:hover {
-    border-color: var(--accentHover);
+    border-color: var(--tmd-accent-hover);
   }
 
   .button-tooltip {
-    background-color: var(--elementHint);
-    color: var(--text);
-    border-color: var(--accent);
+    background-color: var(--tmd-element-hint);
+    color: var(--tmd-text);
+    border-color: var(--tmd-accent);
   }
 }
