@@ -1,9 +1,13 @@
 import { build, context } from 'esbuild';
-import copy from 'esbuild-copy-files-plugin';
 import progress from 'esbuild-plugin-progress';
 import time from 'esbuild-plugin-time';
 import simpleGit from 'simple-git';
 import { readFileSync } from 'fs';
+import { exec } from 'child_process';
+import { watch } from 'chokidar';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.meta.url)));
 
@@ -37,34 +41,28 @@ const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.met
     bundle: true,
     sourcemap: true,
     target: ['es2020'],
-    loader: {
-      '.html': 'text',
-      '.css': 'text',
-    },
     treeShaking: true,
     keepNames: true,
     define: {
       PUBLIC_URL: JSON.stringify(PUBLIC_URL),
       MOD_VERSION: JSON.stringify(packageJson.version),
-      LAST_COMMIT_HASH: JSON.stringify(LAST_COMMIT_HASH),
       VERSION_HASH: JSON.stringify(VERSION_HASH),
       IS_DEVEL: JSON.stringify(IS_DEVEL),
     },
     plugins: [
-      copy({
-        source: ['./public/'],
-        target: './dist/public/',
-        copyWithFolder: false
-      }),
       progress(),
       time(),
     ],
   };
 
-  if (isLocal && process.argv.includes('--dev')) {
+  if (isLocal) {
     const ctx = await context(buildOptions);
 
-    await ctx.watch();
+    await runBuild();
+    watch(['./src', './public']).on('change', async () => {
+      await runBuild();
+    });
+
     console.info('Watching for changes...');
 
     const server = await ctx.serve({ host: HOST, port: PORT, servedir: 'dist' });
@@ -72,10 +70,17 @@ const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.met
 
     return;
   }
+
+  runBuild();
   
-  await build(buildOptions)
-    .catch((err) => {
+  async function runBuild() {
+    await build(buildOptions);
+
+    try {
+      const { stdout } = await execAsync('node ./scripts/prepare_public.js');
+      console.log(stdout);
+    } catch (err) {
       console.error(err);
-      process.exit(1);
-    });
+    }
+  }
 })();
