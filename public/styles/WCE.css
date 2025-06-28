@@ -5,12 +5,12 @@
 #bceRichOnlineProfile {
   background: var(--tmd-element) !important;
   color: var(--tmd-text) !important;
-  border: 2px dashed var(--tmd-accent) !important;
+  border: min(0.2vh, 0.1vw) dashed var(--tmd-accent) !important;
 }
 
 .bce-colors .bce-dark-input {
   background-color: var(--tmd-element);
-  border: 1px solid var(--tmd-accent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   color: var(--tmd-text);
 }
 
@@ -22,11 +22,11 @@
   background-color: var(--tmd-main);
   color: var(--tmd-text);
   border-color: var(--tmd-accent);
-  max-width: max(100dvw, 50dvh);
-  max-height: min(90dvh, 45dvw);
-  min-width: max(15dvh, 30dvw);
-  min-height: max(30dvh, 15dvw);
-  width: max(100dvw, 50dvh);
+  max-width: max(100vw, 50vh);
+  max-height: min(90vh, 45vw);
+  min-width: max(15vh, 30vw);
+  min-height: max(30vh, 15vw);
+  width: max(100vw, 50vh);
 }
 
 #bce-friend-list {
@@ -37,8 +37,8 @@
   background-color: var(--tmd-element);
   border-bottom-color: var(--tmd-accent);
   color: var(--tmd-text);
-  height: min(3dvh, 1.5dvw);
-  font-size: min(1.8dvh, 0.9dvw);
+  height: min(3vh, 1.5vw);
+  font-size: min(1.8vh, 0.9vw);
 }
 
 .bce-friend-list-entry.bce-friend-list-selected {
@@ -56,15 +56,15 @@
 }
 
 #bce-message-input {
-  border-top: 1px solid var(--tmd-accent);
-  border-bottom: 1px solid var(--tmd-accent);
+  border-top: min(0.2vh, 0.1vw) solid var(--tmd-accent);
+  border-bottom: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   background-color: var(--tmd-element);
   color: var(--tmd-text);
 }
 
 #bce-message-input:disabled {
-  border-top: 1px solid var(--tmd-accentDisabled);
-  border-bottom: 1px solid var(--tmd-accentDisabled);
+  border-top: min(0.2vh, 0.1vw) solid var(--tmd-accentDisabled);
+  border-bottom: min(0.2vh, 0.1vw) solid var(--tmd-accentDisabled);
   background-color: var(--tmd-elementDisabled);
   color: var(--tmd-text);
 }
