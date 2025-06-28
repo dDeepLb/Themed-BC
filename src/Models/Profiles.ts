@@ -1,8 +1,9 @@
-import { BaseSettingsModel, GlobalSettingsModel } from './Global';
+import { BaseSettingsModel as DL_BaseSettingsModel } from 'bc-deeplib/deeplib';
 import { ColorsSettingsModel } from './Colors';
 import { IntegrationSettingsModel } from './Integration';
+import { GlobalSettingsModel } from './Global';
 
-export type ProfilesSettingsModel = BaseSettingsModel & {
+export type ProfilesSettingsModel = DL_BaseSettingsModel & {
   [index: number]: ProfileEntryModel;
   index: ProfileEntryModel[];
 };
