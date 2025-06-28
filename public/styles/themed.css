@@ -5,7 +5,7 @@
   background-color: var(--tmd-element, white);
   color: var(--tmd-text, black);
 
-  border: 2px solid var(--tmd-accent, black);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent, black);
   border-radius: 10px;
 
   display: flex;
@@ -42,7 +42,7 @@
   width: auto;
   padding: 5px;
 
-  border: 2px solid var(--tmd-accent, black);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent, black);
   border-radius: 10px;
   transition: all 0.5s ease;
 }
@@ -51,11 +51,6 @@
   background-color: var(--tmd-element-hover, cyan);
   text-shadow: 0 0 0.12em var(--tmd-text-shadow, black);
   cursor: pointer;
-}
-
-.tmd-color-picker:disabled {
-  border: var(--tmd-blocked, red) solid 2px;
-  cursor: not-allowed;
 }
 
 code {
@@ -73,24 +68,22 @@ code {
   color: rgb(203, 185, 23);
 }
 
-#TextAreaChatLog[data-colortheme='dark'] div.ChatMessage.ThemedMessage,
-#TextAreaChatLog[data-colortheme='dark2'] div.ChatMessage.ThemedMessage {
+#TextAreaChatLog[data-colortheme^='dark'] div.ChatMessage.ThemedMessage {
   background-color: var(--tmd-element, transparent);
-  border: 2px solid var(--tmd-accent, #440171);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent, #440171);
   color: var(--tmd-text, white);
 }
 
 #TextAreaChatLog div.ChatMessage.ThemedMessage {
   background-color: #eee;
-  border: 2px solid #440171;
+  border: min(0.2vh, 0.1vw) solid #440171;
   padding-left: 5px;
   display: block;
   white-space: normal;
   color: #111;
 }
 
-#TextAreaChatLog[data-colortheme='dark'] a.ThemedText,
-#TextAreaChatLog[data-colortheme='dark2'] a.ThemedText {
+#TextAreaChatLog[data-colortheme^='dark'] a.ThemedText {
   cursor: pointer;
   font-weight: bold;
   color: var(--tmd-text, white);
@@ -100,28 +93,4 @@ code {
   cursor: pointer;
   font-weight: bold;
   color: #111;
-}
-
-#ThemedGratitude {
-  position: fixed;
-  width: 25%;
-  height: 50%;
-  top: 15%;
-  left: 50%;
-}
-
-.ThemedH {
-  font-size: 1em;
-  color: var(--tmd-text, black);
-}
-
-.ThemedP {
-  font-size: 0.6em;
-  color: var(--tmd-text, black);
-  line-height: 1.5;
-}
-
-.ThemedP:last-child {
-  font-size: 0.8em;
-  color: color-mix(in srgb, var(--tmd-accent-hover, #440171) 50%, var(--tmd-text, black) 50%);
 }
