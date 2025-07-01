@@ -1,5 +1,5 @@
 import Color from 'color';
-import { BaseColorsModel } from '../Models/Colors';
+import { BaseColorsModel, SpecialColorsModel } from '../Models/Colors';
 
 export const plainColors: BaseColorsModel = {
   main: '',
@@ -59,13 +59,15 @@ export const _Color = {
     const globalSettings = Player.Themed.GlobalModule;
 
     Object.keys(colorSettings.special).forEach((key) => {
-      const clr = Color(colorSettings.special[key]);
-      specialColors[key] = [clr.hex(), clr.lighten(0.2).hex()];
+      const typedKey = key as keyof SpecialColorsModel;
+      const clr = Color(colorSettings.special[typedKey]);
+      specialColors[typedKey] = [clr.hex(), clr.lighten(0.2).hex()];
     });
 
     if (globalSettings.doUseAdvancedColoring) {
       Object.keys(colorSettings.base).forEach(key => {
-        plainColors[key] = colorSettings.base[key];
+        const typedKey = key as keyof BaseColorsModel;
+        plainColors[typedKey] = colorSettings.base[typedKey];
       });
     } else {
       const primaryColor = _Color.getHexComputed(colorSettings.base.main);

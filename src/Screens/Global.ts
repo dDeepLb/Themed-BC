@@ -1,12 +1,12 @@
-import { Setting } from '../../.types/setting';
-import { GuiSubscreen } from '../Base/BaseSetting';
-import { getModule } from '../Base/Modules';
+import { BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GlobalModule } from '../Modules/Global';
+import { SettingElement } from 'bc-deeplib/base/elements_typings';
+import { ColorsModule } from '../Modules/Colors';
 
-export class GuiGlobal extends GuiSubscreen {
+export class GuiGlobal extends BaseSubscreen {
   get name(): string {
-    return 'Global';
+    return 'global';
   }
 
   get icon(): string {
@@ -17,19 +17,26 @@ export class GuiGlobal extends GuiSubscreen {
     return super.settings as GlobalSettingsModel;
   }
 
-  get structure(): Setting[] {
+  get pageStructure(): SettingElement[][] {
     const defaultSettings = getModule<GlobalModule>('GlobalModule').defaultSettings;
 
-    return Object.entries(this.settings).map(([key, value]) => ({
-      type: 'checkbox',
-      label: `settings.setting.${key}.name`,
-      description: `settings.setting.${key}.desc`,
-      setting: () => value ?? defaultSettings[key],
-      setSetting: (val) => (this.settings[key] = val)
-    }));
+    return [Object.entries(this.settings).map(([key, value]) => {
+      const typedKey = key as keyof GlobalSettingsModel;
+      return {
+        id: `tmd-global-${key}`,
+        type: 'checkbox',
+        label: getText(`settings.setting.${typedKey}.name`),
+        description: getText(`settings.setting.${typedKey}.desc`),
+        setElementValue: () => value ?? defaultSettings[typedKey],
+        setSettingValue: (val) => {
+          this.settings[typedKey] = val;
+          getModule<ColorsModule>('ColorsModule').reloadTheme();
+        }
+      };
+    })];
   }
 
-  Load(): void {
-    super.Load();
+  load(): void {
+    super.load();
   }
 }

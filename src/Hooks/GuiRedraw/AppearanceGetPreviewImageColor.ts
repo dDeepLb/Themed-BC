@@ -1,9 +1,11 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { plainColors, specialColors } from '../../Utilities/Color';
-import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
+import { sdk } from '../../Themed';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookAppearanceGetPreviewImageColor() {
-  hookFunction(
+  sdk.hookFunction(
     'AppearanceGetPreviewImageColor',
     HookPriority.Observe,
     (args: Parameters<typeof AppearanceGetPreviewImageColor>, next: (args: Parameters<typeof AppearanceGetPreviewImageColor>) => ReturnType<typeof AppearanceGetPreviewImageColor>) => {
@@ -12,7 +14,7 @@ export function hookAppearanceGetPreviewImageColor() {
       const [c, item, hover] = args;
 
       if (DialogMenuMode === 'permissions' && c.IsPlayer()) {
-        let permission = 'allowed';
+        let permission: keyof typeof specialColors = 'allowed';
         if (InventoryIsPermissionBlocked(c, item.Asset.Name, item.Asset.Group.Name)) permission = 'blocked';
         else if (InventoryIsPermissionLimited(c, item.Asset.Name, item.Asset.Group.Name)) permission = 'limited';
         return item.Worn ? specialColors.equipped[hover ? 1 : 0] : specialColors[permission][hover ? 1 : 0];

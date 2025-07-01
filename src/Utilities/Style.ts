@@ -1,10 +1,10 @@
+import { deepLibLogger, PlayerStorage, Style } from 'bc-deeplib/deeplib';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { plainColors, specialColors } from './Color';
-import { PlayerStorage } from './Data';
 import { camelToKebabCase } from './Other';
 
 type styles = {
-  [key in keyof Omit<IntegrationSettingsModel, 'themedEnabled' | 'MBS'>]: string;
+  [key in keyof Omit<IntegrationSettingsModel, 'modEnabled' | 'doShowNewVersionMessage' | 'MBS'>]: string;
 };
 const styles: styles = {
   inputs: '',
@@ -21,7 +21,7 @@ const styles: styles = {
 
 export const BcStyle = {
   injectAll() {
-    const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
+    const isEnabled = PlayerStorage().GlobalModule.modEnabled;
 
     Style.injectEmbed('themed', `${PUBLIC_URL}/styles/themed.css`);
     
@@ -55,12 +55,14 @@ export const BcStyle = {
 export function composeRoot() {
   let genedColors = '';
 
-  Object.keys(plainColors).forEach((key) => {
-    genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[key]};\n\t`;
+  Object.keys(plainColors).forEach((key: string) => {
+    const typedKey = key as keyof typeof plainColors;
+    genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[typedKey]};\n\t`;
   });
   Object.keys(specialColors).forEach((key) => {
-    genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[key][0]};\n\t`;
-    genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[key][1]};\n\t`;
+    const typedKey = key as keyof typeof specialColors;
+    genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[typedKey][0]};\n\t`;
+    genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[typedKey][1]};\n\t`;
   });
 
   return /*css*/ `

@@ -28,13 +28,14 @@ function compileSassOne(inputPath, outputPath) {
   const scssFile = fs.readFileSync(inputPath, 'utf8');
   const result = sass.compileString(scssFile, {
     sourceMap: true,
-    sourceMapIncludeSources: true,
+
     style: 'expanded',
+    syntax: 'scss',
   });
-  const cssWithMap = result.css + `\n/*# sourceMappingURL=${result.sourceMap.file} */\n`;
+  const cssWithMap = result.css + `\n/*# sourceMappingURL=${path.basename(outputPath).replace(/\.scss$/, '.css.map')} */\n`;
 
   fs.writeFileSync(outputPath.replace(/\.scss$/, '.css'), cssWithMap);
-  fs.writeFileSync(outputPath.replace(/\.scss$/, '.map'), JSON.stringify(result.sourceMap));
+  fs.writeFileSync(outputPath.replace(/\.scss$/, '.css.map'), JSON.stringify(result.sourceMap));
 }
 
 compileSassAll();

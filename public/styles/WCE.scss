@@ -48,7 +48,7 @@
 }
 
 .bce-friend-list-entry:hover {
-  background-color: var(--tmd-elementHover);
+  background-color: var(--tmd-element-hover);
 }
 
 #bce-message-right-container {
@@ -63,9 +63,9 @@
 }
 
 #bce-message-input:disabled {
-  border-top: min(0.2vh, 0.1vw) solid var(--tmd-accentDisabled);
-  border-bottom: min(0.2vh, 0.1vw) solid var(--tmd-accentDisabled);
-  background-color: var(--tmd-elementDisabled);
+  border-top: min(0.2vh, 0.1vw) solid var(--tmd-accent-disabled);
+  border-bottom: min(0.2vh, 0.1vw) solid var(--tmd-accent-disabled);
+  background-color: var(--tmd-element-disabled);
   color: var(--tmd-text);
 }
 
@@ -74,11 +74,11 @@
 }
 
 .bce-message-sender {
-  text-shadow: 0.05em 0.05em var(--tmd-textShadow);
+  text-shadow: 0.05em 0.05em var(--tmd-text-shadow);
 }
 
 .bce-message-Message .bce-message-sender {
-  text-shadow: 0.05em 0.05em var(--tmd-textShadow);
+  text-shadow: 0.05em 0.05em var(--tmd-text-shadow);
 }
 
 /* #endregion */

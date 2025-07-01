@@ -1,4 +1,4 @@
-import { BaseModule } from '../Base/BaseModule';
+import { BaseModule, PlayerStorage } from 'bc-deeplib/deeplib';
 import { hookAppearanceGetPreviewImageColor } from '../Hooks/GuiRedraw/AppearanceGetPreviewImageColor';
 import { hookDialogGetMenuButtonColor } from '../Hooks/GuiRedraw/DialogGetMenuButtonColor';
 import { hookDrawBackNextButton } from '../Hooks/GuiRedraw/DrawBackNextButton';
@@ -13,17 +13,17 @@ import { hookDrawRoomBackground } from '../Hooks/GuiRedraw/DrawRoomBackground';
 import { hookDrawText } from '../Hooks/GuiRedraw/DrawText';
 import { hookDrawTextFit } from '../Hooks/GuiRedraw/DrawTextFit';
 import { hookDrawTextWrap } from '../Hooks/GuiRedraw/DrawTextWrap';
-import { PlayerStorage } from '../Utilities/Data';
-import { patchFunction, unpatchFunction } from '../Utilities/SDK';
+import { sdk } from '../Themed';
+import { SettingsModel } from '../Models/Settings';
 
 export const doRedraw = () => {
-  return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== 'ClubCard';
+  return PlayerStorage<SettingsModel>()?.GlobalModule?.modEnabled && PlayerStorage<SettingsModel>().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== 'ClubCard';
 };
 
 export class GuiRedrawModule extends BaseModule {
   patched: boolean = false;
 
-  Load(): void {
+  load(): void {
     hookDrawRoomBackground();
     hookDrawButton();
     hookDrawCheckbox();
@@ -45,7 +45,7 @@ export class GuiRedrawModule extends BaseModule {
   patchGui() {
     if (this.patched) return false;
 
-    patchFunction('ChatSearchNormalDraw', {
+    sdk.patchFunction('ChatSearchNormalDraw', {
       // isBlocked
       'bgColor = isFull ? "#884444" : "#FF9999";':
         'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
@@ -66,7 +66,7 @@ export class GuiRedrawModule extends BaseModule {
         'blocksText.push({ text: gameText, color: "%searchGame"});',
     });
 
-    patchFunction('ChatSearchPermissionDraw', {
+    sdk.patchFunction('ChatSearchPermissionDraw', {
       'bgColor = Hover ? "red" : "pink";':
         'bgColor = "%allowed";',
 
@@ -74,7 +74,7 @@ export class GuiRedrawModule extends BaseModule {
         'bgColor = "%searchBlock";'
     });
 
-    patchFunction('DialogDraw', {
+    sdk.patchFunction('DialogDraw', {
       'DrawRect(1087 + offset, 550, 225, 275, bgColor);':
         'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
 
@@ -82,7 +82,7 @@ export class GuiRedrawModule extends BaseModule {
         'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");',
     });
 
-    patchFunction('DrawProcessScreenFlash', {
+    sdk.patchFunction('DrawProcessScreenFlash', {
       'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));':
         'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));',
 
@@ -90,12 +90,12 @@ export class GuiRedrawModule extends BaseModule {
         'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
     });
 
-    patchFunction('ChatAdminRun', {
+    sdk.patchFunction('ChatAdminRun', {
       'const ButtonBackground = canEdit ? "White" : "#ebebe4";':
         'const ButtonBackground = canEdit ? "%background" : "%disabled";'
     });
 
-    patchFunction('AppearanceRun', {
+    sdk.patchFunction('AppearanceRun', {
       'const ButtonColor = canAccess ? "White" : "#888";':
         'const ButtonColor = canAccess ? "%background" : "%disabled";',
       'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);':
@@ -106,7 +106,7 @@ export class GuiRedrawModule extends BaseModule {
         'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);',
     });
 
-    patchFunction('ExtendedItemGetButtonColor', {
+    sdk.patchFunction('ExtendedItemGetButtonColor', {
       'ButtonColor = "#888888";':
         'ButtonColor = "%accent";',
       'ButtonColor = Hover ? "red" : "pink";':
@@ -126,21 +126,21 @@ export class GuiRedrawModule extends BaseModule {
         'ButtonColor = Hover ? "%hover" : "%background";',
     });
 
-    patchFunction('PreferenceSubscreenDifficultyRun', {
+    sdk.patchFunction('PreferenceSubscreenDifficultyRun', {
       'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "#DDFFDD" : "White", "");':
         'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "%accent" : "%background", "");',
       'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "White" : "#ebebe4", "");':
         'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "%background" : "%disabled", "");'
     });
 
-    patchFunction('ChatAdminRoomCustomizationRun', {
+    sdk.patchFunction('ChatAdminRoomCustomizationRun', {
       'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());':
         'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
       'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());':
         'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
     });
 
-    patchFunction('Shop2._AssetElementDraw', {
+    sdk.patchFunction('Shop2._AssetElementDraw', {
       'options.Background = "cyan";':
         'options.Background = "%hover";',
       'options.Background = "white";':
@@ -151,12 +151,12 @@ export class GuiRedrawModule extends BaseModule {
         'options.Background = "%equipped";',
     });
 
-    patchFunction('RelogRun', {
+    sdk.patchFunction('RelogRun', {
       'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");':
         'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
     });
 
-    patchFunction('ChatRoomMenuDraw', {
+    sdk.patchFunction('ChatRoomMenuDraw', {
       'let color = "White";': 'let color = "%background";',
       'color = "White";': 'color = "%background";',
       'color = "Pink";': 'color = "%blocked";',
@@ -171,19 +171,19 @@ export class GuiRedrawModule extends BaseModule {
   unpatchGui() {
     if (!this.patched) return false;
 
-    unpatchFunction('ChatSearchNormalDraw');
-    unpatchFunction('ChatSearchPermissionDraw');
-    unpatchFunction('DialogDraw');
-    unpatchFunction('DrawProcessScreenFlash');
-    unpatchFunction('ChatAdminRun');
-    unpatchFunction('AppearanceRun');
+    sdk.unpatchFunction('ChatSearchNormalDraw');
+    sdk.unpatchFunction('ChatSearchPermissionDraw');
+    sdk.unpatchFunction('DialogDraw');
+    sdk.unpatchFunction('DrawProcessScreenFlash');
+    sdk.unpatchFunction('ChatAdminRun');
+    sdk.unpatchFunction('AppearanceRun');
 
-    unpatchFunction('ExtendedItemGetButtonColor');
-    unpatchFunction('PreferenceSubscreenDifficultyRun');
-    unpatchFunction('ChatAdminRoomCustomizationRun');
-    unpatchFunction('Shop2._AssetElementDraw');
-    unpatchFunction('RelogRun');
-    unpatchFunction('ChatRoomMenuDraw');
+    sdk.unpatchFunction('ExtendedItemGetButtonColor');
+    sdk.unpatchFunction('PreferenceSubscreenDifficultyRun');
+    sdk.unpatchFunction('ChatAdminRoomCustomizationRun');
+    sdk.unpatchFunction('Shop2._AssetElementDraw');
+    sdk.unpatchFunction('RelogRun');
+    sdk.unpatchFunction('ChatRoomMenuDraw');
 
     this.patched = false;
   }

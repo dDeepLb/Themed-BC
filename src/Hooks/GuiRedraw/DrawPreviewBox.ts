@@ -1,9 +1,11 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
+import { sdk } from '../../Themed';
 import { plainColors } from '../../Utilities/Color';
-import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawPreviewBox() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawPreviewBox',
     HookPriority.Observe,
     (args: Parameters<typeof DrawPreviewBox>, next: (args: Parameters<typeof DrawPreviewBox>) => ReturnType<typeof DrawPreviewBox>) => {
@@ -52,7 +54,7 @@ export function hookDrawPreviewBox() {
       ControllerAddActiveArea(X, Y);
       DrawEmptyRect(X, Y, Width, Height, hover ? plainColors.accentHover : plainColors.accent);
       if (Path !== '') DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
-      DrawPreviewIcons(Icons, X, Y);
+      DrawPreviewIcons(Icons ?? [], X, Y);
       if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
     },
     ModuleCategory.GuiRedraw

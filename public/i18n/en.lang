@@ -1,6 +1,10 @@
 # Mod Button
 infosheet.button_text = Themed Settings
 
+settings.button.back_button_hint = Back
+settings.button.prev_button_hint = Previous page
+settings.button.next_button_hint = Next page
+
 # Modal
 modal.button.accept = Accept
 modal.button.cancel = Cancel
@@ -10,16 +14,16 @@ modal.prompt.share = $Sender shares $SenderPronoun theme.<br>Do you want to load
 modal.prompt.chat_share_notification = $Sender sent a Themed theme:
 
 # Main Menu
-MainMenu.title = - Themed BC v$ModVersion -
-mainmenu.button.Global = Global Settings
-mainmenu.button.Colors = Color Settings
-mainmenu.button.Integration = Integrations
-mainmenu.button.Profiles = Profiles
+mainmenu.title = - Themed BC v$ModVersion -
+mainmenu.button.global = Global Settings
+mainmenu.button.colors = Color Settings
+mainmenu.button.integration = Integrations
+mainmenu.button.profiles = Profiles
 
 # Settings
-Global.title = - Global Settings -
-settings.setting.themedEnabled.name = Enable Themed
-settings.setting.themedEnabled.desc = Enables features of Themed.
+global.title = - Global Settings -
+settings.setting.modEnabled.name = Enable Themed
+settings.setting.modEnabled.desc = Enables features of Themed.
 settings.setting.doVanillaGuiOverhaul.name = Enable GUI Overhaul
 settings.setting.doVanillaGuiOverhaul.desc = Redraws interface using colors selected in Color Settings.
 settings.setting.doUseAdvancedColoring.name = Enable advanced coloring
@@ -34,7 +38,7 @@ settings.setting.doShowNewVersionMessage.name = Enable new version message
 settings.setting.doShowNewVersionMessage.desc = Show message about new version of Themed, when it's out.
 
 # Colors
-Colors.title = - Color Settings -
+colors.title = - Color Settings -
 colors.setting.main.name = Main color
 colors.setting.main.desc = Used for main background and maybe somewhere else^^.
 colors.setting.element.name = Element color
@@ -74,7 +78,7 @@ colors.setting.roomGame.desc = Colors tooltip, that shows game in a room.
 colors.button.change_input_type = Change inputs type
 
 # Integration
-Integration.title = - Integrations -
+integration.title = - Integrations -
 integration.setting.inputs.name = Enable BC Inputs integration
 integration.setting.inputs.desc = Changes CSS styles of BC to use Color Settings. Changes some interactable thingies.
 integration.setting.inventory.name = Enable BC Inventory integration
@@ -99,7 +103,7 @@ integration.setting.MBS.name = Enable MBS integration
 integration.setting.MBS.desc = Changes CSS styles of MBS to use Color Settings. Changes settings interface in a whole.
 
 # Profiles
-Profiles.title = - Profiles -
+profiles.title = - Profiles -
 
 profiles.button.save = Save
 profiles.button.load = Load
@@ -107,6 +111,7 @@ profiles.button.delete = Delete
 
 profiles.prompt = Please, enter profile name.
 profiles.text.profile = Profile
+profiles.text.doesnt_exist = doesn't exist.
 profiles.text.has_been_saved = has been saved!
 profiles.text.needs_to_be_saved = needs to be saved first!
 profiles.text.has_been_loaded = has been loaded!
@@ -122,9 +127,3 @@ reset.label.action_cannot_be_undone = This action cannot be undone!
 
 reset.button.confirm = Confirm
 reset.button.cancel = Cancel
-
-# Support
-Support.title = - Support -
-support.button.ko-fi = Ko-fi
-support.button.patreon = Patreon
-support.other.thankyou = Thank you

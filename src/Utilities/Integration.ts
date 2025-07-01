@@ -1,6 +1,6 @@
+import { PlayerStorage } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../Modules/GuiRedraw';
 import { plainColors } from './Color';
-import { PlayerStorage } from './Data';
 
 export function changeModColors() {
   if (doRedraw()) {

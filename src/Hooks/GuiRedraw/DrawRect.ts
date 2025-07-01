@@ -1,10 +1,12 @@
 import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { ColorType, plainColors, specialColors } from '../../Utilities/Color';
-import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
+import { HookPriority } from 'bc-deeplib/deeplib';
+import { sdk } from '../../Themed';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawRect() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawRect',
     HookPriority.Observe,
     (args: Parameters<typeof DrawRect>, next: (args: Parameters<typeof DrawRect>) => ReturnType<typeof DrawRect>) => {
@@ -87,9 +89,11 @@ export function hookDrawRect() {
           case 'equipped':
           case 'crafted':
           case 'limited':
-          case 'blocked':
-            color = specialColors[color.substring(1)][hover];
+          case 'blocked': {
+            const typedColor = color.substring(1) as keyof typeof specialColors;
+            color = specialColors[typedColor][hover];
             break;
+          }
 
           default:
             return next(args);

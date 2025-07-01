@@ -1,9 +1,10 @@
-import { BaseModule } from '../Base/BaseModule';
-import { Subscreen } from '../Base/SettingDefinitions';
+import { BaseModule, HookPriority, Subscreen } from 'bc-deeplib/deeplib';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GuiGlobal } from '../Screens/Global';
 import { changeModColors } from '../Utilities/Integration';
-import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
+import { sdk } from '../Themed';
+import { ModuleCategory } from '../Utilities/ModDefinition';
+import { BcStyle } from '../Utilities/Style';
 
 export class GlobalModule extends BaseModule {
   private static transparentCharacters: number[] = [];
@@ -22,7 +23,7 @@ export class GlobalModule extends BaseModule {
 
   get defaultSettings() {
     return <GlobalSettingsModel>{
-      themedEnabled: true,
+      modEnabled: true,
       doVanillaGuiOverhaul: true,
       doUseAdvancedColoring: false,
       doUseFlatColor: false,
@@ -32,15 +33,18 @@ export class GlobalModule extends BaseModule {
     };
   }
 
-  Load(): void {
-    changeModColors();
+  load(): void {
+    const reload = () => {
+      changeModColors();
+      BcStyle.reloadAll();
+    };
 
     // try to be sure that the colors are updated 
     // even for mods that are loaded shortly after Themed
-    setTimeout(changeModColors, 60_000);
-    setTimeout(changeModColors, 300_000);
+    setTimeout(reload, 60_000);
+    setTimeout(reload, 300_000);
 
-    hookFunction(
+    sdk.hookFunction(
       'ChatRoomCurrentTime',
       HookPriority.Observe,
       (args, next) => {
@@ -53,25 +57,26 @@ export class GlobalModule extends BaseModule {
       ModuleCategory.Global
     );
 
-    hookFunction(
+    sdk.hookFunction(
       'DialogDraw',
       HookPriority.Observe,
       (args: Parameters<typeof DialogDraw>, next: (args: Parameters<typeof DialogDraw>) => ReturnType<typeof DialogDraw>) => {
-        if (!this.settings.themedEnabled) return next(args);
+        if (!this.settings.modEnabled) return next(args);
         if (!this.settings.doIndicateCharacterAbsence) return next(args);
         if (!(CurrentScreen == 'ChatRoom')) return next(args);
         if (!CurrentCharacter) return next(args);
 
         next(args);
 
-        if (CurrentCharacter === null) return;
+        if (!CurrentCharacter || !CurrentCharacter?.MemberNumber) return;
         if (CurrentCharacter.IsPlayer()) return;
+        if (!CurrentCharacter?.Canvas?.getContext('2d') || !CurrentCharacter?.CanvasBlink?.getContext('2d')) return;
         if (ChatRoomCharacter.includes(CurrentCharacter)) {
           if (GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
-            CurrentCharacter.Canvas.getContext('2d').globalAlpha = 1.0;
-            CurrentCharacter.CanvasBlink.getContext('2d').globalAlpha = 1.0;
+            CurrentCharacter.Canvas.getContext('2d')!.globalAlpha = 1.0;
+            CurrentCharacter.CanvasBlink.getContext('2d')!.globalAlpha = 1.0;
             CharacterAppearanceBuildCanvas(CurrentCharacter);
-            GlobalModule.transparentCharacters.filter((x) => x !== CurrentCharacter.MemberNumber);
+            GlobalModule.transparentCharacters.filter((x) => x !== CurrentCharacter!.MemberNumber);
           }
         } else {
           MainCanvas.save();
@@ -83,8 +88,8 @@ export class GlobalModule extends BaseModule {
           MainCanvas.restore();
 
           if (!GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
-            CurrentCharacter.Canvas.getContext('2d').globalAlpha = 0.2;
-            CurrentCharacter.CanvasBlink.getContext('2d').globalAlpha = 0.2;
+            CurrentCharacter.Canvas.getContext('2d')!.globalAlpha = 0.2;
+            CurrentCharacter.CanvasBlink.getContext('2d')!.globalAlpha = 0.2;
             CharacterAppearanceBuildCanvas(CurrentCharacter);
             GlobalModule.transparentCharacters.push(CurrentCharacter.MemberNumber);
           }
@@ -95,25 +100,26 @@ export class GlobalModule extends BaseModule {
       ModuleCategory.Global
     );
 
-    hookFunction(
+    sdk.hookFunction(
       'AppearanceRun',
       HookPriority.Observe,
       (args: Parameters<typeof AppearanceRun>, next: (args: Parameters<typeof AppearanceRun>) => ReturnType<typeof AppearanceRun>) => {
-        if (!this.settings.themedEnabled) return next(args);
+        if (!this.settings.modEnabled) return next(args);
         if (!this.settings.doIndicateCharacterAbsence) return next(args);
         if (!(CurrentScreen == 'Appearance')) return next(args);
-        if (!CharacterAppearanceSelection) return next(args);
+        if (!CharacterAppearanceSelection || !CharacterAppearanceSelection.MemberNumber) return next(args);
 
         next(args);
 
         if (CharacterAppearanceSelection === null) return;
         if (CharacterAppearanceSelection.IsPlayer()) return;
+        if (!CharacterAppearanceSelection?.Canvas?.getContext('2d') || !CharacterAppearanceSelection?.CanvasBlink?.getContext('2d')) return;
         if (ChatRoomCharacter.includes(CharacterAppearanceSelection)) {
           if (GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
-            CharacterAppearanceSelection.Canvas.getContext('2d').globalAlpha = 1.0;
-            CharacterAppearanceSelection.CanvasBlink.getContext('2d').globalAlpha = 1.0;
+            CharacterAppearanceSelection.Canvas.getContext('2d')!.globalAlpha = 1.0;
+            CharacterAppearanceSelection.CanvasBlink.getContext('2d')!.globalAlpha = 1.0;
             CharacterAppearanceBuildCanvas(CharacterAppearanceSelection);
-            GlobalModule.transparentCharacters.filter((x) => x !== CharacterAppearanceSelection.MemberNumber);
+            GlobalModule.transparentCharacters.filter((x) => x !== CharacterAppearanceSelection!.MemberNumber);
           }
         } else {
           MainCanvas.save();
@@ -125,8 +131,8 @@ export class GlobalModule extends BaseModule {
           MainCanvas.restore();
 
           if (!GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
-            CharacterAppearanceSelection.Canvas.getContext('2d').globalAlpha = 0.2;
-            CharacterAppearanceSelection.CanvasBlink.getContext('2d').globalAlpha = 0.2;
+            CharacterAppearanceSelection.Canvas.getContext('2d')!.globalAlpha = 0.2;
+            CharacterAppearanceSelection.CanvasBlink.getContext('2d')!.globalAlpha = 0.2;
             CharacterAppearanceBuildCanvas(CharacterAppearanceSelection);
             GlobalModule.transparentCharacters.push(CharacterAppearanceSelection.MemberNumber);
           }
@@ -137,11 +143,11 @@ export class GlobalModule extends BaseModule {
       ModuleCategory.Global
     );
 
-    hookFunction(
+    sdk.hookFunction(
       'ChatRoomSync',
       HookPriority.Observe,
       (args: Parameters<typeof ChatRoomSync>, next: (args: Parameters<typeof ChatRoomSync>) => ReturnType<typeof ChatRoomSync>) => {
-        Character.filter(character => GlobalModule.transparentCharacters?.includes(character.MemberNumber));
+        Character.filter(character => character.IsPlayer() || !GlobalModule.transparentCharacters?.includes(character.MemberNumber!));
 
         return next(args);
       },
@@ -149,5 +155,5 @@ export class GlobalModule extends BaseModule {
     );
   }
 
-  Run(): void { }
+  run(): void { }
 }

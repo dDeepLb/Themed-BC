@@ -1,9 +1,11 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
+import { sdk } from '../../Themed';
 import { plainColors } from '../../Utilities/Color';
-import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawBackNextButton() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawBackNextButton',
     HookPriority.Observe,
     (args: Parameters<typeof DrawBackNextButton>, next: (args: Parameters<typeof DrawBackNextButton>) => ReturnType<typeof DrawBackNextButton>) => {

@@ -1,4 +1,5 @@
 import { LocalSettingsModel } from '../Models/local';
+import { dataStore as settingsSave } from 'bc-deeplib/deeplib';
 import { SettingsModel } from '../Models/Settings';
 import { ModName } from './ModDefinition';
 

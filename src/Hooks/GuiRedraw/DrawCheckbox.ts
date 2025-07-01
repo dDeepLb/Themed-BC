@@ -1,8 +1,10 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
+import { sdk } from '../../Themed';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawCheckbox() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawCheckbox',
     HookPriority.Observe,
     (args: Parameters<typeof DrawCheckbox>, next: (args: Parameters<typeof DrawCheckbox>) => ReturnType<typeof DrawCheckbox>) => {
@@ -13,7 +15,7 @@ export function hookDrawCheckbox() {
       const backgroundColor = Disabled ? '%disabled' : '%background';
 
       DrawText(Text, Left + 100, Top + 33, TextColor, '');
-      DrawButton(Left, Top, Width, Height, '', backgroundColor, IsChecked ? CheckImage : '', null, Disabled);
+      DrawButton(Left, Top, Width, Height, '', backgroundColor, IsChecked ? CheckImage : '', undefined, Disabled);
     },
     ModuleCategory.GuiRedraw
   );

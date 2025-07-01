@@ -1,7 +1,7 @@
-import { BaseModule } from '../Base/BaseModule';
+import { BaseModule } from 'bc-deeplib/deeplib';
 
 export class Module extends BaseModule {
-  Load(): void {}
+  load(): void {}
 
-  Run(): void {}
+  run(): void {}
 }

@@ -1,9 +1,6 @@
-import { BaseModule } from '../Base/BaseModule';
-import { Subscreen } from '../Base/SettingDefinitions';
+import { BaseModule, Subscreen } from 'bc-deeplib/deeplib';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { GuiIntegration } from '../Screens/Integration';
-import { hookFunction, HookPriority, ModuleCategory } from '../Utilities/SDK';
-import { BcStyle } from '../Utilities/Style';
 
 export class IntegrationModule extends BaseModule {
   get settingsScreen(): Subscreen | null {
@@ -34,15 +31,6 @@ export class IntegrationModule extends BaseModule {
     };
   }
 
-  Load(): void {
-    hookFunction(
-      'ChatRoomSync',
-      HookPriority.Observe,
-      (args, next) => {
-        next(args);
-        BcStyle.reloadAll();
-      },
-      ModuleCategory.Integration
-    );
+  load(): void {
   }
 }

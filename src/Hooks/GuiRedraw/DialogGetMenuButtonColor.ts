@@ -1,8 +1,9 @@
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { hookFunction, ModuleCategory } from '../../Utilities/SDK';
+import { sdk } from '../../Themed';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDialogGetMenuButtonColor() {
-  hookFunction('DialogGetMenuButtonColor', 0, (args, next) => {
+  sdk.hookFunction('DialogGetMenuButtonColor', 0, (args, next) => {
     if (!doRedraw()) return next(args);
 
     const [buttonName] = args;

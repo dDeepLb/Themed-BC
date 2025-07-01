@@ -1,12 +1,12 @@
-import { Setting } from '../../.types/setting';
-import { GuiSubscreen } from '../Base/BaseSetting';
-import { getModule } from '../Base/Modules';
+import { BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { IntegrationModule } from '../Modules/Integration';
+import { SettingElement } from 'bc-deeplib/base/elements_typings';
+import { ColorsModule } from '../Modules/Colors';
 
-export class GuiIntegration extends GuiSubscreen {
+export class GuiIntegration extends BaseSubscreen {
   get name(): string {
-    return 'Integration';
+    return 'integration';
   }
 
   get icon(): string {
@@ -17,19 +17,27 @@ export class GuiIntegration extends GuiSubscreen {
     return super.settings as IntegrationSettingsModel;
   }
 
-  get structure(): Setting[] {
+  get pageStructure(): SettingElement[][] {
     const defaultSettings = getModule<IntegrationModule>('IntegrationModule').defaultSettings;
 
-    return Object.entries(this.settings).map(([key, value]) => ({
-      type: 'checkbox',
-      label: `integration.setting.${key}.name`,
-      description: `integration.setting.${key}.desc`,
-      setting: () => value ?? defaultSettings[key],
-      setSetting: (val) => (this.settings[key] = val)
-    }));
+    return [Object.entries(this.settings).map(([key, value]) => { 
+      const typedKey = key as keyof IntegrationSettingsModel;
+
+      return {
+        id: `tmd-integration-${key}`,
+        type: 'checkbox',
+        label: getText(`integration.setting.${key}.name`),
+        description: getText(`integration.setting.${key}.desc`),
+        setElementValue: () => value ?? defaultSettings[typedKey],
+        setSettingValue: (val) => {
+          this.settings[typedKey] = val;
+          getModule<ColorsModule>('ColorsModule').reloadTheme();
+        }
+      };
+    })];
   }
 
-  Load(): void {
-    super.Load();
+  load(): void {
+    super.load();
   }
 }
