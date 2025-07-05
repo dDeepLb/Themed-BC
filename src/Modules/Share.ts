@@ -1,7 +1,7 @@
 import { ColorsSettingsModel } from '../Models/Colors';
 import { ColorsModule } from './Colors';
 import { GlobalSettingsModel } from '../Models/Global';
-import { BaseModule, getModule, getText, HookPriority, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, dataStore as settingsSave } from 'bc-deeplib/deeplib';
+import { BaseModule, getModule, getText, HookPriority, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, modStorage } from 'bc-deeplib/deeplib';
 import { sdk } from '../Themed';
 import { useLgcModal } from '../Utilities/Other';
 
@@ -77,7 +77,7 @@ export class ShareModule extends BaseModule {
   acceptShare(data: ColorsSettingsModel, settings: GlobalSettingsModel): void {
     Player.Themed.ColorsModule = data;
     Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
-    settingsSave();
+    modStorage.save();
 
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }

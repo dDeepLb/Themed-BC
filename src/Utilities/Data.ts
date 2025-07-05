@@ -1,19 +1,16 @@
 import { LocalSettingsModel } from '../Models/local';
-import { dataStore as settingsSave } from 'bc-deeplib/deeplib';
+import { modStorage } from 'bc-deeplib/deeplib';
 import { SettingsModel } from '../Models/Settings';
-import { ModName } from './ModDefinition';
 
 export function settingsReset() {
-  Player[ModName] = <SettingsModel>{};
-  settingsSave();
+  modStorage.playerStorage = <SettingsModel>{};
+  modStorage.save();
 }
 
 export function localSettingsLoad() {
-  const data = localStorage.getItem('ThemedLocalData');
+  const data = modStorage.getLocalStorage('ThemedLocalData');
 
-  if (data) {
-    window.ThemedLocalData = JSON.parse(data);
-  } else {
+  if (!data) {
     window.ThemedLocalData = <LocalSettingsModel>{
       loginOptions: {
         hideDummy: false,
@@ -26,5 +23,5 @@ export function localSettingsLoad() {
 }
 
 export function localSettingsSave() {
-  localStorage.setItem('ThemedLocalData', JSON.stringify(window.ThemedLocalData));
+  modStorage.setLocalStorage('ThemedLocalData', window.ThemedLocalData);
 }

@@ -1,4 +1,4 @@
-import { deepLibLogger, PlayerStorage, Style } from 'bc-deeplib/deeplib';
+import { modStorage, Style } from 'bc-deeplib/deeplib';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { plainColors, specialColors } from './Color';
 import { camelToKebabCase } from './Other';
@@ -21,7 +21,7 @@ const styles: styles = {
 
 export const BcStyle = {
   injectAll() {
-    const isEnabled = PlayerStorage().GlobalModule.modEnabled;
+    const isEnabled = modStorage.playerStorage.GlobalModule.modEnabled;
 
     Style.injectEmbed('themed', `${PUBLIC_URL}/styles/themed.css`);
     
@@ -31,7 +31,7 @@ export const BcStyle = {
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
-      if (!PlayerStorage().IntegrationModule[id]) return;
+      if (!modStorage.playerStorage.IntegrationModule[id]) return;
       Style.injectEmbed(id, `${PUBLIC_URL}/styles/${id}.css`);
     });
   },

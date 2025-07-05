@@ -1,9 +1,8 @@
-import { advancedElement, BaseSubscreen, getModule, getText, layoutElement, PlayerStorage } from 'bc-deeplib/deeplib';
+import { advancedElement, BaseSubscreen, getModule, getText, layoutElement, modStorage } from 'bc-deeplib/deeplib';
 import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
 import { conWarn } from '../Utilities/Console';
 import { ModName } from '../Utilities/ModDefinition';
-import { SettingsModel } from '../Models/Settings';
 
 export class GuiProfiles extends BaseSubscreen {
 
@@ -141,7 +140,7 @@ export class GuiProfiles extends BaseSubscreen {
       return;
     }
 
-    const data = PlayerStorage<SettingsModel>().ProfilesModule[profileId].data;
+    const data = modStorage.playerStorage.ProfilesModule[profileId].data;
 
     Player[ModName] = {
       ...Player[ModName],
@@ -205,7 +204,7 @@ export class GuiProfiles extends BaseSubscreen {
   private profileExists(profileId: number): boolean {
     if (!this.isValidProfileId(profileId)) return false;
 
-    const data = PlayerStorage<SettingsModel>()?.ProfilesModule?.[profileId]?.data || {};
+    const data = modStorage.playerStorage?.ProfilesModule?.[profileId]?.data || {};
 
     if (!data || Object.keys(data).length === 0) return false;
 

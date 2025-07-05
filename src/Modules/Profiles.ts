@@ -1,4 +1,4 @@
-import { BaseModule, deepMergeMatchingProperties, getModule, PlayerStorage, Subscreen } from 'bc-deeplib/deeplib';
+import { BaseModule, deepMergeMatchingProperties, getModule, modStorage, Subscreen } from 'bc-deeplib/deeplib';
 import { ProfileSaveModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { GuiProfiles } from '../Screens/Profiles';
 import { ModName } from '../Utilities/ModDefinition';
@@ -32,7 +32,7 @@ export class ProfilesModule extends BaseModule {
     
     for (let i = 0; i < 3; i++) {
       const profileIndex = i + 1;
-      if (!PlayerStorage().ProfilesModule[profileIndex] || Object.keys(PlayerStorage().ProfilesModule[profileIndex]).length === 0) {
+      if (!modStorage.playerStorage.ProfilesModule[profileIndex] || Object.keys(modStorage.playerStorage.ProfilesModule[profileIndex]).length === 0) {
         Player[ModName].ProfilesModule[profileIndex] = {
           data: <ProfileSaveModel>{},
           name: ''

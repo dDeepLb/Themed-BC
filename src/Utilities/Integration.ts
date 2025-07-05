@@ -1,4 +1,4 @@
-import { PlayerStorage } from 'bc-deeplib/deeplib';
+import { modStorage } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../Modules/GuiRedraw';
 import { plainColors } from './Color';
 
@@ -30,7 +30,7 @@ function resetBctColors() {
 
 function changeMbsColors() {
   if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-    if (!PlayerStorage().IntegrationModule.MBS) return;
+    if (!modStorage.playerStorage.IntegrationModule.MBS) return;
     return mbs.css.setStyle({
       backgroundColor: plainColors.main,
       buttonColor: plainColors.element,
@@ -44,7 +44,7 @@ function changeMbsColors() {
 
 function resetMbsColors() {
   if (typeof mbs !== 'undefined' && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-    if (!PlayerStorage().IntegrationModule.MBS)
+    if (!modStorage.playerStorage.IntegrationModule.MBS)
       mbs.css.setStyle({
         backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
         buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,

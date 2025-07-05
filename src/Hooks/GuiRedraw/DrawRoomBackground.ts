@@ -1,9 +1,8 @@
-import { HookPriority, PlayerStorage } from 'bc-deeplib/deeplib';
+import { HookPriority, modStorage } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { sdk } from '../../Themed';
 import { plainColors } from '../../Utilities/Color';
 import { ModuleCategory } from '../../Utilities/ModDefinition';
-import { SettingsModel } from '../../Models/Settings';
 
 export function hookDrawRoomBackground() {
   sdk.hookFunction(
@@ -13,7 +12,7 @@ export function hookDrawRoomBackground() {
       if (!doRedraw()) return next([URL, ...args]);
 
       if (URL.includes('Sheet.jpg')) {
-        if (PlayerStorage<SettingsModel>().GlobalModule.doUseFlatColor) {
+        if (modStorage.playerStorage.GlobalModule.doUseFlatColor) {
           DrawRect(0, 0, 2000, 1000, plainColors.main);
         } else {
           next([URL, ...args]);
