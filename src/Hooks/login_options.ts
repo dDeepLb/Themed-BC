@@ -1,7 +1,6 @@
 import { HookPriority, Style } from 'bc-deeplib/deeplib';
 import { LocalSettingsModel } from '../Models/local';
 import { localSettingsLoad, localSettingsSave } from '../Utilities/Data';
-import { sdk } from '../Themed';
 import { ModSdkManager } from 'bc-deeplib/deeplib';
 
 const ids = {

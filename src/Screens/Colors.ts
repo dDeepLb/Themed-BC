@@ -1,4 +1,4 @@
-import { advancedElement, BaseSubscreen, getModule, getText, layoutElement } from 'bc-deeplib/deeplib';
+import { advancedElement, BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
 import { BaseColorsModel, ColorsSettingsModel, SpecialColorsModel } from '../Models/Colors';
 import { ColorsModule } from '../Modules/Colors';
 import { _Color } from '../Utilities/Color';
