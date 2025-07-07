@@ -55,8 +55,7 @@ export class GuiColors extends BaseSubscreen {
     super.load();
 
     const typeToggleButton = advancedElement.createButton({
-      id: 'tmd-inputs-type-toggle', 
-      type: 'button',
+      id: 'tmd-inputs-type-toggle',
       onClick: () => {
         this.pageStructure.forEach((page) => {
           page.forEach((elm) => {

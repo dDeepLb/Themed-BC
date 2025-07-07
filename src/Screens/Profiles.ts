@@ -43,7 +43,6 @@ export class GuiProfiles extends BaseSubscreen {
         children: [
           advancedElement.createLabel({
             id: `tmd-profile-label-${profileId}`,
-            type: 'label',
             label: profileName
           }),
           {
@@ -52,14 +51,12 @@ export class GuiProfiles extends BaseSubscreen {
             children: [
               advancedElement.createButton({
                 id: `tmd-profiles-profile-save-${profileId}`,
-                type: 'button',
                 onClick: () => this.handleProfilesSaving(profileId),
                 label: getText('profiles.button.save'),
               }),
 
               advancedElement.createButton({
                 id: `tmd-profiles-profile-load-${profileId}`,
-                type: 'button',
                 onClick: () => this.handleProfilesLoading(profileId),
                 label: getText('profiles.button.load'),
                 htmlOptions: {
@@ -71,7 +68,6 @@ export class GuiProfiles extends BaseSubscreen {
 
               advancedElement.createButton({
                 id: `tmd-profiles-profile-delete-${profileId}`,
-                type: 'button',
                 onClick: () => this.handleProfilesDeleting(profileId),
                 label: getText('profiles.button.delete'),
                 htmlOptions: {
