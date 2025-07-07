@@ -76,6 +76,7 @@
     align-items: center;
     justify-content: space-between;
     padding: min(2vh, 1vw);
+    gap: min(2vh, 1vw);
 
     .tmd-profile-buttons {
       display: flex;
@@ -86,6 +87,33 @@
       .button-styling {
         width: min(20vh, 10vw);
         height: 1.4em;
+      }
+    }
+
+    .tmd-profile-color-showcase {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: min(1vh, 0.5vw);
+      align-items: center;
+      padding: 0.2em;
+      background-color: #FFFFFF10;
+      justify-content: center;
+
+      .tmd-profile-color-showcase-button {
+        width: min(4vh, 2vw);
+        height: min(4vh, 2vw);
+        background-color: var(--background-color);
+
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border: min(0.2vh, 0.1vw) solid var(--deeplib-background-color);
+          filter: invert(100%);
+          pointer-events: none;
+          z-index: 0;
+        }
       }
     }
   }

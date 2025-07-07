@@ -3,6 +3,7 @@ import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
 import { conWarn } from '../Utilities/Console';
 import { ModName } from '../Utilities/ModDefinition';
+import { BaseColorsModel } from '../Models/Colors';
 
 export class GuiProfiles extends BaseSubscreen {
 
@@ -45,6 +46,7 @@ export class GuiProfiles extends BaseSubscreen {
             id: `tmd-profile-label-${profileId}`,
             label: profileName
           }),
+          this.createColorShowcase(profileId),
           {
             tag: 'div',
             classList: ['tmd-profile-buttons'],
@@ -89,26 +91,17 @@ export class GuiProfiles extends BaseSubscreen {
 
   resize(onLoad?: boolean): void {
     super.resize(onLoad);
-
-    // ElementSetPosition('tmd-profiles-container', 400, 180);
-    // ElementSetSize('tmd-profiles-container', 1100, 660);
-  }
-
-  exit() {
-    CharacterAppearanceForceUpCharacter = -1;
-    CharacterLoadCanvas(Player);
-    super.exit();
   }
 
   private handleProfilesSaving(profileId: number): void {
-    if(!this.profileCanBeSaved(profileId)) return;
-      
+    if (!this.profileCanBeSaved(profileId)) return;
+
     const name = prompt(getText('profiles.prompt'));
     if (name === null) return;
 
-    const storage = Player[ModName];
+    const storage = modStorage.playerStorage;
     const profile = this.settings[profileId];
-    
+
     if (!profile || Object.keys(profile).length === 0) {
       this.settings[profileId] = {} as ProfileEntryModel;
     }
@@ -127,6 +120,7 @@ export class GuiProfiles extends BaseSubscreen {
 
     this.updateProfileLabel(profileId);
     this.updateProfileButtons(profileId);
+    this.updateProfileColorShowcase(profileId);
   }
 
   private handleProfilesLoading(profileId: number): void {
@@ -148,7 +142,6 @@ export class GuiProfiles extends BaseSubscreen {
     const display = name ? `"${name}"` : profileId;
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_loaded')}`);
 
-    this.updateProfileButtons(profileId);
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }
 
@@ -170,6 +163,7 @@ export class GuiProfiles extends BaseSubscreen {
 
     this.updateProfileLabel(profileId);
     this.updateProfileButtons(profileId);
+    this.updateProfileColorShowcase(profileId);
   }
 
   private updateProfileButtons(profileId: number): void {
@@ -190,6 +184,62 @@ export class GuiProfiles extends BaseSubscreen {
     const profileLabel = ElementWrap(`tmd-profile-label-${profileId}`);
     if (!profileLabel) return;
     profileLabel.textContent = display;
+  }
+
+  private updateProfileColorShowcase(profileId: number): void {
+    const colorShowcase = this.createColorShowcase(profileId);
+
+    if (colorShowcase === null) {
+      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+    } else {
+      const label = ElementWrap(`tmd-profile-label-${profileId}`);
+      if (!label) return;
+      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+      label.after(colorShowcase);
+    }
+  }
+
+  private createColorShowcase(profileId: number): HTMLDivElement | null {
+    const exists = this.profileExists(profileId);
+
+    if (!exists) return null;
+
+    const colors = Object.entries(this.settings[profileId].data.ColorsModule.base);
+
+    return ElementCreate({
+      tag: 'div',
+      classList: ['tmd-profile-color-showcase'],
+      attributes: {
+        id: `tmd-profile-color-showcase-${profileId}`
+      },
+      children:
+        colors.map(([key, value]) => {
+          const isBaseMode = !this.settings[profileId].data.GlobalModule.doUseAdvancedColoring;
+          const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
+
+          if (isBaseMode && !baseModeKey(key as keyof BaseColorsModel)) {
+            return;
+          }
+
+          return advancedElement.createButton({
+            id: `tmd-profile-color-showcase-${profileId}-${key}`,
+            tooltip: getText(`colors.setting.${key}.name`),
+            htmlOptions: {
+              htmlOptions: {
+                button: {
+                  style: {
+                    '--background-color': value
+                  },
+                  classList: ['tmd-profile-color-showcase-button']
+                }
+              },
+              options: {
+                noStyling: true
+              }
+            }
+          });
+        })
+    });
   }
 
   private isValidProfileId(id: number): boolean {
