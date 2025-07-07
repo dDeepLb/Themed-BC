@@ -8,7 +8,7 @@ export function settingsReset() {
 }
 
 export function localSettingsLoad() {
-  const data = modStorage.getLocalStorage('ThemedLocalData');
+  const data = modStorage.getLocalStorage('LocalData') as LocalSettingsModel | null;
 
   if (!data) {
     window.ThemedLocalData = <LocalSettingsModel>{
@@ -19,9 +19,11 @@ export function localSettingsLoad() {
     };
 
     localSettingsSave();
+  } else {
+    window.ThemedLocalData = data;
   }
 }
 
 export function localSettingsSave() {
-  modStorage.setLocalStorage('ThemedLocalData', window.ThemedLocalData);
+  modStorage.setLocalStorage('LocalData', window.ThemedLocalData);
 }
