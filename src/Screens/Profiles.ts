@@ -100,7 +100,7 @@ export class GuiProfiles extends BaseSubscreen {
     super.exit();
   }
 
-  handleProfilesSaving(profileId: number): void {
+  private handleProfilesSaving(profileId: number): void {
     if(!this.profileCanBeSaved(profileId)) return;
       
     const name = prompt(getText('profiles.prompt'));
@@ -126,9 +126,10 @@ export class GuiProfiles extends BaseSubscreen {
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_saved')}`);
 
     this.updateProfileLabel(profileId);
+    this.updateProfileButtons(profileId);
   }
 
-  handleProfilesLoading(profileId: number): void {
+  private handleProfilesLoading(profileId: number): void {
     if (!this.profileExists(profileId)) {
       ToastManager.error(`${getText('profiles.text.profile')} ${profileId} ${getText('profiles.text.doesnt_exist')}`);
       return;
@@ -147,10 +148,11 @@ export class GuiProfiles extends BaseSubscreen {
     const display = name ? `"${name}"` : profileId;
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_loaded')}`);
 
+    this.updateProfileButtons(profileId);
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }
 
-  handleProfilesDeleting(profileId: number): void {
+  private handleProfilesDeleting(profileId: number): void {
     if (!this.profileExists(profileId)) {
       ToastManager.info(`${getText('profiles.text.profile')} ${profileId} ${getText('profiles.text.doesnt_exist')}`);
       return;
@@ -167,9 +169,22 @@ export class GuiProfiles extends BaseSubscreen {
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_deleted')}`);
 
     this.updateProfileLabel(profileId);
+    this.updateProfileButtons(profileId);
   }
 
-  updateProfileLabel(profileId: number): void {
+  private updateProfileButtons(profileId: number): void {
+    const profileSaveButton = ElementWrap(`tmd-profiles-profile-save-${profileId}`) as HTMLButtonElement;
+    const profileLoadButton = ElementWrap(`tmd-profiles-profile-load-${profileId}`) as HTMLButtonElement;
+    const profileDeleteButton = ElementWrap(`tmd-profiles-profile-delete-${profileId}`) as HTMLButtonElement;
+
+    if (!profileSaveButton || !profileLoadButton || !profileDeleteButton) return;
+
+    profileSaveButton.disabled = !this.profileCanBeSaved(profileId);
+    profileLoadButton.disabled = !this.profileExists(profileId);
+    profileDeleteButton.disabled = !this.profileExists(profileId);
+  }
+
+  private updateProfileLabel(profileId: number): void {
     const name = this.settings[profileId].name;
     const display = name ? name : `${getText('profiles.text.profile')} ${profileId}`;
     const profileLabel = ElementWrap(`tmd-profile-label-${profileId}`);
