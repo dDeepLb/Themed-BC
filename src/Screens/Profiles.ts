@@ -123,7 +123,6 @@ export class GuiProfiles extends BaseSubscreen {
     };
 
     const display = name ? `"${name}"` : profileId;
-    //@ts-expect-error: bc-stubs lag
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_saved')}`);
 
     this.updateProfileLabel(profileId);
@@ -131,7 +130,6 @@ export class GuiProfiles extends BaseSubscreen {
 
   handleProfilesLoading(profileId: number): void {
     if (!this.profileExists(profileId)) {
-      //@ts-expect-error: bc-stubs lag
       ToastManager.error(`${getText('profiles.text.profile')} ${profileId} ${getText('profiles.text.doesnt_exist')}`);
       return;
     }
@@ -147,7 +145,6 @@ export class GuiProfiles extends BaseSubscreen {
 
     const name = this.settings[profileId].name;
     const display = name ? `"${name}"` : profileId;
-    //@ts-expect-error: bc-stubs lag
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_loaded')}`);
 
     getModule<ColorsModule>('ColorsModule').reloadTheme();
@@ -155,7 +152,6 @@ export class GuiProfiles extends BaseSubscreen {
 
   handleProfilesDeleting(profileId: number): void {
     if (!this.profileExists(profileId)) {
-      //@ts-expect-error: bc-stubs lag
       ToastManager.info(`${getText('profiles.text.profile')} ${profileId} ${getText('profiles.text.doesnt_exist')}`);
       return;
     }
@@ -168,7 +164,6 @@ export class GuiProfiles extends BaseSubscreen {
     } as ProfileEntryModel;
 
     const display = name ? `"${name}"` : profileId;
-    //@ts-expect-error: bc-stubs lag
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_deleted')}`);
 
     this.updateProfileLabel(profileId);

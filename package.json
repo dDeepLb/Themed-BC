@@ -35,7 +35,7 @@
     "@types/node": "^20.16.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "bc-stubs": "~117.0.0",
+    "bc-stubs": "~117.0.1",
     "chokidar": "^4.0.3",
     "esbuild": "^0.21.5",
     "esbuild-copy-files-plugin": "^1.2.0",

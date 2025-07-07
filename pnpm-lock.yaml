@@ -46,8 +46,8 @@ importers:
         specifier: ^7.18.0
         version: 7.18.0(eslint@8.57.0)(typescript@5.5.4)
       bc-stubs:
-        specifier: ~117.0.0
-        version: 117.0.0
+        specifier: ~117.0.1
+        version: 117.0.1
       chokidar:
         specifier: ^4.0.3
         version: 4.0.3
@@ -516,8 +516,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bc-stubs@117.0.0:
-    resolution: {integrity: sha512-Hv16L9Diakit8oJy9zGiuYr76df5tuMSFV1H5vuPilJtQGLRRHaBwauu/tE+9MhJftJuc1qkj3j0EsgZt1xSTQ==}
+  bc-stubs@117.0.1:
+    resolution: {integrity: sha512-QDIPXr+nOLTR6hQuwSKCDivhcIGXrVU/br8tzmBnD/g1asIPJWEqOZpqe/vs570n8fgOL12imG7hSdPcfjdpYA==}
 
   bondage-club-mod-sdk@1.2.0:
     resolution: {integrity: sha512-S+li+PgX7Qo5yccS/R/eAXC4Opq8lc5AdhTPjC2XhWxDGTieUQKj3QJ4ZLgL8x0ySnK7h+DvlkRZd8+OT5JErQ==}
@@ -1469,7 +1469,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bc-stubs@117.0.0:
+  bc-stubs@117.0.1:
     dependencies:
       socket.io-client: 4.6.1
     transitivePeerDependencies:
