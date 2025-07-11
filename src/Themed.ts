@@ -18,7 +18,7 @@ export const { sdk } = (() => {
     new GUI({
       ButtonText: 'Themed',
       Identifier: 'Themed',
-      Image: `${PUBLIC_URL}/icons/mod.png`,
+      Image: `${PUBLIC_URL}/images/mod.png`,
     }),
     new GlobalModule(),
     new ColorsModule(),
@@ -60,6 +60,6 @@ export const { sdk } = (() => {
     },
     modules,
     migrators,
-    pathToTranslationsFolder: `${PUBLIC_URL}/i18n/`,
+    pathToTranslationsFolder: `${PUBLIC_URL}/translations/`,
   });
 })();
