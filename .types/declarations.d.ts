@@ -7,12 +7,6 @@ declare interface Window {
   ThemedLocalData: import('../src/Models/local').LocalSettingsModel
 }
 
-declare const PUBLIC_URL: string;
-declare const MOD_VERSION: string; 
-declare const LAST_COMMIT_HASH: string; 
-declare const VERSION_HASH: string; 
-declare const IS_DEVEL: boolean; 
-
 declare module '*.html' {
   const value: string;
   export = value;

@@ -28,7 +28,6 @@ function compileSassOne(inputPath, outputPath) {
   const scssFile = fs.readFileSync(inputPath, 'utf8');
   const result = sass.compileString(scssFile, {
     sourceMap: true,
-
     style: 'expanded',
     syntax: 'scss',
   });
