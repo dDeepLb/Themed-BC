@@ -12,7 +12,7 @@ export class GuiColors extends BaseSubscreen {
   }
 
   get icon(): string {
-    return 'Icons/ColorChange.png';
+    return `${PUBLIC_URL}/images/palette.svg`;
   }
 
   get settings(): ColorsSettingsModel {
@@ -73,7 +73,7 @@ export class GuiColors extends BaseSubscreen {
           });
         });
       },
-      image: 'Icons/Swap.png',
+      image: `${PUBLIC_URL}/images/refresh.svg`,
       tooltip: getText('colors.button.change_input_type'),
       size: [90, 90],
     });

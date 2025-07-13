@@ -1,4 +1,4 @@
-import { BaseMigrator, BaseModule, GUI, initMod, VersionModule } from 'bc-deeplib/deeplib';
+import { BaseMigrator, BaseModule, getModule, GUI, GuiImportExport, initMod, VersionModule } from 'bc-deeplib/deeplib';
 import { loadLoginOptions, unloadLoginOptions } from './Hooks/login_options';
 import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
@@ -57,6 +57,16 @@ export const { sdk } = (() => {
         fullName: 'Themed',
         version: MOD_VERSION_CAPTION
       }
+    },
+    mainMenuOptions: {
+      importExportSubscreen: new GuiImportExport({
+        customFileExtension: '.tmd',
+        onImport() {
+          getModule<ColorsModule>('ColorsModule').reloadTheme();
+        },
+      }),
+      repoLink: 'https://github.com/dDeepLb/Themed-BC',
+      wikiLink: 'https://github.com/dDeepLb/Themed-BC/wiki',
     },
     modules,
     migrators,

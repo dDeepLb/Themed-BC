@@ -10,7 +10,7 @@ export class GuiGlobal extends BaseSubscreen {
   }
 
   get icon(): string {
-    return 'Icons/Preference.png';
+    return `${PUBLIC_URL}/images/cog.svg`;
   }
 
   get settings(): GlobalSettingsModel {

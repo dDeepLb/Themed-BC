@@ -12,7 +12,7 @@ export class GuiProfiles extends BaseSubscreen {
   }
 
   get icon(): string {
-    return 'Icons/Title.png';
+    return `${PUBLIC_URL}/images/users_group.svg`;
   }
 
   get settings(): ProfilesSettingsModel {

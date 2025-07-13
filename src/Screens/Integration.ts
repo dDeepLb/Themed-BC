@@ -10,7 +10,7 @@ export class GuiIntegration extends BaseSubscreen {
   }
 
   get icon(): string {
-    return 'Icons/Scripts.png';
+    return `${PUBLIC_URL}/images/stars.svg`;
   }
 
   get settings(): IntegrationSettingsModel {
