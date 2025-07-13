@@ -24,6 +24,10 @@ function compileSassAll() {
   });
 }
 
+/**
+ * @param {string} inputPath 
+ * @param {string} outputPath 
+ */
 function compileSassOne(inputPath, outputPath) {
   const scssFile = fs.readFileSync(inputPath, 'utf8');
   const result = sass.compileString(scssFile, {

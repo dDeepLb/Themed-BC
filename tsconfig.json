@@ -11,7 +11,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     
-    "allowJs": false,
+    "allowJs": true,
+    "checkJs": true,
     "removeComments": false,
     "strict": true,
     "skipLibCheck": true,

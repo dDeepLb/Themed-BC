@@ -3,6 +3,10 @@ import path from 'path';
 
 const allowedExtensions = ['html', 'js', 'css', 'json', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'lang'];
 
+/**
+ * @param {string} inputDir 
+ * @param {string} outputDir 
+ */
 function copyMatchingFiles(inputDir, outputDir) {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
