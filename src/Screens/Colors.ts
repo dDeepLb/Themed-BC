@@ -72,6 +72,7 @@ export class GuiColors extends BaseSubscreen {
             }
           });
         });
+        this.resize();
       },
       image: `${PUBLIC_URL}/images/refresh.svg`,
       tooltip: getText('colors.button.change_input_type'),
