@@ -1,4 +1,4 @@
-import { advancedElement, BaseSubscreen, getModule, getText, layoutElement, modStorage } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getModule, getText, layout, modStorage } from 'bc-deeplib/deeplib';
 import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
 import { conWarn } from '../Utilities/Console';
@@ -28,7 +28,7 @@ export class GuiProfiles extends BaseSubscreen {
       attributes: {
         id: 'tmd-profiles-container'
       },
-      parent: layoutElement.getSubscreenDiv()
+      parent: layout.getSubscreen()
     });
 
     for (let i = 0; i < 3; i++) {
@@ -42,7 +42,7 @@ export class GuiProfiles extends BaseSubscreen {
         },
         classList: ['tmd-profile'],
         children: [
-          advancedElement.createLabel({
+          advElement.createLabel({
             id: `tmd-profile-label-${profileId}`,
             label: profileName
           }),
@@ -51,13 +51,13 @@ export class GuiProfiles extends BaseSubscreen {
             tag: 'div',
             classList: ['tmd-profile-buttons'],
             children: [
-              advancedElement.createButton({
+              advElement.createButton({
                 id: `tmd-profiles-profile-save-${profileId}`,
                 onClick: () => this.handleProfilesSaving(profileId),
                 label: getText('profiles.button.save'),
               }),
 
-              advancedElement.createButton({
+              advElement.createButton({
                 id: `tmd-profiles-profile-load-${profileId}`,
                 onClick: () => this.handleProfilesLoading(profileId),
                 label: getText('profiles.button.load'),
@@ -68,7 +68,7 @@ export class GuiProfiles extends BaseSubscreen {
                 }
               }),
 
-              advancedElement.createButton({
+              advElement.createButton({
                 id: `tmd-profiles-profile-delete-${profileId}`,
                 onClick: () => this.handleProfilesDeleting(profileId),
                 label: getText('profiles.button.delete'),
@@ -221,7 +221,7 @@ export class GuiProfiles extends BaseSubscreen {
             return;
           }
 
-          return advancedElement.createButton({
+          return advElement.createButton({
             id: `tmd-profile-color-showcase-${profileId}-${key}`,
             tooltip: getText(`colors.setting.${key}.name`),
             htmlOptions: {

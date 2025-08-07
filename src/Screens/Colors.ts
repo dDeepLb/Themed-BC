@@ -1,4 +1,4 @@
-import { advancedElement, BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
 import { BaseColorsModel, ColorsSettingsModel, SpecialColorsModel } from '../Models/Colors';
 import { ColorsModule } from '../Modules/Colors';
 import { _Color } from '../Utilities/Color';
@@ -54,7 +54,7 @@ export class GuiColors extends BaseSubscreen {
   load(): void {
     super.load();
 
-    const typeToggleButton = advancedElement.createButton({
+    const typeToggleButton = advElement.createButton({
       id: 'tmd-inputs-type-toggle',
       onClick: () => {
         this.pageStructure.forEach((page) => {

@@ -1,4 +1,4 @@
-import { BaseSubscreen, getText, modules } from 'bc-deeplib/deeplib';
+import { BaseSubscreen, getText, layout, modules, advElement } from 'bc-deeplib/deeplib';
 import { _Color } from '../Utilities/Color';
 import { settingsReset } from '../Utilities/Data';
 import { BcStyle } from '../Utilities/Style';
@@ -8,64 +8,107 @@ export class GuiReset extends BaseSubscreen {
     return 'reset';
   }
 
-  get icon(): string {
-    return '';
-  }
-
-  private allowedConfirmTime: number | null = 0;
-
   load() {
-    this.allowedConfirmTime = Date.now() + 5_000;
     super.load();
+    let timeToConfirm = 5;
+
+    ElementCreate({
+      tag: 'div',
+      classList: ['tmd-reset-container'],
+      attributes: {
+        id: 'tmd-reset-container'
+      },
+      children: [
+        advElement.createLabel({
+          id: 'themed-reset-label-perma_reset_of_mod_data',
+          label: getText('reset.label.perma_reset_of_mod_data'),
+        }),
+        {
+          tag: 'br'
+        },
+        advElement.createLabel({
+          id: 'themed-reset-label-warning',
+          label: getText('reset.label.warning'),
+        }),
+        advElement.createLabel({
+          id: 'themed-reset-label-if_u_confirm_perma_reset',
+          label: getText('reset.label.if_u_confirm_perma_reset'),
+        }),
+        {
+          tag: 'br'
+        },
+        advElement.createLabel({
+          id: 'themed-reset-label-youll_able_to_use_mod',
+          label: getText('reset.label.youll_able_to_use_mod'),
+        }),
+        {
+          tag: 'br'
+        },
+        advElement.createLabel({
+          id: 'themed-reset-label-action_cannot_be_undone',
+          label: getText('reset.label.action_cannot_be_undone'),
+        }),
+        {
+          tag: 'br'
+        },
+        {
+          tag: 'div',
+          attributes: {
+            id: 'tmd-reset-buttons-container'
+          },
+          children: [
+            advElement.createButton({
+              id: 'tmd-reset-button',
+              onClick: () => {
+                this.confirm();
+                timer?.();
+              },
+              label: `${getText('reset.button.confirm')} (${timeToConfirm})`,
+              disabled: true
+            }),
+            advElement.createButton({
+              id: 'tmd-cancel-button',
+              onClick: () => {
+                this.exit();
+                timer?.();
+              },
+              label: getText('reset.button.cancel')
+            })
+          ]
+        }
+      ],
+      parent: layout.getSubscreen(),
+    });
+
+    const timer = TimerCreate(() => {
+      timeToConfirm--;
+      const button = ElementWrap('tmd-reset-button') as HTMLButtonElement | null;
+      const buttonLabel = button?.querySelector('.button-label');
+
+      if (buttonLabel) {
+        buttonLabel.textContent = `${getText('reset.button.confirm')} (${timeToConfirm})`;
+      }
+
+      if (timeToConfirm <= 0) {
+        if (button && buttonLabel) {
+          button.disabled = false;
+          buttonLabel.textContent = getText('reset.button.confirm');
+        }
+
+        timer();
+      }
+    }, 1000, true, 'universal');
   }
 
-  run() {
-    MainCanvas.save();
-    MainCanvas.textAlign = 'center';
-
-    DrawText(getText('reset.label.perma_reset_of_mod_data'), 1000, 125, 'Black');
-
-    DrawText(getText('reset.label.warning'), 1000, 225, 'Black', 'Black');
-    DrawText(getText('reset.label.if_u_confirm_perma_reset'), 1000, 325, 'Black');
-
-    DrawText(getText('reset.label.youll_able_to_use_mod'), 1000, 550, 'Gray');
-
-    DrawText(getText('reset.label.action_cannot_be_undone'), 1000, 625, 'Red', 'Black');
-
-    const now = Date.now();
-    if (now < (this.allowedConfirmTime ?? 0)) {
-      DrawButton(
-        300,
-        720,
-        200,
-        80,
-        `${getText('reset.button.confirm')} (${Math.floor((this.allowedConfirmTime ?? 0 - now) / 1000)})`,
-        '#ddd',
-        undefined,
-        undefined,
-        true
-      );
-    } else {
-      DrawButton(300, 720, 200, 80, getText('reset.button.confirm'), 'White');
-    }
-
-    DrawButton(1520, 720, 200, 80, getText('reset.button.cancel'), 'White');
-
-    MainCanvas.restore();
+  resize(onLoad?: boolean): void {
+    super.resize(onLoad);
+    ElementSetPosition('tmd-reset-container', 500, 175, 'top-left');
+    ElementSetSize('tmd-reset-container', 1000, null);
   }
 
-  click() {
-    if (this.allowedConfirmTime === null) return;
-
-    if (MouseIn(300, 720, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
-    if (MouseIn(1520, 720, 200, 80)) return this.exit();
-  }
-
-  Confirm() {
-    this.allowedConfirmTime = null;
-
+  confirm() {
     settingsReset();
-    
+
     for (const module of modules()) {
       module.registerDefaultSettings();
     }

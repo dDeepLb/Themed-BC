@@ -1,4 +1,4 @@
-import { BaseMigrator, BaseModule, getModule, GUI, GuiImportExport, initMod, VersionModule } from 'bc-deeplib/deeplib';
+import { BaseMigrator, BaseModule, getModule, GUI, GuiImportExport, initMod, modStorage, VersionModule } from 'bc-deeplib/deeplib';
 import { loadLoginOptions, unloadLoginOptions } from './Hooks/login_options';
 import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
@@ -12,6 +12,7 @@ import { _Color } from './Utilities/Color';
 import { MOD_VERSION_CAPTION } from './Utilities/ModDefinition';
 import { BcStyle } from './Utilities/Style';
 import { DeeplibMigrator } from './Migrators/DeeplibMigrator';
+import { GuiReset } from './Screens/Reset';
 
 export const { sdk } = (() => {
   const modules: Array<BaseModule> = [
@@ -62,14 +63,20 @@ export const { sdk } = (() => {
       importExportSubscreen: new GuiImportExport({
         customFileExtension: '.tmd',
         onImport() {
+          modStorage.save();
           getModule<ColorsModule>('ColorsModule').reloadTheme();
         },
       }),
       repoLink: 'https://github.com/dDeepLb/Themed-BC',
       wikiLink: 'https://github.com/dDeepLb/Themed-BC/wiki',
+      resetSubscreen: new GuiReset({
+        drawCharacter: false
+      })
     },
     modules,
     migrators,
-    pathToTranslationsFolder: `${PUBLIC_URL}/translations/`,
+    translationOptions: {
+      pathToTranslationsFolder: `${PUBLIC_URL}/translations/`,
+    }
   });
 })();

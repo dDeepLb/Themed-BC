@@ -5,12 +5,10 @@ export class DeeplibMigrator extends BaseMigrator {
     return '1.6.0';
   }
 
-  Migrate(): boolean {
+  Migrate() {
     // @ts-expect-error migration
     Player.Themed.GlobalModule.modEnabled = Player.Themed.GlobalModule.themedEnabled;
     // @ts-expect-error migration
     delete Player.Themed.GlobalModule.themedEnabled;
-
-    return true;
   }
 }

@@ -5,7 +5,6 @@ import { GlobalSettingsModel } from './Global';
 
 export type ProfilesSettingsModel = DL_BaseSettingsModel & {
   [index: number]: ProfileEntryModel;
-  index: ProfileEntryModel[];
 };
 
 export type ProfileEntryModel = {
