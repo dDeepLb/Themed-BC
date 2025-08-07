@@ -54,6 +54,7 @@ export const _Image = {
   ],
 
   doColorizeImages: [
+    ''
   ],
 
   doDrawImage(source: string) {

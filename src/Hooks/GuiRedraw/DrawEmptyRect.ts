@@ -1,9 +1,11 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
+import { sdk } from '../../Themed';
 import { _Color, ColorType, plainColors } from '../../Utilities/Color';
-import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawEmptyRect() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawEmptyRect',
     HookPriority.Observe,
     (args: Parameters<typeof DrawEmptyRect>, next: (args: Parameters<typeof DrawEmptyRect>) => ReturnType<typeof DrawEmptyRect>) => {
@@ -14,7 +16,7 @@ export function hookDrawEmptyRect() {
       const drawEmptyRect = (color: string) => {
         MainCanvas.beginPath();
         MainCanvas.rect(Left, Top, Width, Height);
-        MainCanvas.lineWidth = Thickness;
+        MainCanvas.lineWidth = Thickness ?? 2;
         MainCanvas.strokeStyle = color;
         MainCanvas.stroke();
       };

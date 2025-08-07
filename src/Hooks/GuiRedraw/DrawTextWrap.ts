@@ -2,10 +2,12 @@ import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { plainColors } from '../../Utilities/Color';
 import { drawRect } from '../../Utilities/Drawing';
-import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
+import { HookPriority } from 'bc-deeplib/deeplib';
+import { sdk } from '../../Themed';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawTextWrap() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawTextWrap',
     HookPriority.Observe,
     (args: Parameters<typeof DrawTextWrap>, next: (args: Parameters<typeof DrawTextWrap>) => ReturnType<typeof DrawTextWrap>) => {

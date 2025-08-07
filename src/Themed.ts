@@ -1,6 +1,5 @@
-import { modules, registerModule } from './Base/Modules';
-import { GUI } from './Base/SettingUtils';
-import { loadLoginOptions } from './Hooks/login_options';
+import { BaseMigrator, BaseModule, getModule, GUI, GuiImportExport, initMod, VersionModule } from 'bc-deeplib/deeplib';
+import { loadLoginOptions, unloadLoginOptions } from './Hooks/login_options';
 import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
@@ -9,102 +8,68 @@ import { GuiRedrawModule } from './Modules/GuiRedraw';
 import { IntegrationModule } from './Modules/Integration';
 import { ProfilesModule } from './Modules/Profiles';
 import { ShareModule } from './Modules/Share';
-import { VersionModule } from './Modules/Version';
-import { Localization } from './Translation';
 import { _Color } from './Utilities/Color';
-import { conDebug, conLog } from './Utilities/Console';
-import { settingsLoad } from './Utilities/Data';
 import { MOD_VERSION_CAPTION } from './Utilities/ModDefinition';
-import { deepMergeMatchingProperties, hasSetter } from './Utilities/Other';
-import { hookFunction } from './Utilities/SDK';
 import { BcStyle } from './Utilities/Style';
+import { DeeplibMigrator } from './Migrators/DeeplibMigrator';
 
-function initWait() {
-  if (window.ThemedLoaded) return;
-  
-  conLog('Init wait');
-  if (CurrentScreen == null || CurrentScreen === 'Login') {
-    const cleanup = loadLoginOptions();
-    
-    hookFunction('LoginResponse', 0, (args, next) => {
-      conDebug('Init! LoginResponse caught: ', args);
-      next(args);
-      const response = args[0];
-      if (response && typeof response.Name === 'string' && typeof response.AccountName === 'string') {
-        cleanup();
-        init();
+export const { sdk } = (() => {
+  const modules: Array<BaseModule> = [
+    new GUI({
+      ButtonText: 'Themed',
+      Identifier: 'Themed',
+      Image: `${PUBLIC_URL}/images/mod.png`,
+    }),
+    new GlobalModule(),
+    new ColorsModule(),
+    new GuiRedrawModule(),
+    new IntegrationModule(),
+    new ProfilesModule(),
+    new CommandsModule(),
+    new ShareModule(),
+    new VersionModule()
+  ];
+
+  const migrators: Array<BaseMigrator> = [
+    new V140Migrator(),
+    new DeeplibMigrator(),
+  ];
+
+  const initFunction = async () => {
+    unloadLoginOptions();
+
+    const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`)
+      .then((res) => res.text())
+      .then((text) => text.replace(/\r\n/g, '\n'));
+
+    VersionModule.setNewVersionMessage(changelog);
+
+    _Color.composeRoot();
+    BcStyle.injectAll();
+  };
+
+  return initMod({
+    initFunction,
+    beforeLogin: () => loadLoginOptions(),
+    modInfo: {
+      info: {
+        name: 'Themed',
+        fullName: 'Themed',
+        version: MOD_VERSION_CAPTION
       }
-    });
-  } else {
-    conLog('Already logged in, init');
-    init();
-  }
-}
-
-export async function init() {
-  await Localization.load();
-
-  settingsLoad();
-
-  if (!initModules()) {
-    unload();
-    return;
-  }
-
-  VersionModule.registerMigrator(new V140Migrator);
-  VersionModule.check();
-
-  for (const m of modules()) {
-    if (m.defaultSettings && hasSetter(m, 'defaultSettings'))
-      m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
-  }
-
-  _Color.composeRoot();
-  BcStyle.injectAll();
-
-  window.ThemedLoaded = true;
-  conLog(`Loaded! Version: ${MOD_VERSION_CAPTION}`);
-}
-
-function initModules(): boolean {
-  registerModule(new GUI());
-  registerModule(new GlobalModule());
-  registerModule(new ColorsModule());
-  registerModule(new GuiRedrawModule());
-  registerModule(new IntegrationModule());
-  registerModule(new ProfilesModule());
-  registerModule(new CommandsModule());
-  registerModule(new ShareModule());
-  registerModule(new VersionModule());
-
-  for (const m of modules()) {
-    m.Init();
-  }
-
-  for (const m of modules()) {
-    m.Load();
-  }
-
-  for (const m of modules()) {
-    m.Run();
-  }
-
-  conLog('Modules Loaded.');
-  return true;
-}
-
-export function unload(): true {
-  unloadModules();
-
-  delete window.ThemedLoaded;
-  conLog('Unloaded.');
-  return true;
-}
-
-function unloadModules() {
-  for (const m of modules()) {
-    m.Unload();
-  }
-}
-
-initWait();
+    },
+    mainMenuOptions: {
+      importExportSubscreen: new GuiImportExport({
+        customFileExtension: '.tmd',
+        onImport() {
+          getModule<ColorsModule>('ColorsModule').reloadTheme();
+        },
+      }),
+      repoLink: 'https://github.com/dDeepLb/Themed-BC',
+      wikiLink: 'https://github.com/dDeepLb/Themed-BC/wiki',
+    },
+    modules,
+    migrators,
+    pathToTranslationsFolder: `${PUBLIC_URL}/translations/`,
+  });
+})();

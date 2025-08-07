@@ -1,21 +1,19 @@
-import { BaseModule } from '../Base/BaseModule';
-import { getModule } from '../Base/Modules';
 import { ShareModule } from './Share';
-import { sendLocalSmart } from '../Utilities/Other';
+import { BaseModule, getModule, sendLocalMessage as messageSendLocal } from 'bc-deeplib/deeplib';
 
 export class CommandsModule extends BaseModule {
-  Load(): void {
+  load(): void {
     CommandCombine([
       {
         Tag: 'share-theme',
         Description: '[member number]: Shares your theme with other people that have Themed installed!',
         Action(args) {
-          if (!args) return getModule<ShareModule>('ShareModule').share(null);
+          if (!args) return getModule<ShareModule>('ShareModule').share(undefined);
 
           const targetNumber = parseInt(args, 10);
           const target = ChatRoomCharacter.find((c) => c.MemberNumber == targetNumber);
           if (!target)
-            sendLocalSmart('theme-share-error', `No character with MemberNumber ${targetNumber} found!`);
+            messageSendLocal('theme-share-error', `No character with MemberNumber ${targetNumber} found!`);
           else
             getModule<ShareModule>('ShareModule').share(target.MemberNumber);
         }
@@ -23,5 +21,5 @@ export class CommandsModule extends BaseModule {
     ]);
   }
 
-  Run(): void { }
+  run(): void { }
 }

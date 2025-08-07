@@ -1,10 +1,12 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
+import { sdk } from '../../Themed';
 import { plainColors } from '../../Utilities/Color';
 import { _Image } from '../../Utilities/Drawing';
-import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawImageEx() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawImageEx',
     HookPriority.Observe,
     (args: Parameters<typeof DrawImageEx>, next: (args: Parameters<typeof DrawImageEx>) => ReturnType<typeof DrawImageEx>) => {
@@ -18,7 +20,7 @@ export function hookDrawImageEx() {
       Options.HexColor = plainColors.accent;
       Options.FullAlpha = true;
 
-      next([Source, Canvas, X, Y, Options]);
+      return next([Source, Canvas, X, Y, Options]);
     },
     ModuleCategory.GuiRedraw
   );

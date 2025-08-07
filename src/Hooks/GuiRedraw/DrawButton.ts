@@ -1,10 +1,12 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
+import { sdk } from '../../Themed';
 import { ColorType, plainColors } from '../../Utilities/Color';
 import { drawButtonRect } from '../../Utilities/Drawing';
-import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawButton() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawButton',
     HookPriority.Observe,
     (args: Parameters<typeof DrawButton>, next: (args: Parameters<typeof DrawButton>) => ReturnType<typeof DrawButton>) => {
@@ -35,7 +37,7 @@ export function hookDrawButton() {
         '%hover',
         '%disabled',
         isHovering,
-        isDisabled
+        isDisabled ?? false
       );
 
       DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, plainColors.text);

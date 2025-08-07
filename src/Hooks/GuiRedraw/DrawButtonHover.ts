@@ -1,10 +1,12 @@
+import { HookPriority } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
+import { sdk } from '../../Themed';
 import { plainColors } from '../../Utilities/Color';
 import { drawRect } from '../../Utilities/Drawing';
-import { hookFunction, HookPriority, ModuleCategory } from '../../Utilities/SDK';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawButtonHover() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawButtonHover',
     HookPriority.Observe,
     (args: Parameters<typeof DrawButtonHover>, next: (args: Parameters<typeof DrawButtonHover>) => ReturnType<typeof DrawButtonHover>) => {

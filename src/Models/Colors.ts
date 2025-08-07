@@ -1,6 +1,6 @@
-import { BaseSettingsModel } from './Global';
+import { BaseSettingsModel as DL_BaseSettingsModel } from 'bc-deeplib/deeplib';
 
-export type ColorsSettingsModel = BaseSettingsModel &  {
+export type ColorsSettingsModel = DL_BaseSettingsModel &  {
   base: BaseColorsModel;
   special: SpecialColorsModel;
 };

@@ -16,13 +16,13 @@
   textarea {
     background: var(--tmd-element);
     color: var(--tmd-text);
-    border: 2px solid var(--tmd-accent);
+    border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   }
 
   input {
     background: var(--tmd-element);
     color: var(--tmd-text);
-    border: 2px solid var(--tmd-accent);
+    border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   }
 
   textarea:focus,

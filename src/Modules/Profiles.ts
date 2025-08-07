@@ -1,11 +1,7 @@
-import { BaseModule } from '../Base/BaseModule';
-import { getModule } from '../Base/Modules';
-import { Subscreen } from '../Base/SettingDefinitions';
+import { BaseModule, deepMergeMatchingProperties, getModule, modStorage, Subscreen } from 'bc-deeplib/deeplib';
 import { ProfileSaveModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { GuiProfiles } from '../Screens/Profiles';
-import { PlayerStorage } from '../Utilities/Data';
 import { ModName } from '../Utilities/ModDefinition';
-import { deepMergeMatchingProperties } from '../Utilities/Other';
 import { ColorsModule } from './Colors';
 import { GlobalModule } from './Global';
 import { IntegrationModule } from './Integration';
@@ -13,6 +9,10 @@ import { IntegrationModule } from './Integration';
 export class ProfilesModule extends BaseModule {
   get settings(): ProfilesSettingsModel {
     return super.settings as ProfilesSettingsModel;
+  }
+
+  set settings(val) {
+    super.settings = val;
   }
 
   get settingsScreen(): Subscreen | null {
@@ -23,7 +23,7 @@ export class ProfilesModule extends BaseModule {
     return <ProfilesSettingsModel>{};
   }
 
-  Load(): void {
+  load(): void {
     const profileDefaults: ProfileSaveModel = {
       GlobalModule: getModule<GlobalModule>('GlobalModule').defaultSettings,
       ColorsModule: getModule<ColorsModule>('ColorsModule').defaultSettings,
@@ -32,7 +32,7 @@ export class ProfilesModule extends BaseModule {
     
     for (let i = 0; i < 3; i++) {
       const profileIndex = i + 1;
-      if (!PlayerStorage()?.ProfilesModule?.[profileIndex] || Object.keys(PlayerStorage()?.ProfilesModule?.[profileIndex]).length === 0) {
+      if (!modStorage.playerStorage.ProfilesModule[profileIndex] || Object.keys(modStorage.playerStorage.ProfilesModule[profileIndex]).length === 0) {
         Player[ModName].ProfilesModule[profileIndex] = {
           data: <ProfileSaveModel>{},
           name: ''

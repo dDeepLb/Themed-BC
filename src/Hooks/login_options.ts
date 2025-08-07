@@ -1,7 +1,7 @@
+import { HookPriority, Style } from 'bc-deeplib/deeplib';
 import { LocalSettingsModel } from '../Models/local';
 import { localSettingsLoad, localSettingsSave } from '../Utilities/Data';
-import { hookFunction, HookPriority, patchFunction, unpatchFunction } from '../Utilities/SDK';
-import { Style } from '../Utilities/Style';
+import { ModSdkManager } from 'bc-deeplib/deeplib';
 
 const ids = {
   optionsOpen: 'tmd-login-options-open',
@@ -23,21 +23,21 @@ export function loadLoginOptions() {
   Style.injectEmbed(ids.optionsStyle, `${PUBLIC_URL}/styles/login-options.css`);
   createUI();
 
-  const cleanup = hookFunction('LoginRun', HookPriority.Observe, (args, next) => {
+  ModSdkManager.prototype.hookFunction('LoginRun', HookPriority.Observe, (args, next) => {
     next(args);
 
     ElementSetPosition(ids.optionsOpen, 2000, 1000, 'bottom-right');
     ElementSetSize(ids.optionsOpen, 90, 90);
 
     ElementSetSize(ids.optionsSheet, 1000, 500);
-  });
+  }, 'LoginRun');
+}
 
-  return () => {
-    removeUI();
-    Style.eject(ids.optionsStyle);
-    cleanup();
-    unpatchLoginPage();
-  };
+export function unloadLoginOptions() {
+  removeUI();
+  Style.eject(ids.optionsStyle);
+  ModSdkManager.prototype.removeHookByModule('LoginRun', 'LoginRun');
+  unpatchLoginPage();
 }
 
 function createUI() {
@@ -62,17 +62,19 @@ function createUI() {
         },
         children: [
           ...Array.from(Object.entries(options)).map(([key, value]) => {
+            const typedKey = key as keyof LocalSettingsModel['loginOptions'];
+
             return {
               tag: 'label',
               classList: ['tmd-login-options-label'],
               children: [
                 ElementCheckbox.Create(`tmd-login-options-${key}`, () => {
-                  loginOptions[key] = !loginOptions[key];
+                  loginOptions[typedKey] = !loginOptions[typedKey];
                   localSettingsSave();
                   repatchLoginPage();
                 },
                 {
-                  checked: loginOptions[key],
+                  checked: loginOptions[typedKey],
                 }),
                 value
               ]
@@ -99,11 +101,11 @@ function patchLoginPage() {
   const loginOptions = window.ThemedLocalData.loginOptions;
 
   if (loginOptions.hideDummy) {
-    patchFunction('LoginRun', {
+    ModSdkManager.prototype.patchFunction('LoginRun', {
       'DrawCharacter(LoginCharacter, 1400, 100, 0.9);': '',
     });
 
-    patchFunction('LoginDoNextThankYou', {
+    ModSdkManager.prototype.patchFunction('LoginDoNextThankYou', {
       'CharacterRelease(LoginCharacter, false);': '',
       'CharacterAppearanceFullRandom(LoginCharacter);': '',
       'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': '',
@@ -112,21 +114,21 @@ function patchLoginPage() {
   }
 
   if (loginOptions.hideCredits) {
-    patchFunction('LoginRun', {
+    ModSdkManager.prototype.patchFunction('LoginRun', {
       'if (LoginCredits) LoginDrawCredits();': 'if (false) LoginDrawCredits();',
       'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': '',
       'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': '',
     });
 
-    patchFunction('LoginDoNextThankYou', {
+    ModSdkManager.prototype.patchFunction('LoginDoNextThankYou', {
       'LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)': '',
     });
   }
 }
 
 function unpatchLoginPage() {
-  unpatchFunction('LoginRun');
-  unpatchFunction('LoginDoNextThankYou');
+  ModSdkManager.prototype.unpatchFunction('LoginRun');
+  ModSdkManager.prototype.unpatchFunction('LoginDoNextThankYou');
 }
 
 function repatchLoginPage() {

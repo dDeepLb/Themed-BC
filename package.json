@@ -3,9 +3,11 @@
   "version": "1.5.6",
   "description": "Bondage Club now with themes!",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "node build.mjs",
-    "dev": "node build.mjs --dev",
+    "build": "deeplib",
+    "dev": "deeplib --watch --serve",
+    "dev:lib": "deeplib --watch --serve --lib-local",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix"
   },
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/dDeepLb/Themed-BC#readme",
   "dependencies": {
+    "bc-deeplib": "^1.0.6",
     "bondage-club-mod-sdk": "^1.2.0",
     "color": "^4.2.3"
   },
@@ -33,16 +36,23 @@
     "@types/node": "^20.16.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "bc-stubs": "~116.0.0",
+    "bc-stubs": "~117.0.1",
+    "chokidar": "^4.0.3",
     "esbuild": "^0.21.5",
     "esbuild-copy-files-plugin": "^1.2.0",
     "esbuild-plugin-progress": "^1.0.1",
     "esbuild-plugin-time": "^1.0.0",
     "eslint": "^8.57.0",
     "globals": "^15.9.0",
+    "sass": "^1.89.2",
     "simple-git": "^3.26.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^7.18.0"
   },
-  "packageManager": "pnpm@10.2.1+sha512.398035c7bd696d0ba0b10a688ed558285329d27ea994804a52bad9167d8e3a72bcb993f9699585d3ca25779ac64949ef422757a6c31102c12ab932e5cbe5cc92"
+  "packageManager": "pnpm@10.2.1+sha512.398035c7bd696d0ba0b10a688ed558285329d27ea994804a52bad9167d8e3a72bcb993f9699585d3ca25779ac64949ef422757a6c31102c12ab932e5cbe5cc92",
+  "pnpm": {
+    "overrides": {
+      "bc-deeplib": "link:../BC-DeepLib"
+    }
+  }
 }

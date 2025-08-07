@@ -1,10 +1,12 @@
 import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { plainColors } from '../../Utilities/Color';
-import { HookPriority, ModuleCategory, hookFunction } from '../../Utilities/SDK';
+import { HookPriority } from 'bc-deeplib/deeplib';
+import { sdk } from '../../Themed';
+import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawTextFit() {
-  hookFunction(
+  sdk.hookFunction(
     'DrawTextFit',
     HookPriority.Observe,
     (args: Parameters<typeof DrawTextFit>, next: (args: Parameters<typeof DrawTextFit>) => ReturnType<typeof DrawTextFit>) => {

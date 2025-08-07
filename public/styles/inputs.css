@@ -1,13 +1,12 @@
-textarea {
-  background: var(--tmd-element);
-  color: var(--tmd-text);
-  border: 2px solid var(--tmd-accent);
-}
-
+textarea,
 input:not([type="range"]) {
   background: var(--tmd-element);
   color: var(--tmd-text);
-  border: 2px solid var(--tmd-accent);
+  border: min(0.2vh, 0.2vw) solid var(--tmd-accent);
+}
+
+input[type="range"] {
+  background-color: transparent;
 }
 
 input[type="color"] {

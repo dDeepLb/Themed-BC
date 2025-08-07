@@ -1,214 +1,269 @@
-import { GuiSubscreen } from '../Base/BaseSetting';
-import { getModule } from '../Base/Modules';
-import { ProfileEntryModel, ProfileNames, ProfileSaveModel, ProfilesSettingsModel } from '../Models/Profiles';
+import { advancedElement, BaseSubscreen, getModule, getText, layoutElement, modStorage } from 'bc-deeplib/deeplib';
+import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
-import { getText } from '../Translation';
 import { conWarn } from '../Utilities/Console';
-import { PlayerStorage } from '../Utilities/Data';
 import { ModName } from '../Utilities/ModDefinition';
+import { BaseColorsModel } from '../Models/Colors';
 
-export class GuiProfiles extends GuiSubscreen {
-  private PreferenceText = '';
-  private ProfileNames: ProfileNames = ['', '', ''];
+export class GuiProfiles extends BaseSubscreen {
 
   get name(): string {
-    return 'Profiles';
+    return 'profiles';
   }
 
   get icon(): string {
-    return 'Icons/Title.png';
+    return `${PUBLIC_URL}/images/users_group.svg`;
   }
 
   get settings(): ProfilesSettingsModel {
     return super.settings as ProfilesSettingsModel;
   }
 
-  tmpGlbl = GuiSubscreen.START_X;
+  load() {
+    super.load();
 
-  Load() {
-    super.Load();
+    const profilesContainer = ElementCreate({
+      tag: 'div',
+      classList: ['tmd-profiles-container'],
+      attributes: {
+        id: 'tmd-profiles-container'
+      },
+      parent: layoutElement.getSubscreenDiv()
+    });
 
     for (let i = 0; i < 3; i++) {
-      const profileIndex = i + 1;
-      this.ProfileNames[i] = PlayerStorage()?.ProfilesModule?.[profileIndex]?.name ?? '';
+      const profileId = i + 1;
+      const profileName = this.settings[profileId].name || getText('profiles.text.profile') + ` ${profileId}`;
+
+      const profileElement = ElementCreate({
+        tag: 'div',
+        attributes: {
+          id: `tmd-profile-${profileId}`,
+        },
+        classList: ['tmd-profile'],
+        children: [
+          advancedElement.createLabel({
+            id: `tmd-profile-label-${profileId}`,
+            label: profileName
+          }),
+          this.createColorShowcase(profileId),
+          {
+            tag: 'div',
+            classList: ['tmd-profile-buttons'],
+            children: [
+              advancedElement.createButton({
+                id: `tmd-profiles-profile-save-${profileId}`,
+                onClick: () => this.handleProfilesSaving(profileId),
+                label: getText('profiles.button.save'),
+              }),
+
+              advancedElement.createButton({
+                id: `tmd-profiles-profile-load-${profileId}`,
+                onClick: () => this.handleProfilesLoading(profileId),
+                label: getText('profiles.button.load'),
+                htmlOptions: {
+                  options: {
+                    disabled: !this.profileExists(profileId)
+                  }
+                }
+              }),
+
+              advancedElement.createButton({
+                id: `tmd-profiles-profile-delete-${profileId}`,
+                onClick: () => this.handleProfilesDeleting(profileId),
+                label: getText('profiles.button.delete'),
+                htmlOptions: {
+                  options: {
+                    disabled: !this.profileExists(profileId)
+                  }
+                }
+              }),
+            ]
+          }
+        ]
+      });
+
+      profilesContainer.appendChild(profileElement);
     }
 
     CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
   }
 
-  Run() {
-    MainCanvas.save();
-    super.Run();
-    MainCanvas.textAlign = 'left';
-
-    for (let i = 0; i < 3; i++) {
-      const profileIndex = i + 1;
-
-      if (this.ProfileNames[i] === '')
-        DrawText(getText('profiles.text.profile') + ` ${profileIndex}`, this.getXPos(profileIndex), this.getYPos(profileIndex), 'Black', 'Gray');
-      if (this.ProfileNames[i] !== '')
-        DrawText(this.ProfileNames[i] as string, this.getXPos(profileIndex), this.getYPos(profileIndex), 'Black', 'Gray');
-
-      this.drawButton('profiles.button.save', 'white', profileIndex, 250);
-      this.drawButton('profiles.button.load', 'white', profileIndex, 500);
-      this.drawButton('profiles.button.delete', 'IndianRed', profileIndex, 750);
-    }
-
-    if (this.PreferenceText)
-      DrawText(this.PreferenceText, GuiSubscreen.START_X + 250, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, 'Black', 'Gray');
-
-    MainCanvas.restore();
+  resize(onLoad?: boolean): void {
+    super.resize(onLoad);
   }
 
-  Click() {
-    super.Click();
+  private handleProfilesSaving(profileId: number): void {
+    if (!this.profileCanBeSaved(profileId)) return;
 
-    for (let i = 0; i < 3; i++) {
-      const profileIndex = i + 1;
+    const name = prompt(getText('profiles.prompt'));
+    if (name === null) return;
 
-      this.handleProfilesSaving(profileIndex);
-      this.handleProfilesLoading(profileIndex);
-      this.handleProfilesDeleting(profileIndex);
-    }
-  }
+    const storage = modStorage.playerStorage;
+    const profile = this.settings[profileId];
 
-  Exit() {
-    CharacterAppearanceForceUpCharacter = -1;
-    CharacterLoadCanvas(Player);
-    this.PreferenceText = '';
-    super.Exit();
-  }
-
-  saveProfile(profileId: number, profileName: string) {
-    if (profileId < 1 || profileId > 3) {
-      conWarn(`Invalid profile id ${profileId}`);
-      return false;
+    if (!profile || Object.keys(profile).length === 0) {
+      this.settings[profileId] = {} as ProfileEntryModel;
     }
 
-    if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-      Player[ModName].ProfilesModule[profileId] = <ProfileEntryModel>{};
-    }
-
-    const saveData: ProfileSaveModel = {
-      GlobalModule: PlayerStorage().GlobalModule,
-      ColorsModule: PlayerStorage().ColorsModule,
-      IntegrationModule: PlayerStorage().IntegrationModule
+    this.settings[profileId] = {
+      name: name,
+      data: {
+        GlobalModule: storage.GlobalModule,
+        ColorsModule: storage.ColorsModule,
+        IntegrationModule: storage.IntegrationModule,
+      },
     };
+
+    const display = name ? `"${name}"` : profileId;
+    ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_saved')}`);
+
+    this.updateProfileLabel(profileId);
+    this.updateProfileButtons(profileId);
+    this.updateProfileColorShowcase(profileId);
+  }
+
+  private handleProfilesLoading(profileId: number): void {
+    if (!this.profileExists(profileId)) {
+      ToastManager.error(`${getText('profiles.text.profile')} ${profileId} ${getText('profiles.text.doesnt_exist')}`);
+      return;
+    }
+
+    const data = modStorage.playerStorage.ProfilesModule[profileId].data;
+
+    Player[ModName] = {
+      ...Player[ModName],
+      GlobalModule: data.GlobalModule,
+      ColorsModule: data.ColorsModule,
+      IntegrationModule: data.IntegrationModule,
+    };
+
+    const name = this.settings[profileId].name;
+    const display = name ? `"${name}"` : profileId;
+    ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_loaded')}`);
+
+    getModule<ColorsModule>('ColorsModule').reloadTheme();
+  }
+
+  private handleProfilesDeleting(profileId: number): void {
+    if (!this.profileExists(profileId)) {
+      ToastManager.info(`${getText('profiles.text.profile')} ${profileId} ${getText('profiles.text.doesnt_exist')}`);
+      return;
+    }
+
+    const name = this.settings[profileId].name;
 
     Player[ModName].ProfilesModule[profileId] = {
-      name: profileName,
-      data: saveData
-    };
+      name: '',
+      data: {}
+    } as ProfileEntryModel;
+
+    const display = name ? `"${name}"` : profileId;
+    ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_deleted')}`);
+
+    this.updateProfileLabel(profileId);
+    this.updateProfileButtons(profileId);
+    this.updateProfileColorShowcase(profileId);
+  }
+
+  private updateProfileButtons(profileId: number): void {
+    const profileSaveButton = ElementWrap(`tmd-profiles-profile-save-${profileId}`) as HTMLButtonElement;
+    const profileLoadButton = ElementWrap(`tmd-profiles-profile-load-${profileId}`) as HTMLButtonElement;
+    const profileDeleteButton = ElementWrap(`tmd-profiles-profile-delete-${profileId}`) as HTMLButtonElement;
+
+    if (!profileSaveButton || !profileLoadButton || !profileDeleteButton) return;
+
+    profileSaveButton.disabled = !this.profileCanBeSaved(profileId);
+    profileLoadButton.disabled = !this.profileExists(profileId);
+    profileDeleteButton.disabled = !this.profileExists(profileId);
+  }
+
+  private updateProfileLabel(profileId: number): void {
+    const name = this.settings[profileId].name;
+    const display = name ? name : `${getText('profiles.text.profile')} ${profileId}`;
+    const profileLabel = ElementWrap(`tmd-profile-label-${profileId}`);
+    if (!profileLabel) return;
+    profileLabel.textContent = display;
+  }
+
+  private updateProfileColorShowcase(profileId: number): void {
+    const colorShowcase = this.createColorShowcase(profileId);
+
+    if (colorShowcase === null) {
+      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+    } else {
+      const label = ElementWrap(`tmd-profile-label-${profileId}`);
+      if (!label) return;
+      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+      label.after(colorShowcase);
+    }
+  }
+
+  private createColorShowcase(profileId: number): HTMLDivElement | null {
+    const exists = this.profileExists(profileId);
+
+    if (!exists) return null;
+
+    const colors = Object.entries(this.settings[profileId].data.ColorsModule.base);
+
+    return ElementCreate({
+      tag: 'div',
+      classList: ['tmd-profile-color-showcase'],
+      attributes: {
+        id: `tmd-profile-color-showcase-${profileId}`
+      },
+      children:
+        colors.map(([key, value]) => {
+          const isBaseMode = !this.settings[profileId].data.GlobalModule.doUseAdvancedColoring;
+          const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
+
+          if (isBaseMode && !baseModeKey(key as keyof BaseColorsModel)) {
+            return;
+          }
+
+          return advancedElement.createButton({
+            id: `tmd-profile-color-showcase-${profileId}-${key}`,
+            tooltip: getText(`colors.setting.${key}.name`),
+            htmlOptions: {
+              htmlOptions: {
+                button: {
+                  style: {
+                    '--background-color': value
+                  },
+                  classList: ['tmd-profile-color-showcase-button']
+                }
+              },
+              options: {
+                noStyling: true
+              }
+            }
+          });
+        })
+    });
+  }
+
+  private isValidProfileId(id: number): boolean {
+    if (id < 1 || id > 3) {
+      conWarn(`Invalid profile id ${id}`);
+      return false;
+    }
 
     return true;
   }
 
-  loadProfile(profileId: number) {
-    if (profileId < 1 || profileId > 3) {
-      conWarn(`Invalid profile id ${profileId}`);
-      return false;
-    }
-
-    if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length < 1) {
-      return false;
-    }
-
-    const data = PlayerStorage().ProfilesModule[profileId].data;
-    if (Object.keys(data).length < 1) {
-      return false;
-    }
-
-    if (data) {
-      Player[ModName].GlobalModule = data.GlobalModule;
-      Player[ModName].ColorsModule = data.ColorsModule;
-      Player[ModName].IntegrationModule = data.IntegrationModule;
-    }
+  private profileCanBeSaved(profileId: number): boolean {
+    if (!this.isValidProfileId(profileId)) return false;
 
     return true;
   }
 
-  deleteProfile(profileId: number) {
-    if (profileId < 1 || profileId > 3) {
-      conWarn(`Invalid profile id ${profileId}`);
-      return false;
-    }
+  private profileExists(profileId: number): boolean {
+    if (!this.isValidProfileId(profileId)) return false;
 
-    if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-      return false;
-    }
+    const data = modStorage.playerStorage?.ProfilesModule?.[profileId]?.data || {};
 
-    Player[ModName].ProfilesModule[profileId] = <ProfileEntryModel>{};
+    if (!data || Object.keys(data).length === 0) return false;
+
     return true;
-  }
-
-  handleProfilesSaving(profileIndex: number) {
-    const formerIndex = profileIndex - 1;
-    if (MouseIn(this.getXPos(profileIndex) + 250, this.getYPos(profileIndex) - 32, 200, 64)) {
-      const promptedName = prompt(getText('profiles.prompt'));
-
-      if (promptedName === null) return;
-      this.ProfileNames[formerIndex] = promptedName;
-      if (this.ProfileNames[formerIndex] === '') {
-        this.saveProfile(profileIndex, '');
-        this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.has_been_saved')}`;
-      }
-
-      if (this.ProfileNames[formerIndex] !== '') {
-        this.saveProfile(profileIndex, this.ProfileNames[formerIndex] as string);
-        this.PreferenceText = `${getText('profiles.text.profile')} "${this.ProfileNames[formerIndex]}" ${getText(
-          'profiles.text.has_been_saved'
-        )}`;
-      }
-
-      return;
-    }
-  }
-
-  handleProfilesLoading(profileIndex: number) {
-    const formerIndex = profileIndex - 1;
-    if (MouseIn(this.getXPos(profileIndex) + 500, this.getYPos(profileIndex) - 32, 200, 64)) {
-      if (!this.loadProfile(profileIndex)) {
-        this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.needs_to_be_saved')}`;
-        return;
-      }
-
-      if (this.ProfileNames[formerIndex] === '')
-        this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.has_been_loaded')}`;
-      if (this.ProfileNames[formerIndex] !== '')
-        this.PreferenceText = `${getText('profiles.text.profile')} "${this.ProfileNames[formerIndex]}" ${getText(
-          'profiles.text.has_been_loaded'
-        )}`;
-
-      getModule<ColorsModule>('ColorsModule').reloadTheme();
-
-      return;
-    }
-  }
-
-  handleProfilesDeleting(profileIndex: number) {
-    const formerIndex = profileIndex - 1;
-    if (MouseIn(this.getXPos(profileIndex) + 750, this.getYPos(profileIndex) - 32, 200, 64)) {
-      if (!this.ProfileNames[formerIndex]) return;
-
-      if (this.deleteProfile(profileIndex)) {
-        if (this.ProfileNames[formerIndex] === '') {
-          this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.has_been_deleted')}`;
-          return;
-        }
-        if (this.ProfileNames[formerIndex] !== '') {
-          this.PreferenceText = `${getText('profiles.text.profile')} "${this.ProfileNames[formerIndex]}" ${getText(
-            'profiles.text.has_been_deleted'
-          )}`;
-          this.ProfileNames[formerIndex] = '';
-          return;
-        }
-      }
-
-      if (!this.deleteProfile(profileIndex)) {
-        this.PreferenceText = `${getText('profiles.text.profile')} ${profileIndex} ${getText('profiles.text.not_saved_or_already_deleted')}`;
-        return;
-      }
-      return;
-    }
   }
 }

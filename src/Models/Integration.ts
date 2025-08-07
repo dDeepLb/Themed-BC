@@ -1,6 +1,6 @@
-import { BaseSettingsModel } from './Global';
+import { BaseSettingsModel as DL_BaseSettingsModel } from 'bc-deeplib/deeplib';
 
-export type IntegrationSettingsModel = BaseSettingsModel & {
+export type IntegrationSettingsModel = DL_BaseSettingsModel & {
   inputs: boolean;
   chat: boolean;
   inventory: boolean;

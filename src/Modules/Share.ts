@@ -1,12 +1,9 @@
-import { BaseModule } from '../Base/BaseModule';
-import { getModule } from '../Base/Modules';
 import { ColorsSettingsModel } from '../Models/Colors';
-import { getText } from '../Translation';
-import { settingsSave } from '../Utilities/Data';
-import { sendAction, sendLocalSmart, useLgcModal } from '../Utilities/Other';
-import { HookPriority, hookFunction } from '../Utilities/SDK';
 import { ColorsModule } from './Colors';
 import { GlobalSettingsModel } from '../Models/Global';
+import { BaseModule, getModule, getText, HookPriority, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, modStorage } from 'bc-deeplib/deeplib';
+import { sdk } from '../Themed';
+import { useLgcModal } from '../Utilities/Other';
 
 type ThemedMessageDictionaryEntry = {
   ThemedMessage: ThemedMessageModel;
@@ -18,13 +15,13 @@ interface ThemedMessageModel {
 }
 
 export class ShareModule extends BaseModule {
-  Load(): void {
-    hookFunction('ChatRoomMessageProcessHidden', HookPriority.Observe, (args, next) => {
-      const data = args[0] as ServerChatRoomMessage;
+  load(): void {
+    sdk.hookFunction('ChatRoomMessageProcessHidden', HookPriority.Observe, (args, next) => {
+      const [data, sender] = args;
 
       if (data.Content !== 'ThemedTheme') return next(args);
+      if (!sender.MemberNumber) return next(args);
 
-      const sender = ChatRoomCharacter.find((c) => c.MemberNumber == data.Sender);
       const senderName = CharacterNickname(sender);
       const prompt = getText('modal.prompt.share')
         .replace('$Sender', `${senderName} (${data.Sender})`)
@@ -45,7 +42,9 @@ export class ShareModule extends BaseModule {
       text.classList.add('modal-prompt');
       button.classList.add('modal-button');
 
-      const messageData = data.Dictionary[0]['ThemedMessage'];
+      if (!data.Dictionary) return next(args);
+
+      const messageData = (data.Dictionary[0] as unknown as ThemedMessageDictionaryEntry)['ThemedMessage'];
 
       const theme = messageData.Theme;
       const version = messageData.ThemeVersion;
@@ -53,7 +52,7 @@ export class ShareModule extends BaseModule {
 
       button.addEventListener('click', () => {
         if (!version || version !== Player.Themed.Version) {
-          sendLocalSmart('theme-not-up-to-date', 'Theme sent by ' + senderName + ' is not up-to-date!');
+          messageSendLocal('theme-not-up-to-date', `Theme sent by ${senderName} is not up-to-date!`);
           return;
         }
 
@@ -70,20 +69,22 @@ export class ShareModule extends BaseModule {
 
       ChatRoomAppendChat(message);
       ElementScrollToEnd('TextAreaChatLog');
+
+      return next(args);
     });
   }
 
   acceptShare(data: ColorsSettingsModel, settings: GlobalSettingsModel): void {
     Player.Themed.ColorsModule = data;
     Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
-    settingsSave();
+    modStorage.save();
 
     getModule<ColorsModule>('ColorsModule').reloadTheme();
   }
 
-  share(target: number | null): void {
-    sendLocalSmart('theme-share', 'Shared theme with ' + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : 'everyone'));
-    sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, 'Possessive', false)} Themed theme!`, target);
+  share(target: number | undefined): void {
+    messageSendLocal('theme-share', 'Shared theme with ' + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target) as Character) : 'everyone'));
+    messageSendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, 'Possessive', false)} Themed theme!`, target);
 
     const packet = <ServerChatRoomMessage><unknown>{
       Type: 'Hidden',
