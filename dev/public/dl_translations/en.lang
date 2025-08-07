@@ -1,0 +1,17 @@
+# Navigation
+settings.button.back_button_hint = Back
+settings.button.prev_button_hint = Previous page
+settings.button.next_button_hint = Next page
+
+# Main Menu
+mainmenu.button.wiki = Wiki
+mainmenu.button.repo = Repository
+mainmenu.button.reset = Reset
+mainmenu.button.import_export = Import & Export
+
+# Import & Export
+import-export.title = - Import & Export -
+import-export.button.export_file = Export to file
+import-export.button.import_file = Import from file
+import-export.button.export_clipboard = Export to clipboard
+import-export.button.import_clipboard = Import from clipboard

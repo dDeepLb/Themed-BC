@@ -8,9 +8,6 @@ var Themed = (() => {
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-  var __esm = (fn, res) => function __init() {
-    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
-  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -37,17 +34,10 @@ var Themed = (() => {
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // <define:LAST_COMMIT_HASH>
-  var init_define_LAST_COMMIT_HASH = __esm({
-    "<define:LAST_COMMIT_HASH>"() {
-    }
-  });
-
   // node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js
   var require_color_name = __commonJS({
     "node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js"(exports, module) {
       "use strict";
-      init_define_LAST_COMMIT_HASH();
       module.exports = {
         "aliceblue": [240, 248, 255],
         "antiquewhite": [250, 235, 215],
@@ -204,7 +194,6 @@ var Themed = (() => {
   // node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js
   var require_is_arrayish = __commonJS({
     "node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
       module.exports = /* @__PURE__ */ __name(function isArrayish(obj) {
         if (!obj || typeof obj === "string") {
           return false;
@@ -218,7 +207,6 @@ var Themed = (() => {
   var require_simple_swizzle = __commonJS({
     "node_modules/.pnpm/simple-swizzle@0.2.2/node_modules/simple-swizzle/index.js"(exports, module) {
       "use strict";
-      init_define_LAST_COMMIT_HASH();
       var isArrayish = require_is_arrayish();
       var concat = Array.prototype.concat;
       var slice = Array.prototype.slice;
@@ -245,7 +233,6 @@ var Themed = (() => {
   // node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js
   var require_color_string = __commonJS({
     "node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
       var colorNames = require_color_name();
       var swizzle = require_simple_swizzle();
       var hasOwnProperty = Object.hasOwnProperty;
@@ -433,7 +420,6 @@ var Themed = (() => {
   // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js
   var require_conversions = __commonJS({
     "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
       var cssKeywords = require_color_name();
       var reverseKeywords = {};
       for (const key of Object.keys(cssKeywords)) {
@@ -1106,7 +1092,6 @@ var Themed = (() => {
   // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js
   var require_route = __commonJS({
     "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
       var conversions = require_conversions();
       function buildGraph() {
         const graph = {};
@@ -1181,7 +1166,6 @@ var Themed = (() => {
   // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js
   var require_color_convert = __commonJS({
     "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
       var conversions = require_conversions();
       var route = require_route();
       var convert = {};
@@ -1245,7 +1229,6 @@ var Themed = (() => {
   // node_modules/.pnpm/color@4.2.3/node_modules/color/index.js
   var require_color = __commonJS({
     "node_modules/.pnpm/color@4.2.3/node_modules/color/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
       var colorString = require_color_string();
       var convert = require_color_convert();
       var skippedModels = [
@@ -1637,10 +1620,41 @@ var Themed = (() => {
     }
   });
 
-  // node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js
-  var require_bcmodsdk = __commonJS({
+  // src/Themed.ts
+  var Themed_exports = {};
+  __export(Themed_exports, {
+    sdk: () => sdk
+  });
+
+  // node_modules/.pnpm/bc-deeplib@1.1.1_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  var __create2 = Object.create;
+  var __defProp2 = Object.defineProperty;
+  var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames2 = Object.getOwnPropertyNames;
+  var __getProtoOf2 = Object.getPrototypeOf;
+  var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+  var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
+  var __commonJS2 = /* @__PURE__ */ __name((cb, mod) => /* @__PURE__ */ __name(function __require() {
+    return mod || (0, cb[__getOwnPropNames2(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  }, "__require"), "__commonJS");
+  var __copyProps2 = /* @__PURE__ */ __name((to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames2(from))
+        if (!__hasOwnProp2.call(to, key) && key !== except)
+          __defProp2(to, key, { get: /* @__PURE__ */ __name(() => from[key], "get"), enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+    }
+    return to;
+  }, "__copyProps");
+  var __toESM2 = /* @__PURE__ */ __name((mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  )), "__toESM");
+  var require_bcmodsdk = __commonJS2({
     "node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js"(exports) {
-      init_define_LAST_COMMIT_HASH();
       var bcModSdk = function() {
         "use strict";
         const o = "1.2.0";
@@ -1650,21 +1664,25 @@ var Themed = (() => {
           throw console.error(e2), e2;
         }
         __name(e, "e");
+        __name2(e, "e");
         const t = new TextEncoder();
         function n(o2) {
           return !!o2 && "object" == typeof o2 && !Array.isArray(o2);
         }
         __name(n, "n");
+        __name2(n, "n");
         function r(o2) {
           const e2 = /* @__PURE__ */ new Set();
           return o2.filter((o3) => !e2.has(o3) && e2.add(o3));
         }
         __name(r, "r");
+        __name2(r, "r");
         const i = /* @__PURE__ */ new Map(), a = /* @__PURE__ */ new Set();
         function c(o2) {
           a.has(o2) || (a.add(o2), console.warn(o2));
         }
         __name(c, "c");
+        __name2(c, "c");
         function s(o2) {
           const e2 = [], t2 = /* @__PURE__ */ new Map(), n2 = /* @__PURE__ */ new Set();
           for (const r3 of f.values()) {
@@ -1687,14 +1705,14 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
             for (const [n3, r3] of e3.entries()) t3.includes(n3) || c(`ModSDK: Patching ${o3.name}: Patch ${n3} not applied`), t3 = t3.replaceAll(n3, r3);
             return (0, eval)(`(${t3})`);
           }(o2.original, t2);
-          let i2 = /* @__PURE__ */ __name(function(e3) {
+          let i2 = /* @__PURE__ */ __name2(function(e3) {
             var t3, i3;
             const a2 = null === (i3 = (t3 = m.errorReporterHooks).hookChainExit) || void 0 === i3 ? void 0 : i3.call(t3, o2.name, n2), c2 = r2.apply(this, e3);
             return null == a2 || a2(), c2;
           }, "i");
           for (let t3 = e2.length - 1; t3 >= 0; t3--) {
             const n3 = e2[t3], r3 = i2;
-            i2 = /* @__PURE__ */ __name(function(e3) {
+            i2 = /* @__PURE__ */ __name2(function(e3) {
               var t4, i3;
               const a2 = null === (i3 = (t4 = m.errorReporterHooks).hookEnter) || void 0 === i3 ? void 0 : i3.call(t4, o2.name, n3.mod), c2 = n3.hook.apply(this, [e3, (o3) => {
                 if (1 !== arguments.length || !Array.isArray(e3)) throw new Error(`Mod ${n3.mod} failed to call next hook: Expected args to be array, got ${typeof o3}`);
@@ -1706,6 +1724,7 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
           return { hooks: e2, patches: t2, patchesSources: n2, enter: i2, final: r2 };
         }
         __name(s, "s");
+        __name2(s, "s");
         function l(o2, e2 = false) {
           let r2 = i.get(o2);
           if (r2) e2 && (r2.precomputed = s(r2));
@@ -1724,7 +1743,7 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
               }
               return ((-1 ^ e4) >>> 0).toString(16).padStart(8, "0").toUpperCase();
             }(c2.toString().replaceAll("\r\n", "\n")), d2 = { name: o2, original: c2, originalHash: l2 };
-            r2 = Object.assign(Object.assign({}, d2), { precomputed: s(d2), router: /* @__PURE__ */ __name(() => {
+            r2 = Object.assign(Object.assign({}, d2), { precomputed: s(d2), router: /* @__PURE__ */ __name2(() => {
             }, "router"), context: e3, contextProperty: a2[a2.length - 1] }), r2.router = /* @__PURE__ */ function(o3) {
               return function(...e4) {
                 return o3.precomputed.enter.apply(this, [e4]);
@@ -1734,21 +1753,25 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
           return r2;
         }
         __name(l, "l");
+        __name2(l, "l");
         function d() {
           for (const o2 of i.values()) o2.precomputed = s(o2);
         }
         __name(d, "d");
+        __name2(d, "d");
         function p() {
           const o2 = /* @__PURE__ */ new Map();
           for (const [e2, t2] of i) o2.set(e2, { name: e2, original: t2.original, originalHash: t2.originalHash, sdkEntrypoint: t2.router, currentEntrypoint: t2.context[t2.contextProperty], hookedByMods: r(t2.precomputed.hooks.map((o3) => o3.mod)), patchedByMods: Array.from(t2.precomputed.patchesSources) });
           return o2;
         }
         __name(p, "p");
+        __name2(p, "p");
         const f = /* @__PURE__ */ new Map();
         function u(o2) {
           f.get(o2.name) !== o2 && e(`Failed to unload mod '${o2.name}': Not registered`), f.delete(o2.name), o2.loaded = false, d();
         }
         __name(u, "u");
+        __name2(u, "u");
         function g(o2, t2) {
           o2 && "object" == typeof o2 || e("Failed to register mod: Expected info object, got " + typeof o2), "string" == typeof o2.name && o2.name || e("Failed to register mod: Expected name to be non-empty string, got " + typeof o2.name);
           let r2 = `'${o2.name}'`;
@@ -1756,10 +1779,10 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
           const i2 = true === t2.allowReplace, a2 = f.get(o2.name);
           a2 && (a2.allowReplace && i2 || e(`Refusing to load mod ${r2}: it is already loaded and doesn't allow being replaced.
 Was the mod loaded multiple times?`), u(a2));
-          const c2 = /* @__PURE__ */ __name((o3) => {
+          const c2 = /* @__PURE__ */ __name2((o3) => {
             let e2 = g2.patching.get(o3.name);
             return e2 || (e2 = { hooks: [], patches: /* @__PURE__ */ new Map() }, g2.patching.set(o3.name, e2)), e2;
-          }, "c"), s2 = /* @__PURE__ */ __name((o3, t3) => (...n2) => {
+          }, "c"), s2 = /* @__PURE__ */ __name2((o3, t3) => (...n2) => {
             var i3, a3;
             const c3 = null === (a3 = (i3 = m.errorReporterHooks).apiEndpointEnter) || void 0 === a3 ? void 0 : a3.call(i3, o3, g2.name);
             g2.loaded || e(`Mod ${r2} attempted to call SDK function after being unloaded`);
@@ -1795,12 +1818,14 @@ Was the mod loaded multiple times?`), u(a2));
           return f.set(o2.name, g2), Object.freeze(p2);
         }
         __name(g, "g");
+        __name2(g, "g");
         function h() {
           const o2 = [];
           for (const e2 of f.values()) o2.push({ name: e2.name, fullName: e2.fullName, version: e2.version, repository: e2.repository });
           return o2;
         }
         __name(h, "h");
+        __name2(h, "h");
         let m;
         const y = void 0 === window.bcModSdk ? window.bcModSdk = function() {
           const e2 = { version: o, apiVersion: 1, registerMod: g, getModsInfo: h, getPatchingInfo: p, errorReporterHooks: Object.seal({ apiEndpointEnter: null, hookEnter: null, hookChainExit: null }) };
@@ -1811,101 +1836,2510 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }();
     }
   });
-
-  // src/Themed.ts
-  var Themed_exports = {};
-  __export(Themed_exports, {
-    init: () => init,
-    unload: () => unload
-  });
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Base/Modules.ts
-  init_define_LAST_COMMIT_HASH();
-  var modulesMap = /* @__PURE__ */ new Map();
-  function modules() {
-    return [...modulesMap.values()];
-  }
-  __name(modules, "modules");
-  function registerModule(module) {
-    modulesMap.set(module.constructor.name, module);
-    return module;
-  }
-  __name(registerModule, "registerModule");
-  function getModule(moduleType) {
-    return modulesMap.get(moduleType);
-  }
-  __name(getModule, "getModule");
-
-  // src/Base/SettingUtils.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Screens/MainMenu.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Base/BaseSetting.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Modules/GuiRedraw.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Base/BaseModule.ts
-  init_define_LAST_COMMIT_HASH();
-  var _BaseModule = class _BaseModule {
+  var _a;
+  var BaseModule = (_a = class {
     get settingsScreen() {
       return null;
     }
-    /** Allows changing the subkey for that module settings storage */
     get settingsStorage() {
       return this.constructor.name;
     }
     get settings() {
+      const modName = ModSdkManager.ModInfo.name;
       if (!this.settingsStorage) return {};
-      if (!Player.Themed) {
-        Player.Themed = {};
+      if (!modStorage.playerStorage) {
+        Player[modName] = {};
         this.registerDefaultSettings();
-      } else if (!Player.Themed[this.settingsStorage]) this.registerDefaultSettings();
-      return Player.Themed[this.settingsStorage];
+      } else if (!modStorage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
+      return modStorage.playerStorage[this.settingsStorage];
     }
-    set settings(val) {
-      if (!Player.Themed) {
-        Player.Themed = {};
+    set settings(value) {
+      const modName = ModSdkManager.ModInfo.name;
+      const storage = new ModStorage(modName);
+      if (!this.settingsStorage) return;
+      if (!storage.playerStorage) {
+        Player[modName] = {};
         this.registerDefaultSettings();
-      } else if (!Player.Themed[this.settingsStorage]) this.registerDefaultSettings();
-      Player.Themed[this.settingsStorage] = val;
+      } else if (!storage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
+      storage.playerStorage[this.settingsStorage] = value;
     }
-    get enabled() {
-      if (!Player.Themed.GlobalModule) return false;
-      return Player.Themed.GlobalModule.themedEnabled && this.settings.themedEnabled && (ServerPlayerIsInChatRoom() || CurrentModule == "Room" && CurrentScreen == "Crafting");
-    }
-    Init() {
+    init() {
       this.registerDefaultSettings();
     }
     registerDefaultSettings() {
       const storage = this.settingsStorage;
       const defaults = this.defaultSettings;
       if (!storage || !defaults) return;
-      Player.Themed[storage] = Object.assign(defaults, Player.Themed[storage] ?? {});
+      Player[ModSdkManager.ModInfo.name][storage] = Object.assign(defaults, Player[ModSdkManager.ModInfo.name][storage] ?? {});
     }
     get defaultSettings() {
       return null;
     }
-    Load() {
+    load() {
     }
-    Run() {
+    run() {
     }
-    Unload() {
+    unload() {
+    }
+  }, __name(_a, "BaseModule"), __name2(_a, "BaseModule"), _a);
+  function getCurrentSubscreen() {
+    return GUI.instance && GUI.instance.currentSubscreen;
+  }
+  __name(getCurrentSubscreen, "getCurrentSubscreen");
+  __name2(getCurrentSubscreen, "getCurrentSubscreen");
+  function setSubscreen(subscreen) {
+    if (!GUI.instance) {
+      throw new Error("Attempt to set subscreen before init");
+    }
+    GUI.instance.currentSubscreen = subscreen;
+    return GUI.instance.currentSubscreen;
+  }
+  __name(setSubscreen, "setSubscreen");
+  __name2(setSubscreen, "setSubscreen");
+  var _a2;
+  var BaseSubscreen = (_a2 = class {
+    constructor(subscreenOptions, module) {
+      __publicField(this, "options");
+      __publicField(this, "module");
+      if (module) this.module = module;
+      this.options = subscreenOptions || {};
+    }
+    get name() {
+      return "UNKNOWN";
+    }
+    get icon() {
+      return "";
+    }
+    get subscreenName() {
+      return this.constructor.name;
+    }
+    setSubscreen(screen) {
+      return setSubscreen(screen);
+    }
+    get settings() {
+      return this.module.settings;
+    }
+    set settings(value) {
+      this.module.settings = value;
+    }
+    get pageStructure() {
+      return [[]];
+    }
+    get currentPage() {
+      return this.pageStructure[Math.min(_a2.currentPage - 1, this.pageStructure.length - 1)];
+    }
+    changePage(page, setLabel) {
+      const totalPages = this.pageStructure.length;
+      if (page > totalPages) page = 1;
+      if (page < 1) page = totalPages;
+      _a2.currentPage = page;
+      this.managePageElementsVisibility();
+      setLabel(`${_a2.currentPage} of ${this.pageStructure.length}`);
+    }
+    managePageElementsVisibility() {
+      this.pageStructure.forEach((item, ix) => {
+        if (ix != _a2.currentPage - 1) {
+          item.forEach((setting) => {
+            domUtil.hide(`${setting.id}-container`);
+          });
+        } else {
+          item.forEach((setting) => {
+            domUtil.unhide(`${setting.id}-container`);
+          });
+        }
+      });
+    }
+    load() {
+      for (const module of modules()) {
+        if (!module.settingsScreen) continue;
+        if (!module.settings || !Object.keys(module.settings).length) module.registerDefaultSettings();
+      }
+      _a2.currentPage = 1;
+      layoutElement.createSubscreenDiv();
+      const settingsElement = layoutElement.createSettingsDiv();
+      layoutElement.appendToSubscreenDiv(settingsElement);
+      const menu = ElementMenu.Create("deeplib-nav-menu", []);
+      layoutElement.appendToSubscreenDiv(menu);
+      if (this.pageStructure.length > 1) {
+        const backNext = advancedElement.createBackNext({
+          id: "deeplib-page-back-next",
+          next: /* @__PURE__ */ __name2(({ setLabel }) => this.changePage(_a2.currentPage + 1, setLabel), "next"),
+          initialNextTooltip: getText("settings.button.next_button_hint"),
+          back: /* @__PURE__ */ __name2(({ setLabel }) => this.changePage(_a2.currentPage - 1, setLabel), "back"),
+          initialPrevTooltip: getText("settings.button.prev_button_hint"),
+          initialLabel: `${_a2.currentPage} of ${this.pageStructure.length}`
+        });
+        ElementMenu.PrependItem(menu, backNext);
+      }
+      const subscreenTitle = advancedElement.createLabel({
+        id: "deeplib-subscreen-title",
+        label: getText(`${this.name}.title`).replace("$ModVersion", ModSdkManager.ModInfo.version)
+      });
+      layoutElement.appendToSubscreenDiv(subscreenTitle);
+      if (this.name !== "mainmenu") {
+        const exitButton = advancedElement.createButton({
+          id: "deeplib-exit",
+          size: [90, 90],
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.exit();
+          }, "onClick"),
+          tooltip: getText("settings.button.back_button_hint")
+        });
+        ElementMenu.AppendButton(menu, exitButton);
+      }
+      const tooltip = advancedElement.createTooltip();
+      layoutElement.appendToSubscreenDiv(tooltip);
+      this.pageStructure.forEach(
+        (s) => s.forEach((item) => {
+          let element;
+          switch (item.type) {
+            case "text":
+            case "number":
+            case "color":
+              element = advancedElement.createInput(item);
+              break;
+            case "checkbox":
+              element = advancedElement.createCheckbox(item);
+              break;
+            case "button":
+              element = advancedElement.createButton(item);
+              break;
+            case "label":
+              element = advancedElement.createLabel(item);
+              break;
+            case "custom":
+              element = advancedElement.createCustom(item);
+              break;
+          }
+          layoutElement.appendToSettingsDiv(element);
+        })
+      );
+      this.managePageElementsVisibility();
+      CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
+    }
+    run() {
+      if (this.options.drawCharacter) DrawCharacter(Player, 50, 50, 0.9, false);
+    }
+    click() {
+    }
+    exit() {
+      CharacterAppearanceForceUpCharacter = -1;
+      CharacterLoadCanvas(Player);
+      setSubscreen("mainmenu");
+      modStorage.save();
+    }
+    resize(onLoad = false) {
+      const offset = this.options.drawCharacter ? 0 : 380;
+      const subscreen = layoutElement.getSubscreenDiv();
+      const settingsDiv = layoutElement.getSettingsDiv();
+      ElementSetPosition(subscreen || "", 0, 0);
+      ElementSetSize(subscreen || "", 2e3, 1e3);
+      ElementSetFontSize(subscreen || "", "auto");
+      if (this.name === "mainmenu") {
+        ElementSetPosition(settingsDiv || "", 530 - offset, 170);
+        ElementSetSize(settingsDiv || "", 600 + offset, 660);
+      } else {
+        ElementSetPosition(settingsDiv || "", 530 - offset, 170);
+        ElementSetSize(settingsDiv || "", 1e3 + offset, 660);
+      }
+      ElementSetPosition("deeplib-subscreen-title", 530 - offset, 75);
+      ElementSetSize("deeplib-subscreen-title", 800, 60);
+      ElementSetPosition("deeplib-nav-menu", 1905, 75, "top-right");
+      ElementSetSize("deeplib-nav-menu", null, 90);
+      ElementSetPosition(advancedElement.getTooltip() || "", 250, 850);
+      ElementSetSize(advancedElement.getTooltip() || "", 1500, 70);
+      _a2.currentElements.forEach((item) => {
+        const options2 = item[1];
+        domUtil.autoSetPosition(options2.id, options2.position);
+        domUtil.autoSetSize(options2.id, options2.size);
+      });
+      if (settingsDiv) {
+        if (domUtil.hasOverflow(settingsDiv)?.vertical) {
+          settingsDiv.classList.add("deeplib-overflow-box");
+        } else {
+          settingsDiv.classList.remove("deeplib-overflow-box");
+        }
+      }
+    }
+    unload() {
+      _a2.currentElements = [];
+      layoutElement.removeSubscreenDiv();
+    }
+  }, __name(_a2, "_BaseSubscreen"), __name2(_a2, "BaseSubscreen"), __publicField(_a2, "currentElements", []), __publicField(_a2, "currentPage", 1), _a2);
+  var styles_default = `.deeplib-subscreen,
+.deeplib-modal {
+  --deeplib-background-color: var(--tmd-main, white);
+  --deeplib-element-color: var(--tmd-element, white);
+  --deeplib-element-hover-color: var(--tmd-element-hover, cyan);
+  --deeplib-blocked-color: var(--tmd-blocked, red);
+  --deeplib-text-color: var(--tmd-text, black);
+  --deeplib-icon-color: var(--tmd-accent, white);
+  --deeplib-icon-hover-color: var(--tmd-accent-hover, cyan);
+  --deeplib-border-color: var(--tmd-accent, black);
+  --deeplib-border-width: min(0.2vh, 0.1vw);
+  --deeplib-border-width: min(0.2dvh, 0.1dvw);
+  --deeplib-border-radius: min(1vh, 0.5vw);
+  --deeplib-border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-button {
+  color: var(--deeplib-text-color);
+  width: 100%;
+  height: 100%;
+}
+
+.deeplib-button.button-styling,
+.deeplib-button.button-styling::before {
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-button img {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-position: left;
+  background-color: var(--deeplib-icon-color);
+  background-blend-mode: multiply;
+  background-size: contain;
+  mask-position: left;
+  mask-size: contain;
+  background-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  color: transparent;
+  background-image: var(--image);
+  mask-image: var(--image);
+  pointer-events: none;
+}
+
+.deeplib-button:hover img {
+  background-color: var(--deeplib-icon-hover-color);
+}
+
+.deeplib-button .button-label {
+  background-color: transparent !important;
+  color: var(--deeplib-text-color);
+  font-size: min(3.6dvh, 1.8dvw);
+}
+
+.deeplib-button .button-tooltip {
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+#deeplib-page-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#deeplib-subscreen-title {
+  text-align: left;
+  color: var(--deeplib-text-color);
+}
+
+.deeplib-text {
+  color: var(--deeplib-text-color);
+}
+
+.deeplib-subscreen {
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.deeplib-subscreen * {
+  box-sizing: border-box;
+  pointer-events: all;
+}
+
+.deeplib-settings {
+  display: grid;
+  grid-auto-rows: min-content;
+  padding: min(1dvh, 0.5dvw);
+  gap: 0.3em;
+  overflow-y: scroll;
+}
+
+.deeplib-misc {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: min(1vh, 0.5vw);
+}
+
+.deeplib-tooltip {
+  background-color: var(--deeplib-element-color);
+  color: var(--deeplib-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: min(1dvh, 0.5dvw);
+  padding: min(1vh, 0.5vw);
+  font-size: 0.8em;
+  border: min(0.2vh, 0.1vw) solid var(--deeplib-border-color);
+}
+
+.deeplib-overflow-box {
+  border: var(--deeplib-border-color) solid var(--deeplib-border-width);
+}
+
+.deeplib-prev-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: min(2dvh, 1dvw);
+  background-color: var(--deeplib-element-color);
+  color: var(--deeplib-text-color);
+  border-radius: min(1dvh, 0.5dvw);
+  border: min(0.2vh, 0.1vw) solid var(--deeplib-border-color);
+}
+.deeplib-prev-next .deeplib-prev-next-button {
+  height: 100%;
+  aspect-ratio: 1;
+}
+.deeplib-prev-next .deeplib-prev-next-button:hover {
+  background-color: var(--deeplib-element-hover-color);
+  border-radius: var(--deeplib-border-radius);
+}
+.deeplib-prev-next .deeplib-prev-next-label {
+  white-space: nowrap;
+}
+
+#deeplib-nav-menu {
+  display: flex;
+  flex-direction: row;
+  gap: min(2dvh, 1dvw);
+}
+
+.deeplib-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.deeplib-checkbox-container input.deeplib-input {
+  width: min(5vh, 2.5vw);
+  height: min(5vh, 2.5vw);
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-checkbox-container input.deeplib-input[type=checkbox]:checked::before {
+  width: 80%;
+  height: 80%;
+}
+
+.deeplib-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.deeplib-input-container:has(label.deeplib-text) {
+  margin-top: min(1vh, 0.5vw);
+}
+
+.deeplib-input-container input.deeplib-input {
+  font-size: 0.6em;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+  padding-left: min(1vh, 0.5vw);
+  padding-right: min(1vh, 0.5vw);
+  min-height: min(5dvh, 2.5dvw);
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-input-container input.deeplib-input[type=color] {
+  padding: 0px;
+  width: min(5vh, 2.5vw);
+  height: min(5vh, 2.5vw);
+  border-radius: 0px;
+}
+
+.deeplib-input-container input.deeplib-input[type=color]:disabled {
+  border: var(--deeplib-blocked-color) solid var(--deeplib-border-width);
+  cursor: not-allowed;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.deeplib-highlight-text {
+  font-weight: bold;
+  color: rgb(203, 185, 23);
+}
+
+#TextAreaChatLog[data-colortheme=dark] div.ChatMessage.deeplib-message,
+#TextAreaChatLog[data-colortheme=dark2] div.ChatMessage.deeplib-message {
+  background-color: var(--deeplib-element-color);
+  border: min(0.2dvh, 0.1dvw) solid var(--deeplib-border-color);
+  color: var(--deeplib-text-color);
+}
+
+#TextAreaChatLog div.ChatMessage.deeplib-message {
+  background-color: #eee;
+  border: min(0.2dvh, 0.1dvw) solid #440171;
+  color: #111;
+  padding-left: min(0.6dvh, 0.3dvw);
+  display: block;
+  white-space: normal;
+}
+
+#TextAreaChatLog[data-colortheme=dark] div.ChatMessage.deeplib-message a,
+#TextAreaChatLog[data-colortheme=dark2] div.ChatMessage.deeplib-message a {
+  color: var(--deeplib-text-color);
+}
+
+#TextAreaChatLog div.ChatMessage.deeplib-message a {
+  cursor: pointer;
+  font-weight: bold;
+  color: #111;
+}
+
+.deeplib-modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  width: max(50dvw, 25dvh);
+  font-size: min(4dvh, 2dvw);
+  padding: min(2dvh, 1dvw);
+  background-color: var(--deeplib-element-color);
+  border-radius: min(1.2dvh, 0.6dvw);
+  border: min(0.2dvh, 0.1dvw) solid var(--deeplib-border-color);
+  color: var(--deeplib-text-color);
+}
+.deeplib-modal .deeplib-modal-input {
+  width: 100%;
+  font-size: min(2.6dvh, 1.8dvw);
+  border-radius: min(1dvh, 0.5dvw);
+  padding: min(1dvh, 0.5dvw);
+}
+.deeplib-modal input.deeplib-modal-input {
+  max-width: max(50dvh, 25dvw);
+}
+.deeplib-modal .deeplib-modal-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 0.5em;
+  width: 100%;
+}
+.deeplib-modal .deeplib-modal-button-container .deeplib-button {
+  font-size: 0.8em;
+  display: flex;
+  width: auto;
+  padding: min(0.4vh, 0.2vw) min(2vh, 1vw);
+}
+.deeplib-modal .deeplib-modal-button-container .deeplib-button .button-label {
+  display: contents;
+}
+
+.deeplib-modal-blocker {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL0Rlby9OVk1FL1N0dWZmL0NvZGUvQkMvQkMtRGVlcExpYi9zcmMvc3R5bGVzIiwic291cmNlcyI6WyJ2YXJzLnNjc3MiLCJidXR0b25zLnNjc3MiLCJlbGVtZW50cy5zY3NzIiwiaW5wdXRzLnNjc3MiLCJtZXNzYWdlcy5zY3NzIiwibW9kYWwuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0VBRUU7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUNiRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFFQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUMzQ0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFNRTtFQUNBOztBQU5BO0VBQ0U7RUFDQTs7QUFPSjtFQUNFOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTs7O0FDdEZGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBSUY7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUM3REY7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FDN0JGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUdGO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7O0FBTVI7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5kZWVwbGliLXN1YnNjcmVlbixcbi5kZWVwbGliLW1vZGFsIHtcbiAgLS1kZWVwbGliLWJhY2tncm91bmQtY29sb3I6IHZhcigtLXRtZC1tYWluLCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudCwgd2hpdGUpO1xuICAtLWRlZXBsaWItZWxlbWVudC1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWVsZW1lbnQtaG92ZXIsIGN5YW4pO1xuICAtLWRlZXBsaWItYmxvY2tlZC1jb2xvcjogdmFyKC0tdG1kLWJsb2NrZWQsIHJlZCk7XG4gIC0tZGVlcGxpYi10ZXh0LWNvbG9yOiB2YXIoLS10bWQtdGV4dCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgd2hpdGUpO1xuICAtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWFjY2VudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcbn1cblxuLmRlZXBsaWItbWlzYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcbiAgZ2FwOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLXRvb2x0aXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLW92ZXJmbG93LWJveCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbn1cblxuLmRlZXBsaWItcHJldi1uZXh0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1idXR0b24ge1xuICAgICY6aG92ZXIge1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yKTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gICAgfVxuICAgIFxuICAgIGhlaWdodDogMTAwJTtcbiAgICBhc3BlY3QtcmF0aW86IDE7XG4gIH1cblxuICAuZGVlcGxpYi1wcmV2LW5leHQtbGFiZWwge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIH1cbn1cblxuI2RlZXBsaWItbmF2LW1lbnUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbn0iLCIuZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl06Y2hlY2tlZDo6YmVmb3JlIHtcbiAgd2lkdGg6IDgwJTtcbiAgaGVpZ2h0OiA4MCU7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lcjpoYXMobGFiZWwuZGVlcGxpYi10ZXh0KSB7XG4gIG1hcmdpbi10b3A6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXQge1xuICBmb250LXNpemU6IDAuNmVtO1xuICBwYWRkaW5nOiA1cHggMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIG91dGxpbmU6IG5vbmU7XG4gIHBhZGRpbmctbGVmdDogbWluKDF2aCwgMC41dncpO1xuICBwYWRkaW5nLXJpZ2h0OiBtaW4oMXZoLCAwLjV2dyk7XG4gIG1pbi1oZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjb2xvclwiXSB7XG4gIHBhZGRpbmc6IDBweDtcbiAgd2lkdGg6IG1pbig1dmgsIDIuNXZ3KTtcbiAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIGJvcmRlci1yYWRpdXM6IDBweDtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdOmRpc2FibGVkIHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJsb2NrZWQtY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcbn1cblxuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXG5pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuXG5pbnB1dFt0eXBlPW51bWJlcl0ge1xuICBhcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG4gIC1tb3otYXBwZWFyYW5jZTogdGV4dGZpZWxkO1xufVxuIiwiLmRlZXBsaWItaGlnaGxpZ2h0LXRleHQge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJnYigyMDMsIDE4NSwgMjMpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCAjNDQwMTcxO1xuICBjb2xvcjogIzExMTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMC42ZHZoLCAwLjNkdncpO1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2hpdGUtc3BhY2U6IG5vcm1hbDtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogIzExMTtcbn1cbiIsIi5kZWVwbGliLW1vZGFsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDEwJTtcbiAgbGVmdDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7XG4gIHotaW5kZXg6IDEwMDE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuNWVtO1xuICB3aWR0aDogbWF4KDUwZHZ3LCAyNWR2aCk7XG4gIGZvbnQtc2l6ZTogbWluKDRkdmgsIDJkdncpO1xuICBwYWRkaW5nOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjJkdmgsIDAuNmR2dyk7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuXG4gIC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXNpemU6IG1pbigyLjZkdmgsIDEuOGR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxuXG4gIGlucHV0LmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIG1heC13aWR0aDogbWF4KDUwZHZoLCAyNWR2dyk7XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1idXR0b24tY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbiAgICBnYXA6IDAuNWVtO1xuICAgIHdpZHRoOiAxMDAlO1xuXG4gICAgLmRlZXBsaWItYnV0dG9uIHtcbiAgICAgIGZvbnQtc2l6ZTogMC44ZW07XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgICBwYWRkaW5nOiBtaW4oMC40dmgsIDAuMnZ3KSBtaW4oMnZoLCAxdncpO1xuXG4gICAgICAuYnV0dG9uLWxhYmVsIHtcbiAgICAgICAgZGlzcGxheTogY29udGVudHM7XG4gICAgICB9XG4gICAgfVxuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
+  var modStorage;
+  function initMod(options2) {
+    const sdk2 = new ModSdkManager(options2.modInfo.info, options2.modInfo.options);
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    modStorage = new ModStorage(ModSdkManager.ModInfo.name);
+    Style.injectInline("deeplib-style", styles_default);
+    deepLibLogger.debug(`Init wait for ${MOD_NAME}`);
+    if (CurrentScreen == null || CurrentScreen === "Login") {
+      options2.beforeLogin?.();
+      const removeHook = sdk2.hookFunction("LoginResponse", 0, (args, next) => {
+        deepLibLogger.debug(`Init for ${MOD_NAME}! LoginResponse caught: `, args);
+        next(args);
+        const response = args[0];
+        if (response === "InvalidNamePassword") return next(args);
+        if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
+          init(options2);
+          removeHook();
+        }
+      });
+    } else {
+      deepLibLogger.debug(`Already logged in, initing ${MOD_NAME}`);
+      init(options2);
+    }
+    return { sdk: sdk2 };
+  }
+  __name(initMod, "initMod");
+  __name2(initMod, "initMod");
+  async function init(options2) {
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    const MOD_VERSION2 = ModSdkManager.ModInfo.version;
+    if (window[MOD_NAME + "Loaded"]) return;
+    modStorage.load();
+    if (options2.pathToTranslationsFolder) {
+      await Localization.init({
+        pathToTranslationsFolder: options2.pathToTranslationsFolder
+      });
+    }
+    if (options2.modules && !initModules(options2.modules)) {
+      unloadMod();
+      return;
+    }
+    if (options2.migrators) {
+      for (const m of options2.migrators) {
+        VersionModule.registerMigrator(m);
+      }
+    }
+    await options2.initFunction?.();
+    if (options2.mainMenuOptions)
+      MainMenu.setOptions(options2.mainMenuOptions);
+    VersionModule.checkVersionUpdate();
+    for (const m of modules()) {
+      if (m.defaultSettings && hasGetter(m, "defaultSettings") && m.settings && hasSetter(m, "settings")) {
+        if (Object.entries(m.defaultSettings).length === 0) continue;
+        m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+      }
+    }
+    window[MOD_NAME + "Loaded"] = true;
+    deepLibLogger.log(`Loaded ${MOD_NAME}! Version: ${MOD_VERSION2}`);
+  }
+  __name(init, "init");
+  __name2(init, "init");
+  function initModules(modulesToRegister) {
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    for (const module of modulesToRegister) {
+      registerModule(module);
+    }
+    for (const module of modules()) {
+      module.init();
+    }
+    for (const module of modules()) {
+      module.load();
+    }
+    for (const module of modules()) {
+      module.run();
+    }
+    deepLibLogger.debug(`Modules Loaded for ${MOD_NAME}.`);
+    return true;
+  }
+  __name(initModules, "initModules");
+  __name2(initModules, "initModules");
+  function unloadMod() {
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    unloadModules();
+    delete window[MOD_NAME + "Loaded"];
+    deepLibLogger.debug(`Unloaded ${MOD_NAME}.`);
+    return true;
+  }
+  __name(unloadMod, "unloadMod");
+  __name2(unloadMod, "unloadMod");
+  function unloadModules() {
+    for (const module of modules()) {
+      module.unload();
+    }
+  }
+  __name(unloadModules, "unloadModules");
+  __name2(unloadModules, "unloadModules");
+  var modulesMap = /* @__PURE__ */ new Map();
+  function modules() {
+    return [...modulesMap.values()];
+  }
+  __name(modules, "modules");
+  __name2(modules, "modules");
+  function registerModule(module) {
+    modulesMap.set(module.constructor.name, module);
+    return module;
+  }
+  __name(registerModule, "registerModule");
+  __name2(registerModule, "registerModule");
+  function getModule(moduleType) {
+    return modulesMap.get(moduleType);
+  }
+  __name(getModule, "getModule");
+  __name2(getModule, "getModule");
+  var _a3;
+  var BaseMigrator2 = (_a3 = class {
+  }, __name(_a3, "BaseMigrator2"), __name2(_a3, "BaseMigrator"), _a3);
+  var _a4;
+  var GUI = (_a4 = class extends BaseModule {
+    constructor(modButtonOptions) {
+      super();
+      __publicField(this, "_subscreens");
+      __publicField(this, "_mainMenu");
+      __publicField(this, "_currentSubscreen", null);
+      __publicField(this, "_modButtonOptions");
+      if (_a4.instance) {
+        throw new Error("Duplicate initialization");
+      }
+      for (const module of modules()) {
+        if (!module.settingsScreen) continue;
+      }
+      this._mainMenu = new MainMenu(this);
+      this._subscreens = [this._mainMenu];
+      this._modButtonOptions = modButtonOptions;
+      _a4.instance = this;
+    }
+    get subscreens() {
+      return this._subscreens;
+    }
+    get mainMenu() {
+      return this._mainMenu;
+    }
+    get currentSubscreen() {
+      return this._currentSubscreen;
+    }
+    set currentSubscreen(subscreen) {
+      if (this._currentSubscreen) {
+        this._currentSubscreen.unload();
+      }
+      if (typeof subscreen === "string") {
+        const scr = this._subscreens?.find((s) => s.name === subscreen);
+        if (!scr) throw `Failed to find screen name ${subscreen}`;
+        this._currentSubscreen = scr;
+      } else {
+        this._currentSubscreen = subscreen;
+      }
+      PreferenceMessage = "";
+      PreferencePageCurrent = 1;
+      if (this._currentSubscreen) {
+        this._currentSubscreen.load();
+        this._currentSubscreen.resize(true);
+      }
+    }
+    get defaultSettings() {
+      return null;
+    }
+    load() {
+      for (const module of modules()) {
+        if (!module.settingsScreen) continue;
+        this._subscreens.push(new module.settingsScreen({}, module));
+      }
+      this._mainMenu.subscreens = this._subscreens;
+      PreferenceRegisterExtensionSetting({
+        Identifier: this._modButtonOptions.Identifier,
+        ButtonText: this._modButtonOptions.ButtonText,
+        Image: this._modButtonOptions.Image,
+        load: this._modButtonOptions.load || (() => {
+          setSubscreen(new MainMenu(this));
+        }),
+        run: this._modButtonOptions.run || (() => {
+          if (this._currentSubscreen) {
+            MainCanvas.textAlign = "left";
+            this._currentSubscreen.run();
+            MainCanvas.textAlign = "center";
+            const newCanvasPosition = [MainCanvas.canvas.offsetLeft, MainCanvas.canvas.offsetTop, MainCanvas.canvas.clientWidth, MainCanvas.canvas.clientHeight];
+            if (!CommonArraysEqual(newCanvasPosition, DrawCanvasPosition)) {
+              DrawCanvasPosition = newCanvasPosition;
+              this._currentSubscreen.resize(false);
+            }
+          }
+        }),
+        click: this._modButtonOptions.click || (() => {
+          if (this._currentSubscreen) {
+            this._currentSubscreen.click();
+          }
+        }),
+        exit: this._modButtonOptions.exit || (() => {
+          if (this._currentSubscreen) {
+            this._currentSubscreen.exit();
+          }
+        }),
+        unload: this._modButtonOptions.unload || (() => {
+          if (this._currentSubscreen) {
+            this._currentSubscreen.unload();
+          }
+        })
+      });
+    }
+  }, __name(_a4, "_GUI"), __name2(_a4, "GUI"), __publicField(_a4, "instance", null), _a4);
+  var _a5;
+  var VersionModule = (_a5 = class extends BaseModule {
+    load() {
+      _a5.Version = ModSdkManager.ModInfo.version;
+      ModSdkManager.prototype.hookFunction(
+        "ChatRoomSync",
+        HookPriority.Observe,
+        (args, next) => {
+          next(args);
+          if (modStorage.playerStorage.GlobalModule.doShowNewVersionMessage && _a5.isItNewVersion) {
+            _a5.sendNewVersionMessage();
+          }
+        },
+        "VersionModule"
+      );
+    }
+    static checkVersionUpdate() {
+      const PreviousVersion = _a5.loadVersion();
+      const CurrentVersion = _a5.Version;
+      if (_a5.isNewVersion(PreviousVersion, CurrentVersion)) {
+        _a5.isItNewVersion = true;
+        _a5.checkVersionMigration();
+        _a5.saveVersion();
+      }
+      modStorage.save();
+    }
+    static checkVersionMigration() {
+      const PreviousVersion = _a5.loadVersion();
+      for (const migrator of _a5.Migrators) {
+        if (_a5.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
+          migrator.Migrate();
+          deepLibLogger.info(`Migrating ${ModSdkManager.ModInfo.name} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
+        }
+      }
+    }
+    static registerMigrator(migrator) {
+      _a5.Migrators.push(migrator);
+      _a5.Migrators.sort((a, b) => a.MigrationVersion.localeCompare(b.MigrationVersion));
+    }
+    static setNewVersionMessage(newVersionMessage) {
+      _a5.NewVersionMessage = newVersionMessage;
+    }
+    static sendNewVersionMessage() {
+      sendLocalMessage("deeplib-new-version", _a5.NewVersionMessage);
+    }
+    static isNewVersion(current, candidate) {
+      if (current !== void 0) {
+        const CURRENT_ = current.split("."), CANDIDATE_ = candidate.split(".");
+        for (let i = 0; i < 3; i++) {
+          if (CURRENT_[i] === CANDIDATE_[i]) {
+            continue;
+          }
+          return CANDIDATE_[i] > CURRENT_[i];
+        }
+      }
+      if (current === void 0 || current === "" || !current) {
+        return true;
+      }
+      return false;
+    }
+    static saveVersion() {
+      if (modStorage.playerStorage) {
+        Player[ModSdkManager.ModInfo.name].Version = _a5.Version;
+      }
+    }
+    static loadVersion() {
+      return modStorage.playerStorage?.Version;
+    }
+  }, __name(_a5, "_VersionModule"), __name2(_a5, "VersionModule"), __publicField(_a5, "isItNewVersion", false), __publicField(_a5, "Version"), __publicField(_a5, "NewVersionMessage", ""), __publicField(_a5, "Migrators", []), _a5);
+  var _a6;
+  var GuiDebug = (_a6 = class extends BaseSubscreen {
+    get name() {
+      return "debug";
+    }
+    get pageStructure() {
+      return [
+        [
+          {
+            type: "button",
+            id: "test-deeplib-big-button",
+            size: [405, 80],
+            label: "Big Button",
+            tooltip: "This is a big button",
+            image: "Icons/Exit.png",
+            onClick() {
+              deepLibLogger.info("Big Button Clicked");
+            }
+          },
+          {
+            type: "button",
+            id: "test-deeplib-small-button",
+            size: [90, 90],
+            tooltip: "This is a small button",
+            image: "Icons/Exit.png",
+            onClick() {
+              deepLibLogger.info("Small Button Clicked");
+            }
+          },
+          {
+            type: "checkbox",
+            id: "test-deeplib-checkbox",
+            label: "Checkbox",
+            description: "This is a checkbox",
+            setElementValue() {
+              return true;
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Checkbox value:", val);
+            }
+          },
+          {
+            type: "text",
+            id: "test-deeplib-text-input",
+            label: "Input",
+            description: "This is a text input",
+            setElementValue() {
+              return "Input Value";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "number",
+            id: "test-deeplib-number-input",
+            label: "Input",
+            description: "This is a number input",
+            setElementValue() {
+              return "123";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "label",
+            id: "test-deeplib-label",
+            label: "Label",
+            description: "This is a label"
+          }
+        ],
+        [
+          {
+            type: "button",
+            id: "test-deeplib-big-button2",
+            size: [405, 80],
+            label: "Big Button",
+            tooltip: "This is a big button",
+            image: "Icons/Prev.png",
+            onClick() {
+              deepLibLogger.info("Big Button Clicked");
+            }
+          },
+          {
+            type: "button",
+            id: "test-deeplib-small-button2",
+            size: [90, 90],
+            tooltip: "This is a small button",
+            image: "Icons/Next.png",
+            onClick() {
+              deepLibLogger.info("Small Button Clicked");
+            }
+          },
+          {
+            type: "checkbox",
+            id: "test-deeplib-checkbox2",
+            label: "Checkbox",
+            description: "This is a checkbox",
+            setElementValue() {
+              return true;
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Checkbox value:", val);
+            }
+          },
+          {
+            type: "text",
+            id: "test-deeplib-text-input2",
+            label: "Input",
+            description: "This is a text input",
+            setElementValue() {
+              return "Input Value";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "number",
+            id: "test-deeplib-number-input2",
+            label: "Input",
+            description: "This is a number input",
+            setElementValue() {
+              return "123";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "label",
+            id: "test-deeplib-label2",
+            label: "Label",
+            description: "This is a label"
+          }
+        ]
+      ];
+    }
+  }, __name(_a6, "GuiDebug"), __name2(_a6, "GuiDebug"), _a6);
+  function deepMerge(target, source) {
+    if (target === void 0) return source;
+    if (source === void 0) return target;
+    if (typeof target !== "object" || typeof source !== "object") {
+      return source;
+    }
+    for (const key of Object.keys(source)) {
+      if (Array.isArray(source[key]) && Array.isArray(target[key])) {
+        target[key] = [...target[key], ...source[key]];
+      } else if (typeof source[key] === "object" && source[key] !== null) {
+        target[key] = deepMerge(target[key] || {}, source[key]);
+      } else {
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  __name(deepMerge, "deepMerge");
+  __name2(deepMerge, "deepMerge");
+  function shuffleArray(array) {
+    const temp = JSON.parse(JSON.stringify(array));
+    const ret = [];
+    while (temp.length > 0) {
+      const d = Math.floor(Math.random() * temp.length);
+      ret.push(temp[d]);
+      temp.splice(d, 1);
+    }
+    return ret;
+  }
+  __name(shuffleArray, "shuffleArray");
+  __name2(shuffleArray, "shuffleArray");
+  function exportToGlobal(name, value) {
+    const keys = name.split(".");
+    let current = globalThis;
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (!current[keys[i]]) {
+        current[keys[i]] = {};
+      }
+      current = current[keys[i]];
+    }
+    current[keys[keys.length - 1]] = value;
+  }
+  __name(exportToGlobal, "exportToGlobal");
+  __name2(exportToGlobal, "exportToGlobal");
+  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
+    const mergedObject = { ...mergeTo };
+    for (const key in mergeFrom) {
+      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
+        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      } else if (key in mergedObject) {
+        mergedObject[key] = mergeFrom[key];
+      }
+    }
+    return mergedObject;
+  }
+  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  __name2(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  function hasGetter(obj, prop) {
+    while (obj && obj !== Object.prototype) {
+      const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+      if (descriptor?.get) return true;
+      obj = Object.getPrototypeOf(obj);
+    }
+    return false;
+  }
+  __name(hasGetter, "hasGetter");
+  __name2(hasGetter, "hasGetter");
+  function hasSetter(obj, prop) {
+    while (obj && obj !== Object.prototype) {
+      const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+      if (descriptor?.set) return true;
+      obj = Object.getPrototypeOf(obj);
+    }
+    return false;
+  }
+  __name(hasSetter, "hasSetter");
+  __name2(hasSetter, "hasSetter");
+  var advancedElement = {
+    createButton: elementCreateButton,
+    createCheckbox: elementCreateCheckbox,
+    createInput: elementCreateInput,
+    createLabel: elementCreateLabel,
+    createCustom: elementCreateCustom,
+    createTooltip: elementCreateTooltip,
+    getTooltip: elementGetTooltip,
+    setTooltip: elementSetTooltip,
+    createBackNext: elementPrevNext
+  };
+  function elementCreateButton(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "button";
+    const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
+    const button = ElementButton.Create(
+      options2.htmlOptions?.id ?? options2.id,
+      options2.htmlOptions?.onClick ?? options2?.onClick ?? (() => {
+      }),
+      deepMerge({
+        tooltip: options2.tooltip,
+        label: options2.label,
+        labelPosition: "center"
+      }, options2.htmlOptions?.options),
+      deepMerge({
+        button: {
+          classList: ["deeplib-button"],
+          attributes: {
+            disabled
+          },
+          children: [
+            options2.image ? {
+              tag: "img",
+              attributes: {
+                id: `${options2.id}-image`,
+                alt: "",
+                decoding: "async",
+                loading: "lazy",
+                src: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                // 1x1 transparent image to get rid of broken image
+              },
+              style: {
+                "--image": `url("${options2.image}")`
+              }
+            } : void 0
+          ]
+        }
+      }, options2.htmlOptions?.htmlOptions ?? {})
+    );
+    BaseSubscreen.currentElements.push([button, options2]);
+    return button;
+  }
+  __name(elementCreateButton, "elementCreateButton");
+  __name2(elementCreateButton, "elementCreateButton");
+  function elementCreateCheckbox(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "checkbox";
+    const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
+    const retElem = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-checkbox-container"],
+      attributes: {
+        id: `${options2.id}-container`
+      },
+      children: [
+        deepMerge({
+          tag: "input",
+          classList: ["checkbox", "deeplib-input"],
+          attributes: {
+            type: "checkbox",
+            id: options2.id,
+            disabled,
+            checked: options2?.setElementValue?.() || void 0
+          }
+        }, options2.htmlOptions),
+        {
+          tag: "label",
+          classList: ["deeplib-text"],
+          attributes: {
+            for: options2.id
+          },
+          children: [options2.label]
+        }
+      ],
+      eventListeners: {
+        change: /* @__PURE__ */ __name2(() => {
+          options2?.setSettingValue?.(document.getElementById(options2.id)?.checked);
+        }, "change")
+      }
+    });
+    if (options2.description) {
+      retElem.addEventListener("mouseover", () => {
+        elementSetTooltip(options2.description || "");
+      });
+      retElem.addEventListener("mouseout", () => {
+        elementSetTooltip("");
+      });
+    }
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateCheckbox, "elementCreateCheckbox");
+  __name2(elementCreateCheckbox, "elementCreateCheckbox");
+  function elementCreateCustom(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "custom";
+    const retElem = ElementCreate(options2.htmlOptions);
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateCustom, "elementCreateCustom");
+  __name2(elementCreateCustom, "elementCreateCustom");
+  function elementCreateInput(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
+    const retElem = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-input-container"],
+      attributes: {
+        id: `${options2.id}-container`
+      },
+      children: [
+        deepMerge({
+          tag: "input",
+          classList: ["deeplib-input"],
+          attributes: {
+            type: options2.type,
+            id: options2.id,
+            placeholder: " ",
+            disabled,
+            value: options2?.setElementValue?.() || void 0
+          }
+        }, options2.htmlOptions),
+        options2.label ? {
+          tag: "label",
+          classList: ["deeplib-text"],
+          attributes: {
+            for: options2.id
+          },
+          children: [options2.label]
+        } : void 0
+      ],
+      eventListeners: {
+        input: /* @__PURE__ */ __name2(() => {
+          options2?.setSettingValue?.(document.getElementById(options2.id)?.value);
+        }, "input")
+      }
+    });
+    if (options2.description) {
+      retElem.addEventListener("mouseover", () => {
+        elementSetTooltip(options2.description || "");
+      });
+      retElem.addEventListener("mouseout", () => {
+        elementSetTooltip("");
+      });
+    }
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateInput, "elementCreateInput");
+  __name2(elementCreateInput, "elementCreateInput");
+  function elementCreateLabel(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "label";
+    const retElem = ElementCreate(deepMerge({
+      tag: "span",
+      classList: ["deeplib-label", "deeplib-text"],
+      attributes: {
+        id: options2.id
+      },
+      children: [
+        options2.label
+      ]
+    }, options2.htmlOptions));
+    if (options2.description) {
+      retElem.addEventListener("mouseover", () => {
+        elementSetTooltip(options2.description || "");
+      });
+      retElem.addEventListener("mouseout", () => {
+        elementSetTooltip("");
+      });
+    }
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateLabel, "elementCreateLabel");
+  __name2(elementCreateLabel, "elementCreateLabel");
+  function elementCreateTooltip() {
+    const element = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-tooltip"],
+      attributes: {
+        id: "deeplib-tooltip"
+      },
+      style: {
+        display: "none"
+      }
+    });
+    return element;
+  }
+  __name(elementCreateTooltip, "elementCreateTooltip");
+  __name2(elementCreateTooltip, "elementCreateTooltip");
+  function elementGetTooltip() {
+    return document.getElementById("deeplib-tooltip") ?? void 0;
+  }
+  __name(elementGetTooltip, "elementGetTooltip");
+  __name2(elementGetTooltip, "elementGetTooltip");
+  function elementSetTooltip(text) {
+    const element = document.getElementById("deeplib-tooltip");
+    if (!element) return false;
+    element.innerHTML = text;
+    if (text === "") element.style.display = "none";
+    else element.style.display = "";
+    return true;
+  }
+  __name(elementSetTooltip, "elementSetTooltip");
+  __name2(elementSetTooltip, "elementSetTooltip");
+  function elementPrevNext(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    const setLabel = /* @__PURE__ */ __name2((label) => {
+      const elem2 = document.getElementById(`${options2.id}-label`);
+      if (!elem2) return false;
+      elem2.textContent = label;
+    }, "setLabel");
+    const setPrevTooltip = /* @__PURE__ */ __name2((tooltip) => {
+      const elem2 = document.getElementById(`deeplib-prev-next-${options2.id}-prev-button-tooltip`);
+      if (!elem2) return false;
+      elem2.textContent = tooltip;
+    }, "setPrevTooltip");
+    const setNextTooltip = /* @__PURE__ */ __name2((tooltip) => {
+      const elem2 = document.getElementById(`deeplib-prev-next-${options2.id}-next-button-tooltip`);
+      if (!elem2) return false;
+      elem2.textContent = tooltip;
+    }, "setNextTooltip");
+    const retElem = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-prev-next"],
+      attributes: {
+        id: options2.id
+      },
+      children: [
+        advancedElement.createButton({
+          id: `deeplib-prev-next-${options2.id}-prev-button`,
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_left.svg`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            options2.back({
+              setLabel,
+              setBackTooltip: setPrevTooltip,
+              setNextTooltip
+            });
+          }, "onClick"),
+          tooltip: options2.initialPrevTooltip,
+          htmlOptions: {
+            htmlOptions: {
+              button: {
+                classList: ["deeplib-prev-next-button"]
+              }
+            },
+            options: {
+              noStyling: true
+            }
+          }
+        }),
+        advancedElement.createLabel({
+          id: `${options2.id}-label`,
+          label: options2.initialLabel,
+          htmlOptions: {
+            classList: ["deeplib-prev-next-label"]
+          }
+        }),
+        advancedElement.createButton({
+          id: `deeplib-prev-next-${options2.id}-next-button`,
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_right.svg`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            options2.next({
+              setLabel,
+              setBackTooltip: setPrevTooltip,
+              setNextTooltip
+            });
+          }, "onClick"),
+          tooltip: options2.initialNextTooltip,
+          htmlOptions: {
+            htmlOptions: {
+              button: {
+                classList: ["deeplib-prev-next-button"]
+              }
+            },
+            options: {
+              noStyling: true
+            }
+          }
+        })
+      ]
+    });
+    return retElem;
+  }
+  __name(elementPrevNext, "elementPrevNext");
+  __name2(elementPrevNext, "elementPrevNext");
+  var _a7;
+  var Modal = (_a7 = class {
+    constructor(opts) {
+      __publicField(this, "dialog");
+      __publicField(this, "blocker");
+      __publicField(this, "inputEl");
+      __publicField(this, "timeoutId");
+      /**
+       * An internal function where we will save promise function.
+       */
+      __publicField(this, "resolve", /* @__PURE__ */ __name2(() => {
+      }, "resolve"));
+      this.opts = opts;
+      opts ?? (opts = {});
+      opts.closeOnBackdrop ?? (opts.closeOnBackdrop = true);
+      const promptId = `modal-prompt-${Date.now()}`;
+      this.dialog = ElementCreate({
+        tag: "dialog",
+        classList: ["deeplib-modal"],
+        attributes: {
+          role: "dialog",
+          "aria-modal": "true",
+          "aria-labelledby": promptId
+        },
+        style: {
+          fontFamily: CommonGetFontName()
+        },
+        children: [
+          opts.prompt,
+          {
+            tag: "div",
+            classList: ["deeplib-modal-prompt"],
+            attributes: {
+              id: promptId
+            },
+            children: [
+              opts.input ? this.renderInput(opts.input) : void 0
+            ]
+          },
+          this.renderButtons()
+        ]
+      });
+      this.blocker = this.createBlocker();
+      this.renderButtons();
+      document.body.append(this.createBlocker(), this.dialog);
+      this.setupFocusTrap();
+      if (opts.timeoutMs) {
+        this.timeoutId = window.setTimeout(() => this.close("timeout"), opts.timeoutMs);
+      }
+    }
+    show() {
+      return _a7.enqueue(this);
+    }
+    static async alert(msg, timeoutMs) {
+      await new _a7({ prompt: msg, buttons: [{ action: "close", text: "OK" }], timeoutMs }).show();
+    }
+    static async confirm(msg) {
+      const [action] = await new _a7({ prompt: msg, buttons: [{ text: "Cancel", action: "cancel" }, { text: "OK", action: "ok" }] }).show();
+      return action === "ok";
+    }
+    static async prompt(msg, defaultValue = "") {
+      const [action, value] = await new _a7({ prompt: msg, timeoutMs: 0, input: { type: "input", defaultValue }, buttons: [{ text: "Cancel", action: "cancel" }, { text: "Submit", action: "submit" }] }).show();
+      return action === "submit" ? value : null;
+    }
+    renderInput(cfg) {
+      const el = document.createElement(cfg.type);
+      el.classList.add("deeplib-modal-input");
+      if (cfg.placeholder) el.placeholder = cfg.placeholder;
+      if (cfg.readOnly) el.readOnly = true;
+      if (cfg.defaultValue) el.value = cfg.defaultValue;
+      if (cfg.type === "textarea") el.rows = 5;
+      el.addEventListener("input", () => {
+        const err = cfg.validate?.(el.value);
+        el.setCustomValidity(err || "");
+      });
+      this.inputEl = el;
+      return el;
+    }
+    renderButtons() {
+      const container = document.createElement("div");
+      container.classList.add("deeplib-modal-button-container");
+      const btns = this.opts.buttons ? [...this.opts.buttons] : [];
+      btns.forEach((b) => {
+        const btn = advancedElement.createButton({
+          label: b.text,
+          id: `deeplib-modal-${b.action}`,
+          disabled: b.disabled,
+          onClick: /* @__PURE__ */ __name2(() => this.close(b.action), "onClick")
+        });
+        container.append(btn);
+      });
+      return container;
+    }
+    createBlocker() {
+      const blocker = document.createElement("div");
+      blocker.classList.add("deeplib-modal-blocker");
+      blocker.title = "Click to close";
+      if (this.opts.closeOnBackdrop !== false)
+        blocker.addEventListener("click", () => this.close("close"));
+      return blocker;
+    }
+    setupFocusTrap() {
+      const focusable = 'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])';
+      const elements = Array.from(this.dialog.querySelectorAll(focusable));
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      this.dialog.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") {
+          if (elements.length === 0) {
+            e.preventDefault();
+            return;
+          }
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === last) {
+              first.focus();
+              e.preventDefault();
+            }
+          }
+        } else if (e.key === "Escape") {
+          e.stopPropagation();
+          this.close("close");
+        }
+      });
+      window.requestAnimationFrame(() => {
+        (this.inputEl || first)?.focus();
+      });
+    }
+    close(action) {
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+      this.dialog.close();
+      this.dialog.remove();
+      this.blocker.remove();
+      document.body.querySelector(".deeplib-modal-blocker")?.remove();
+      const value = this.inputEl?.value ?? "";
+      this.resolve([action, value]);
+      _a7.dequeue();
+    }
+    /** A function that adds a modal to the queue and returns a promise */
+    static enqueue(modal) {
+      _a7.queue.push(modal);
+      if (!_a7.processing) _a7.dequeue();
+      return new Promise((resolve) => modal.resolve = resolve);
+    }
+    /** A function that processes the queue, removing the first modal */
+    static dequeue() {
+      const modal = _a7.queue.shift();
+      if (modal) {
+        _a7.processing = true;
+        modal.dialog.show();
+      } else {
+        _a7.processing = false;
+      }
+    }
+  }, __name(_a7, "_Modal"), __name2(_a7, "Modal"), __publicField(_a7, "queue", []), __publicField(_a7, "processing", false), _a7);
+  window.Modal = Modal;
+  var _a8;
+  var MainMenu = (_a8 = class extends BaseSubscreen {
+    constructor(module) {
+      super({ drawCharacter: true }, module);
+      __publicField(this, "subscreens", []);
+      this.subscreens = module.subscreens;
+    }
+    get name() {
+      return "mainmenu";
+    }
+    load() {
+      if (!GUI.instance?.currentSubscreen) {
+        this.setSubscreen(this);
+        return;
+      }
+      super.load();
+      const exitButton = advancedElement.createButton({
+        id: "exit",
+        size: [90, 90],
+        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.exit();
+        }, "onClick"),
+        tooltip: getText("settings.button.back_button_hint")
+      });
+      const menu = document.getElementById("deeplib-nav-menu");
+      if (menu) {
+        ElementMenu.AppendButton(menu, exitButton);
+      }
+      for (const screen of this.subscreens) {
+        if (screen.name == "mainmenu") continue;
+        const button = advancedElement.createButton({
+          id: `${screen.name}-button`,
+          image: screen.icon,
+          label: getText(`mainmenu.button.${screen.name}`),
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(screen);
+          }, "onClick"),
+          size: [null, 90]
+        });
+        layoutElement.appendToSettingsDiv(button);
+      }
+      const miscDiv = layoutElement.createMiscDiv();
+      layoutElement.appendToSubscreenDiv(miscDiv);
+      if (_a8.options.wikiLink) {
+        const wikiButton = advancedElement.createButton({
+          id: "deeplib-wiki-button",
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/notebook.svg`,
+          label: getText("mainmenu.button.wiki"),
+          onClick: /* @__PURE__ */ __name2(() => {
+            window.open(_a8.options.wikiLink, "_blank");
+          }, "onClick"),
+          size: [null, 80]
+        });
+        layoutElement.appendToMiscDiv(wikiButton);
+      }
+      if (_a8.options.repoLink) {
+        const repoButton = advancedElement.createButton({
+          id: "deeplib-repo-button",
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/git.svg`,
+          label: getText("mainmenu.button.repo"),
+          onClick: /* @__PURE__ */ __name2(() => {
+            window.open(_a8.options.repoLink, "_blank");
+          }, "onClick"),
+          size: [null, 80]
+        });
+        layoutElement.appendToMiscDiv(repoButton);
+      }
+      if (_a8.options.resetSubscreen) {
+        const resetButton = advancedElement.createButton({
+          id: "deeplib-reset-button",
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/trash_bin.svg`,
+          label: getText("mainmenu.button.reset"),
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(_a8.options.resetSubscreen);
+          }, "onClick"),
+          size: [null, 80]
+        });
+        layoutElement.appendToMiscDiv(resetButton);
+      }
+      if (_a8.options.importExportSubscreen) {
+        const importExportButton = advancedElement.createButton({
+          id: "deeplib-import-export-button",
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/transfer.svg`,
+          label: getText("mainmenu.button.import_export"),
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(_a8.options.importExportSubscreen);
+          }, "onClick"),
+          size: [null, 80]
+        });
+        layoutElement.appendToMiscDiv(importExportButton);
+      }
+      if (false) {
+        const debugButton = advancedElement.createButton({
+          id: "deeplib-debug-button",
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/bug.svg`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(new GuiDebug());
+          }, "onClick"),
+          size: [90, 90]
+        });
+        if (menu) {
+          ElementMenu.PrependItem(menu, debugButton);
+        }
+      }
+    }
+    run() {
+      super.run();
+    }
+    click() {
+    }
+    exit() {
+      CharacterAppearanceForceUpCharacter = -1;
+      CharacterLoadCanvas(Player);
+      this.setSubscreen(null);
+      PreferenceSubscreenExtensionsClear();
+    }
+    resize() {
+      super.resize();
+      ElementSetPosition("deeplib-misc", 1905, 930, "bottom-right");
+      ElementSetSize("deeplib-misc", 405, null);
+    }
+    static setOptions(mainMenuOptions) {
+      _a8.options = mainMenuOptions;
+    }
+  }, __name(_a8, "_MainMenu"), __name2(_a8, "MainMenu"), __publicField(_a8, "options", {}), _a8);
+  var _a9;
+  var GuiImportExport = (_a9 = class extends BaseSubscreen {
+    constructor(importExportOptions) {
+      super({ drawCharacter: true });
+      __publicField(this, "importExportOptions");
+      this.importExportOptions = importExportOptions;
+    }
+    get name() {
+      return "import-export";
+    }
+    load() {
+      super.load();
+      const importFromFileButton = advancedElement.createButton({
+        id: "deeplib-import-file-button",
+        size: [600, 90],
+        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_import.svg`,
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataImport("file");
+        }, "onClick"),
+        label: getText("import-export.button.import_file")
+      });
+      layoutElement.appendToSettingsDiv(importFromFileButton);
+      const exportToFileButton = advancedElement.createButton({
+        id: "deeplib-export-file-button",
+        size: [600, 90],
+        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_export.svg`,
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataExport("file");
+        }, "onClick"),
+        label: getText("import-export.button.export_file")
+      });
+      layoutElement.appendToSettingsDiv(exportToFileButton);
+      const importFromClipboardButton = advancedElement.createButton({
+        id: "deeplib-import-clipboard-button",
+        size: [600, 90],
+        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_import.svg`,
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataImport("clipboard");
+        }, "onClick"),
+        label: getText("import-export.button.import_clipboard")
+      });
+      layoutElement.appendToSettingsDiv(importFromClipboardButton);
+      const exportToClipboardButton = advancedElement.createButton({
+        id: "deeplib-export-clipboard-button",
+        size: [600, 90],
+        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_export.svg`,
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataExport("clipboard");
+        }, "onClick"),
+        label: getText("import-export.button.export_clipboard")
+      });
+      layoutElement.appendToSettingsDiv(exportToClipboardButton);
+    }
+    resize() {
+      super.resize();
+    }
+    async dataExport(transferMethod) {
+      try {
+        const data = LZString.compressToBase64(JSON.stringify(modStorage.playerStorage));
+        if (transferMethod === "clipboard") {
+          await this.exportToClipboard(data);
+        } else if (transferMethod === "file") {
+          await this.exportToFile(data, "themed_settings");
+        }
+        this.importExportOptions.onExport?.();
+        ToastManager.success("Data exported successfully.");
+      } catch (error) {
+        ToastManager.error("Data export failed.");
+        deepLibLogger.error(`Data export failed for ${ModSdkManager.ModInfo.name}.`, error);
+      }
+    }
+    async dataImport(transferMethod) {
+      try {
+        let importedData = "";
+        if (transferMethod === "clipboard") {
+          importedData = await this.importFromClipboard() ?? null;
+        } else if (transferMethod === "file") {
+          importedData = await this.importFromFile() ?? null;
+        }
+        if (!importedData) {
+          throw new Error("No data imported.");
+        }
+        const data = JSON.parse(LZString.decompressFromBase64(importedData) ?? "");
+        if (!data) {
+          throw new Error("Invalid data.");
+        }
+        modStorage.playerStorage = data;
+        this.importExportOptions.onImport?.();
+        ToastManager.success("Data imported successfully.");
+      } catch (error) {
+        ToastManager.error("Data import failed.");
+        deepLibLogger.error(`Data import failed for ${ModSdkManager.ModInfo.name}.`, error);
+      }
+    }
+    async exportToFile(data, defaultFileName) {
+      const CUSTOM_EXTENSION = this.importExportOptions.customFileExtension.startsWith(".") ? this.importExportOptions.customFileExtension : "." + this.importExportOptions.customFileExtension;
+      const suggestedName = defaultFileName.endsWith(CUSTOM_EXTENSION) ? defaultFileName : defaultFileName + CUSTOM_EXTENSION;
+      if ("showSaveFilePicker" in window) {
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName,
+            types: [
+              {
+                description: "Custom Data Files",
+                accept: { "text/plain": [CUSTOM_EXTENSION] }
+              }
+            ]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(data);
+          await writable.close();
+        } catch (error) {
+          throw new Error("File save cancelled or failed: " + error.message);
+        }
+      } else {
+        const fileName = await Modal.prompt("Enter file name", suggestedName);
+        if (fileName === null) {
+          return;
+        } else if (fileName === "") {
+          throw new Error("File name cannot be empty.");
+        }
+        const blob = new Blob([data], { type: "text/plain" });
+        const link = ElementCreate({
+          tag: "a",
+          attributes: {
+            href: URL.createObjectURL(blob),
+            download: fileName.endsWith(CUSTOM_EXTENSION) ? fileName : fileName + CUSTOM_EXTENSION
+          }
+        });
+        link.click();
+        URL.revokeObjectURL(link.href);
+      }
+    }
+    async importFromFile() {
+      const CUSTOM_EXTENSION = this.importExportOptions.customFileExtension.startsWith(".") ? this.importExportOptions.customFileExtension : "." + this.importExportOptions.customFileExtension;
+      async function importFromFileInternal(file) {
+        if (!file.name.endsWith(CUSTOM_EXTENSION)) {
+          throw new Error(`Invalid file type. Expected a ${CUSTOM_EXTENSION} file.`);
+        }
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error("Failed to read file."));
+          reader.readAsText(file);
+        });
+      }
+      __name(importFromFileInternal, "importFromFileInternal");
+      __name2(importFromFileInternal, "importFromFileInternal");
+      if ("showOpenFilePicker" in window) {
+        try {
+          const [fileHandle] = await window.showOpenFilePicker({
+            types: [
+              {
+                description: "Custom Data Files",
+                accept: { "text/plain": [CUSTOM_EXTENSION] }
+              }
+            ],
+            multiple: false
+          });
+          const file = await fileHandle.getFile();
+          return await importFromFileInternal(file);
+        } catch (error) {
+          throw new Error("File selection cancelled or failed: " + error.message);
+        }
+      } else {
+        return new Promise((resolve, reject) => {
+          const input = document.createElement("input");
+          input.type = "file";
+          input.accept = CUSTOM_EXTENSION;
+          input.onchange = async (event) => {
+            const file = event.target.files?.[0];
+            if (file) {
+              try {
+                const data = await importFromFileInternal(file);
+                resolve(data);
+              } catch (error) {
+                reject(error);
+              }
+            } else {
+              reject(new Error("No file selected."));
+            }
+          };
+          input.click();
+        });
+      }
+    }
+    async exportToClipboard(data) {
+      return navigator.clipboard.writeText(data).catch((error) => {
+        throw new Error("Failed to copy data to clipboard." + error);
+      });
+    }
+    async importFromClipboard() {
+      return Modal.prompt("Enter data to import").catch((error) => {
+        throw new Error("Failed to read data from clipboard." + error);
+      });
+    }
+  }, __name(_a9, "GuiImportExport"), __name2(_a9, "GuiImportExport"), _a9);
+  var _a10;
+  var ModStorage = (_a10 = class {
+    constructor(modName) {
+      __publicField(this, "modName");
+      if (!_a10._instance) {
+        _a10._instance = this;
+        this.modName = modName;
+      }
+      this.modName ?? (this.modName = modName);
+      return _a10._instance;
+    }
+    get playerStorage() {
+      return Player[this.modName];
+    }
+    set playerStorage(value) {
+      Player[this.modName] = value;
+    }
+    get extensionStorage() {
+      return Player.ExtensionSettings[this.modName];
+    }
+    set extensionStorage(value) {
+      Player.ExtensionSettings[this.modName] = value;
+    }
+    setLocalStorage(key, value) {
+      localStorage.setItem(`${this.modName}_${key}`, _a10.dataCompress(value));
+    }
+    getLocalStorage(key) {
+      const data = localStorage.getItem(`${this.modName}_${key}`);
+      if (!data) return null;
+      return _a10.dataDecompress(data);
+    }
+    load() {
+      if (this.extensionStorage) {
+        const parsed = _a10.dataDecompress(this.extensionStorage || "");
+        if (parsed === null || !Object.hasOwn(parsed, "Version")) {
+          this.playerStorage = {};
+        } else {
+          this.playerStorage = parsed;
+        }
+        ;
+      } else {
+        this.playerStorage = {};
+      }
+    }
+    save() {
+      if (!this.extensionStorage) this.extensionStorage = "";
+      this.extensionStorage = _a10.dataCompress(this.playerStorage);
+      ServerPlayerExtensionSettingsSync(this.modName);
+    }
+    static dataDecompress(string) {
+      const d = LZString.decompressFromBase64(string);
+      let data = null;
+      try {
+        const decoded = JSON.parse(d);
+        data = decoded;
+      } catch (error) {
+        deepLibLogger.error(error);
+      }
+      return data;
+    }
+    static dataCompress(object) {
+      return LZString.compressToBase64(JSON.stringify(object));
+    }
+  }, __name(_a10, "_ModStorage"), __name2(_a10, "ModStorage"), __publicField(_a10, "_instance", null), _a10);
+  var domUtil = {
+    autoSetPosition,
+    autoSetSize,
+    hide,
+    unhide,
+    hasOverflow
+  };
+  function autoSetPosition(_, position) {
+    let xPos = void 0;
+    let yPos = void 0;
+    if (Array.isArray(position)) {
+      xPos = position[0];
+      yPos = position[1];
+    } else if (typeof position === "function") {
+      const result = position();
+      xPos = result[0];
+      yPos = result[1];
+    }
+    if (xPos !== void 0 && yPos !== void 0) ElementSetPosition(_, xPos, yPos);
+  }
+  __name(autoSetPosition, "autoSetPosition");
+  __name2(autoSetPosition, "autoSetPosition");
+  function autoSetSize(_, size) {
+    let width = void 0;
+    let height = void 0;
+    if (Array.isArray(size)) {
+      width = size[0];
+      height = size[1];
+    } else if (typeof size === "function") {
+      const result = size();
+      width = result[0];
+      height = result[1];
+    }
+    if (width !== void 0 && height !== void 0) ElementSetSize(_, width, height);
+  }
+  __name(autoSetSize, "autoSetSize");
+  __name2(autoSetSize, "autoSetSize");
+  function hide(_) {
+    const element = ElementWrap(_);
+    if (!element) return;
+    element.style.display = "none";
+  }
+  __name(hide, "hide");
+  __name2(hide, "hide");
+  function unhide(_) {
+    const element = ElementWrap(_);
+    if (!element) return;
+    element.style.display = "";
+  }
+  __name(unhide, "unhide");
+  __name2(unhide, "unhide");
+  function hasOverflow(el) {
+    const element = ElementWrap(el);
+    if (!element) return null;
+    const vertical = element.scrollHeight > element.clientHeight;
+    const horizontal = element.scrollWidth > element.clientWidth;
+    return {
+      any: vertical || horizontal,
+      vertical,
+      horizontal
+    };
+  }
+  __name(hasOverflow, "hasOverflow");
+  __name2(hasOverflow, "hasOverflow");
+  var layoutElement = {
+    createSubscreenDiv: elementCreateSubscreenDiv,
+    getSubscreenDiv: elementGetSubscreenDiv,
+    appendToSubscreenDiv: elementAppendToSubscreenDiv,
+    removeSubscreenDiv: elementRemoveSubscreenDiv,
+    createSettingsDiv: elementCreateSettingsDiv,
+    getSettingsDiv: elementGetSettingsDiv,
+    appendToSettingsDiv: elementAppendToSettingsDiv,
+    removeSettingsDiv: elementRemoveSettingsDiv,
+    createMiscDiv: elementCreateMiscDiv,
+    getMiscDiv: elementGetMiscDiv,
+    appendToMiscDiv: elementAppendToMiscDiv,
+    removeMiscDiv: elementRemoveMiscDiv
+  };
+  function elementCreateSubscreenDiv() {
+    const subscreenDiv = elementGetSubscreenDiv();
+    if (subscreenDiv) {
+      console.error("Subscreen already exists");
+      return subscreenDiv;
+    }
+    const div = document.createElement("div");
+    div.id = "deeplib-subscreen";
+    div.classList.add("deeplib-subscreen", "HideOnPopup");
+    return document.body.appendChild(div);
+  }
+  __name(elementCreateSubscreenDiv, "elementCreateSubscreenDiv");
+  __name2(elementCreateSubscreenDiv, "elementCreateSubscreenDiv");
+  function elementGetSubscreenDiv() {
+    return document.getElementById("deeplib-subscreen") ?? void 0;
+  }
+  __name(elementGetSubscreenDiv, "elementGetSubscreenDiv");
+  __name2(elementGetSubscreenDiv, "elementGetSubscreenDiv");
+  function elementRemoveSubscreenDiv() {
+    return elementGetSubscreenDiv()?.remove();
+  }
+  __name(elementRemoveSubscreenDiv, "elementRemoveSubscreenDiv");
+  __name2(elementRemoveSubscreenDiv, "elementRemoveSubscreenDiv");
+  function elementAppendToSubscreenDiv(...element) {
+    return elementGetSubscreenDiv()?.append(...element);
+  }
+  __name(elementAppendToSubscreenDiv, "elementAppendToSubscreenDiv");
+  __name2(elementAppendToSubscreenDiv, "elementAppendToSubscreenDiv");
+  function elementCreateSettingsDiv() {
+    const settingsDiv = elementGetSettingsDiv();
+    if (settingsDiv) {
+      console.error("Settings screen already exists");
+      return settingsDiv;
+    }
+    const div = document.createElement("div");
+    div.id = "deeplib-settings";
+    div.classList.add("deeplib-settings");
+    return div;
+  }
+  __name(elementCreateSettingsDiv, "elementCreateSettingsDiv");
+  __name2(elementCreateSettingsDiv, "elementCreateSettingsDiv");
+  function elementGetSettingsDiv() {
+    return document.getElementById("deeplib-settings") ?? void 0;
+  }
+  __name(elementGetSettingsDiv, "elementGetSettingsDiv");
+  __name2(elementGetSettingsDiv, "elementGetSettingsDiv");
+  function elementAppendToSettingsDiv(...element) {
+    return elementGetSettingsDiv()?.append(...element);
+  }
+  __name(elementAppendToSettingsDiv, "elementAppendToSettingsDiv");
+  __name2(elementAppendToSettingsDiv, "elementAppendToSettingsDiv");
+  function elementRemoveSettingsDiv() {
+    return elementGetSettingsDiv()?.remove();
+  }
+  __name(elementRemoveSettingsDiv, "elementRemoveSettingsDiv");
+  __name2(elementRemoveSettingsDiv, "elementRemoveSettingsDiv");
+  function elementCreateMiscDiv() {
+    const miscDiv = elementGetMiscDiv();
+    if (miscDiv) {
+      console.error("Settings screen already exists");
+      return miscDiv;
+    }
+    const div = document.createElement("div");
+    div.id = "deeplib-misc";
+    div.classList.add("deeplib-misc");
+    return div;
+  }
+  __name(elementCreateMiscDiv, "elementCreateMiscDiv");
+  __name2(elementCreateMiscDiv, "elementCreateMiscDiv");
+  function elementGetMiscDiv() {
+    return document.getElementById("deeplib-misc");
+  }
+  __name(elementGetMiscDiv, "elementGetMiscDiv");
+  __name2(elementGetMiscDiv, "elementGetMiscDiv");
+  function elementAppendToMiscDiv(...element) {
+    return elementGetMiscDiv()?.append(...element);
+  }
+  __name(elementAppendToMiscDiv, "elementAppendToMiscDiv");
+  __name2(elementAppendToMiscDiv, "elementAppendToMiscDiv");
+  function elementRemoveMiscDiv() {
+    return elementGetMiscDiv()?.remove();
+  }
+  __name(elementRemoveMiscDiv, "elementRemoveMiscDiv");
+  __name2(elementRemoveMiscDiv, "elementRemoveMiscDiv");
+  var _a11;
+  var Logger = (_a11 = class extends Array {
+    constructor(modName) {
+      super();
+      __publicField(this, "ModName", "DeepLib");
+      if (modName) {
+        this.ModName = modName;
+      }
+    }
+    _Log(level, ...args) {
+      const logEntry = {
+        logLevel: level,
+        args: [...args],
+        // trace: arguments.callee.caller.toString().split('\n'), 
+        date: new Date(Date.now())
+        // `[${this.ModName}] ${formattedArgs}` 
+      };
+      const userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.includes("chrome") || userAgent.includes("firefox")) {
+        const color = _a11.colorizeLog(level);
+        args.forEach((arg) => {
+          if (typeof arg === "string") {
+            arg = `
+%c${arg}`;
+          }
+        });
+        console.log(`%c${this.ModName}:`, color, ...args);
+      } else {
+        console.log(`${this.ModName}:`, ...args);
+      }
+      this.push(logEntry);
+    }
+    info(...args) {
+      this._Log("info", ...args);
+    }
+    log(...args) {
+      this._Log("log", ...args);
+    }
+    warn(...args) {
+      this._Log("warn", ...args);
+    }
+    error(...args) {
+      this._Log("error", ...args);
+    }
+    debug(...args) {
+      this._Log("debug", ...args);
+    }
+    static colorizeLog(logLevel) {
+      const colors = {
+        info: "color: #32CCCC",
+        log: "color: #CCCC32",
+        warn: "color: #eec355",
+        error: "color: #750b0b",
+        debug: "color: #9E4BCF"
+      };
+      return colors[logLevel];
+    }
+  }, __name(_a11, "_Logger"), __name2(_a11, "Logger"), _a11);
+  var deepLibLogger = new Logger();
+  function sendLocalMessage(id, message, timeoutInSeconds) {
+    const element = ElementCreate({
+      tag: "div",
+      classList: ["ChatMessage", "deeplib-message", "ChatMessageNonDialogue"],
+      attributes: {
+        id: id ?? `DEEPLIB_LOCAL_MESSAGE_${Date.now()}`,
+        "data-time": ChatRoomCurrentTime(),
+        "data-sender": Player.MemberNumber?.toString()
+      },
+      children: [
+        {
+          tag: "span",
+          classList: ["deeplib-text"],
+          innerHTML: message.replaceAll("\n	", "")
+        },
+        {
+          tag: "br"
+        },
+        {
+          tag: "a",
+          classList: ["deeplib-text"],
+          attributes: {
+            href: "#"
+          },
+          innerHTML: "<b>Close (Click)</b>",
+          eventListeners: {
+            click: /* @__PURE__ */ __name2(() => {
+              element.remove();
+            }, "click")
+          }
+        }
+      ]
+    });
+    ChatRoomAppendChat(element);
+    if (!timeoutInSeconds) return;
+    setTimeout(() => element.remove(), timeoutInSeconds * 1e3);
+  }
+  __name(sendLocalMessage, "sendLocalMessage");
+  __name2(sendLocalMessage, "sendLocalMessage");
+  function sendActionMessage(msg, target = void 0, dictionary = []) {
+    if (!msg) return;
+    ServerSend("ChatRoomChat", {
+      Content: "DEEPLIB_CUSTOM_ACTION",
+      Type: "Action",
+      Target: target ?? void 0,
+      Dictionary: [
+        { Tag: 'MISSING TEXT IN "Interface.csv": DEEPLIB_CUSTOM_ACTION', Text: msg },
+        ...dictionary
+      ]
+    });
+  }
+  __name(sendActionMessage, "sendActionMessage");
+  __name2(sendActionMessage, "sendActionMessage");
+  var import_bondage_club_mod_sdk = __toESM2(require_bcmodsdk(), 1);
+  var rawSdk = import_bondage_club_mod_sdk.default;
+  var bcModSdkRef = rawSdk.default ?? rawSdk;
+  var HookPriority = {
+    Observe: 0,
+    AddBehavior: 1,
+    ModifyBehavior: 5,
+    OverrideBehavior: 10,
+    Top: 100
+  };
+  var _a12;
+  var ModSdkManager = (_a12 = class {
+    constructor(info, options2) {
+      _a12.SDK = bcModSdkRef.registerMod(info, options2);
+      _a12.ModInfo = info;
+    }
+    initPatchableFunction(target) {
+      let result = _a12.patchedFunctions.get(target);
+      if (!result) {
+        result = {
+          name: target,
+          hooks: []
+        };
+        _a12.patchedFunctions.set(target, result);
+      }
+      return result;
+    }
+    hookFunction(target, priority, hook, module = null) {
+      const data = this.initPatchableFunction(target);
+      if (data.hooks.some((h) => h.hook === hook)) {
+        return () => null;
+      }
+      const removeCallback = _a12.SDK?.hookFunction(target, priority, hook);
+      data.hooks.push({
+        hook,
+        priority,
+        module,
+        removeCallback
+      });
+      data.hooks.sort((a, b) => b.priority - a.priority);
+      return removeCallback;
+    }
+    patchFunction(target, patches) {
+      _a12.SDK?.patchFunction(target, patches);
+    }
+    unpatchFunction(target) {
+      _a12.SDK?.removePatches(target);
+    }
+    removeHookByModule(target, module) {
+      const data = this.initPatchableFunction(target);
+      for (let i = data.hooks.length - 1; i >= 0; i--) {
+        if (data.hooks[i].module === module) {
+          data.hooks[i].removeCallback();
+          data.hooks.splice(i, 1);
+        }
+      }
+      return true;
+    }
+    removeAllHooksByModule(module) {
+      for (const data of _a12.patchedFunctions.values()) {
+        for (let i = data.hooks.length - 1; i >= 0; i--) {
+          if (data.hooks[i].module === module) {
+            data.hooks[i].removeCallback();
+            data.hooks.splice(i, 1);
+          }
+        }
+      }
+      return true;
+    }
+  }, __name(_a12, "_ModSdkManager"), __name2(_a12, "ModSdkManager"), __publicField(_a12, "SDK"), __publicField(_a12, "patchedFunctions", /* @__PURE__ */ new Map()), __publicField(_a12, "ModInfo"), _a12);
+  var Style = {
+    injectInline(styleId, styleSource) {
+      const isStyleLoaded = document.getElementById(styleId);
+      if (isStyleLoaded) return;
+      const styleElement = document.createElement("style");
+      styleElement.id = styleId;
+      styleElement.appendChild(document.createTextNode(styleSource));
+      document.head.appendChild(styleElement);
+    },
+    injectEmbed(styleId, styleLink) {
+      const isStyleLoaded = document.getElementById(styleId);
+      if (isStyleLoaded) return;
+      const styleElement = document.createElement("link");
+      styleElement.id = styleId;
+      styleElement.rel = "stylesheet";
+      styleElement.href = styleLink;
+      document.head.appendChild(styleElement);
+    },
+    eject(id) {
+      const style = document.getElementById(id);
+      if (!style) return;
+      style.remove();
+    },
+    reload(styleId, styleSource) {
+      Style.eject(styleId);
+      Style.injectInline(styleId, styleSource);
+    },
+    async fetch(link) {
+      return fetch(link).then((res) => res.text());
     }
   };
-  __name(_BaseModule, "BaseModule");
-  var BaseModule = _BaseModule;
+  var _a13;
+  var Localization = (_a13 = class {
+    static async init(initOptions) {
+      if (_a13.initialized) return;
+      _a13.initialized = true;
+      _a13.PathToModTranslation = initOptions.pathToTranslationsFolder.endsWith("/") ? initOptions.pathToTranslationsFolder : initOptions.pathToTranslationsFolder + "/";
+      const lang = TranslationLanguage.toLowerCase();
+      const libTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, lang);
+      if (lang === "en") {
+        _a13.LibTranslation = libTranslation;
+      } else {
+        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, "en");
+        _a13.LibTranslation = { ...fallbackTranslation, ...libTranslation };
+      }
+      const modTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, lang);
+      if (lang === "en") {
+        _a13.ModTranslation = modTranslation;
+      } else {
+        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, "en");
+        _a13.ModTranslation = { ...fallbackTranslation, ...modTranslation };
+      }
+    }
+    static getTextMod(srcTag) {
+      return _a13.ModTranslation?.[srcTag] || void 0;
+    }
+    static getTextLib(srcTag) {
+      return _a13.LibTranslation?.[srcTag] || void 0;
+    }
+    static async fetchLanguageFile(baseUrl, lang) {
+      const response = await fetch(`${baseUrl}${lang}.lang`);
+      if (lang !== "en" && !response.ok) {
+        return this.fetchLanguageFile(baseUrl, "en");
+      }
+      const langFileContent = await response.text();
+      return this.parseLanguageFile(langFileContent);
+    }
+    static parseLanguageFile(content) {
+      const translations = {};
+      const lines = content.split("\n");
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith("#")) continue;
+        const [key, ...rest] = trimmed.split("=");
+        translations[key.trim()] = rest.join("=").trim();
+      }
+      return translations;
+    }
+  }, __name(_a13, "_Localization"), __name2(_a13, "Localization"), __publicField(_a13, "LibTranslation", {}), __publicField(_a13, "ModTranslation", {}), __publicField(_a13, "PathToModTranslation"), __publicField(_a13, "PathToLibTranslation", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_translations/`), __publicField(_a13, "initialized", false), _a13);
+  var getText = /* @__PURE__ */ __name2((srcTag) => {
+    return Localization.getTextMod(srcTag) || Localization.getTextLib(srcTag) || srcTag;
+  }, "getText");
 
-  // src/Hooks/GuiRedraw/AppearanceGetPreviewImageColor.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/Utilities/Data.ts
+  function localSettingsLoad() {
+    const data = modStorage.getLocalStorage("LocalData");
+    if (!data) {
+      window.ThemedLocalData = {
+        loginOptions: {
+          hideDummy: false,
+          hideCredits: false
+        }
+      };
+      localSettingsSave();
+    } else {
+      window.ThemedLocalData = data;
+    }
+  }
+  __name(localSettingsLoad, "localSettingsLoad");
+  function localSettingsSave() {
+    modStorage.setLocalStorage("LocalData", window.ThemedLocalData);
+  }
+  __name(localSettingsSave, "localSettingsSave");
+
+  // src/Hooks/login_options.ts
+  var ids = {
+    optionsOpen: "tmd-login-options-open",
+    optionsClose: "tmd-login-options-dialog-close",
+    optionsSheet: "tmd-login-options-dialog",
+    optionsContent: "tmd-login-options-dialog-content",
+    optionsStyle: "tmd-login-options-style"
+  };
+  var options = {
+    hideCredits: "Hide Credits",
+    hideDummy: "Hide Dummy"
+  };
+  function loadLoginOptions() {
+    localSettingsLoad();
+    patchLoginPage();
+    Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/login-options.css`);
+    createUI();
+    ModSdkManager.prototype.hookFunction("LoginRun", HookPriority.Observe, (args, next) => {
+      next(args);
+      ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
+      ElementSetSize(ids.optionsOpen, 90, 90);
+      ElementSetSize(ids.optionsSheet, 1e3, 500);
+    }, "LoginRun");
+  }
+  __name(loadLoginOptions, "loadLoginOptions");
+  function unloadLoginOptions() {
+    removeUI();
+    Style.eject(ids.optionsStyle);
+    ModSdkManager.prototype.removeHookByModule("LoginRun", "LoginRun");
+    unpatchLoginPage();
+  }
+  __name(unloadLoginOptions, "unloadLoginOptions");
+  function createUI() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
+      tooltip: "[Themed] Login Options",
+      image: "./Icons/Preference.png"
+    });
+    document.body.appendChild(optionsButton);
+    const optionsSheet = ElementCreate({
+      tag: "dialog",
+      attributes: {
+        id: ids.optionsSheet
+      },
+      children: [
+        ElementCreate({
+          tag: "div",
+          attributes: {
+            id: ids.optionsContent
+          },
+          children: [
+            ...Array.from(Object.entries(options)).map(([key, value]) => {
+              const typedKey = key;
+              return {
+                tag: "label",
+                classList: ["tmd-login-options-label"],
+                children: [
+                  ElementCheckbox.Create(
+                    `tmd-login-options-${key}`,
+                    () => {
+                      loginOptions[typedKey] = !loginOptions[typedKey];
+                      localSettingsSave();
+                      repatchLoginPage();
+                    },
+                    {
+                      checked: loginOptions[typedKey]
+                    }
+                  ),
+                  value
+                ]
+              };
+            })
+          ]
+        }),
+        ElementButton.Create(
+          ids.optionsClose,
+          () => optionsSheet.close(),
+          {
+            label: "Close"
+          }
+        )
+      ],
+      parent: document.body
+    });
+  }
+  __name(createUI, "createUI");
+  function removeUI() {
+    document.getElementById(ids.optionsOpen)?.remove();
+    document.getElementById(ids.optionsSheet)?.remove();
+  }
+  __name(removeUI, "removeUI");
+  function patchLoginPage() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    if (loginOptions.hideDummy) {
+      ModSdkManager.prototype.patchFunction("LoginRun", {
+        "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
+      });
+      ModSdkManager.prototype.patchFunction("LoginDoNextThankYou", {
+        "CharacterRelease(LoginCharacter, false);": "",
+        "CharacterAppearanceFullRandom(LoginCharacter);": "",
+        'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
+        "CharacterFullRandomRestrain(LoginCharacter)": ""
+      });
+    }
+    if (loginOptions.hideCredits) {
+      ModSdkManager.prototype.patchFunction("LoginRun", {
+        "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
+        'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
+        'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
+      });
+      ModSdkManager.prototype.patchFunction("LoginDoNextThankYou", {
+        "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
+      });
+    }
+  }
+  __name(patchLoginPage, "patchLoginPage");
+  function unpatchLoginPage() {
+    ModSdkManager.prototype.unpatchFunction("LoginRun");
+    ModSdkManager.prototype.unpatchFunction("LoginDoNextThankYou");
+  }
+  __name(unpatchLoginPage, "unpatchLoginPage");
+  function repatchLoginPage() {
+    unpatchLoginPage();
+    patchLoginPage();
+  }
+  __name(repatchLoginPage, "repatchLoginPage");
+
+  // src/Migrators/V140Migrator.ts
+  var _V140Migrator = class _V140Migrator extends BaseMigrator2 {
+    get MigrationVersion() {
+      return "1.4.0";
+    }
+    Migrate() {
+      const colorsData = Player.Themed.ColorsModule;
+      const integrationsData = Player.Themed.IntegrationModule;
+      if (colorsData) {
+        if (Player.Themed.ColorsModule["primaryColor"]) {
+          Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
+          delete Player.Themed.ColorsModule["primaryColor"];
+        }
+        if (Player.Themed.ColorsModule["accentColor"]) {
+          Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
+          delete Player.Themed.ColorsModule["accentColor"];
+        }
+        if (Player.Themed.ColorsModule["textColor"]) {
+          Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
+          delete Player.Themed.ColorsModule["textColor"];
+        }
+      }
+      if (integrationsData) {
+        if (Player.Themed.IntegrationModule["BC"]) {
+          Player.Themed.IntegrationModule.inputs = Player.Themed.IntegrationModule["BC"];
+          delete Player.Themed.IntegrationModule["BC"];
+        }
+        if (Player.Themed.IntegrationModule["BC_Chat"]) {
+          Player.Themed.IntegrationModule.chat = Player.Themed.IntegrationModule["BC_Chat"];
+          delete Player.Themed.IntegrationModule["BC_Chat"];
+        }
+        if (Player.Themed.IntegrationModule["BC_FriendList"]) {
+          Player.Themed.IntegrationModule.friendList = Player.Themed.IntegrationModule["BC_FriendList"];
+          delete Player.Themed.IntegrationModule["BC_FriendList"];
+        }
+        if (Player.Themed.IntegrationModule["BC_Other"]) {
+          Player.Themed.IntegrationModule.scrollbar = Player.Themed.IntegrationModule["BC_Other"];
+          Player.Themed.IntegrationModule.selection = Player.Themed.IntegrationModule["BC_Other"];
+          delete Player.Themed.IntegrationModule["BC_Other"];
+        }
+        if (Player.Themed.IntegrationModule["FBC"]) {
+          Player.Themed.IntegrationModule.WCE = Player.Themed.IntegrationModule["FBC"];
+          delete Player.Themed.IntegrationModule["FBC"];
+        }
+      }
+      return true;
+    }
+  };
+  __name(_V140Migrator, "V140Migrator");
+  var V140Migrator = _V140Migrator;
+
+  // src/Modules/Colors.ts
+  var import_color6 = __toESM(require_color(), 1);
 
   // src/Utilities/Color.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color = __toESM(require_color());
+  var import_color = __toESM(require_color(), 1);
   var plainColors = {
     main: "",
     element: "",
@@ -1947,12 +4381,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
       const colorSettings = Player.Themed.ColorsModule;
       const globalSettings = Player.Themed.GlobalModule;
       Object.keys(colorSettings.special).forEach((key) => {
-        const clr = (0, import_color.default)(colorSettings.special[key]);
-        specialColors[key] = [clr.hex(), clr.lighten(0.2).hex()];
+        const typedKey = key;
+        const clr = (0, import_color.default)(colorSettings.special[typedKey]);
+        specialColors[typedKey] = [clr.hex(), clr.lighten(0.2).hex()];
       });
       if (globalSettings.doUseAdvancedColoring) {
         Object.keys(colorSettings.base).forEach((key) => {
-          plainColors[key] = colorSettings.base[key];
+          const typedKey = key;
+          plainColors[typedKey] = colorSettings.base[typedKey];
         });
       } else {
         const primaryColor2 = _Color.getHexComputed(colorSettings.base.main);
@@ -1973,109 +4409,145 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
   };
 
-  // src/Utilities/SDK.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_bondage_club_mod_sdk = __toESM(require_bcmodsdk());
-
-  // src/Utilities/Console.ts
-  init_define_LAST_COMMIT_HASH();
-  var STYLES = {
-    INFO: "color: #32CCCC",
-    LOG: "color: #CCCC32",
-    DEBUG: "color: #9E4BCF"
-  };
-  var cmdPrefix = "Themed";
-  function conInfo(...args) {
-    if (typeof args[0] === "string") console.info(`%c${cmdPrefix}: ${args[0]}`, STYLES.INFO, ...args.slice(1));
-    else console.info(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
-  }
-  __name(conInfo, "conInfo");
-  function conLog(...args) {
-    if (typeof args[0] === "string") console.log(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.log(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
-  }
-  __name(conLog, "conLog");
-  function conWarn(...args) {
-    if (typeof args[0] === "string") console.warn(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.warn(`%c${cmdPrefix}: `, STYLES.LOG, ...args);
-  }
-  __name(conWarn, "conWarn");
-  function conErr(...args) {
-    if (typeof args[0] === "string") console.error(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.error(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
-  }
-  __name(conErr, "conErr");
-  function conDebug(...args) {
-    if (true) {
-      if (typeof args[0] === "string") console.debug(`%c${cmdPrefix}: ${args[0]}`, STYLES.DEBUG, ...args.slice(1));
-      else console.debug(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
+  // src/Screens/Colors.ts
+  var _GuiColors = class _GuiColors extends BaseSubscreen {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "settingsBackup", {});
     }
-  }
-  __name(conDebug, "conDebug");
+    get name() {
+      return "colors";
+    }
+    get icon() {
+      return `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/palette.svg`;
+    }
+    get settings() {
+      return super.settings;
+    }
+    get pageStructure() {
+      const defaultSettings = getModule("ColorsModule").defaultSettings;
+      const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
+      const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
+      return [
+        Object.entries(this.settings.base).map(([key, value]) => {
+          const typedKey = key;
+          return {
+            id: key,
+            type: "color",
+            label: getText(`colors.setting.${key}.name`),
+            description: getText(`colors.setting.${key}.desc`),
+            setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setElementValue"),
+            setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setSettingValue"),
+            disabled: isBaseMode && !baseModeKey(typedKey)
+          };
+        }).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
+        Object.entries(this.settings.special).map(([key, value]) => {
+          const typedKey = key;
+          return {
+            id: key,
+            type: "color",
+            label: getText(`colors.setting.${key}.name`),
+            description: getText(`colors.setting.${key}.desc`),
+            setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setElementValue"),
+            setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setSettingValue")
+          };
+        })
+      ];
+    }
+    load() {
+      super.load();
+      const typeToggleButton = advancedElement.createButton({
+        id: "tmd-inputs-type-toggle",
+        onClick: /* @__PURE__ */ __name(() => {
+          this.pageStructure.forEach((page) => {
+            page.forEach((elm) => {
+              if (elm.type == "color" || elm.type == "text") {
+                const e = document.getElementById(elm.id);
+                if (!e) return;
+                const elementType = e.getAttribute("type");
+                if (elementType == "color") {
+                  e.setAttribute("type", "text");
+                } else {
+                  e.setAttribute("type", "color");
+                }
+              }
+            });
+          });
+          this.resize();
+        }, "onClick"),
+        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/refresh.svg`,
+        tooltip: getText("colors.button.change_input_type"),
+        size: [90, 90]
+      });
+      const menu = document.getElementById("deeplib-nav-menu");
+      if (menu) {
+        ElementMenu.PrependItem(menu, typeToggleButton);
+      }
+      this.settingsBackup = CommonCloneDeep(this.settings);
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        document.getElementById(key)?.addEventListener("input", function() {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            const typedKey = key;
+            settings.base[typedKey] = this.value;
+          }
+          getModule("ColorsModule").reloadTheme();
+        });
+      }), Object.entries(this.settings.special).forEach(([key]) => {
+        document.getElementById(key)?.addEventListener("input", function() {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            const typedKey = key;
+            settings.special[typedKey] = this.value;
+          }
+          getModule("ColorsModule").reloadTheme();
+        });
+      });
+    }
+    exit() {
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!input) return;
+        if (!_Color.isValidHex(input.value)) {
+          const typedKey = key;
+          settings.base[typedKey] = this.settingsBackup.base[typedKey];
+        }
+      }), Object.entries(this.settings.special).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!input) return;
+        if (!_Color.isValidHex(input.value)) {
+          const typedKey = key;
+          settings.special[typedKey] = this.settingsBackup.special[typedKey];
+        }
+      });
+      super.exit();
+    }
+  };
+  __name(_GuiColors, "GuiColors");
+  var GuiColors = _GuiColors;
 
   // src/Utilities/ModDefinition.ts
-  init_define_LAST_COMMIT_HASH();
   var ModName = "Themed";
-  var FullModName = "BC Themed";
-  var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"1a8ca4a6"}` : "1.5.6";
-
-  // src/Utilities/SDK.ts
-  var SDK = import_bondage_club_mod_sdk.default.registerMod(
-    {
-      name: ModName,
-      fullName: FullModName,
-      version: MOD_VERSION_CAPTION,
-      repository: ModRepository
-    },
-    {
-      allowReplace: false
-    }
-  );
-  var patchedFunctions = /* @__PURE__ */ new Map();
-  function initPatchableFunction(target) {
-    let result = patchedFunctions.get(target);
-    if (!result) {
-      result = {
-        name: target,
-        hooks: []
-      };
-      patchedFunctions.set(target, result);
-    }
-    return result;
-  }
-  __name(initPatchableFunction, "initPatchableFunction");
-  function patchFunction(target, patches) {
-    SDK.patchFunction(target, patches);
-  }
-  __name(patchFunction, "patchFunction");
-  function unpatchFunction(target) {
-    SDK.removePatches(target);
-  }
-  __name(unpatchFunction, "unpatchFunction");
-  function hookFunction(target, priority, hook, module = null) {
-    const data = initPatchableFunction(target);
-    if (data.hooks.some((h) => h.hook === hook)) {
-      conErr(`Duplicate hook for "${target}"`, hook);
-      return () => null;
-    }
-    const removeCallback = SDK.hookFunction(target, priority, hook);
-    data.hooks.push({
-      hook,
-      priority,
-      module,
-      removeCallback
-    });
-    data.hooks.sort((a, b) => b.priority - a.priority);
-    return removeCallback;
-  }
-  __name(hookFunction, "hookFunction");
+  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"081242b2"}` : "1.5.6";
+  var ModuleCategory = {
+    Global: "Global",
+    Colors: "Colors",
+    Profiles: "Profiles",
+    Integration: "Integration",
+    GuiRedraw: "GuiRedraw"
+  };
 
   // src/Hooks/GuiRedraw/AppearanceGetPreviewImageColor.ts
   function hookAppearanceGetPreviewImageColor() {
-    hookFunction(
+    sdk.hookFunction(
       "AppearanceGetPreviewImageColor",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [c, item, hover] = args;
@@ -2096,15 +4568,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
           else return hover ? plainColors.elementHover : plainColors.element;
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookAppearanceGetPreviewImageColor, "hookAppearanceGetPreviewImageColor");
 
   // src/Hooks/GuiRedraw/DialogGetMenuButtonColor.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDialogGetMenuButtonColor() {
-    hookFunction("DialogGetMenuButtonColor", 0, (args, next) => {
+    sdk.hookFunction("DialogGetMenuButtonColor", 0, (args, next) => {
       if (!doRedraw()) return next(args);
       const [buttonName] = args;
       if (DialogIsMenuButtonDisabled(buttonName)) {
@@ -2114,16 +4585,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
       } else {
         return "%background";
       }
-    }, 3 /* GuiRedraw */);
+    }, ModuleCategory.GuiRedraw);
   }
   __name(hookDialogGetMenuButtonColor, "hookDialogGetMenuButtonColor");
 
   // src/Hooks/GuiRedraw/DrawBackNextButton.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDrawBackNextButton() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawBackNextButton",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height, Label, Color7, Image, , , Disabled] = args;
@@ -2186,16 +4656,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
             DrawButtonHover(Left, Top, Width, Height, MouseX < LeftSplit ? BackText() : MouseX >= RightSplit ? NextText() : "");
           });
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawBackNextButton, "hookDrawBackNextButton");
 
-  // src/Hooks/GuiRedraw/DrawButton.ts
-  init_define_LAST_COMMIT_HASH();
-
   // src/Utilities/Drawing.ts
-  init_define_LAST_COMMIT_HASH();
   var _Image = {
     doNotColorizeImageIncludes: [
       "Assets/Female3DCG/",
@@ -2248,7 +4714,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
       "Icons/Small/Use.png",
       "Icons/Small/YouTube.png"
     ],
-    doColorizeImages: [],
+    doColorizeImages: [
+      ""
+    ],
     doDrawImage(source) {
       if (!source) return false;
       if (typeof source !== "string") return false;
@@ -2284,9 +4752,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
   // src/Hooks/GuiRedraw/DrawButton.ts
   function hookDrawButton() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawButton",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [x, y, width, height, label, , image, hoveringText, isDisabled] = args;
@@ -2311,7 +4779,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           "%hover",
           "%disabled",
           isHovering,
-          isDisabled
+          isDisabled ?? false
         );
         DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, plainColors.text);
         if (image != null && image != "") {
@@ -2321,17 +4789,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
           DrawHoverElements.push(() => DrawButtonHover(x, y, width, height, hoveringText));
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawButton, "hookDrawButton");
 
   // src/Hooks/GuiRedraw/DrawButtonHover.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDrawButtonHover() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawButtonHover",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [, , Width, Height, HoveringText] = args;
@@ -2345,42 +4812,40 @@ One of mods you are using is using an old version of SDK. It will work for now b
         DrawTextFit(HoveringText, Left + 225, Top + 33, 444, "Black");
         MainCanvas.restore();
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawButtonHover, "hookDrawButtonHover");
 
   // src/Hooks/GuiRedraw/DrawCheckbox.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDrawCheckbox() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawCheckbox",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = "Black", CheckImage = "Icons/Checked.png"] = args;
         const backgroundColor = Disabled ? "%disabled" : "%background";
         DrawText(Text, Left + 100, Top + 33, TextColor, "");
-        DrawButton(Left, Top, Width, Height, "", backgroundColor, IsChecked ? CheckImage : "", null, Disabled);
+        DrawButton(Left, Top, Width, Height, "", backgroundColor, IsChecked ? CheckImage : "", void 0, Disabled);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawCheckbox, "hookDrawCheckbox");
 
   // src/Hooks/GuiRedraw/DrawEmptyRect.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDrawEmptyRect() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawEmptyRect",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height, Color7, Thickness] = args;
         const drawEmptyRect = /* @__PURE__ */ __name((color) => {
           MainCanvas.beginPath();
           MainCanvas.rect(Left, Top, Width, Height);
-          MainCanvas.lineWidth = Thickness;
+          MainCanvas.lineWidth = Thickness ?? 2;
           MainCanvas.strokeStyle = color;
           MainCanvas.stroke();
         }, "drawEmptyRect");
@@ -2412,17 +4877,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
           }
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawEmptyRect, "hookDrawEmptyRect");
 
   // src/Hooks/GuiRedraw/DrawImageEx.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDrawImageEx() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawImageEx",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (typeof args[0] !== "string") return next(args);
@@ -2432,19 +4896,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
         Options ?? (Options = {});
         Options.HexColor = plainColors.accent;
         Options.FullAlpha = true;
-        next([Source, Canvas, X, Y, Options]);
+        return next([Source, Canvas, X, Y, Options]);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawImageEx, "hookDrawImageEx");
 
   // src/Hooks/GuiRedraw/DrawPreviewBox.ts
-  init_define_LAST_COMMIT_HASH();
   function hookDrawPreviewBox() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawPreviewBox",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [X, Y, Path, Description, Options] = args;
@@ -2482,21 +4945,20 @@ One of mods you are using is using an old version of SDK. It will work for now b
         ControllerAddActiveArea(X, Y);
         DrawEmptyRect(X, Y, Width, Height, hover ? plainColors.accentHover : plainColors.accent);
         if (Path !== "") DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
-        DrawPreviewIcons(Icons, X, Y);
+        DrawPreviewIcons(Icons ?? [], X, Y);
         if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawPreviewBox, "hookDrawPreviewBox");
 
   // src/Hooks/GuiRedraw/DrawRect.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color2 = __toESM(require_color());
+  var import_color2 = __toESM(require_color(), 1);
   function hookDrawRect() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawRect",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height] = args;
@@ -2556,9 +5018,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "equipped":
             case "crafted":
             case "limited":
-            case "blocked":
-              color = specialColors[color.substring(1)][hover];
+            case "blocked": {
+              const typedColor = color.substring(1);
+              color = specialColors[typedColor][hover];
               break;
+            }
             default:
               return next(args);
           }
@@ -2582,6 +5046,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "#ffffff88":
             case "#ffffffcc":
             case "#d7f6e9":
+            // LSCG Version Tooltip
             case "#808080":
               color = plainColors.element;
               break;
@@ -2617,123 +5082,43 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         drawRect2(color);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawRect, "hookDrawRect");
 
   // src/Hooks/GuiRedraw/DrawRoomBackground.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Data.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/String.ts
-  init_define_LAST_COMMIT_HASH();
-  var __String = class __String {
-    static encode(string) {
-      return LZString.compressToBase64(JSON.stringify(string));
-    }
-    static decode(string) {
-      const d = LZString.decompressFromBase64(string);
-      let data = {};
-      try {
-        const decoded = JSON.parse(d);
-        data = decoded;
-      } catch {
-      }
-      if (data) return data;
-    }
-  };
-  __name(__String, "_String");
-  var _String = __String;
-
-  // src/Utilities/Data.ts
-  var PlayerStorage = /* @__PURE__ */ __name(() => typeof Player?.[ModName] === "object" ? CommonCloneDeep(Player?.[ModName]) : void 0, "PlayerStorage");
-  var ExtensionStorage = /* @__PURE__ */ __name(() => Player.ExtensionSettings[ModName], "ExtensionStorage");
-  function settingsLoad() {
-    if (ExtensionStorage()) {
-      Player[ModName] = JSON.parse(LZString.decompressFromBase64(ExtensionStorage()));
-    } else if (Player.OnlineSettings[ModName]) {
-      Player[ModName] = JSON.parse(LZString.decompressFromBase64(Player.OnlineSettings[ModName]));
-      delete Player.OnlineSettings[ModName];
-      window.ServerAccountUpdate.QueueData({ OnlineSettings: Player.OnlineSettings });
-    } else {
-      Player[ModName] = {};
-    }
-  }
-  __name(settingsLoad, "settingsLoad");
-  function settingsSave() {
-    if (!ExtensionStorage()) Player.ExtensionSettings[ModName] = "";
-    const Data = {
-      Version: PlayerStorage().Version,
-      GlobalModule: PlayerStorage().GlobalModule,
-      ColorsModule: PlayerStorage().ColorsModule,
-      IntegrationModule: PlayerStorage().IntegrationModule,
-      ProfilesModule: PlayerStorage().ProfilesModule
-    };
-    Player.ExtensionSettings[ModName] = _String.encode(Data);
-    ServerPlayerExtensionSettingsSync(ModName);
-  }
-  __name(settingsSave, "settingsSave");
-  function settingsReset() {
-    Player[ModName] = {};
-    settingsSave();
-  }
-  __name(settingsReset, "settingsReset");
-  function localSettingsLoad() {
-    const data = localStorage.getItem("ThemedLocalData");
-    if (data) {
-      window.ThemedLocalData = JSON.parse(data);
-    } else {
-      window.ThemedLocalData = {
-        loginOptions: {
-          hideDummy: false,
-          hideCredits: false
-        }
-      };
-      localSettingsSave();
-    }
-  }
-  __name(localSettingsLoad, "localSettingsLoad");
-  function localSettingsSave() {
-    localStorage.setItem("ThemedLocalData", JSON.stringify(window.ThemedLocalData));
-  }
-  __name(localSettingsSave, "localSettingsSave");
-
-  // src/Hooks/GuiRedraw/DrawRoomBackground.ts
   function hookDrawRoomBackground() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawRoomBackground",
-      0 /* Observe */,
-      ([URL, ...args], next) => {
-        if (!doRedraw()) return next([URL, ...args]);
-        if (URL.includes("Sheet.jpg")) {
-          if (PlayerStorage().GlobalModule.doUseFlatColor) {
+      HookPriority.Observe,
+      ([URL2, ...args], next) => {
+        if (!doRedraw()) return next([URL2, ...args]);
+        if (URL2.includes("Sheet.jpg")) {
+          if (modStorage.playerStorage.GlobalModule.doUseFlatColor) {
             DrawRect(0, 0, 2e3, 1e3, plainColors.main);
           } else {
-            next([URL, ...args]);
+            next([URL2, ...args]);
             MainCanvas.save();
             MainCanvas.globalCompositeOperation = "multiply";
             DrawRect(0, 0, 2e3, 1e3, plainColors.main);
             MainCanvas.restore();
           }
         } else {
-          next([URL, ...args]);
+          next([URL2, ...args]);
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawRoomBackground, "hookDrawRoomBackground");
 
   // src/Hooks/GuiRedraw/DrawText.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color3 = __toESM(require_color());
+  var import_color3 = __toESM(require_color(), 1);
   function hookDrawText() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawText",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
@@ -2753,18 +5138,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         next(args);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawText, "hookDrawText");
 
   // src/Hooks/GuiRedraw/DrawTextFit.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color4 = __toESM(require_color());
+  var import_color4 = __toESM(require_color(), 1);
   function hookDrawTextFit() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawTextFit",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
@@ -2780,18 +5164,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         return next(args);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawTextFit, "hookDrawTextFit");
 
   // src/Hooks/GuiRedraw/DrawTextWrap.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color5 = __toESM(require_color());
+  var import_color5 = __toESM(require_color(), 1);
   function hookDrawTextWrap() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawTextWrap",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
@@ -2847,21 +5230,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
         } else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
         if (MaxLine != null && TextSize != null) MainCanvas.font = TextSize;
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawTextWrap, "hookDrawTextWrap");
 
   // src/Modules/GuiRedraw.ts
   var doRedraw = /* @__PURE__ */ __name(() => {
-    return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== "ClubCard";
+    return modStorage.playerStorage?.GlobalModule?.modEnabled && modStorage.playerStorage.GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== "ClubCard";
   }, "doRedraw");
   var _GuiRedrawModule = class _GuiRedrawModule extends BaseModule {
     constructor() {
       super(...arguments);
       __publicField(this, "patched", false);
     }
-    Load() {
+    load() {
       hookDrawRoomBackground();
       hookDrawButton();
       hookDrawCheckbox();
@@ -2880,7 +5263,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     patchGui() {
       if (this.patched) return false;
-      patchFunction("ChatSearchNormalDraw", {
+      sdk.patchFunction("ChatSearchNormalDraw", {
         // isBlocked
         'bgColor = isFull ? "#884444" : "#FF9999";': 'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
         // hasFriends
@@ -2891,28 +5274,28 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'blocksText.push({ text: blockedText, color: "#FF9999" });': 'blocksText.push({ text: blockedText, color: "%searchBlock" });',
         'blocksText.push({ text: gameText, color: "#9999FF"});': 'blocksText.push({ text: gameText, color: "%searchGame"});'
       });
-      patchFunction("ChatSearchPermissionDraw", {
+      sdk.patchFunction("ChatSearchPermissionDraw", {
         'bgColor = Hover ? "red" : "pink";': 'bgColor = "%allowed";',
         'bgColor = Hover ? "green" : "lime";': 'bgColor = "%searchBlock";'
       });
-      patchFunction("DialogDraw", {
+      sdk.patchFunction("DialogDraw", {
         "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
         'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");': 'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");'
       });
-      patchFunction("DrawProcessScreenFlash", {
+      sdk.patchFunction("DrawProcessScreenFlash", {
         'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
-      patchFunction("ChatAdminRun", {
+      sdk.patchFunction("ChatAdminRun", {
         'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
       });
-      patchFunction("AppearanceRun", {
+      sdk.patchFunction("AppearanceRun", {
         'const ButtonColor = canAccess ? "White" : "#888";': 'const ButtonColor = canAccess ? "%background" : "%disabled";',
         'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);': 'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
         'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "#aaa", null, null, !CanCycleColors);': 'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "%disabled", null, null, !CanCycleColors);',
         'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "#fff" : "#aaa", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);': 'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);'
       });
-      patchFunction("ExtendedItemGetButtonColor", {
+      sdk.patchFunction("ExtendedItemGetButtonColor", {
         'ButtonColor = "#888888";': 'ButtonColor = "%accent";',
         'ButtonColor = Hover ? "red" : "pink";': 'ButtonColor = "%blocked";',
         'ButtonColor = Hover ? "orange" : "#fed8b1";': 'ButtonColor = "%limited";',
@@ -2922,24 +5305,24 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'ButtonColor = Hover ? "Cyan" : "LightGreen";': 'ButtonColor = "%allowed";',
         'ButtonColor = Hover ? "Cyan" : "White";': 'ButtonColor = Hover ? "%hover" : "%background";'
       });
-      patchFunction("PreferenceSubscreenDifficultyRun", {
+      sdk.patchFunction("PreferenceSubscreenDifficultyRun", {
         'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "#DDFFDD" : "White", "");': 'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "%accent" : "%background", "");',
         'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "White" : "#ebebe4", "");': 'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "%background" : "%disabled", "");'
       });
-      patchFunction("ChatAdminRoomCustomizationRun", {
+      sdk.patchFunction("ChatAdminRoomCustomizationRun", {
         'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());': 'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
         'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());': 'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());'
       });
-      patchFunction("Shop2._AssetElementDraw", {
+      sdk.patchFunction("Shop2._AssetElementDraw", {
         'options.Background = "cyan";': 'options.Background = "%hover";',
         'options.Background = "white";': 'options.Background = "%background";',
         'options.Background = "gray";': 'options.Background = "%disabled";',
         'options.Background = "pink";': 'options.Background = "%equipped";'
       });
-      patchFunction("RelogRun", {
+      sdk.patchFunction("RelogRun", {
         'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
       });
-      patchFunction("ChatRoomMenuDraw", {
+      sdk.patchFunction("ChatRoomMenuDraw", {
         'let color = "White";': 'let color = "%background";',
         'color = "White";': 'color = "%background";',
         'color = "Pink";': 'color = "%blocked";',
@@ -2951,18 +5334,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     unpatchGui() {
       if (!this.patched) return false;
-      unpatchFunction("ChatSearchNormalDraw");
-      unpatchFunction("ChatSearchPermissionDraw");
-      unpatchFunction("DialogDraw");
-      unpatchFunction("DrawProcessScreenFlash");
-      unpatchFunction("ChatAdminRun");
-      unpatchFunction("AppearanceRun");
-      unpatchFunction("ExtendedItemGetButtonColor");
-      unpatchFunction("PreferenceSubscreenDifficultyRun");
-      unpatchFunction("ChatAdminRoomCustomizationRun");
-      unpatchFunction("Shop2._AssetElementDraw");
-      unpatchFunction("RelogRun");
-      unpatchFunction("ChatRoomMenuDraw");
+      sdk.unpatchFunction("ChatSearchNormalDraw");
+      sdk.unpatchFunction("ChatSearchPermissionDraw");
+      sdk.unpatchFunction("DialogDraw");
+      sdk.unpatchFunction("DrawProcessScreenFlash");
+      sdk.unpatchFunction("ChatAdminRun");
+      sdk.unpatchFunction("AppearanceRun");
+      sdk.unpatchFunction("ExtendedItemGetButtonColor");
+      sdk.unpatchFunction("PreferenceSubscreenDifficultyRun");
+      sdk.unpatchFunction("ChatAdminRoomCustomizationRun");
+      sdk.unpatchFunction("Shop2._AssetElementDraw");
+      sdk.unpatchFunction("RelogRun");
+      sdk.unpatchFunction("ChatRoomMenuDraw");
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -2976,329 +5359,63 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_GuiRedrawModule, "GuiRedrawModule");
   var GuiRedrawModule = _GuiRedrawModule;
 
-  // src/Translation.ts
-  init_define_LAST_COMMIT_HASH();
-  var _Localization = class _Localization {
-    static async load() {
-      const lang = TranslationLanguage.toLowerCase();
-      this.Translation = await _Localization.fetchLanguageFile(lang);
-      if (lang == "en") {
-        return;
-      }
-      this.FallbackTranslation = await _Localization.fetchLanguageFile("en");
+  // src/Utilities/Integration.ts
+  function changeModColors() {
+    if (doRedraw()) {
+      changeBctColors();
+      changeMbsColors();
+    } else {
+      resetBctColors();
+      resetMbsColors();
     }
-    static getText(srcTag) {
-      return this.Translation[srcTag] || this.FallbackTranslation?.[srcTag] || srcTag || "";
-    }
-    static async fetchLanguageFile(lang) {
-      const response = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/i18n/${lang}.lang`);
-      if (lang != "en" && !response.ok) {
-        return _Localization.fetchLanguageFile("en");
-      }
-      const langFileContent = await response.text();
-      return this.parseLanguageFile(langFileContent);
-    }
-    static parseLanguageFile(content) {
-      const translations = {};
-      const lines = content.split("\n");
-      for (const line of lines) {
-        if (line.trim() === "" || line.trim().startsWith("#")) {
-          continue;
-        }
-        const [key, value] = line.split("=");
-        translations[key.trim()] = value.trim();
-      }
-      return translations;
-    }
-  };
-  __name(_Localization, "Localization");
-  __publicField(_Localization, "Translation", new Object());
-  __publicField(_Localization, "FallbackTranslation", new Object());
-  var Localization = _Localization;
-  var getText = /* @__PURE__ */ __name((string) => Localization.getText(string), "getText");
-
-  // src/Base/SettingDefinitions.ts
-  init_define_LAST_COMMIT_HASH();
-  var SETTING_NAME_PREFIX = "Themed";
-  function setSubscreen(subscreen) {
-    if (!GUI.instance) {
-      throw new Error("Attempt to set subscreen before init");
-    }
-    GUI.instance.currentSubscreen = subscreen;
-    return GUI.instance.currentSubscreen;
   }
-  __name(setSubscreen, "setSubscreen");
-
-  // src/Base/BaseSetting.ts
-  var _GuiSubscreen = class _GuiSubscreen {
-    constructor(module) {
-      __publicField(this, "module");
-      this.module = module;
+  __name(changeModColors, "changeModColors");
+  function changeBctColors() {
+    if (Player.BCT) {
+      BCT_API.HintBackColor = plainColors.element;
+      BCT_API.HintBorderColor = plainColors.accent;
+      BCT_API.HintForeColor = plainColors.text;
     }
-    get name() {
-      return "UNKNOWN";
-    }
-    get icon() {
-      return "";
-    }
-    get label() {
-      return "UNDEFINED SETTING SCREEN";
-    }
-    get message() {
-      return PreferenceMessage;
-    }
-    set message(message) {
-      PreferenceMessage = message;
-    }
-    get SubscreenName() {
-      return SETTING_NAME_PREFIX + this.constructor.name;
-    }
-    setSubscreen(screen) {
-      return setSubscreen(screen);
-    }
-    get settings() {
-      return this.module.settings;
-    }
-    get multipageStructure() {
-      return [[]];
-    }
-    get structure() {
-      return this.multipageStructure[Math.min(PreferencePageCurrent - 1, this.multipageStructure.length - 1)];
-    }
-    getYPos(ix) {
-      return _GuiSubscreen.START_Y + _GuiSubscreen.Y_MOD * (ix % 9);
-    }
-    getXPos(ix) {
-      return _GuiSubscreen.START_X + _GuiSubscreen.X_MOD * Math.floor(ix / 9);
-    }
-    hideElements() {
-      this.multipageStructure.forEach((item, ix) => {
-        if (ix != PreferencePageCurrent - 1) {
-          item.forEach((setting) => {
-            if (setting.type == "text" || setting.type == "number" || setting.type == "color") this.elementHide(setting.id);
-          });
-        }
-      });
-    }
-    Load() {
-      for (const module of modules()) {
-        if (!module.settingsScreen) continue;
-        if (!Object.keys(module.settings).length) module.registerDefaultSettings();
-      }
-      this.multipageStructure.forEach(
-        (s) => s.forEach((item) => {
-          switch (item.type) {
-            case "text": {
-              const input = ElementCreateInput(item.id, "text", item.setting?.(), "255");
-              input.setAttribute("autocomplete", "off");
-              break;
-            }
-            case "number":
-              ElementCreateInput(item.id, "number", item.setting?.(), "255");
-              break;
-            case "color": {
-              const elm = ElementCreateInput(item.id, "color", item.setting?.());
-              elm.classList.add("tmd-color-picker");
-              break;
-            }
-          }
-        })
-      );
-      CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
-    }
-    Run() {
-      _GuiSubscreen.POS_BAK = _GuiSubscreen.START_X;
-      MainCanvas.save();
-      _GuiSubscreen.START_X = 550;
-      MainCanvas.textAlign = "left";
-      DrawCharacter(Player, 50, 50, 0.9, false);
-      DrawText(getText(`${this.name}.title`), _GuiSubscreen.START_X, _GuiSubscreen.START_Y - _GuiSubscreen.Y_MOD, "Black", "#D7F6E9");
-      DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png", "Main Menu");
-      if (this.multipageStructure.length > 1) {
-        MainCanvas.textAlign = "center";
-        PreferencePageChangeDraw(1595, 75, this.multipageStructure.length);
-        MainCanvas.textAlign = "left";
-      }
-      this.hideElements();
-      this.structure.forEach((item, ix) => {
-        switch (item.type) {
-          case "checkbox":
-            this.drawCheckbox(item.label, item.description, item.setting(), ix, item.disabled);
-            break;
-          case "text":
-          case "number":
-          case "color":
-            this.elementPosition(item.id, item.label, item.description, ix, item.disabled);
-            break;
-          case "label":
-            this.drawLabel(item.label, item.description, ix);
-            break;
-          case "button":
-            this.drawBetterButton(item.position, item.size, item.label, item.color, item.image, item.disabled);
-            break;
-        }
-      });
-      _GuiSubscreen.START_X = _GuiSubscreen.POS_BAK;
-      MainCanvas.restore();
-    }
-    Click() {
-      _GuiSubscreen.POS_BAK = _GuiSubscreen.START_X;
-      _GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
-      _GuiSubscreen.START_X = 550;
-      MainCanvas.textAlign = "left";
-      if (MouseIn(1815, 75, 90, 90)) return this.Exit();
-      if (this.multipageStructure.length > 1) PreferencePageChangeClick(1595, 75, this.multipageStructure.length);
-      this.structure.forEach((item, ix) => {
-        switch (item.type) {
-          case "checkbox":
-            if (MouseIn(this.getXPos(ix), this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
-              item.setSetting(!item.setting());
-            }
-            break;
-          case "button":
-            if (MouseIn(item.position[0], item.position[1], item.size[0], item.size[1])) item.callback();
-            break;
-        }
-      });
-      _GuiSubscreen.START_X = _GuiSubscreen.POS_BAK;
-      MainCanvas.textAlign = _GuiSubscreen.TEXT_ALIGN_BAK;
-    }
-    Exit() {
-      this.multipageStructure.forEach(
-        (s) => s.forEach((item) => {
-          switch (item.type) {
-            case "number":
-              if (!CommonIsNumeric(ElementValue(item.id))) {
-                ElementRemove(item.id);
-              }
-              break;
-            case "text":
-            case "color":
-              item.setSetting?.(ElementValue(item.id));
-              ElementRemove(item.id);
-              break;
-          }
-        })
-      );
-      CharacterAppearanceForceUpCharacter = -1;
-      CharacterLoadCanvas(Player);
-      getModule("ColorsModule").reloadTheme();
-      setSubscreen("MainMenu");
-      settingsSave();
-    }
-    Unload() {
-    }
-    tooltip(text) {
-      drawTooltip(300, 850, 1400, text, "left");
-    }
-    drawCheckbox(label, description, value, order, disabled = false) {
-      const checkboxSize = 64;
-      const labelOffset = checkboxSize + 30;
-      const isHovering = MouseIn(this.getXPos(order) + labelOffset, this.getYPos(order) - 32, 600, checkboxSize);
-      DrawTextFit(getText(label), this.getXPos(order) + labelOffset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      DrawCheckbox(this.getXPos(order), this.getYPos(order) - 32, checkboxSize, checkboxSize, "", value ?? false, disabled);
-      if (isHovering) this.tooltip(getText(description));
-    }
-    drawBetterButton(position, size, label, color, image = "", disabled = false) {
-      const isHovering = MouseIn(position[0], position[1] - 32, size[0], size[1]);
-      DrawButton(position[0], position[1], size[0], size[1], "", color, "", "", disabled);
-      DrawImageResize(image, position[0] + 10, position[1] + 10, 60, 60);
-      DrawTextFit(getText(label), position[0] + 80, position[1] + 40, 600, isHovering ? "Red" : "Black", "Gray");
-    }
-    drawButton(label, color, order, XOffset, disabled = false) {
-      const isHovering = MouseIn(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64);
-      DrawButton(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64, "", color, "", "", disabled);
-      DrawTextFit(getText(label), this.getXPos(order) + XOffset + 58, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-    }
-    elementHide(elementId) {
-      ElementPosition(elementId, -999, -999, 1, 1);
-    }
-    elementPosition(elementId, label, description, order, disabled = false) {
-      const element = document.getElementById(elementId);
-      if (!element) return;
-      let offset = 0;
-      if (element?.type === "color") offset = -336;
-      const isHovering = MouseIn(this.getXPos(order) + 450 + offset, this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order) + 450 + offset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400 + offset, 64);
-      if (disabled) ElementSetAttribute(elementId, "disabled", "true");
-      if (!disabled) ElementRemoveAttribute(elementId, "disabled");
-      if (isHovering) this.tooltip(getText(description));
-    }
-    drawLabel(label, description, order) {
-      const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      if (isHovering) this.tooltip(getText(description));
-    }
-  };
-  __name(_GuiSubscreen, "GuiSubscreen");
-  __publicField(_GuiSubscreen, "START_X", 180);
-  __publicField(_GuiSubscreen, "START_Y", 205);
-  __publicField(_GuiSubscreen, "X_MOD", 950);
-  __publicField(_GuiSubscreen, "Y_MOD", 75);
-  __publicField(_GuiSubscreen, "POS_BAK", _GuiSubscreen.START_X);
-  __publicField(_GuiSubscreen, "TEXT_ALIGN_BAK");
-  var GuiSubscreen = _GuiSubscreen;
-  function drawTooltip(x, y, width, text, align) {
-    const canvas = MainCanvas;
-    const bak = canvas.textAlign;
-    canvas.textAlign = align;
-    canvas.beginPath();
-    canvas.rect(x, y, width, 65);
-    canvas.fillStyle = doRedraw() ? plainColors.element : "#FFFF88";
-    canvas.fillRect(x, y, width, 65);
-    canvas.fill();
-    canvas.lineWidth = 2;
-    canvas.strokeStyle = doRedraw() ? plainColors.accent : "black";
-    canvas.stroke();
-    canvas.closePath();
-    DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? plainColors.text : "black");
-    canvas.textAlign = bak;
   }
-  __name(drawTooltip, "drawTooltip");
-
-  // src/Screens/Reset.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Style.ts
-  init_define_LAST_COMMIT_HASH();
+  __name(changeBctColors, "changeBctColors");
+  function resetBctColors() {
+    if (Player.BCT) {
+      BCT_API.HintBackColor = "yellow";
+      BCT_API.HintBorderColor = "black";
+      BCT_API.HintForeColor = "black";
+    }
+  }
+  __name(resetBctColors, "resetBctColors");
+  function changeMbsColors() {
+    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
+      if (!modStorage.playerStorage.IntegrationModule.MBS) return;
+      return mbs.css.setStyle({
+        backgroundColor: plainColors.main,
+        buttonColor: plainColors.element,
+        buttonHoverColor: plainColors.elementHover,
+        borderColor: plainColors.accent,
+        tooltipColor: plainColors.elementHint,
+        textColor: plainColors.text
+      });
+    }
+  }
+  __name(changeMbsColors, "changeMbsColors");
+  function resetMbsColors() {
+    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
+      if (!modStorage.playerStorage.IntegrationModule.MBS)
+        mbs.css.setStyle({
+          backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
+          buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
+          buttonHoverColor: mbs.css.DEFAULT_STYLE.buttonHoverColor,
+          borderColor: mbs.css.DEFAULT_STYLE.borderColor,
+          tooltipColor: mbs.css.DEFAULT_STYLE.tooltipColor,
+          textColor: mbs.css.DEFAULT_STYLE.textColor
+        });
+    }
+  }
+  __name(resetMbsColors, "resetMbsColors");
 
   // src/Utilities/Other.ts
-  init_define_LAST_COMMIT_HASH();
-  function sendLocalSmart(id, message, timeoutInSeconds) {
-    const div = document.createElement("div");
-    div.id = id;
-    div.setAttribute("class", "ChatMessage ThemedMessage");
-    div.setAttribute("data-time", ChatRoomCurrentTime());
-    div.setAttribute("data-sender", Player?.MemberNumber + "");
-    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
-    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
-    ChatRoomAppendChat(div);
-    if (!timeoutInSeconds) return;
-    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
-  }
-  __name(sendLocalSmart, "sendLocalSmart");
-  function sendAction(msg, target) {
-    ServerSend("ChatRoomChat", {
-      Content: "Beep",
-      Type: "Action",
-      Sender: Player.MemberNumber,
-      ...target ? { Target: target } : {},
-      Dictionary: [
-        // EN
-        { Tag: "Beep", Text: "msg" },
-        // CN
-        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
-        // DE
-        { Tag: "Biep", Text: "msg" },
-        // FR
-        { Tag: "Sonner", Text: "msg" },
-        // Message itself
-        { Tag: "msg", Text: msg }
-      ]
-    });
-  }
-  __name(sendAction, "sendAction");
   function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
     if (document.getElementById("themed-modal")) return false;
     const modal = document.createElement("div");
@@ -3329,22 +5446,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
     document.body.append(modal);
   }
   __name(useLgcModal, "useLgcModal");
-  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = { ...mergeTo };
-    for (const key in mergeFrom) {
-      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
-        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
-      } else if (key in mergedObject) {
-        mergedObject[key] = mergeFrom[key];
-      }
-    }
-    return mergedObject;
-  }
-  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  function hasSetter(obj, prop) {
-    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
-  }
-  __name(hasSetter, "hasSetter");
   function camelToKebabCase(str) {
     return str.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
   }
@@ -3363,46 +5464,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
     FUSAM: "",
     TTS: ""
   };
-  var Style = {
-    injectInline(styleId, styleSource) {
-      const isStyleLoaded = document.getElementById(styleId);
-      if (isStyleLoaded) return;
-      const styleElement = document.createElement("style");
-      styleElement.id = styleId;
-      styleElement.appendChild(document.createTextNode(styleSource));
-      document.head.appendChild(styleElement);
-    },
-    injectEmbed(styleId, styleLink) {
-      const isStyleLoaded = document.getElementById(styleId);
-      if (isStyleLoaded) return;
-      const styleElement = document.createElement("link");
-      styleElement.id = styleId;
-      styleElement.rel = "stylesheet";
-      styleElement.href = styleLink;
-      document.head.appendChild(styleElement);
-    },
-    eject(id) {
-      const style = document.getElementById(id);
-      if (!style) return;
-      style.remove();
-    },
-    reload(styleId, styleSource) {
-      Style.eject(styleId);
-      Style.injectInline(styleId, styleSource);
-    },
-    async fetch(link) {
-      return fetch(link).then((res) => res.text());
-    }
-  };
   var BcStyle = {
     injectAll() {
-      const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
+      const isEnabled = modStorage.playerStorage.GlobalModule.modEnabled;
       Style.injectEmbed("themed", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/themed.css`);
       if (!isEnabled) return;
       Style.injectInline("root", composeRoot());
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
-        if (!PlayerStorage().IntegrationModule[id]) return;
+        if (!modStorage.playerStorage.IntegrationModule[id]) return;
         Style.injectEmbed(id, `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/${id}.css`);
       });
     },
@@ -3422,13 +5492,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
   function composeRoot() {
     let genedColors = "";
     Object.keys(plainColors).forEach((key) => {
-      genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[key]};
+      const typedKey = key;
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[typedKey]};
 	`;
     });
     Object.keys(specialColors).forEach((key) => {
-      genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[key][0]};
+      const typedKey = key;
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[typedKey][0]};
 	`;
-      genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[key][1]};
+      genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[typedKey][1]};
 	`;
     });
     return (
@@ -3441,609 +5513,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
     );
   }
   __name(composeRoot, "composeRoot");
-
-  // src/Screens/Reset.ts
-  var _GuiReset = class _GuiReset extends GuiSubscreen {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "allowedConfirmTime", 0);
-    }
-    get name() {
-      return "Reset";
-    }
-    get icon() {
-      return "";
-    }
-    Load() {
-      this.allowedConfirmTime = Date.now() + 5e3;
-      super.Load();
-    }
-    Run() {
-      GuiSubscreen.POS_BAK = GuiSubscreen.START_X;
-      GuiSubscreen.START_X = 180;
-      MainCanvas.save();
-      MainCanvas.textAlign = "center";
-      DrawText(getText("reset.label.perma_reset_of_mod_data"), 1e3, 125, "Black");
-      DrawText(getText("reset.label.warning"), 1e3, 225, "Black", "Black");
-      DrawText(getText("reset.label.if_u_confirm_perma_reset"), 1e3, 325, "Black");
-      DrawText(getText("reset.label.youll_able_to_use_mod"), 1e3, 550, "Gray");
-      DrawText(getText("reset.label.action_cannot_be_undone"), 1e3, 625, "Red", "Black");
-      const now = Date.now();
-      if (now < this.allowedConfirmTime) {
-        DrawButton(
-          300,
-          720,
-          200,
-          80,
-          `${getText("reset.button.confirm")} (${Math.floor((this.allowedConfirmTime - now) / 1e3)})`,
-          "#ddd",
-          void 0,
-          void 0,
-          true
-        );
-      } else {
-        DrawButton(300, 720, 200, 80, getText("reset.button.confirm"), "White");
-      }
-      DrawButton(1520, 720, 200, 80, getText("reset.button.cancel"), "White");
-      MainCanvas.restore();
-    }
-    Click() {
-      if (this.allowedConfirmTime === null) return;
-      if (MouseIn(300, 720, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
-      if (MouseIn(1520, 720, 200, 80)) return this.Exit();
-    }
-    Confirm() {
-      this.allowedConfirmTime = null;
-      settingsReset();
-      for (const module of modules()) {
-        module.registerDefaultSettings();
-      }
-      _Color.composeRoot();
-      BcStyle.reloadAll();
-      this.setSubscreen(null);
-      PreferenceSubscreenExtensionsClear();
-    }
-  };
-  __name(_GuiReset, "GuiReset");
-  var GuiReset = _GuiReset;
-
-  // src/Screens/MainMenu.ts
-  var _MainMenu = class _MainMenu extends GuiSubscreen {
-    constructor(module) {
-      super(module);
-      __publicField(this, "subscreens", []);
-      this.subscreens = module.subscreens;
-    }
-    get name() {
-      return "MainMenu";
-    }
-    Load() {
-      if (!GUI.instance?.currentSubscreen) {
-        this.setSubscreen(this);
-        return;
-      }
-      super.Load();
-    }
-    Run() {
-      const tmp = GuiSubscreen.START_X;
-      MainCanvas.save();
-      GuiSubscreen.START_X = 550;
-      MainCanvas.textAlign = "left";
-      DrawCharacter(Player, 50, 50, 0.9, false);
-      DrawText(
-        getText("MainMenu.title").replace("$ModVersion", MOD_VERSION_CAPTION),
-        GuiSubscreen.START_X,
-        GuiSubscreen.START_Y - GuiSubscreen.Y_MOD,
-        "Black",
-        "#D7F6E9"
-      );
-      DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
-      MainCanvas.textAlign = "center";
-      let i = 0;
-      for (const screen of this.subscreens) {
-        const PX = Math.floor(i / 6);
-        const PY = i % 6;
-        if (screen.name == "MainMenu") continue;
-        DrawButton(GuiSubscreen.START_X + 430 * PX, 190 + 120 * PY, 450, 90, "", "White", "", "");
-        DrawImageResize(screen.icon, GuiSubscreen.START_X + 430 * PX + 10, 190 + 120 * PY + 10, 70, 70);
-        MainCanvas.textAlign = "left";
-        DrawTextFit(getText(`mainmenu.button.${screen.name}`), GuiSubscreen.START_X + 100 + 430 * PX, 235 + 120 * PY, 340, "Black");
-        MainCanvas.textAlign = "center";
-        i++;
-        MainCanvas.textAlign = "left";
-      }
-      DrawButton(1500, 830, 405, 80, "", "IndianRed");
-      DrawImageResize("Icons/ServiceBell.png", 1510, 840, 60, 60);
-      DrawTextFit("Reset", 1580, 870, 320, "Black");
-      GuiSubscreen.START_X = tmp;
-      MainCanvas.restore();
-    }
-    Click() {
-      if (MouseIn(1815, 75, 90, 90)) return this.Exit();
-      const tmp = GuiSubscreen.START_X;
-      GuiSubscreen.START_X = 550;
-      let i = 0;
-      for (const screen of this.subscreens) {
-        const PX = Math.floor(i / 6);
-        const PY = i % 6;
-        if (screen.name == "MainMenu") continue;
-        if (MouseIn(GuiSubscreen.START_X + 430 * PX, 190 + 120 * PY, 450, 90)) {
-          this.setSubscreen(screen);
-          return;
-        }
-        i++;
-      }
-      GuiSubscreen.START_X = tmp;
-      if (MouseIn(1500, 830, 405, 80)) this.setSubscreen(new GuiReset(getModule("GlobalModule")));
-    }
-    Exit() {
-      CharacterAppearanceForceUpCharacter = -1;
-      CharacterLoadCanvas(Player);
-      this.setSubscreen(null);
-      PreferenceSubscreenExtensionsClear();
-    }
-  };
-  __name(_MainMenu, "MainMenu");
-  var MainMenu = _MainMenu;
-
-  // src/Base/SettingUtils.ts
-  var _GUI = class _GUI extends BaseModule {
-    constructor() {
-      super();
-      __publicField(this, "_subscreens");
-      __publicField(this, "_mainMenu");
-      __publicField(this, "_currentSubscreen", null);
-      if (_GUI.instance) {
-        throw new Error("Duplicate initialization");
-      }
-      this._mainMenu = new MainMenu(this);
-      this._subscreens = [this._mainMenu];
-      _GUI.instance = this;
-    }
-    get subscreens() {
-      return this._subscreens;
-    }
-    get mainMenu() {
-      return this._mainMenu;
-    }
-    get currentSubscreen() {
-      return this._currentSubscreen;
-    }
-    set currentSubscreen(subscreen) {
-      if (this._currentSubscreen) {
-        this._currentSubscreen.Unload();
-      }
-      if (typeof subscreen === "string") {
-        const scr = this._subscreens?.find((s) => s.name === subscreen);
-        if (!scr) throw `Failed to find screen name ${subscreen}`;
-        this._currentSubscreen = scr;
-      } else {
-        this._currentSubscreen = subscreen;
-      }
-      PreferenceMessage = "";
-      PreferencePageCurrent = 1;
-      if (this._currentSubscreen) {
-        this._currentSubscreen.Load();
-      }
-    }
-    get currentCharacter() {
-      return Player;
-    }
-    get defaultSettings() {
-      return null;
-    }
-    Load() {
-      for (const module of modules()) {
-        if (!module.settingsScreen) continue;
-        this._subscreens.push(new module.settingsScreen(module));
-      }
-      this._mainMenu.subscreens = this._subscreens;
-      PreferenceRegisterExtensionSetting({
-        Identifier: "Themed",
-        ButtonText: getText("infosheet.button_text"),
-        Image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/icons/mod.png`,
-        load: /* @__PURE__ */ __name(() => {
-          setSubscreen(new MainMenu(this));
-        }, "load"),
-        run: /* @__PURE__ */ __name(() => {
-          if (this._currentSubscreen) {
-            MainCanvas.textAlign = "left";
-            this._currentSubscreen.Run();
-            MainCanvas.textAlign = "center";
-            this.drawDebug();
-          }
-        }, "run"),
-        click: /* @__PURE__ */ __name(() => {
-          if (this._currentSubscreen) {
-            this._currentSubscreen.Click();
-          }
-        }, "click"),
-        exit: /* @__PURE__ */ __name(() => {
-          if (this._currentSubscreen) {
-            this._currentSubscreen.Exit();
-          }
-        }, "exit")
-      });
-    }
-    drawDebug() {
-      if (true) {
-        if (MouseX > 0 || MouseY > 0) {
-          MainCanvas.save();
-          MainCanvas.lineWidth = 1;
-          MainCanvas.strokeStyle = "red";
-          MainCanvas.beginPath();
-          MainCanvas.moveTo(0, MouseY);
-          MainCanvas.lineTo(2e3, MouseY);
-          MainCanvas.moveTo(MouseX, 0);
-          MainCanvas.lineTo(MouseX, 1e3);
-          MainCanvas.stroke();
-          MainCanvas.fillStyle = "black";
-          MainCanvas.strokeStyle = "white";
-          MainCanvas.fillRect(0, 950, 250, 50);
-          MainCanvas.strokeRect(0, 950, 250, 50);
-          DrawText(`X: ${MouseX} Y: ${MouseY}`, 125, 975, "white");
-          MainCanvas.restore();
-        }
-      }
-    }
-  };
-  __name(_GUI, "GUI");
-  __publicField(_GUI, "instance", null);
-  var GUI = _GUI;
-
-  // src/Hooks/login_options.ts
-  init_define_LAST_COMMIT_HASH();
-  var ids = {
-    optionsOpen: "tmd-login-options-open",
-    optionsClose: "tmd-login-options-dialog-close",
-    optionsSheet: "tmd-login-options-dialog",
-    optionsContent: "tmd-login-options-dialog-content",
-    optionsStyle: "tmd-login-options-style"
-  };
-  var options = {
-    hideCredits: "Hide Credits",
-    hideDummy: "Hide Dummy"
-  };
-  function loadLoginOptions() {
-    localSettingsLoad();
-    patchLoginPage();
-    Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/login-options.css`);
-    createUI();
-    const cleanup = hookFunction("LoginRun", 0 /* Observe */, (args, next) => {
-      next(args);
-      ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
-      ElementSetSize(ids.optionsOpen, 90, 90);
-      ElementSetSize(ids.optionsSheet, 1e3, 500);
-    });
-    return () => {
-      removeUI();
-      Style.eject(ids.optionsStyle);
-      cleanup();
-      unpatchLoginPage();
-    };
-  }
-  __name(loadLoginOptions, "loadLoginOptions");
-  function createUI() {
-    const loginOptions = window.ThemedLocalData.loginOptions;
-    const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
-      tooltip: "[Themed] Login Options",
-      image: "./Icons/Preference.png"
-    });
-    document.body.appendChild(optionsButton);
-    const optionsSheet = ElementCreate({
-      tag: "dialog",
-      attributes: {
-        id: ids.optionsSheet
-      },
-      children: [
-        ElementCreate({
-          tag: "div",
-          attributes: {
-            id: ids.optionsContent
-          },
-          children: [
-            ...Array.from(Object.entries(options)).map(([key, value]) => {
-              return {
-                tag: "label",
-                classList: ["tmd-login-options-label"],
-                children: [
-                  ElementCheckbox.Create(
-                    `tmd-login-options-${key}`,
-                    () => {
-                      loginOptions[key] = !loginOptions[key];
-                      localSettingsSave();
-                      repatchLoginPage();
-                    },
-                    {
-                      checked: loginOptions[key]
-                    }
-                  ),
-                  value
-                ]
-              };
-            })
-          ]
-        }),
-        ElementButton.Create(
-          ids.optionsClose,
-          () => optionsSheet.close(),
-          {
-            label: "Close"
-          }
-        )
-      ],
-      parent: document.body
-    });
-  }
-  __name(createUI, "createUI");
-  function removeUI() {
-    document.getElementById(ids.optionsOpen)?.remove();
-    document.getElementById(ids.optionsSheet)?.remove();
-  }
-  __name(removeUI, "removeUI");
-  function patchLoginPage() {
-    const loginOptions = window.ThemedLocalData.loginOptions;
-    if (loginOptions.hideDummy) {
-      patchFunction("LoginRun", {
-        "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
-      });
-      patchFunction("LoginDoNextThankYou", {
-        "CharacterRelease(LoginCharacter, false);": "",
-        "CharacterAppearanceFullRandom(LoginCharacter);": "",
-        'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
-        "CharacterFullRandomRestrain(LoginCharacter)": ""
-      });
-    }
-    if (loginOptions.hideCredits) {
-      patchFunction("LoginRun", {
-        "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
-        'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
-        'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
-      });
-      patchFunction("LoginDoNextThankYou", {
-        "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
-      });
-    }
-  }
-  __name(patchLoginPage, "patchLoginPage");
-  function unpatchLoginPage() {
-    unpatchFunction("LoginRun");
-    unpatchFunction("LoginDoNextThankYou");
-  }
-  __name(unpatchLoginPage, "unpatchLoginPage");
-  function repatchLoginPage() {
-    unpatchLoginPage();
-    patchLoginPage();
-  }
-  __name(repatchLoginPage, "repatchLoginPage");
-
-  // src/Migrators/V140Migrator.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Migrators/BaseMigrator.ts
-  init_define_LAST_COMMIT_HASH();
-  var _BaseMigrator = class _BaseMigrator {
-  };
-  __name(_BaseMigrator, "BaseMigrator");
-  var BaseMigrator = _BaseMigrator;
-
-  // src/Migrators/V140Migrator.ts
-  var _V140Migrator = class _V140Migrator extends BaseMigrator {
-    get MigrationVersion() {
-      return "1.4.0";
-    }
-    Migrate() {
-      const colorsData = Player.Themed.ColorsModule;
-      const integrationsData = Player.Themed.IntegrationModule;
-      if (colorsData) {
-        if (Player.Themed.ColorsModule["primaryColor"]) {
-          Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
-          delete Player.Themed.ColorsModule["primaryColor"];
-        }
-        if (Player.Themed.ColorsModule["accentColor"]) {
-          Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
-          delete Player.Themed.ColorsModule["accentColor"];
-        }
-        if (Player.Themed.ColorsModule["textColor"]) {
-          Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
-          delete Player.Themed.ColorsModule["textColor"];
-        }
-      }
-      if (integrationsData) {
-        if (Player.Themed.IntegrationModule["BC"]) {
-          Player.Themed.IntegrationModule.inputs = Player.Themed.IntegrationModule["BC"];
-          delete Player.Themed.IntegrationModule["BC"];
-        }
-        if (Player.Themed.IntegrationModule["BC_Chat"]) {
-          Player.Themed.IntegrationModule.chat = Player.Themed.IntegrationModule["BC_Chat"];
-          delete Player.Themed.IntegrationModule["BC_Chat"];
-        }
-        if (Player.Themed.IntegrationModule["BC_FriendList"]) {
-          Player.Themed.IntegrationModule.friendList = Player.Themed.IntegrationModule["BC_FriendList"];
-          delete Player.Themed.IntegrationModule["BC_FriendList"];
-        }
-        if (Player.Themed.IntegrationModule["BC_Other"]) {
-          Player.Themed.IntegrationModule.scrollbar = Player.Themed.IntegrationModule["BC_Other"];
-          Player.Themed.IntegrationModule.selection = Player.Themed.IntegrationModule["BC_Other"];
-          delete Player.Themed.IntegrationModule["BC_Other"];
-        }
-        if (Player.Themed.IntegrationModule["FBC"]) {
-          Player.Themed.IntegrationModule.WCE = Player.Themed.IntegrationModule["FBC"];
-          delete Player.Themed.IntegrationModule["FBC"];
-        }
-      }
-      return true;
-    }
-  };
-  __name(_V140Migrator, "V140Migrator");
-  var V140Migrator = _V140Migrator;
-
-  // src/Modules/Colors.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color6 = __toESM(require_color());
-
-  // src/Screens/Colors.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiColors = class _GuiColors extends GuiSubscreen {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "settingsBackup");
-    }
-    get name() {
-      return "Colors";
-    }
-    get icon() {
-      return "Icons/ColorChange.png";
-    }
-    get settings() {
-      return super.settings;
-    }
-    get multipageStructure() {
-      const defaultSettings = getModule("ColorsModule").defaultSettings;
-      const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
-      const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
-      return [
-        Object.entries(this.settings.base).map(([key, value]) => ({
-          type: "color",
-          id: key,
-          label: `colors.setting.${key}.name`,
-          description: `colors.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[key], "setting"),
-          disabled: isBaseMode && !baseModeKey(key)
-        })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
-        Object.entries(this.settings.special).map(([key, value]) => ({
-          type: "color",
-          id: key,
-          label: `colors.setting.${key}.name`,
-          description: `colors.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting")
-        }))
-      ];
-    }
-    Load() {
-      super.Load();
-      this.settingsBackup = CommonCloneDeep(this.settings);
-      const settings = getModule("ColorsModule").settings;
-      Object.entries(this.settings.base).forEach(([key]) => {
-        document.getElementById(key).addEventListener("input", function(ev) {
-          if (!_Color.isValidHex(this.value)) {
-            this.setCustomValidity("Invalid hex color");
-          } else {
-            this.setCustomValidity("");
-            settings.base[key] = this.value;
-          }
-          getModule("ColorsModule").reloadTheme();
-        });
-      }), Object.entries(this.settings.special).forEach(([key]) => {
-        document.getElementById(key).addEventListener("input", function(ev) {
-          if (!_Color.isValidHex(this.value)) {
-            this.setCustomValidity("Invalid hex color");
-          } else {
-            this.setCustomValidity("");
-            settings.special[key] = this.value;
-          }
-          getModule("ColorsModule").reloadTheme();
-        });
-      });
-    }
-    Run() {
-      DrawButton(1495, 75, 90, 90, "", "White", "Icons/Swap.png", getText("colors.button.change_input_type"));
-      super.Run();
-    }
-    Click() {
-      if (MouseIn(1495, 75, 90, 90)) {
-        this.multipageStructure.forEach((page) => {
-          page.forEach((elm) => {
-            if (elm.type == "color" || elm.type == "text") {
-              const e = document.getElementById(elm.id);
-              const elementType = e.getAttribute("type");
-              if (elementType == "color") {
-                e.setAttribute("type", "text");
-              } else {
-                e.setAttribute("type", "color");
-              }
-            }
-          });
-        });
-        return;
-      }
-      super.Click();
-    }
-    Exit() {
-      const settings = getModule("ColorsModule").settings;
-      Object.entries(this.settings.base).forEach(([key]) => {
-        const input = document.getElementById(key);
-        if (!_Color.isValidHex(input.value)) {
-          settings.base[key] = this.settingsBackup.base[key];
-        }
-      }), Object.entries(this.settings.special).forEach(([key]) => {
-        const input = document.getElementById(key);
-        if (!_Color.isValidHex(input.value)) {
-          settings.special[key] = this.settingsBackup.special[key];
-        }
-      });
-      super.Exit();
-    }
-  };
-  __name(_GuiColors, "GuiColors");
-  var GuiColors = _GuiColors;
-
-  // src/Utilities/Integration.ts
-  init_define_LAST_COMMIT_HASH();
-  function changeModColors() {
-    if (doRedraw()) {
-      changeBctColors();
-      changeMbsColors();
-    } else {
-      resetBctColors();
-      resetMbsColors();
-    }
-  }
-  __name(changeModColors, "changeModColors");
-  function changeBctColors() {
-    if (Player.BCT) {
-      BCT_API.HintBackColor = plainColors.element;
-      BCT_API.HintBorderColor = plainColors.accent;
-      BCT_API.HintForeColor = plainColors.text;
-    }
-  }
-  __name(changeBctColors, "changeBctColors");
-  function resetBctColors() {
-    if (Player.BCT) {
-      BCT_API.HintBackColor = "yellow";
-      BCT_API.HintBorderColor = "black";
-      BCT_API.HintForeColor = "black";
-    }
-  }
-  __name(resetBctColors, "resetBctColors");
-  function changeMbsColors() {
-    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-      if (!PlayerStorage().IntegrationModule.MBS) return;
-      return mbs.css.setStyle({
-        backgroundColor: plainColors.main,
-        buttonColor: plainColors.element,
-        buttonHoverColor: plainColors.elementHover,
-        borderColor: plainColors.accent,
-        tooltipColor: plainColors.elementHint,
-        textColor: plainColors.text
-      });
-    }
-  }
-  __name(changeMbsColors, "changeMbsColors");
-  function resetMbsColors() {
-    if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-      if (!PlayerStorage().IntegrationModule.MBS)
-        mbs.css.setStyle({
-          backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
-          buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
-          buttonHoverColor: mbs.css.DEFAULT_STYLE.buttonHoverColor,
-          borderColor: mbs.css.DEFAULT_STYLE.borderColor,
-          tooltipColor: mbs.css.DEFAULT_STYLE.tooltipColor,
-          textColor: mbs.css.DEFAULT_STYLE.textColor
-        });
-    }
-  }
-  __name(resetMbsColors, "resetMbsColors");
 
   // src/Modules/Colors.ts
   var primaryColor = (0, import_color6.default)("#202020");
@@ -4095,9 +5564,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
       };
     }
-    Load() {
+    load() {
     }
     reloadTheme() {
+      deepLibLogger.info("Reloading theme");
       _Color.composeRoot();
       BcStyle.reloadAll();
       changeModColors();
@@ -4108,58 +5578,60 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ColorsModule = _ColorsModule;
 
   // src/Modules/Commands.ts
-  init_define_LAST_COMMIT_HASH();
   var _CommandsModule = class _CommandsModule extends BaseModule {
-    Load() {
+    load() {
       CommandCombine([
         {
           Tag: "share-theme",
           Description: "[member number]: Shares your theme with other people that have Themed installed!",
           Action(args) {
-            if (!args) return getModule("ShareModule").share(null);
+            if (!args) return getModule("ShareModule").share(void 0);
             const targetNumber = parseInt(args, 10);
             const target = ChatRoomCharacter.find((c) => c.MemberNumber == targetNumber);
             if (!target)
-              sendLocalSmart("theme-share-error", `No character with MemberNumber ${targetNumber} found!`);
+              sendLocalMessage("theme-share-error", `No character with MemberNumber ${targetNumber} found!`);
             else
               getModule("ShareModule").share(target.MemberNumber);
           }
         }
       ]);
     }
-    Run() {
+    run() {
     }
   };
   __name(_CommandsModule, "CommandsModule");
   var CommandsModule = _CommandsModule;
 
-  // src/Modules/Global.ts
-  init_define_LAST_COMMIT_HASH();
-
   // src/Screens/Global.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiGlobal = class _GuiGlobal extends GuiSubscreen {
+  var _GuiGlobal = class _GuiGlobal extends BaseSubscreen {
     get name() {
-      return "Global";
+      return "global";
     }
     get icon() {
-      return "Icons/Preference.png";
+      return `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/cog.svg`;
     }
     get settings() {
       return super.settings;
     }
-    get structure() {
+    get pageStructure() {
       const defaultSettings = getModule("GlobalModule").defaultSettings;
-      return Object.entries(this.settings).map(([key, value]) => ({
-        type: "checkbox",
-        label: `settings.setting.${key}.name`,
-        description: `settings.setting.${key}.desc`,
-        setting: /* @__PURE__ */ __name(() => value ?? defaultSettings[key], "setting"),
-        setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
-      }));
+      return [Object.entries(this.settings).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: `tmd-global-${key}`,
+          type: "checkbox",
+          label: getText(`settings.setting.${typedKey}.name`),
+          description: getText(`settings.setting.${typedKey}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name((val) => {
+            this.settings[typedKey] = val;
+            getModule("ColorsModule").reloadTheme();
+          }, "setSettingValue")
+        };
+      })];
     }
-    Load() {
-      super.Load();
+    load() {
+      super.load();
     }
   };
   __name(_GuiGlobal, "GuiGlobal");
@@ -4178,7 +5650,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     get defaultSettings() {
       return {
-        themedEnabled: true,
+        modEnabled: true,
         doVanillaGuiOverhaul: true,
         doUseAdvancedColoring: false,
         doUseFlatColor: false,
@@ -4187,31 +5659,35 @@ One of mods you are using is using an old version of SDK. It will work for now b
         doShowNewVersionMessage: true
       };
     }
-    Load() {
-      changeModColors();
-      setTimeout(changeModColors, 6e4);
-      setTimeout(changeModColors, 3e5);
-      hookFunction(
+    load() {
+      const reload = /* @__PURE__ */ __name(() => {
+        changeModColors();
+        BcStyle.reloadAll();
+      }, "reload");
+      setTimeout(reload, 6e4);
+      setTimeout(reload, 3e5);
+      sdk.hookFunction(
         "ChatRoomCurrentTime",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
           if (!this.settings.doShowLocaleTime) return next(args);
           const currentTime = new Date(Date.now());
           return currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
-      hookFunction(
+      sdk.hookFunction(
         "DialogDraw",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
-          if (!this.settings.themedEnabled) return next(args);
+          if (!this.settings.modEnabled) return next(args);
           if (!this.settings.doIndicateCharacterAbsence) return next(args);
           if (!(CurrentScreen == "ChatRoom")) return next(args);
           if (!CurrentCharacter) return next(args);
           next(args);
-          if (CurrentCharacter === null) return;
+          if (!CurrentCharacter || !CurrentCharacter?.MemberNumber) return;
           if (CurrentCharacter.IsPlayer()) return;
+          if (!CurrentCharacter?.Canvas?.getContext("2d") || !CurrentCharacter?.CanvasBlink?.getContext("2d")) return;
           if (ChatRoomCharacter.includes(CurrentCharacter)) {
             if (_GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
               CurrentCharacter.Canvas.getContext("2d").globalAlpha = 1;
@@ -4236,19 +5712,20 @@ One of mods you are using is using an old version of SDK. It will work for now b
             DrawImageEx("Icons/Warning.svg", MainCanvas, 500 + 125, 125, { Width: 250, Height: 250, HexColor: "#ff0000", FullAlpha: true });
           }
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
-      hookFunction(
+      sdk.hookFunction(
         "AppearanceRun",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
-          if (!this.settings.themedEnabled) return next(args);
+          if (!this.settings.modEnabled) return next(args);
           if (!this.settings.doIndicateCharacterAbsence) return next(args);
           if (!(CurrentScreen == "Appearance")) return next(args);
-          if (!CharacterAppearanceSelection) return next(args);
+          if (!CharacterAppearanceSelection || !CharacterAppearanceSelection.MemberNumber) return next(args);
           next(args);
           if (CharacterAppearanceSelection === null) return;
           if (CharacterAppearanceSelection.IsPlayer()) return;
+          if (!CharacterAppearanceSelection?.Canvas?.getContext("2d") || !CharacterAppearanceSelection?.CanvasBlink?.getContext("2d")) return;
           if (ChatRoomCharacter.includes(CharacterAppearanceSelection)) {
             if (_GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
               CharacterAppearanceSelection.Canvas.getContext("2d").globalAlpha = 1;
@@ -4273,52 +5750,55 @@ One of mods you are using is using an old version of SDK. It will work for now b
             DrawImageEx("Icons/Warning.svg", MainCanvas, 660 + 125, 125, { Width: 250, Height: 250, HexColor: "#ff0000" });
           }
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
-      hookFunction(
+      sdk.hookFunction(
         "ChatRoomSync",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
-          Character.filter((character) => _GlobalModule.transparentCharacters?.includes(character.MemberNumber));
+          Character.filter((character) => character.IsPlayer() || !_GlobalModule.transparentCharacters?.includes(character.MemberNumber));
           return next(args);
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
     }
-    Run() {
+    run() {
     }
   };
   __name(_GlobalModule, "GlobalModule");
   __publicField(_GlobalModule, "transparentCharacters", []);
   var GlobalModule = _GlobalModule;
 
-  // src/Modules/Integration.ts
-  init_define_LAST_COMMIT_HASH();
-
   // src/Screens/Integration.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiIntegration = class _GuiIntegration extends GuiSubscreen {
+  var _GuiIntegration = class _GuiIntegration extends BaseSubscreen {
     get name() {
-      return "Integration";
+      return "integration";
     }
     get icon() {
-      return "Icons/Scripts.png";
+      return `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/stars.svg`;
     }
     get settings() {
       return super.settings;
     }
-    get structure() {
+    get pageStructure() {
       const defaultSettings = getModule("IntegrationModule").defaultSettings;
-      return Object.entries(this.settings).map(([key, value]) => ({
-        type: "checkbox",
-        label: `integration.setting.${key}.name`,
-        description: `integration.setting.${key}.desc`,
-        setting: /* @__PURE__ */ __name(() => value ?? defaultSettings[key], "setting"),
-        setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
-      }));
+      return [Object.entries(this.settings).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: `tmd-integration-${key}`,
+          type: "checkbox",
+          label: getText(`integration.setting.${key}.name`),
+          description: getText(`integration.setting.${key}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name((val) => {
+            this.settings[typedKey] = val;
+            getModule("ColorsModule").reloadTheme();
+          }, "setSettingValue")
+        };
+      })];
     }
-    Load() {
-      super.Load();
+    load() {
+      super.load();
     }
   };
   __name(_GuiIntegration, "GuiIntegration");
@@ -4350,191 +5830,236 @@ One of mods you are using is using an old version of SDK. It will work for now b
         MBS: true
       };
     }
-    Load() {
-      hookFunction(
-        "ChatRoomSync",
-        0 /* Observe */,
-        (args, next) => {
-          next(args);
-          BcStyle.reloadAll();
-        },
-        2 /* Integration */
-      );
+    load() {
     }
   };
   __name(_IntegrationModule, "IntegrationModule");
   var IntegrationModule = _IntegrationModule;
 
-  // src/Modules/Profiles.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/Utilities/Console.ts
+  var STYLES = {
+    INFO: "color: #32CCCC",
+    LOG: "color: #CCCC32",
+    DEBUG: "color: #9E4BCF"
+  };
+  var cmdPrefix = "Themed";
+  function conWarn(...args) {
+    if (typeof args[0] === "string") console.warn(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
+    else console.warn(`%c${cmdPrefix}: `, STYLES.LOG, ...args);
+  }
+  __name(conWarn, "conWarn");
 
   // src/Screens/Profiles.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiProfiles = class _GuiProfiles extends GuiSubscreen {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "PreferenceText", "");
-      __publicField(this, "ProfileNames", ["", "", ""]);
-      __publicField(this, "tmpGlbl", GuiSubscreen.START_X);
-    }
+  var _GuiProfiles = class _GuiProfiles extends BaseSubscreen {
     get name() {
-      return "Profiles";
+      return "profiles";
     }
     get icon() {
-      return "Icons/Title.png";
+      return `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/users_group.svg`;
     }
     get settings() {
       return super.settings;
     }
-    Load() {
-      super.Load();
+    load() {
+      super.load();
+      const profilesContainer = ElementCreate({
+        tag: "div",
+        classList: ["tmd-profiles-container"],
+        attributes: {
+          id: "tmd-profiles-container"
+        },
+        parent: layoutElement.getSubscreenDiv()
+      });
       for (let i = 0; i < 3; i++) {
-        const profileIndex = i + 1;
-        this.ProfileNames[i] = PlayerStorage()?.ProfilesModule?.[profileIndex]?.name ?? "";
+        const profileId = i + 1;
+        const profileName = this.settings[profileId].name || getText("profiles.text.profile") + ` ${profileId}`;
+        const profileElement = ElementCreate({
+          tag: "div",
+          attributes: {
+            id: `tmd-profile-${profileId}`
+          },
+          classList: ["tmd-profile"],
+          children: [
+            advancedElement.createLabel({
+              id: `tmd-profile-label-${profileId}`,
+              label: profileName
+            }),
+            this.createColorShowcase(profileId),
+            {
+              tag: "div",
+              classList: ["tmd-profile-buttons"],
+              children: [
+                advancedElement.createButton({
+                  id: `tmd-profiles-profile-save-${profileId}`,
+                  onClick: /* @__PURE__ */ __name(() => this.handleProfilesSaving(profileId), "onClick"),
+                  label: getText("profiles.button.save")
+                }),
+                advancedElement.createButton({
+                  id: `tmd-profiles-profile-load-${profileId}`,
+                  onClick: /* @__PURE__ */ __name(() => this.handleProfilesLoading(profileId), "onClick"),
+                  label: getText("profiles.button.load"),
+                  htmlOptions: {
+                    options: {
+                      disabled: !this.profileExists(profileId)
+                    }
+                  }
+                }),
+                advancedElement.createButton({
+                  id: `tmd-profiles-profile-delete-${profileId}`,
+                  onClick: /* @__PURE__ */ __name(() => this.handleProfilesDeleting(profileId), "onClick"),
+                  label: getText("profiles.button.delete"),
+                  htmlOptions: {
+                    options: {
+                      disabled: !this.profileExists(profileId)
+                    }
+                  }
+                })
+              ]
+            }
+          ]
+        });
+        profilesContainer.appendChild(profileElement);
       }
       CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
     }
-    Run() {
-      MainCanvas.save();
-      super.Run();
-      MainCanvas.textAlign = "left";
-      for (let i = 0; i < 3; i++) {
-        const profileIndex = i + 1;
-        if (this.ProfileNames[i] === "")
-          DrawText(getText("profiles.text.profile") + ` ${profileIndex}`, this.getXPos(profileIndex), this.getYPos(profileIndex), "Black", "Gray");
-        if (this.ProfileNames[i] !== "")
-          DrawText(this.ProfileNames[i], this.getXPos(profileIndex), this.getYPos(profileIndex), "Black", "Gray");
-        this.drawButton("profiles.button.save", "white", profileIndex, 250);
-        this.drawButton("profiles.button.load", "white", profileIndex, 500);
-        this.drawButton("profiles.button.delete", "IndianRed", profileIndex, 750);
-      }
-      if (this.PreferenceText)
-        DrawText(this.PreferenceText, GuiSubscreen.START_X + 250, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, "Black", "Gray");
-      MainCanvas.restore();
+    resize(onLoad) {
+      super.resize(onLoad);
     }
-    Click() {
-      super.Click();
-      for (let i = 0; i < 3; i++) {
-        const profileIndex = i + 1;
-        this.handleProfilesSaving(profileIndex);
-        this.handleProfilesLoading(profileIndex);
-        this.handleProfilesDeleting(profileIndex);
+    handleProfilesSaving(profileId) {
+      if (!this.profileCanBeSaved(profileId)) return;
+      const name = prompt(getText("profiles.prompt"));
+      if (name === null) return;
+      const storage = modStorage.playerStorage;
+      const profile = this.settings[profileId];
+      if (!profile || Object.keys(profile).length === 0) {
+        this.settings[profileId] = {};
       }
-    }
-    Exit() {
-      CharacterAppearanceForceUpCharacter = -1;
-      CharacterLoadCanvas(Player);
-      this.PreferenceText = "";
-      super.Exit();
-    }
-    saveProfile(profileId, profileName) {
-      if (profileId < 1 || profileId > 3) {
-        conWarn(`Invalid profile id ${profileId}`);
-        return false;
-      }
-      if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-        Player[ModName].ProfilesModule[profileId] = {};
-      }
-      const saveData = {
-        GlobalModule: PlayerStorage().GlobalModule,
-        ColorsModule: PlayerStorage().ColorsModule,
-        IntegrationModule: PlayerStorage().IntegrationModule
+      this.settings[profileId] = {
+        name,
+        data: {
+          GlobalModule: storage.GlobalModule,
+          ColorsModule: storage.ColorsModule,
+          IntegrationModule: storage.IntegrationModule
+        }
       };
+      const display = name ? `"${name}"` : profileId;
+      ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_saved")}`);
+      this.updateProfileLabel(profileId);
+      this.updateProfileButtons(profileId);
+      this.updateProfileColorShowcase(profileId);
+    }
+    handleProfilesLoading(profileId) {
+      if (!this.profileExists(profileId)) {
+        ToastManager.error(`${getText("profiles.text.profile")} ${profileId} ${getText("profiles.text.doesnt_exist")}`);
+        return;
+      }
+      const data = modStorage.playerStorage.ProfilesModule[profileId].data;
+      Player[ModName] = {
+        ...Player[ModName],
+        GlobalModule: data.GlobalModule,
+        ColorsModule: data.ColorsModule,
+        IntegrationModule: data.IntegrationModule
+      };
+      const name = this.settings[profileId].name;
+      const display = name ? `"${name}"` : profileId;
+      ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_loaded")}`);
+      getModule("ColorsModule").reloadTheme();
+    }
+    handleProfilesDeleting(profileId) {
+      if (!this.profileExists(profileId)) {
+        ToastManager.info(`${getText("profiles.text.profile")} ${profileId} ${getText("profiles.text.doesnt_exist")}`);
+        return;
+      }
+      const name = this.settings[profileId].name;
       Player[ModName].ProfilesModule[profileId] = {
-        name: profileName,
-        data: saveData
+        name: "",
+        data: {}
       };
-      return true;
+      const display = name ? `"${name}"` : profileId;
+      ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_deleted")}`);
+      this.updateProfileLabel(profileId);
+      this.updateProfileButtons(profileId);
+      this.updateProfileColorShowcase(profileId);
     }
-    loadProfile(profileId) {
-      if (profileId < 1 || profileId > 3) {
-        conWarn(`Invalid profile id ${profileId}`);
-        return false;
-      }
-      if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length < 1) {
-        return false;
-      }
-      const data = PlayerStorage().ProfilesModule[profileId].data;
-      if (Object.keys(data).length < 1) {
-        return false;
-      }
-      if (data) {
-        Player[ModName].GlobalModule = data.GlobalModule;
-        Player[ModName].ColorsModule = data.ColorsModule;
-        Player[ModName].IntegrationModule = data.IntegrationModule;
-      }
-      return true;
+    updateProfileButtons(profileId) {
+      const profileSaveButton = ElementWrap(`tmd-profiles-profile-save-${profileId}`);
+      const profileLoadButton = ElementWrap(`tmd-profiles-profile-load-${profileId}`);
+      const profileDeleteButton = ElementWrap(`tmd-profiles-profile-delete-${profileId}`);
+      if (!profileSaveButton || !profileLoadButton || !profileDeleteButton) return;
+      profileSaveButton.disabled = !this.profileCanBeSaved(profileId);
+      profileLoadButton.disabled = !this.profileExists(profileId);
+      profileDeleteButton.disabled = !this.profileExists(profileId);
     }
-    deleteProfile(profileId) {
-      if (profileId < 1 || profileId > 3) {
-        conWarn(`Invalid profile id ${profileId}`);
-        return false;
-      }
-      if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-        return false;
-      }
-      Player[ModName].ProfilesModule[profileId] = {};
-      return true;
+    updateProfileLabel(profileId) {
+      const name = this.settings[profileId].name;
+      const display = name ? name : `${getText("profiles.text.profile")} ${profileId}`;
+      const profileLabel = ElementWrap(`tmd-profile-label-${profileId}`);
+      if (!profileLabel) return;
+      profileLabel.textContent = display;
     }
-    handleProfilesSaving(profileIndex) {
-      const formerIndex = profileIndex - 1;
-      if (MouseIn(this.getXPos(profileIndex) + 250, this.getYPos(profileIndex) - 32, 200, 64)) {
-        const promptedName = prompt(getText("profiles.prompt"));
-        if (promptedName === null) return;
-        this.ProfileNames[formerIndex] = promptedName;
-        if (this.ProfileNames[formerIndex] === "") {
-          this.saveProfile(profileIndex, "");
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_saved")}`;
-        }
-        if (this.ProfileNames[formerIndex] !== "") {
-          this.saveProfile(profileIndex, this.ProfileNames[formerIndex]);
-          this.PreferenceText = `${getText("profiles.text.profile")} "${this.ProfileNames[formerIndex]}" ${getText(
-            "profiles.text.has_been_saved"
-          )}`;
-        }
-        return;
+    updateProfileColorShowcase(profileId) {
+      const colorShowcase = this.createColorShowcase(profileId);
+      if (colorShowcase === null) {
+        ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+      } else {
+        const label = ElementWrap(`tmd-profile-label-${profileId}`);
+        if (!label) return;
+        ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+        label.after(colorShowcase);
       }
     }
-    handleProfilesLoading(profileIndex) {
-      const formerIndex = profileIndex - 1;
-      if (MouseIn(this.getXPos(profileIndex) + 500, this.getYPos(profileIndex) - 32, 200, 64)) {
-        if (!this.loadProfile(profileIndex)) {
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.needs_to_be_saved")}`;
-          return;
-        }
-        if (this.ProfileNames[formerIndex] === "")
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_loaded")}`;
-        if (this.ProfileNames[formerIndex] !== "")
-          this.PreferenceText = `${getText("profiles.text.profile")} "${this.ProfileNames[formerIndex]}" ${getText(
-            "profiles.text.has_been_loaded"
-          )}`;
-        getModule("ColorsModule").reloadTheme();
-        return;
-      }
-    }
-    handleProfilesDeleting(profileIndex) {
-      const formerIndex = profileIndex - 1;
-      if (MouseIn(this.getXPos(profileIndex) + 750, this.getYPos(profileIndex) - 32, 200, 64)) {
-        if (!this.ProfileNames[formerIndex]) return;
-        if (this.deleteProfile(profileIndex)) {
-          if (this.ProfileNames[formerIndex] === "") {
-            this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_deleted")}`;
+    createColorShowcase(profileId) {
+      const exists = this.profileExists(profileId);
+      if (!exists) return null;
+      const colors = Object.entries(this.settings[profileId].data.ColorsModule.base);
+      return ElementCreate({
+        tag: "div",
+        classList: ["tmd-profile-color-showcase"],
+        attributes: {
+          id: `tmd-profile-color-showcase-${profileId}`
+        },
+        children: colors.map(([key, value]) => {
+          const isBaseMode = !this.settings[profileId].data.GlobalModule.doUseAdvancedColoring;
+          const baseModeKey = /* @__PURE__ */ __name((key2) => ["main", "accent", "text"].includes(key2), "baseModeKey");
+          if (isBaseMode && !baseModeKey(key)) {
             return;
           }
-          if (this.ProfileNames[formerIndex] !== "") {
-            this.PreferenceText = `${getText("profiles.text.profile")} "${this.ProfileNames[formerIndex]}" ${getText(
-              "profiles.text.has_been_deleted"
-            )}`;
-            this.ProfileNames[formerIndex] = "";
-            return;
-          }
-        }
-        if (!this.deleteProfile(profileIndex)) {
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.not_saved_or_already_deleted")}`;
-          return;
-        }
-        return;
+          return advancedElement.createButton({
+            id: `tmd-profile-color-showcase-${profileId}-${key}`,
+            tooltip: getText(`colors.setting.${key}.name`),
+            htmlOptions: {
+              htmlOptions: {
+                button: {
+                  style: {
+                    "--background-color": value
+                  },
+                  classList: ["tmd-profile-color-showcase-button"]
+                }
+              },
+              options: {
+                noStyling: true
+              }
+            }
+          });
+        })
+      });
+    }
+    isValidProfileId(id) {
+      if (id < 1 || id > 3) {
+        conWarn(`Invalid profile id ${id}`);
+        return false;
       }
+      return true;
+    }
+    profileCanBeSaved(profileId) {
+      if (!this.isValidProfileId(profileId)) return false;
+      return true;
+    }
+    profileExists(profileId) {
+      if (!this.isValidProfileId(profileId)) return false;
+      const data = modStorage.playerStorage?.ProfilesModule?.[profileId]?.data || {};
+      if (!data || Object.keys(data).length === 0) return false;
+      return true;
     }
   };
   __name(_GuiProfiles, "GuiProfiles");
@@ -4545,13 +6070,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
     get settings() {
       return super.settings;
     }
+    set settings(val) {
+      super.settings = val;
+    }
     get settingsScreen() {
       return GuiProfiles;
     }
     get defaultSettings() {
       return {};
     }
-    Load() {
+    load() {
       const profileDefaults = {
         GlobalModule: getModule("GlobalModule").defaultSettings,
         ColorsModule: getModule("ColorsModule").defaultSettings,
@@ -4559,7 +6087,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       };
       for (let i = 0; i < 3; i++) {
         const profileIndex = i + 1;
-        if (!PlayerStorage()?.ProfilesModule?.[profileIndex] || Object.keys(PlayerStorage()?.ProfilesModule?.[profileIndex]).length === 0) {
+        if (!modStorage.playerStorage.ProfilesModule[profileIndex] || Object.keys(modStorage.playerStorage.ProfilesModule[profileIndex]).length === 0) {
           Player[ModName].ProfilesModule[profileIndex] = {
             data: {},
             name: ""
@@ -4573,13 +6101,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ProfilesModule = _ProfilesModule;
 
   // src/Modules/Share.ts
-  init_define_LAST_COMMIT_HASH();
   var _ShareModule = class _ShareModule extends BaseModule {
-    Load() {
-      hookFunction("ChatRoomMessageProcessHidden", 0 /* Observe */, (args, next) => {
-        const data = args[0];
+    load() {
+      sdk.hookFunction("ChatRoomMessageProcessHidden", HookPriority.Observe, (args, next) => {
+        const [data, sender] = args;
         if (data.Content !== "ThemedTheme") return next(args);
-        const sender = ChatRoomCharacter.find((c) => c.MemberNumber == data.Sender);
+        if (!sender.MemberNumber) return next(args);
         const senderName = CharacterNickname(sender);
         const prompt2 = getText("modal.prompt.share").replace("$Sender", `${senderName} (${data.Sender})`).replace("$SenderPronoun", CharacterPronoun(sender, "Possessive", false));
         const message = document.createElement("div");
@@ -4593,13 +6120,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
         button.innerHTML = getText("modal.button.show");
         text.classList.add("modal-prompt");
         button.classList.add("modal-button");
+        if (!data.Dictionary) return next(args);
         const messageData = data.Dictionary[0]["ThemedMessage"];
         const theme = messageData.Theme;
         const version = messageData.ThemeVersion;
         const settings = Player.Themed.GlobalModule;
         button.addEventListener("click", () => {
           if (!version || version !== Player.Themed.Version) {
-            sendLocalSmart("theme-not-up-to-date", "Theme sent by " + senderName + " is not up-to-date!");
+            sendLocalMessage("theme-not-up-to-date", `Theme sent by ${senderName} is not up-to-date!`);
             return;
           }
           useLgcModal(
@@ -4614,17 +6142,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
         message.append(text, button);
         ChatRoomAppendChat(message);
         ElementScrollToEnd("TextAreaChatLog");
+        return next(args);
       });
     }
     acceptShare(data, settings) {
       Player.Themed.ColorsModule = data;
       Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
-      settingsSave();
+      modStorage.save();
       getModule("ColorsModule").reloadTheme();
     }
     share(target) {
-      sendLocalSmart("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
-      sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`, target);
+      sendLocalMessage("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
+      sendActionMessage(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`, target);
       const packet = {
         Type: "Hidden",
         Content: "ThemedTheme",
@@ -4644,159 +6173,73 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_ShareModule, "ShareModule");
   var ShareModule = _ShareModule;
 
-  // src/Modules/Version.ts
-  init_define_LAST_COMMIT_HASH();
-  var _VersionModule = class _VersionModule extends BaseModule {
-    Load() {
-      hookFunction(
-        "ChatRoomSync",
-        0 /* Observe */,
-        (args, next) => {
-          next(args);
-          _VersionModule.sendNewVersionMessage();
-        },
-        4 /* Version */
-      );
+  // src/Migrators/DeeplibMigrator.ts
+  var _DeeplibMigrator = class _DeeplibMigrator extends BaseMigrator2 {
+    get MigrationVersion() {
+      return "1.6.0";
     }
-    static isNewVersion(current, candidate) {
-      if (current !== void 0) {
-        const CURRENT_ = current.split("."), CANDIDATE_ = candidate.split(".");
-        for (let i = 0; i < 3; i++) {
-          if (CURRENT_[i] === CANDIDATE_[i]) {
-            continue;
-          }
-          return CANDIDATE_[i] > CURRENT_[i];
-        }
-      }
-      if (current === void 0 || current === "" || !current) {
-        return true;
-      }
-      return false;
-    }
-    static async sendNewVersionMessage() {
-      if (PlayerStorage().GlobalModule.doShowNewVersionMessage && _VersionModule.isItNewVersion) {
-        const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/html/Changelog.html`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
-        sendLocalSmart("ThemedNewVersion", changelog);
-      }
-    }
-    static saveVersion() {
-      if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.6";
-      }
-    }
-    static loadVersion() {
-      if (PlayerStorage()?.Version) {
-        return PlayerStorage().Version;
-      }
-      return;
-    }
-    static checkNewVersion() {
-      const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.6")) {
-        _VersionModule.isItNewVersion = true;
-      }
-    }
-    static checkVersionMigration() {
-      const PreviousVersion = _VersionModule.loadVersion();
-      for (const migrator of _VersionModule.Migrators) {
-        if (_VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
-          migrator.Migrate();
-          conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
-        }
-      }
-    }
-    static check() {
-      _VersionModule.checkNewVersion();
-      _VersionModule.checkVersionMigration();
-      _VersionModule.saveVersion();
-      settingsSave();
-    }
-    static registerMigrator(migrator) {
-      _VersionModule.Migrators.push(migrator);
+    Migrate() {
+      Player.Themed.GlobalModule.modEnabled = Player.Themed.GlobalModule.themedEnabled;
+      delete Player.Themed.GlobalModule.themedEnabled;
+      return true;
     }
   };
-  __name(_VersionModule, "VersionModule");
-  __publicField(_VersionModule, "isItNewVersion", false);
-  __publicField(_VersionModule, "Migrators", []);
-  var VersionModule = _VersionModule;
+  __name(_DeeplibMigrator, "DeeplibMigrator");
+  var DeeplibMigrator = _DeeplibMigrator;
 
   // src/Themed.ts
-  function initWait() {
-    if (window.ThemedLoaded) return;
-    conLog("Init wait");
-    if (CurrentScreen == null || CurrentScreen === "Login") {
-      const cleanup = loadLoginOptions();
-      hookFunction("LoginResponse", 0, (args, next) => {
-        conDebug("Init! LoginResponse caught: ", args);
-        next(args);
-        const response = args[0];
-        if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
-          cleanup();
-          init();
+  var { sdk } = (() => {
+    const modules2 = [
+      new GUI({
+        ButtonText: "Themed",
+        Identifier: "Themed",
+        Image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/mod.png`
+      }),
+      new GlobalModule(),
+      new ColorsModule(),
+      new GuiRedrawModule(),
+      new IntegrationModule(),
+      new ProfilesModule(),
+      new CommandsModule(),
+      new ShareModule(),
+      new VersionModule()
+    ];
+    const migrators = [
+      new V140Migrator(),
+      new DeeplibMigrator()
+    ];
+    const initFunction = /* @__PURE__ */ __name(async () => {
+      unloadLoginOptions();
+      const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/html/Changelog.html`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
+      VersionModule.setNewVersionMessage(changelog);
+      _Color.composeRoot();
+      BcStyle.injectAll();
+    }, "initFunction");
+    return initMod({
+      initFunction,
+      beforeLogin: /* @__PURE__ */ __name(() => loadLoginOptions(), "beforeLogin"),
+      modInfo: {
+        info: {
+          name: "Themed",
+          fullName: "Themed",
+          version: MOD_VERSION_CAPTION
         }
-      });
-    } else {
-      conLog("Already logged in, init");
-      init();
-    }
-  }
-  __name(initWait, "initWait");
-  async function init() {
-    await Localization.load();
-    settingsLoad();
-    if (!initModules()) {
-      unload();
-      return;
-    }
-    VersionModule.registerMigrator(new V140Migrator());
-    VersionModule.check();
-    for (const m of modules()) {
-      if (m.defaultSettings && hasSetter(m, "defaultSettings"))
-        m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
-    }
-    _Color.composeRoot();
-    BcStyle.injectAll();
-    window.ThemedLoaded = true;
-    conLog(`Loaded! Version: ${MOD_VERSION_CAPTION}`);
-  }
-  __name(init, "init");
-  function initModules() {
-    registerModule(new GUI());
-    registerModule(new GlobalModule());
-    registerModule(new ColorsModule());
-    registerModule(new GuiRedrawModule());
-    registerModule(new IntegrationModule());
-    registerModule(new ProfilesModule());
-    registerModule(new CommandsModule());
-    registerModule(new ShareModule());
-    registerModule(new VersionModule());
-    for (const m of modules()) {
-      m.Init();
-    }
-    for (const m of modules()) {
-      m.Load();
-    }
-    for (const m of modules()) {
-      m.Run();
-    }
-    conLog("Modules Loaded.");
-    return true;
-  }
-  __name(initModules, "initModules");
-  function unload() {
-    unloadModules();
-    delete window.ThemedLoaded;
-    conLog("Unloaded.");
-    return true;
-  }
-  __name(unload, "unload");
-  function unloadModules() {
-    for (const m of modules()) {
-      m.Unload();
-    }
-  }
-  __name(unloadModules, "unloadModules");
-  initWait();
+      },
+      mainMenuOptions: {
+        importExportSubscreen: new GuiImportExport({
+          customFileExtension: ".tmd",
+          onImport() {
+            getModule("ColorsModule").reloadTheme();
+          }
+        }),
+        repoLink: "https://github.com/dDeepLb/Themed-BC",
+        wikiLink: "https://github.com/dDeepLb/Themed-BC/wiki"
+      },
+      modules: modules2,
+      migrators,
+      pathToTranslationsFolder: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/translations/`
+    });
+  })();
   return __toCommonJS(Themed_exports);
 })();
 //# sourceMappingURL=themed.js.map

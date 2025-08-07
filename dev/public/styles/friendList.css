@@ -7,46 +7,46 @@
 }
 
 #friend-list-beep-dialog {
-  background-color: color-mix(in srgb, var(--tmd-element) 80%, #ffffffaa 40%);
+  background-color: color-mix(in srgb, var(--tmd-element) 80%, rgba(255, 255, 255, 0.6666666667) 40%);
   color: var(--tmd-text);
 }
 
-#friend-list-subscreen,
-#friend-list-beep-dialog {
-  textarea {
-    background: var(--tmd-element);
-    color: var(--tmd-text);
-    border: 2px solid var(--tmd-accent);
-  }
-
-  input {
-    background: var(--tmd-element);
-    color: var(--tmd-text);
-    border: 2px solid var(--tmd-accent);
-  }
-
-  textarea:focus,
-  input:focus {
-    outline: var(--tmd-accent) solid 1px;
-  }
-
-  .button {
-    --button-color: var(--tmd-element);
-    --disabled-color: var(--tmd-element-disabled);
-    --hover-color: var(--tmd-element-hover);
-  }
-
-  .button-styling {
-    border-color: var(--tmd-accent);
-  }
-
-  .button-styling:hover {
-    border-color: var(--tmd-accent-hover);
-  }
-
-  .button-tooltip {
-    background-color: var(--tmd-element-hint);
-    color: var(--tmd-text);
-    border-color: var(--tmd-accent);
-  }
+#friend-list-subscreen textarea,
+#friend-list-beep-dialog textarea {
+  background: var(--tmd-element);
+  color: var(--tmd-text);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
 }
+#friend-list-subscreen input,
+#friend-list-beep-dialog input {
+  background: var(--tmd-element);
+  color: var(--tmd-text);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
+}
+#friend-list-subscreen textarea:focus,
+#friend-list-subscreen input:focus,
+#friend-list-beep-dialog textarea:focus,
+#friend-list-beep-dialog input:focus {
+  outline: var(--tmd-accent) solid 1px;
+}
+#friend-list-subscreen .button,
+#friend-list-beep-dialog .button {
+  --button-color: var(--tmd-element);
+  --disabled-color: var(--tmd-element-disabled);
+  --hover-color: var(--tmd-element-hover);
+}
+#friend-list-subscreen .button-styling,
+#friend-list-beep-dialog .button-styling {
+  border-color: var(--tmd-accent);
+}
+#friend-list-subscreen .button-styling:hover,
+#friend-list-beep-dialog .button-styling:hover {
+  border-color: var(--tmd-accent-hover);
+}
+#friend-list-subscreen .button-tooltip,
+#friend-list-beep-dialog .button-tooltip {
+  background-color: var(--tmd-element-hint);
+  color: var(--tmd-text);
+  border-color: var(--tmd-accent);
+}
+/*# sourceMappingURL=friendList.css.map */
