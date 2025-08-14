@@ -4801,7 +4801,7 @@ input[type=number] {
 
   // src/Utilities/ModDefinition.ts
   var ModName = "Themed";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"f21586e9"}` : "1.5.6";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"993e025f"}` : "1.5.6";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -6610,6 +6610,7 @@ input[type=number] {
         importExportSubscreen: new GuiImportExport({
           customFileExtension: ".tmd",
           onImport() {
+            modStorage.save();
             getModule("ColorsModule").reloadTheme();
           }
         }),
