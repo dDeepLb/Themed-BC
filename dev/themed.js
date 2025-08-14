@@ -4801,7 +4801,7 @@ input[type=number] {
 
   // src/Utilities/ModDefinition.ts
   var ModName = "Themed";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"fc6bec09"}` : "1.5.6";
+  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"fcb08a4f"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -6448,7 +6448,6 @@ input[type=number] {
     Migrate() {
       Player.Themed.GlobalModule.modEnabled = Player.Themed.GlobalModule.themedEnabled;
       delete Player.Themed.GlobalModule.themedEnabled;
-      return true;
     }
   };
   __name(_DeeplibMigrator, "DeeplibMigrator");
@@ -6507,27 +6506,23 @@ input[type=number] {
               id: "tmd-reset-buttons-container"
             },
             children: [
-              ElementButton.Create(
-                "tmd-reset-button",
-                () => {
+              advElement.createButton({
+                id: "tmd-reset-button",
+                onClick: /* @__PURE__ */ __name(() => {
                   this.confirm();
                   timer?.();
-                },
-                {
-                  label: `${getText("reset.button.confirm")} (${timeToConfirm})`,
-                  disabled: true
-                }
-              ),
-              ElementButton.Create(
-                "tmd-cancel-button",
-                () => {
+                }, "onClick"),
+                label: `${getText("reset.button.confirm")} (${timeToConfirm})`,
+                disabled: true
+              }),
+              advElement.createButton({
+                id: "tmd-cancel-button",
+                onClick: /* @__PURE__ */ __name(() => {
                   this.exit();
                   timer?.();
-                },
-                {
-                  label: getText("reset.button.cancel")
-                }
-              )
+                }, "onClick"),
+                label: getText("reset.button.cancel")
+              })
             ]
           }
         ],
