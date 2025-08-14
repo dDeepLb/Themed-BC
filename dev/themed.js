@@ -1626,7 +1626,7 @@ var Themed = (() => {
     sdk: () => sdk
   });
 
-  // node_modules/.pnpm/bc-deeplib@1.1.1_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  // node_modules/.pnpm/bc-deeplib@1.1.3_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
   var __create2 = Object.create;
   var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -1838,12 +1838,27 @@ One of mods you are using is using an old version of SDK. It will work for now b
   });
   var _a;
   var BaseModule = (_a = class {
+    /**
+     * An optional UI screen for configuring this module's settings.
+     * Subclasses can override this getter to provide a `Subscreen` instance.
+     * Modules with screens are automatically registered to the main menu.
+     */
     get settingsScreen() {
       return null;
     }
+    /**
+     * The storage key under which this module's settings will be saved.
+     * Defaults to the class name.
+     *
+     * Subclasses can override this if they require a custom storage key.
+     */
     get settingsStorage() {
       return this.constructor.name;
     }
+    /**
+     * Retrieves the current settings for this module.
+     * If no settings exist yet, registers default settings first.
+     */
     get settings() {
       const modName = ModSdkManager.ModInfo.name;
       if (!this.settingsStorage) return {};
@@ -1853,6 +1868,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       } else if (!modStorage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
       return modStorage.playerStorage[this.settingsStorage];
     }
+    /**
+     * Persists new settings for this module.
+     * Automatically initializes storage and defaults if they don't exist.
+     */
     set settings(value) {
       const modName = ModSdkManager.ModInfo.name;
       const storage = new ModStorage(modName);
@@ -1863,30 +1882,53 @@ One of mods you are using is using an old version of SDK. It will work for now b
       } else if (!storage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
       storage.playerStorage[this.settingsStorage] = value;
     }
+    /**
+     * Initializes the module.
+     * Default implementation registers default settings immediately.
+     * Subclasses can override to perform additional setup.
+     */
     init() {
       this.registerDefaultSettings();
     }
+    /**
+     * Registers default settings for this module in persistent storage.
+     * Only runs if a storage key and default settings are defined.
+     * 
+     * If some settings already exist, they will be merged with defaults.
+     * Existing values will NOT be overwritten.
+     */
     registerDefaultSettings() {
       const storage = this.settingsStorage;
       const defaults = this.defaultSettings;
       if (!storage || !defaults) return;
       Player[ModSdkManager.ModInfo.name][storage] = Object.assign(defaults, Player[ModSdkManager.ModInfo.name][storage] ?? {});
     }
+    /**
+     * Provides default settings for this module.
+     * Subclasses should override this getter to return their defaults.
+     */
     get defaultSettings() {
       return null;
     }
+    /**
+     * Called when the module is loaded into the system.
+     * Subclasses should override to perform data loading or initialization.
+     */
     load() {
     }
+    /**
+     * By default doesn't get called each frame, only once when the module is loaded.
+     * Subclasses can override to implement runtime logic.
+     */
     run() {
     }
+    /**
+     * Called when the module is being removed.
+     * Subclasses can override to perform cleanup or save final state.
+     */
     unload() {
     }
   }, __name(_a, "BaseModule"), __name2(_a, "BaseModule"), _a);
-  function getCurrentSubscreen() {
-    return GUI.instance && GUI.instance.currentSubscreen;
-  }
-  __name(getCurrentSubscreen, "getCurrentSubscreen");
-  __name2(getCurrentSubscreen, "getCurrentSubscreen");
   function setSubscreen(subscreen) {
     if (!GUI.instance) {
       throw new Error("Attempt to set subscreen before init");
@@ -1899,35 +1941,57 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var _a2;
   var BaseSubscreen = (_a2 = class {
     constructor(subscreenOptions, module) {
+      /** Runtime options for this subscreen. */
       __publicField(this, "options");
+      /** Reference to the module this subscreen belongs to. */
       __publicField(this, "module");
       if (module) this.module = module;
       this.options = subscreenOptions || {};
     }
+    /**
+     * Logical name of this subscreen.
+     * Used for localization key resolution in `load()`.
+     * Subclasses should override this with a meaningful identifier.
+     */
     get name() {
       return "UNKNOWN";
     }
+    /**
+     * Path to or Base64 data for an icon representing this subscreen.
+     * Defaults to empty string (no icon).
+     */
     get icon() {
       return "";
     }
-    get subscreenName() {
-      return this.constructor.name;
-    }
+    /** Changes the currently active subscreen. */
     setSubscreen(screen) {
       return setSubscreen(screen);
     }
+    /** Gets this subscreen's settings object from its parent module. */
     get settings() {
       return this.module.settings;
     }
+    /** Updates this subscreen's settings in its parent module. */
     set settings(value) {
       this.module.settings = value;
     }
+    /**
+     * Defines the paginated layout of the subscreen's settings UI.
+     * Each element in the outer array is a page; each page contains `SettingElement`s.
+     *
+     * Subclasses should override to define their actual UI structure.
+     */
     get pageStructure() {
       return [[]];
     }
+    /** Gets the currently visible page's settings elements. */
     get currentPage() {
       return this.pageStructure[Math.min(_a2.currentPage - 1, this.pageStructure.length - 1)];
     }
+    /**
+     * Changes the visible page in a multi-page subscreen.
+     * Automatically wraps around when going past the first or last page.
+     */
     changePage(page, setLabel) {
       const totalPages = this.pageStructure.length;
       if (page > totalPages) page = 1;
@@ -1936,6 +2000,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       this.managePageElementsVisibility();
       setLabel(`${_a2.currentPage} of ${this.pageStructure.length}`);
     }
+    /**
+     * Updates the DOM to show only elements belonging to the current page.
+     * All elements on other pages are hidden.
+     */
     managePageElementsVisibility() {
       this.pageStructure.forEach((item, ix) => {
         if (ix != _a2.currentPage - 1) {
@@ -1949,19 +2017,30 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
       });
     }
+    /**
+     * Called when this subscreen is first displayed.
+     * Builds the layout, initializes navigation, and renders all settings elements.
+     *
+     * Handles:
+     *  - Ensuring each module with a settings screen has its defaults loaded
+     *  - Creating navigation menus and back/next page controls
+     *  - Building and appending UI elements based on `pageStructure`
+     *  - Setting up exit button and tooltip
+     *  - Resetting to page 1
+     */
     load() {
       for (const module of modules()) {
         if (!module.settingsScreen) continue;
         if (!module.settings || !Object.keys(module.settings).length) module.registerDefaultSettings();
       }
       _a2.currentPage = 1;
-      layoutElement.createSubscreenDiv();
-      const settingsElement = layoutElement.createSettingsDiv();
-      layoutElement.appendToSubscreenDiv(settingsElement);
+      layout.createSubscreen();
+      const settingsElement = layout.createSettingsDiv();
+      layout.appendToSubscreen(settingsElement);
       const menu = ElementMenu.Create("deeplib-nav-menu", []);
-      layoutElement.appendToSubscreenDiv(menu);
+      layout.appendToSubscreen(menu);
       if (this.pageStructure.length > 1) {
-        const backNext = advancedElement.createBackNext({
+        const backNext = advElement.createBackNext({
           id: "deeplib-page-back-next",
           next: /* @__PURE__ */ __name2(({ setLabel }) => this.changePage(_a2.currentPage + 1, setLabel), "next"),
           initialNextTooltip: getText("settings.button.next_button_hint"),
@@ -1971,13 +2050,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
         });
         ElementMenu.PrependItem(menu, backNext);
       }
-      const subscreenTitle = advancedElement.createLabel({
+      const subscreenTitle = advElement.createLabel({
         id: "deeplib-subscreen-title",
         label: getText(`${this.name}.title`).replace("$ModVersion", ModSdkManager.ModInfo.version)
       });
-      layoutElement.appendToSubscreenDiv(subscreenTitle);
+      layout.appendToSubscreen(subscreenTitle);
       if (this.name !== "mainmenu") {
-        const exitButton = advancedElement.createButton({
+        const exitButton = advElement.createButton({
           id: "deeplib-exit",
           size: [90, 90],
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
@@ -1988,8 +2067,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
         });
         ElementMenu.AppendButton(menu, exitButton);
       }
-      const tooltip = advancedElement.createTooltip();
-      layoutElement.appendToSubscreenDiv(tooltip);
+      const tooltip = advElement.createTooltip();
+      layout.appendToSubscreen(tooltip);
       this.pageStructure.forEach(
         (s) => s.forEach((item) => {
           let element;
@@ -1997,42 +2076,59 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "text":
             case "number":
             case "color":
-              element = advancedElement.createInput(item);
+              element = advElement.createInput(item);
               break;
             case "checkbox":
-              element = advancedElement.createCheckbox(item);
+              element = advElement.createCheckbox(item);
               break;
             case "button":
-              element = advancedElement.createButton(item);
+              element = advElement.createButton(item);
               break;
             case "label":
-              element = advancedElement.createLabel(item);
+              element = advElement.createLabel(item);
               break;
             case "custom":
-              element = advancedElement.createCustom(item);
+              element = advElement.createCustom(item);
               break;
           }
-          layoutElement.appendToSettingsDiv(element);
+          layout.appendToSettingsDiv(element);
         })
       );
       this.managePageElementsVisibility();
       CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
     }
+    /**
+     * Called each frame while this subscreen is active.
+     * Default behavior draws the player's character if `drawCharacter` is enabled.
+     */
     run() {
       if (this.options.drawCharacter) DrawCharacter(Player, 50, 50, 0.9, false);
     }
+    /**
+     * Handles mouse clicks *on canvas* while the subscreen is active.
+     * Default implementation is empty — subclasses may override.
+     */
     click() {
     }
+    /**
+     * Exits this subscreen, returning to the main menu.
+     * Also saves persistent storage changes.
+     * Called after the `unload`.
+     */
     exit() {
       CharacterAppearanceForceUpCharacter = -1;
       CharacterLoadCanvas(Player);
       setSubscreen("mainmenu");
       modStorage.save();
     }
+    /**
+     * Called when the window is resized.
+     * Also checks for overflow in the settings div and applies styling accordingly.
+     */
     resize(onLoad = false) {
       const offset = this.options.drawCharacter ? 0 : 380;
-      const subscreen = layoutElement.getSubscreenDiv();
-      const settingsDiv = layoutElement.getSettingsDiv();
+      const subscreen = layout.getSubscreen();
+      const settingsDiv = layout.getSettingsDiv();
       ElementSetPosition(subscreen || "", 0, 0);
       ElementSetSize(subscreen || "", 2e3, 1e3);
       ElementSetFontSize(subscreen || "", "auto");
@@ -2047,8 +2143,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
       ElementSetSize("deeplib-subscreen-title", 800, 60);
       ElementSetPosition("deeplib-nav-menu", 1905, 75, "top-right");
       ElementSetSize("deeplib-nav-menu", null, 90);
-      ElementSetPosition(advancedElement.getTooltip() || "", 250, 850);
-      ElementSetSize(advancedElement.getTooltip() || "", 1500, 70);
+      ElementSetPosition(advElement.getTooltip() || "", 250, 850);
+      ElementSetSize(advElement.getTooltip() || "", 1500, 70);
       _a2.currentElements.forEach((item) => {
         const options2 = item[1];
         domUtil.autoSetPosition(options2.id, options2.position);
@@ -2062,11 +2158,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
       }
     }
+    /**
+     * Called when this subscreen is being removed.
+     * Resets the static element registry and removes the subscreen from the layout.
+     * Called before `exit`.
+     */
     unload() {
       _a2.currentElements = [];
-      layoutElement.removeSubscreenDiv();
+      layout.removeSubscreen();
     }
-  }, __name(_a2, "_BaseSubscreen"), __name2(_a2, "BaseSubscreen"), __publicField(_a2, "currentElements", []), __publicField(_a2, "currentPage", 1), _a2);
+  }, __name(_a2, "_BaseSubscreen"), __name2(_a2, "BaseSubscreen"), /** Global registry of currently rendered elements and their definitions. */
+  __publicField(_a2, "currentElements", []), /** Tracks the currently visible page number (1-based index). */
+  __publicField(_a2, "currentPage", 1), _a2);
   var styles_default = `.deeplib-subscreen,
 .deeplib-modal {
   --deeplib-background-color: var(--tmd-main, white);
@@ -2074,8 +2177,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
   --deeplib-element-hover-color: var(--tmd-element-hover, cyan);
   --deeplib-blocked-color: var(--tmd-blocked, red);
   --deeplib-text-color: var(--tmd-text, black);
-  --deeplib-icon-color: var(--tmd-accent, white);
-  --deeplib-icon-hover-color: var(--tmd-accent-hover, cyan);
+  --deeplib-icon-color: var(--tmd-accent, black);
+  --deeplib-icon-hover-color: var(--tmd-accent-hover, black);
   --deeplib-border-color: var(--tmd-accent, black);
   --deeplib-border-width: min(0.2vh, 0.1vw);
   --deeplib-border-width: min(0.2dvh, 0.1dvw);
@@ -2363,7 +2466,7 @@ input[type=number] {
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.5);
 }
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL0Rlby9OVk1FL1N0dWZmL0NvZGUvQkMvQkMtRGVlcExpYi9zcmMvc3R5bGVzIiwic291cmNlcyI6WyJ2YXJzLnNjc3MiLCJidXR0b25zLnNjc3MiLCJlbGVtZW50cy5zY3NzIiwiaW5wdXRzLnNjc3MiLCJtZXNzYWdlcy5zY3NzIiwibW9kYWwuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0VBRUU7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUNiRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFFQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUMzQ0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFNRTtFQUNBOztBQU5BO0VBQ0U7RUFDQTs7QUFPSjtFQUNFOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTs7O0FDdEZGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBSUY7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUM3REY7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FDN0JGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUdGO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7O0FBTVI7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5kZWVwbGliLXN1YnNjcmVlbixcbi5kZWVwbGliLW1vZGFsIHtcbiAgLS1kZWVwbGliLWJhY2tncm91bmQtY29sb3I6IHZhcigtLXRtZC1tYWluLCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudCwgd2hpdGUpO1xuICAtLWRlZXBsaWItZWxlbWVudC1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWVsZW1lbnQtaG92ZXIsIGN5YW4pO1xuICAtLWRlZXBsaWItYmxvY2tlZC1jb2xvcjogdmFyKC0tdG1kLWJsb2NrZWQsIHJlZCk7XG4gIC0tZGVlcGxpYi10ZXh0LWNvbG9yOiB2YXIoLS10bWQtdGV4dCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgd2hpdGUpO1xuICAtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWFjY2VudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcbn1cblxuLmRlZXBsaWItbWlzYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcbiAgZ2FwOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLXRvb2x0aXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLW92ZXJmbG93LWJveCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbn1cblxuLmRlZXBsaWItcHJldi1uZXh0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1idXR0b24ge1xuICAgICY6aG92ZXIge1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yKTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gICAgfVxuICAgIFxuICAgIGhlaWdodDogMTAwJTtcbiAgICBhc3BlY3QtcmF0aW86IDE7XG4gIH1cblxuICAuZGVlcGxpYi1wcmV2LW5leHQtbGFiZWwge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIH1cbn1cblxuI2RlZXBsaWItbmF2LW1lbnUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbn0iLCIuZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl06Y2hlY2tlZDo6YmVmb3JlIHtcbiAgd2lkdGg6IDgwJTtcbiAgaGVpZ2h0OiA4MCU7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lcjpoYXMobGFiZWwuZGVlcGxpYi10ZXh0KSB7XG4gIG1hcmdpbi10b3A6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXQge1xuICBmb250LXNpemU6IDAuNmVtO1xuICBwYWRkaW5nOiA1cHggMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIG91dGxpbmU6IG5vbmU7XG4gIHBhZGRpbmctbGVmdDogbWluKDF2aCwgMC41dncpO1xuICBwYWRkaW5nLXJpZ2h0OiBtaW4oMXZoLCAwLjV2dyk7XG4gIG1pbi1oZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjb2xvclwiXSB7XG4gIHBhZGRpbmc6IDBweDtcbiAgd2lkdGg6IG1pbig1dmgsIDIuNXZ3KTtcbiAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIGJvcmRlci1yYWRpdXM6IDBweDtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdOmRpc2FibGVkIHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJsb2NrZWQtY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcbn1cblxuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXG5pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuXG5pbnB1dFt0eXBlPW51bWJlcl0ge1xuICBhcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG4gIC1tb3otYXBwZWFyYW5jZTogdGV4dGZpZWxkO1xufVxuIiwiLmRlZXBsaWItaGlnaGxpZ2h0LXRleHQge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJnYigyMDMsIDE4NSwgMjMpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCAjNDQwMTcxO1xuICBjb2xvcjogIzExMTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMC42ZHZoLCAwLjNkdncpO1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2hpdGUtc3BhY2U6IG5vcm1hbDtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogIzExMTtcbn1cbiIsIi5kZWVwbGliLW1vZGFsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDEwJTtcbiAgbGVmdDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7XG4gIHotaW5kZXg6IDEwMDE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuNWVtO1xuICB3aWR0aDogbWF4KDUwZHZ3LCAyNWR2aCk7XG4gIGZvbnQtc2l6ZTogbWluKDRkdmgsIDJkdncpO1xuICBwYWRkaW5nOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjJkdmgsIDAuNmR2dyk7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuXG4gIC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXNpemU6IG1pbigyLjZkdmgsIDEuOGR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxuXG4gIGlucHV0LmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIG1heC13aWR0aDogbWF4KDUwZHZoLCAyNWR2dyk7XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1idXR0b24tY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbiAgICBnYXA6IDAuNWVtO1xuICAgIHdpZHRoOiAxMDAlO1xuXG4gICAgLmRlZXBsaWItYnV0dG9uIHtcbiAgICAgIGZvbnQtc2l6ZTogMC44ZW07XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgICBwYWRkaW5nOiBtaW4oMC40dmgsIDAuMnZ3KSBtaW4oMnZoLCAxdncpO1xuXG4gICAgICAuYnV0dG9uLWxhYmVsIHtcbiAgICAgICAgZGlzcGxheTogY29udGVudHM7XG4gICAgICB9XG4gICAgfVxuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL05WTUUvU3R1ZmYvQ29kZS9CQy9CQy1EZWVwTGliL3NyYy9zdHlsZXMiLCJzb3VyY2VzIjpbInZhcnMuc2NzcyIsImJ1dHRvbnMuc2NzcyIsImVsZW1lbnRzLnNjc3MiLCJpbnB1dHMuc2NzcyIsIm1lc3NhZ2VzLnNjc3MiLCJtb2RhbC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7RUFFRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQ2JGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUVBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQzNDRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQU1FO0VBQ0E7O0FBTkE7RUFDRTtFQUNBOztBQU9KO0VBQ0U7OztBQUlKO0VBQ0U7RUFDQTtFQUNBOzs7QUN0RkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFJRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQzdERjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUM3QkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBR0Y7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOzs7QUFNUjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmRlZXBsaWItc3Vic2NyZWVuLFxuLmRlZXBsaWItbW9kYWwge1xuICAtLWRlZXBsaWItYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tdG1kLW1haW4sIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yOiB2YXIoLS10bWQtYmxvY2tlZCwgcmVkKTtcbiAgLS1kZWVwbGliLXRleHQtY29sb3I6IHZhcigtLXRtZC10ZXh0LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LWhvdmVyLCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcbn1cblxuLmRlZXBsaWItbWlzYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcbiAgZ2FwOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLXRvb2x0aXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLW92ZXJmbG93LWJveCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbn1cblxuLmRlZXBsaWItcHJldi1uZXh0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1idXR0b24ge1xuICAgICY6aG92ZXIge1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yKTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gICAgfVxuICAgIFxuICAgIGhlaWdodDogMTAwJTtcbiAgICBhc3BlY3QtcmF0aW86IDE7XG4gIH1cblxuICAuZGVlcGxpYi1wcmV2LW5leHQtbGFiZWwge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIH1cbn1cblxuI2RlZXBsaWItbmF2LW1lbnUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbn0iLCIuZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl06Y2hlY2tlZDo6YmVmb3JlIHtcbiAgd2lkdGg6IDgwJTtcbiAgaGVpZ2h0OiA4MCU7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lcjpoYXMobGFiZWwuZGVlcGxpYi10ZXh0KSB7XG4gIG1hcmdpbi10b3A6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXQge1xuICBmb250LXNpemU6IDAuNmVtO1xuICBwYWRkaW5nOiA1cHggMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIG91dGxpbmU6IG5vbmU7XG4gIHBhZGRpbmctbGVmdDogbWluKDF2aCwgMC41dncpO1xuICBwYWRkaW5nLXJpZ2h0OiBtaW4oMXZoLCAwLjV2dyk7XG4gIG1pbi1oZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjb2xvclwiXSB7XG4gIHBhZGRpbmc6IDBweDtcbiAgd2lkdGg6IG1pbig1dmgsIDIuNXZ3KTtcbiAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIGJvcmRlci1yYWRpdXM6IDBweDtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdOmRpc2FibGVkIHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJsb2NrZWQtY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcbn1cblxuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXG5pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuXG5pbnB1dFt0eXBlPW51bWJlcl0ge1xuICBhcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG4gIC1tb3otYXBwZWFyYW5jZTogdGV4dGZpZWxkO1xufVxuIiwiLmRlZXBsaWItaGlnaGxpZ2h0LXRleHQge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJnYigyMDMsIDE4NSwgMjMpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCAjNDQwMTcxO1xuICBjb2xvcjogIzExMTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMC42ZHZoLCAwLjNkdncpO1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2hpdGUtc3BhY2U6IG5vcm1hbDtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogIzExMTtcbn1cbiIsIi5kZWVwbGliLW1vZGFsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDEwJTtcbiAgbGVmdDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7XG4gIHotaW5kZXg6IDEwMDE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuNWVtO1xuICB3aWR0aDogbWF4KDUwZHZ3LCAyNWR2aCk7XG4gIGZvbnQtc2l6ZTogbWluKDRkdmgsIDJkdncpO1xuICBwYWRkaW5nOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjJkdmgsIDAuNmR2dyk7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuXG4gIC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXNpemU6IG1pbigyLjZkdmgsIDEuOGR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxuXG4gIGlucHV0LmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIG1heC13aWR0aDogbWF4KDUwZHZoLCAyNWR2dyk7XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1idXR0b24tY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbiAgICBnYXA6IDAuNWVtO1xuICAgIHdpZHRoOiAxMDAlO1xuXG4gICAgLmRlZXBsaWItYnV0dG9uIHtcbiAgICAgIGZvbnQtc2l6ZTogMC44ZW07XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgICBwYWRkaW5nOiBtaW4oMC40dmgsIDAuMnZ3KSBtaW4oMnZoLCAxdncpO1xuXG4gICAgICAuYnV0dG9uLWxhYmVsIHtcbiAgICAgICAgZGlzcGxheTogY29udGVudHM7XG4gICAgICB9XG4gICAgfVxuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
   var modStorage;
   function initMod(options2) {
     const sdk2 = new ModSdkManager(options2.modInfo.info, options2.modInfo.options);
@@ -2396,11 +2499,7 @@ input[type=number] {
     const MOD_VERSION2 = ModSdkManager.ModInfo.version;
     if (window[MOD_NAME + "Loaded"]) return;
     modStorage.load();
-    if (options2.pathToTranslationsFolder) {
-      await Localization.init({
-        pathToTranslationsFolder: options2.pathToTranslationsFolder
-      });
-    }
+    await Localization.init(options2.translationOptions);
     if (options2.modules && !initModules(options2.modules)) {
       unloadMod();
       return;
@@ -2482,11 +2581,20 @@ input[type=number] {
   }, __name(_a3, "BaseMigrator2"), __name2(_a3, "BaseMigrator"), _a3);
   var _a4;
   var GUI = (_a4 = class extends BaseModule {
+    /** 
+     * Creates the GUI instance and initializes the main menu. 
+     * 
+     * @throws If another `GUI` instance already exists.
+     */
     constructor(modButtonOptions) {
       super();
+      /** All subscreens managed by this GUI, including the main menu and module settings screens. */
       __publicField(this, "_subscreens");
+      /** The mod's main menu screen. */
       __publicField(this, "_mainMenu");
+      /** The currently active subscreen, or `null` if none is active. */
       __publicField(this, "_currentSubscreen", null);
+      /** Options defining how the mod's settings button is displayed and behaves. */
       __publicField(this, "_modButtonOptions");
       if (_a4.instance) {
         throw new Error("Duplicate initialization");
@@ -2499,15 +2607,24 @@ input[type=number] {
       this._modButtonOptions = modButtonOptions;
       _a4.instance = this;
     }
+    /** Returns all registered subscreens. */
     get subscreens() {
       return this._subscreens;
     }
+    /** Returns the main menu subscreen instance. */
     get mainMenu() {
       return this._mainMenu;
     }
+    /** Returns the currently active subscreen. */
     get currentSubscreen() {
       return this._currentSubscreen;
     }
+    /**
+     * Sets the current subscreen.
+     * Accepts either a `BaseSubscreen` instance or the `name` of a subscreen.
+     *
+     * @throws If a string is provided but no subscreen with that name exists.
+     */
     set currentSubscreen(subscreen) {
       if (this._currentSubscreen) {
         this._currentSubscreen.unload();
@@ -2519,16 +2636,18 @@ input[type=number] {
       } else {
         this._currentSubscreen = subscreen;
       }
-      PreferenceMessage = "";
-      PreferencePageCurrent = 1;
       if (this._currentSubscreen) {
         this._currentSubscreen.load();
         this._currentSubscreen.resize(true);
       }
     }
-    get defaultSettings() {
-      return null;
-    }
+    /**
+     * Loads the GUI and registers the mod's settings button in the extensions menu.
+     *
+     * - Creates subscreens for each module's settings screen.
+     * - Registers lifecycle callbacks for subscreens events.
+     * - Sets up the main menu and its subscreens.
+     */
     load() {
       for (const module of modules()) {
         if (!module.settingsScreen) continue;
@@ -2539,41 +2658,45 @@ input[type=number] {
         Identifier: this._modButtonOptions.Identifier,
         ButtonText: this._modButtonOptions.ButtonText,
         Image: this._modButtonOptions.Image,
-        load: this._modButtonOptions.load || (() => {
+        load: /* @__PURE__ */ __name2(() => {
           setSubscreen(new MainMenu(this));
-        }),
-        run: this._modButtonOptions.run || (() => {
+        }, "load"),
+        run: /* @__PURE__ */ __name2(() => {
           if (this._currentSubscreen) {
-            MainCanvas.textAlign = "left";
             this._currentSubscreen.run();
-            MainCanvas.textAlign = "center";
             const newCanvasPosition = [MainCanvas.canvas.offsetLeft, MainCanvas.canvas.offsetTop, MainCanvas.canvas.clientWidth, MainCanvas.canvas.clientHeight];
             if (!CommonArraysEqual(newCanvasPosition, DrawCanvasPosition)) {
               DrawCanvasPosition = newCanvasPosition;
               this._currentSubscreen.resize(false);
             }
           }
-        }),
-        click: this._modButtonOptions.click || (() => {
+        }, "run"),
+        click: /* @__PURE__ */ __name2(() => {
           if (this._currentSubscreen) {
             this._currentSubscreen.click();
           }
-        }),
-        exit: this._modButtonOptions.exit || (() => {
+        }, "click"),
+        exit: /* @__PURE__ */ __name2(() => {
           if (this._currentSubscreen) {
             this._currentSubscreen.exit();
           }
-        }),
-        unload: this._modButtonOptions.unload || (() => {
+        }, "exit"),
+        unload: /* @__PURE__ */ __name2(() => {
           if (this._currentSubscreen) {
             this._currentSubscreen.unload();
           }
-        })
+        }, "unload")
       });
     }
-  }, __name(_a4, "_GUI"), __name2(_a4, "GUI"), __publicField(_a4, "instance", null), _a4);
+  }, __name(_a4, "_GUI"), __name2(_a4, "GUI"), /** The singleton instance of the GUI controller. */
+  __publicField(_a4, "instance", null), _a4);
   var _a5;
   var VersionModule = (_a5 = class extends BaseModule {
+    /**
+     * Initializes the module on load:
+     * - Stores the current mod version.
+     * - Hooks into `ChatRoomSync` to show a "new version" message when applicable.
+     */
     load() {
       _a5.Version = ModSdkManager.ModInfo.version;
       ModSdkManager.prototype.hookFunction(
@@ -2588,6 +2711,14 @@ input[type=number] {
         "VersionModule"
       );
     }
+    /**
+     * Checks if the stored version differs from the current version.
+     * If a new version is detected:
+     * - Flags the session as updated.
+     * - Runs applicable migrations.
+     * - Updates stored version in player data.
+     * - Saves `modStorage`.
+     */
     static checkVersionUpdate() {
       const PreviousVersion = _a5.loadVersion();
       const CurrentVersion = _a5.Version;
@@ -2598,6 +2729,10 @@ input[type=number] {
       }
       modStorage.save();
     }
+    /**
+     * Executes migrations for all registered migrators whose `MigrationVersion`
+     * is newer than the previously stored version.
+     */
     static checkVersionMigration() {
       const PreviousVersion = _a5.loadVersion();
       for (const migrator of _a5.Migrators) {
@@ -2607,16 +2742,27 @@ input[type=number] {
         }
       }
     }
+    /**
+     * Registers a new migrator for handling version-specific changes.
+     * Migrators are sorted by their `MigrationVersion` in ascending order.
+     */
     static registerMigrator(migrator) {
       _a5.Migrators.push(migrator);
       _a5.Migrators.sort((a, b) => a.MigrationVersion.localeCompare(b.MigrationVersion));
     }
+    /** Sets the message that will be displayed when a new version is detected. */
     static setNewVersionMessage(newVersionMessage) {
       _a5.NewVersionMessage = newVersionMessage;
     }
+    /** Sends the currently configured "new version" message to the local player. */
     static sendNewVersionMessage() {
       sendLocalMessage("deeplib-new-version", _a5.NewVersionMessage);
     }
+    /**
+     * Determines if a given `candidate` version is newer than the `current` version.
+     * 
+     * Version strings are expected in `MAJOR.MINOR.PATCH` format.
+     */
     static isNewVersion(current, candidate) {
       if (current !== void 0) {
         const CURRENT_ = current.split("."), CANDIDATE_ = candidate.split(".");
@@ -2632,15 +2778,21 @@ input[type=number] {
       }
       return false;
     }
+    /** Saves the current mod version into persistent player storage. */
     static saveVersion() {
       if (modStorage.playerStorage) {
         Player[ModSdkManager.ModInfo.name].Version = _a5.Version;
       }
     }
+    /** Loads the stored mod version from persistent player storage. */
     static loadVersion() {
       return modStorage.playerStorage?.Version;
     }
-  }, __name(_a5, "_VersionModule"), __name2(_a5, "VersionModule"), __publicField(_a5, "isItNewVersion", false), __publicField(_a5, "Version"), __publicField(_a5, "NewVersionMessage", ""), __publicField(_a5, "Migrators", []), _a5);
+  }, __name(_a5, "_VersionModule"), __name2(_a5, "VersionModule"), /** Whether the current session is running a new version compared to stored data */
+  __publicField(_a5, "isItNewVersion", false), /** The current mod version (retrieved from `ModSdkManager.ModInfo.version`) */
+  __publicField(_a5, "Version"), /** Message to display when a new version is detected */
+  __publicField(_a5, "NewVersionMessage", ""), /** List of registered migration handlers, sorted by version */
+  __publicField(_a5, "Migrators", []), _a5);
   var _a6;
   var GuiDebug = (_a6 = class extends BaseSubscreen {
     get name() {
@@ -2858,7 +3010,7 @@ input[type=number] {
   }
   __name(hasSetter, "hasSetter");
   __name2(hasSetter, "hasSetter");
-  var advancedElement = {
+  var advElement = {
     createButton: elementCreateButton,
     createCheckbox: elementCreateCheckbox,
     createInput: elementCreateInput,
@@ -3105,7 +3257,7 @@ input[type=number] {
         id: options2.id
       },
       children: [
-        advancedElement.createButton({
+        advElement.createButton({
           id: `deeplib-prev-next-${options2.id}-prev-button`,
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_left.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
@@ -3127,14 +3279,14 @@ input[type=number] {
             }
           }
         }),
-        advancedElement.createLabel({
+        advElement.createLabel({
           id: `${options2.id}-label`,
           label: options2.initialLabel,
           htmlOptions: {
             classList: ["deeplib-prev-next-label"]
           }
         }),
-        advancedElement.createButton({
+        advElement.createButton({
           id: `deeplib-prev-next-${options2.id}-next-button`,
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_right.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
@@ -3212,20 +3364,35 @@ input[type=number] {
         this.timeoutId = window.setTimeout(() => this.close("timeout"), opts.timeoutMs);
       }
     }
+    /**
+     * Displays the modal and resolves with the chosen action and input value.
+     */
     show() {
       return _a7.enqueue(this);
     }
+    /**
+     * Shows a simple alert modal with a single "OK" button.
+     */
     static async alert(msg, timeoutMs) {
       await new _a7({ prompt: msg, buttons: [{ action: "close", text: "OK" }], timeoutMs }).show();
     }
+    /**
+     * Shows a confirmation modal with "Cancel" and "OK" buttons.
+     * Returns true if "OK" is clicked.
+     */
     static async confirm(msg) {
       const [action] = await new _a7({ prompt: msg, buttons: [{ text: "Cancel", action: "cancel" }, { text: "OK", action: "ok" }] }).show();
       return action === "ok";
     }
+    /**
+     * Shows a prompt modal with an input field and "Submit"/"Cancel" buttons.
+     * Returns the input value if submitted, otherwise null.
+     */
     static async prompt(msg, defaultValue = "") {
       const [action, value] = await new _a7({ prompt: msg, timeoutMs: 0, input: { type: "input", defaultValue }, buttons: [{ text: "Cancel", action: "cancel" }, { text: "Submit", action: "submit" }] }).show();
       return action === "submit" ? value : null;
     }
+    /** Creates the input element for the modal, applying configuration and validation. */
     renderInput(cfg) {
       const el = document.createElement(cfg.type);
       el.classList.add("deeplib-modal-input");
@@ -3240,12 +3407,13 @@ input[type=number] {
       this.inputEl = el;
       return el;
     }
+    /** Creates modal action buttons from configuration. */
     renderButtons() {
       const container = document.createElement("div");
       container.classList.add("deeplib-modal-button-container");
       const btns = this.opts.buttons ? [...this.opts.buttons] : [];
       btns.forEach((b) => {
-        const btn = advancedElement.createButton({
+        const btn = advElement.createButton({
           label: b.text,
           id: `deeplib-modal-${b.action}`,
           disabled: b.disabled,
@@ -3255,6 +3423,7 @@ input[type=number] {
       });
       return container;
     }
+    /** Creates the modal backdrop blocker with optional click-to-close behavior. */
     createBlocker() {
       const blocker = document.createElement("div");
       blocker.classList.add("deeplib-modal-blocker");
@@ -3263,6 +3432,7 @@ input[type=number] {
         blocker.addEventListener("click", () => this.close("close"));
       return blocker;
     }
+    /** Implements a focus trap to keep keyboard navigation inside the modal. */
     setupFocusTrap() {
       const focusable = 'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])';
       const elements = Array.from(this.dialog.querySelectorAll(focusable));
@@ -3294,6 +3464,7 @@ input[type=number] {
         (this.inputEl || first)?.focus();
       });
     }
+    /** Closes the modal, cleans up DOM, resolves promise, and shows next queued modal. */
     close(action) {
       if (this.timeoutId) clearTimeout(this.timeoutId);
       this.dialog.close();
@@ -3320,8 +3491,9 @@ input[type=number] {
         _a7.processing = false;
       }
     }
-  }, __name(_a7, "_Modal"), __name2(_a7, "Modal"), __publicField(_a7, "queue", []), __publicField(_a7, "processing", false), _a7);
-  window.Modal = Modal;
+  }, __name(_a7, "_Modal"), __name2(_a7, "Modal"), /** Static modal queue. */
+  __publicField(_a7, "queue", []), /** Flag to indicate if a modal is currently being shown. */
+  __publicField(_a7, "processing", false), _a7);
   var _a8;
   var MainMenu = (_a8 = class extends BaseSubscreen {
     constructor(module) {
@@ -3338,7 +3510,7 @@ input[type=number] {
         return;
       }
       super.load();
-      const exitButton = advancedElement.createButton({
+      const exitButton = advElement.createButton({
         id: "exit",
         size: [90, 90],
         image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
@@ -3353,7 +3525,7 @@ input[type=number] {
       }
       for (const screen of this.subscreens) {
         if (screen.name == "mainmenu") continue;
-        const button = advancedElement.createButton({
+        const button = advElement.createButton({
           id: `${screen.name}-button`,
           image: screen.icon,
           label: getText(`mainmenu.button.${screen.name}`),
@@ -3362,12 +3534,12 @@ input[type=number] {
           }, "onClick"),
           size: [null, 90]
         });
-        layoutElement.appendToSettingsDiv(button);
+        layout.appendToSettingsDiv(button);
       }
-      const miscDiv = layoutElement.createMiscDiv();
-      layoutElement.appendToSubscreenDiv(miscDiv);
+      const miscDiv = layout.createMiscDiv();
+      layout.appendToSubscreen(miscDiv);
       if (_a8.options.wikiLink) {
-        const wikiButton = advancedElement.createButton({
+        const wikiButton = advElement.createButton({
           id: "deeplib-wiki-button",
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/notebook.svg`,
           label: getText("mainmenu.button.wiki"),
@@ -3376,10 +3548,10 @@ input[type=number] {
           }, "onClick"),
           size: [null, 80]
         });
-        layoutElement.appendToMiscDiv(wikiButton);
+        layout.appendToMiscDiv(wikiButton);
       }
       if (_a8.options.repoLink) {
-        const repoButton = advancedElement.createButton({
+        const repoButton = advElement.createButton({
           id: "deeplib-repo-button",
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/git.svg`,
           label: getText("mainmenu.button.repo"),
@@ -3388,10 +3560,10 @@ input[type=number] {
           }, "onClick"),
           size: [null, 80]
         });
-        layoutElement.appendToMiscDiv(repoButton);
+        layout.appendToMiscDiv(repoButton);
       }
       if (_a8.options.resetSubscreen) {
-        const resetButton = advancedElement.createButton({
+        const resetButton = advElement.createButton({
           id: "deeplib-reset-button",
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/trash_bin.svg`,
           label: getText("mainmenu.button.reset"),
@@ -3400,10 +3572,10 @@ input[type=number] {
           }, "onClick"),
           size: [null, 80]
         });
-        layoutElement.appendToMiscDiv(resetButton);
+        layout.appendToMiscDiv(resetButton);
       }
       if (_a8.options.importExportSubscreen) {
-        const importExportButton = advancedElement.createButton({
+        const importExportButton = advElement.createButton({
           id: "deeplib-import-export-button",
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/transfer.svg`,
           label: getText("mainmenu.button.import_export"),
@@ -3412,10 +3584,10 @@ input[type=number] {
           }, "onClick"),
           size: [null, 80]
         });
-        layoutElement.appendToMiscDiv(importExportButton);
+        layout.appendToMiscDiv(importExportButton);
       }
       if (false) {
-        const debugButton = advancedElement.createButton({
+        const debugButton = advElement.createButton({
           id: "deeplib-debug-button",
           image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/bug.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
@@ -3460,7 +3632,7 @@ input[type=number] {
     }
     load() {
       super.load();
-      const importFromFileButton = advancedElement.createButton({
+      const importFromFileButton = advElement.createButton({
         id: "deeplib-import-file-button",
         size: [600, 90],
         image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_import.svg`,
@@ -3469,8 +3641,8 @@ input[type=number] {
         }, "onClick"),
         label: getText("import-export.button.import_file")
       });
-      layoutElement.appendToSettingsDiv(importFromFileButton);
-      const exportToFileButton = advancedElement.createButton({
+      layout.appendToSettingsDiv(importFromFileButton);
+      const exportToFileButton = advElement.createButton({
         id: "deeplib-export-file-button",
         size: [600, 90],
         image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_export.svg`,
@@ -3479,8 +3651,8 @@ input[type=number] {
         }, "onClick"),
         label: getText("import-export.button.export_file")
       });
-      layoutElement.appendToSettingsDiv(exportToFileButton);
-      const importFromClipboardButton = advancedElement.createButton({
+      layout.appendToSettingsDiv(exportToFileButton);
+      const importFromClipboardButton = advElement.createButton({
         id: "deeplib-import-clipboard-button",
         size: [600, 90],
         image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_import.svg`,
@@ -3489,8 +3661,8 @@ input[type=number] {
         }, "onClick"),
         label: getText("import-export.button.import_clipboard")
       });
-      layoutElement.appendToSettingsDiv(importFromClipboardButton);
-      const exportToClipboardButton = advancedElement.createButton({
+      layout.appendToSettingsDiv(importFromClipboardButton);
+      const exportToClipboardButton = advElement.createButton({
         id: "deeplib-export-clipboard-button",
         size: [600, 90],
         image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_export.svg`,
@@ -3499,11 +3671,12 @@ input[type=number] {
         }, "onClick"),
         label: getText("import-export.button.export_clipboard")
       });
-      layoutElement.appendToSettingsDiv(exportToClipboardButton);
+      layout.appendToSettingsDiv(exportToClipboardButton);
     }
     resize() {
       super.resize();
     }
+    /** Exports the mod data using the specified method. */
     async dataExport(transferMethod) {
       try {
         const data = LZString.compressToBase64(JSON.stringify(modStorage.playerStorage));
@@ -3519,6 +3692,7 @@ input[type=number] {
         deepLibLogger.error(`Data export failed for ${ModSdkManager.ModInfo.name}.`, error);
       }
     }
+    /** Imports mod data using the specified method. */
     async dataImport(transferMethod) {
       try {
         let importedData = "";
@@ -3542,6 +3716,7 @@ input[type=number] {
         deepLibLogger.error(`Data import failed for ${ModSdkManager.ModInfo.name}.`, error);
       }
     }
+    /** Saves data to a file using the browser's save dialog. */
     async exportToFile(data, defaultFileName) {
       const CUSTOM_EXTENSION = this.importExportOptions.customFileExtension.startsWith(".") ? this.importExportOptions.customFileExtension : "." + this.importExportOptions.customFileExtension;
       const suggestedName = defaultFileName.endsWith(CUSTOM_EXTENSION) ? defaultFileName : defaultFileName + CUSTOM_EXTENSION;
@@ -3581,6 +3756,7 @@ input[type=number] {
         URL.revokeObjectURL(link.href);
       }
     }
+    /** Opens a file picker and reads the selected file's contents, importing the data. */
     async importFromFile() {
       const CUSTOM_EXTENSION = this.importExportOptions.customFileExtension.startsWith(".") ? this.importExportOptions.customFileExtension : "." + this.importExportOptions.customFileExtension;
       async function importFromFileInternal(file) {
@@ -3634,11 +3810,13 @@ input[type=number] {
         });
       }
     }
+    /** Copies the given data to the clipboard. */
     async exportToClipboard(data) {
       return navigator.clipboard.writeText(data).catch((error) => {
         throw new Error("Failed to copy data to clipboard." + error);
       });
     }
+    /** Prompts the user to enter data and returns it. */
     async importFromClipboard() {
       return Modal.prompt("Enter data to import").catch((error) => {
         throw new Error("Failed to read data from clipboard." + error);
@@ -3648,6 +3826,7 @@ input[type=number] {
   var _a10;
   var ModStorage = (_a10 = class {
     constructor(modName) {
+      /** The unique mod identifier used as key prefix in storage */
       __publicField(this, "modName");
       if (!_a10._instance) {
         _a10._instance = this;
@@ -3708,12 +3887,37 @@ input[type=number] {
     static dataCompress(object) {
       return LZString.compressToBase64(JSON.stringify(object));
     }
-  }, __name(_a10, "_ModStorage"), __name2(_a10, "ModStorage"), __publicField(_a10, "_instance", null), _a10);
+  }, __name(_a10, "_ModStorage"), __name2(_a10, "ModStorage"), /** Singleton instance of ModStorage */
+  __publicField(_a10, "_instance", null), _a10);
   var domUtil = {
+    /**
+     * Automatically sets the position of the element based on the given position.
+     * The position can be either a [x, y] tuple or a function returning such a tuple.
+     * If both x and y are defined, the element's position is updated accordingly.
+     */
     autoSetPosition,
+    /**
+     * Automatically sets the size of the element based on the given size.
+     * The size can be either a [width, height] tuple or a function returning such a tuple.
+     * If both width and height are defined, the element's size is updated accordingly.
+     */
     autoSetSize,
+    /**
+     * Hides the element by setting its CSS display property to 'none'.
+     * If the element cannot be found, the function does nothing.
+     */
     hide,
+    /**
+     * Unhides the element by clearing its CSS display property (sets it to '').
+     * If the element cannot be found, the function does nothing.
+     */
     unhide,
+    /**
+     * Checks if the element has overflow content.
+     * Returns an object indicating if there is any overflow,
+     * and specifically if there is vertical or horizontal overflow.
+     * Returns null if the element is not found.
+     */
     hasOverflow
   };
   function autoSetPosition(_, position) {
@@ -3773,11 +3977,11 @@ input[type=number] {
   }
   __name(hasOverflow, "hasOverflow");
   __name2(hasOverflow, "hasOverflow");
-  var layoutElement = {
-    createSubscreenDiv: elementCreateSubscreenDiv,
-    getSubscreenDiv: elementGetSubscreenDiv,
-    appendToSubscreenDiv: elementAppendToSubscreenDiv,
-    removeSubscreenDiv: elementRemoveSubscreenDiv,
+  var layout = {
+    createSubscreen: elementCreateSubscreenDiv,
+    getSubscreen: elementGetSubscreenDiv,
+    appendToSubscreen: elementAppendToSubscreenDiv,
+    removeSubscreen: elementRemoveSubscreenDiv,
     createSettingsDiv: elementCreateSettingsDiv,
     getSettingsDiv: elementGetSettingsDiv,
     appendToSettingsDiv: elementAppendToSettingsDiv,
@@ -3995,10 +4199,12 @@ input[type=number] {
   };
   var _a12;
   var ModSdkManager = (_a12 = class {
+    /** Registers a mod with the SDK and stores mod information. */
     constructor(info, options2) {
       _a12.SDK = bcModSdkRef.registerMod(info, options2);
       _a12.ModInfo = info;
     }
+    /** Retrieves or initializes patch data for a given target function. */
     initPatchableFunction(target) {
       let result = _a12.patchedFunctions.get(target);
       if (!result) {
@@ -4010,6 +4216,11 @@ input[type=number] {
       }
       return result;
     }
+    /**
+     * Hooks a function with a callback at a given priority. 
+     * 
+     * Prevents duplicate hooks.
+     */
     hookFunction(target, priority, hook, module = null) {
       const data = this.initPatchableFunction(target);
       if (data.hooks.some((h) => h.hook === hook)) {
@@ -4025,12 +4236,23 @@ input[type=number] {
       data.hooks.sort((a, b) => b.priority - a.priority);
       return removeCallback;
     }
+    /**
+     * Applies patches to a target function.
+     * 
+     * **This method is DANGEROUS** to use and has high potential to conflict with other mods.
+     */
     patchFunction(target, patches) {
       _a12.SDK?.patchFunction(target, patches);
     }
+    /**
+     * Removes all patches from a target function.
+     */
     unpatchFunction(target) {
       _a12.SDK?.removePatches(target);
     }
+    /**
+     * Removes all hooks associated with a specific module from a target function.
+     */
     removeHookByModule(target, module) {
       const data = this.initPatchableFunction(target);
       for (let i = data.hooks.length - 1; i >= 0; i--) {
@@ -4041,6 +4263,9 @@ input[type=number] {
       }
       return true;
     }
+    /**
+     * Removes all hooks associated with a specific module across all patched functions.
+     */
     removeAllHooksByModule(module) {
       for (const data of _a12.patchedFunctions.values()) {
         for (let i = data.hooks.length - 1; i >= 0; i--) {
@@ -4054,6 +4279,10 @@ input[type=number] {
     }
   }, __name(_a12, "_ModSdkManager"), __name2(_a12, "ModSdkManager"), __publicField(_a12, "SDK"), __publicField(_a12, "patchedFunctions", /* @__PURE__ */ new Map()), __publicField(_a12, "ModInfo"), _a12);
   var Style = {
+    /**
+     * Injects a CSS style block directly into the document head using a <style> tag.
+     * If a style element with the same `styleId` already exists, it won't inject again.
+     */
     injectInline(styleId, styleSource) {
       const isStyleLoaded = document.getElementById(styleId);
       if (isStyleLoaded) return;
@@ -4062,6 +4291,10 @@ input[type=number] {
       styleElement.appendChild(document.createTextNode(styleSource));
       document.head.appendChild(styleElement);
     },
+    /**
+     * Injects a CSS stylesheet link into the document head using a <link> tag.
+     * If a link element with the same `styleId` already exists, it won't inject again.
+     */
     injectEmbed(styleId, styleLink) {
       const isStyleLoaded = document.getElementById(styleId);
       if (isStyleLoaded) return;
@@ -4071,55 +4304,83 @@ input[type=number] {
       styleElement.href = styleLink;
       document.head.appendChild(styleElement);
     },
+    /**
+     * Removes a style element from the document head by its ID.
+     * Does nothing if the element is not found.
+     */
     eject(id) {
       const style = document.getElementById(id);
       if (!style) return;
       style.remove();
     },
+    /**
+     * Reloads an inline style by removing the existing style element (if any)
+     * and injecting the new styles inline again.
+     */
     reload(styleId, styleSource) {
       Style.eject(styleId);
       Style.injectInline(styleId, styleSource);
     },
+    /** Fetches the text content of a stylesheet or any resource at the given link. */
     async fetch(link) {
       return fetch(link).then((res) => res.text());
     }
   };
   var _a13;
   var Localization = (_a13 = class {
+    /** Initialize the localization system by loading translation files. */
     static async init(initOptions) {
       if (_a13.initialized) return;
       _a13.initialized = true;
-      _a13.PathToModTranslation = initOptions.pathToTranslationsFolder.endsWith("/") ? initOptions.pathToTranslationsFolder : initOptions.pathToTranslationsFolder + "/";
-      const lang = TranslationLanguage.toLowerCase();
+      _a13.PathToModTranslation = (() => {
+        if (!initOptions?.pathToTranslationsFolder) return void 0;
+        return initOptions.pathToTranslationsFolder.endsWith("/") ? initOptions.pathToTranslationsFolder : `${initOptions.pathToTranslationsFolder}/`;
+      })();
+      _a13.DefaultLanguage = initOptions?.defaultLanguage || _a13.DefaultLanguage;
+      const lang = initOptions?.fixedLanguage ? _a13.DefaultLanguage : TranslationLanguage.toLowerCase();
       const libTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, lang);
-      if (lang === "en") {
+      if (lang === _a13.DefaultLanguage) {
         _a13.LibTranslation = libTranslation;
       } else {
-        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, "en");
+        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, _a13.DefaultLanguage);
         _a13.LibTranslation = { ...fallbackTranslation, ...libTranslation };
       }
+      if (!_a13.PathToModTranslation) return;
       const modTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, lang);
-      if (lang === "en") {
+      if (lang === _a13.DefaultLanguage) {
         _a13.ModTranslation = modTranslation;
       } else {
-        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, "en");
+        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, _a13.DefaultLanguage);
         _a13.ModTranslation = { ...fallbackTranslation, ...modTranslation };
       }
     }
+    /** Get a translated string from mod translations by source tag. */
     static getTextMod(srcTag) {
       return _a13.ModTranslation?.[srcTag] || void 0;
     }
+    /** Get a translated string from library translations by source tag. */
     static getTextLib(srcTag) {
       return _a13.LibTranslation?.[srcTag] || void 0;
     }
+    /**
+     * Fetch and parse a language file from the given base URL and language code.
+     * Falls back to default language if the requested language file is unavailable.
+     */
     static async fetchLanguageFile(baseUrl, lang) {
       const response = await fetch(`${baseUrl}${lang}.lang`);
-      if (lang !== "en" && !response.ok) {
-        return this.fetchLanguageFile(baseUrl, "en");
+      if (lang !== _a13.DefaultLanguage && !response.ok) {
+        return this.fetchLanguageFile(baseUrl, _a13.DefaultLanguage);
+      }
+      if (!response.ok) {
+        return {};
       }
       const langFileContent = await response.text();
       return this.parseLanguageFile(langFileContent);
     }
+    /**
+     * Parse the raw content of a language file into a TranslationDict.
+     * Ignores empty lines and comments starting with '#'.
+     */
     static parseLanguageFile(content) {
       const translations = {};
       const lines = content.split("\n");
@@ -4131,12 +4392,18 @@ input[type=number] {
       }
       return translations;
     }
-  }, __name(_a13, "_Localization"), __name2(_a13, "Localization"), __publicField(_a13, "LibTranslation", {}), __publicField(_a13, "ModTranslation", {}), __publicField(_a13, "PathToModTranslation"), __publicField(_a13, "PathToLibTranslation", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_translations/`), __publicField(_a13, "initialized", false), _a13);
+  }, __name(_a13, "_Localization"), __name2(_a13, "Localization"), __publicField(_a13, "LibTranslation", {}), __publicField(_a13, "ModTranslation", {}), __publicField(_a13, "PathToModTranslation"), __publicField(_a13, "PathToLibTranslation", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_translations/`), __publicField(_a13, "DefaultLanguage", "en"), /** Flag to prevent re-initialization */
+  __publicField(_a13, "initialized", false), _a13);
   var getText = /* @__PURE__ */ __name2((srcTag) => {
     return Localization.getTextMod(srcTag) || Localization.getTextLib(srcTag) || srcTag;
   }, "getText");
 
   // src/Utilities/Data.ts
+  function settingsReset() {
+    modStorage.playerStorage = {};
+    modStorage.save();
+  }
+  __name(settingsReset, "settingsReset");
   function localSettingsLoad() {
     const data = modStorage.getLocalStorage("LocalData");
     if (!data) {
@@ -4456,7 +4723,7 @@ input[type=number] {
     }
     load() {
       super.load();
-      const typeToggleButton = advancedElement.createButton({
+      const typeToggleButton = advElement.createButton({
         id: "tmd-inputs-type-toggle",
         onClick: /* @__PURE__ */ __name(() => {
           this.pageStructure.forEach((page) => {
@@ -4534,7 +4801,7 @@ input[type=number] {
 
   // src/Utilities/ModDefinition.ts
   var ModName = "Themed";
-  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"081242b2"}` : "1.5.6";
+  var MOD_VERSION_CAPTION = true ? `${"1.5.6"} - ${"f21586e9"}` : "1.5.6";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5868,7 +6135,7 @@ input[type=number] {
         attributes: {
           id: "tmd-profiles-container"
         },
-        parent: layoutElement.getSubscreenDiv()
+        parent: layout.getSubscreen()
       });
       for (let i = 0; i < 3; i++) {
         const profileId = i + 1;
@@ -5880,7 +6147,7 @@ input[type=number] {
           },
           classList: ["tmd-profile"],
           children: [
-            advancedElement.createLabel({
+            advElement.createLabel({
               id: `tmd-profile-label-${profileId}`,
               label: profileName
             }),
@@ -5889,12 +6156,12 @@ input[type=number] {
               tag: "div",
               classList: ["tmd-profile-buttons"],
               children: [
-                advancedElement.createButton({
+                advElement.createButton({
                   id: `tmd-profiles-profile-save-${profileId}`,
                   onClick: /* @__PURE__ */ __name(() => this.handleProfilesSaving(profileId), "onClick"),
                   label: getText("profiles.button.save")
                 }),
-                advancedElement.createButton({
+                advElement.createButton({
                   id: `tmd-profiles-profile-load-${profileId}`,
                   onClick: /* @__PURE__ */ __name(() => this.handleProfilesLoading(profileId), "onClick"),
                   label: getText("profiles.button.load"),
@@ -5904,7 +6171,7 @@ input[type=number] {
                     }
                   }
                 }),
-                advancedElement.createButton({
+                advElement.createButton({
                   id: `tmd-profiles-profile-delete-${profileId}`,
                   onClick: /* @__PURE__ */ __name(() => this.handleProfilesDeleting(profileId), "onClick"),
                   label: getText("profiles.button.delete"),
@@ -6024,7 +6291,7 @@ input[type=number] {
           if (isBaseMode && !baseModeKey(key)) {
             return;
           }
-          return advancedElement.createButton({
+          return advElement.createButton({
             id: `tmd-profile-color-showcase-${profileId}-${key}`,
             tooltip: getText(`colors.setting.${key}.name`),
             htmlOptions: {
@@ -6187,6 +6454,120 @@ input[type=number] {
   __name(_DeeplibMigrator, "DeeplibMigrator");
   var DeeplibMigrator = _DeeplibMigrator;
 
+  // src/Screens/Reset.ts
+  var _GuiReset = class _GuiReset extends BaseSubscreen {
+    get name() {
+      return "reset";
+    }
+    load() {
+      super.load();
+      let timeToConfirm = 5;
+      ElementCreate({
+        tag: "div",
+        classList: ["tmd-reset-container"],
+        attributes: {
+          id: "tmd-reset-container"
+        },
+        children: [
+          advElement.createLabel({
+            id: "themed-reset-label-perma_reset_of_mod_data",
+            label: getText("reset.label.perma_reset_of_mod_data")
+          }),
+          {
+            tag: "br"
+          },
+          advElement.createLabel({
+            id: "themed-reset-label-warning",
+            label: getText("reset.label.warning")
+          }),
+          advElement.createLabel({
+            id: "themed-reset-label-if_u_confirm_perma_reset",
+            label: getText("reset.label.if_u_confirm_perma_reset")
+          }),
+          {
+            tag: "br"
+          },
+          advElement.createLabel({
+            id: "themed-reset-label-youll_able_to_use_mod",
+            label: getText("reset.label.youll_able_to_use_mod")
+          }),
+          {
+            tag: "br"
+          },
+          advElement.createLabel({
+            id: "themed-reset-label-action_cannot_be_undone",
+            label: getText("reset.label.action_cannot_be_undone")
+          }),
+          {
+            tag: "br"
+          },
+          {
+            tag: "div",
+            attributes: {
+              id: "tmd-reset-buttons-container"
+            },
+            children: [
+              ElementButton.Create(
+                "tmd-reset-button",
+                () => {
+                  this.confirm();
+                  timer?.();
+                },
+                {
+                  label: `${getText("reset.button.confirm")} (${timeToConfirm})`,
+                  disabled: true
+                }
+              ),
+              ElementButton.Create(
+                "tmd-cancel-button",
+                () => {
+                  this.exit();
+                  timer?.();
+                },
+                {
+                  label: getText("reset.button.cancel")
+                }
+              )
+            ]
+          }
+        ],
+        parent: layout.getSubscreen()
+      });
+      const timer = TimerCreate(() => {
+        timeToConfirm--;
+        const button = ElementWrap("tmd-reset-button");
+        const buttonLabel = button?.querySelector(".button-label");
+        if (buttonLabel) {
+          buttonLabel.textContent = `${getText("reset.button.confirm")} (${timeToConfirm})`;
+        }
+        if (timeToConfirm <= 0) {
+          if (button && buttonLabel) {
+            button.disabled = false;
+            buttonLabel.textContent = getText("reset.button.confirm");
+          }
+          timer();
+        }
+      }, 1e3, true, "universal");
+    }
+    resize(onLoad) {
+      super.resize(onLoad);
+      ElementSetPosition("tmd-reset-container", 500, 175, "top-left");
+      ElementSetSize("tmd-reset-container", 1e3, null);
+    }
+    confirm() {
+      settingsReset();
+      for (const module of modules()) {
+        module.registerDefaultSettings();
+      }
+      _Color.composeRoot();
+      BcStyle.reloadAll();
+      this.setSubscreen(null);
+      PreferenceSubscreenExtensionsClear();
+    }
+  };
+  __name(_GuiReset, "GuiReset");
+  var GuiReset = _GuiReset;
+
   // src/Themed.ts
   var { sdk } = (() => {
     const modules2 = [
@@ -6233,11 +6614,16 @@ input[type=number] {
           }
         }),
         repoLink: "https://github.com/dDeepLb/Themed-BC",
-        wikiLink: "https://github.com/dDeepLb/Themed-BC/wiki"
+        wikiLink: "https://github.com/dDeepLb/Themed-BC/wiki",
+        resetSubscreen: new GuiReset({
+          drawCharacter: false
+        })
       },
       modules: modules2,
       migrators,
-      pathToTranslationsFolder: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/translations/`
+      translationOptions: {
+        pathToTranslationsFolder: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/translations/`
+      }
     });
   })();
   return __toCommonJS(Themed_exports);

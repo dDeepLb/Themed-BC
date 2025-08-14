@@ -122,12 +122,6 @@ code {
   color: rgb(203, 185, 23);
 }
 
-#TextAreaChatLog[data-colortheme^=dark] div.ChatMessage.ThemedMessage {
-  background-color: var(--tmd-element, transparent);
-  border: min(0.2vh, 0.1vw) solid var(--tmd-accent, #440171);
-  color: var(--tmd-text, white);
-}
-
 #TextAreaChatLog div.ChatMessage.ThemedMessage {
   background-color: #eee;
   border: min(0.2vh, 0.1vw) solid #440171;
@@ -136,16 +130,44 @@ code {
   white-space: normal;
   color: #111;
 }
-
-#TextAreaChatLog[data-colortheme^=dark] a.ThemedText {
+#TextAreaChatLog div.ChatMessage.ThemedMessage a.ThemedText {
+  cursor: pointer;
+  font-weight: bold;
+  color: #111;
+}
+#TextAreaChatLog[data-colortheme^=dark] div.ChatMessage.ThemedMessage {
+  background-color: var(--tmd-element, transparent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent, #440171);
+  color: var(--tmd-text, white);
+}
+#TextAreaChatLog[data-colortheme^=dark] div.ChatMessage.ThemedMessage a.ThemedText {
   cursor: pointer;
   font-weight: bold;
   color: var(--tmd-text, white);
 }
 
-#TextAreaChatLog a.ThemedText {
-  cursor: pointer;
-  font-weight: bold;
-  color: #111;
+#deeplib-subscreen:has(#tmd-reset-container) #deeplib-subscreen-title,
+#deeplib-subscreen:has(#tmd-reset-container) #deeplib-exit {
+  display: none;
+}
+
+#tmd-reset-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+#tmd-reset-container #tmd-reset-buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: min(8dvh, 4dvw);
+}
+#tmd-reset-container #tmd-reset-buttons-container button {
+  height: 1.4em;
+  min-width: min(30vh, 15vw);
+}
+#tmd-reset-container #tmd-reset-buttons-container button .button-label {
+  display: contents;
 }
 /*# sourceMappingURL=themed.css.map */
