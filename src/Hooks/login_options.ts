@@ -1,7 +1,6 @@
 import { HookPriority, sdk, Style } from 'bc-deeplib/deeplib';
 import { LocalSettingsModel } from '../Models/local';
 import { localSettingsLoad, localSettingsSave } from '../Utilities/Data';
-import { ModSdkManager } from 'bc-deeplib/deeplib';
 
 const ids = {
   optionsOpen: 'tmd-login-options-open',
@@ -105,11 +104,11 @@ function patchLoginPage() {
   const loginOptions = window.ThemedLocalData.loginOptions;
 
   if (loginOptions.hideDummy) {
-    ModSdkManager.prototype.patchFunction('LoginRun', {
+    sdk.patchFunction('LoginRun', {
       'DrawCharacter(LoginCharacter, 1400, 100, 0.9);': '',
     });
 
-    ModSdkManager.prototype.patchFunction('LoginDoNextThankYou', {
+    sdk.patchFunction('LoginDoNextThankYou', {
       'CharacterRelease(LoginCharacter, false);': '',
       'CharacterAppearanceFullRandom(LoginCharacter);': '',
       'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': '',
@@ -118,21 +117,21 @@ function patchLoginPage() {
   }
 
   if (loginOptions.hideCredits) {
-    ModSdkManager.prototype.patchFunction('LoginRun', {
+    sdk.patchFunction('LoginRun', {
       'if (LoginCredits) LoginDrawCredits();': 'if (false) LoginDrawCredits();',
       'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': '',
       'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': '',
     });
 
-    ModSdkManager.prototype.patchFunction('LoginDoNextThankYou', {
+    sdk.patchFunction('LoginDoNextThankYou', {
       'LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)': '',
     });
   }
 }
 
 function unpatchLoginPage() {
-  ModSdkManager.prototype.unpatchFunction('LoginRun');
-  ModSdkManager.prototype.unpatchFunction('LoginDoNextThankYou');
+  sdk.unpatchFunction('LoginRun');
+  sdk.unpatchFunction('LoginDoNextThankYou');
 }
 
 function repatchLoginPage() {
