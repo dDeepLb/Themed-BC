@@ -58,7 +58,7 @@ function createUI() {
       id: ids.optionsSheet,
     },
     children: [
-      ElementCreate({
+      {
         tag: 'div',
         attributes: {
           id: ids.optionsContent
@@ -84,7 +84,7 @@ function createUI() {
             } as HTMLOptions<keyof HTMLElementTagNameMap>;
           })
         ]
-      }),
+      },
       ElementButton.Create(ids.optionsClose, () => optionsSheet.close(),
         {
           label: 'Close',
