@@ -1,4 +1,4 @@
-import { HookPriority, Style } from 'bc-deeplib/deeplib';
+import { HookPriority, sdk, Style } from 'bc-deeplib/deeplib';
 import { LocalSettingsModel } from '../Models/local';
 import { localSettingsLoad, localSettingsSave } from '../Utilities/Data';
 import { ModSdkManager } from 'bc-deeplib/deeplib';
@@ -23,21 +23,25 @@ export function loadLoginOptions() {
   Style.injectEmbed(ids.optionsStyle, `${PUBLIC_URL}/styles/login-options.css`);
   createUI();
 
-  ModSdkManager.prototype.hookFunction('LoginRun', HookPriority.Observe, (args, next) => {
+  const loginRunHook = sdk.hookFunction('LoginRun', HookPriority.Observe, (args, next) => {
     next(args);
 
     ElementSetPosition(ids.optionsOpen, 2000, 1000, 'bottom-right');
     ElementSetSize(ids.optionsOpen, 90, 90);
 
     ElementSetSize(ids.optionsSheet, 1000, 500);
-  }, 'LoginRun');
-}
+  });
+  
+  const loginExitHook = sdk.hookFunction('LoginUnload', HookPriority.Observe, (args, next) => {
+    loginExitHook();
+    loginRunHook();
 
-export function unloadLoginOptions() {
-  removeUI();
-  Style.eject(ids.optionsStyle);
-  ModSdkManager.prototype.removeHookByModule('LoginRun', 'LoginRun');
-  unpatchLoginPage();
+    removeUI();
+    Style.eject(ids.optionsStyle);
+    unpatchLoginPage();
+
+    return next(args);
+  });
 }
 
 function createUI() {

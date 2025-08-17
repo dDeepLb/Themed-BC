@@ -1,5 +1,5 @@
 import { BaseMigrator, BaseModule, getModule, GUI, GuiImportExport, initMod, modStorage, VersionModule } from 'bc-deeplib/deeplib';
-import { loadLoginOptions, unloadLoginOptions } from './Hooks/login_options';
+import { loadLoginOptions } from './Hooks/login_options';
 import { V140Migrator } from './Migrators/V140Migrator';
 import { ColorsModule } from './Modules/Colors';
 import { CommandsModule } from './Modules/Commands';
@@ -37,8 +37,6 @@ import { GuiReset } from './Screens/Reset';
   ];
 
   const initFunction = async () => {
-    unloadLoginOptions();
-
     const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`)
       .then((res) => res.text())
       .then((text) => text.replace(/\r\n/g, '\n'));
