@@ -1,76 +1,85 @@
 import { ColorsSettingsModel } from '../Models/Colors';
 import { ColorsModule } from './Colors';
 import { GlobalSettingsModel } from '../Models/Global';
-import { BaseModule, getModule, getText, HookPriority, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, modStorage } from 'bc-deeplib/deeplib';
-import { sdk } from '../Themed';
-import { useLgcModal } from '../Utilities/Other';
-
-type ThemedMessageDictionaryEntry = {
-  ThemedMessage: ThemedMessageModel;
-};
+import { advElement, BaseModule, EventChannel, getModule, getText, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, Modal, modStorage } from 'bc-deeplib/deeplib';
 
 interface ThemedMessageModel {
-  Theme: ColorsSettingsModel;
-  ThemeVersion: string;
+  Settings: GlobalSettingsModel,
+  Theme: ColorsSettingsModel,
+  ThemeVersion: string,
 }
 
-export class ShareModule extends BaseModule {
-  load(): void {
-    sdk.hookFunction('ChatRoomMessageProcessHidden', HookPriority.Observe, (args, next) => {
-      const [data, sender] = args;
+type Events = {
+  ThemedTheme: ThemedMessageModel;
+};
 
-      if (data.Content !== 'ThemedTheme') return next(args);
-      if (!sender.MemberNumber) return next(args);
+export class ShareModule extends BaseModule {
+  channel: EventChannel<Events, 'share'> | null = null;
+
+  load(): void {
+    this.channel = new EventChannel('share');
+
+    this.channel.registerListener('ThemedTheme', (data, sender) => {
+      const theme = data.Theme;
+      const version = data.ThemeVersion;
+      const settings = data.Settings;
 
       const senderName = CharacterNickname(sender);
       const prompt = getText('modal.prompt.share')
-        .replace('$Sender', `${senderName} (${data.Sender})`)
-        .replace('$SenderPronoun', CharacterPronoun(sender, 'Possessive', false));
+        .replace('$Sender', `${senderName} (${sender.MemberNumber})`)
+        .replace('$SenderPronoun', CharacterPronoun(sender, 'Possessive', false))
+        .split('<br>')
+        .map((str) => ({
+          tag: 'span',
+          children: [str]
+        }) as HTMLOptions<'span'>);
 
-      const message = document.createElement('div');
-      message.id = sender.MemberNumber.toString();
-      message.setAttribute('class', 'themed-chat-modal');
-      message.setAttribute('data-time', ChatRoomCurrentTime());
-      message.setAttribute('data-sender', sender.MemberNumber + '');
+      const shareNotification = getText('modal.prompt.chat_share_notification')
+        .replace('$Sender', `${senderName} (${sender.MemberNumber})`);
 
-      const text = document.createElement('div');
-      const button = document.createElement('div');
-
-      text.innerHTML = getText('modal.prompt.chat_share_notification').replace('$Sender', `${senderName} (${data.Sender})`);
-      button.innerHTML = getText('modal.button.show');
-
-      text.classList.add('modal-prompt');
-      button.classList.add('modal-button');
-
-      if (!data.Dictionary) return next(args);
-
-      const messageData = (data.Dictionary[0] as unknown as ThemedMessageDictionaryEntry)['ThemedMessage'];
-
-      const theme = messageData.Theme;
-      const version = messageData.ThemeVersion;
-      const settings = Player.Themed.GlobalModule;
-
-      button.addEventListener('click', () => {
-        if (!version || version !== Player.Themed.Version) {
-          messageSendLocal('theme-not-up-to-date', `Theme sent by ${senderName} is not up-to-date!`);
-          return;
-        }
-
-        useLgcModal(
-          prompt,
-          () => {
-            this.acceptShare(theme, settings);
+      const message = ElementCreate({
+        tag: 'div',
+        classList: ['themed-chat-modal'],
+        attributes: {
+          'data-time': ChatRoomCurrentTime(),
+          'data-sender': sender.MemberNumber?.toString(),
+          id: sender.MemberNumber?.toString()
+        },
+        children: [
+          {
+            tag: 'span',
+            classList: ['modal-prompt'],
+            children: [
+              shareNotification
+            ]
           },
-          () => { }
-        );
+          advElement.createButton({
+            id: ElementGenerateID(),
+            htmlOptions: {
+              button: {
+                classList: ['modal-button']
+              }
+            },
+            options: {
+              label: getText('modal.button.show'),
+            },
+            onClick: () => {
+              if (!version || version !== Player.Themed.Version) {
+                messageSendLocal('theme-not-up-to-date', `Theme sent by ${senderName} is not up-to-date!`);
+                return;
+              }
+
+              Modal.confirm(prompt).then((result) => {
+                if (result) {
+                  this.acceptShare(theme, settings);
+                }
+              });
+            },
+          })
+        ]
       });
 
-      message.append(text, button);
-
       ChatRoomAppendChat(message);
-      ElementScrollToEnd('TextAreaChatLog');
-
-      return next(args);
     });
   }
 
@@ -86,20 +95,10 @@ export class ShareModule extends BaseModule {
     messageSendLocal('theme-share', 'Shared theme with ' + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target) as Character) : 'everyone'));
     messageSendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, 'Possessive', false)} Themed theme!`, target);
 
-    const packet = <ServerChatRoomMessage><unknown>{
-      Type: 'Hidden',
-      Content: 'ThemedTheme',
-      Sender: Player.MemberNumber,
-      ...(target ? { Target: target } : {}),
-      Dictionary: [<ThemedMessageDictionaryEntry>{
-        ThemedMessage: {
-          ThemeVersion: Player.Themed.Version,
-          Theme: Player.Themed.ColorsModule,
-          Settings: Player.Themed.GlobalModule,
-        }
-      }]
-    };
-
-    ServerSend('ChatRoomChat', packet);
+    this.channel?.sendEvent('ThemedTheme', {
+      Theme: Player.Themed.ColorsModule,
+      Settings: Player.Themed.GlobalModule,
+      ThemeVersion: Player.Themed.Version
+    });
   }
 }

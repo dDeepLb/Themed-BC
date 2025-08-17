@@ -1,6 +1,7 @@
 .themed-modal,
 .themed-chat-modal {
-  padding: 5px;
+  padding: min(1vh, 0.5vw);
+  padding: min(1dvh, 0.5dvw);
 
   background-color: var(--tmd-element, white);
   color: var(--tmd-text, black);
@@ -39,12 +40,14 @@
 }
 
 .modal-button {
-  width: auto;
-  padding: 5px;
-
-  border: min(0.2vh, 0.1vw) solid var(--tmd-accent, black);
-  border-radius: 10px;
   transition: all 0.5s ease;
+  width: auto;
+  padding: min(0.6vh, 0.3vw) min(1vh, 0.5vw);
+
+  .button-label {
+    display: contents;
+    font-size: inherit;
+  }
 }
 
 .modal-button:hover {
