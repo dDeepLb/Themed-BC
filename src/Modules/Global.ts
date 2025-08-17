@@ -1,8 +1,7 @@
-import { BaseModule, HookPriority, Subscreen } from 'bc-deeplib/deeplib';
+import { BaseModule, HookPriority, sdk, Subscreen } from 'bc-deeplib/deeplib';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GuiGlobal } from '../Screens/Global';
 import { changeModColors } from '../Utilities/Integration';
-import { sdk } from '../Themed';
 import { ModuleCategory } from '../Utilities/ModDefinition';
 import { BcStyle } from '../Utilities/Style';
 

@@ -1,5 +1,5 @@
+import { sdk } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { sdk } from '../../Themed';
 import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDialogGetMenuButtonColor() {

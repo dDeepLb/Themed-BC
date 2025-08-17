@@ -1,4 +1,4 @@
-import { BaseModule, modStorage } from 'bc-deeplib/deeplib';
+import { BaseModule, modStorage, sdk } from 'bc-deeplib/deeplib';
 import { hookAppearanceGetPreviewImageColor } from '../Hooks/GuiRedraw/AppearanceGetPreviewImageColor';
 import { hookDialogGetMenuButtonColor } from '../Hooks/GuiRedraw/DialogGetMenuButtonColor';
 import { hookDrawBackNextButton } from '../Hooks/GuiRedraw/DrawBackNextButton';
@@ -13,7 +13,6 @@ import { hookDrawRoomBackground } from '../Hooks/GuiRedraw/DrawRoomBackground';
 import { hookDrawText } from '../Hooks/GuiRedraw/DrawText';
 import { hookDrawTextFit } from '../Hooks/GuiRedraw/DrawTextFit';
 import { hookDrawTextWrap } from '../Hooks/GuiRedraw/DrawTextWrap';
-import { sdk } from '../Themed';
 
 export const doRedraw = () => {
   return modStorage.playerStorage?.GlobalModule?.modEnabled && modStorage.playerStorage.GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== 'ClubCard';

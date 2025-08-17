@@ -1,6 +1,5 @@
-import { HookPriority } from 'bc-deeplib/deeplib';
+import { HookPriority, sdk } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
-import { sdk } from '../../Themed';
 import { plainColors } from '../../Utilities/Color';
 import { ModuleCategory } from '../../Utilities/ModDefinition';
 

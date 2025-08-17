@@ -14,7 +14,7 @@ import { BcStyle } from './Utilities/Style';
 import { DeeplibMigrator } from './Migrators/DeeplibMigrator';
 import { GuiReset } from './Screens/Reset';
 
-export const { sdk } = (() => {
+(() => {
   const modules: Array<BaseModule> = [
     new GUI({
       ButtonText: 'Themed',

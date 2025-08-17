@@ -1,7 +1,6 @@
-import { HookPriority } from 'bc-deeplib/deeplib';
+import { HookPriority, sdk } from 'bc-deeplib/deeplib';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { plainColors, specialColors } from '../../Utilities/Color';
-import { sdk } from '../../Themed';
 import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookAppearanceGetPreviewImageColor() {

@@ -2,8 +2,7 @@ import Color from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { plainColors } from '../../Utilities/Color';
 import { drawRect } from '../../Utilities/Drawing';
-import { HookPriority } from 'bc-deeplib/deeplib';
-import { sdk } from '../../Themed';
+import { HookPriority, sdk } from 'bc-deeplib/deeplib';
 import { ModuleCategory } from '../../Utilities/ModDefinition';
 
 export function hookDrawTextWrap() {
