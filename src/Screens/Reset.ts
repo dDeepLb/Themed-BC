@@ -63,7 +63,9 @@ export class GuiReset extends BaseSubscreen {
                 this.confirm();
                 timer?.();
               },
-              label: `${getText('reset.button.confirm')} (${timeToConfirm})`,
+              options: {
+                label: `${getText('reset.button.confirm')} (${timeToConfirm})`,
+              },
               disabled: true
             }),
             advElement.createButton({
@@ -72,7 +74,9 @@ export class GuiReset extends BaseSubscreen {
                 this.exit();
                 timer?.();
               },
-              label: getText('reset.button.cancel')
+              options: {
+                label: getText('reset.button.cancel')
+              }
             })
           ]
         }

@@ -54,28 +54,26 @@ export class GuiProfiles extends BaseSubscreen {
               advElement.createButton({
                 id: `tmd-profiles-profile-save-${profileId}`,
                 onClick: () => this.handleProfilesSaving(profileId),
-                label: getText('profiles.button.save'),
+                options: {
+                  label: getText('profiles.button.save'),
+                }
               }),
 
               advElement.createButton({
                 id: `tmd-profiles-profile-load-${profileId}`,
                 onClick: () => this.handleProfilesLoading(profileId),
-                label: getText('profiles.button.load'),
-                htmlOptions: {
-                  options: {
-                    disabled: !this.profileExists(profileId)
-                  }
+                options: {
+                  label: getText('profiles.button.load'),
+                  disabled: !this.profileExists(profileId)
                 }
               }),
 
               advElement.createButton({
                 id: `tmd-profiles-profile-delete-${profileId}`,
                 onClick: () => this.handleProfilesDeleting(profileId),
-                label: getText('profiles.button.delete'),
-                htmlOptions: {
-                  options: {
-                    disabled: !this.profileExists(profileId)
-                  }
+                options: {
+                  label: getText('profiles.button.delete'),
+                  disabled: !this.profileExists(profileId)
                 }
               }),
             ]
@@ -223,19 +221,17 @@ export class GuiProfiles extends BaseSubscreen {
 
           return advElement.createButton({
             id: `tmd-profile-color-showcase-${profileId}-${key}`,
-            tooltip: getText(`colors.setting.${key}.name`),
             htmlOptions: {
-              htmlOptions: {
-                button: {
-                  style: {
-                    '--background-color': value
-                  },
-                  classList: ['tmd-profile-color-showcase-button']
-                }
-              },
-              options: {
-                noStyling: true
+              button: {
+                style: {
+                  '--background-color': value
+                },
+                classList: ['tmd-profile-color-showcase-button']
               }
+            },
+            options: {
+              noStyling: true,
+              tooltip: getText(`colors.setting.${key}.name`),
             }
           });
         })

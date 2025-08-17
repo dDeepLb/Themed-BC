@@ -74,9 +74,11 @@ export class GuiColors extends BaseSubscreen {
         });
         this.resize();
       },
-      image: `${PUBLIC_URL}/images/refresh.svg`,
-      tooltip: getText('colors.button.change_input_type'),
       size: [90, 90],
+      options: {
+        image: `${PUBLIC_URL}/images/refresh.svg`,
+        tooltip: getText('colors.button.change_input_type'),
+      }
     });
 
     const menu = document.getElementById('deeplib-nav-menu');
