@@ -104,14 +104,14 @@ export class GuiProfiles extends BaseSubscreen {
       this.settings[profileId] = {} as ProfileEntryModel;
     }
 
-    this.settings[profileId] = {
+    this.settings[profileId] = CommonCloneDeep({
       name: name,
       data: {
         GlobalModule: storage.GlobalModule,
         ColorsModule: storage.ColorsModule,
         IntegrationModule: storage.IntegrationModule,
       },
-    };
+    });
 
     const display = name ? `"${name}"` : profileId;
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_saved')}`);
@@ -129,12 +129,12 @@ export class GuiProfiles extends BaseSubscreen {
 
     const data = modStorage.playerStorage.ProfilesModule[profileId].data;
 
-    Player[ModName] = {
+    Player[ModName] = CommonCloneDeep({
       ...Player[ModName],
       GlobalModule: data.GlobalModule,
       ColorsModule: data.ColorsModule,
       IntegrationModule: data.IntegrationModule,
-    };
+    });
 
     const name = this.settings[profileId].name;
     const display = name ? `"${name}"` : profileId;
