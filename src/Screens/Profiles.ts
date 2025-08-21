@@ -1,4 +1,4 @@
-import { advElement, BaseSubscreen, getModule, getText, layout, modStorage } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getModule, getText, layout, modStorage, Modal } from 'bc-deeplib/deeplib';
 import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
 import { conWarn } from '../Utilities/Console';
@@ -91,10 +91,10 @@ export class GuiProfiles extends BaseSubscreen {
     super.resize(onLoad);
   }
 
-  private handleProfilesSaving(profileId: number): void {
+  private async handleProfilesSaving(profileId: number): Promise<void> {
     if (!this.profileCanBeSaved(profileId)) return;
 
-    const name = prompt(getText('profiles.prompt'));
+    const name = await Modal.prompt(getText('profiles.prompt'));
     if (name === null) return;
 
     const storage = modStorage.playerStorage;
