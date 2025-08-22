@@ -11,10 +11,6 @@ var Themed = (() => {
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
-  var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
-  };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
       for (let key of __getOwnPropNames(from))
@@ -31,7 +27,6 @@ var Themed = (() => {
     isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
     mod
   ));
-  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
   // node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js
@@ -1620,13 +1615,7 @@ var Themed = (() => {
     }
   });
 
-  // src/Themed.ts
-  var Themed_exports = {};
-  __export(Themed_exports, {
-    sdk: () => sdk
-  });
-
-  // node_modules/.pnpm/bc-deeplib@1.1.3_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  // node_modules/.pnpm/bc-deeplib@1.2.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
   var __create2 = Object.create;
   var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -1988,6 +1977,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
     get currentPage() {
       return this.pageStructure[Math.min(_a2.currentPage - 1, this.pageStructure.length - 1)];
     }
+    getPageLabel() {
+      return CommonStringPartitionReplace(getText("settings.page.label"), {
+        $currentPage$: `${_a2.currentPage}`,
+        $totalPages$: `${this.pageStructure.length}`
+      }).join("");
+    }
     /**
      * Changes the visible page in a multi-page subscreen.
      * Automatically wraps around when going past the first or last page.
@@ -1998,7 +1993,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (page < 1) page = totalPages;
       _a2.currentPage = page;
       this.managePageElementsVisibility();
-      setLabel(`${_a2.currentPage} of ${this.pageStructure.length}`);
+      setLabel(this.getPageLabel());
     }
     /**
      * Updates the DOM to show only elements belonging to the current page.
@@ -2046,7 +2041,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           initialNextTooltip: getText("settings.button.next_button_hint"),
           back: /* @__PURE__ */ __name2(({ setLabel }) => this.changePage(_a2.currentPage - 1, setLabel), "back"),
           initialPrevTooltip: getText("settings.button.prev_button_hint"),
-          initialLabel: `${_a2.currentPage} of ${this.pageStructure.length}`
+          initialLabel: this.getPageLabel()
         });
         ElementMenu.PrependItem(menu, backNext);
       }
@@ -2059,11 +2054,13 @@ One of mods you are using is using an old version of SDK. It will work for now b
         const exitButton = advElement.createButton({
           id: "deeplib-exit",
           size: [90, 90],
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
             this.exit();
           }, "onClick"),
-          tooltip: getText("settings.button.back_button_hint")
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
+            tooltip: getText("settings.button.back_button_hint")
+          }
         });
         ElementMenu.AppendButton(menu, exitButton);
       }
@@ -2146,9 +2143,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       ElementSetPosition(advElement.getTooltip() || "", 250, 850);
       ElementSetSize(advElement.getTooltip() || "", 1500, 70);
       _a2.currentElements.forEach((item) => {
+        const element = item[0];
         const options2 = item[1];
-        domUtil.autoSetPosition(options2.id, options2.position);
-        domUtil.autoSetSize(options2.id, options2.size);
+        domUtil.autoSetPosition(options2.id ?? element.id, options2.position);
+        domUtil.autoSetSize(options2.id ?? element.id, options2.size);
       });
       if (settingsDiv) {
         if (domUtil.hasOverflow(settingsDiv)?.vertical) {
@@ -2175,6 +2173,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   --deeplib-background-color: var(--tmd-main, white);
   --deeplib-element-color: var(--tmd-element, white);
   --deeplib-element-hover-color: var(--tmd-element-hover, cyan);
+  --deeplib-accent-color: var(--tmd-accent, #FFFF88);
   --deeplib-blocked-color: var(--tmd-blocked, red);
   --deeplib-text-color: var(--tmd-text, black);
   --deeplib-icon-color: var(--tmd-accent, black);
@@ -2317,6 +2316,25 @@ One of mods you are using is using an old version of SDK. It will work for now b
   gap: min(2dvh, 1dvw);
 }
 
+#deeplib-storage-meter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--deeplib-element-color);
+  border: var(--deeplib-border-width) solid var(--deeplib-border-color);
+  border-radius: var(--deeplib-border-radius);
+  z-index: -1;
+}
+
+#deeplib-storage-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--deeplib-accent-color);
+}
+
 .deeplib-checkbox-container {
   display: flex;
   flex-direction: row;
@@ -2456,6 +2474,12 @@ input[type=number] {
 .deeplib-modal .deeplib-modal-button-container .deeplib-button .button-label {
   display: contents;
 }
+.deeplib-modal .deeplib-modal-prompt-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .deeplib-modal-blocker {
   z-index: 1000;
@@ -2466,17 +2490,18 @@ input[type=number] {
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.5);
 }
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL05WTUUvU3R1ZmYvQ29kZS9CQy9CQy1EZWVwTGliL3NyYy9zdHlsZXMiLCJzb3VyY2VzIjpbInZhcnMuc2NzcyIsImJ1dHRvbnMuc2NzcyIsImVsZW1lbnRzLnNjc3MiLCJpbnB1dHMuc2NzcyIsIm1lc3NhZ2VzLnNjc3MiLCJtb2RhbC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7RUFFRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQ2JGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUVBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQzNDRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQU1FO0VBQ0E7O0FBTkE7RUFDRTtFQUNBOztBQU9KO0VBQ0U7OztBQUlKO0VBQ0U7RUFDQTtFQUNBOzs7QUN0RkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFJRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQzdERjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUM3QkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBR0Y7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOzs7QUFNUjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmRlZXBsaWItc3Vic2NyZWVuLFxuLmRlZXBsaWItbW9kYWwge1xuICAtLWRlZXBsaWItYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tdG1kLW1haW4sIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yOiB2YXIoLS10bWQtYmxvY2tlZCwgcmVkKTtcbiAgLS1kZWVwbGliLXRleHQtY29sb3I6IHZhcigtLXRtZC10ZXh0LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LWhvdmVyLCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcbn1cblxuLmRlZXBsaWItbWlzYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcbiAgZ2FwOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLXRvb2x0aXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLW92ZXJmbG93LWJveCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbn1cblxuLmRlZXBsaWItcHJldi1uZXh0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1idXR0b24ge1xuICAgICY6aG92ZXIge1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yKTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gICAgfVxuICAgIFxuICAgIGhlaWdodDogMTAwJTtcbiAgICBhc3BlY3QtcmF0aW86IDE7XG4gIH1cblxuICAuZGVlcGxpYi1wcmV2LW5leHQtbGFiZWwge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIH1cbn1cblxuI2RlZXBsaWItbmF2LW1lbnUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbn0iLCIuZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl06Y2hlY2tlZDo6YmVmb3JlIHtcbiAgd2lkdGg6IDgwJTtcbiAgaGVpZ2h0OiA4MCU7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lcjpoYXMobGFiZWwuZGVlcGxpYi10ZXh0KSB7XG4gIG1hcmdpbi10b3A6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXQge1xuICBmb250LXNpemU6IDAuNmVtO1xuICBwYWRkaW5nOiA1cHggMDtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIG91dGxpbmU6IG5vbmU7XG4gIHBhZGRpbmctbGVmdDogbWluKDF2aCwgMC41dncpO1xuICBwYWRkaW5nLXJpZ2h0OiBtaW4oMXZoLCAwLjV2dyk7XG4gIG1pbi1oZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjb2xvclwiXSB7XG4gIHBhZGRpbmc6IDBweDtcbiAgd2lkdGg6IG1pbig1dmgsIDIuNXZ3KTtcbiAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIGJvcmRlci1yYWRpdXM6IDBweDtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdOmRpc2FibGVkIHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJsb2NrZWQtY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcbn1cblxuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXG5pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuXG5pbnB1dFt0eXBlPW51bWJlcl0ge1xuICBhcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG4gIC1tb3otYXBwZWFyYW5jZTogdGV4dGZpZWxkO1xufVxuIiwiLmRlZXBsaWItaGlnaGxpZ2h0LXRleHQge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJnYigyMDMsIDE4NSwgMjMpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCAjNDQwMTcxO1xuICBjb2xvcjogIzExMTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMC42ZHZoLCAwLjNkdncpO1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2hpdGUtc3BhY2U6IG5vcm1hbDtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogIzExMTtcbn1cbiIsIi5kZWVwbGliLW1vZGFsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDEwJTtcbiAgbGVmdDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7XG4gIHotaW5kZXg6IDEwMDE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuNWVtO1xuICB3aWR0aDogbWF4KDUwZHZ3LCAyNWR2aCk7XG4gIGZvbnQtc2l6ZTogbWluKDRkdmgsIDJkdncpO1xuICBwYWRkaW5nOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjJkdmgsIDAuNmR2dyk7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuXG4gIC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXNpemU6IG1pbigyLjZkdmgsIDEuOGR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxuXG4gIGlucHV0LmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIG1heC13aWR0aDogbWF4KDUwZHZoLCAyNWR2dyk7XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1idXR0b24tY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbiAgICBnYXA6IDAuNWVtO1xuICAgIHdpZHRoOiAxMDAlO1xuXG4gICAgLmRlZXBsaWItYnV0dG9uIHtcbiAgICAgIGZvbnQtc2l6ZTogMC44ZW07XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgICBwYWRkaW5nOiBtaW4oMC40dmgsIDAuMnZ3KSBtaW4oMnZoLCAxdncpO1xuXG4gICAgICAuYnV0dG9uLWxhYmVsIHtcbiAgICAgICAgZGlzcGxheTogY29udGVudHM7XG4gICAgICB9XG4gICAgfVxuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL05WTUUvU3R1ZmYvQ29kZS9CQy9CQy1EZWVwTGliL3NyYy9zdHlsZXMiLCJzb3VyY2VzIjpbInZhcnMuc2NzcyIsImJ1dHRvbnMuc2NzcyIsImVsZW1lbnRzLnNjc3MiLCJpbnB1dHMuc2NzcyIsIm1lc3NhZ2VzLnNjc3MiLCJtb2RhbC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7RUFFRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FDZEY7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBRUE7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FDM0NGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBTUU7RUFDQTs7QUFOQTtFQUNFO0VBQ0E7O0FBT0o7RUFDRTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUN6R0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFJRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQzdERjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUM3QkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBR0Y7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUtOO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0EiLCJzb3VyY2VzQ29udGVudCI6WyIuZGVlcGxpYi1zdWJzY3JlZW4sXG4uZGVlcGxpYi1tb2RhbCB7XG4gIC0tZGVlcGxpYi1iYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS10bWQtbWFpbiwgd2hpdGUpO1xuICAtLWRlZXBsaWItZWxlbWVudC1jb2xvcjogdmFyKC0tdG1kLWVsZW1lbnQsIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtaG92ZXItY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LWhvdmVyLCBjeWFuKTtcbiAgLS1kZWVwbGliLWFjY2VudC1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgI0ZGRkY4OCk7XG4gIC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yOiB2YXIoLS10bWQtYmxvY2tlZCwgcmVkKTtcbiAgLS1kZWVwbGliLXRleHQtY29sb3I6IHZhcigtLXRtZC10ZXh0LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LWhvdmVyLCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG4gIG92ZXJmbG93LXk6IHNjcm9sbDtcbn1cblxuLmRlZXBsaWItbWlzYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcbiAgZ2FwOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLXRvb2x0aXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLW92ZXJmbG93LWJveCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbn1cblxuLmRlZXBsaWItcHJldi1uZXh0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1idXR0b24ge1xuICAgICY6aG92ZXIge1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yKTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gICAgfVxuICAgIFxuICAgIGhlaWdodDogMTAwJTtcbiAgICBhc3BlY3QtcmF0aW86IDE7XG4gIH1cblxuICAuZGVlcGxpYi1wcmV2LW5leHQtbGFiZWwge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIH1cbn1cblxuI2RlZXBsaWItbmF2LW1lbnUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbn1cblxuI2RlZXBsaWItc3RvcmFnZS1tZXRlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJvcmRlci13aWR0aCkgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiB2YXIoLS1kZWVwbGliLWJvcmRlci1yYWRpdXMpO1xuICB6LWluZGV4OiAtMTtcbn1cblxuI2RlZXBsaWItc3RvcmFnZS1iYXIge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAwJTtcbiAgYmFja2dyb3VuZDogdmFyKC0tZGVlcGxpYi1hY2NlbnQtY29sb3IpO1xufVxuIiwiLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjNlbTtcbn1cblxuLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXQge1xuICB3aWR0aDogbWluKDV2aCwgMi41dncpO1xuICBoZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbn1cblxuLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNoZWNrYm94XCJdOmNoZWNrZWQ6OmJlZm9yZSB7XG4gIHdpZHRoOiA4MCU7XG4gIGhlaWdodDogODAlO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXI6aGFzKGxhYmVsLmRlZXBsaWItdGV4dCkge1xuICBtYXJnaW4tdG9wOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0IHtcbiAgZm9udC1zaXplOiAwLjZlbTtcbiAgcGFkZGluZzogNXB4IDA7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xuICBvdXRsaW5lOiBub25lO1xuICBwYWRkaW5nLWxlZnQ6IG1pbigxdmgsIDAuNXZ3KTtcbiAgcGFkZGluZy1yaWdodDogbWluKDF2aCwgMC41dncpO1xuICBtaW4taGVpZ2h0OiBtaW4oNWR2aCwgMi41ZHZ3KTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbn1cblxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY29sb3JcIl0ge1xuICBwYWRkaW5nOiAwcHg7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICBib3JkZXItcmFkaXVzOiAwcHg7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjb2xvclwiXTpkaXNhYmxlZCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yKSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci13aWR0aCk7XG4gIGN1cnNvcjogbm90LWFsbG93ZWQ7XG59XG5cbmlucHV0Ojotd2Via2l0LW91dGVyLXNwaW4tYnV0dG9uLFxuaW5wdXQ6Oi13ZWJraXQtaW5uZXItc3Bpbi1idXR0b24ge1xuICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XG4gIG1hcmdpbjogMDtcbn1cblxuaW5wdXRbdHlwZT1udW1iZXJdIHtcbiAgYXBwZWFyYW5jZTogdGV4dGZpZWxkO1xuICAtbW96LWFwcGVhcmFuY2U6IHRleHRmaWVsZDtcbn1cbiIsIi5kZWVwbGliLWhpZ2hsaWdodC10ZXh0IHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiByZ2IoMjAzLCAxODUsIDIzKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlLFxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsyJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2Uge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgIzQ0MDE3MTtcbiAgY29sb3I6ICMxMTE7XG4gIHBhZGRpbmctbGVmdDogbWluKDAuNmR2aCwgMC4zZHZ3KTtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdoaXRlLXNwYWNlOiBub3JtYWw7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhLFxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsyJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhIHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6ICMxMTE7XG59XG4iLCIuZGVlcGxpYi1tb2RhbCB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgdG9wOiAxMCU7XG4gIGxlZnQ6IDUwJTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpO1xuICB6LWluZGV4OiAxMDAxO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjVlbTtcbiAgd2lkdGg6IG1heCg1MGR2dywgMjVkdmgpO1xuICBmb250LXNpemU6IG1pbig0ZHZoLCAyZHZ3KTtcbiAgcGFkZGluZzogbWluKDJkdmgsIDFkdncpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4yZHZoLCAwLjZkdncpO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcblxuICAuZGVlcGxpYi1tb2RhbC1pbnB1dCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZm9udC1zaXplOiBtaW4oMi42ZHZoLCAxLjhkdncpO1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gICAgcGFkZGluZzogbWluKDFkdmgsIDAuNWR2dyk7XG4gIH1cblxuICBpbnB1dC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICBtYXgtd2lkdGg6IG1heCg1MGR2aCwgMjVkdncpO1xuICB9XG5cbiAgLmRlZXBsaWItbW9kYWwtYnV0dG9uLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gICAgZ2FwOiAwLjVlbTtcbiAgICB3aWR0aDogMTAwJTtcblxuICAgIC5kZWVwbGliLWJ1dHRvbiB7XG4gICAgICBmb250LXNpemU6IDAuOGVtO1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgcGFkZGluZzogbWluKDAuNHZoLCAwLjJ2dykgbWluKDJ2aCwgMXZ3KTtcblxuICAgICAgLmJ1dHRvbi1sYWJlbCB7XG4gICAgICAgIGRpc3BsYXk6IGNvbnRlbnRzO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIC5kZWVwbGliLW1vZGFsLXByb21wdC1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
   var modStorage;
+  var sdk;
   function initMod(options2) {
-    const sdk2 = new ModSdkManager(options2.modInfo.info, options2.modInfo.options);
+    sdk = new ModSdkManager(options2.modInfo.info, options2.modInfo.options);
     const MOD_NAME = ModSdkManager.ModInfo.name;
     modStorage = new ModStorage(ModSdkManager.ModInfo.name);
     Style.injectInline("deeplib-style", styles_default);
     deepLibLogger.debug(`Init wait for ${MOD_NAME}`);
     if (CurrentScreen == null || CurrentScreen === "Login") {
       options2.beforeLogin?.();
-      const removeHook = sdk2.hookFunction("LoginResponse", 0, (args, next) => {
+      const removeHook = sdk.hookFunction("LoginResponse", 0, (args, next) => {
         deepLibLogger.debug(`Init for ${MOD_NAME}! LoginResponse caught: `, args);
         next(args);
         const response = args[0];
@@ -2490,7 +2515,6 @@ input[type=number] {
       deepLibLogger.debug(`Already logged in, initing ${MOD_NAME}`);
       init(options2);
     }
-    return { sdk: sdk2 };
   }
   __name(initMod, "initMod");
   __name2(initMod, "initMod");
@@ -3010,6 +3034,7 @@ input[type=number] {
   }
   __name(hasSetter, "hasSetter");
   __name2(hasSetter, "hasSetter");
+  var byteToKB = /* @__PURE__ */ __name2((nByte) => Math.round(nByte / 100) / 10, "byteToKB");
   var advElement = {
     createButton: elementCreateButton,
     createCheckbox: elementCreateCheckbox,
@@ -3022,19 +3047,23 @@ input[type=number] {
     createBackNext: elementPrevNext
   };
   function elementCreateButton(options2) {
+    options2.id ?? (options2.id = ElementGenerateID());
     const elem = document.getElementById(options2.id);
     if (elem) return elem;
     options2.type = "button";
+    let image = void 0;
+    if (options2.options?.image) {
+      image = options2.options.image;
+      options2.options.image = void 0;
+    }
     const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
     const button = ElementButton.Create(
-      options2.htmlOptions?.id ?? options2.id,
-      options2.htmlOptions?.onClick ?? options2?.onClick ?? (() => {
+      options2.id,
+      options2?.onClick ?? (() => {
       }),
       deepMerge({
-        tooltip: options2.tooltip,
-        label: options2.label,
         labelPosition: "center"
-      }, options2.htmlOptions?.options),
+      }, options2.options),
       deepMerge({
         button: {
           classList: ["deeplib-button"],
@@ -3042,7 +3071,7 @@ input[type=number] {
             disabled
           },
           children: [
-            options2.image ? {
+            image ? {
               tag: "img",
               attributes: {
                 id: `${options2.id}-image`,
@@ -3053,12 +3082,12 @@ input[type=number] {
                 // 1x1 transparent image to get rid of broken image
               },
               style: {
-                "--image": `url("${options2.image}")`
+                "--image": `url("${image}")`
               }
             } : void 0
           ]
         }
-      }, options2.htmlOptions?.htmlOptions ?? {})
+      }, options2.htmlOptions ?? {})
     );
     BaseSubscreen.currentElements.push([button, options2]);
     return button;
@@ -3259,7 +3288,6 @@ input[type=number] {
       children: [
         advElement.createButton({
           id: `deeplib-prev-next-${options2.id}-prev-button`,
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_left.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
             options2.back({
               setLabel,
@@ -3267,16 +3295,15 @@ input[type=number] {
               setNextTooltip
             });
           }, "onClick"),
-          tooltip: options2.initialPrevTooltip,
           htmlOptions: {
-            htmlOptions: {
-              button: {
-                classList: ["deeplib-prev-next-button"]
-              }
-            },
-            options: {
-              noStyling: true
+            button: {
+              classList: ["deeplib-prev-next-button"]
             }
+          },
+          options: {
+            noStyling: true,
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_left.svg`,
+            tooltip: options2.initialPrevTooltip
           }
         }),
         advElement.createLabel({
@@ -3288,7 +3315,6 @@ input[type=number] {
         }),
         advElement.createButton({
           id: `deeplib-prev-next-${options2.id}-next-button`,
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_right.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
             options2.next({
               setLabel,
@@ -3296,16 +3322,15 @@ input[type=number] {
               setNextTooltip
             });
           }, "onClick"),
-          tooltip: options2.initialNextTooltip,
           htmlOptions: {
-            htmlOptions: {
-              button: {
-                classList: ["deeplib-prev-next-button"]
-              }
-            },
-            options: {
-              noStyling: true
+            button: {
+              classList: ["deeplib-prev-next-button"]
             }
+          },
+          options: {
+            noStyling: true,
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/arrow_right.svg`,
+            tooltip: options2.initialNextTooltip
           }
         })
       ]
@@ -3330,6 +3355,7 @@ input[type=number] {
       opts ?? (opts = {});
       opts.closeOnBackdrop ?? (opts.closeOnBackdrop = true);
       const promptId = `modal-prompt-${Date.now()}`;
+      const prompt = (CommonIsArray(opts.prompt) ? opts.prompt : [opts.prompt]).filter((i) => i != null) ?? [""];
       this.dialog = ElementCreate({
         tag: "dialog",
         classList: ["deeplib-modal"],
@@ -3342,7 +3368,13 @@ input[type=number] {
           fontFamily: CommonGetFontName()
         },
         children: [
-          opts.prompt,
+          {
+            tag: "div",
+            classList: ["deeplib-modal-prompt-container"],
+            children: [
+              ...prompt
+            ]
+          },
           {
             tag: "div",
             classList: ["deeplib-modal-prompt"],
@@ -3374,22 +3406,39 @@ input[type=number] {
      * Shows a simple alert modal with a single "OK" button.
      */
     static async alert(msg, timeoutMs) {
-      await new _a7({ prompt: msg, buttons: [{ action: "close", text: "OK" }], timeoutMs }).show();
+      await new _a7({
+        prompt: msg,
+        buttons: [{ action: "close", text: getText("modal.button.ok") }],
+        timeoutMs,
+        escapeAction: "close"
+      }).show();
     }
     /**
      * Shows a confirmation modal with "Cancel" and "OK" buttons.
      * Returns true if "OK" is clicked.
      */
     static async confirm(msg) {
-      const [action] = await new _a7({ prompt: msg, buttons: [{ text: "Cancel", action: "cancel" }, { text: "OK", action: "ok" }] }).show();
-      return action === "ok";
+      const [action] = await new _a7({
+        prompt: msg,
+        buttons: [{ text: getText("modal.button.decline"), action: "decline" }, { text: getText("modal.button.confirm"), action: "confirm" }],
+        escapeAction: "decline",
+        enterAction: "confirm"
+      }).show();
+      return action === "confirm";
     }
     /**
      * Shows a prompt modal with an input field and "Submit"/"Cancel" buttons.
      * Returns the input value if submitted, otherwise null.
      */
     static async prompt(msg, defaultValue = "") {
-      const [action, value] = await new _a7({ prompt: msg, timeoutMs: 0, input: { type: "input", defaultValue }, buttons: [{ text: "Cancel", action: "cancel" }, { text: "Submit", action: "submit" }] }).show();
+      const [action, value] = await new _a7({
+        prompt: msg,
+        timeoutMs: 0,
+        input: { type: "input", defaultValue },
+        buttons: [{ text: getText("modal.button.cancel"), action: "cancel" }, { text: getText("modal.button.submit"), action: "submit" }],
+        escapeAction: "cancel",
+        enterAction: "submit"
+      }).show();
       return action === "submit" ? value : null;
     }
     /** Creates the input element for the modal, applying configuration and validation. */
@@ -3414,10 +3463,12 @@ input[type=number] {
       const btns = this.opts.buttons ? [...this.opts.buttons] : [];
       btns.forEach((b) => {
         const btn = advElement.createButton({
-          label: b.text,
           id: `deeplib-modal-${b.action}`,
-          disabled: b.disabled,
-          onClick: /* @__PURE__ */ __name2(() => this.close(b.action), "onClick")
+          onClick: /* @__PURE__ */ __name2(() => this.close(b.action), "onClick"),
+          options: {
+            disabled: b.disabled,
+            label: b.text
+          }
         });
         container.append(btn);
       });
@@ -3457,7 +3508,12 @@ input[type=number] {
           }
         } else if (e.key === "Escape") {
           e.stopPropagation();
-          this.close("close");
+          this.close(this.opts.escapeAction ?? "close");
+        } else if (e.key === "Enter") {
+          if (elements.some((el) => el === document.activeElement) && document.activeElement !== this.inputEl) return;
+          e.preventDefault();
+          e.stopPropagation();
+          this.close(this.opts.enterAction ?? "submit");
         }
       });
       window.requestAnimationFrame(() => {
@@ -3513,11 +3569,13 @@ input[type=number] {
       const exitButton = advElement.createButton({
         id: "exit",
         size: [90, 90],
-        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
         onClick: /* @__PURE__ */ __name2(() => {
           this.exit();
         }, "onClick"),
-        tooltip: getText("settings.button.back_button_hint")
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/exit.svg`,
+          tooltip: getText("settings.button.back_button_hint")
+        }
       });
       const menu = document.getElementById("deeplib-nav-menu");
       if (menu) {
@@ -3527,12 +3585,14 @@ input[type=number] {
         if (screen.name == "mainmenu") continue;
         const button = advElement.createButton({
           id: `${screen.name}-button`,
-          image: screen.icon,
-          label: getText(`mainmenu.button.${screen.name}`),
           onClick: /* @__PURE__ */ __name2(() => {
             this.setSubscreen(screen);
           }, "onClick"),
-          size: [null, 90]
+          size: [null, 90],
+          options: {
+            image: screen.icon,
+            label: getText(`mainmenu.button.${screen.name}`)
+          }
         });
         layout.appendToSettingsDiv(button);
       }
@@ -3541,59 +3601,107 @@ input[type=number] {
       if (_a8.options.wikiLink) {
         const wikiButton = advElement.createButton({
           id: "deeplib-wiki-button",
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/notebook.svg`,
-          label: getText("mainmenu.button.wiki"),
           onClick: /* @__PURE__ */ __name2(() => {
             window.open(_a8.options.wikiLink, "_blank");
           }, "onClick"),
-          size: [null, 80]
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/notebook.svg`,
+            label: getText("mainmenu.button.wiki")
+          }
         });
         layout.appendToMiscDiv(wikiButton);
       }
       if (_a8.options.repoLink) {
         const repoButton = advElement.createButton({
           id: "deeplib-repo-button",
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/git.svg`,
-          label: getText("mainmenu.button.repo"),
           onClick: /* @__PURE__ */ __name2(() => {
             window.open(_a8.options.repoLink, "_blank");
           }, "onClick"),
-          size: [null, 80]
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/git.svg`,
+            label: getText("mainmenu.button.repo")
+          }
         });
         layout.appendToMiscDiv(repoButton);
       }
       if (_a8.options.resetSubscreen) {
         const resetButton = advElement.createButton({
           id: "deeplib-reset-button",
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/trash_bin.svg`,
-          label: getText("mainmenu.button.reset"),
           onClick: /* @__PURE__ */ __name2(() => {
             this.setSubscreen(_a8.options.resetSubscreen);
           }, "onClick"),
-          size: [null, 80]
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/trash_bin.svg`,
+            label: getText("mainmenu.button.reset")
+          }
         });
         layout.appendToMiscDiv(resetButton);
       }
       if (_a8.options.importExportSubscreen) {
         const importExportButton = advElement.createButton({
           id: "deeplib-import-export-button",
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/transfer.svg`,
-          label: getText("mainmenu.button.import_export"),
           onClick: /* @__PURE__ */ __name2(() => {
             this.setSubscreen(_a8.options.importExportSubscreen);
           }, "onClick"),
-          size: [null, 80]
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/transfer.svg`,
+            label: getText("mainmenu.button.import_export")
+          }
         });
         layout.appendToMiscDiv(importExportButton);
+      }
+      if (_a8.options.storageFullnessIndicator) {
+        const maxStorageCapacityKB = 180;
+        const currentStorageCapacityKB = byteToKB(ModStorage.measureSize(Player.OnlineSettings));
+        const fullness = (currentStorageCapacityKB / maxStorageCapacityKB * 100).toFixed(1);
+        const storageFullnessWrapper = advElement.createButton({
+          id: CommonGenerateUniqueID(),
+          size: [null, 80],
+          options: {
+            tooltipPosition: "left",
+            noStyling: true,
+            tooltip: CommonStringPartitionReplace(getText("mainmenu.meter.storage_hint"), {
+              $percentage$: `${fullness}`
+            }).join(""),
+            label: CommonStringPartitionReplace(getText("mainmenu.meter.storage_label"), {
+              $currentCapacity$: `${currentStorageCapacityKB}`,
+              $maxCapacity$: `${maxStorageCapacityKB}`
+            }).join("")
+          },
+          htmlOptions: {
+            button: {
+              children: [
+                {
+                  tag: "div",
+                  attributes: { id: "deeplib-storage-meter" },
+                  children: [
+                    {
+                      tag: "div",
+                      attributes: { id: "deeplib-storage-bar" },
+                      style: { width: `${fullness}%` }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+        layout.appendToMiscDiv(storageFullnessWrapper);
       }
       if (false) {
         const debugButton = advElement.createButton({
           id: "deeplib-debug-button",
-          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/bug.svg`,
           onClick: /* @__PURE__ */ __name2(() => {
             this.setSubscreen(new GuiDebug());
           }, "onClick"),
-          size: [90, 90]
+          size: [90, 90],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/bug.svg`
+          }
         });
         if (menu) {
           ElementMenu.PrependItem(menu, debugButton);
@@ -3635,41 +3743,49 @@ input[type=number] {
       const importFromFileButton = advElement.createButton({
         id: "deeplib-import-file-button",
         size: [600, 90],
-        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_import.svg`,
         onClick: /* @__PURE__ */ __name2(() => {
           this.dataImport("file");
         }, "onClick"),
-        label: getText("import-export.button.import_file")
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_import.svg`,
+          label: getText("import-export.button.import_file")
+        }
       });
       layout.appendToSettingsDiv(importFromFileButton);
       const exportToFileButton = advElement.createButton({
         id: "deeplib-export-file-button",
         size: [600, 90],
-        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_export.svg`,
         onClick: /* @__PURE__ */ __name2(() => {
           this.dataExport("file");
         }, "onClick"),
-        label: getText("import-export.button.export_file")
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/file_export.svg`,
+          label: getText("import-export.button.export_file")
+        }
       });
       layout.appendToSettingsDiv(exportToFileButton);
       const importFromClipboardButton = advElement.createButton({
         id: "deeplib-import-clipboard-button",
         size: [600, 90],
-        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_import.svg`,
         onClick: /* @__PURE__ */ __name2(() => {
           this.dataImport("clipboard");
         }, "onClick"),
-        label: getText("import-export.button.import_clipboard")
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_import.svg`,
+          label: getText("import-export.button.import_clipboard")
+        }
       });
       layout.appendToSettingsDiv(importFromClipboardButton);
       const exportToClipboardButton = advElement.createButton({
         id: "deeplib-export-clipboard-button",
         size: [600, 90],
-        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_export.svg`,
         onClick: /* @__PURE__ */ __name2(() => {
           this.dataExport("clipboard");
         }, "onClick"),
-        label: getText("import-export.button.export_clipboard")
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/dl_images/clipboard_export.svg`,
+          label: getText("import-export.button.export_clipboard")
+        }
       });
       layout.appendToSettingsDiv(exportToClipboardButton);
     }
@@ -3886,6 +4002,19 @@ input[type=number] {
     }
     static dataCompress(object) {
       return LZString.compressToBase64(JSON.stringify(object));
+    }
+    static measureSize(data) {
+      try {
+        if (typeof data !== "string") {
+          data = JSON.stringify(data) || "";
+        }
+        if (typeof data === "string") {
+          return new TextEncoder().encode(data).byteLength;
+        }
+        throw new Error();
+      } catch {
+        return NaN;
+      }
     }
   }, __name(_a10, "_ModStorage"), __name2(_a10, "ModStorage"), /** Singleton instance of ModStorage */
   __publicField(_a10, "_instance", null), _a10);
@@ -4397,6 +4526,62 @@ input[type=number] {
   var getText = /* @__PURE__ */ __name2((srcTag) => {
     return Localization.getTextMod(srcTag) || Localization.getTextLib(srcTag) || srcTag;
   }, "getText");
+  var _a14;
+  var EventChannel = (_a14 = class {
+    constructor(channelName) {
+      __publicField(this, "listeners", {});
+      this.channelName = channelName;
+      ModSdkManager.prototype.hookFunction("ChatRoomMessageProcessHidden", 0, (args, next) => {
+        if (!this.isChannelMessage(args[0])) {
+          return next(args);
+        }
+        const [message, sender] = args;
+        const { type, data } = message.Dictionary[0];
+        const listeners = this.listeners[type];
+        if (listeners) {
+          listeners.forEach((listener) => listener(data, sender));
+        }
+        return next(args);
+      }, `EventChannel-${channelName}`);
+    }
+    unload() {
+      Object.keys(this.listeners).forEach((key) => delete this.listeners[key]);
+      ModSdkManager.prototype.removeHookByModule("ChatRoomMessageProcessHidden", `EventChannel-${this.channelName}`);
+    }
+    sendEvent(type, data, target = null) {
+      const packet = {
+        Type: "Hidden",
+        Content: this.channelName,
+        Sender: Player.MemberNumber,
+        ...target ? { Target: target } : {},
+        Dictionary: [
+          {
+            type,
+            data
+          }
+        ]
+      };
+      ServerSend("ChatRoomChat", packet);
+    }
+    registerListener(event, listener) {
+      const listeners = this.listeners[event] ?? [];
+      listeners.push(listener);
+      this.listeners[event] = listeners;
+      return () => this.unregisterListener(event, listener);
+    }
+    unregisterListener(event, listener) {
+      const listeners = this.listeners[event];
+      if (listeners) {
+        const index = listeners.indexOf(listener);
+        if (index !== -1) {
+          listeners.splice(index, 1);
+        }
+      }
+    }
+    isChannelMessage(message) {
+      return message && message.Type === "Hidden" && message.Content === this.channelName && message.Sender && message.Sender !== Player.MemberNumber && message.Dictionary && !!message.Dictionary[0]?.data && !!message.Dictionary[0]?.type || false;
+    }
+  }, __name(_a14, "EventChannel"), __name2(_a14, "EventChannel"), _a14);
 
   // src/Utilities/Data.ts
   function settingsReset() {
@@ -4441,21 +4626,22 @@ input[type=number] {
     patchLoginPage();
     Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/login-options.css`);
     createUI();
-    ModSdkManager.prototype.hookFunction("LoginRun", HookPriority.Observe, (args, next) => {
+    const loginRunHook = sdk.hookFunction("LoginRun", HookPriority.Observe, (args, next) => {
       next(args);
       ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
       ElementSetSize(ids.optionsOpen, 90, 90);
       ElementSetSize(ids.optionsSheet, 1e3, 500);
-    }, "LoginRun");
+    });
+    const loginExitHook = sdk.hookFunction("LoginUnload", HookPriority.Observe, (args, next) => {
+      loginExitHook();
+      loginRunHook();
+      removeUI();
+      Style.eject(ids.optionsStyle);
+      unpatchLoginPage();
+      return next(args);
+    });
   }
   __name(loadLoginOptions, "loadLoginOptions");
-  function unloadLoginOptions() {
-    removeUI();
-    Style.eject(ids.optionsStyle);
-    ModSdkManager.prototype.removeHookByModule("LoginRun", "LoginRun");
-    unpatchLoginPage();
-  }
-  __name(unloadLoginOptions, "unloadLoginOptions");
   function createUI() {
     const loginOptions = window.ThemedLocalData.loginOptions;
     const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
@@ -4469,7 +4655,7 @@ input[type=number] {
         id: ids.optionsSheet
       },
       children: [
-        ElementCreate({
+        {
           tag: "div",
           attributes: {
             id: ids.optionsContent
@@ -4497,7 +4683,7 @@ input[type=number] {
               };
             })
           ]
-        }),
+        },
         ElementButton.Create(
           ids.optionsClose,
           () => optionsSheet.close(),
@@ -4518,10 +4704,10 @@ input[type=number] {
   function patchLoginPage() {
     const loginOptions = window.ThemedLocalData.loginOptions;
     if (loginOptions.hideDummy) {
-      ModSdkManager.prototype.patchFunction("LoginRun", {
+      sdk.patchFunction("LoginRun", {
         "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
       });
-      ModSdkManager.prototype.patchFunction("LoginDoNextThankYou", {
+      sdk.patchFunction("LoginDoNextThankYou", {
         "CharacterRelease(LoginCharacter, false);": "",
         "CharacterAppearanceFullRandom(LoginCharacter);": "",
         'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
@@ -4529,20 +4715,20 @@ input[type=number] {
       });
     }
     if (loginOptions.hideCredits) {
-      ModSdkManager.prototype.patchFunction("LoginRun", {
+      sdk.patchFunction("LoginRun", {
         "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
         'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
         'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
       });
-      ModSdkManager.prototype.patchFunction("LoginDoNextThankYou", {
+      sdk.patchFunction("LoginDoNextThankYou", {
         "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
       });
     }
   }
   __name(patchLoginPage, "patchLoginPage");
   function unpatchLoginPage() {
-    ModSdkManager.prototype.unpatchFunction("LoginRun");
-    ModSdkManager.prototype.unpatchFunction("LoginDoNextThankYou");
+    sdk.unpatchFunction("LoginRun");
+    sdk.unpatchFunction("LoginDoNextThankYou");
   }
   __name(unpatchLoginPage, "unpatchLoginPage");
   function repatchLoginPage() {
@@ -4742,9 +4928,11 @@ input[type=number] {
           });
           this.resize();
         }, "onClick"),
-        image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/refresh.svg`,
-        tooltip: getText("colors.button.change_input_type"),
-        size: [90, 90]
+        size: [90, 90],
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/images/refresh.svg`,
+          tooltip: getText("colors.button.change_input_type")
+        }
       });
       const menu = document.getElementById("deeplib-nav-menu");
       if (menu) {
@@ -4801,7 +4989,7 @@ input[type=number] {
 
   // src/Utilities/ModDefinition.ts
   var ModName = "Themed";
-  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"fcb08a4f"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"9c0a83ea"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5683,36 +5871,6 @@ input[type=number] {
   __name(resetMbsColors, "resetMbsColors");
 
   // src/Utilities/Other.ts
-  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
-    if (document.getElementById("themed-modal")) return false;
-    const modal = document.createElement("div");
-    const modalTitle = document.createElement("div");
-    const modalButtons = document.createElement("div");
-    const modalAcceptButton = document.createElement("div");
-    const modalCancelButton = document.createElement("div");
-    modal.classList.add("themed-modal");
-    modalTitle.id = "modal-prompt";
-    modalButtons.id = "modal-buttons";
-    modalAcceptButton.id = "modal-button-accept";
-    modalCancelButton.id = "modal-button-cancel";
-    modalAcceptButton.classList.add("modal-button");
-    modalCancelButton.classList.add("modal-button");
-    modalTitle.innerHTML = prompt2;
-    modalAcceptButton.innerText = getText("modal.button.accept");
-    modalCancelButton.innerText = getText("modal.button.cancel");
-    modalAcceptButton.addEventListener("click", () => {
-      acceptCallbackFn();
-      modal.remove();
-    });
-    modalCancelButton.addEventListener("click", () => {
-      cancelCallbackFn();
-      modal.remove();
-    });
-    modalButtons.append(modalAcceptButton, modalCancelButton);
-    modal.append(modalTitle, modalButtons);
-    document.body.append(modal);
-  }
-  __name(useLgcModal, "useLgcModal");
   function camelToKebabCase(str) {
     return str.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
   }
@@ -6159,26 +6317,24 @@ input[type=number] {
                 advElement.createButton({
                   id: `tmd-profiles-profile-save-${profileId}`,
                   onClick: /* @__PURE__ */ __name(() => this.handleProfilesSaving(profileId), "onClick"),
-                  label: getText("profiles.button.save")
+                  options: {
+                    label: getText("profiles.button.save")
+                  }
                 }),
                 advElement.createButton({
                   id: `tmd-profiles-profile-load-${profileId}`,
                   onClick: /* @__PURE__ */ __name(() => this.handleProfilesLoading(profileId), "onClick"),
-                  label: getText("profiles.button.load"),
-                  htmlOptions: {
-                    options: {
-                      disabled: !this.profileExists(profileId)
-                    }
+                  options: {
+                    label: getText("profiles.button.load"),
+                    disabled: !this.profileExists(profileId)
                   }
                 }),
                 advElement.createButton({
                   id: `tmd-profiles-profile-delete-${profileId}`,
                   onClick: /* @__PURE__ */ __name(() => this.handleProfilesDeleting(profileId), "onClick"),
-                  label: getText("profiles.button.delete"),
-                  htmlOptions: {
-                    options: {
-                      disabled: !this.profileExists(profileId)
-                    }
+                  options: {
+                    label: getText("profiles.button.delete"),
+                    disabled: !this.profileExists(profileId)
                   }
                 })
               ]
@@ -6192,23 +6348,23 @@ input[type=number] {
     resize(onLoad) {
       super.resize(onLoad);
     }
-    handleProfilesSaving(profileId) {
+    async handleProfilesSaving(profileId) {
       if (!this.profileCanBeSaved(profileId)) return;
-      const name = prompt(getText("profiles.prompt"));
+      const name = await Modal.prompt(getText("profiles.prompt"));
       if (name === null) return;
       const storage = modStorage.playerStorage;
       const profile = this.settings[profileId];
       if (!profile || Object.keys(profile).length === 0) {
         this.settings[profileId] = {};
       }
-      this.settings[profileId] = {
+      this.settings[profileId] = CommonCloneDeep({
         name,
         data: {
           GlobalModule: storage.GlobalModule,
           ColorsModule: storage.ColorsModule,
           IntegrationModule: storage.IntegrationModule
         }
-      };
+      });
       const display = name ? `"${name}"` : profileId;
       ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_saved")}`);
       this.updateProfileLabel(profileId);
@@ -6221,12 +6377,12 @@ input[type=number] {
         return;
       }
       const data = modStorage.playerStorage.ProfilesModule[profileId].data;
-      Player[ModName] = {
+      Player[ModName] = CommonCloneDeep({
         ...Player[ModName],
         GlobalModule: data.GlobalModule,
         ColorsModule: data.ColorsModule,
         IntegrationModule: data.IntegrationModule
-      };
+      });
       const name = this.settings[profileId].name;
       const display = name ? `"${name}"` : profileId;
       ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_loaded")}`);
@@ -6293,19 +6449,17 @@ input[type=number] {
           }
           return advElement.createButton({
             id: `tmd-profile-color-showcase-${profileId}-${key}`,
-            tooltip: getText(`colors.setting.${key}.name`),
             htmlOptions: {
-              htmlOptions: {
-                button: {
-                  style: {
-                    "--background-color": value
-                  },
-                  classList: ["tmd-profile-color-showcase-button"]
-                }
-              },
-              options: {
-                noStyling: true
+              button: {
+                style: {
+                  "--background-color": value
+                },
+                classList: ["tmd-profile-color-showcase-button"]
               }
+            },
+            options: {
+              noStyling: true,
+              tooltip: getText(`colors.setting.${key}.name`)
             }
           });
         })
@@ -6344,24 +6498,26 @@ input[type=number] {
       return GuiProfiles;
     }
     get defaultSettings() {
-      return {};
-    }
-    load() {
       const profileDefaults = {
         GlobalModule: getModule("GlobalModule").defaultSettings,
         ColorsModule: getModule("ColorsModule").defaultSettings,
         IntegrationModule: getModule("IntegrationModule").defaultSettings
       };
+      const data = modStorage.playerStorage?.ProfilesModule || {};
       for (let i = 0; i < 3; i++) {
         const profileIndex = i + 1;
-        if (!modStorage.playerStorage.ProfilesModule[profileIndex] || Object.keys(modStorage.playerStorage.ProfilesModule[profileIndex]).length === 0) {
-          Player[ModName].ProfilesModule[profileIndex] = {
+        if (!data[profileIndex] || Object.keys(data[profileIndex]).length === 0) {
+          data[profileIndex] = {
             data: {},
             name: ""
           };
         }
-        if (Object.keys(Player[ModName].ProfilesModule[profileIndex].data).length > 0) Player[ModName].ProfilesModule[profileIndex].data = deepMergeMatchingProperties(profileDefaults, Player[ModName].ProfilesModule[profileIndex].data);
+        if (Object.keys(data[profileIndex].data).length > 0)
+          data[profileIndex].data = deepMergeMatchingProperties(profileDefaults, data[profileIndex].data);
       }
+      return data;
+    }
+    load() {
     }
   };
   __name(_ProfilesModule, "ProfilesModule");
@@ -6369,47 +6525,63 @@ input[type=number] {
 
   // src/Modules/Share.ts
   var _ShareModule = class _ShareModule extends BaseModule {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "channel", null);
+    }
     load() {
-      sdk.hookFunction("ChatRoomMessageProcessHidden", HookPriority.Observe, (args, next) => {
-        const [data, sender] = args;
-        if (data.Content !== "ThemedTheme") return next(args);
-        if (!sender.MemberNumber) return next(args);
+      this.channel = new EventChannel("share");
+      this.channel.registerListener("ThemedTheme", (data, sender) => {
+        const theme = data.Theme;
+        const version = data.ThemeVersion;
+        const settings = data.Settings;
         const senderName = CharacterNickname(sender);
-        const prompt2 = getText("modal.prompt.share").replace("$Sender", `${senderName} (${data.Sender})`).replace("$SenderPronoun", CharacterPronoun(sender, "Possessive", false));
-        const message = document.createElement("div");
-        message.id = sender.MemberNumber.toString();
-        message.setAttribute("class", "themed-chat-modal");
-        message.setAttribute("data-time", ChatRoomCurrentTime());
-        message.setAttribute("data-sender", sender.MemberNumber + "");
-        const text = document.createElement("div");
-        const button = document.createElement("div");
-        text.innerHTML = getText("modal.prompt.chat_share_notification").replace("$Sender", `${senderName} (${data.Sender})`);
-        button.innerHTML = getText("modal.button.show");
-        text.classList.add("modal-prompt");
-        button.classList.add("modal-button");
-        if (!data.Dictionary) return next(args);
-        const messageData = data.Dictionary[0]["ThemedMessage"];
-        const theme = messageData.Theme;
-        const version = messageData.ThemeVersion;
-        const settings = Player.Themed.GlobalModule;
-        button.addEventListener("click", () => {
-          if (!version || version !== Player.Themed.Version) {
-            sendLocalMessage("theme-not-up-to-date", `Theme sent by ${senderName} is not up-to-date!`);
-            return;
-          }
-          useLgcModal(
-            prompt2,
-            () => {
-              this.acceptShare(theme, settings);
+        const prompt = getText("modal.prompt.share").replace("$Sender", `${senderName} (${sender.MemberNumber})`).replace("$SenderPronoun", CharacterPronoun(sender, "Possessive", false)).split("<br>").map((str) => ({
+          tag: "span",
+          children: [str]
+        }));
+        const shareNotification = getText("modal.prompt.chat_share_notification").replace("$Sender", `${senderName} (${sender.MemberNumber})`);
+        const message = ElementCreate({
+          tag: "div",
+          classList: ["themed-chat-modal"],
+          attributes: {
+            "data-time": ChatRoomCurrentTime(),
+            "data-sender": sender.MemberNumber?.toString(),
+            id: sender.MemberNumber?.toString()
+          },
+          children: [
+            {
+              tag: "span",
+              classList: ["modal-prompt"],
+              children: [
+                shareNotification
+              ]
             },
-            () => {
-            }
-          );
+            advElement.createButton({
+              id: ElementGenerateID(),
+              htmlOptions: {
+                button: {
+                  classList: ["modal-button"]
+                }
+              },
+              options: {
+                label: getText("modal.button.show")
+              },
+              onClick: /* @__PURE__ */ __name(() => {
+                if (!version || version !== Player.Themed.Version) {
+                  sendLocalMessage("theme-not-up-to-date", `Theme sent by ${senderName} is not up-to-date!`);
+                  return;
+                }
+                Modal.confirm(prompt).then((result) => {
+                  if (result) {
+                    this.acceptShare(theme, settings);
+                  }
+                });
+              }, "onClick")
+            })
+          ]
         });
-        message.append(text, button);
         ChatRoomAppendChat(message);
-        ElementScrollToEnd("TextAreaChatLog");
-        return next(args);
       });
     }
     acceptShare(data, settings) {
@@ -6421,20 +6593,11 @@ input[type=number] {
     share(target) {
       sendLocalMessage("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
       sendActionMessage(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`, target);
-      const packet = {
-        Type: "Hidden",
-        Content: "ThemedTheme",
-        Sender: Player.MemberNumber,
-        ...target ? { Target: target } : {},
-        Dictionary: [{
-          ThemedMessage: {
-            ThemeVersion: Player.Themed.Version,
-            Theme: Player.Themed.ColorsModule,
-            Settings: Player.Themed.GlobalModule
-          }
-        }]
-      };
-      ServerSend("ChatRoomChat", packet);
+      this.channel?.sendEvent("ThemedTheme", {
+        Theme: Player.Themed.ColorsModule,
+        Settings: Player.Themed.GlobalModule,
+        ThemeVersion: Player.Themed.Version
+      });
     }
   };
   __name(_ShareModule, "ShareModule");
@@ -6512,7 +6675,9 @@ input[type=number] {
                   this.confirm();
                   timer?.();
                 }, "onClick"),
-                label: `${getText("reset.button.confirm")} (${timeToConfirm})`,
+                options: {
+                  label: `${getText("reset.button.confirm")} (${timeToConfirm})`
+                },
                 disabled: true
               }),
               advElement.createButton({
@@ -6521,7 +6686,9 @@ input[type=number] {
                   this.exit();
                   timer?.();
                 }, "onClick"),
-                label: getText("reset.button.cancel")
+                options: {
+                  label: getText("reset.button.cancel")
+                }
               })
             ]
           }
@@ -6564,7 +6731,7 @@ input[type=number] {
   var GuiReset = _GuiReset;
 
   // src/Themed.ts
-  var { sdk } = (() => {
+  (() => {
     const modules2 = [
       new GUI({
         ButtonText: "Themed",
@@ -6585,7 +6752,6 @@ input[type=number] {
       new DeeplibMigrator()
     ];
     const initFunction = /* @__PURE__ */ __name(async () => {
-      unloadLoginOptions();
       const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/html/Changelog.html`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
       VersionModule.setNewVersionMessage(changelog);
       _Color.composeRoot();
@@ -6622,6 +6788,5 @@ input[type=number] {
       }
     });
   })();
-  return __toCommonJS(Themed_exports);
 })();
 //# sourceMappingURL=themed.js.map
