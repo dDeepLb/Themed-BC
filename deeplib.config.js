@@ -1,5 +1,3 @@
-// @ts-check
-
 import { defineConfig } from 'bc-deeplib/build';
 
 export default defineConfig({
