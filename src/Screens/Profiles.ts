@@ -127,10 +127,10 @@ export class GuiProfiles extends BaseSubscreen {
       return;
     }
 
-    const data = modStorage.playerStorage.ProfilesModule[profileId].data;
+    const data = this.settings[profileId].data;
 
-    Player[ModName] = CommonCloneDeep({
-      ...Player[ModName],
+    modStorage.playerStorage = CommonCloneDeep({
+      ...modStorage.playerStorage,
       GlobalModule: data.GlobalModule,
       ColorsModule: data.ColorsModule,
       IntegrationModule: data.IntegrationModule,
@@ -151,7 +151,7 @@ export class GuiProfiles extends BaseSubscreen {
 
     const name = this.settings[profileId].name;
 
-    Player[ModName].ProfilesModule[profileId] = {
+    this.settings[profileId] = {
       name: '',
       data: {}
     } as ProfileEntryModel;
@@ -199,7 +199,9 @@ export class GuiProfiles extends BaseSubscreen {
 
     if (!exists) return null;
 
-    const colors = Object.entries(this.settings[profileId].data.ColorsModule.base);
+    const profile = this.settings[profileId];
+
+    const colors = Object.entries(profile.data.ColorsModule.base);
 
     return ElementCreate({
       tag: 'div',
@@ -209,7 +211,7 @@ export class GuiProfiles extends BaseSubscreen {
       },
       children:
         colors.map(([key, value]) => {
-          const isBaseMode = !this.settings[profileId].data.GlobalModule.doUseAdvancedColoring;
+          const isBaseMode = !profile.data.GlobalModule.doUseAdvancedColoring;
           const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
 
           if (isBaseMode && !baseModeKey(key as keyof BaseColorsModel)) {
@@ -253,7 +255,7 @@ export class GuiProfiles extends BaseSubscreen {
   private profileExists(profileId: number): boolean {
     if (!this.isValidProfileId(profileId)) return false;
 
-    const data = modStorage.playerStorage?.ProfilesModule?.[profileId]?.data || {};
+    const data = this.settings[profileId]?.data || {};
 
     if (!data || Object.keys(data).length === 0) return false;
 

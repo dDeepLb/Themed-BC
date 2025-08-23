@@ -1,4 +1,4 @@
-import { advElement, BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getModule, getText, modStorage } from 'bc-deeplib/deeplib';
 import { BaseColorsModel, ColorsSettingsModel, SpecialColorsModel } from '../Models/Colors';
 import { ColorsModule } from '../Modules/Colors';
 import { _Color } from '../Utilities/Color';
@@ -21,7 +21,7 @@ export class GuiColors extends BaseSubscreen {
 
   get pageStructure(): SettingElement[][] {
     const defaultSettings = getModule<ColorsModule>('ColorsModule').defaultSettings;
-    const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
+    const isBaseMode = !modStorage.playerStorage.GlobalModule.doUseAdvancedColoring;
     const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
 
     return [Object.entries(this.settings.base).map(([key, value]) => {
