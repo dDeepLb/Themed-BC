@@ -4879,7 +4879,7 @@ input[type=number] {
     }
     get pageStructure() {
       const defaultSettings = getModule("ColorsModule").defaultSettings;
-      const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
+      const isBaseMode = !modStorage.playerStorage.GlobalModule.doUseAdvancedColoring;
       const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
       return [
         Object.entries(this.settings.base).map(([key, value]) => {
@@ -4949,7 +4949,7 @@ input[type=number] {
             const typedKey = key;
             settings.base[typedKey] = this.value;
           }
-          getModule("ColorsModule").reloadTheme();
+          ColorsModule.reloadTheme();
         });
       }), Object.entries(this.settings.special).forEach(([key]) => {
         document.getElementById(key)?.addEventListener("input", function() {
@@ -4960,7 +4960,7 @@ input[type=number] {
             const typedKey = key;
             settings.special[typedKey] = this.value;
           }
-          getModule("ColorsModule").reloadTheme();
+          ColorsModule.reloadTheme();
         });
       });
     }
@@ -4988,8 +4988,7 @@ input[type=number] {
   var GuiColors = _GuiColors;
 
   // src/Utilities/ModDefinition.ts
-  var ModName = "Themed";
-  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"9c0a83ea"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"5fd109d4"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5774,9 +5773,6 @@ input[type=number] {
         'options.Background = "gray";': 'options.Background = "%disabled";',
         'options.Background = "pink";': 'options.Background = "%equipped";'
       });
-      sdk.patchFunction("RelogRun", {
-        'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
-      });
       sdk.patchFunction("ChatRoomMenuDraw", {
         'let color = "White";': 'let color = "%background";',
         'color = "White";': 'color = "%background";',
@@ -5799,7 +5795,6 @@ input[type=number] {
       sdk.unpatchFunction("PreferenceSubscreenDifficultyRun");
       sdk.unpatchFunction("ChatAdminRoomCustomizationRun");
       sdk.unpatchFunction("Shop2._AssetElementDraw");
-      sdk.unpatchFunction("RelogRun");
       sdk.unpatchFunction("ChatRoomMenuDraw");
       this.patched = false;
     }
@@ -5991,7 +5986,7 @@ input[type=number] {
     }
     load() {
     }
-    reloadTheme() {
+    static reloadTheme() {
       deepLibLogger.info("Reloading theme");
       _Color.composeRoot();
       BcStyle.reloadAll();
@@ -6050,7 +6045,7 @@ input[type=number] {
           setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings[typedKey], "setElementValue"),
           setSettingValue: /* @__PURE__ */ __name((val) => {
             this.settings[typedKey] = val;
-            getModule("ColorsModule").reloadTheme();
+            ColorsModule.reloadTheme();
           }, "setSettingValue")
         };
       })];
@@ -6217,7 +6212,7 @@ input[type=number] {
           setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings[typedKey], "setElementValue"),
           setSettingValue: /* @__PURE__ */ __name((val) => {
             this.settings[typedKey] = val;
-            getModule("ColorsModule").reloadTheme();
+            ColorsModule.reloadTheme();
           }, "setSettingValue")
         };
       })];
@@ -6376,9 +6371,9 @@ input[type=number] {
         ToastManager.error(`${getText("profiles.text.profile")} ${profileId} ${getText("profiles.text.doesnt_exist")}`);
         return;
       }
-      const data = modStorage.playerStorage.ProfilesModule[profileId].data;
-      Player[ModName] = CommonCloneDeep({
-        ...Player[ModName],
+      const data = this.settings[profileId].data;
+      modStorage.playerStorage = CommonCloneDeep({
+        ...modStorage.playerStorage,
         GlobalModule: data.GlobalModule,
         ColorsModule: data.ColorsModule,
         IntegrationModule: data.IntegrationModule
@@ -6386,7 +6381,7 @@ input[type=number] {
       const name = this.settings[profileId].name;
       const display = name ? `"${name}"` : profileId;
       ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_loaded")}`);
-      getModule("ColorsModule").reloadTheme();
+      ColorsModule.reloadTheme();
     }
     handleProfilesDeleting(profileId) {
       if (!this.profileExists(profileId)) {
@@ -6394,7 +6389,7 @@ input[type=number] {
         return;
       }
       const name = this.settings[profileId].name;
-      Player[ModName].ProfilesModule[profileId] = {
+      this.settings[profileId] = {
         name: "",
         data: {}
       };
@@ -6421,20 +6416,17 @@ input[type=number] {
       profileLabel.textContent = display;
     }
     updateProfileColorShowcase(profileId) {
+      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
       const colorShowcase = this.createColorShowcase(profileId);
-      if (colorShowcase === null) {
-        ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
-      } else {
-        const label = ElementWrap(`tmd-profile-label-${profileId}`);
-        if (!label) return;
-        ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
-        label.after(colorShowcase);
+      if (colorShowcase) {
+        ElementWrap(`tmd-profile-label-${profileId}`)?.after(colorShowcase);
       }
     }
     createColorShowcase(profileId) {
       const exists = this.profileExists(profileId);
       if (!exists) return null;
-      const colors = Object.entries(this.settings[profileId].data.ColorsModule.base);
+      const profile = this.settings[profileId];
+      const colors = Object.entries(profile.data.ColorsModule.base);
       return ElementCreate({
         tag: "div",
         classList: ["tmd-profile-color-showcase"],
@@ -6442,7 +6434,7 @@ input[type=number] {
           id: `tmd-profile-color-showcase-${profileId}`
         },
         children: colors.map(([key, value]) => {
-          const isBaseMode = !this.settings[profileId].data.GlobalModule.doUseAdvancedColoring;
+          const isBaseMode = !profile.data.GlobalModule.doUseAdvancedColoring;
           const baseModeKey = /* @__PURE__ */ __name((key2) => ["main", "accent", "text"].includes(key2), "baseModeKey");
           if (isBaseMode && !baseModeKey(key)) {
             return;
@@ -6478,7 +6470,7 @@ input[type=number] {
     }
     profileExists(profileId) {
       if (!this.isValidProfileId(profileId)) return false;
-      const data = modStorage.playerStorage?.ProfilesModule?.[profileId]?.data || {};
+      const data = this.settings[profileId]?.data || {};
       if (!data || Object.keys(data).length === 0) return false;
       return true;
     }
@@ -6588,7 +6580,7 @@ input[type=number] {
       Player.Themed.ColorsModule = data;
       Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
       modStorage.save();
-      getModule("ColorsModule").reloadTheme();
+      ColorsModule.reloadTheme();
     }
     share(target) {
       sendLocalMessage("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
@@ -6721,8 +6713,7 @@ input[type=number] {
       for (const module of modules()) {
         module.registerDefaultSettings();
       }
-      _Color.composeRoot();
-      BcStyle.reloadAll();
+      ColorsModule.reloadTheme();
       this.setSubscreen(null);
       PreferenceSubscreenExtensionsClear();
     }
@@ -6772,7 +6763,7 @@ input[type=number] {
           customFileExtension: ".tmd",
           onImport() {
             modStorage.save();
-            getModule("ColorsModule").reloadTheme();
+            ColorsModule.reloadTheme();
           }
         }),
         repoLink: "https://github.com/dDeepLb/Themed-BC",
