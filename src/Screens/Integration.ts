@@ -31,7 +31,7 @@ export class GuiIntegration extends BaseSubscreen {
         setElementValue: () => value ?? defaultSettings[typedKey],
         setSettingValue: (val) => {
           this.settings[typedKey] = val;
-          getModule<ColorsModule>('ColorsModule').reloadTheme();
+          ColorsModule.reloadTheme();
         }
       };
     })];

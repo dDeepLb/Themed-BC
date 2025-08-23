@@ -1,7 +1,6 @@
 import { BaseSubscreen, getText, layout, modules, advElement } from 'bc-deeplib/deeplib';
-import { _Color } from '../Utilities/Color';
 import { settingsReset } from '../Utilities/Data';
-import { BcStyle } from '../Utilities/Style';
+import { ColorsModule } from '../Modules/Colors';
 
 export class GuiReset extends BaseSubscreen {
   get name(): string {
@@ -117,8 +116,7 @@ export class GuiReset extends BaseSubscreen {
       module.registerDefaultSettings();
     }
 
-    _Color.composeRoot();
-    BcStyle.reloadAll();
+    ColorsModule.reloadTheme();
 
     this.setSubscreen(null);
     PreferenceSubscreenExtensionsClear();

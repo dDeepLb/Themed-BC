@@ -1,9 +1,8 @@
-import { advElement, BaseSubscreen, getModule, getText, layout, modStorage, Modal } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getText, layout, Modal, modStorage } from 'bc-deeplib/deeplib';
+import { BaseColorsModel } from '../Models/Colors';
 import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
 import { conWarn } from '../Utilities/Console';
-import { ModName } from '../Utilities/ModDefinition';
-import { BaseColorsModel } from '../Models/Colors';
 
 export class GuiProfiles extends BaseSubscreen {
 
@@ -140,7 +139,7 @@ export class GuiProfiles extends BaseSubscreen {
     const display = name ? `"${name}"` : profileId;
     ToastManager.success(`${getText('profiles.text.profile')} ${display} ${getText('profiles.text.has_been_loaded')}`);
 
-    getModule<ColorsModule>('ColorsModule').reloadTheme();
+    ColorsModule.reloadTheme();
   }
 
   private handleProfilesDeleting(profileId: number): void {

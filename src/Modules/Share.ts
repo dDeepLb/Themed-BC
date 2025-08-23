@@ -1,7 +1,7 @@
 import { ColorsSettingsModel } from '../Models/Colors';
 import { ColorsModule } from './Colors';
 import { GlobalSettingsModel } from '../Models/Global';
-import { advElement, BaseModule, EventChannel, getModule, getText, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, Modal, modStorage } from 'bc-deeplib/deeplib';
+import { advElement, BaseModule, EventChannel, getText, sendActionMessage as messageSendAction, sendLocalMessage as messageSendLocal, Modal, modStorage } from 'bc-deeplib/deeplib';
 
 interface ThemedMessageModel {
   Settings: GlobalSettingsModel,
@@ -88,7 +88,7 @@ export class ShareModule extends BaseModule {
     Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
     modStorage.save();
 
-    getModule<ColorsModule>('ColorsModule').reloadTheme();
+    ColorsModule.reloadTheme();
   }
 
   share(target: number | undefined): void {

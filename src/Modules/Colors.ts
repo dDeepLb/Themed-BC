@@ -64,7 +64,7 @@ export class ColorsModule extends BaseModule {
   load(): void {
   }
 
-  reloadTheme(): void {
+  static reloadTheme(): void {
     deepLibLogger.info('Reloading theme');
     _Color.composeRoot();
     BcStyle.reloadAll();

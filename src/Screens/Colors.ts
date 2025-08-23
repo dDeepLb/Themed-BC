@@ -100,7 +100,7 @@ export class GuiColors extends BaseSubscreen {
           settings.base[typedKey] = this.value;
         }
         
-        getModule<ColorsModule>('ColorsModule').reloadTheme();
+        ColorsModule.reloadTheme();
       });
     }),
 
@@ -114,7 +114,7 @@ export class GuiColors extends BaseSubscreen {
           settings.special[typedKey] = this.value;
         }
         
-        getModule<ColorsModule>('ColorsModule').reloadTheme();
+        ColorsModule.reloadTheme();
       });
     });
   }
