@@ -185,15 +185,12 @@ export class GuiProfiles extends BaseSubscreen {
   }
 
   private updateProfileColorShowcase(profileId: number): void {
+    ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+
     const colorShowcase = this.createColorShowcase(profileId);
 
-    if (colorShowcase === null) {
-      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
-    } else {
-      const label = ElementWrap(`tmd-profile-label-${profileId}`);
-      if (!label) return;
-      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
-      label.after(colorShowcase);
+    if (colorShowcase) {
+      ElementWrap(`tmd-profile-label-${profileId}`)?.after(colorShowcase);
     }
   }
 
