@@ -149,11 +149,6 @@ export class GuiRedrawModule extends BaseModule {
         'options.Background = "%equipped";',
     });
 
-    sdk.patchFunction('RelogRun', {
-      'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");':
-        'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
-    });
-
     sdk.patchFunction('ChatRoomMenuDraw', {
       'let color = "White";': 'let color = "%background";',
       'color = "White";': 'color = "%background";',
@@ -180,7 +175,6 @@ export class GuiRedrawModule extends BaseModule {
     sdk.unpatchFunction('PreferenceSubscreenDifficultyRun');
     sdk.unpatchFunction('ChatAdminRoomCustomizationRun');
     sdk.unpatchFunction('Shop2._AssetElementDraw');
-    sdk.unpatchFunction('RelogRun');
     sdk.unpatchFunction('ChatRoomMenuDraw');
 
     this.patched = false;
