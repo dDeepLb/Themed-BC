@@ -18,28 +18,30 @@ input:focus {
   outline: var(--tmd-accent) solid 1px;
 }
 
-.button {
-  --button-color: var(--tmd-element);
-  --disabled-color: var(--tmd-element-disabled);
-  --hover-color: var(--tmd-element-hover);
-}
+:not(:has(.toast-button)) {
+  .button {
+    --button-color: var(--tmd-element);
+    --disabled-color: var(--tmd-element-disabled);
+    --hover-color: var(--tmd-element-hover);
+  }
 
-.button-styling {
-  border-color: var(--tmd-accent);
-}
+  .button-styling {
+    border-color: var(--tmd-accent);
+  }
 
-.button-styling:hover {
-  border-color: var(--tmd-accent-hover);
-}
+  .button-styling:hover {
+    border-color: var(--tmd-accent-hover);
+  }
 
-.button-tooltip {
-  background-color: var(--tmd-element-hint);
-  color: var(--tmd-text);
-  border-color: var(--tmd-accent);
-}
+  .button-tooltip {
+    background-color: var(--tmd-element-hint);
+    color: var(--tmd-text);
+    border-color: var(--tmd-accent);
+  }
 
-.button-styling>.button-label {
-  color: var(--tmd-text);
+  .button-styling>.button-label {
+    color: var(--tmd-text);
+  }
 }
 
 input[type="checkbox"] {
