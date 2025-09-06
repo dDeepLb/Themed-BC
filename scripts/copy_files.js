@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const allowedExtensions = ['html', 'js', 'css', 'json', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'lang'];
+const allowedExtensions = ['html', 'js', 'css', 'json', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'lang', 'txt'];
 
 /**
  * @param {string} inputDir 
