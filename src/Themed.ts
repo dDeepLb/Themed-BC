@@ -14,7 +14,11 @@ import { BcStyle } from './Utilities/Style';
 import { DeeplibMigrator } from './Migrators/DeeplibMigrator';
 import { GuiReset } from './Screens/Reset';
 
-(() => {
+(async () => {
+  const changelog = await fetch(`${PUBLIC_URL}/text/changelog.txt`)
+    .then((res) => res.text())
+    .then((text) => text.replace(/\r\n/g, '\n'));
+
   const modules: Array<BaseModule> = [
     new GUI({
       ButtonText: 'Themed',
@@ -28,7 +32,9 @@ import { GuiReset } from './Screens/Reset';
     new ProfilesModule(),
     new CommandsModule(),
     new ShareModule(),
-    new VersionModule()
+    new VersionModule({
+      newVersionMessage: changelog
+    })
   ];
 
   const migrators: Array<BaseMigrator> = [
@@ -36,13 +42,7 @@ import { GuiReset } from './Screens/Reset';
     new DeeplibMigrator(),
   ];
 
-  const initFunction = async () => {
-    const changelog = await fetch(`${PUBLIC_URL}/html/Changelog.html`)
-      .then((res) => res.text())
-      .then((text) => text.replace(/\r\n/g, '\n'));
-
-    VersionModule.setNewVersionMessage(changelog);
-
+  const initFunction = () => {
     _Color.composeRoot();
     BcStyle.injectAll();
   };
