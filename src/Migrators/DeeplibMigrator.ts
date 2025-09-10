@@ -2,11 +2,11 @@ import { BaseMigrator } from 'bc-deeplib/deeplib';
 import { ColorsModule } from '../Modules/Colors';
 
 export class DeeplibMigrator extends BaseMigrator {
-  get MigrationVersion(): string {
+  get migrationVersion(): string {
     return '1.6.0';
   }
 
-  Migrate() {
+  migrate() {
     // @ts-expect-error migration
     Player.Themed.GlobalModule.modEnabled = Player.Themed.GlobalModule.themedEnabled;
     // @ts-expect-error migration

@@ -21,9 +21,9 @@ import { GuiReset } from './Screens/Reset';
 
   const modules: Array<BaseModule> = [
     new GUI({
-      ButtonText: 'Themed',
-      Identifier: 'Themed',
-      Image: `${PUBLIC_URL}/images/mod.png`,
+      buttonText: 'Themed',
+      identifier: 'Themed',
+      image: `${PUBLIC_URL}/images/mod.png`,
     }),
     new GlobalModule(),
     new ColorsModule(),

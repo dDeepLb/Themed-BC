@@ -1,11 +1,11 @@
 import { BaseMigrator } from 'bc-deeplib/deeplib';
 
 export class V140Migrator extends BaseMigrator {
-  get MigrationVersion(): string {
+  get migrationVersion(): string {
     return '1.4.0';
   }
 
-  Migrate(): boolean {
+  migrate(): boolean {
     const colorsData = Player.Themed.ColorsModule;
     const integrationsData = Player.Themed.IntegrationModule;
 
