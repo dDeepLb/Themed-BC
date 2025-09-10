@@ -67,9 +67,7 @@ import { GuiReset } from './Screens/Reset';
       }),
       repoLink: 'https://github.com/dDeepLb/Themed-BC',
       wikiLink: 'https://github.com/dDeepLb/Themed-BC/wiki',
-      resetSubscreen: new GuiReset({
-        drawCharacter: false
-      })
+      resetSubscreen: new GuiReset()
     },
     modules,
     migrators,

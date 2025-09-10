@@ -1,17 +1,15 @@
-import { BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
+import { BaseSubscreen, getModule, getText, SubscreenOptions } from 'bc-deeplib/deeplib';
 import { IntegrationSettingsModel } from '../Models/Integration';
 import { IntegrationModule } from '../Modules/Integration';
 import { SettingElement } from 'bc-deeplib/base/elements_typings';
 import { ColorsModule } from '../Modules/Colors';
 
 export class GuiIntegration extends BaseSubscreen {
-  get name(): string {
-    return 'integration';
-  }
-
-  get icon(): string {
-    return `${PUBLIC_URL}/images/stars.svg`;
-  }
+  
+  protected static override subscreenOptions: SubscreenOptions = {
+    name: 'integration',
+    icon: `${PUBLIC_URL}/images/stars.svg`
+  };
 
   get settings(): IntegrationSettingsModel {
     return super.settings as IntegrationSettingsModel;

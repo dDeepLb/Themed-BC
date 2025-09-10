@@ -1,4 +1,4 @@
-import { advElement, BaseSubscreen, getText, layout, Modal, modStorage } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getText, layout, Modal, modStorage, SubscreenOptions } from 'bc-deeplib/deeplib';
 import { BaseColorsModel } from '../Models/Colors';
 import { ProfileEntryModel, ProfilesSettingsModel } from '../Models/Profiles';
 import { ColorsModule } from '../Modules/Colors';
@@ -6,13 +6,11 @@ import { conWarn } from '../Utilities/Console';
 
 export class GuiProfiles extends BaseSubscreen {
 
-  get name(): string {
-    return 'profiles';
-  }
-
-  get icon(): string {
-    return `${PUBLIC_URL}/images/users_group.svg`;
-  }
+  protected static override subscreenOptions: SubscreenOptions = {
+    name: 'profiles',
+    icon: `${PUBLIC_URL}/images/users_group.svg`,
+    drawCharacter: false
+  };
 
   get settings(): ProfilesSettingsModel {
     return super.settings as ProfilesSettingsModel;

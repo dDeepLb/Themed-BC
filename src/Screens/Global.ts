@@ -1,17 +1,15 @@
-import { BaseSubscreen, getModule, getText } from 'bc-deeplib/deeplib';
+import { BaseSubscreen, getModule, getText, SubscreenOptions } from 'bc-deeplib/deeplib';
 import { GlobalSettingsModel } from '../Models/Global';
 import { GlobalModule } from '../Modules/Global';
 import { SettingElement } from 'bc-deeplib/base/elements_typings';
 import { ColorsModule } from '../Modules/Colors';
 
 export class GuiGlobal extends BaseSubscreen {
-  get name(): string {
-    return 'global';
-  }
 
-  get icon(): string {
-    return `${PUBLIC_URL}/images/cog.svg`;
-  }
+  protected static override subscreenOptions: SubscreenOptions = {
+    name: 'global',
+    icon: `${PUBLIC_URL}/images/cog.svg`
+  };
 
   get settings(): GlobalSettingsModel {
     return super.settings as GlobalSettingsModel;

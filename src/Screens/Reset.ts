@@ -1,4 +1,4 @@
-import { BaseSubscreen, getText, layout, modules, advElement } from 'bc-deeplib/deeplib';
+import { BaseSubscreen, getText, layout, modules, advElement, SubscreenOptions } from 'bc-deeplib/deeplib';
 import { settingsReset } from '../Utilities/Data';
 import { ColorsModule } from '../Modules/Colors';
 
@@ -6,6 +6,11 @@ export class GuiReset extends BaseSubscreen {
   get name(): string {
     return 'reset';
   }
+
+  protected static override subscreenOptions: SubscreenOptions = {
+    drawCharacter: false,
+    name: 'reset'
+  };
 
   load() {
     super.load();

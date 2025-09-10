@@ -1,19 +1,17 @@
-import { advElement, BaseSubscreen, getModule, getText, modStorage } from 'bc-deeplib/deeplib';
+import { advElement, BaseSubscreen, getModule, getText, modStorage, SubscreenOptions } from 'bc-deeplib/deeplib';
 import { BaseColorsModel, ColorsSettingsModel, SpecialColorsModel } from '../Models/Colors';
 import { ColorsModule } from '../Modules/Colors';
 import { _Color } from '../Utilities/Color';
 import { Input, SettingElement } from 'bc-deeplib/base/elements_typings';
 
+
 export class GuiColors extends BaseSubscreen {
   settingsBackup: ColorsSettingsModel = {} as ColorsSettingsModel;
 
-  get name(): string {
-    return 'colors';
-  }
-
-  get icon(): string {
-    return `${PUBLIC_URL}/images/palette.svg`;
-  }
+  static override subscreenOptions: SubscreenOptions = {
+    name: 'colors',
+    icon: `${PUBLIC_URL}/images/palette.svg`
+  };
 
   get settings(): ColorsSettingsModel {
     return super.settings as ColorsSettingsModel;
