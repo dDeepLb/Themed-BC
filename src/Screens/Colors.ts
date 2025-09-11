@@ -100,7 +100,7 @@ export class GuiColors extends BaseSubscreen {
         
         ColorsModule.reloadTheme();
       });
-    }),
+    });
 
     Object.entries(this.settings.special).forEach(([key]) => {
       (document.getElementById(key) as HTMLInputElement)?.addEventListener('input', function() {
@@ -129,7 +129,7 @@ export class GuiColors extends BaseSubscreen {
         const typedKey = key as keyof BaseColorsModel;
         settings.base[typedKey] = this.settingsBackup.base[typedKey];
       }
-    }),
+    });
 
     Object.entries(this.settings.special).forEach(([key]) => {
       const input = document.getElementById(key) as HTMLInputElement;

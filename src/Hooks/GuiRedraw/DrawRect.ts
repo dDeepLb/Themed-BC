@@ -1,4 +1,4 @@
-import Color from 'color';
+import Color, { ColorInstance } from 'color';
 import { doRedraw } from '../../Modules/GuiRedraw';
 import { ColorType, plainColors, specialColors } from '../../Utilities/Color';
 import { HookPriority, sdk } from 'bc-deeplib/deeplib';
@@ -104,7 +104,7 @@ export function hookDrawRect() {
             parsedColor = Color(color.toLowerCase()).hexa().toLowerCase();
           else
             parsedColor = Color(color.toLowerCase()).hex().toLowerCase();
-        } catch (e) {
+        } catch {
           parsedColor = null;
           return next(args);
         }
@@ -141,10 +141,10 @@ export function hookDrawRect() {
       }
 
       if (buttonStates.includes(buttonStateSymbol)) {
-        let parsedColor: Color | null = null;
+        let parsedColor: ColorInstance | null = null;
         try {
           parsedColor = Color(color.toLowerCase());
-        } catch (e) {
+        } catch {
           parsedColor = null;
         }
 
