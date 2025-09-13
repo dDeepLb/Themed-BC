@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       bc-deeplib:
-        specifier: ^1.2.0
-        version: 1.2.0(sass-embedded@1.90.0)
+        specifier: ^2.0.0
+        version: 2.0.0(sass-embedded@1.90.0)
       bondage-club-mod-sdk:
         specifier: ^1.2.0
         version: 1.2.0
@@ -517,8 +517,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bc-deeplib@1.2.0:
-    resolution: {integrity: sha512-RphAGnx6IJvTpVBJub2MniJq2lIm9oHL5FgNDPXJrec5utvn2/r1OHnhHC9nORCtDNZdu5qMYUJGqODHKOvxTw==}
+  bc-deeplib@2.0.0:
+    resolution: {integrity: sha512-0P/0zHqHy8OZ0xeXIeeSNLNaoxD2dMWo0FiOZWfnErxDagjrEAlPCn9U7PABeRftSTV4aJatoVTRf9vWc060Pw==}
     hasBin: true
 
   bc-stubs@117.0.1:
@@ -1681,7 +1681,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bc-deeplib@1.2.0(sass-embedded@1.90.0):
+  bc-deeplib@2.0.0(sass-embedded@1.90.0):
     dependencies:
       bondage-club-mod-sdk: 1.2.0
       chokidar: 4.0.3
