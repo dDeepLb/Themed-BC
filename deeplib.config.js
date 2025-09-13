@@ -1,7 +1,7 @@
 import { defineConfig } from 'bc-deeplib/build';
 
 export default defineConfig({
-  entry: 'Themed.ts',
+  entry: 'themed.ts',
   outfile: 'themed.js',
   globalName: 'Themed',
   distDirName: 'dist',
