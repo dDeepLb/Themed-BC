@@ -1,15 +1,15 @@
 textarea,
-input:not([type="range"]) {
+input:not([type=range]) {
   background: var(--tmd-element);
   color: var(--tmd-text);
   border: min(0.2vh, 0.2vw) solid var(--tmd-accent);
 }
 
-input[type="range"] {
+input[type=range] {
   background-color: transparent;
 }
 
-input[type="color"] {
+input[type=color] {
   padding: 0px;
 }
 
@@ -18,45 +18,41 @@ input:focus {
   outline: var(--tmd-accent) solid 1px;
 }
 
-.button {
+:not(:has(.toast-button)) .button {
   --button-color: var(--tmd-element);
   --disabled-color: var(--tmd-element-disabled);
   --hover-color: var(--tmd-element-hover);
 }
-
-.button-styling {
+:not(:has(.toast-button)) .button-styling {
   border-color: var(--tmd-accent);
 }
-
-.button-styling:hover {
+:not(:has(.toast-button)) .button-styling:hover {
   border-color: var(--tmd-accent-hover);
 }
-
-.button-tooltip {
+:not(:has(.toast-button)) .button-tooltip {
   background-color: var(--tmd-element-hint);
   color: var(--tmd-text);
   border-color: var(--tmd-accent);
 }
-
-.button-styling>.button-label {
+:not(:has(.toast-button)) .button-styling > .button-label {
   color: var(--tmd-text);
 }
 
-input[type="checkbox"] {
+input[type=checkbox] {
   background-color: var(--tmd-element);
   color: var(--tmd-text);
   border-color: var(--tmd-accent);
 }
 
-input[type="checkbox"]:hover {
+input[type=checkbox]:hover {
   background-color: var(--tmd-element-hover);
 }
 
-input[type="checkbox"]:disabled {
+input[type=checkbox]:disabled {
   background-color: var(--tmd-element-disabled);
 }
 
-input[type="checkbox"]::before {
+input[type=checkbox]::before {
   background-color: var(--tmd-accent);
 }
 
@@ -69,3 +65,4 @@ input[type=range]::-moz-range-thumb,
 input[type=range]::-webkit-slider-thumb {
   background-color: var(--tmd-accent);
 }
+/*# sourceMappingURL=inputs.css.map */

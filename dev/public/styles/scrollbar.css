@@ -69,3 +69,17 @@
 ::-ms-scrollbar-thumb:hover {
   background-color: var(--tmd-scrollbar-thumb-hover);
 }
+
+.scroll-box {
+	scrollbar-color: var(--tmd-scrollbar-thumb) var(--tmd-scrollbar-track);
+}
+
+@media (hover: hover) {
+	.scroll-box {
+		scrollbar-color: var(--tmd-scrollbar-thumb) var(--tmd-scrollbar-track);
+	}
+
+	.scroll-box:hover {
+		scrollbar-color: var(--tmd-scrollbar-thumb-hover) var(--tmd-scrollbar-track);
+	}
+}

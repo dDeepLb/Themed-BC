@@ -1,0 +1,11 @@
+1.6.0
+• Migrated the mod to new architecture.
+• A lot of changes that are added by new architecture:
+  • New UI & feel.
+  • Import/Export screen (hella convenient).
+
+1.5.6
+• Add on-login screen options.
+
+1.5.5
+• Update looks for new reply feature upgrade.

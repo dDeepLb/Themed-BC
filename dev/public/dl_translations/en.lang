@@ -3,6 +3,7 @@ settings.button.back_button_hint = Back
 settings.button.prev_button_hint = Previous page
 settings.button.next_button_hint = Next page
 settings.page.label = $currentPage$ of $totalPages$
+settings.button.help_button_hint = Show Help
 
 # Main Menu
 mainmenu.button.wiki = Wiki
@@ -25,3 +26,7 @@ modal.button.ok = OK
 modal.button.cancel = Cancel
 modal.button.submit = Submit
 modal.button.decline = Decline
+
+# Version Module
+module.version.version_update = Version Update
+module.version.new_version_toast_title = New Version: $modName$, v$modVersion$
