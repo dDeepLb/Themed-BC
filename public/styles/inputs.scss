@@ -2,7 +2,7 @@ textarea,
 input:not([type="range"]) {
   background: var(--tmd-element);
   color: var(--tmd-text);
-  border: min(0.2vh, 0.2vw) solid var(--tmd-accent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
 }
 
 input[type="range"] {
