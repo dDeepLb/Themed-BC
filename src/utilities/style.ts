@@ -23,11 +23,11 @@ export const BcStyle = {
   injectAll() {
     const isEnabled = modStorage.playerStorage.GlobalModule.modEnabled;
 
-    Style.injectEmbed('themed', `${PUBLIC_URL}/styles/themed.css`);
-    
+    Style.injectEmbed('tmd-style', `${PUBLIC_URL}/styles/themed.css`);
+
     if (!isEnabled) return;
 
-    Style.injectInline('root', composeRoot());
+    Style.injectInline('tmd-root', composeRoot());
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
@@ -37,8 +37,8 @@ export const BcStyle = {
   },
 
   ejectAll() {
-    Style.eject('root');
-    Style.eject('themed');
+    Style.eject('tmd-root');
+    Style.eject('tmd-style');
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
