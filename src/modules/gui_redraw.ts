@@ -1,4 +1,4 @@
-import { BaseModule, modStorage, sdk } from 'bc-deeplib/deeplib';import { hookAppearanceGetPreviewImageColor } from '../hooks/gui_redraw/appearance_get_preview_image_color';
+import { BaseModule, modStorage, sdk } from 'bc-deeplib/deeplib'; import { hookAppearanceGetPreviewImageColor } from '../hooks/gui_redraw/appearance_get_preview_image_color';
 import { hookDialogGetMenuButtonColor } from '../hooks/gui_redraw/dialog_get_menu_button_color';
 import { hookDrawBackNextButton } from '../hooks/gui_redraw/draw_back_next_button';
 import { hookDrawButton } from '../hooks/gui_redraw/draw_button';
@@ -42,27 +42,6 @@ export class GuiRedrawModule extends BaseModule {
 
   patchGui() {
     if (this.patched) return false;
-
-    sdk.patchFunction('ChatSearchNormalDraw', {
-      // isBlocked
-      'bgColor = isFull ? "#884444" : "#FF9999";':
-        'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
-      // hasFriends
-      'bgColor = isFull ? "#448855" : "#CFFFCF";':
-        'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
-      // else
-      'bgColor = isFull ? "#666" : "White";':
-        'bgColor = isFull ? "%searchFull" : "%background";',
-
-      'blocksText.push({ text: friendsText, color: "#FFFF88"});':
-        'blocksText.push({ text: friendsText, color: "%friendhint"});',
-
-      'blocksText.push({ text: blockedText, color: "#FF9999" });':
-        'blocksText.push({ text: blockedText, color: "%searchBlock" });',
-
-      'blocksText.push({ text: gameText, color: "#9999FF"});':
-        'blocksText.push({ text: gameText, color: "%searchGame"});',
-    });
 
     sdk.patchFunction('ChatSearchPermissionDraw', {
       'bgColor = Hover ? "red" : "pink";':
@@ -164,7 +143,6 @@ export class GuiRedrawModule extends BaseModule {
   unpatchGui() {
     if (!this.patched) return false;
 
-    sdk.unpatchFunction('ChatSearchNormalDraw');
     sdk.unpatchFunction('ChatSearchPermissionDraw');
     sdk.unpatchFunction('DialogDraw');
     sdk.unpatchFunction('DrawProcessScreenFlash');

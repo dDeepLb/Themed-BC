@@ -56,34 +56,6 @@ export function hookDrawRect() {
               : plainColors.accent;
             break;
 
-          case 'friendhint':
-            color = plainColors.elementHint;
-            break;
-
-          case 'searchFullBlock':
-            color = Color(specialColors.blocked[hover]).mix(Color(specialColors.roomBlocked[hover]), 0.5).hex();
-            break;
-
-          case 'searchBlock':
-            color = specialColors.roomBlocked[hover];
-            break;
-
-          case 'searchFullFriend':
-            color = Color(specialColors.roomFriend[hover]).mix(Color(plainColors.elementDisabled), 0.5).hex();
-            break;
-
-          case 'searchFriend':
-            color = specialColors.roomFriend[hover];
-            break;
-
-          case 'searchFull':
-            color = plainColors.elementDisabled;
-            break;
-
-          case 'searchGame':
-            color = specialColors.roomGame[hover];
-            break;
-
           case 'allowed':
           case 'equipped':
           case 'crafted':
