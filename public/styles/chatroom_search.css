@@ -1,0 +1,157 @@
+.chat-search-room .chat-search-room-tooltip-entry {
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
+  color: var(--tmd-text);
+}
+.chat-search-room .chat-search-room-tooltip-friends {
+  background-color: var(--tmd-room-friend);
+  border-color: var(--tmd-room-friend-hover);
+}
+.chat-search-room .chat-search-room-tooltip-game {
+  background-color: var(--tmd-room-game);
+  border-color: var(--tmd-room-game-hover);
+}
+.chat-search-room .chat-search-room-tooltip-blocked {
+  background-color: var(--tmd-room-blocked);
+  border-color: var(--tmd-room-blocked-hover);
+}
+body:has(button[data-mode=FilterMode]) .chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-temporary-hidden=true] {
+  background-color: var(--tmd-blocked);
+}
+body:has(button[data-mode=FilterMode]) .chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-temporary-hidden=false] {
+  background-color: var(--tmd-allowed);
+}
+.chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-blocked=true] {
+  --button-color: var(--tmd-room-blocked);
+  --hover-color: var(--tmd-room-blocked-hover);
+}
+.chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-with-friends=true] {
+  --button-color: var(--tmd-room-friend);
+  --hover-color: var(--tmd-room-friend-hover);
+}
+.chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-full=true] {
+  --button-color: var(--tmd-element-disabled);
+  --hover-color: var(--tmd-element-disabled-hover);
+}
+.chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-full=true][data-blocked=true] {
+  --button-color: var(--tmd-search-full-blocked);
+  --hover-color: var(--tmd-search-full-blocked-hover);
+}
+.chat-search-room .chat-search-room-join-button.chat-search-room-join-button[data-full=true][data-with-friends=true] {
+  --button-color: var(--tmd-search-full-friend);
+  --hover-color: var(--tmd-search-full-friend-hover);
+}
+.chat-search-room .chat-search-room-page-button {
+  --button-color: transparent !important;
+  --hover-color: transparent !important;
+  --disabled-color: transparent !important;
+}
+body[data-tmd-theme-type=dark] .chat-search-room .chat-search-room-page-button img {
+  filter: brightness(0) invert(1);
+}
+body[data-tmd-theme-type=light] .chat-search-room .chat-search-room-page-button img {
+  filter: brightness(0);
+}
+.chat-search-room p {
+  color: var(--tmd-text);
+}
+body[data-tmd-theme-type=dark] .chat-search-room .chat-search-room-icon {
+  filter: invert(1);
+}
+body[data-tmd-theme-type=light] .chat-search-room .chat-search-room-icon {
+  filter: none;
+}
+
+body[data-tmd-theme-type=dark] #chat-search-clear-input-search img,
+body[data-tmd-theme-type=dark] #chat-search-room-search-button img,
+body[data-tmd-theme-type=dark] #chat-search-room-open-search-menu img {
+  filter: invert(1);
+}
+
+body[data-tmd-theme-type=light] #chat-search-clear-input-search img,
+body[data-tmd-theme-type=light] #chat-search-room-search-button img,
+body[data-tmd-theme-type=light] #chat-search-room-open-search-menu img {
+  filter: none;
+}
+
+#chat-search-room-page {
+  background-color: var(--tmd-element);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
+}
+#chat-search-room-page .chat-search-room-page-title,
+#chat-search-room-page .chat-search-room-page-creator,
+#chat-search-room-page .chat-search-room-page-description,
+#chat-search-room-page .chat-search-room-page-tag,
+#chat-search-room-page .chat-search-room-page-member-count,
+#chat-search-room-page .chat-search-room-page-join-button {
+  color: var(--tmd-text);
+}
+#chat-search-room-page .chat-search-room-page-tag-friends {
+  color: var(--tmd-room-friend);
+}
+#chat-search-room-page .chat-search-room-page-tag-friends:hover {
+  color: var(--tmd-room-friend-hover);
+}
+#chat-search-room-page .chat-search-room-page-description,
+#chat-search-room-page .chat-search-room-page-member-count {
+  background-color: var(--tmd-element-hint);
+}
+#chat-search-room-page .chat-search-room-page-member-count {
+  border: none;
+}
+body[data-tmd-theme-type=dark] #chat-search-room-page #chat-search-room-page-exit img {
+  filter: none;
+}
+body[data-tmd-theme-type=light] #chat-search-room-page #chat-search-room-page-exit img {
+  filter: invert(1);
+}
+
+#chat-search-search-menu {
+  background-color: var(--tmd-element);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
+  color: var(--tmd-text);
+}
+#chat-search-search-menu .chat-search-search-menu-search-button {
+  color: var(--tmd-text);
+}
+#chat-search-search-menu #chat-search-search-menu-room-type-radio-group,
+#chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group {
+  border-color: var(--tmd-accent);
+}
+#chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button,
+#chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button {
+  --button-color: var(--tmd-element);
+  --hover-color: var(--tmd-element-hover);
+  --disabled-color: var(--tmd-element-disabled);
+  background-color: var(--tmd-element);
+}
+#chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button[aria-checked=true],
+#chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button[aria-checked=true] {
+  background-color: var(--tmd-element-hint);
+  border-right-color: var(--tmd-accent);
+  border-left-color: var(--tmd-accent);
+}
+#chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button[aria-checked=true]:first-child,
+#chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button[aria-checked=true]:first-child {
+  border-right-color: var(--tmd-accent);
+}
+#chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button[aria-checked=true]:last-child,
+#chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button[aria-checked=true]:last-child {
+  border-left-color: var(--tmd-accent);
+}
+body[data-tmd-theme-type=dark] #chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button img,
+body[data-tmd-theme-type=dark] #chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button img {
+  filter: invert(1);
+}
+body[data-tmd-theme-type=light] #chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button img,
+body[data-tmd-theme-type=light] #chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button img {
+  filter: none;
+}
+body[data-tmd-theme-type=dark] #chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button[value=None] img,
+body[data-tmd-theme-type=dark] #chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button[value=None] img {
+  filter: none;
+}
+body[data-tmd-theme-type=light] #chat-search-search-menu #chat-search-search-menu-room-type-radio-group .element-button-group-button[value=None] img,
+body[data-tmd-theme-type=light] #chat-search-search-menu #chat-search-search-menu-room-lobby-radio-group .element-button-group-button[value=None] img {
+  filter: invert(1);
+}
+/*# sourceMappingURL=chatroom_search.css.map */

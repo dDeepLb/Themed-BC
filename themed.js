@@ -1,1647 +1,40 @@
 "use strict";
 var Themed = (() => {
-  var __create = Object.create;
   var __defProp = Object.defineProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+
+  // node_modules/.pnpm/bc-deeplib@2.0.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  var __create = Object.create;
+  var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
-  var __esm = (fn, res) => function __init() {
-    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
-  };
-  var __commonJS = (cb, mod) => function __require() {
+  var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
+  var __commonJS = /* @__PURE__ */ __name((cb, mod) => /* @__PURE__ */ __name(function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-  };
-  var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
-  };
-  var __copyProps = (to, from, except, desc) => {
+  }, "__require"), "__commonJS");
+  var __copyProps = /* @__PURE__ */ __name((to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
       for (let key of __getOwnPropNames(from))
         if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+          __defProp2(to, key, { get: /* @__PURE__ */ __name(() => from[key], "get"), enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
     }
     return to;
-  };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  }, "__copyProps");
+  var __toESM = /* @__PURE__ */ __name((mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
     // If the importer is in node compatibility mode or this is not an ESM
     // file that has been converted to a CommonJS file using a Babel-
     // compatible transform (i.e. "__esModule" has not been set), then set
     // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", { value: mod, enumerable: true }) : target,
     mod
-  ));
-  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-
-  // <define:LAST_COMMIT_HASH>
-  var init_define_LAST_COMMIT_HASH = __esm({
-    "<define:LAST_COMMIT_HASH>"() {
-    }
-  });
-
-  // node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js
-  var require_color_name = __commonJS({
-    "node_modules/.pnpm/color-name@1.1.4/node_modules/color-name/index.js"(exports, module) {
-      "use strict";
-      init_define_LAST_COMMIT_HASH();
-      module.exports = {
-        "aliceblue": [240, 248, 255],
-        "antiquewhite": [250, 235, 215],
-        "aqua": [0, 255, 255],
-        "aquamarine": [127, 255, 212],
-        "azure": [240, 255, 255],
-        "beige": [245, 245, 220],
-        "bisque": [255, 228, 196],
-        "black": [0, 0, 0],
-        "blanchedalmond": [255, 235, 205],
-        "blue": [0, 0, 255],
-        "blueviolet": [138, 43, 226],
-        "brown": [165, 42, 42],
-        "burlywood": [222, 184, 135],
-        "cadetblue": [95, 158, 160],
-        "chartreuse": [127, 255, 0],
-        "chocolate": [210, 105, 30],
-        "coral": [255, 127, 80],
-        "cornflowerblue": [100, 149, 237],
-        "cornsilk": [255, 248, 220],
-        "crimson": [220, 20, 60],
-        "cyan": [0, 255, 255],
-        "darkblue": [0, 0, 139],
-        "darkcyan": [0, 139, 139],
-        "darkgoldenrod": [184, 134, 11],
-        "darkgray": [169, 169, 169],
-        "darkgreen": [0, 100, 0],
-        "darkgrey": [169, 169, 169],
-        "darkkhaki": [189, 183, 107],
-        "darkmagenta": [139, 0, 139],
-        "darkolivegreen": [85, 107, 47],
-        "darkorange": [255, 140, 0],
-        "darkorchid": [153, 50, 204],
-        "darkred": [139, 0, 0],
-        "darksalmon": [233, 150, 122],
-        "darkseagreen": [143, 188, 143],
-        "darkslateblue": [72, 61, 139],
-        "darkslategray": [47, 79, 79],
-        "darkslategrey": [47, 79, 79],
-        "darkturquoise": [0, 206, 209],
-        "darkviolet": [148, 0, 211],
-        "deeppink": [255, 20, 147],
-        "deepskyblue": [0, 191, 255],
-        "dimgray": [105, 105, 105],
-        "dimgrey": [105, 105, 105],
-        "dodgerblue": [30, 144, 255],
-        "firebrick": [178, 34, 34],
-        "floralwhite": [255, 250, 240],
-        "forestgreen": [34, 139, 34],
-        "fuchsia": [255, 0, 255],
-        "gainsboro": [220, 220, 220],
-        "ghostwhite": [248, 248, 255],
-        "gold": [255, 215, 0],
-        "goldenrod": [218, 165, 32],
-        "gray": [128, 128, 128],
-        "green": [0, 128, 0],
-        "greenyellow": [173, 255, 47],
-        "grey": [128, 128, 128],
-        "honeydew": [240, 255, 240],
-        "hotpink": [255, 105, 180],
-        "indianred": [205, 92, 92],
-        "indigo": [75, 0, 130],
-        "ivory": [255, 255, 240],
-        "khaki": [240, 230, 140],
-        "lavender": [230, 230, 250],
-        "lavenderblush": [255, 240, 245],
-        "lawngreen": [124, 252, 0],
-        "lemonchiffon": [255, 250, 205],
-        "lightblue": [173, 216, 230],
-        "lightcoral": [240, 128, 128],
-        "lightcyan": [224, 255, 255],
-        "lightgoldenrodyellow": [250, 250, 210],
-        "lightgray": [211, 211, 211],
-        "lightgreen": [144, 238, 144],
-        "lightgrey": [211, 211, 211],
-        "lightpink": [255, 182, 193],
-        "lightsalmon": [255, 160, 122],
-        "lightseagreen": [32, 178, 170],
-        "lightskyblue": [135, 206, 250],
-        "lightslategray": [119, 136, 153],
-        "lightslategrey": [119, 136, 153],
-        "lightsteelblue": [176, 196, 222],
-        "lightyellow": [255, 255, 224],
-        "lime": [0, 255, 0],
-        "limegreen": [50, 205, 50],
-        "linen": [250, 240, 230],
-        "magenta": [255, 0, 255],
-        "maroon": [128, 0, 0],
-        "mediumaquamarine": [102, 205, 170],
-        "mediumblue": [0, 0, 205],
-        "mediumorchid": [186, 85, 211],
-        "mediumpurple": [147, 112, 219],
-        "mediumseagreen": [60, 179, 113],
-        "mediumslateblue": [123, 104, 238],
-        "mediumspringgreen": [0, 250, 154],
-        "mediumturquoise": [72, 209, 204],
-        "mediumvioletred": [199, 21, 133],
-        "midnightblue": [25, 25, 112],
-        "mintcream": [245, 255, 250],
-        "mistyrose": [255, 228, 225],
-        "moccasin": [255, 228, 181],
-        "navajowhite": [255, 222, 173],
-        "navy": [0, 0, 128],
-        "oldlace": [253, 245, 230],
-        "olive": [128, 128, 0],
-        "olivedrab": [107, 142, 35],
-        "orange": [255, 165, 0],
-        "orangered": [255, 69, 0],
-        "orchid": [218, 112, 214],
-        "palegoldenrod": [238, 232, 170],
-        "palegreen": [152, 251, 152],
-        "paleturquoise": [175, 238, 238],
-        "palevioletred": [219, 112, 147],
-        "papayawhip": [255, 239, 213],
-        "peachpuff": [255, 218, 185],
-        "peru": [205, 133, 63],
-        "pink": [255, 192, 203],
-        "plum": [221, 160, 221],
-        "powderblue": [176, 224, 230],
-        "purple": [128, 0, 128],
-        "rebeccapurple": [102, 51, 153],
-        "red": [255, 0, 0],
-        "rosybrown": [188, 143, 143],
-        "royalblue": [65, 105, 225],
-        "saddlebrown": [139, 69, 19],
-        "salmon": [250, 128, 114],
-        "sandybrown": [244, 164, 96],
-        "seagreen": [46, 139, 87],
-        "seashell": [255, 245, 238],
-        "sienna": [160, 82, 45],
-        "silver": [192, 192, 192],
-        "skyblue": [135, 206, 235],
-        "slateblue": [106, 90, 205],
-        "slategray": [112, 128, 144],
-        "slategrey": [112, 128, 144],
-        "snow": [255, 250, 250],
-        "springgreen": [0, 255, 127],
-        "steelblue": [70, 130, 180],
-        "tan": [210, 180, 140],
-        "teal": [0, 128, 128],
-        "thistle": [216, 191, 216],
-        "tomato": [255, 99, 71],
-        "turquoise": [64, 224, 208],
-        "violet": [238, 130, 238],
-        "wheat": [245, 222, 179],
-        "white": [255, 255, 255],
-        "whitesmoke": [245, 245, 245],
-        "yellow": [255, 255, 0],
-        "yellowgreen": [154, 205, 50]
-      };
-    }
-  });
-
-  // node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js
-  var require_is_arrayish = __commonJS({
-    "node_modules/.pnpm/is-arrayish@0.3.2/node_modules/is-arrayish/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
-      module.exports = /* @__PURE__ */ __name(function isArrayish(obj) {
-        if (!obj || typeof obj === "string") {
-          return false;
-        }
-        return obj instanceof Array || Array.isArray(obj) || obj.length >= 0 && (obj.splice instanceof Function || Object.getOwnPropertyDescriptor(obj, obj.length - 1) && obj.constructor.name !== "String");
-      }, "isArrayish");
-    }
-  });
-
-  // node_modules/.pnpm/simple-swizzle@0.2.2/node_modules/simple-swizzle/index.js
-  var require_simple_swizzle = __commonJS({
-    "node_modules/.pnpm/simple-swizzle@0.2.2/node_modules/simple-swizzle/index.js"(exports, module) {
-      "use strict";
-      init_define_LAST_COMMIT_HASH();
-      var isArrayish = require_is_arrayish();
-      var concat = Array.prototype.concat;
-      var slice = Array.prototype.slice;
-      var swizzle = module.exports = /* @__PURE__ */ __name(function swizzle2(args) {
-        var results = [];
-        for (var i = 0, len = args.length; i < len; i++) {
-          var arg = args[i];
-          if (isArrayish(arg)) {
-            results = concat.call(results, slice.call(arg));
-          } else {
-            results.push(arg);
-          }
-        }
-        return results;
-      }, "swizzle");
-      swizzle.wrap = function(fn) {
-        return function() {
-          return fn(swizzle(arguments));
-        };
-      };
-    }
-  });
-
-  // node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js
-  var require_color_string = __commonJS({
-    "node_modules/.pnpm/color-string@1.9.1/node_modules/color-string/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
-      var colorNames = require_color_name();
-      var swizzle = require_simple_swizzle();
-      var hasOwnProperty = Object.hasOwnProperty;
-      var reverseNames = /* @__PURE__ */ Object.create(null);
-      for (name in colorNames) {
-        if (hasOwnProperty.call(colorNames, name)) {
-          reverseNames[colorNames[name]] = name;
-        }
-      }
-      var name;
-      var cs = module.exports = {
-        to: {},
-        get: {}
-      };
-      cs.get = function(string) {
-        var prefix = string.substring(0, 3).toLowerCase();
-        var val;
-        var model;
-        switch (prefix) {
-          case "hsl":
-            val = cs.get.hsl(string);
-            model = "hsl";
-            break;
-          case "hwb":
-            val = cs.get.hwb(string);
-            model = "hwb";
-            break;
-          default:
-            val = cs.get.rgb(string);
-            model = "rgb";
-            break;
-        }
-        if (!val) {
-          return null;
-        }
-        return { model, value: val };
-      };
-      cs.get.rgb = function(string) {
-        if (!string) {
-          return null;
-        }
-        var abbr = /^#([a-f0-9]{3,4})$/i;
-        var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
-        var rgba = /^rgba?\(\s*([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
-        var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
-        var keyword = /^(\w+)$/;
-        var rgb = [0, 0, 0, 1];
-        var match;
-        var i;
-        var hexAlpha;
-        if (match = string.match(hex)) {
-          hexAlpha = match[2];
-          match = match[1];
-          for (i = 0; i < 3; i++) {
-            var i2 = i * 2;
-            rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
-          }
-          if (hexAlpha) {
-            rgb[3] = parseInt(hexAlpha, 16) / 255;
-          }
-        } else if (match = string.match(abbr)) {
-          match = match[1];
-          hexAlpha = match[3];
-          for (i = 0; i < 3; i++) {
-            rgb[i] = parseInt(match[i] + match[i], 16);
-          }
-          if (hexAlpha) {
-            rgb[3] = parseInt(hexAlpha + hexAlpha, 16) / 255;
-          }
-        } else if (match = string.match(rgba)) {
-          for (i = 0; i < 3; i++) {
-            rgb[i] = parseInt(match[i + 1], 0);
-          }
-          if (match[4]) {
-            if (match[5]) {
-              rgb[3] = parseFloat(match[4]) * 0.01;
-            } else {
-              rgb[3] = parseFloat(match[4]);
-            }
-          }
-        } else if (match = string.match(per)) {
-          for (i = 0; i < 3; i++) {
-            rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);
-          }
-          if (match[4]) {
-            if (match[5]) {
-              rgb[3] = parseFloat(match[4]) * 0.01;
-            } else {
-              rgb[3] = parseFloat(match[4]);
-            }
-          }
-        } else if (match = string.match(keyword)) {
-          if (match[1] === "transparent") {
-            return [0, 0, 0, 0];
-          }
-          if (!hasOwnProperty.call(colorNames, match[1])) {
-            return null;
-          }
-          rgb = colorNames[match[1]];
-          rgb[3] = 1;
-          return rgb;
-        } else {
-          return null;
-        }
-        for (i = 0; i < 3; i++) {
-          rgb[i] = clamp(rgb[i], 0, 255);
-        }
-        rgb[3] = clamp(rgb[3], 0, 1);
-        return rgb;
-      };
-      cs.get.hsl = function(string) {
-        if (!string) {
-          return null;
-        }
-        var hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d\.]+)%\s*,?\s*([+-]?[\d\.]+)%\s*(?:[,|\/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
-        var match = string.match(hsl);
-        if (match) {
-          var alpha = parseFloat(match[4]);
-          var h = (parseFloat(match[1]) % 360 + 360) % 360;
-          var s = clamp(parseFloat(match[2]), 0, 100);
-          var l = clamp(parseFloat(match[3]), 0, 100);
-          var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
-          return [h, s, l, a];
-        }
-        return null;
-      };
-      cs.get.hwb = function(string) {
-        if (!string) {
-          return null;
-        }
-        var hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
-        var match = string.match(hwb);
-        if (match) {
-          var alpha = parseFloat(match[4]);
-          var h = (parseFloat(match[1]) % 360 + 360) % 360;
-          var w = clamp(parseFloat(match[2]), 0, 100);
-          var b = clamp(parseFloat(match[3]), 0, 100);
-          var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
-          return [h, w, b, a];
-        }
-        return null;
-      };
-      cs.to.hex = function() {
-        var rgba = swizzle(arguments);
-        return "#" + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : "");
-      };
-      cs.to.rgb = function() {
-        var rgba = swizzle(arguments);
-        return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ")" : "rgba(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ", " + rgba[3] + ")";
-      };
-      cs.to.rgb.percent = function() {
-        var rgba = swizzle(arguments);
-        var r = Math.round(rgba[0] / 255 * 100);
-        var g = Math.round(rgba[1] / 255 * 100);
-        var b = Math.round(rgba[2] / 255 * 100);
-        return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + r + "%, " + g + "%, " + b + "%)" : "rgba(" + r + "%, " + g + "%, " + b + "%, " + rgba[3] + ")";
-      };
-      cs.to.hsl = function() {
-        var hsla = swizzle(arguments);
-        return hsla.length < 4 || hsla[3] === 1 ? "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)" : "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, " + hsla[3] + ")";
-      };
-      cs.to.hwb = function() {
-        var hwba = swizzle(arguments);
-        var a = "";
-        if (hwba.length >= 4 && hwba[3] !== 1) {
-          a = ", " + hwba[3];
-        }
-        return "hwb(" + hwba[0] + ", " + hwba[1] + "%, " + hwba[2] + "%" + a + ")";
-      };
-      cs.to.keyword = function(rgb) {
-        return reverseNames[rgb.slice(0, 3)];
-      };
-      function clamp(num, min, max) {
-        return Math.min(Math.max(min, num), max);
-      }
-      __name(clamp, "clamp");
-      function hexDouble(num) {
-        var str = Math.round(num).toString(16).toUpperCase();
-        return str.length < 2 ? "0" + str : str;
-      }
-      __name(hexDouble, "hexDouble");
-    }
-  });
-
-  // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js
-  var require_conversions = __commonJS({
-    "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/conversions.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
-      var cssKeywords = require_color_name();
-      var reverseKeywords = {};
-      for (const key of Object.keys(cssKeywords)) {
-        reverseKeywords[cssKeywords[key]] = key;
-      }
-      var convert = {
-        rgb: { channels: 3, labels: "rgb" },
-        hsl: { channels: 3, labels: "hsl" },
-        hsv: { channels: 3, labels: "hsv" },
-        hwb: { channels: 3, labels: "hwb" },
-        cmyk: { channels: 4, labels: "cmyk" },
-        xyz: { channels: 3, labels: "xyz" },
-        lab: { channels: 3, labels: "lab" },
-        lch: { channels: 3, labels: "lch" },
-        hex: { channels: 1, labels: ["hex"] },
-        keyword: { channels: 1, labels: ["keyword"] },
-        ansi16: { channels: 1, labels: ["ansi16"] },
-        ansi256: { channels: 1, labels: ["ansi256"] },
-        hcg: { channels: 3, labels: ["h", "c", "g"] },
-        apple: { channels: 3, labels: ["r16", "g16", "b16"] },
-        gray: { channels: 1, labels: ["gray"] }
-      };
-      module.exports = convert;
-      for (const model of Object.keys(convert)) {
-        if (!("channels" in convert[model])) {
-          throw new Error("missing channels property: " + model);
-        }
-        if (!("labels" in convert[model])) {
-          throw new Error("missing channel labels property: " + model);
-        }
-        if (convert[model].labels.length !== convert[model].channels) {
-          throw new Error("channel and label counts mismatch: " + model);
-        }
-        const { channels, labels } = convert[model];
-        delete convert[model].channels;
-        delete convert[model].labels;
-        Object.defineProperty(convert[model], "channels", { value: channels });
-        Object.defineProperty(convert[model], "labels", { value: labels });
-      }
-      convert.rgb.hsl = function(rgb) {
-        const r = rgb[0] / 255;
-        const g = rgb[1] / 255;
-        const b = rgb[2] / 255;
-        const min = Math.min(r, g, b);
-        const max = Math.max(r, g, b);
-        const delta = max - min;
-        let h;
-        let s;
-        if (max === min) {
-          h = 0;
-        } else if (r === max) {
-          h = (g - b) / delta;
-        } else if (g === max) {
-          h = 2 + (b - r) / delta;
-        } else if (b === max) {
-          h = 4 + (r - g) / delta;
-        }
-        h = Math.min(h * 60, 360);
-        if (h < 0) {
-          h += 360;
-        }
-        const l = (min + max) / 2;
-        if (max === min) {
-          s = 0;
-        } else if (l <= 0.5) {
-          s = delta / (max + min);
-        } else {
-          s = delta / (2 - max - min);
-        }
-        return [h, s * 100, l * 100];
-      };
-      convert.rgb.hsv = function(rgb) {
-        let rdif;
-        let gdif;
-        let bdif;
-        let h;
-        let s;
-        const r = rgb[0] / 255;
-        const g = rgb[1] / 255;
-        const b = rgb[2] / 255;
-        const v = Math.max(r, g, b);
-        const diff = v - Math.min(r, g, b);
-        const diffc = /* @__PURE__ */ __name(function(c) {
-          return (v - c) / 6 / diff + 1 / 2;
-        }, "diffc");
-        if (diff === 0) {
-          h = 0;
-          s = 0;
-        } else {
-          s = diff / v;
-          rdif = diffc(r);
-          gdif = diffc(g);
-          bdif = diffc(b);
-          if (r === v) {
-            h = bdif - gdif;
-          } else if (g === v) {
-            h = 1 / 3 + rdif - bdif;
-          } else if (b === v) {
-            h = 2 / 3 + gdif - rdif;
-          }
-          if (h < 0) {
-            h += 1;
-          } else if (h > 1) {
-            h -= 1;
-          }
-        }
-        return [
-          h * 360,
-          s * 100,
-          v * 100
-        ];
-      };
-      convert.rgb.hwb = function(rgb) {
-        const r = rgb[0];
-        const g = rgb[1];
-        let b = rgb[2];
-        const h = convert.rgb.hsl(rgb)[0];
-        const w = 1 / 255 * Math.min(r, Math.min(g, b));
-        b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
-        return [h, w * 100, b * 100];
-      };
-      convert.rgb.cmyk = function(rgb) {
-        const r = rgb[0] / 255;
-        const g = rgb[1] / 255;
-        const b = rgb[2] / 255;
-        const k = Math.min(1 - r, 1 - g, 1 - b);
-        const c = (1 - r - k) / (1 - k) || 0;
-        const m = (1 - g - k) / (1 - k) || 0;
-        const y = (1 - b - k) / (1 - k) || 0;
-        return [c * 100, m * 100, y * 100, k * 100];
-      };
-      function comparativeDistance(x, y) {
-        return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
-      }
-      __name(comparativeDistance, "comparativeDistance");
-      convert.rgb.keyword = function(rgb) {
-        const reversed = reverseKeywords[rgb];
-        if (reversed) {
-          return reversed;
-        }
-        let currentClosestDistance = Infinity;
-        let currentClosestKeyword;
-        for (const keyword of Object.keys(cssKeywords)) {
-          const value = cssKeywords[keyword];
-          const distance = comparativeDistance(rgb, value);
-          if (distance < currentClosestDistance) {
-            currentClosestDistance = distance;
-            currentClosestKeyword = keyword;
-          }
-        }
-        return currentClosestKeyword;
-      };
-      convert.keyword.rgb = function(keyword) {
-        return cssKeywords[keyword];
-      };
-      convert.rgb.xyz = function(rgb) {
-        let r = rgb[0] / 255;
-        let g = rgb[1] / 255;
-        let b = rgb[2] / 255;
-        r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
-        g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
-        b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
-        const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
-        const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
-        const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
-        return [x * 100, y * 100, z * 100];
-      };
-      convert.rgb.lab = function(rgb) {
-        const xyz = convert.rgb.xyz(rgb);
-        let x = xyz[0];
-        let y = xyz[1];
-        let z = xyz[2];
-        x /= 95.047;
-        y /= 100;
-        z /= 108.883;
-        x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
-        y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
-        z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
-        const l = 116 * y - 16;
-        const a = 500 * (x - y);
-        const b = 200 * (y - z);
-        return [l, a, b];
-      };
-      convert.hsl.rgb = function(hsl) {
-        const h = hsl[0] / 360;
-        const s = hsl[1] / 100;
-        const l = hsl[2] / 100;
-        let t2;
-        let t3;
-        let val;
-        if (s === 0) {
-          val = l * 255;
-          return [val, val, val];
-        }
-        if (l < 0.5) {
-          t2 = l * (1 + s);
-        } else {
-          t2 = l + s - l * s;
-        }
-        const t1 = 2 * l - t2;
-        const rgb = [0, 0, 0];
-        for (let i = 0; i < 3; i++) {
-          t3 = h + 1 / 3 * -(i - 1);
-          if (t3 < 0) {
-            t3++;
-          }
-          if (t3 > 1) {
-            t3--;
-          }
-          if (6 * t3 < 1) {
-            val = t1 + (t2 - t1) * 6 * t3;
-          } else if (2 * t3 < 1) {
-            val = t2;
-          } else if (3 * t3 < 2) {
-            val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
-          } else {
-            val = t1;
-          }
-          rgb[i] = val * 255;
-        }
-        return rgb;
-      };
-      convert.hsl.hsv = function(hsl) {
-        const h = hsl[0];
-        let s = hsl[1] / 100;
-        let l = hsl[2] / 100;
-        let smin = s;
-        const lmin = Math.max(l, 0.01);
-        l *= 2;
-        s *= l <= 1 ? l : 2 - l;
-        smin *= lmin <= 1 ? lmin : 2 - lmin;
-        const v = (l + s) / 2;
-        const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
-        return [h, sv * 100, v * 100];
-      };
-      convert.hsv.rgb = function(hsv) {
-        const h = hsv[0] / 60;
-        const s = hsv[1] / 100;
-        let v = hsv[2] / 100;
-        const hi = Math.floor(h) % 6;
-        const f = h - Math.floor(h);
-        const p = 255 * v * (1 - s);
-        const q = 255 * v * (1 - s * f);
-        const t = 255 * v * (1 - s * (1 - f));
-        v *= 255;
-        switch (hi) {
-          case 0:
-            return [v, t, p];
-          case 1:
-            return [q, v, p];
-          case 2:
-            return [p, v, t];
-          case 3:
-            return [p, q, v];
-          case 4:
-            return [t, p, v];
-          case 5:
-            return [v, p, q];
-        }
-      };
-      convert.hsv.hsl = function(hsv) {
-        const h = hsv[0];
-        const s = hsv[1] / 100;
-        const v = hsv[2] / 100;
-        const vmin = Math.max(v, 0.01);
-        let sl;
-        let l;
-        l = (2 - s) * v;
-        const lmin = (2 - s) * vmin;
-        sl = s * vmin;
-        sl /= lmin <= 1 ? lmin : 2 - lmin;
-        sl = sl || 0;
-        l /= 2;
-        return [h, sl * 100, l * 100];
-      };
-      convert.hwb.rgb = function(hwb) {
-        const h = hwb[0] / 360;
-        let wh = hwb[1] / 100;
-        let bl = hwb[2] / 100;
-        const ratio = wh + bl;
-        let f;
-        if (ratio > 1) {
-          wh /= ratio;
-          bl /= ratio;
-        }
-        const i = Math.floor(6 * h);
-        const v = 1 - bl;
-        f = 6 * h - i;
-        if ((i & 1) !== 0) {
-          f = 1 - f;
-        }
-        const n = wh + f * (v - wh);
-        let r;
-        let g;
-        let b;
-        switch (i) {
-          default:
-          case 6:
-          case 0:
-            r = v;
-            g = n;
-            b = wh;
-            break;
-          case 1:
-            r = n;
-            g = v;
-            b = wh;
-            break;
-          case 2:
-            r = wh;
-            g = v;
-            b = n;
-            break;
-          case 3:
-            r = wh;
-            g = n;
-            b = v;
-            break;
-          case 4:
-            r = n;
-            g = wh;
-            b = v;
-            break;
-          case 5:
-            r = v;
-            g = wh;
-            b = n;
-            break;
-        }
-        return [r * 255, g * 255, b * 255];
-      };
-      convert.cmyk.rgb = function(cmyk) {
-        const c = cmyk[0] / 100;
-        const m = cmyk[1] / 100;
-        const y = cmyk[2] / 100;
-        const k = cmyk[3] / 100;
-        const r = 1 - Math.min(1, c * (1 - k) + k);
-        const g = 1 - Math.min(1, m * (1 - k) + k);
-        const b = 1 - Math.min(1, y * (1 - k) + k);
-        return [r * 255, g * 255, b * 255];
-      };
-      convert.xyz.rgb = function(xyz) {
-        const x = xyz[0] / 100;
-        const y = xyz[1] / 100;
-        const z = xyz[2] / 100;
-        let r;
-        let g;
-        let b;
-        r = x * 3.2406 + y * -1.5372 + z * -0.4986;
-        g = x * -0.9689 + y * 1.8758 + z * 0.0415;
-        b = x * 0.0557 + y * -0.204 + z * 1.057;
-        r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
-        g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
-        b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
-        r = Math.min(Math.max(0, r), 1);
-        g = Math.min(Math.max(0, g), 1);
-        b = Math.min(Math.max(0, b), 1);
-        return [r * 255, g * 255, b * 255];
-      };
-      convert.xyz.lab = function(xyz) {
-        let x = xyz[0];
-        let y = xyz[1];
-        let z = xyz[2];
-        x /= 95.047;
-        y /= 100;
-        z /= 108.883;
-        x = x > 8856e-6 ? x ** (1 / 3) : 7.787 * x + 16 / 116;
-        y = y > 8856e-6 ? y ** (1 / 3) : 7.787 * y + 16 / 116;
-        z = z > 8856e-6 ? z ** (1 / 3) : 7.787 * z + 16 / 116;
-        const l = 116 * y - 16;
-        const a = 500 * (x - y);
-        const b = 200 * (y - z);
-        return [l, a, b];
-      };
-      convert.lab.xyz = function(lab) {
-        const l = lab[0];
-        const a = lab[1];
-        const b = lab[2];
-        let x;
-        let y;
-        let z;
-        y = (l + 16) / 116;
-        x = a / 500 + y;
-        z = y - b / 200;
-        const y2 = y ** 3;
-        const x2 = x ** 3;
-        const z2 = z ** 3;
-        y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
-        x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
-        z = z2 > 8856e-6 ? z2 : (z - 16 / 116) / 7.787;
-        x *= 95.047;
-        y *= 100;
-        z *= 108.883;
-        return [x, y, z];
-      };
-      convert.lab.lch = function(lab) {
-        const l = lab[0];
-        const a = lab[1];
-        const b = lab[2];
-        let h;
-        const hr = Math.atan2(b, a);
-        h = hr * 360 / 2 / Math.PI;
-        if (h < 0) {
-          h += 360;
-        }
-        const c = Math.sqrt(a * a + b * b);
-        return [l, c, h];
-      };
-      convert.lch.lab = function(lch) {
-        const l = lch[0];
-        const c = lch[1];
-        const h = lch[2];
-        const hr = h / 360 * 2 * Math.PI;
-        const a = c * Math.cos(hr);
-        const b = c * Math.sin(hr);
-        return [l, a, b];
-      };
-      convert.rgb.ansi16 = function(args, saturation = null) {
-        const [r, g, b] = args;
-        let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
-        value = Math.round(value / 50);
-        if (value === 0) {
-          return 30;
-        }
-        let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
-        if (value === 2) {
-          ansi += 60;
-        }
-        return ansi;
-      };
-      convert.hsv.ansi16 = function(args) {
-        return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
-      };
-      convert.rgb.ansi256 = function(args) {
-        const r = args[0];
-        const g = args[1];
-        const b = args[2];
-        if (r === g && g === b) {
-          if (r < 8) {
-            return 16;
-          }
-          if (r > 248) {
-            return 231;
-          }
-          return Math.round((r - 8) / 247 * 24) + 232;
-        }
-        const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
-        return ansi;
-      };
-      convert.ansi16.rgb = function(args) {
-        let color = args % 10;
-        if (color === 0 || color === 7) {
-          if (args > 50) {
-            color += 3.5;
-          }
-          color = color / 10.5 * 255;
-          return [color, color, color];
-        }
-        const mult = (~~(args > 50) + 1) * 0.5;
-        const r = (color & 1) * mult * 255;
-        const g = (color >> 1 & 1) * mult * 255;
-        const b = (color >> 2 & 1) * mult * 255;
-        return [r, g, b];
-      };
-      convert.ansi256.rgb = function(args) {
-        if (args >= 232) {
-          const c = (args - 232) * 10 + 8;
-          return [c, c, c];
-        }
-        args -= 16;
-        let rem;
-        const r = Math.floor(args / 36) / 5 * 255;
-        const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
-        const b = rem % 6 / 5 * 255;
-        return [r, g, b];
-      };
-      convert.rgb.hex = function(args) {
-        const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
-        const string = integer.toString(16).toUpperCase();
-        return "000000".substring(string.length) + string;
-      };
-      convert.hex.rgb = function(args) {
-        const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
-        if (!match) {
-          return [0, 0, 0];
-        }
-        let colorString = match[0];
-        if (match[0].length === 3) {
-          colorString = colorString.split("").map((char) => {
-            return char + char;
-          }).join("");
-        }
-        const integer = parseInt(colorString, 16);
-        const r = integer >> 16 & 255;
-        const g = integer >> 8 & 255;
-        const b = integer & 255;
-        return [r, g, b];
-      };
-      convert.rgb.hcg = function(rgb) {
-        const r = rgb[0] / 255;
-        const g = rgb[1] / 255;
-        const b = rgb[2] / 255;
-        const max = Math.max(Math.max(r, g), b);
-        const min = Math.min(Math.min(r, g), b);
-        const chroma = max - min;
-        let grayscale;
-        let hue;
-        if (chroma < 1) {
-          grayscale = min / (1 - chroma);
-        } else {
-          grayscale = 0;
-        }
-        if (chroma <= 0) {
-          hue = 0;
-        } else if (max === r) {
-          hue = (g - b) / chroma % 6;
-        } else if (max === g) {
-          hue = 2 + (b - r) / chroma;
-        } else {
-          hue = 4 + (r - g) / chroma;
-        }
-        hue /= 6;
-        hue %= 1;
-        return [hue * 360, chroma * 100, grayscale * 100];
-      };
-      convert.hsl.hcg = function(hsl) {
-        const s = hsl[1] / 100;
-        const l = hsl[2] / 100;
-        const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
-        let f = 0;
-        if (c < 1) {
-          f = (l - 0.5 * c) / (1 - c);
-        }
-        return [hsl[0], c * 100, f * 100];
-      };
-      convert.hsv.hcg = function(hsv) {
-        const s = hsv[1] / 100;
-        const v = hsv[2] / 100;
-        const c = s * v;
-        let f = 0;
-        if (c < 1) {
-          f = (v - c) / (1 - c);
-        }
-        return [hsv[0], c * 100, f * 100];
-      };
-      convert.hcg.rgb = function(hcg) {
-        const h = hcg[0] / 360;
-        const c = hcg[1] / 100;
-        const g = hcg[2] / 100;
-        if (c === 0) {
-          return [g * 255, g * 255, g * 255];
-        }
-        const pure = [0, 0, 0];
-        const hi = h % 1 * 6;
-        const v = hi % 1;
-        const w = 1 - v;
-        let mg = 0;
-        switch (Math.floor(hi)) {
-          case 0:
-            pure[0] = 1;
-            pure[1] = v;
-            pure[2] = 0;
-            break;
-          case 1:
-            pure[0] = w;
-            pure[1] = 1;
-            pure[2] = 0;
-            break;
-          case 2:
-            pure[0] = 0;
-            pure[1] = 1;
-            pure[2] = v;
-            break;
-          case 3:
-            pure[0] = 0;
-            pure[1] = w;
-            pure[2] = 1;
-            break;
-          case 4:
-            pure[0] = v;
-            pure[1] = 0;
-            pure[2] = 1;
-            break;
-          default:
-            pure[0] = 1;
-            pure[1] = 0;
-            pure[2] = w;
-        }
-        mg = (1 - c) * g;
-        return [
-          (c * pure[0] + mg) * 255,
-          (c * pure[1] + mg) * 255,
-          (c * pure[2] + mg) * 255
-        ];
-      };
-      convert.hcg.hsv = function(hcg) {
-        const c = hcg[1] / 100;
-        const g = hcg[2] / 100;
-        const v = c + g * (1 - c);
-        let f = 0;
-        if (v > 0) {
-          f = c / v;
-        }
-        return [hcg[0], f * 100, v * 100];
-      };
-      convert.hcg.hsl = function(hcg) {
-        const c = hcg[1] / 100;
-        const g = hcg[2] / 100;
-        const l = g * (1 - c) + 0.5 * c;
-        let s = 0;
-        if (l > 0 && l < 0.5) {
-          s = c / (2 * l);
-        } else if (l >= 0.5 && l < 1) {
-          s = c / (2 * (1 - l));
-        }
-        return [hcg[0], s * 100, l * 100];
-      };
-      convert.hcg.hwb = function(hcg) {
-        const c = hcg[1] / 100;
-        const g = hcg[2] / 100;
-        const v = c + g * (1 - c);
-        return [hcg[0], (v - c) * 100, (1 - v) * 100];
-      };
-      convert.hwb.hcg = function(hwb) {
-        const w = hwb[1] / 100;
-        const b = hwb[2] / 100;
-        const v = 1 - b;
-        const c = v - w;
-        let g = 0;
-        if (c < 1) {
-          g = (v - c) / (1 - c);
-        }
-        return [hwb[0], c * 100, g * 100];
-      };
-      convert.apple.rgb = function(apple) {
-        return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
-      };
-      convert.rgb.apple = function(rgb) {
-        return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
-      };
-      convert.gray.rgb = function(args) {
-        return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
-      };
-      convert.gray.hsl = function(args) {
-        return [0, 0, args[0]];
-      };
-      convert.gray.hsv = convert.gray.hsl;
-      convert.gray.hwb = function(gray) {
-        return [0, 100, gray[0]];
-      };
-      convert.gray.cmyk = function(gray) {
-        return [0, 0, 0, gray[0]];
-      };
-      convert.gray.lab = function(gray) {
-        return [gray[0], 0, 0];
-      };
-      convert.gray.hex = function(gray) {
-        const val = Math.round(gray[0] / 100 * 255) & 255;
-        const integer = (val << 16) + (val << 8) + val;
-        const string = integer.toString(16).toUpperCase();
-        return "000000".substring(string.length) + string;
-      };
-      convert.rgb.gray = function(rgb) {
-        const val = (rgb[0] + rgb[1] + rgb[2]) / 3;
-        return [val / 255 * 100];
-      };
-    }
-  });
-
-  // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js
-  var require_route = __commonJS({
-    "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/route.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
-      var conversions = require_conversions();
-      function buildGraph() {
-        const graph = {};
-        const models = Object.keys(conversions);
-        for (let len = models.length, i = 0; i < len; i++) {
-          graph[models[i]] = {
-            // http://jsperf.com/1-vs-infinity
-            // micro-opt, but this is simple.
-            distance: -1,
-            parent: null
-          };
-        }
-        return graph;
-      }
-      __name(buildGraph, "buildGraph");
-      function deriveBFS(fromModel) {
-        const graph = buildGraph();
-        const queue = [fromModel];
-        graph[fromModel].distance = 0;
-        while (queue.length) {
-          const current = queue.pop();
-          const adjacents = Object.keys(conversions[current]);
-          for (let len = adjacents.length, i = 0; i < len; i++) {
-            const adjacent = adjacents[i];
-            const node = graph[adjacent];
-            if (node.distance === -1) {
-              node.distance = graph[current].distance + 1;
-              node.parent = current;
-              queue.unshift(adjacent);
-            }
-          }
-        }
-        return graph;
-      }
-      __name(deriveBFS, "deriveBFS");
-      function link(from, to) {
-        return function(args) {
-          return to(from(args));
-        };
-      }
-      __name(link, "link");
-      function wrapConversion(toModel, graph) {
-        const path = [graph[toModel].parent, toModel];
-        let fn = conversions[graph[toModel].parent][toModel];
-        let cur = graph[toModel].parent;
-        while (graph[cur].parent) {
-          path.unshift(graph[cur].parent);
-          fn = link(conversions[graph[cur].parent][cur], fn);
-          cur = graph[cur].parent;
-        }
-        fn.conversion = path;
-        return fn;
-      }
-      __name(wrapConversion, "wrapConversion");
-      module.exports = function(fromModel) {
-        const graph = deriveBFS(fromModel);
-        const conversion = {};
-        const models = Object.keys(graph);
-        for (let len = models.length, i = 0; i < len; i++) {
-          const toModel = models[i];
-          const node = graph[toModel];
-          if (node.parent === null) {
-            continue;
-          }
-          conversion[toModel] = wrapConversion(toModel, graph);
-        }
-        return conversion;
-      };
-    }
-  });
-
-  // node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js
-  var require_color_convert = __commonJS({
-    "node_modules/.pnpm/color-convert@2.0.1/node_modules/color-convert/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
-      var conversions = require_conversions();
-      var route = require_route();
-      var convert = {};
-      var models = Object.keys(conversions);
-      function wrapRaw(fn) {
-        const wrappedFn = /* @__PURE__ */ __name(function(...args) {
-          const arg0 = args[0];
-          if (arg0 === void 0 || arg0 === null) {
-            return arg0;
-          }
-          if (arg0.length > 1) {
-            args = arg0;
-          }
-          return fn(args);
-        }, "wrappedFn");
-        if ("conversion" in fn) {
-          wrappedFn.conversion = fn.conversion;
-        }
-        return wrappedFn;
-      }
-      __name(wrapRaw, "wrapRaw");
-      function wrapRounded(fn) {
-        const wrappedFn = /* @__PURE__ */ __name(function(...args) {
-          const arg0 = args[0];
-          if (arg0 === void 0 || arg0 === null) {
-            return arg0;
-          }
-          if (arg0.length > 1) {
-            args = arg0;
-          }
-          const result = fn(args);
-          if (typeof result === "object") {
-            for (let len = result.length, i = 0; i < len; i++) {
-              result[i] = Math.round(result[i]);
-            }
-          }
-          return result;
-        }, "wrappedFn");
-        if ("conversion" in fn) {
-          wrappedFn.conversion = fn.conversion;
-        }
-        return wrappedFn;
-      }
-      __name(wrapRounded, "wrapRounded");
-      models.forEach((fromModel) => {
-        convert[fromModel] = {};
-        Object.defineProperty(convert[fromModel], "channels", { value: conversions[fromModel].channels });
-        Object.defineProperty(convert[fromModel], "labels", { value: conversions[fromModel].labels });
-        const routes = route(fromModel);
-        const routeModels = Object.keys(routes);
-        routeModels.forEach((toModel) => {
-          const fn = routes[toModel];
-          convert[fromModel][toModel] = wrapRounded(fn);
-          convert[fromModel][toModel].raw = wrapRaw(fn);
-        });
-      });
-      module.exports = convert;
-    }
-  });
-
-  // node_modules/.pnpm/color@4.2.3/node_modules/color/index.js
-  var require_color = __commonJS({
-    "node_modules/.pnpm/color@4.2.3/node_modules/color/index.js"(exports, module) {
-      init_define_LAST_COMMIT_HASH();
-      var colorString = require_color_string();
-      var convert = require_color_convert();
-      var skippedModels = [
-        // To be honest, I don't really feel like keyword belongs in color convert, but eh.
-        "keyword",
-        // Gray conflicts with some method names, and has its own method defined.
-        "gray",
-        // Shouldn't really be in color-convert either...
-        "hex"
-      ];
-      var hashedModelKeys = {};
-      for (const model of Object.keys(convert)) {
-        hashedModelKeys[[...convert[model].labels].sort().join("")] = model;
-      }
-      var limiters = {};
-      function Color7(object, model) {
-        if (!(this instanceof Color7)) {
-          return new Color7(object, model);
-        }
-        if (model && model in skippedModels) {
-          model = null;
-        }
-        if (model && !(model in convert)) {
-          throw new Error("Unknown model: " + model);
-        }
-        let i;
-        let channels;
-        if (object == null) {
-          this.model = "rgb";
-          this.color = [0, 0, 0];
-          this.valpha = 1;
-        } else if (object instanceof Color7) {
-          this.model = object.model;
-          this.color = [...object.color];
-          this.valpha = object.valpha;
-        } else if (typeof object === "string") {
-          const result = colorString.get(object);
-          if (result === null) {
-            throw new Error("Unable to parse color from string: " + object);
-          }
-          this.model = result.model;
-          channels = convert[this.model].channels;
-          this.color = result.value.slice(0, channels);
-          this.valpha = typeof result.value[channels] === "number" ? result.value[channels] : 1;
-        } else if (object.length > 0) {
-          this.model = model || "rgb";
-          channels = convert[this.model].channels;
-          const newArray = Array.prototype.slice.call(object, 0, channels);
-          this.color = zeroArray(newArray, channels);
-          this.valpha = typeof object[channels] === "number" ? object[channels] : 1;
-        } else if (typeof object === "number") {
-          this.model = "rgb";
-          this.color = [
-            object >> 16 & 255,
-            object >> 8 & 255,
-            object & 255
-          ];
-          this.valpha = 1;
-        } else {
-          this.valpha = 1;
-          const keys = Object.keys(object);
-          if ("alpha" in object) {
-            keys.splice(keys.indexOf("alpha"), 1);
-            this.valpha = typeof object.alpha === "number" ? object.alpha : 0;
-          }
-          const hashedKeys = keys.sort().join("");
-          if (!(hashedKeys in hashedModelKeys)) {
-            throw new Error("Unable to parse color from object: " + JSON.stringify(object));
-          }
-          this.model = hashedModelKeys[hashedKeys];
-          const { labels } = convert[this.model];
-          const color = [];
-          for (i = 0; i < labels.length; i++) {
-            color.push(object[labels[i]]);
-          }
-          this.color = zeroArray(color);
-        }
-        if (limiters[this.model]) {
-          channels = convert[this.model].channels;
-          for (i = 0; i < channels; i++) {
-            const limit = limiters[this.model][i];
-            if (limit) {
-              this.color[i] = limit(this.color[i]);
-            }
-          }
-        }
-        this.valpha = Math.max(0, Math.min(1, this.valpha));
-        if (Object.freeze) {
-          Object.freeze(this);
-        }
-      }
-      __name(Color7, "Color");
-      Color7.prototype = {
-        toString() {
-          return this.string();
-        },
-        toJSON() {
-          return this[this.model]();
-        },
-        string(places) {
-          let self = this.model in colorString.to ? this : this.rgb();
-          self = self.round(typeof places === "number" ? places : 1);
-          const args = self.valpha === 1 ? self.color : [...self.color, this.valpha];
-          return colorString.to[self.model](args);
-        },
-        percentString(places) {
-          const self = this.rgb().round(typeof places === "number" ? places : 1);
-          const args = self.valpha === 1 ? self.color : [...self.color, this.valpha];
-          return colorString.to.rgb.percent(args);
-        },
-        array() {
-          return this.valpha === 1 ? [...this.color] : [...this.color, this.valpha];
-        },
-        object() {
-          const result = {};
-          const { channels } = convert[this.model];
-          const { labels } = convert[this.model];
-          for (let i = 0; i < channels; i++) {
-            result[labels[i]] = this.color[i];
-          }
-          if (this.valpha !== 1) {
-            result.alpha = this.valpha;
-          }
-          return result;
-        },
-        unitArray() {
-          const rgb = this.rgb().color;
-          rgb[0] /= 255;
-          rgb[1] /= 255;
-          rgb[2] /= 255;
-          if (this.valpha !== 1) {
-            rgb.push(this.valpha);
-          }
-          return rgb;
-        },
-        unitObject() {
-          const rgb = this.rgb().object();
-          rgb.r /= 255;
-          rgb.g /= 255;
-          rgb.b /= 255;
-          if (this.valpha !== 1) {
-            rgb.alpha = this.valpha;
-          }
-          return rgb;
-        },
-        round(places) {
-          places = Math.max(places || 0, 0);
-          return new Color7([...this.color.map(roundToPlace(places)), this.valpha], this.model);
-        },
-        alpha(value) {
-          if (value !== void 0) {
-            return new Color7([...this.color, Math.max(0, Math.min(1, value))], this.model);
-          }
-          return this.valpha;
-        },
-        // Rgb
-        red: getset("rgb", 0, maxfn(255)),
-        green: getset("rgb", 1, maxfn(255)),
-        blue: getset("rgb", 2, maxfn(255)),
-        hue: getset(["hsl", "hsv", "hsl", "hwb", "hcg"], 0, (value) => (value % 360 + 360) % 360),
-        saturationl: getset("hsl", 1, maxfn(100)),
-        lightness: getset("hsl", 2, maxfn(100)),
-        saturationv: getset("hsv", 1, maxfn(100)),
-        value: getset("hsv", 2, maxfn(100)),
-        chroma: getset("hcg", 1, maxfn(100)),
-        gray: getset("hcg", 2, maxfn(100)),
-        white: getset("hwb", 1, maxfn(100)),
-        wblack: getset("hwb", 2, maxfn(100)),
-        cyan: getset("cmyk", 0, maxfn(100)),
-        magenta: getset("cmyk", 1, maxfn(100)),
-        yellow: getset("cmyk", 2, maxfn(100)),
-        black: getset("cmyk", 3, maxfn(100)),
-        x: getset("xyz", 0, maxfn(95.047)),
-        y: getset("xyz", 1, maxfn(100)),
-        z: getset("xyz", 2, maxfn(108.833)),
-        l: getset("lab", 0, maxfn(100)),
-        a: getset("lab", 1),
-        b: getset("lab", 2),
-        keyword(value) {
-          if (value !== void 0) {
-            return new Color7(value);
-          }
-          return convert[this.model].keyword(this.color);
-        },
-        hex(value) {
-          if (value !== void 0) {
-            return new Color7(value);
-          }
-          return colorString.to.hex(this.rgb().round().color);
-        },
-        hexa(value) {
-          if (value !== void 0) {
-            return new Color7(value);
-          }
-          const rgbArray = this.rgb().round().color;
-          let alphaHex = Math.round(this.valpha * 255).toString(16).toUpperCase();
-          if (alphaHex.length === 1) {
-            alphaHex = "0" + alphaHex;
-          }
-          return colorString.to.hex(rgbArray) + alphaHex;
-        },
-        rgbNumber() {
-          const rgb = this.rgb().color;
-          return (rgb[0] & 255) << 16 | (rgb[1] & 255) << 8 | rgb[2] & 255;
-        },
-        luminosity() {
-          const rgb = this.rgb().color;
-          const lum = [];
-          for (const [i, element] of rgb.entries()) {
-            const chan = element / 255;
-            lum[i] = chan <= 0.04045 ? chan / 12.92 : ((chan + 0.055) / 1.055) ** 2.4;
-          }
-          return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
-        },
-        contrast(color2) {
-          const lum1 = this.luminosity();
-          const lum2 = color2.luminosity();
-          if (lum1 > lum2) {
-            return (lum1 + 0.05) / (lum2 + 0.05);
-          }
-          return (lum2 + 0.05) / (lum1 + 0.05);
-        },
-        level(color2) {
-          const contrastRatio = this.contrast(color2);
-          if (contrastRatio >= 7) {
-            return "AAA";
-          }
-          return contrastRatio >= 4.5 ? "AA" : "";
-        },
-        isDark() {
-          const rgb = this.rgb().color;
-          const yiq = (rgb[0] * 2126 + rgb[1] * 7152 + rgb[2] * 722) / 1e4;
-          return yiq < 128;
-        },
-        isLight() {
-          return !this.isDark();
-        },
-        negate() {
-          const rgb = this.rgb();
-          for (let i = 0; i < 3; i++) {
-            rgb.color[i] = 255 - rgb.color[i];
-          }
-          return rgb;
-        },
-        lighten(ratio) {
-          const hsl = this.hsl();
-          hsl.color[2] += hsl.color[2] * ratio;
-          return hsl;
-        },
-        darken(ratio) {
-          const hsl = this.hsl();
-          hsl.color[2] -= hsl.color[2] * ratio;
-          return hsl;
-        },
-        saturate(ratio) {
-          const hsl = this.hsl();
-          hsl.color[1] += hsl.color[1] * ratio;
-          return hsl;
-        },
-        desaturate(ratio) {
-          const hsl = this.hsl();
-          hsl.color[1] -= hsl.color[1] * ratio;
-          return hsl;
-        },
-        whiten(ratio) {
-          const hwb = this.hwb();
-          hwb.color[1] += hwb.color[1] * ratio;
-          return hwb;
-        },
-        blacken(ratio) {
-          const hwb = this.hwb();
-          hwb.color[2] += hwb.color[2] * ratio;
-          return hwb;
-        },
-        grayscale() {
-          const rgb = this.rgb().color;
-          const value = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
-          return Color7.rgb(value, value, value);
-        },
-        fade(ratio) {
-          return this.alpha(this.valpha - this.valpha * ratio);
-        },
-        opaquer(ratio) {
-          return this.alpha(this.valpha + this.valpha * ratio);
-        },
-        rotate(degrees) {
-          const hsl = this.hsl();
-          let hue = hsl.color[0];
-          hue = (hue + degrees) % 360;
-          hue = hue < 0 ? 360 + hue : hue;
-          hsl.color[0] = hue;
-          return hsl;
-        },
-        mix(mixinColor, weight) {
-          if (!mixinColor || !mixinColor.rgb) {
-            throw new Error('Argument to "mix" was not a Color instance, but rather an instance of ' + typeof mixinColor);
-          }
-          const color1 = mixinColor.rgb();
-          const color2 = this.rgb();
-          const p = weight === void 0 ? 0.5 : weight;
-          const w = 2 * p - 1;
-          const a = color1.alpha() - color2.alpha();
-          const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2;
-          const w2 = 1 - w1;
-          return Color7.rgb(
-            w1 * color1.red() + w2 * color2.red(),
-            w1 * color1.green() + w2 * color2.green(),
-            w1 * color1.blue() + w2 * color2.blue(),
-            color1.alpha() * p + color2.alpha() * (1 - p)
-          );
-        }
-      };
-      for (const model of Object.keys(convert)) {
-        if (skippedModels.includes(model)) {
-          continue;
-        }
-        const { channels } = convert[model];
-        Color7.prototype[model] = function(...args) {
-          if (this.model === model) {
-            return new Color7(this);
-          }
-          if (args.length > 0) {
-            return new Color7(args, model);
-          }
-          return new Color7([...assertArray(convert[this.model][model].raw(this.color)), this.valpha], model);
-        };
-        Color7[model] = function(...args) {
-          let color = args[0];
-          if (typeof color === "number") {
-            color = zeroArray(args, channels);
-          }
-          return new Color7(color, model);
-        };
-      }
-      function roundTo(number, places) {
-        return Number(number.toFixed(places));
-      }
-      __name(roundTo, "roundTo");
-      function roundToPlace(places) {
-        return function(number) {
-          return roundTo(number, places);
-        };
-      }
-      __name(roundToPlace, "roundToPlace");
-      function getset(model, channel, modifier) {
-        model = Array.isArray(model) ? model : [model];
-        for (const m of model) {
-          (limiters[m] || (limiters[m] = []))[channel] = modifier;
-        }
-        model = model[0];
-        return function(value) {
-          let result;
-          if (value !== void 0) {
-            if (modifier) {
-              value = modifier(value);
-            }
-            result = this[model]();
-            result.color[channel] = value;
-            return result;
-          }
-          result = this[model]().color[channel];
-          if (modifier) {
-            result = modifier(result);
-          }
-          return result;
-        };
-      }
-      __name(getset, "getset");
-      function maxfn(max) {
-        return function(v) {
-          return Math.max(0, Math.min(max, v));
-        };
-      }
-      __name(maxfn, "maxfn");
-      function assertArray(value) {
-        return Array.isArray(value) ? value : [value];
-      }
-      __name(assertArray, "assertArray");
-      function zeroArray(array, length) {
-        for (let i = 0; i < length; i++) {
-          if (typeof array[i] !== "number") {
-            array[i] = 0;
-          }
-        }
-        return array;
-      }
-      __name(zeroArray, "zeroArray");
-      module.exports = Color7;
-    }
-  });
-
-  // node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js
+  )), "__toESM");
   var require_bcmodsdk = __commonJS({
     "node_modules/.pnpm/bondage-club-mod-sdk@1.2.0/node_modules/bondage-club-mod-sdk/dist/bcmodsdk.js"(exports) {
-      init_define_LAST_COMMIT_HASH();
-      var bcModSdk = function() {
+      var bcModSdk = (function() {
         "use strict";
         const o = "1.2.0";
         function e(o2) {
@@ -1650,21 +43,25 @@ var Themed = (() => {
           throw console.error(e2), e2;
         }
         __name(e, "e");
+        __name2(e, "e");
         const t = new TextEncoder();
         function n(o2) {
           return !!o2 && "object" == typeof o2 && !Array.isArray(o2);
         }
         __name(n, "n");
+        __name2(n, "n");
         function r(o2) {
           const e2 = /* @__PURE__ */ new Set();
-          return o2.filter((o3) => !e2.has(o3) && e2.add(o3));
+          return o2.filter(((o3) => !e2.has(o3) && e2.add(o3)));
         }
         __name(r, "r");
+        __name2(r, "r");
         const i = /* @__PURE__ */ new Map(), a = /* @__PURE__ */ new Set();
         function c(o2) {
           a.has(o2) || (a.add(o2), console.warn(o2));
         }
         __name(c, "c");
+        __name2(c, "c");
         function s(o2) {
           const e2 = [], t2 = /* @__PURE__ */ new Map(), n2 = /* @__PURE__ */ new Set();
           for (const r3 of f.values()) {
@@ -1680,21 +77,21 @@ Patch2:
 ${a2}`), t2.set(e3, a2), n2.add(r3.name);
             }
           }
-          e2.sort((o3, e3) => e3.priority - o3.priority);
-          const r2 = function(o3, e3) {
+          e2.sort(((o3, e3) => e3.priority - o3.priority));
+          const r2 = (function(o3, e3) {
             if (0 === e3.size) return o3;
             let t3 = o3.toString().replaceAll("\r\n", "\n");
             for (const [n3, r3] of e3.entries()) t3.includes(n3) || c(`ModSDK: Patching ${o3.name}: Patch ${n3} not applied`), t3 = t3.replaceAll(n3, r3);
             return (0, eval)(`(${t3})`);
-          }(o2.original, t2);
-          let i2 = /* @__PURE__ */ __name(function(e3) {
+          })(o2.original, t2);
+          let i2 = /* @__PURE__ */ __name2(function(e3) {
             var t3, i3;
             const a2 = null === (i3 = (t3 = m.errorReporterHooks).hookChainExit) || void 0 === i3 ? void 0 : i3.call(t3, o2.name, n2), c2 = r2.apply(this, e3);
             return null == a2 || a2(), c2;
           }, "i");
           for (let t3 = e2.length - 1; t3 >= 0; t3--) {
             const n3 = e2[t3], r3 = i2;
-            i2 = /* @__PURE__ */ __name(function(e3) {
+            i2 = /* @__PURE__ */ __name2(function(e3) {
               var t4, i3;
               const a2 = null === (i3 = (t4 = m.errorReporterHooks).hookEnter) || void 0 === i3 ? void 0 : i3.call(t4, o2.name, n3.mod), c2 = n3.hook.apply(this, [e3, (o3) => {
                 if (1 !== arguments.length || !Array.isArray(e3)) throw new Error(`Mod ${n3.mod} failed to call next hook: Expected args to be array, got ${typeof o3}`);
@@ -1706,6 +103,7 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
           return { hooks: e2, patches: t2, patchesSources: n2, enter: i2, final: r2 };
         }
         __name(s, "s");
+        __name2(s, "s");
         function l(o2, e2 = false) {
           let r2 = i.get(o2);
           if (r2) e2 && (r2.precomputed = s(r2));
@@ -1715,7 +113,7 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
             for (let t2 = 0; t2 < a2.length - 1; t2++) if (e3 = e3[a2[t2]], !n(e3)) throw new Error(`ModSDK: Function ${o2} to be patched not found; ${a2.slice(0, t2 + 1).join(".")} is not object`);
             const c2 = e3[a2[a2.length - 1]];
             if ("function" != typeof c2) throw new Error(`ModSDK: Function ${o2} to be patched not found`);
-            const l2 = function(o3) {
+            const l2 = (function(o3) {
               let e4 = -1;
               for (const n2 of t.encode(o3)) {
                 let o4 = 255 & (e4 ^ n2);
@@ -1723,32 +121,36 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
                 e4 = e4 >>> 8 ^ o4;
               }
               return ((-1 ^ e4) >>> 0).toString(16).padStart(8, "0").toUpperCase();
-            }(c2.toString().replaceAll("\r\n", "\n")), d2 = { name: o2, original: c2, originalHash: l2 };
-            r2 = Object.assign(Object.assign({}, d2), { precomputed: s(d2), router: /* @__PURE__ */ __name(() => {
-            }, "router"), context: e3, contextProperty: a2[a2.length - 1] }), r2.router = /* @__PURE__ */ function(o3) {
+            })(c2.toString().replaceAll("\r\n", "\n")), d2 = { name: o2, original: c2, originalHash: l2 };
+            r2 = Object.assign(Object.assign({}, d2), { precomputed: s(d2), router: /* @__PURE__ */ __name2(() => {
+            }, "router"), context: e3, contextProperty: a2[a2.length - 1] }), r2.router = /* @__PURE__ */ (function(o3) {
               return function(...e4) {
                 return o3.precomputed.enter.apply(this, [e4]);
               };
-            }(r2), i.set(o2, r2), e3[r2.contextProperty] = r2.router;
+            })(r2), i.set(o2, r2), e3[r2.contextProperty] = r2.router;
           }
           return r2;
         }
         __name(l, "l");
+        __name2(l, "l");
         function d() {
           for (const o2 of i.values()) o2.precomputed = s(o2);
         }
         __name(d, "d");
+        __name2(d, "d");
         function p() {
           const o2 = /* @__PURE__ */ new Map();
-          for (const [e2, t2] of i) o2.set(e2, { name: e2, original: t2.original, originalHash: t2.originalHash, sdkEntrypoint: t2.router, currentEntrypoint: t2.context[t2.contextProperty], hookedByMods: r(t2.precomputed.hooks.map((o3) => o3.mod)), patchedByMods: Array.from(t2.precomputed.patchesSources) });
+          for (const [e2, t2] of i) o2.set(e2, { name: e2, original: t2.original, originalHash: t2.originalHash, sdkEntrypoint: t2.router, currentEntrypoint: t2.context[t2.contextProperty], hookedByMods: r(t2.precomputed.hooks.map(((o3) => o3.mod))), patchedByMods: Array.from(t2.precomputed.patchesSources) });
           return o2;
         }
         __name(p, "p");
+        __name2(p, "p");
         const f = /* @__PURE__ */ new Map();
         function u(o2) {
           f.get(o2.name) !== o2 && e(`Failed to unload mod '${o2.name}': Not registered`), f.delete(o2.name), o2.loaded = false, d();
         }
         __name(u, "u");
+        __name2(u, "u");
         function g(o2, t2) {
           o2 && "object" == typeof o2 || e("Failed to register mod: Expected info object, got " + typeof o2), "string" == typeof o2.name && o2.name || e("Failed to register mod: Expected name to be non-empty string, got " + typeof o2.name);
           let r2 = `'${o2.name}'`;
@@ -1756,16 +158,16 @@ ${a2}`), t2.set(e3, a2), n2.add(r3.name);
           const i2 = true === t2.allowReplace, a2 = f.get(o2.name);
           a2 && (a2.allowReplace && i2 || e(`Refusing to load mod ${r2}: it is already loaded and doesn't allow being replaced.
 Was the mod loaded multiple times?`), u(a2));
-          const c2 = /* @__PURE__ */ __name((o3) => {
+          const c2 = /* @__PURE__ */ __name2((o3) => {
             let e2 = g2.patching.get(o3.name);
             return e2 || (e2 = { hooks: [], patches: /* @__PURE__ */ new Map() }, g2.patching.set(o3.name, e2)), e2;
-          }, "c"), s2 = /* @__PURE__ */ __name((o3, t3) => (...n2) => {
+          }, "c"), s2 = /* @__PURE__ */ __name2((o3, t3) => (...n2) => {
             var i3, a3;
             const c3 = null === (a3 = (i3 = m.errorReporterHooks).apiEndpointEnter) || void 0 === a3 ? void 0 : a3.call(i3, o3, g2.name);
             g2.loaded || e(`Mod ${r2} attempted to call SDK function after being unloaded`);
             const s3 = t3(...n2);
             return null == c3 || c3(), s3;
-          }, "s"), p2 = { unload: s2("unload", () => u(g2)), hookFunction: s2("hookFunction", (o3, t3, n2) => {
+          }, "s"), p2 = { unload: s2("unload", (() => u(g2))), hookFunction: s2("hookFunction", ((o3, t3, n2) => {
             "string" == typeof o3 && o3 || e(`Mod ${r2} failed to patch a function: Expected function name string, got ${typeof o3}`);
             const i3 = l(o3), a3 = c2(i3);
             "number" != typeof t3 && e(`Mod ${r2} failed to hook function '${o3}': Expected priority number, got ${typeof t3}`), "function" != typeof n2 && e(`Mod ${r2} failed to hook function '${o3}': Expected hook function, got ${typeof n2}`);
@@ -1774,138 +176,4629 @@ Was the mod loaded multiple times?`), u(a2));
               const o4 = a3.hooks.indexOf(s3);
               o4 >= 0 && (a3.hooks.splice(o4, 1), d());
             };
-          }), patchFunction: s2("patchFunction", (o3, t3) => {
+          })), patchFunction: s2("patchFunction", ((o3, t3) => {
             "string" == typeof o3 && o3 || e(`Mod ${r2} failed to patch a function: Expected function name string, got ${typeof o3}`);
             const i3 = l(o3), a3 = c2(i3);
             n(t3) || e(`Mod ${r2} failed to patch function '${o3}': Expected patches object, got ${typeof t3}`);
             for (const [n2, i4] of Object.entries(t3)) "string" == typeof i4 ? a3.patches.set(n2, i4) : null === i4 ? a3.patches.delete(n2) : e(`Mod ${r2} failed to patch function '${o3}': Invalid format of patch '${n2}'`);
             d();
-          }), removePatches: s2("removePatches", (o3) => {
+          })), removePatches: s2("removePatches", ((o3) => {
             "string" == typeof o3 && o3 || e(`Mod ${r2} failed to patch a function: Expected function name string, got ${typeof o3}`);
             const t3 = l(o3);
             c2(t3).patches.clear(), d();
-          }), callOriginal: s2("callOriginal", (o3, t3, n2) => {
+          })), callOriginal: s2("callOriginal", ((o3, t3, n2) => {
             "string" == typeof o3 && o3 || e(`Mod ${r2} failed to call a function: Expected function name string, got ${typeof o3}`);
             const i3 = l(o3);
             return Array.isArray(t3) || e(`Mod ${r2} failed to call a function: Expected args array, got ${typeof t3}`), i3.original.apply(null != n2 ? n2 : globalThis, t3);
-          }), getOriginalHash: s2("getOriginalHash", (o3) => {
+          })), getOriginalHash: s2("getOriginalHash", ((o3) => {
             "string" == typeof o3 && o3 || e(`Mod ${r2} failed to get hash: Expected function name string, got ${typeof o3}`);
             return l(o3).originalHash;
-          }) }, g2 = { name: o2.name, fullName: o2.fullName, version: o2.version, repository: o2.repository, allowReplace: i2, api: p2, loaded: true, patching: /* @__PURE__ */ new Map() };
+          })) }, g2 = { name: o2.name, fullName: o2.fullName, version: o2.version, repository: o2.repository, allowReplace: i2, api: p2, loaded: true, patching: /* @__PURE__ */ new Map() };
           return f.set(o2.name, g2), Object.freeze(p2);
         }
         __name(g, "g");
+        __name2(g, "g");
         function h() {
           const o2 = [];
           for (const e2 of f.values()) o2.push({ name: e2.name, fullName: e2.fullName, version: e2.version, repository: e2.repository });
           return o2;
         }
         __name(h, "h");
+        __name2(h, "h");
         let m;
-        const y = void 0 === window.bcModSdk ? window.bcModSdk = function() {
+        const y = void 0 === window.bcModSdk ? window.bcModSdk = (function() {
           const e2 = { version: o, apiVersion: 1, registerMod: g, getModsInfo: h, getPatchingInfo: p, errorReporterHooks: Object.seal({ apiEndpointEnter: null, hookEnter: null, hookChainExit: null }) };
           return m = e2, Object.freeze(e2);
-        }() : (n(window.bcModSdk) || e("Failed to init Mod SDK: Name already in use"), 1 !== window.bcModSdk.apiVersion && e(`Failed to init Mod SDK: Different version already loaded ('1.2.0' vs '${window.bcModSdk.version}')`), window.bcModSdk.version !== o && alert(`Mod SDK warning: Loading different but compatible versions ('1.2.0' vs '${window.bcModSdk.version}')
+        })() : (n(window.bcModSdk) || e("Failed to init Mod SDK: Name already in use"), 1 !== window.bcModSdk.apiVersion && e(`Failed to init Mod SDK: Different version already loaded ('1.2.0' vs '${window.bcModSdk.version}')`), window.bcModSdk.version !== o && alert(`Mod SDK warning: Loading different but compatible versions ('1.2.0' vs '${window.bcModSdk.version}')
 One of mods you are using is using an old version of SDK. It will work for now but please inform author to update`), window.bcModSdk);
         return "undefined" != typeof exports && (Object.defineProperty(exports, "__esModule", { value: true }), exports.default = y), y;
-      }();
+      })();
     }
   });
+  var _a;
+  var BaseModule = (_a = class {
+    /**
+     * An optional UI screen for configuring this module's settings.
+     * Subclasses can override this getter to provide a `Subscreen` instance.
+     * Modules with screens are automatically registered to the main menu.
+     */
+    get settingsScreen() {
+      return null;
+    }
+    /**
+     * The storage key under which this module's settings will be saved.
+     * Defaults to the class name.
+     *
+     * Subclasses can override this if they require a custom storage key.
+     */
+    get settingsStorage() {
+      return this.constructor.name;
+    }
+    /**
+     * Retrieves the current settings for this module.
+     * If no settings exist yet, registers default settings first.
+     */
+    get settings() {
+      const modName = ModSdkManager.ModInfo.name;
+      if (!this.settingsStorage) return {};
+      if (!modStorage.playerStorage) {
+        Player[modName] = {};
+        this.registerDefaultSettings();
+      } else if (!modStorage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
+      return modStorage.playerStorage[this.settingsStorage];
+    }
+    /**
+     * Persists new settings for this module.
+     * Automatically initializes storage and defaults if they don't exist.
+     */
+    set settings(value) {
+      const modName = ModSdkManager.ModInfo.name;
+      const storage = new ModStorage(modName);
+      if (!this.settingsStorage) return;
+      if (!storage.playerStorage) {
+        Player[modName] = {};
+        this.registerDefaultSettings();
+      } else if (!storage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
+      storage.playerStorage[this.settingsStorage] = value;
+    }
+    /**
+     * Initializes the module.
+     * Default implementation registers default settings immediately.
+     * Subclasses can override to perform additional setup.
+     */
+    init() {
+      this.registerDefaultSettings();
+    }
+    /**
+     * Registers default settings for this module in persistent storage.
+     * Only runs if a storage key and default settings are defined.
+     * 
+     * If some settings already exist, they will be merged with defaults.
+     * Existing values will NOT be overwritten.
+     */
+    registerDefaultSettings() {
+      const storage = this.settingsStorage;
+      const defaults = this.defaultSettings;
+      if (!storage || !defaults) return;
+      Player[ModSdkManager.ModInfo.name][storage] = Object.assign(defaults, Player[ModSdkManager.ModInfo.name][storage] ?? {});
+    }
+    /**
+     * Provides default settings for this module.
+     * Subclasses should override this getter to return their defaults.
+     */
+    get defaultSettings() {
+      return null;
+    }
+    /**
+     * Called when the module is loaded into the system.
+     * Subclasses should override to perform data loading or initialization.
+     */
+    load() {
+    }
+    /**
+     * By default doesn't get called each frame, only once when the module is loaded.
+     * Subclasses can override to implement runtime logic.
+     */
+    run() {
+    }
+    /**
+     * Called when the module is being removed.
+     * Subclasses can override to perform cleanup or save final state.
+     */
+    unload() {
+    }
+  }, __name(_a, "BaseModule"), __name2(_a, "BaseModule"), _a);
+  async function setSubscreen(subscreen) {
+    if (!GUI.instance) {
+      throw new Error("Attempt to set subscreen before init");
+    }
+    const screenName = typeof subscreen === "string" ? subscreen : subscreen?.options.name;
+    const screenId = `${BaseSubscreen.id}_${screenName}`;
+    await CommonSetScreen(...["DeepLibMod", `${screenId}`]);
+  }
+  __name(setSubscreen, "setSubscreen");
+  __name2(setSubscreen, "setSubscreen");
+  var _a2;
+  var BaseSubscreen = (_a2 = class {
+    constructor(module) {
+      /** Runtime options for this subscreen. */
+      __publicField(this, "options");
+      /** Reference to the module this subscreen belongs to. */
+      __publicField(this, "module");
+      if (module) this.module = module;
+      const ctor = this.constructor;
+      this.options = {
+        ..._a2.subscreenOptions,
+        ...ctor.subscreenOptions
+      };
+      const screenName = this.options.name;
+      const screenId = `${_a2.id}_${screenName}`;
+      exportToGlobal(`${screenId}Load`, this.load.bind(this));
+      exportToGlobal(`${screenId}Run`, this.run.bind(this));
+      exportToGlobal(`${screenId}Click`, this.click.bind(this));
+      exportToGlobal(`${screenId}Exit`, this.exit.bind(this));
+      exportToGlobal(`${screenId}Unload`, this.unload.bind(this));
+      exportToGlobal(`${screenId}Resize`, this.resize.bind(this));
+      exportToGlobal(`${screenId}Background`, this.options.background);
+      CommonCSVCache[ScreenFileGetTranslation("DeepLibMod", screenId)] = [];
+    }
+    /** Changes the currently active subscreen. */
+    async setSubscreen(screen) {
+      return await setSubscreen(screen);
+    }
+    /** Gets this subscreen's settings object from its parent module. */
+    get settings() {
+      return this.module.settings;
+    }
+    /** Updates this subscreen's settings in its parent module. */
+    set settings(value) {
+      this.module.settings = value;
+    }
+    /**
+     * Defines the paginated layout of the subscreen's settings UI.
+     * Each element in the outer array is a page; each page contains `SettingElement`s.
+     *
+     * Subclasses should override to define their actual UI structure.
+     */
+    get pageStructure() {
+      return [[]];
+    }
+    /** Gets the currently visible page's settings elements. */
+    get currentPage() {
+      return this.pageStructure[Math.min(_a2.currentPage - 1, this.pageStructure.length - 1)];
+    }
+    getPageLabel() {
+      return CommonStringPartitionReplace(getText("settings.page.label"), {
+        $currentPage$: `${_a2.currentPage}`,
+        $totalPages$: `${this.pageStructure.length}`
+      }).join("");
+    }
+    /**
+     * Changes the visible page in a multi-page subscreen.
+     * Automatically wraps around when going past the first or last page.
+     */
+    changePage(page, setLabel) {
+      const totalPages = this.pageStructure.length;
+      if (page > totalPages) page = 1;
+      if (page < 1) page = totalPages;
+      _a2.currentPage = page;
+      this.managePageElementsVisibility();
+      setLabel(this.getPageLabel());
+    }
+    /**
+     * Updates the DOM to show only elements belonging to the current page.
+     * All elements on other pages are hidden.
+     */
+    managePageElementsVisibility() {
+      this.pageStructure.forEach((item, ix) => {
+        if (ix != _a2.currentPage - 1) {
+          item.forEach((setting) => {
+            domUtil.hide(`${setting.id}-container`);
+          });
+        } else {
+          item.forEach((setting) => {
+            domUtil.unhide(`${setting.id}-container`);
+          });
+        }
+      });
+    }
+    /**
+     * Called when this subscreen is first displayed.
+     * Builds the layout, initializes navigation, and renders all settings elements.
+     *
+     * Handles:
+     *  - Ensuring each module with a settings screen has its defaults loaded
+     *  - Creating navigation menus and back/next page controls
+     *  - Building and appending UI elements based on `pageStructure`
+     *  - Setting up exit button and tooltip
+     *  - Resetting to page 1
+     */
+    load() {
+      var _a15, _b;
+      for (const module of modules()) {
+        if (!module.settingsScreen) continue;
+        if (!module.settings || !Object.keys(module.settings).length) module.registerDefaultSettings();
+      }
+      _a2.currentPage = 1;
+      layout.getSubscreen();
+      const settingsElement = layout.getSettingsDiv();
+      layout.appendToSubscreen(settingsElement);
+      const menu = ElementMenu.Create("deeplib-nav-menu", []);
+      layout.appendToSubscreen(menu);
+      if (this.pageStructure.length > 1) {
+        const backNext = advElement.createBackNext({
+          id: "deeplib-page-back-next",
+          next: /* @__PURE__ */ __name2(({ setLabel }) => this.changePage(_a2.currentPage + 1, setLabel), "next"),
+          initialNextTooltip: getText("settings.button.next_button_hint"),
+          back: /* @__PURE__ */ __name2(({ setLabel }) => this.changePage(_a2.currentPage - 1, setLabel), "back"),
+          initialPrevTooltip: getText("settings.button.prev_button_hint"),
+          initialLabel: this.getPageLabel()
+        });
+        ElementMenu.PrependItem(menu, backNext);
+      }
+      if (this.options.help) {
+        const onClick = this.options.help.onClick;
+        let action = /* @__PURE__ */ __name2(() => {
+        }, "action");
+        if (typeof onClick === "string" || onClick instanceof URL) {
+          action = /* @__PURE__ */ __name2(() => window.open(onClick, "_blank"), "action");
+        } else if (typeof onClick === "function") {
+          action = onClick;
+        } else if (onClick instanceof _a2) {
+          action = /* @__PURE__ */ __name2(async () => await this.setSubscreen(onClick), "action");
+        }
+        (_a15 = this.options.help).tooltip ?? (_a15.tooltip = getText("settings.button.help_button_hint"));
+        (_b = this.options.help).icon ?? (_b.icon = `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/bookmark.svg`);
+        const helpButton = advElement.createButton({
+          id: "deeplib-help",
+          size: [90, 90],
+          onClick: action,
+          options: {
+            image: this.options.help.icon,
+            tooltip: this.options.help.tooltip
+          }
+        });
+        ElementMenu.AppendButton(menu, helpButton);
+      }
+      const subscreenTitle = advElement.createLabel({
+        id: "deeplib-subscreen-title",
+        label: getText(`${this.options.name}.title`).replace("$ModVersion", ModSdkManager.ModInfo.version)
+      });
+      layout.appendToSubscreen(subscreenTitle);
+      if (this.options.name !== "mainmenu") {
+        const exitButton = advElement.createButton({
+          id: "deeplib-exit",
+          size: [90, 90],
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.exit();
+          }, "onClick"),
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/exit.svg`,
+            tooltip: getText("settings.button.back_button_hint")
+          }
+        });
+        ElementMenu.AppendButton(menu, exitButton);
+      }
+      const tooltip = advElement.createTooltip();
+      layout.appendToSubscreen(tooltip);
+      this.pageStructure.forEach(
+        (s) => s.forEach((item) => {
+          let element;
+          switch (item.type) {
+            case "text":
+            case "number":
+            case "color":
+              element = advElement.createInput(item);
+              break;
+            case "checkbox":
+              element = advElement.createCheckbox(item);
+              break;
+            case "button":
+              element = advElement.createButton(item);
+              break;
+            case "label":
+              element = advElement.createLabel(item);
+              break;
+            case "custom":
+              element = advElement.createCustom(item);
+              break;
+          }
+          layout.appendToSettingsDiv(element);
+        })
+      );
+      this.managePageElementsVisibility();
+      CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
+    }
+    /**
+     * Called each frame while this subscreen is active.
+     * Default behavior draws the player's character if `drawCharacter` is enabled.
+     */
+    run() {
+      if (this.options.drawCharacter) DrawCharacter(Player, 50, 50, 0.9, false);
+    }
+    /**
+     * Handles mouse clicks *on canvas* while the subscreen is active.
+     * Default implementation is empty — subclasses may override.
+     */
+    click() {
+    }
+    /**
+     * Exits this subscreen, returning to the main menu.
+     * Also saves persistent storage changes.
+     * Called after the `unload`.
+     */
+    exit() {
+      CharacterAppearanceForceUpCharacter = -1;
+      CharacterLoadCanvas(Player);
+      const returnScreen = typeof this.options.returnScreen === "function" ? this.options.returnScreen() : this.options.returnScreen;
+      if (returnScreen instanceof _a2 || !returnScreen) {
+        setSubscreen(returnScreen ?? "mainmenu").then(() => {
+          modStorage.save();
+        });
+      } else if (Array.isArray(returnScreen)) {
+        CommonSetScreen(...returnScreen).then(() => {
+          modStorage.save();
+        });
+      }
+    }
+    /**
+     * Called when the window is resized.
+     * Also checks for overflow in the settings div and applies styling accordingly.
+     */
+    resize(_onLoad = false) {
+      const offset = this.options.drawCharacter ? 0 : 380;
+      const subscreen = layout.getSubscreen();
+      const settingsDiv = layout.getSettingsDiv();
+      ElementSetPosition(subscreen || "", 0, 0);
+      ElementSetSize(subscreen || "", 2e3, 1e3);
+      ElementSetFontSize(subscreen || "", "auto");
+      if (this.options.name === "mainmenu") {
+        ElementSetPosition(settingsDiv || "", 530 - offset, 170);
+        ElementSetSize(settingsDiv || "", 600 + offset, 660);
+      } else {
+        ElementSetPosition(settingsDiv || "", 530 - offset, 170);
+        ElementSetSize(settingsDiv || "", 1e3 + offset, 660);
+      }
+      ElementSetPosition("deeplib-subscreen-title", 530 - offset, 75);
+      ElementSetSize("deeplib-subscreen-title", 800, 60);
+      ElementSetPosition("deeplib-nav-menu", 1905, 75, "top-right");
+      ElementSetSize("deeplib-nav-menu", null, 90);
+      ElementSetPosition(advElement.getTooltip() || "", 250, 850);
+      ElementSetSize(advElement.getTooltip() || "", 1500, 70);
+      _a2.currentElements.forEach((item) => {
+        const element = item[0];
+        const options2 = item[1];
+        domUtil.autoSetPosition(options2.id ?? element.id, options2.position);
+        domUtil.autoSetSize(options2.id ?? element.id, options2.size);
+      });
+      if (settingsDiv) {
+        if (domUtil.hasOverflow(settingsDiv)?.vertical) {
+          settingsDiv.classList.add("deeplib-overflow-box");
+        } else {
+          settingsDiv.classList.remove("deeplib-overflow-box");
+        }
+      }
+    }
+    /**
+     * Called when this subscreen is being removed.
+     * Resets the static element registry and removes the subscreen from the layout.
+     * Called before `exit`.
+     */
+    unload() {
+      _a2.currentElements = [];
+      layout.removeSubscreen();
+    }
+  }, __name(_a2, "_BaseSubscreen"), __name2(_a2, "BaseSubscreen"), /** Global registry of currently rendered elements and their definitions. */
+  __publicField(_a2, "currentElements", []), /** Tracks the currently visible page number (1-based index). */
+  __publicField(_a2, "currentPage", 1), /** Identifier for internal use to avoid screen name collisions. */
+  __publicField(_a2, "id", CommonGenerateUniqueID()), /** Optional configuration flags for a BaseSubscreen instance. */
+  __publicField(_a2, "subscreenOptions", {
+    drawCharacter: true,
+    name: "UNKNOWN",
+    icon: "",
+    background: "Sheet"
+  }), _a2);
+  var styles_default = `.deeplib-subscreen,
+.deeplib-modal {
+  --deeplib-background-color: var(--tmd-main, white);
+  --deeplib-element-color: var(--tmd-element, white);
+  --deeplib-element-hover-color: var(--tmd-element-hover, cyan);
+  --deeplib-accent-color: var(--tmd-accent, #FFFF88);
+  --deeplib-blocked-color: var(--tmd-blocked, red);
+  --deeplib-text-color: var(--tmd-text, black);
+  --deeplib-icon-color: var(--tmd-accent, black);
+  --deeplib-icon-hover-color: var(--tmd-accent-hover, black);
+  --deeplib-border-color: var(--tmd-accent, black);
+  --deeplib-border-width: min(0.2vh, 0.1vw);
+  --deeplib-border-width: min(0.2dvh, 0.1dvw);
+  --deeplib-border-radius: min(1vh, 0.5vw);
+  --deeplib-border-radius: min(1dvh, 0.5dvw);
+}
 
-  // src/Themed.ts
-  var Themed_exports = {};
-  __export(Themed_exports, {
-    init: () => init,
-    unload: () => unload
-  });
-  init_define_LAST_COMMIT_HASH();
+.deeplib-button {
+  color: var(--deeplib-text-color);
+  width: 100%;
+  height: 100%;
+}
 
-  // src/Base/Modules.ts
-  init_define_LAST_COMMIT_HASH();
+.deeplib-button.button-styling,
+.deeplib-button.button-styling::before {
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-button img {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-position: left;
+  background-color: var(--deeplib-icon-color);
+  background-blend-mode: multiply;
+  background-size: contain;
+  mask-position: left;
+  mask-size: contain;
+  background-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  color: transparent;
+  background-image: var(--image);
+  mask-image: var(--image);
+  pointer-events: none;
+}
+
+.deeplib-button:hover img {
+  background-color: var(--deeplib-icon-hover-color);
+}
+
+.deeplib-button .button-label {
+  background-color: transparent !important;
+  color: var(--deeplib-text-color);
+  font-size: min(3.6dvh, 1.8dvw);
+}
+
+.deeplib-button .button-tooltip {
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+#deeplib-page-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#deeplib-subscreen-title {
+  text-align: left;
+  color: var(--deeplib-text-color);
+}
+
+.deeplib-text {
+  color: var(--deeplib-text-color);
+}
+
+.deeplib-subscreen {
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.deeplib-subscreen * {
+  box-sizing: border-box;
+  pointer-events: all;
+}
+
+.deeplib-settings {
+  display: grid;
+  grid-auto-rows: min-content;
+  padding: min(1dvh, 0.5dvw);
+  gap: 0.3em;
+}
+
+.deeplib-misc {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: min(1vh, 0.5vw);
+}
+
+.deeplib-tooltip {
+  background-color: var(--deeplib-element-color);
+  color: var(--deeplib-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: min(1dvh, 0.5dvw);
+  padding: min(1vh, 0.5vw);
+  font-size: 0.8em;
+  border: min(0.2vh, 0.1vw) solid var(--deeplib-border-color);
+  z-index: 1;
+}
+
+.deeplib-overflow-box {
+  border: var(--deeplib-border-color) solid var(--deeplib-border-width);
+}
+
+.deeplib-prev-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: min(2dvh, 1dvw);
+  background-color: var(--deeplib-element-color);
+  color: var(--deeplib-text-color);
+  border-radius: min(1dvh, 0.5dvw);
+  border: min(0.2vh, 0.1vw) solid var(--deeplib-border-color);
+}
+.deeplib-prev-next .deeplib-prev-next-button:hover {
+  background-color: var(--deeplib-element-hover-color);
+  border-radius: var(--deeplib-border-radius);
+}
+.deeplib-prev-next .deeplib-prev-next-button {
+  height: 100%;
+  aspect-ratio: 1;
+}
+.deeplib-prev-next .deeplib-prev-next-label {
+  white-space: nowrap;
+}
+
+#deeplib-nav-menu {
+  display: flex;
+  flex-direction: row;
+  gap: min(2dvh, 1dvw);
+}
+
+#deeplib-storage-meter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--deeplib-element-color);
+  border: var(--deeplib-border-width) solid var(--deeplib-border-color);
+  border-radius: var(--deeplib-border-radius);
+  z-index: -1;
+}
+
+#deeplib-storage-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--deeplib-accent-color);
+}
+
+.deeplib-checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.deeplib-checkbox-container input.deeplib-input {
+  width: min(5vh, 2.5vw);
+  height: min(5vh, 2.5vw);
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-checkbox-container input.deeplib-input[type=checkbox]:checked::before {
+  width: 80%;
+  height: 80%;
+}
+
+.deeplib-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.deeplib-input-container:has(label.deeplib-text) {
+  margin-top: min(1vh, 0.5vw);
+}
+
+.deeplib-input-container input.deeplib-input {
+  font-size: 0.6em;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+  padding-left: min(1vh, 0.5vw);
+  padding-right: min(1vh, 0.5vw);
+  min-height: min(5dvh, 2.5dvw);
+  border-radius: min(1dvh, 0.5dvw);
+}
+
+.deeplib-input-container input.deeplib-input[type=color] {
+  padding: 0px;
+  width: min(5vh, 2.5vw);
+  height: min(5vh, 2.5vw);
+  border-radius: 0px;
+}
+
+.deeplib-input-container input.deeplib-input[type=color]:disabled {
+  border: var(--deeplib-blocked-color) solid var(--deeplib-border-width);
+  cursor: not-allowed;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.deeplib-highlight-text {
+  font-weight: bold;
+  color: rgb(203, 185, 23);
+}
+
+#TextAreaChatLog[data-colortheme=dark] div.ChatMessage.deeplib-message,
+#TextAreaChatLog[data-colortheme=dark2] div.ChatMessage.deeplib-message {
+  background-color: var(--deeplib-element-color);
+  border: min(0.2dvh, 0.1dvw) solid var(--deeplib-border-color);
+  color: var(--deeplib-text-color);
+}
+
+#TextAreaChatLog div.ChatMessage.deeplib-message {
+  background-color: #eee;
+  border: min(0.2dvh, 0.1dvw) solid #440171;
+  color: #111;
+  padding-left: min(0.6dvh, 0.3dvw);
+  display: block;
+  white-space: normal;
+}
+
+#TextAreaChatLog[data-colortheme=dark] div.ChatMessage.deeplib-message a,
+#TextAreaChatLog[data-colortheme=dark2] div.ChatMessage.deeplib-message a {
+  color: var(--deeplib-text-color);
+}
+
+#TextAreaChatLog div.ChatMessage.deeplib-message a {
+  cursor: pointer;
+  font-weight: bold;
+  color: #111;
+}
+
+.deeplib-modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  width: max(50dvw, 25dvh);
+  font-size: min(4dvh, 2dvw);
+  padding: min(2dvh, 1dvw);
+  background-color: var(--deeplib-element-color);
+  border-radius: min(1.2dvh, 0.6dvw);
+  border: min(0.2dvh, 0.1dvw) solid var(--deeplib-border-color);
+  color: var(--deeplib-text-color);
+}
+.deeplib-modal .deeplib-modal-input {
+  width: 100%;
+  font-size: min(2.6dvh, 1.8dvw);
+  border-radius: min(1dvh, 0.5dvw);
+  padding: min(1dvh, 0.5dvw);
+}
+.deeplib-modal input.deeplib-modal-input {
+  max-width: max(50dvh, 25dvw);
+}
+.deeplib-modal .deeplib-modal-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 0.5em;
+  width: 100%;
+}
+.deeplib-modal .deeplib-modal-button-container .deeplib-button {
+  font-size: 0.8em;
+  display: flex;
+  width: auto;
+  padding: min(0.4vh, 0.2vw) min(2vh, 1vw);
+}
+.deeplib-modal .deeplib-modal-button-container .deeplib-button .button-label {
+  display: contents;
+}
+.deeplib-modal .deeplib-modal-prompt-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.deeplib-modal-blocker {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL05WTUUvU3R1ZmYvQ29kZS9CQy9CQy1EZWVwTGliL3NyYy9zdHlsZXMiLCJzb3VyY2VzIjpbInZhcnMuc2NzcyIsImJ1dHRvbnMuc2NzcyIsImVsZW1lbnRzLnNjc3MiLCJpbnB1dHMuc2NzcyIsIm1lc3NhZ2VzLnNjc3MiLCJtb2RhbC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7RUFFRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FDZEY7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBRUE7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FDM0NGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUdFO0VBQ0U7RUFDQTs7QUFISjtFQU1FO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUN6R0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFJRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQzdERjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUM3QkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBR0Y7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUtOO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0EiLCJzb3VyY2VzQ29udGVudCI6WyIuZGVlcGxpYi1zdWJzY3JlZW4sXG4uZGVlcGxpYi1tb2RhbCB7XG4gIC0tZGVlcGxpYi1iYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS10bWQtbWFpbiwgd2hpdGUpO1xuICAtLWRlZXBsaWItZWxlbWVudC1jb2xvcjogdmFyKC0tdG1kLWVsZW1lbnQsIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtaG92ZXItY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LWhvdmVyLCBjeWFuKTtcbiAgLS1kZWVwbGliLWFjY2VudC1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgI0ZGRkY4OCk7XG4gIC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yOiB2YXIoLS10bWQtYmxvY2tlZCwgcmVkKTtcbiAgLS1kZWVwbGliLXRleHQtY29sb3I6IHZhcigtLXRtZC10ZXh0LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LWhvdmVyLCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLW1pc2Mge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uLXJldmVyc2U7XG4gIGdhcDogbWluKDF2aCwgMC41dncpO1xufVxuXG4uZGVlcGxpYi10b29sdGlwIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBwYWRkaW5nOiBtaW4oMXZoLCAwLjV2dyk7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICB6LWluZGV4OiAxO1xufVxuXG4uZGVlcGxpYi1vdmVyZmxvdy1ib3gge1xuICBib3JkZXI6IHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci13aWR0aCk7XG59XG5cbi5kZWVwbGliLXByZXYtbmV4dCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBib3JkZXI6IG1pbigwLjJ2aCwgMC4xdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcblxuICAuZGVlcGxpYi1wcmV2LW5leHQtYnV0dG9uIHtcbiAgICAmOmhvdmVyIHtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1ob3Zlci1jb2xvcik7XG4gICAgICBib3JkZXItcmFkaXVzOiB2YXIoLS1kZWVwbGliLWJvcmRlci1yYWRpdXMpO1xuICAgIH1cbiAgICBcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYXNwZWN0LXJhdGlvOiAxO1xuICB9XG5cbiAgLmRlZXBsaWItcHJldi1uZXh0LWxhYmVsIHtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICB9XG59XG5cbiNkZWVwbGliLW5hdi1tZW51IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG59XG5cbiNkZWVwbGliLXN0b3JhZ2UtbWV0ZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMHB4O1xuICBsZWZ0OiAwcHg7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogdmFyKC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzKTtcbiAgei1pbmRleDogLTE7XG59XG5cbiNkZWVwbGliLXN0b3JhZ2UtYmFyIHtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMCU7XG4gIGJhY2tncm91bmQ6IHZhcigtLWRlZXBsaWItYWNjZW50LWNvbG9yKTtcbn1cbiIsIi5kZWVwbGliLWNoZWNrYm94LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWNoZWNrYm94LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0IHtcbiAgd2lkdGg6IG1pbig1dmgsIDIuNXZ3KTtcbiAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWNoZWNrYm94LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjaGVja2JveFwiXTpjaGVja2VkOjpiZWZvcmUge1xuICB3aWR0aDogODAlO1xuICBoZWlnaHQ6IDgwJTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjNlbTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyOmhhcyhsYWJlbC5kZWVwbGliLXRleHQpIHtcbiAgbWFyZ2luLXRvcDogbWluKDF2aCwgMC41dncpO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIGZvbnQtc2l6ZTogMC42ZW07XG4gIHBhZGRpbmc6IDVweCAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgb3V0bGluZTogbm9uZTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMXZoLCAwLjV2dyk7XG4gIHBhZGRpbmctcmlnaHQ6IG1pbigxdmgsIDAuNXZ3KTtcbiAgbWluLWhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdIHtcbiAgcGFkZGluZzogMHB4O1xuICB3aWR0aDogbWluKDV2aCwgMi41dncpO1xuICBoZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgYm9yZGVyLXJhZGl1czogMHB4O1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY29sb3JcIl06ZGlzYWJsZWQge1xuICBib3JkZXI6IHZhcigtLWRlZXBsaWItYmxvY2tlZC1jb2xvcikgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpO1xuICBjdXJzb3I6IG5vdC1hbGxvd2VkO1xufVxuXG5pbnB1dDo6LXdlYmtpdC1vdXRlci1zcGluLWJ1dHRvbixcbmlucHV0Ojotd2Via2l0LWlubmVyLXNwaW4tYnV0dG9uIHtcbiAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lO1xuICBtYXJnaW46IDA7XG59XG5cbmlucHV0W3R5cGU9bnVtYmVyXSB7XG4gIGFwcGVhcmFuY2U6IHRleHRmaWVsZDtcbiAgLW1vei1hcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG59XG4iLCIuZGVlcGxpYi1oaWdobGlnaHQtdGV4dCB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogcmdiKDIwMywgMTg1LCAyMyk7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSxcbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrMiddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2Uge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkICM0NDAxNzE7XG4gIGNvbG9yOiAjMTExO1xuICBwYWRkaW5nLWxlZnQ6IG1pbigwLjZkdmgsIDAuM2R2dyk7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICB3aGl0ZS1zcGFjZTogbm9ybWFsO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSxcbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrMiddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiAjMTExO1xufVxuIiwiLmRlZXBsaWItbW9kYWwge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMTAlO1xuICBsZWZ0OiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgei1pbmRleDogMTAwMTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC41ZW07XG4gIHdpZHRoOiBtYXgoNTBkdncsIDI1ZHZoKTtcbiAgZm9udC1zaXplOiBtaW4oNGR2aCwgMmR2dyk7XG4gIHBhZGRpbmc6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMmR2aCwgMC42ZHZ3KTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG5cbiAgLmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZvbnQtc2l6ZTogbWluKDIuNmR2aCwgMS44ZHZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICAgIHBhZGRpbmc6IG1pbigxZHZoLCAwLjVkdncpO1xuICB9XG5cbiAgaW5wdXQuZGVlcGxpYi1tb2RhbC1pbnB1dCB7XG4gICAgbWF4LXdpZHRoOiBtYXgoNTBkdmgsIDI1ZHZ3KTtcbiAgfVxuXG4gIC5kZWVwbGliLW1vZGFsLWJ1dHRvbi1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICAgIGdhcDogMC41ZW07XG4gICAgd2lkdGg6IDEwMCU7XG5cbiAgICAuZGVlcGxpYi1idXR0b24ge1xuICAgICAgZm9udC1zaXplOiAwLjhlbTtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICB3aWR0aDogYXV0bztcbiAgICAgIHBhZGRpbmc6IG1pbigwLjR2aCwgMC4ydncpIG1pbigydmgsIDF2dyk7XG5cbiAgICAgIC5idXR0b24tbGFiZWwge1xuICAgICAgICBkaXNwbGF5OiBjb250ZW50cztcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1wcm9tcHQtY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgfVxufVxuXG4uZGVlcGxpYi1tb2RhbC1ibG9ja2VyIHtcbiAgei1pbmRleDogMTAwMDtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDBkdnc7XG4gIGhlaWdodDogMTAwZHZoO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG59XG4iXX0= */`;
+  var modStorage;
+  var sdk;
+  function initMod(options2) {
+    sdk = new ModSdkManager(options2.modInfo.info, options2.modInfo.options);
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    modStorage = new ModStorage(ModSdkManager.ModInfo.name);
+    Style.injectInline("deeplib-style", styles_default);
+    deepLibLogger.debug(`Init wait for ${MOD_NAME}`);
+    if (CurrentScreen == null || CurrentScreen === "Login") {
+      options2.beforeLogin?.();
+      const removeHook = sdk.hookFunction("LoginResponse", 0, (args, next) => {
+        deepLibLogger.debug(`Init for ${MOD_NAME}! LoginResponse caught: `, args);
+        next(args);
+        const response = args[0];
+        if (response === "InvalidNamePassword") return next(args);
+        if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
+          init(options2);
+          removeHook();
+        }
+      });
+    } else {
+      deepLibLogger.debug(`Already logged in, initing ${MOD_NAME}`);
+      init(options2);
+    }
+  }
+  __name(initMod, "initMod");
+  __name2(initMod, "initMod");
+  async function init(options2) {
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    const MOD_VERSION2 = ModSdkManager.ModInfo.version;
+    if (window[MOD_NAME + "Loaded"]) return;
+    modStorage.load();
+    await Localization.init(options2.translationOptions);
+    if (options2.modules && !initModules(options2.modules)) {
+      unloadMod();
+      return;
+    }
+    if (options2.migrators) {
+      for (const m of options2.migrators) {
+        VersionModule.registerMigrator(m);
+      }
+    }
+    await options2.initFunction?.();
+    if (options2.mainMenuOptions)
+      MainMenu.setOptions(options2.mainMenuOptions);
+    for (const m of modules()) {
+      if (m.defaultSettings && hasGetter(m, "defaultSettings") && m.settings && hasSetter(m, "settings")) {
+        if (Object.entries(m.defaultSettings).length === 0) continue;
+        m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+      }
+    }
+    window[MOD_NAME + "Loaded"] = true;
+    deepLibLogger.log(`Loaded ${MOD_NAME}! Version: ${MOD_VERSION2}`);
+  }
+  __name(init, "init");
+  __name2(init, "init");
+  function initModules(modulesToRegister) {
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    for (const module of modulesToRegister) {
+      registerModule(module);
+    }
+    for (const module of modules()) {
+      module.init();
+    }
+    for (const module of modules()) {
+      module.load();
+    }
+    for (const module of modules()) {
+      module.run();
+    }
+    deepLibLogger.debug(`Modules Loaded for ${MOD_NAME}.`);
+    return true;
+  }
+  __name(initModules, "initModules");
+  __name2(initModules, "initModules");
+  function unloadMod() {
+    const MOD_NAME = ModSdkManager.ModInfo.name;
+    unloadModules();
+    delete window[MOD_NAME + "Loaded"];
+    deepLibLogger.debug(`Unloaded ${MOD_NAME}.`);
+    return true;
+  }
+  __name(unloadMod, "unloadMod");
+  __name2(unloadMod, "unloadMod");
+  function unloadModules() {
+    for (const module of modules()) {
+      module.unload();
+    }
+  }
+  __name(unloadModules, "unloadModules");
+  __name2(unloadModules, "unloadModules");
   var modulesMap = /* @__PURE__ */ new Map();
   function modules() {
     return [...modulesMap.values()];
   }
   __name(modules, "modules");
+  __name2(modules, "modules");
   function registerModule(module) {
     modulesMap.set(module.constructor.name, module);
     return module;
   }
   __name(registerModule, "registerModule");
+  __name2(registerModule, "registerModule");
   function getModule(moduleType) {
     return modulesMap.get(moduleType);
   }
   __name(getModule, "getModule");
-
-  // src/Base/SettingUtils.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Screens/MainMenu.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Base/BaseSetting.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Modules/GuiRedraw.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Base/BaseModule.ts
-  init_define_LAST_COMMIT_HASH();
-  var _BaseModule = class _BaseModule {
-    get settingsScreen() {
-      return null;
+  __name2(getModule, "getModule");
+  var _a3;
+  var BaseMigrator2 = (_a3 = class {
+  }, __name(_a3, "BaseMigrator2"), __name2(_a3, "BaseMigrator"), _a3);
+  var _a4;
+  var GUI = (_a4 = class extends BaseModule {
+    /** 
+     * Creates the GUI instance and initializes the main menu. 
+     * 
+     * @throws If another `GUI` instance already exists.
+     */
+    constructor(guiOptions = null) {
+      super();
+      /** All subscreens managed by this GUI, including the main menu and module settings screens. */
+      __publicField(this, "_subscreens");
+      /** The mod's main menu screen. */
+      __publicField(this, "_mainMenu");
+      /** Options defining how the mod's settings button is displayed and behaves. */
+      __publicField(this, "_modButtonOptions");
+      if (_a4.instance) {
+        throw new Error("Duplicate initialization");
+      }
+      for (const module of modules()) {
+        if (!module.settingsScreen) continue;
+      }
+      this._mainMenu = guiOptions?.mainMenu ? new guiOptions.mainMenu(this) : new MainMenu(this);
+      this._subscreens = [this._mainMenu];
+      this._modButtonOptions = guiOptions;
+      _a4.instance = this;
     }
-    /** Allows changing the subkey for that module settings storage */
-    get settingsStorage() {
-      return this.constructor.name;
+    /** Returns all registered subscreens. */
+    get subscreens() {
+      return this._subscreens;
     }
-    get settings() {
-      if (!this.settingsStorage) return {};
-      if (!Player.Themed) {
-        Player.Themed = {};
-        this.registerDefaultSettings();
-      } else if (!Player.Themed[this.settingsStorage]) this.registerDefaultSettings();
-      return Player.Themed[this.settingsStorage];
+    /** Returns the main menu subscreen instance. */
+    get mainMenu() {
+      return this._mainMenu;
     }
-    set settings(val) {
-      if (!Player.Themed) {
-        Player.Themed = {};
-        this.registerDefaultSettings();
-      } else if (!Player.Themed[this.settingsStorage]) this.registerDefaultSettings();
-      Player.Themed[this.settingsStorage] = val;
+    /**
+     * Loads the GUI and registers the mod's settings button in the extensions menu.
+     *
+     * - Creates subscreens for each module's settings screen.
+     * - Registers lifecycle callbacks for subscreens events.
+     * - Sets up the main menu and its subscreens.
+     */
+    load() {
+      if (!this._modButtonOptions) return;
+      for (const module of modules()) {
+        if (!module.settingsScreen) continue;
+        this._subscreens.push(new module.settingsScreen(module));
+      }
+      this._mainMenu.subscreens = this._subscreens;
+      PreferenceRegisterExtensionSetting({
+        Identifier: this._modButtonOptions.identifier,
+        ButtonText: this._modButtonOptions.buttonText,
+        Image: this._modButtonOptions.image,
+        load: /* @__PURE__ */ __name2(async () => {
+          await setSubscreen(this._mainMenu);
+        }, "load"),
+        run: /* @__PURE__ */ __name2(() => {
+        }, "run"),
+        click: /* @__PURE__ */ __name2(() => {
+        }, "click"),
+        exit: /* @__PURE__ */ __name2(() => {
+        }, "exit")
+      });
     }
-    get enabled() {
-      if (!Player.Themed.GlobalModule) return false;
-      return Player.Themed.GlobalModule.themedEnabled && this.settings.themedEnabled && (ServerPlayerIsInChatRoom() || CurrentModule == "Room" && CurrentScreen == "Crafting");
+  }, __name(_a4, "_GUI"), __name2(_a4, "GUI"), /** The singleton instance of the GUI controller. */
+  __publicField(_a4, "instance", null), _a4);
+  var _a5;
+  var VersionModule = (_a5 = class extends BaseModule {
+    constructor(options2) {
+      super();
+      _a5.newVersionMessage = options2.newVersionMessage;
+      _a5.beforeEach = options2.beforeEach;
+      _a5.afterEach = options2.afterEach;
+      _a5.beforeAll = options2.beforeAll;
+      _a5.afterAll = options2.afterAll;
     }
-    Init() {
-      this.registerDefaultSettings();
+    /**
+     * Initializes the module on load:
+     * - Stores the current mod version.
+     * - Hooks into `ChatRoomSync` to show a "new version" message when applicable.
+     */
+    load() {
+      _a5.version = ModSdkManager.ModInfo.version;
+      _a5.checkVersionUpdate();
+      if (modStorage.playerStorage.GlobalModule.doShowNewVersionMessage && _a5.isItNewVersion) {
+        _a5.sendNewVersionMessage();
+      }
     }
-    registerDefaultSettings() {
-      const storage = this.settingsStorage;
-      const defaults = this.defaultSettings;
-      if (!storage || !defaults) return;
-      Player.Themed[storage] = Object.assign(defaults, Player.Themed[storage] ?? {});
+    /**
+     * Checks if the stored version differs from the current version.
+     * If a new version is detected:
+     * - Flags the session as updated.
+     * - Runs applicable migrations.
+     * - Updates stored version in player data.
+     * - Saves `modStorage`.
+     */
+    static checkVersionUpdate() {
+      const previousVersion = _a5.loadVersion();
+      const currentVersion = _a5.version;
+      if (_a5.isNewVersion(previousVersion, currentVersion)) {
+        _a5.isItNewVersion = true;
+        _a5.checkVersionMigration();
+        _a5.saveVersion();
+      }
+      modStorage.save();
     }
-    get defaultSettings() {
-      return null;
+    /**
+     * Executes migrations for all registered migrators whose `MigrationVersion`
+     * is newer than the previously stored version.
+     */
+    static checkVersionMigration() {
+      const previousVersion = _a5.loadVersion();
+      const toMigrate = _a5.migrators.filter(
+        (m) => _a5.isNewVersion(previousVersion, m.migrationVersion)
+      );
+      if (!toMigrate.length) return;
+      _a5.beforeAll?.();
+      for (const migrator of toMigrate) {
+        _a5.beforeEach?.();
+        migrator.migrate();
+        deepLibLogger.info(
+          `Migrating ${ModSdkManager.ModInfo.name} from ${previousVersion} to ${migrator.migrationVersion} with ${migrator.constructor.name}`
+        );
+        _a5.afterEach?.();
+      }
+      _a5.afterAll?.();
     }
-    Load() {
+    /**
+     * Registers a new migrator for handling version-specific changes.
+     * Migrators are sorted by their `MigrationVersion` in ascending order.
+     */
+    static registerMigrator(migrator) {
+      _a5.migrators.push(migrator);
+      _a5.migrators.sort((a, b) => a.migrationVersion.localeCompare(b.migrationVersion));
     }
-    Run() {
+    /** Sends the currently configured "new version" message to the local player. */
+    static sendNewVersionMessage() {
+      const beepLogLength = FriendListBeepLog.push({
+        MemberNumber: Player.MemberNumber,
+        MemberName: ModSdkManager.ModInfo.name,
+        ChatRoomName: getText("module.version.version_update"),
+        ChatRoomSpace: "X",
+        Private: false,
+        Sent: false,
+        Time: /* @__PURE__ */ new Date(),
+        Message: _a5.newVersionMessage
+      });
+      const beepIdx = beepLogLength - 1;
+      const title = CommonStringPartitionReplace(getText("module.version.new_version_toast_title"), {
+        $modName$: ModSdkManager.ModInfo.name,
+        $modVersion$: _a5.version
+      }).join("");
+      const data = FriendListBeepLog[beepIdx];
+      ServerShowBeep(_a5.newVersionMessage, 1e4, {
+        memberNumber: data.MemberNumber,
+        memberName: data.MemberName,
+        chatRoomName: data.ChatRoomName,
+        ...data.Message && {
+          onClick: /* @__PURE__ */ __name2(() => {
+            FriendListShowBeep(beepIdx);
+          }, "onClick")
+        }
+      }, title);
     }
-    Unload() {
+    /**
+     * Determines if a given `candidate` version is newer than the `current` version.
+     * 
+     * Version strings are expected in `MAJOR.MINOR.PATCH` format.
+     */
+    static isNewVersion(current, candidate) {
+      if (current !== void 0) {
+        const CURRENT_ = current.split("."), CANDIDATE_ = candidate.split(".");
+        for (let i = 0; i < 3; i++) {
+          if (CURRENT_[i] === CANDIDATE_[i]) {
+            continue;
+          }
+          return CANDIDATE_[i] > CURRENT_[i];
+        }
+      }
+      if (current === void 0 || current === "" || !current) {
+        return true;
+      }
+      return false;
+    }
+    /** Saves the current mod version into persistent player storage. */
+    static saveVersion() {
+      if (modStorage.playerStorage) {
+        Player[ModSdkManager.ModInfo.name].Version = _a5.version;
+      }
+    }
+    /** Loads the stored mod version from persistent player storage. */
+    static loadVersion() {
+      return modStorage.playerStorage?.Version;
+    }
+  }, __name(_a5, "_VersionModule"), __name2(_a5, "VersionModule"), /** Whether the current session is running a new version compared to stored data */
+  __publicField(_a5, "isItNewVersion", false), /** The current mod version (retrieved from `ModSdkManager.ModInfo.version`) */
+  __publicField(_a5, "version"), /** Message to display when a new version is detected */
+  __publicField(_a5, "newVersionMessage", ""), /** List of registered migration handlers, sorted by version */
+  __publicField(_a5, "migrators", []), /** Optional lifecycle hook. Runs before each migration */
+  __publicField(_a5, "beforeEach"), /** Optional lifecycle hook. Runs after each migration */
+  __publicField(_a5, "afterEach"), /** Optional lifecycle hook. Runs before all migrations */
+  __publicField(_a5, "beforeAll"), /** Optional lifecycle hook. Runs after all migrations */
+  __publicField(_a5, "afterAll"), _a5);
+  var _a6;
+  var GuiDebug = (_a6 = class extends BaseSubscreen {
+    get pageStructure() {
+      return [
+        [
+          {
+            type: "button",
+            id: "test-deeplib-big-button",
+            size: [405, 80],
+            label: "Big Button",
+            tooltip: "This is a big button",
+            image: "Icons/Exit.png",
+            onClick() {
+              deepLibLogger.info("Big Button Clicked");
+            }
+          },
+          {
+            type: "button",
+            id: "test-deeplib-small-button",
+            size: [90, 90],
+            tooltip: "This is a small button",
+            image: "Icons/Exit.png",
+            onClick() {
+              deepLibLogger.info("Small Button Clicked");
+            }
+          },
+          {
+            type: "checkbox",
+            id: "test-deeplib-checkbox",
+            label: "Checkbox",
+            description: "This is a checkbox",
+            setElementValue() {
+              return true;
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Checkbox value:", val);
+            }
+          },
+          {
+            type: "text",
+            id: "test-deeplib-text-input",
+            label: "Input",
+            description: "This is a text input",
+            setElementValue() {
+              return "Input Value";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "number",
+            id: "test-deeplib-number-input",
+            label: "Input",
+            description: "This is a number input",
+            setElementValue() {
+              return "123";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "label",
+            id: "test-deeplib-label",
+            label: "Label",
+            description: "This is a label"
+          }
+        ],
+        [
+          {
+            type: "button",
+            id: "test-deeplib-big-button2",
+            size: [405, 80],
+            label: "Big Button",
+            tooltip: "This is a big button",
+            image: "Icons/Prev.png",
+            onClick() {
+              deepLibLogger.info("Big Button Clicked");
+            }
+          },
+          {
+            type: "button",
+            id: "test-deeplib-small-button2",
+            size: [90, 90],
+            tooltip: "This is a small button",
+            image: "Icons/Next.png",
+            onClick() {
+              deepLibLogger.info("Small Button Clicked");
+            }
+          },
+          {
+            type: "checkbox",
+            id: "test-deeplib-checkbox2",
+            label: "Checkbox",
+            description: "This is a checkbox",
+            setElementValue() {
+              return true;
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Checkbox value:", val);
+            }
+          },
+          {
+            type: "text",
+            id: "test-deeplib-text-input2",
+            label: "Input",
+            description: "This is a text input",
+            setElementValue() {
+              return "Input Value";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "number",
+            id: "test-deeplib-number-input2",
+            label: "Input",
+            description: "This is a number input",
+            setElementValue() {
+              return "123";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Input value:", val);
+            }
+          },
+          {
+            type: "label",
+            id: "test-deeplib-label2",
+            label: "Label",
+            description: "This is a label"
+          }
+        ]
+      ];
+    }
+  }, __name(_a6, "GuiDebug"), __name2(_a6, "GuiDebug"), __publicField(_a6, "subscreenOptions", {
+    name: "debug"
+  }), _a6);
+  function deepMerge(target, source) {
+    if (target === void 0) return source;
+    if (source === void 0) return target;
+    if (typeof target !== "object" || typeof source !== "object") {
+      return source;
+    }
+    for (const key of Object.keys(source)) {
+      if (Array.isArray(source[key]) && Array.isArray(target[key])) {
+        target[key] = [...target[key], ...source[key]];
+      } else if (typeof source[key] === "object" && source[key] !== null) {
+        target[key] = deepMerge(target[key] || {}, source[key]);
+      } else {
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+  __name(deepMerge, "deepMerge");
+  __name2(deepMerge, "deepMerge");
+  function shuffleArray(array) {
+    const temp = JSON.parse(JSON.stringify(array));
+    const ret = [];
+    while (temp.length > 0) {
+      const d = Math.floor(Math.random() * temp.length);
+      ret.push(temp[d]);
+      temp.splice(d, 1);
+    }
+    return ret;
+  }
+  __name(shuffleArray, "shuffleArray");
+  __name2(shuffleArray, "shuffleArray");
+  function exportToGlobal(name, value) {
+    const keys = name.split(".");
+    let current = globalThis;
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (!current[keys[i]]) {
+        current[keys[i]] = {};
+      }
+      current = current[keys[i]];
+    }
+    current[keys[keys.length - 1]] = value;
+  }
+  __name(exportToGlobal, "exportToGlobal");
+  __name2(exportToGlobal, "exportToGlobal");
+  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
+    const mergedObject = { ...mergeTo };
+    for (const key in mergeFrom) {
+      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
+        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
+      } else if (key in mergedObject) {
+        mergedObject[key] = mergeFrom[key];
+      }
+    }
+    return mergedObject;
+  }
+  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  __name2(deepMergeMatchingProperties, "deepMergeMatchingProperties");
+  function hasGetter(obj, prop) {
+    while (obj && obj !== Object.prototype) {
+      const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+      if (descriptor?.get) return true;
+      obj = Object.getPrototypeOf(obj);
+    }
+    return false;
+  }
+  __name(hasGetter, "hasGetter");
+  __name2(hasGetter, "hasGetter");
+  function hasSetter(obj, prop) {
+    while (obj && obj !== Object.prototype) {
+      const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+      if (descriptor?.set) return true;
+      obj = Object.getPrototypeOf(obj);
+    }
+    return false;
+  }
+  __name(hasSetter, "hasSetter");
+  __name2(hasSetter, "hasSetter");
+  var byteToKB = /* @__PURE__ */ __name2((nByte) => Math.round(nByte / 100) / 10, "byteToKB");
+  var advElement = {
+    createButton: elementCreateButton,
+    createCheckbox: elementCreateCheckbox,
+    createInput: elementCreateInput,
+    createLabel: elementCreateLabel,
+    createCustom: elementCreateCustom,
+    createTooltip: elementCreateTooltip,
+    getTooltip: elementGetTooltip,
+    setTooltip: elementSetTooltip,
+    createBackNext: elementPrevNext
+  };
+  function elementCreateButton(options2) {
+    options2.id ?? (options2.id = ElementGenerateID());
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "button";
+    let image = void 0;
+    if (options2.options?.image) {
+      image = options2.options.image;
+      options2.options.image = void 0;
+    }
+    const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
+    const button = ElementButton.Create(
+      options2.id,
+      options2?.onClick ?? (() => {
+      }),
+      deepMerge({
+        labelPosition: "center"
+      }, options2.options),
+      deepMerge({
+        button: {
+          classList: ["deeplib-button"],
+          attributes: {
+            disabled
+          },
+          children: [
+            image ? {
+              tag: "img",
+              attributes: {
+                id: `${options2.id}-image`,
+                alt: "",
+                decoding: "async",
+                loading: "lazy",
+                src: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                // 1x1 transparent image to get rid of broken image
+              },
+              style: {
+                "--image": `url("${image}")`
+              }
+            } : void 0
+          ]
+        }
+      }, options2.htmlOptions ?? {})
+    );
+    BaseSubscreen.currentElements.push([button, options2]);
+    return button;
+  }
+  __name(elementCreateButton, "elementCreateButton");
+  __name2(elementCreateButton, "elementCreateButton");
+  function elementCreateCheckbox(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "checkbox";
+    const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
+    const retElem = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-checkbox-container"],
+      attributes: {
+        id: `${options2.id}-container`
+      },
+      children: [
+        deepMerge({
+          tag: "input",
+          classList: ["checkbox", "deeplib-input"],
+          attributes: {
+            type: "checkbox",
+            id: options2.id,
+            disabled,
+            checked: options2?.setElementValue?.() || void 0
+          }
+        }, options2.htmlOptions),
+        {
+          tag: "label",
+          classList: ["deeplib-text"],
+          attributes: {
+            for: options2.id
+          },
+          children: [options2.label]
+        }
+      ],
+      eventListeners: {
+        change: /* @__PURE__ */ __name2(() => {
+          options2?.setSettingValue?.(document.getElementById(options2.id)?.checked);
+        }, "change")
+      }
+    });
+    if (options2.description) {
+      retElem.addEventListener("mouseover", () => {
+        elementSetTooltip(options2.description || "");
+      });
+      retElem.addEventListener("mouseout", () => {
+        elementSetTooltip("");
+      });
+    }
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateCheckbox, "elementCreateCheckbox");
+  __name2(elementCreateCheckbox, "elementCreateCheckbox");
+  function elementCreateCustom(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "custom";
+    const retElem = ElementCreate(options2.htmlOptions);
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateCustom, "elementCreateCustom");
+  __name2(elementCreateCustom, "elementCreateCustom");
+  function elementCreateInput(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
+    const retElem = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-input-container"],
+      attributes: {
+        id: `${options2.id}-container`
+      },
+      children: [
+        deepMerge({
+          tag: "input",
+          classList: ["deeplib-input"],
+          attributes: {
+            type: options2.type,
+            id: options2.id,
+            placeholder: " ",
+            disabled,
+            value: options2?.setElementValue?.() || void 0
+          }
+        }, options2.htmlOptions),
+        options2.label ? {
+          tag: "label",
+          classList: ["deeplib-text"],
+          attributes: {
+            for: options2.id
+          },
+          children: [options2.label]
+        } : void 0
+      ],
+      eventListeners: {
+        input: /* @__PURE__ */ __name2(() => {
+          options2?.setSettingValue?.(document.getElementById(options2.id)?.value);
+        }, "input")
+      }
+    });
+    if (options2.description) {
+      retElem.addEventListener("mouseover", () => {
+        elementSetTooltip(options2.description || "");
+      });
+      retElem.addEventListener("mouseout", () => {
+        elementSetTooltip("");
+      });
+    }
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateInput, "elementCreateInput");
+  __name2(elementCreateInput, "elementCreateInput");
+  function elementCreateLabel(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    options2.type = "label";
+    const retElem = ElementCreate(deepMerge({
+      tag: "span",
+      classList: ["deeplib-label", "deeplib-text"],
+      attributes: {
+        id: options2.id
+      },
+      children: [
+        options2.label
+      ]
+    }, options2.htmlOptions));
+    if (options2.description) {
+      retElem.addEventListener("mouseover", () => {
+        elementSetTooltip(options2.description || "");
+      });
+      retElem.addEventListener("mouseout", () => {
+        elementSetTooltip("");
+      });
+    }
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateLabel, "elementCreateLabel");
+  __name2(elementCreateLabel, "elementCreateLabel");
+  function elementCreateTooltip() {
+    const element = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-tooltip"],
+      attributes: {
+        id: "deeplib-tooltip"
+      },
+      style: {
+        display: "none"
+      }
+    });
+    return element;
+  }
+  __name(elementCreateTooltip, "elementCreateTooltip");
+  __name2(elementCreateTooltip, "elementCreateTooltip");
+  function elementGetTooltip() {
+    return document.getElementById("deeplib-tooltip") ?? void 0;
+  }
+  __name(elementGetTooltip, "elementGetTooltip");
+  __name2(elementGetTooltip, "elementGetTooltip");
+  function elementSetTooltip(text) {
+    const element = document.getElementById("deeplib-tooltip");
+    if (!element) return false;
+    element.innerHTML = text;
+    if (text === "") element.style.display = "none";
+    else element.style.display = "";
+    return true;
+  }
+  __name(elementSetTooltip, "elementSetTooltip");
+  __name2(elementSetTooltip, "elementSetTooltip");
+  function elementPrevNext(options2) {
+    const elem = document.getElementById(options2.id);
+    if (elem) return elem;
+    const setLabel = /* @__PURE__ */ __name2((label) => {
+      const elem2 = document.getElementById(`${options2.id}-label`);
+      if (!elem2) return false;
+      elem2.textContent = label;
+    }, "setLabel");
+    const setPrevTooltip = /* @__PURE__ */ __name2((tooltip) => {
+      const elem2 = document.getElementById(`deeplib-prev-next-${options2.id}-prev-button-tooltip`);
+      if (!elem2) return false;
+      elem2.textContent = tooltip;
+    }, "setPrevTooltip");
+    const setNextTooltip = /* @__PURE__ */ __name2((tooltip) => {
+      const elem2 = document.getElementById(`deeplib-prev-next-${options2.id}-next-button-tooltip`);
+      if (!elem2) return false;
+      elem2.textContent = tooltip;
+    }, "setNextTooltip");
+    const retElem = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-prev-next"],
+      attributes: {
+        id: options2.id
+      },
+      children: [
+        advElement.createButton({
+          id: `deeplib-prev-next-${options2.id}-prev-button`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            options2.back({
+              setLabel,
+              setBackTooltip: setPrevTooltip,
+              setNextTooltip
+            });
+          }, "onClick"),
+          htmlOptions: {
+            button: {
+              classList: ["deeplib-prev-next-button"]
+            }
+          },
+          options: {
+            noStyling: true,
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/arrow_left.svg`,
+            tooltip: options2.initialPrevTooltip
+          }
+        }),
+        advElement.createLabel({
+          id: `${options2.id}-label`,
+          label: options2.initialLabel,
+          htmlOptions: {
+            classList: ["deeplib-prev-next-label"]
+          }
+        }),
+        advElement.createButton({
+          id: `deeplib-prev-next-${options2.id}-next-button`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            options2.next({
+              setLabel,
+              setBackTooltip: setPrevTooltip,
+              setNextTooltip
+            });
+          }, "onClick"),
+          htmlOptions: {
+            button: {
+              classList: ["deeplib-prev-next-button"]
+            }
+          },
+          options: {
+            noStyling: true,
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/arrow_right.svg`,
+            tooltip: options2.initialNextTooltip
+          }
+        })
+      ]
+    });
+    return retElem;
+  }
+  __name(elementPrevNext, "elementPrevNext");
+  __name2(elementPrevNext, "elementPrevNext");
+  var _a7;
+  var Modal = (_a7 = class {
+    constructor(opts) {
+      __publicField(this, "dialog");
+      __publicField(this, "blocker");
+      __publicField(this, "inputEl");
+      __publicField(this, "timeoutId");
+      /**
+       * An internal function where we will save promise function.
+       */
+      __publicField(this, "resolve", /* @__PURE__ */ __name2(() => {
+      }, "resolve"));
+      this.opts = opts;
+      opts ?? (opts = {});
+      opts.closeOnBackdrop ?? (opts.closeOnBackdrop = true);
+      const promptId = `modal-prompt-${Date.now()}`;
+      const prompt = (CommonIsArray(opts.prompt) ? opts.prompt : [opts.prompt]).filter((i) => i != null) ?? [""];
+      this.dialog = ElementCreate({
+        tag: "dialog",
+        classList: ["deeplib-modal"],
+        attributes: {
+          role: "dialog",
+          "aria-modal": "true",
+          "aria-labelledby": promptId
+        },
+        style: {
+          fontFamily: CommonGetFontName()
+        },
+        children: [
+          {
+            tag: "div",
+            classList: ["deeplib-modal-prompt-container"],
+            children: [
+              ...prompt
+            ]
+          },
+          {
+            tag: "div",
+            classList: ["deeplib-modal-prompt"],
+            attributes: {
+              id: promptId
+            },
+            children: [
+              opts.input ? this.renderInput(opts.input) : void 0
+            ]
+          },
+          this.renderButtons()
+        ]
+      });
+      this.blocker = this.createBlocker();
+      this.renderButtons();
+      document.body.append(this.createBlocker(), this.dialog);
+      this.setupFocusTrap();
+      if (opts.timeoutMs) {
+        this.timeoutId = window.setTimeout(() => this.close("timeout"), opts.timeoutMs);
+      }
+    }
+    /**
+     * Displays the modal and resolves with the chosen action and input value.
+     */
+    show() {
+      return _a7.enqueue(this);
+    }
+    /**
+     * Shows a simple alert modal with a single "OK" button.
+     */
+    static async alert(msg, timeoutMs) {
+      await new _a7({
+        prompt: msg,
+        buttons: [{ action: "close", text: getText("modal.button.ok") }],
+        timeoutMs,
+        escapeAction: "close"
+      }).show();
+    }
+    /**
+     * Shows a confirmation modal with "Cancel" and "OK" buttons.
+     * Returns true if "OK" is clicked.
+     */
+    static async confirm(msg) {
+      const [action] = await new _a7({
+        prompt: msg,
+        buttons: [{ text: getText("modal.button.decline"), action: "decline" }, { text: getText("modal.button.confirm"), action: "confirm" }],
+        escapeAction: "decline",
+        enterAction: "confirm"
+      }).show();
+      return action === "confirm";
+    }
+    /**
+     * Shows a prompt modal with an input field and "Submit"/"Cancel" buttons.
+     * Returns the input value if submitted, otherwise null.
+     */
+    static async prompt(msg, defaultValue = "") {
+      const [action, value] = await new _a7({
+        prompt: msg,
+        timeoutMs: 0,
+        input: { type: "input", defaultValue },
+        buttons: [{ text: getText("modal.button.cancel"), action: "cancel" }, { text: getText("modal.button.submit"), action: "submit" }],
+        escapeAction: "cancel",
+        enterAction: "submit"
+      }).show();
+      return action === "submit" ? value : null;
+    }
+    /** Creates the input element for the modal, applying configuration and validation. */
+    renderInput(cfg) {
+      const el = document.createElement(cfg.type);
+      el.classList.add("deeplib-modal-input");
+      if (cfg.placeholder) el.placeholder = cfg.placeholder;
+      if (cfg.readOnly) el.readOnly = true;
+      if (cfg.defaultValue) el.value = cfg.defaultValue;
+      if (cfg.type === "textarea") el.rows = 5;
+      el.addEventListener("input", () => {
+        const err = cfg.validate?.(el.value);
+        el.setCustomValidity(err || "");
+      });
+      this.inputEl = el;
+      return el;
+    }
+    /** Creates modal action buttons from configuration. */
+    renderButtons() {
+      const container = document.createElement("div");
+      container.classList.add("deeplib-modal-button-container");
+      const btns = this.opts.buttons ? [...this.opts.buttons] : [];
+      btns.forEach((b) => {
+        const btn = advElement.createButton({
+          id: `deeplib-modal-${b.action}`,
+          onClick: /* @__PURE__ */ __name2(() => this.close(b.action), "onClick"),
+          options: {
+            disabled: b.disabled,
+            label: b.text
+          }
+        });
+        container.append(btn);
+      });
+      return container;
+    }
+    /** Creates the modal backdrop blocker with optional click-to-close behavior. */
+    createBlocker() {
+      const blocker = document.createElement("div");
+      blocker.classList.add("deeplib-modal-blocker");
+      blocker.title = "Click to close";
+      if (this.opts.closeOnBackdrop !== false)
+        blocker.addEventListener("click", () => this.close("close"));
+      return blocker;
+    }
+    /** Implements a focus trap to keep keyboard navigation inside the modal. */
+    setupFocusTrap() {
+      const focusable = 'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])';
+      const elements = Array.from(this.dialog.querySelectorAll(focusable));
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      this.dialog.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") {
+          if (elements.length === 0) {
+            e.preventDefault();
+            return;
+          }
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === last) {
+              first.focus();
+              e.preventDefault();
+            }
+          }
+        } else if (e.key === "Escape") {
+          e.stopPropagation();
+          this.close(this.opts.escapeAction ?? "close");
+        } else if (e.key === "Enter") {
+          if (elements.some((el) => el === document.activeElement) && document.activeElement !== this.inputEl) return;
+          e.preventDefault();
+          e.stopPropagation();
+          this.close(this.opts.enterAction ?? "submit");
+        }
+      });
+      window.requestAnimationFrame(() => {
+        (this.inputEl || first)?.focus();
+      });
+    }
+    /** Closes the modal, cleans up DOM, resolves promise, and shows next queued modal. */
+    close(action) {
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+      this.dialog.close();
+      this.dialog.remove();
+      this.blocker.remove();
+      document.body.querySelector(".deeplib-modal-blocker")?.remove();
+      const value = this.inputEl?.value ?? "";
+      this.resolve([action, value]);
+      _a7.dequeue();
+    }
+    /** A function that adds a modal to the queue and returns a promise */
+    static enqueue(modal) {
+      _a7.queue.push(modal);
+      if (!_a7.processing) _a7.dequeue();
+      return new Promise((resolve) => modal.resolve = resolve);
+    }
+    /** A function that processes the queue, removing the first modal */
+    static dequeue() {
+      const modal = _a7.queue.shift();
+      if (modal) {
+        _a7.processing = true;
+        modal.dialog.show();
+      } else {
+        _a7.processing = false;
+      }
+    }
+  }, __name(_a7, "_Modal"), __name2(_a7, "Modal"), /** Static modal queue. */
+  __publicField(_a7, "queue", []), /** Flag to indicate if a modal is currently being shown. */
+  __publicField(_a7, "processing", false), _a7);
+  var _a8;
+  var MainMenu = (_a8 = class extends BaseSubscreen {
+    constructor(module) {
+      super(module);
+      __publicField(this, "subscreens", []);
+      this.subscreens = module.subscreens;
+    }
+    load() {
+      if (!GUI.instance || CurrentModule !== "DeepLibMod") {
+        this.setSubscreen(this);
+        return;
+      }
+      super.load();
+      const exitButton = advElement.createButton({
+        id: "exit",
+        size: [90, 90],
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.exit();
+        }, "onClick"),
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/exit.svg`,
+          tooltip: getText("settings.button.back_button_hint")
+        }
+      });
+      const menu = document.getElementById("deeplib-nav-menu");
+      if (menu) {
+        ElementMenu.AppendButton(menu, exitButton);
+      }
+      for (const screen of this.subscreens) {
+        if (screen.options.name == "mainmenu") continue;
+        const button = advElement.createButton({
+          id: `${screen.options.name}-button`,
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(screen);
+          }, "onClick"),
+          size: [null, 90],
+          options: {
+            image: screen.options.icon,
+            label: getText(`mainmenu.button.${screen.options.name}`)
+          }
+        });
+        layout.appendToSettingsDiv(button);
+      }
+      const miscDiv = layout.getMiscDiv();
+      layout.appendToSubscreen(miscDiv);
+      if (_a8.options.wikiLink) {
+        const wikiButton = advElement.createButton({
+          id: "deeplib-wiki-button",
+          onClick: /* @__PURE__ */ __name2(() => {
+            window.open(_a8.options.wikiLink, "_blank");
+          }, "onClick"),
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/notebook.svg`,
+            label: getText("mainmenu.button.wiki")
+          }
+        });
+        layout.appendToMiscDiv(wikiButton);
+      }
+      if (_a8.options.repoLink) {
+        const repoButton = advElement.createButton({
+          id: "deeplib-repo-button",
+          onClick: /* @__PURE__ */ __name2(() => {
+            window.open(_a8.options.repoLink, "_blank");
+          }, "onClick"),
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/git.svg`,
+            label: getText("mainmenu.button.repo")
+          }
+        });
+        layout.appendToMiscDiv(repoButton);
+      }
+      if (_a8.options.resetSubscreen) {
+        const resetButton = advElement.createButton({
+          id: "deeplib-reset-button",
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(_a8.options.resetSubscreen);
+          }, "onClick"),
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/trash_bin.svg`,
+            label: getText("mainmenu.button.reset")
+          }
+        });
+        layout.appendToMiscDiv(resetButton);
+      }
+      if (_a8.options.importExportSubscreen) {
+        const importExportButton = advElement.createButton({
+          id: "deeplib-import-export-button",
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(_a8.options.importExportSubscreen);
+          }, "onClick"),
+          size: [null, 80],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/transfer.svg`,
+            label: getText("mainmenu.button.import_export")
+          }
+        });
+        layout.appendToMiscDiv(importExportButton);
+      }
+      if (_a8.options.storageFullnessIndicator) {
+        const maxStorageCapacityKB = 180;
+        const currentStorageCapacityKB = byteToKB(ModStorage.measureSize(Player.OnlineSettings));
+        const fullness = (currentStorageCapacityKB / maxStorageCapacityKB * 100).toFixed(1);
+        const storageFullnessWrapper = advElement.createButton({
+          id: CommonGenerateUniqueID(),
+          size: [null, 80],
+          options: {
+            tooltipPosition: "left",
+            noStyling: true,
+            tooltip: CommonStringPartitionReplace(getText("mainmenu.meter.storage_hint"), {
+              $percentage$: `${fullness}`
+            }).join(""),
+            label: CommonStringPartitionReplace(getText("mainmenu.meter.storage_label"), {
+              $currentCapacity$: `${currentStorageCapacityKB}`,
+              $maxCapacity$: `${maxStorageCapacityKB}`
+            }).join("")
+          },
+          htmlOptions: {
+            button: {
+              children: [
+                {
+                  tag: "div",
+                  attributes: { id: "deeplib-storage-meter" },
+                  children: [
+                    {
+                      tag: "div",
+                      attributes: { id: "deeplib-storage-bar" },
+                      style: { width: `${fullness}%` }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        });
+        layout.appendToMiscDiv(storageFullnessWrapper);
+      }
+      if (false) {
+        const debugButton = advElement.createButton({
+          id: "deeplib-debug-button",
+          onClick: /* @__PURE__ */ __name2(() => {
+            this.setSubscreen(new GuiDebug());
+          }, "onClick"),
+          size: [90, 90],
+          options: {
+            image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/bug.svg`
+          }
+        });
+        if (menu) {
+          ElementMenu.PrependItem(menu, debugButton);
+        }
+      }
+    }
+    run() {
+      super.run();
+    }
+    click() {
+    }
+    exit() {
+      CharacterAppearanceForceUpCharacter = -1;
+      CharacterLoadCanvas(Player);
+      const returnScreen = typeof this.options.returnScreen === "function" ? this.options.returnScreen() : this.options.returnScreen;
+      if (!returnScreen) {
+        PreferenceOpenSubscreen("Extensions").then(() => {
+          PreferenceSubscreenExtensionsClear();
+        });
+      } else if (returnScreen instanceof BaseSubscreen) {
+        setSubscreen(returnScreen ?? null).then(() => {
+        });
+      } else if (Array.isArray(returnScreen)) {
+        CommonSetScreen(...returnScreen);
+      }
+    }
+    resize() {
+      super.resize();
+      ElementSetPosition("deeplib-misc", 1905, 930, "bottom-right");
+      ElementSetSize("deeplib-misc", 405, null);
+    }
+    static setOptions(mainMenuOptions) {
+      _a8.options = mainMenuOptions;
+    }
+  }, __name(_a8, "_MainMenu"), __name2(_a8, "MainMenu"), __publicField(_a8, "options", {}), __publicField(_a8, "subscreenOptions", {
+    name: "mainmenu"
+  }), _a8);
+  async function PreferenceOpenSubscreen(subscreen, page = 1) {
+    if (CurrentModule !== "Character" || CurrentScreen !== "Preference") {
+      await CommonSetScreen("Character", "Preference");
+    }
+    PreferenceSubscreen?.unload?.();
+    PreferenceSubscreen = PreferenceSubscreens.find((s) => s.name === subscreen) ?? null;
+    if (!CommonIsNonNegativeInteger(page)) page = 1;
+    PreferencePageCurrent = page;
+    PreferenceMessage = "";
+    PreferenceSubscreen?.load?.();
+  }
+  __name(PreferenceOpenSubscreen, "PreferenceOpenSubscreen");
+  __name2(PreferenceOpenSubscreen, "PreferenceOpenSubscreen");
+  var _a9;
+  var GuiImportExport = (_a9 = class extends BaseSubscreen {
+    constructor(importExportOptions) {
+      super();
+      __publicField(this, "importExportOptions");
+      this.importExportOptions = importExportOptions;
+    }
+    load() {
+      super.load();
+      const importFromFileButton = advElement.createButton({
+        id: "deeplib-import-file-button",
+        size: [600, 90],
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataImport("file");
+        }, "onClick"),
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/file_import.svg`,
+          label: getText("import-export.button.import_file")
+        }
+      });
+      layout.appendToSettingsDiv(importFromFileButton);
+      const exportToFileButton = advElement.createButton({
+        id: "deeplib-export-file-button",
+        size: [600, 90],
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataExport("file");
+        }, "onClick"),
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/file_export.svg`,
+          label: getText("import-export.button.export_file")
+        }
+      });
+      layout.appendToSettingsDiv(exportToFileButton);
+      const importFromClipboardButton = advElement.createButton({
+        id: "deeplib-import-clipboard-button",
+        size: [600, 90],
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataImport("clipboard");
+        }, "onClick"),
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/clipboard_import.svg`,
+          label: getText("import-export.button.import_clipboard")
+        }
+      });
+      layout.appendToSettingsDiv(importFromClipboardButton);
+      const exportToClipboardButton = advElement.createButton({
+        id: "deeplib-export-clipboard-button",
+        size: [600, 90],
+        onClick: /* @__PURE__ */ __name2(() => {
+          this.dataExport("clipboard");
+        }, "onClick"),
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_images/clipboard_export.svg`,
+          label: getText("import-export.button.export_clipboard")
+        }
+      });
+      layout.appendToSettingsDiv(exportToClipboardButton);
+    }
+    resize() {
+      super.resize();
+    }
+    /** Exports the mod data using the specified method. */
+    async dataExport(transferMethod) {
+      try {
+        const data = LZString.compressToBase64(JSON.stringify(modStorage.playerStorage));
+        if (transferMethod === "clipboard") {
+          await this.exportToClipboard(data);
+        } else if (transferMethod === "file") {
+          await this.exportToFile(data, "themed_settings");
+        }
+        this.importExportOptions.onExport?.();
+        ToastManager.success("Data exported successfully.");
+      } catch (error) {
+        ToastManager.error("Data export failed.");
+        deepLibLogger.error(`Data export failed for ${ModSdkManager.ModInfo.name}.`, error);
+      }
+    }
+    /** Imports mod data using the specified method. */
+    async dataImport(transferMethod) {
+      try {
+        let importedData = "";
+        if (transferMethod === "clipboard") {
+          importedData = await this.importFromClipboard() ?? null;
+        } else if (transferMethod === "file") {
+          importedData = await this.importFromFile() ?? null;
+        }
+        if (!importedData) {
+          throw new Error("No data imported.");
+        }
+        const data = JSON.parse(LZString.decompressFromBase64(importedData) ?? "");
+        if (!data) {
+          throw new Error("Invalid data.");
+        }
+        modStorage.playerStorage = data;
+        this.importExportOptions.onImport?.();
+        ToastManager.success("Data imported successfully.");
+      } catch (error) {
+        ToastManager.error("Data import failed.");
+        deepLibLogger.error(`Data import failed for ${ModSdkManager.ModInfo.name}.`, error);
+      }
+    }
+    /** Saves data to a file using the browser's save dialog. */
+    async exportToFile(data, defaultFileName) {
+      const CUSTOM_EXTENSION = this.importExportOptions.customFileExtension.startsWith(".") ? this.importExportOptions.customFileExtension : "." + this.importExportOptions.customFileExtension;
+      const suggestedName = defaultFileName.endsWith(CUSTOM_EXTENSION) ? defaultFileName : defaultFileName + CUSTOM_EXTENSION;
+      if ("showSaveFilePicker" in window) {
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName,
+            types: [
+              {
+                description: "Custom Data Files",
+                accept: { "text/plain": [CUSTOM_EXTENSION] }
+              }
+            ]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(data);
+          await writable.close();
+        } catch (error) {
+          throw new Error("File save cancelled or failed: " + error.message);
+        }
+      } else {
+        const fileName = await Modal.prompt("Enter file name", suggestedName);
+        if (fileName === null) {
+          return;
+        } else if (fileName === "") {
+          throw new Error("File name cannot be empty.");
+        }
+        const blob = new Blob([data], { type: "text/plain" });
+        const link2 = ElementCreate({
+          tag: "a",
+          attributes: {
+            href: URL.createObjectURL(blob),
+            download: fileName.endsWith(CUSTOM_EXTENSION) ? fileName : fileName + CUSTOM_EXTENSION
+          }
+        });
+        link2.click();
+        URL.revokeObjectURL(link2.href);
+      }
+    }
+    /** Opens a file picker and reads the selected file's contents, importing the data. */
+    async importFromFile() {
+      const CUSTOM_EXTENSION = this.importExportOptions.customFileExtension.startsWith(".") ? this.importExportOptions.customFileExtension : "." + this.importExportOptions.customFileExtension;
+      async function importFromFileInternal(file) {
+        if (!file.name.endsWith(CUSTOM_EXTENSION)) {
+          throw new Error(`Invalid file type. Expected a ${CUSTOM_EXTENSION} file.`);
+        }
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error("Failed to read file."));
+          reader.readAsText(file);
+        });
+      }
+      __name(importFromFileInternal, "importFromFileInternal");
+      __name2(importFromFileInternal, "importFromFileInternal");
+      if ("showOpenFilePicker" in window) {
+        try {
+          const [fileHandle] = await window.showOpenFilePicker({
+            types: [
+              {
+                description: "Custom Data Files",
+                accept: { "text/plain": [CUSTOM_EXTENSION] }
+              }
+            ],
+            multiple: false
+          });
+          const file = await fileHandle.getFile();
+          return await importFromFileInternal(file);
+        } catch (error) {
+          throw new Error("File selection cancelled or failed: " + error.message);
+        }
+      } else {
+        return new Promise((resolve, reject) => {
+          const input = document.createElement("input");
+          input.type = "file";
+          input.accept = CUSTOM_EXTENSION;
+          input.onchange = async (event) => {
+            const file = event.target.files?.[0];
+            if (file) {
+              try {
+                const data = await importFromFileInternal(file);
+                resolve(data);
+              } catch (error) {
+                reject(error);
+              }
+            } else {
+              reject(new Error("No file selected."));
+            }
+          };
+          input.click();
+        });
+      }
+    }
+    /** Copies the given data to the clipboard. */
+    async exportToClipboard(data) {
+      return navigator.clipboard.writeText(data).catch((error) => {
+        throw new Error("Failed to copy data to clipboard." + error);
+      });
+    }
+    /** Prompts the user to enter data and returns it. */
+    async importFromClipboard() {
+      return Modal.prompt("Enter data to import").catch((error) => {
+        throw new Error("Failed to read data from clipboard." + error);
+      });
+    }
+  }, __name(_a9, "GuiImportExport"), __name2(_a9, "GuiImportExport"), __publicField(_a9, "subscreenOptions", {
+    name: "import-export"
+  }), _a9);
+  var _a10;
+  var ModStorage = (_a10 = class {
+    constructor(modName) {
+      /** The unique mod identifier used as key prefix in storage */
+      __publicField(this, "modName");
+      if (!_a10._instance) {
+        _a10._instance = this;
+        this.modName = modName;
+      }
+      this.modName ?? (this.modName = modName);
+      return _a10._instance;
+    }
+    get playerStorage() {
+      return Player[this.modName];
+    }
+    set playerStorage(value) {
+      Player[this.modName] = value;
+    }
+    get extensionStorage() {
+      return Player.ExtensionSettings[this.modName];
+    }
+    set extensionStorage(value) {
+      Player.ExtensionSettings[this.modName] = value;
+    }
+    setLocalStorage(key, value) {
+      localStorage.setItem(`${this.modName}_${key}`, _a10.dataCompress(value));
+    }
+    getLocalStorage(key) {
+      const data = localStorage.getItem(`${this.modName}_${key}`);
+      if (!data) return null;
+      return _a10.dataDecompress(data);
+    }
+    load() {
+      if (this.extensionStorage) {
+        const parsed = _a10.dataDecompress(this.extensionStorage || "");
+        if (parsed === null || !Object.hasOwn(parsed, "Version")) {
+          this.playerStorage = {};
+        } else {
+          this.playerStorage = parsed;
+        }
+        ;
+      } else {
+        this.playerStorage = {};
+      }
+    }
+    save() {
+      if (!this.extensionStorage) this.extensionStorage = "";
+      this.extensionStorage = _a10.dataCompress(this.playerStorage);
+      ServerPlayerExtensionSettingsSync(this.modName);
+    }
+    static dataDecompress(string) {
+      const d = LZString.decompressFromBase64(string);
+      let data = null;
+      try {
+        const decoded = JSON.parse(d);
+        data = decoded;
+      } catch (error) {
+        deepLibLogger.error(error);
+      }
+      return data;
+    }
+    static dataCompress(object) {
+      return LZString.compressToBase64(JSON.stringify(object));
+    }
+    static measureSize(data) {
+      try {
+        if (typeof data !== "string") {
+          data = JSON.stringify(data) || "";
+        }
+        if (typeof data === "string") {
+          return new TextEncoder().encode(data).byteLength;
+        }
+        throw new Error();
+      } catch {
+        return NaN;
+      }
+    }
+  }, __name(_a10, "_ModStorage"), __name2(_a10, "ModStorage"), /** Singleton instance of ModStorage */
+  __publicField(_a10, "_instance", null), _a10);
+  var domUtil = {
+    /**
+     * Automatically sets the position of the element based on the given position.
+     * The position can be either a [x, y] tuple or a function returning such a tuple.
+     * If both x and y are defined, the element's position is updated accordingly.
+     */
+    autoSetPosition,
+    /**
+     * Automatically sets the size of the element based on the given size.
+     * The size can be either a [width, height] tuple or a function returning such a tuple.
+     * If both width and height are defined, the element's size is updated accordingly.
+     */
+    autoSetSize,
+    /**
+     * Hides the element by setting its CSS display property to 'none'.
+     * If the element cannot be found, the function does nothing.
+     */
+    hide,
+    /**
+     * Unhides the element by clearing its CSS display property (sets it to '').
+     * If the element cannot be found, the function does nothing.
+     */
+    unhide,
+    /**
+     * Checks if the element has overflow content.
+     * Returns an object indicating if there is any overflow,
+     * and specifically if there is vertical or horizontal overflow.
+     * Returns null if the element is not found.
+     */
+    hasOverflow
+  };
+  function autoSetPosition(_, position) {
+    let xPos = void 0;
+    let yPos = void 0;
+    if (Array.isArray(position)) {
+      xPos = position[0];
+      yPos = position[1];
+    } else if (typeof position === "function") {
+      const result = position();
+      xPos = result[0];
+      yPos = result[1];
+    }
+    if (xPos !== void 0 && yPos !== void 0) ElementSetPosition(_, xPos, yPos);
+  }
+  __name(autoSetPosition, "autoSetPosition");
+  __name2(autoSetPosition, "autoSetPosition");
+  function autoSetSize(_, size) {
+    let width = void 0;
+    let height = void 0;
+    if (Array.isArray(size)) {
+      width = size[0];
+      height = size[1];
+    } else if (typeof size === "function") {
+      const result = size();
+      width = result[0];
+      height = result[1];
+    }
+    if (width !== void 0 && height !== void 0) ElementSetSize(_, width, height);
+  }
+  __name(autoSetSize, "autoSetSize");
+  __name2(autoSetSize, "autoSetSize");
+  function hide(_) {
+    const element = ElementWrap(_);
+    if (!element) return;
+    element.style.display = "none";
+  }
+  __name(hide, "hide");
+  __name2(hide, "hide");
+  function unhide(_) {
+    const element = ElementWrap(_);
+    if (!element) return;
+    element.style.display = "";
+  }
+  __name(unhide, "unhide");
+  __name2(unhide, "unhide");
+  function hasOverflow(el) {
+    const element = ElementWrap(el);
+    if (!element) return null;
+    const vertical = element.scrollHeight > element.clientHeight;
+    const horizontal = element.scrollWidth > element.clientWidth;
+    return {
+      any: vertical || horizontal,
+      vertical,
+      horizontal
+    };
+  }
+  __name(hasOverflow, "hasOverflow");
+  __name2(hasOverflow, "hasOverflow");
+  var layout = {
+    getSubscreen: elementGetSubscreenDiv,
+    appendToSubscreen: elementAppendToSubscreenDiv,
+    removeSubscreen: elementRemoveSubscreenDiv,
+    getSettingsDiv: elementGetSettingsDiv,
+    appendToSettingsDiv: elementAppendToSettingsDiv,
+    removeSettingsDiv: elementRemoveSettingsDiv,
+    getMiscDiv: elementGetMiscDiv,
+    appendToMiscDiv: elementAppendToMiscDiv,
+    removeMiscDiv: elementRemoveMiscDiv
+  };
+  function elementGetSubscreenDiv() {
+    const subscreenDiv = ElementWrap("deeplib-subscreen");
+    if (subscreenDiv) {
+      return subscreenDiv;
+    }
+    const div = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-subscreen", "HideOnPopup"],
+      attributes: { id: "deeplib-subscreen" }
+    });
+    return document.body.appendChild(div);
+  }
+  __name(elementGetSubscreenDiv, "elementGetSubscreenDiv");
+  __name2(elementGetSubscreenDiv, "elementGetSubscreenDiv");
+  function elementRemoveSubscreenDiv() {
+    return elementGetSubscreenDiv()?.remove();
+  }
+  __name(elementRemoveSubscreenDiv, "elementRemoveSubscreenDiv");
+  __name2(elementRemoveSubscreenDiv, "elementRemoveSubscreenDiv");
+  function elementAppendToSubscreenDiv(...element) {
+    return elementGetSubscreenDiv()?.append(...element);
+  }
+  __name(elementAppendToSubscreenDiv, "elementAppendToSubscreenDiv");
+  __name2(elementAppendToSubscreenDiv, "elementAppendToSubscreenDiv");
+  function elementGetSettingsDiv() {
+    const settingsDiv = ElementWrap("deeplib-settings");
+    if (settingsDiv) {
+      return settingsDiv;
+    }
+    const div = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-settings", "scroll-box"],
+      attributes: { id: "deeplib-settings" }
+    });
+    return div;
+  }
+  __name(elementGetSettingsDiv, "elementGetSettingsDiv");
+  __name2(elementGetSettingsDiv, "elementGetSettingsDiv");
+  function elementAppendToSettingsDiv(...element) {
+    return elementGetSettingsDiv()?.append(...element);
+  }
+  __name(elementAppendToSettingsDiv, "elementAppendToSettingsDiv");
+  __name2(elementAppendToSettingsDiv, "elementAppendToSettingsDiv");
+  function elementRemoveSettingsDiv() {
+    return elementGetSettingsDiv()?.remove();
+  }
+  __name(elementRemoveSettingsDiv, "elementRemoveSettingsDiv");
+  __name2(elementRemoveSettingsDiv, "elementRemoveSettingsDiv");
+  function elementGetMiscDiv() {
+    const miscDiv = ElementWrap("deeplib-misc");
+    if (miscDiv) {
+      return miscDiv;
+    }
+    const div = ElementCreate({
+      tag: "div",
+      classList: ["deeplib-misc"],
+      attributes: { id: "deeplib-misc" }
+    });
+    return div;
+  }
+  __name(elementGetMiscDiv, "elementGetMiscDiv");
+  __name2(elementGetMiscDiv, "elementGetMiscDiv");
+  function elementAppendToMiscDiv(...element) {
+    return elementGetMiscDiv()?.append(...element);
+  }
+  __name(elementAppendToMiscDiv, "elementAppendToMiscDiv");
+  __name2(elementAppendToMiscDiv, "elementAppendToMiscDiv");
+  function elementRemoveMiscDiv() {
+    return elementGetMiscDiv()?.remove();
+  }
+  __name(elementRemoveMiscDiv, "elementRemoveMiscDiv");
+  __name2(elementRemoveMiscDiv, "elementRemoveMiscDiv");
+  var _a11;
+  var Logger = (_a11 = class extends Array {
+    constructor(modName) {
+      super();
+      __publicField(this, "ModName", "DeepLib");
+      if (modName) {
+        this.ModName = modName;
+      }
+    }
+    _Log(level, ...args) {
+      const logEntry = {
+        logLevel: level,
+        args: [...args],
+        // trace: arguments.callee.caller.toString().split('\n'), 
+        date: new Date(Date.now())
+        // `[${this.ModName}] ${formattedArgs}` 
+      };
+      const userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.includes("chrome") || userAgent.includes("firefox")) {
+        const color = _a11.colorizeLog(level);
+        args.forEach((arg) => {
+          if (typeof arg === "string") {
+            arg = `
+%c${arg}`;
+          }
+        });
+        console.log(`%c${this.ModName}:`, color, ...args);
+      } else {
+        console.log(`${this.ModName}:`, ...args);
+      }
+      this.push(logEntry);
+    }
+    info(...args) {
+      this._Log("info", ...args);
+    }
+    log(...args) {
+      this._Log("log", ...args);
+    }
+    warn(...args) {
+      this._Log("warn", ...args);
+    }
+    error(...args) {
+      this._Log("error", ...args);
+    }
+    debug(...args) {
+      this._Log("debug", ...args);
+    }
+    static colorizeLog(logLevel) {
+      const colors = {
+        info: "color: #32CCCC",
+        log: "color: #CCCC32",
+        warn: "color: #eec355",
+        error: "color: #750b0b",
+        debug: "color: #9E4BCF"
+      };
+      return colors[logLevel];
+    }
+  }, __name(_a11, "_Logger"), __name2(_a11, "Logger"), _a11);
+  var deepLibLogger = new Logger();
+  function sendLocalMessage(id, message, timeoutInSeconds) {
+    const element = ElementCreate({
+      tag: "div",
+      classList: ["ChatMessage", "deeplib-message", "ChatMessageNonDialogue"],
+      attributes: {
+        id: id ?? `DEEPLIB_LOCAL_MESSAGE_${Date.now()}`,
+        "data-time": ChatRoomCurrentTime(),
+        "data-sender": Player.MemberNumber?.toString()
+      },
+      children: [
+        {
+          tag: "span",
+          classList: ["deeplib-text"],
+          innerHTML: message.replaceAll("\n	", "")
+        },
+        {
+          tag: "br"
+        },
+        {
+          tag: "a",
+          classList: ["deeplib-text"],
+          attributes: {
+            href: "#"
+          },
+          innerHTML: "<b>Close (Click)</b>",
+          eventListeners: {
+            click: /* @__PURE__ */ __name2(() => {
+              element.remove();
+            }, "click")
+          }
+        }
+      ]
+    });
+    ChatRoomAppendChat(element);
+    if (!timeoutInSeconds) return;
+    setTimeout(() => element.remove(), timeoutInSeconds * 1e3);
+  }
+  __name(sendLocalMessage, "sendLocalMessage");
+  __name2(sendLocalMessage, "sendLocalMessage");
+  function sendActionMessage(msg, target = void 0, dictionary = []) {
+    if (!msg) return;
+    ServerSend("ChatRoomChat", {
+      Content: "DEEPLIB_CUSTOM_ACTION",
+      Type: "Action",
+      Target: target ?? void 0,
+      Dictionary: [
+        { Tag: 'MISSING TEXT IN "Interface.csv": DEEPLIB_CUSTOM_ACTION', Text: msg },
+        ...dictionary
+      ]
+    });
+  }
+  __name(sendActionMessage, "sendActionMessage");
+  __name2(sendActionMessage, "sendActionMessage");
+  var import_bondage_club_mod_sdk = __toESM(require_bcmodsdk(), 1);
+  var rawSdk = import_bondage_club_mod_sdk.default;
+  var bcModSdkRef = rawSdk.default ?? rawSdk;
+  var HookPriority = {
+    Observe: 0,
+    AddBehavior: 1,
+    ModifyBehavior: 5,
+    OverrideBehavior: 10,
+    Top: 100
+  };
+  var _a12;
+  var ModSdkManager = (_a12 = class {
+    /** Registers a mod with the SDK and stores mod information. */
+    constructor(info, options2) {
+      _a12.SDK = bcModSdkRef.registerMod(info, options2);
+      _a12.ModInfo = info;
+    }
+    /** Retrieves or initializes patch data for a given target function. */
+    initPatchableFunction(target) {
+      let result = _a12.patchedFunctions.get(target);
+      if (!result) {
+        result = {
+          name: target,
+          hooks: []
+        };
+        _a12.patchedFunctions.set(target, result);
+      }
+      return result;
+    }
+    /**
+     * Hooks a function with a callback at a given priority. 
+     * 
+     * Prevents duplicate hooks.
+     */
+    hookFunction(target, priority, hook, module = null) {
+      const data = this.initPatchableFunction(target);
+      if (data.hooks.some((h) => h.hook === hook)) {
+        return () => null;
+      }
+      const removeCallback = _a12.SDK?.hookFunction(target, priority, hook);
+      data.hooks.push({
+        hook,
+        priority,
+        module,
+        removeCallback
+      });
+      data.hooks.sort((a, b) => b.priority - a.priority);
+      return removeCallback;
+    }
+    /**
+     * Applies patches to a target function.
+     * 
+     * **This method is DANGEROUS** to use and has high potential to conflict with other mods.
+     */
+    patchFunction(target, patches) {
+      _a12.SDK?.patchFunction(target, patches);
+    }
+    /**
+     * Removes all patches from a target function.
+     */
+    unpatchFunction(target) {
+      _a12.SDK?.removePatches(target);
+    }
+    /**
+     * Removes all hooks associated with a specific module from a target function.
+     */
+    removeHookByModule(target, module) {
+      const data = this.initPatchableFunction(target);
+      for (let i = data.hooks.length - 1; i >= 0; i--) {
+        if (data.hooks[i].module === module) {
+          data.hooks[i].removeCallback();
+          data.hooks.splice(i, 1);
+        }
+      }
+      return true;
+    }
+    /**
+     * Removes all hooks associated with a specific module across all patched functions.
+     */
+    removeAllHooksByModule(module) {
+      for (const data of _a12.patchedFunctions.values()) {
+        for (let i = data.hooks.length - 1; i >= 0; i--) {
+          if (data.hooks[i].module === module) {
+            data.hooks[i].removeCallback();
+            data.hooks.splice(i, 1);
+          }
+        }
+      }
+      return true;
+    }
+  }, __name(_a12, "_ModSdkManager"), __name2(_a12, "ModSdkManager"), __publicField(_a12, "SDK"), __publicField(_a12, "patchedFunctions", /* @__PURE__ */ new Map()), __publicField(_a12, "ModInfo"), _a12);
+  var Style = {
+    /**
+     * Injects a CSS style block directly into the document head using a <style> tag.
+     * If a style element with the same `styleId` already exists, it won't inject again.
+     */
+    injectInline(styleId, styleSource) {
+      const isStyleLoaded = document.getElementById(styleId);
+      if (isStyleLoaded) return;
+      const styleElement = document.createElement("style");
+      styleElement.id = styleId;
+      styleElement.appendChild(document.createTextNode(styleSource));
+      document.head.appendChild(styleElement);
+    },
+    /**
+     * Injects a CSS stylesheet link into the document head using a <link> tag.
+     * If a link element with the same `styleId` already exists, it won't inject again.
+     */
+    injectEmbed(styleId, styleLink) {
+      const isStyleLoaded = document.getElementById(styleId);
+      if (isStyleLoaded) return;
+      const styleElement = document.createElement("link");
+      styleElement.id = styleId;
+      styleElement.rel = "stylesheet";
+      styleElement.href = styleLink;
+      document.head.appendChild(styleElement);
+    },
+    /**
+     * Removes a style element from the document head by its ID.
+     * Does nothing if the element is not found.
+     */
+    eject(id) {
+      const style = document.getElementById(id);
+      if (!style) return;
+      style.remove();
+    },
+    /**
+     * Reloads an inline style by removing the existing style element (if any)
+     * and injecting the new styles inline again.
+     */
+    reload(styleId, styleSource) {
+      Style.eject(styleId);
+      Style.injectInline(styleId, styleSource);
+    },
+    /** Fetches the text content of a stylesheet or any resource at the given link. */
+    async fetch(link2) {
+      return fetch(link2).then((res) => res.text());
     }
   };
-  __name(_BaseModule, "BaseModule");
-  var BaseModule = _BaseModule;
+  var _a13;
+  var Localization = (_a13 = class {
+    /** Initialize the localization system by loading translation files. */
+    static async init(initOptions) {
+      if (_a13.initialized) return;
+      _a13.initialized = true;
+      _a13.PathToModTranslation = (() => {
+        if (!initOptions?.pathToTranslationsFolder) return void 0;
+        return initOptions.pathToTranslationsFolder.endsWith("/") ? initOptions.pathToTranslationsFolder : `${initOptions.pathToTranslationsFolder}/`;
+      })();
+      _a13.DefaultLanguage = initOptions?.defaultLanguage || _a13.DefaultLanguage;
+      const lang = initOptions?.fixedLanguage ? _a13.DefaultLanguage : TranslationLanguage.toLowerCase();
+      const libTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, lang);
+      if (lang === _a13.DefaultLanguage) {
+        _a13.LibTranslation = libTranslation;
+      } else {
+        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToLibTranslation, _a13.DefaultLanguage);
+        _a13.LibTranslation = { ...fallbackTranslation, ...libTranslation };
+      }
+      if (!_a13.PathToModTranslation) return;
+      const modTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, lang);
+      if (lang === _a13.DefaultLanguage) {
+        _a13.ModTranslation = modTranslation;
+      } else {
+        const fallbackTranslation = await _a13.fetchLanguageFile(_a13.PathToModTranslation, _a13.DefaultLanguage);
+        _a13.ModTranslation = { ...fallbackTranslation, ...modTranslation };
+      }
+    }
+    /** Get a translated string from mod translations by source tag. */
+    static getTextMod(srcTag) {
+      return _a13.ModTranslation?.[srcTag] || void 0;
+    }
+    /** Get a translated string from library translations by source tag. */
+    static getTextLib(srcTag) {
+      return _a13.LibTranslation?.[srcTag] || void 0;
+    }
+    /**
+     * Fetch and parse a language file from the given base URL and language code.
+     * Falls back to default language if the requested language file is unavailable.
+     */
+    static async fetchLanguageFile(baseUrl, lang) {
+      const response = await fetch(`${baseUrl}${lang}.lang`);
+      if (lang !== _a13.DefaultLanguage && !response.ok) {
+        return this.fetchLanguageFile(baseUrl, _a13.DefaultLanguage);
+      }
+      if (!response.ok) {
+        return {};
+      }
+      const langFileContent = await response.text();
+      return this.parseLanguageFile(langFileContent);
+    }
+    /**
+     * Parse the raw content of a language file into a TranslationDict.
+     * Ignores empty lines and comments starting with '#'.
+     */
+    static parseLanguageFile(content) {
+      const translations = {};
+      const lines = content.split("\n");
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith("#")) continue;
+        const [key, ...rest] = trimmed.split("=");
+        translations[key.trim()] = rest.join("=").trim();
+      }
+      return translations;
+    }
+  }, __name(_a13, "_Localization"), __name2(_a13, "Localization"), __publicField(_a13, "LibTranslation", {}), __publicField(_a13, "ModTranslation", {}), __publicField(_a13, "PathToModTranslation"), __publicField(_a13, "PathToLibTranslation", `${"https://ddeeplb.github.io/Themed-BC/public"}/dl_translations/`), __publicField(_a13, "DefaultLanguage", "en"), /** Flag to prevent re-initialization */
+  __publicField(_a13, "initialized", false), _a13);
+  var getText = /* @__PURE__ */ __name2((srcTag) => {
+    return Localization.getTextMod(srcTag) || Localization.getTextLib(srcTag) || srcTag;
+  }, "getText");
+  var _a14;
+  var EventChannel = (_a14 = class {
+    constructor(channelName) {
+      __publicField(this, "listeners", {});
+      this.channelName = channelName;
+      ModSdkManager.prototype.hookFunction("ChatRoomMessageProcessHidden", 0, (args, next) => {
+        if (!this.isChannelMessage(args[0])) {
+          return next(args);
+        }
+        const [message, sender] = args;
+        const { type, data } = message.Dictionary[0];
+        const listeners = this.listeners[type];
+        if (listeners) {
+          listeners.forEach((listener) => listener(data, sender));
+        }
+        return next(args);
+      }, `EventChannel-${channelName}`);
+    }
+    unload() {
+      Object.keys(this.listeners).forEach((key) => delete this.listeners[key]);
+      ModSdkManager.prototype.removeHookByModule("ChatRoomMessageProcessHidden", `EventChannel-${this.channelName}`);
+    }
+    sendEvent(type, data, target = null) {
+      const packet = {
+        Type: "Hidden",
+        Content: this.channelName,
+        Sender: Player.MemberNumber,
+        ...target ? { Target: target } : {},
+        Dictionary: [
+          {
+            type,
+            data
+          }
+        ]
+      };
+      ServerSend("ChatRoomChat", packet);
+    }
+    registerListener(event, listener) {
+      const listeners = this.listeners[event] ?? [];
+      listeners.push(listener);
+      this.listeners[event] = listeners;
+      return () => this.unregisterListener(event, listener);
+    }
+    unregisterListener(event, listener) {
+      const listeners = this.listeners[event];
+      if (listeners) {
+        const index = listeners.indexOf(listener);
+        if (index !== -1) {
+          listeners.splice(index, 1);
+        }
+      }
+    }
+    isChannelMessage(message) {
+      return message && message.Type === "Hidden" && message.Content === this.channelName && message.Sender && message.Sender !== Player.MemberNumber && message.Dictionary && !!message.Dictionary[0]?.data && !!message.Dictionary[0]?.type || false;
+    }
+  }, __name(_a14, "EventChannel"), __name2(_a14, "EventChannel"), _a14);
 
-  // src/Hooks/GuiRedraw/AppearanceGetPreviewImageColor.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/utilities/data.ts
+  function settingsReset() {
+    modStorage.playerStorage = {};
+    modStorage.save();
+  }
+  __name(settingsReset, "settingsReset");
+  function localSettingsLoad() {
+    const data = modStorage.getLocalStorage("LocalData");
+    if (!data) {
+      window.ThemedLocalData = {
+        loginOptions: {
+          hideDummy: false,
+          hideCredits: false
+        }
+      };
+      localSettingsSave();
+    } else {
+      window.ThemedLocalData = data;
+    }
+  }
+  __name(localSettingsLoad, "localSettingsLoad");
+  function localSettingsSave() {
+    modStorage.setLocalStorage("LocalData", window.ThemedLocalData);
+  }
+  __name(localSettingsSave, "localSettingsSave");
 
-  // src/Utilities/Color.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color = __toESM(require_color());
+  // src/hooks/login_options.ts
+  var ids = {
+    optionsOpen: "tmd-login-options-open",
+    optionsClose: "tmd-login-options-dialog-close",
+    optionsSheet: "tmd-login-options-dialog",
+    optionsContent: "tmd-login-options-dialog-content",
+    optionsStyle: "tmd-login-options-style"
+  };
+  var options = {
+    hideCredits: "Hide Credits",
+    hideDummy: "Hide Dummy"
+  };
+  function loadLoginOptions() {
+    localSettingsLoad();
+    patchLoginPage();
+    Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/login-options.css`);
+    createUI();
+    const loginRunHook = sdk.hookFunction("LoginRun", HookPriority.Observe, (args, next) => {
+      next(args);
+      ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
+      ElementSetSize(ids.optionsOpen, 90, 90);
+      ElementSetSize(ids.optionsSheet, 1e3, 500);
+    });
+    const loginExitHook = sdk.hookFunction("LoginUnload", HookPriority.Observe, (args, next) => {
+      loginExitHook();
+      loginRunHook();
+      removeUI();
+      Style.eject(ids.optionsStyle);
+      unpatchLoginPage();
+      return next(args);
+    });
+  }
+  __name(loadLoginOptions, "loadLoginOptions");
+  function createUI() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
+      tooltip: "[Themed] Login Options",
+      image: "./Icons/Preference.png"
+    });
+    document.body.appendChild(optionsButton);
+    const optionsSheet = ElementCreate({
+      tag: "dialog",
+      attributes: {
+        id: ids.optionsSheet
+      },
+      children: [
+        {
+          tag: "div",
+          attributes: {
+            id: ids.optionsContent
+          },
+          children: [
+            ...Array.from(Object.entries(options)).map(([key, value]) => {
+              const typedKey = key;
+              return {
+                tag: "label",
+                classList: ["tmd-login-options-label"],
+                children: [
+                  ElementCheckbox.Create(
+                    `tmd-login-options-${key}`,
+                    () => {
+                      loginOptions[typedKey] = !loginOptions[typedKey];
+                      localSettingsSave();
+                      repatchLoginPage();
+                    },
+                    {
+                      checked: loginOptions[typedKey]
+                    }
+                  ),
+                  value
+                ]
+              };
+            })
+          ]
+        },
+        ElementButton.Create(
+          ids.optionsClose,
+          () => optionsSheet.close(),
+          {
+            label: "Close"
+          }
+        )
+      ],
+      parent: document.body
+    });
+  }
+  __name(createUI, "createUI");
+  function removeUI() {
+    document.getElementById(ids.optionsOpen)?.remove();
+    document.getElementById(ids.optionsSheet)?.remove();
+  }
+  __name(removeUI, "removeUI");
+  function patchLoginPage() {
+    const loginOptions = window.ThemedLocalData.loginOptions;
+    if (loginOptions.hideDummy) {
+      sdk.patchFunction("LoginRun", {
+        "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
+      });
+      sdk.patchFunction("LoginDoNextThankYou", {
+        "CharacterRelease(LoginCharacter, false);": "",
+        "CharacterAppearanceFullRandom(LoginCharacter);": "",
+        'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
+        "CharacterFullRandomRestrain(LoginCharacter)": ""
+      });
+    }
+    if (loginOptions.hideCredits) {
+      sdk.patchFunction("LoginRun", {
+        "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
+        'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
+        'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
+      });
+      sdk.patchFunction("LoginDoNextThankYou", {
+        "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
+      });
+    }
+  }
+  __name(patchLoginPage, "patchLoginPage");
+  function unpatchLoginPage() {
+    sdk.unpatchFunction("LoginRun");
+    sdk.unpatchFunction("LoginDoNextThankYou");
+  }
+  __name(unpatchLoginPage, "unpatchLoginPage");
+  function repatchLoginPage() {
+    unpatchLoginPage();
+    patchLoginPage();
+  }
+  __name(repatchLoginPage, "repatchLoginPage");
+
+  // src/migrators/v140_migrator.ts
+  var _V140Migrator = class _V140Migrator extends BaseMigrator2 {
+    get migrationVersion() {
+      return "1.4.0";
+    }
+    migrate() {
+      const colorsData = Player.Themed.ColorsModule;
+      const integrationsData = Player.Themed.IntegrationModule;
+      if (colorsData) {
+        if (Player.Themed.ColorsModule["primaryColor"]) {
+          Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
+          delete Player.Themed.ColorsModule["primaryColor"];
+        }
+        if (Player.Themed.ColorsModule["accentColor"]) {
+          Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
+          delete Player.Themed.ColorsModule["accentColor"];
+        }
+        if (Player.Themed.ColorsModule["textColor"]) {
+          Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
+          delete Player.Themed.ColorsModule["textColor"];
+        }
+      }
+      if (integrationsData) {
+        if (Player.Themed.IntegrationModule["BC"]) {
+          Player.Themed.IntegrationModule.inputs = Player.Themed.IntegrationModule["BC"];
+          delete Player.Themed.IntegrationModule["BC"];
+        }
+        if (Player.Themed.IntegrationModule["BC_Chat"]) {
+          Player.Themed.IntegrationModule.chat = Player.Themed.IntegrationModule["BC_Chat"];
+          delete Player.Themed.IntegrationModule["BC_Chat"];
+        }
+        if (Player.Themed.IntegrationModule["BC_FriendList"]) {
+          Player.Themed.IntegrationModule.friendList = Player.Themed.IntegrationModule["BC_FriendList"];
+          delete Player.Themed.IntegrationModule["BC_FriendList"];
+        }
+        if (Player.Themed.IntegrationModule["BC_Other"]) {
+          Player.Themed.IntegrationModule.scrollbar = Player.Themed.IntegrationModule["BC_Other"];
+          Player.Themed.IntegrationModule.selection = Player.Themed.IntegrationModule["BC_Other"];
+          delete Player.Themed.IntegrationModule["BC_Other"];
+        }
+        if (Player.Themed.IntegrationModule["FBC"]) {
+          Player.Themed.IntegrationModule.WCE = Player.Themed.IntegrationModule["FBC"];
+          delete Player.Themed.IntegrationModule["FBC"];
+        }
+      }
+      return true;
+    }
+  };
+  __name(_V140Migrator, "V140Migrator");
+  var V140Migrator = _V140Migrator;
+
+  // node_modules/.pnpm/color-name@2.0.0/node_modules/color-name/index.js
+  var color_name_default = {
+    aliceblue: [240, 248, 255],
+    antiquewhite: [250, 235, 215],
+    aqua: [0, 255, 255],
+    aquamarine: [127, 255, 212],
+    azure: [240, 255, 255],
+    beige: [245, 245, 220],
+    bisque: [255, 228, 196],
+    black: [0, 0, 0],
+    blanchedalmond: [255, 235, 205],
+    blue: [0, 0, 255],
+    blueviolet: [138, 43, 226],
+    brown: [165, 42, 42],
+    burlywood: [222, 184, 135],
+    cadetblue: [95, 158, 160],
+    chartreuse: [127, 255, 0],
+    chocolate: [210, 105, 30],
+    coral: [255, 127, 80],
+    cornflowerblue: [100, 149, 237],
+    cornsilk: [255, 248, 220],
+    crimson: [220, 20, 60],
+    cyan: [0, 255, 255],
+    darkblue: [0, 0, 139],
+    darkcyan: [0, 139, 139],
+    darkgoldenrod: [184, 134, 11],
+    darkgray: [169, 169, 169],
+    darkgreen: [0, 100, 0],
+    darkgrey: [169, 169, 169],
+    darkkhaki: [189, 183, 107],
+    darkmagenta: [139, 0, 139],
+    darkolivegreen: [85, 107, 47],
+    darkorange: [255, 140, 0],
+    darkorchid: [153, 50, 204],
+    darkred: [139, 0, 0],
+    darksalmon: [233, 150, 122],
+    darkseagreen: [143, 188, 143],
+    darkslateblue: [72, 61, 139],
+    darkslategray: [47, 79, 79],
+    darkslategrey: [47, 79, 79],
+    darkturquoise: [0, 206, 209],
+    darkviolet: [148, 0, 211],
+    deeppink: [255, 20, 147],
+    deepskyblue: [0, 191, 255],
+    dimgray: [105, 105, 105],
+    dimgrey: [105, 105, 105],
+    dodgerblue: [30, 144, 255],
+    firebrick: [178, 34, 34],
+    floralwhite: [255, 250, 240],
+    forestgreen: [34, 139, 34],
+    fuchsia: [255, 0, 255],
+    gainsboro: [220, 220, 220],
+    ghostwhite: [248, 248, 255],
+    gold: [255, 215, 0],
+    goldenrod: [218, 165, 32],
+    gray: [128, 128, 128],
+    green: [0, 128, 0],
+    greenyellow: [173, 255, 47],
+    grey: [128, 128, 128],
+    honeydew: [240, 255, 240],
+    hotpink: [255, 105, 180],
+    indianred: [205, 92, 92],
+    indigo: [75, 0, 130],
+    ivory: [255, 255, 240],
+    khaki: [240, 230, 140],
+    lavender: [230, 230, 250],
+    lavenderblush: [255, 240, 245],
+    lawngreen: [124, 252, 0],
+    lemonchiffon: [255, 250, 205],
+    lightblue: [173, 216, 230],
+    lightcoral: [240, 128, 128],
+    lightcyan: [224, 255, 255],
+    lightgoldenrodyellow: [250, 250, 210],
+    lightgray: [211, 211, 211],
+    lightgreen: [144, 238, 144],
+    lightgrey: [211, 211, 211],
+    lightpink: [255, 182, 193],
+    lightsalmon: [255, 160, 122],
+    lightseagreen: [32, 178, 170],
+    lightskyblue: [135, 206, 250],
+    lightslategray: [119, 136, 153],
+    lightslategrey: [119, 136, 153],
+    lightsteelblue: [176, 196, 222],
+    lightyellow: [255, 255, 224],
+    lime: [0, 255, 0],
+    limegreen: [50, 205, 50],
+    linen: [250, 240, 230],
+    magenta: [255, 0, 255],
+    maroon: [128, 0, 0],
+    mediumaquamarine: [102, 205, 170],
+    mediumblue: [0, 0, 205],
+    mediumorchid: [186, 85, 211],
+    mediumpurple: [147, 112, 219],
+    mediumseagreen: [60, 179, 113],
+    mediumslateblue: [123, 104, 238],
+    mediumspringgreen: [0, 250, 154],
+    mediumturquoise: [72, 209, 204],
+    mediumvioletred: [199, 21, 133],
+    midnightblue: [25, 25, 112],
+    mintcream: [245, 255, 250],
+    mistyrose: [255, 228, 225],
+    moccasin: [255, 228, 181],
+    navajowhite: [255, 222, 173],
+    navy: [0, 0, 128],
+    oldlace: [253, 245, 230],
+    olive: [128, 128, 0],
+    olivedrab: [107, 142, 35],
+    orange: [255, 165, 0],
+    orangered: [255, 69, 0],
+    orchid: [218, 112, 214],
+    palegoldenrod: [238, 232, 170],
+    palegreen: [152, 251, 152],
+    paleturquoise: [175, 238, 238],
+    palevioletred: [219, 112, 147],
+    papayawhip: [255, 239, 213],
+    peachpuff: [255, 218, 185],
+    peru: [205, 133, 63],
+    pink: [255, 192, 203],
+    plum: [221, 160, 221],
+    powderblue: [176, 224, 230],
+    purple: [128, 0, 128],
+    rebeccapurple: [102, 51, 153],
+    red: [255, 0, 0],
+    rosybrown: [188, 143, 143],
+    royalblue: [65, 105, 225],
+    saddlebrown: [139, 69, 19],
+    salmon: [250, 128, 114],
+    sandybrown: [244, 164, 96],
+    seagreen: [46, 139, 87],
+    seashell: [255, 245, 238],
+    sienna: [160, 82, 45],
+    silver: [192, 192, 192],
+    skyblue: [135, 206, 235],
+    slateblue: [106, 90, 205],
+    slategray: [112, 128, 144],
+    slategrey: [112, 128, 144],
+    snow: [255, 250, 250],
+    springgreen: [0, 255, 127],
+    steelblue: [70, 130, 180],
+    tan: [210, 180, 140],
+    teal: [0, 128, 128],
+    thistle: [216, 191, 216],
+    tomato: [255, 99, 71],
+    turquoise: [64, 224, 208],
+    violet: [238, 130, 238],
+    wheat: [245, 222, 179],
+    white: [255, 255, 255],
+    whitesmoke: [245, 245, 245],
+    yellow: [255, 255, 0],
+    yellowgreen: [154, 205, 50]
+  };
+
+  // node_modules/.pnpm/color-string@2.1.0/node_modules/color-string/index.js
+  var reverseNames = /* @__PURE__ */ Object.create(null);
+  for (const name in color_name_default) {
+    if (Object.hasOwn(color_name_default, name)) {
+      reverseNames[color_name_default[name]] = name;
+    }
+  }
+  var cs = {
+    to: {},
+    get: {}
+  };
+  cs.get = function(string) {
+    const prefix = string.slice(0, 3).toLowerCase();
+    let value;
+    let model;
+    switch (prefix) {
+      case "hsl": {
+        value = cs.get.hsl(string);
+        model = "hsl";
+        break;
+      }
+      case "hwb": {
+        value = cs.get.hwb(string);
+        model = "hwb";
+        break;
+      }
+      default: {
+        value = cs.get.rgb(string);
+        model = "rgb";
+        break;
+      }
+    }
+    if (!value) {
+      return null;
+    }
+    return { model, value };
+  };
+  cs.get.rgb = function(string) {
+    if (!string) {
+      return null;
+    }
+    const abbr = /^#([a-f\d]{3,4})$/i;
+    const hex = /^#([a-f\d]{6})([a-f\d]{2})?$/i;
+    const rgba = /^rgba?\(\s*([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)\s*(?:[\s,|/]\s*([+-]?[\d.]+)(%?)\s*)?\)$/;
+    const per = /^rgba?\(\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[\s,|/]\s*([+-]?[\d.]+)(%?)\s*)?\)$/;
+    const keyword = /^(\w+)$/;
+    let rgb = [0, 0, 0, 1];
+    let match;
+    let i;
+    let hexAlpha;
+    if (match = string.match(hex)) {
+      hexAlpha = match[2];
+      match = match[1];
+      for (i = 0; i < 3; i++) {
+        const i2 = i * 2;
+        rgb[i] = Number.parseInt(match.slice(i2, i2 + 2), 16);
+      }
+      if (hexAlpha) {
+        rgb[3] = Number.parseInt(hexAlpha, 16) / 255;
+      }
+    } else if (match = string.match(abbr)) {
+      match = match[1];
+      hexAlpha = match[3];
+      for (i = 0; i < 3; i++) {
+        rgb[i] = Number.parseInt(match[i] + match[i], 16);
+      }
+      if (hexAlpha) {
+        rgb[3] = Number.parseInt(hexAlpha + hexAlpha, 16) / 255;
+      }
+    } else if (match = string.match(rgba)) {
+      for (i = 0; i < 3; i++) {
+        rgb[i] = Number.parseInt(match[i + 1], 10);
+      }
+      if (match[4]) {
+        rgb[3] = match[5] ? Number.parseFloat(match[4]) * 0.01 : Number.parseFloat(match[4]);
+      }
+    } else if (match = string.match(per)) {
+      for (i = 0; i < 3; i++) {
+        rgb[i] = Math.round(Number.parseFloat(match[i + 1]) * 2.55);
+      }
+      if (match[4]) {
+        rgb[3] = match[5] ? Number.parseFloat(match[4]) * 0.01 : Number.parseFloat(match[4]);
+      }
+    } else if (match = string.match(keyword)) {
+      if (match[1] === "transparent") {
+        return [0, 0, 0, 0];
+      }
+      if (!Object.hasOwn(color_name_default, match[1])) {
+        return null;
+      }
+      rgb = color_name_default[match[1]];
+      rgb[3] = 1;
+      return rgb;
+    } else {
+      return null;
+    }
+    for (i = 0; i < 3; i++) {
+      rgb[i] = clamp(rgb[i], 0, 255);
+    }
+    rgb[3] = clamp(rgb[3], 0, 1);
+    return rgb;
+  };
+  cs.get.hsl = function(string) {
+    if (!string) {
+      return null;
+    }
+    const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
+    const match = string.match(hsl);
+    if (match) {
+      const alpha = Number.parseFloat(match[4]);
+      const h = (Number.parseFloat(match[1]) % 360 + 360) % 360;
+      const s = clamp(Number.parseFloat(match[2]), 0, 100);
+      const l = clamp(Number.parseFloat(match[3]), 0, 100);
+      const a = clamp(Number.isNaN(alpha) ? 1 : alpha, 0, 1);
+      return [h, s, l, a];
+    }
+    return null;
+  };
+  cs.get.hwb = function(string) {
+    if (!string) {
+      return null;
+    }
+    const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
+    const match = string.match(hwb);
+    if (match) {
+      const alpha = Number.parseFloat(match[4]);
+      const h = (Number.parseFloat(match[1]) % 360 + 360) % 360;
+      const w = clamp(Number.parseFloat(match[2]), 0, 100);
+      const b = clamp(Number.parseFloat(match[3]), 0, 100);
+      const a = clamp(Number.isNaN(alpha) ? 1 : alpha, 0, 1);
+      return [h, w, b, a];
+    }
+    return null;
+  };
+  cs.to.hex = function(...rgba) {
+    return "#" + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + (rgba[3] < 1 ? hexDouble(Math.round(rgba[3] * 255)) : "");
+  };
+  cs.to.rgb = function(...rgba) {
+    return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ")" : "rgba(" + Math.round(rgba[0]) + ", " + Math.round(rgba[1]) + ", " + Math.round(rgba[2]) + ", " + rgba[3] + ")";
+  };
+  cs.to.rgb.percent = function(...rgba) {
+    const r = Math.round(rgba[0] / 255 * 100);
+    const g = Math.round(rgba[1] / 255 * 100);
+    const b = Math.round(rgba[2] / 255 * 100);
+    return rgba.length < 4 || rgba[3] === 1 ? "rgb(" + r + "%, " + g + "%, " + b + "%)" : "rgba(" + r + "%, " + g + "%, " + b + "%, " + rgba[3] + ")";
+  };
+  cs.to.hsl = function(...hsla) {
+    return hsla.length < 4 || hsla[3] === 1 ? "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)" : "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, " + hsla[3] + ")";
+  };
+  cs.to.hwb = function(...hwba) {
+    let a = "";
+    if (hwba.length >= 4 && hwba[3] !== 1) {
+      a = ", " + hwba[3];
+    }
+    return "hwb(" + hwba[0] + ", " + hwba[1] + "%, " + hwba[2] + "%" + a + ")";
+  };
+  cs.to.keyword = function(...rgb) {
+    return reverseNames[rgb.slice(0, 3)];
+  };
+  function clamp(number_, min, max) {
+    return Math.min(Math.max(min, number_), max);
+  }
+  __name(clamp, "clamp");
+  function hexDouble(number_) {
+    const string_ = Math.round(number_).toString(16).toUpperCase();
+    return string_.length < 2 ? "0" + string_ : string_;
+  }
+  __name(hexDouble, "hexDouble");
+  var color_string_default = cs;
+
+  // node_modules/.pnpm/color-convert@3.1.0/node_modules/color-convert/conversions.js
+  var reverseKeywords = {};
+  for (const key of Object.keys(color_name_default)) {
+    reverseKeywords[color_name_default[key]] = key;
+  }
+  var convert = {
+    rgb: { channels: 3, labels: "rgb" },
+    hsl: { channels: 3, labels: "hsl" },
+    hsv: { channels: 3, labels: "hsv" },
+    hwb: { channels: 3, labels: "hwb" },
+    cmyk: { channels: 4, labels: "cmyk" },
+    xyz: { channels: 3, labels: "xyz" },
+    lab: { channels: 3, labels: "lab" },
+    oklab: { channels: 3, labels: ["okl", "oka", "okb"] },
+    lch: { channels: 3, labels: "lch" },
+    oklch: { channels: 3, labels: ["okl", "okc", "okh"] },
+    hex: { channels: 1, labels: ["hex"] },
+    keyword: { channels: 1, labels: ["keyword"] },
+    ansi16: { channels: 1, labels: ["ansi16"] },
+    ansi256: { channels: 1, labels: ["ansi256"] },
+    hcg: { channels: 3, labels: ["h", "c", "g"] },
+    apple: { channels: 3, labels: ["r16", "g16", "b16"] },
+    gray: { channels: 1, labels: ["gray"] }
+  };
+  var conversions_default = convert;
+  var LAB_FT = (6 / 29) ** 3;
+  function srgbNonlinearTransform(c) {
+    const cc = c > 31308e-7 ? 1.055 * c ** (1 / 2.4) - 0.055 : c * 12.92;
+    return Math.min(Math.max(0, cc), 1);
+  }
+  __name(srgbNonlinearTransform, "srgbNonlinearTransform");
+  function srgbNonlinearTransformInv(c) {
+    return c > 0.04045 ? ((c + 0.055) / 1.055) ** 2.4 : c / 12.92;
+  }
+  __name(srgbNonlinearTransformInv, "srgbNonlinearTransformInv");
+  for (const model of Object.keys(convert)) {
+    if (!("channels" in convert[model])) {
+      throw new Error("missing channels property: " + model);
+    }
+    if (!("labels" in convert[model])) {
+      throw new Error("missing channel labels property: " + model);
+    }
+    if (convert[model].labels.length !== convert[model].channels) {
+      throw new Error("channel and label counts mismatch: " + model);
+    }
+    const { channels, labels } = convert[model];
+    delete convert[model].channels;
+    delete convert[model].labels;
+    Object.defineProperty(convert[model], "channels", { value: channels });
+    Object.defineProperty(convert[model], "labels", { value: labels });
+  }
+  convert.rgb.hsl = function(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+    const delta = max - min;
+    let h;
+    let s;
+    switch (max) {
+      case min: {
+        h = 0;
+        break;
+      }
+      case r: {
+        h = (g - b) / delta;
+        break;
+      }
+      case g: {
+        h = 2 + (b - r) / delta;
+        break;
+      }
+      case b: {
+        h = 4 + (r - g) / delta;
+        break;
+      }
+    }
+    h = Math.min(h * 60, 360);
+    if (h < 0) {
+      h += 360;
+    }
+    const l = (min + max) / 2;
+    if (max === min) {
+      s = 0;
+    } else if (l <= 0.5) {
+      s = delta / (max + min);
+    } else {
+      s = delta / (2 - max - min);
+    }
+    return [h, s * 100, l * 100];
+  };
+  convert.rgb.hsv = function(rgb) {
+    let rdif;
+    let gdif;
+    let bdif;
+    let h;
+    let s;
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const v = Math.max(r, g, b);
+    const diff = v - Math.min(r, g, b);
+    const diffc = /* @__PURE__ */ __name(function(c) {
+      return (v - c) / 6 / diff + 1 / 2;
+    }, "diffc");
+    if (diff === 0) {
+      h = 0;
+      s = 0;
+    } else {
+      s = diff / v;
+      rdif = diffc(r);
+      gdif = diffc(g);
+      bdif = diffc(b);
+      switch (v) {
+        case r: {
+          h = bdif - gdif;
+          break;
+        }
+        case g: {
+          h = 1 / 3 + rdif - bdif;
+          break;
+        }
+        case b: {
+          h = 2 / 3 + gdif - rdif;
+          break;
+        }
+      }
+      if (h < 0) {
+        h += 1;
+      } else if (h > 1) {
+        h -= 1;
+      }
+    }
+    return [
+      h * 360,
+      s * 100,
+      v * 100
+    ];
+  };
+  convert.rgb.hwb = function(rgb) {
+    const r = rgb[0];
+    const g = rgb[1];
+    let b = rgb[2];
+    const h = convert.rgb.hsl(rgb)[0];
+    const w = 1 / 255 * Math.min(r, Math.min(g, b));
+    b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
+    return [h, w * 100, b * 100];
+  };
+  convert.rgb.oklab = function(rgb) {
+    const r = srgbNonlinearTransformInv(rgb[0] / 255);
+    const g = srgbNonlinearTransformInv(rgb[1] / 255);
+    const b = srgbNonlinearTransformInv(rgb[2] / 255);
+    const lp = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+    const mp = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+    const sp = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+    const l = 0.2104542553 * lp + 0.793617785 * mp - 0.0040720468 * sp;
+    const aa = 1.9779984951 * lp - 2.428592205 * mp + 0.4505937099 * sp;
+    const bb = 0.0259040371 * lp + 0.7827717662 * mp - 0.808675766 * sp;
+    return [l * 100, aa * 100, bb * 100];
+  };
+  convert.rgb.cmyk = function(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const k = Math.min(1 - r, 1 - g, 1 - b);
+    const c = (1 - r - k) / (1 - k) || 0;
+    const m = (1 - g - k) / (1 - k) || 0;
+    const y = (1 - b - k) / (1 - k) || 0;
+    return [c * 100, m * 100, y * 100, k * 100];
+  };
+  function comparativeDistance(x, y) {
+    return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+  }
+  __name(comparativeDistance, "comparativeDistance");
+  convert.rgb.keyword = function(rgb) {
+    const reversed = reverseKeywords[rgb];
+    if (reversed) {
+      return reversed;
+    }
+    let currentClosestDistance = Number.POSITIVE_INFINITY;
+    let currentClosestKeyword;
+    for (const keyword of Object.keys(color_name_default)) {
+      const value = color_name_default[keyword];
+      const distance = comparativeDistance(rgb, value);
+      if (distance < currentClosestDistance) {
+        currentClosestDistance = distance;
+        currentClosestKeyword = keyword;
+      }
+    }
+    return currentClosestKeyword;
+  };
+  convert.keyword.rgb = function(keyword) {
+    return color_name_default[keyword];
+  };
+  convert.rgb.xyz = function(rgb) {
+    const r = srgbNonlinearTransformInv(rgb[0] / 255);
+    const g = srgbNonlinearTransformInv(rgb[1] / 255);
+    const b = srgbNonlinearTransformInv(rgb[2] / 255);
+    const x = r * 0.4124564 + g * 0.3575761 + b * 0.1804375;
+    const y = r * 0.2126729 + g * 0.7151522 + b * 0.072175;
+    const z = r * 0.0193339 + g * 0.119192 + b * 0.9503041;
+    return [x * 100, y * 100, z * 100];
+  };
+  convert.rgb.lab = function(rgb) {
+    const xyz = convert.rgb.xyz(rgb);
+    let x = xyz[0];
+    let y = xyz[1];
+    let z = xyz[2];
+    x /= 95.047;
+    y /= 100;
+    z /= 108.883;
+    x = x > LAB_FT ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+    y = y > LAB_FT ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+    z = z > LAB_FT ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+    const l = 116 * y - 16;
+    const a = 500 * (x - y);
+    const b = 200 * (y - z);
+    return [l, a, b];
+  };
+  convert.hsl.rgb = function(hsl) {
+    const h = hsl[0] / 360;
+    const s = hsl[1] / 100;
+    const l = hsl[2] / 100;
+    let t3;
+    let value;
+    if (s === 0) {
+      value = l * 255;
+      return [value, value, value];
+    }
+    const t2 = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const t1 = 2 * l - t2;
+    const rgb = [0, 0, 0];
+    for (let i = 0; i < 3; i++) {
+      t3 = h + 1 / 3 * -(i - 1);
+      if (t3 < 0) {
+        t3++;
+      }
+      if (t3 > 1) {
+        t3--;
+      }
+      if (6 * t3 < 1) {
+        value = t1 + (t2 - t1) * 6 * t3;
+      } else if (2 * t3 < 1) {
+        value = t2;
+      } else if (3 * t3 < 2) {
+        value = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
+      } else {
+        value = t1;
+      }
+      rgb[i] = value * 255;
+    }
+    return rgb;
+  };
+  convert.hsl.hsv = function(hsl) {
+    const h = hsl[0];
+    let s = hsl[1] / 100;
+    let l = hsl[2] / 100;
+    let smin = s;
+    const lmin = Math.max(l, 0.01);
+    l *= 2;
+    s *= l <= 1 ? l : 2 - l;
+    smin *= lmin <= 1 ? lmin : 2 - lmin;
+    const v = (l + s) / 2;
+    const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
+    return [h, sv * 100, v * 100];
+  };
+  convert.hsv.rgb = function(hsv) {
+    const h = hsv[0] / 60;
+    const s = hsv[1] / 100;
+    let v = hsv[2] / 100;
+    const hi = Math.floor(h) % 6;
+    const f = h - Math.floor(h);
+    const p = 255 * v * (1 - s);
+    const q = 255 * v * (1 - s * f);
+    const t = 255 * v * (1 - s * (1 - f));
+    v *= 255;
+    switch (hi) {
+      case 0: {
+        return [v, t, p];
+      }
+      case 1: {
+        return [q, v, p];
+      }
+      case 2: {
+        return [p, v, t];
+      }
+      case 3: {
+        return [p, q, v];
+      }
+      case 4: {
+        return [t, p, v];
+      }
+      case 5: {
+        return [v, p, q];
+      }
+    }
+  };
+  convert.hsv.hsl = function(hsv) {
+    const h = hsv[0];
+    const s = hsv[1] / 100;
+    const v = hsv[2] / 100;
+    const vmin = Math.max(v, 0.01);
+    let sl;
+    let l;
+    l = (2 - s) * v;
+    const lmin = (2 - s) * vmin;
+    sl = s * vmin;
+    sl /= lmin <= 1 ? lmin : 2 - lmin;
+    sl = sl || 0;
+    l /= 2;
+    return [h, sl * 100, l * 100];
+  };
+  convert.hwb.rgb = function(hwb) {
+    const h = hwb[0] / 360;
+    let wh = hwb[1] / 100;
+    let bl = hwb[2] / 100;
+    const ratio = wh + bl;
+    let f;
+    if (ratio > 1) {
+      wh /= ratio;
+      bl /= ratio;
+    }
+    const i = Math.floor(6 * h);
+    const v = 1 - bl;
+    f = 6 * h - i;
+    if ((i & 1) !== 0) {
+      f = 1 - f;
+    }
+    const n = wh + f * (v - wh);
+    let r;
+    let g;
+    let b;
+    switch (i) {
+      default:
+      case 6:
+      case 0: {
+        r = v;
+        g = n;
+        b = wh;
+        break;
+      }
+      case 1: {
+        r = n;
+        g = v;
+        b = wh;
+        break;
+      }
+      case 2: {
+        r = wh;
+        g = v;
+        b = n;
+        break;
+      }
+      case 3: {
+        r = wh;
+        g = n;
+        b = v;
+        break;
+      }
+      case 4: {
+        r = n;
+        g = wh;
+        b = v;
+        break;
+      }
+      case 5: {
+        r = v;
+        g = wh;
+        b = n;
+        break;
+      }
+    }
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.cmyk.rgb = function(cmyk) {
+    const c = cmyk[0] / 100;
+    const m = cmyk[1] / 100;
+    const y = cmyk[2] / 100;
+    const k = cmyk[3] / 100;
+    const r = 1 - Math.min(1, c * (1 - k) + k);
+    const g = 1 - Math.min(1, m * (1 - k) + k);
+    const b = 1 - Math.min(1, y * (1 - k) + k);
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.xyz.rgb = function(xyz) {
+    const x = xyz[0] / 100;
+    const y = xyz[1] / 100;
+    const z = xyz[2] / 100;
+    let r;
+    let g;
+    let b;
+    r = x * 3.2404542 + y * -1.5371385 + z * -0.4985314;
+    g = x * -0.969266 + y * 1.8760108 + z * 0.041556;
+    b = x * 0.0556434 + y * -0.2040259 + z * 1.0572252;
+    r = srgbNonlinearTransform(r);
+    g = srgbNonlinearTransform(g);
+    b = srgbNonlinearTransform(b);
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.xyz.lab = function(xyz) {
+    let x = xyz[0];
+    let y = xyz[1];
+    let z = xyz[2];
+    x /= 95.047;
+    y /= 100;
+    z /= 108.883;
+    x = x > LAB_FT ? x ** (1 / 3) : 7.787 * x + 16 / 116;
+    y = y > LAB_FT ? y ** (1 / 3) : 7.787 * y + 16 / 116;
+    z = z > LAB_FT ? z ** (1 / 3) : 7.787 * z + 16 / 116;
+    const l = 116 * y - 16;
+    const a = 500 * (x - y);
+    const b = 200 * (y - z);
+    return [l, a, b];
+  };
+  convert.xyz.oklab = function(xyz) {
+    const x = xyz[0] / 100;
+    const y = xyz[1] / 100;
+    const z = xyz[2] / 100;
+    const lp = Math.cbrt(0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z);
+    const mp = Math.cbrt(0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z);
+    const sp = Math.cbrt(0.0482003018 * x + 0.2643662691 * y + 0.633851707 * z);
+    const l = 0.2104542553 * lp + 0.793617785 * mp - 0.0040720468 * sp;
+    const a = 1.9779984951 * lp - 2.428592205 * mp + 0.4505937099 * sp;
+    const b = 0.0259040371 * lp + 0.7827717662 * mp - 0.808675766 * sp;
+    return [l * 100, a * 100, b * 100];
+  };
+  convert.oklab.oklch = function(oklab) {
+    return convert.lab.lch(oklab);
+  };
+  convert.oklab.xyz = function(oklab) {
+    const ll = oklab[0] / 100;
+    const a = oklab[1] / 100;
+    const b = oklab[2] / 100;
+    const l = (0.999999998 * ll + 0.396337792 * a + 0.215803758 * b) ** 3;
+    const m = (1.000000008 * ll - 0.105561342 * a - 0.063854175 * b) ** 3;
+    const s = (1.000000055 * ll - 0.089484182 * a - 1.291485538 * b) ** 3;
+    const x = 1.227013851 * l - 0.55779998 * m + 0.281256149 * s;
+    const y = -0.040580178 * l + 1.11225687 * m - 0.071676679 * s;
+    const z = -0.076381285 * l - 0.421481978 * m + 1.58616322 * s;
+    return [x * 100, y * 100, z * 100];
+  };
+  convert.oklab.rgb = function(oklab) {
+    const ll = oklab[0] / 100;
+    const aa = oklab[1] / 100;
+    const bb = oklab[2] / 100;
+    const l = (ll + 0.3963377774 * aa + 0.2158037573 * bb) ** 3;
+    const m = (ll - 0.1055613458 * aa - 0.0638541728 * bb) ** 3;
+    const s = (ll - 0.0894841775 * aa - 1.291485548 * bb) ** 3;
+    const r = srgbNonlinearTransform(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s);
+    const g = srgbNonlinearTransform(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s);
+    const b = srgbNonlinearTransform(-0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s);
+    return [r * 255, g * 255, b * 255];
+  };
+  convert.oklch.oklab = function(oklch) {
+    return convert.lch.lab(oklch);
+  };
+  convert.lab.xyz = function(lab) {
+    const l = lab[0];
+    const a = lab[1];
+    const b = lab[2];
+    let x;
+    let y;
+    let z;
+    y = (l + 16) / 116;
+    x = a / 500 + y;
+    z = y - b / 200;
+    const y2 = y ** 3;
+    const x2 = x ** 3;
+    const z2 = z ** 3;
+    y = y2 > LAB_FT ? y2 : (y - 16 / 116) / 7.787;
+    x = x2 > LAB_FT ? x2 : (x - 16 / 116) / 7.787;
+    z = z2 > LAB_FT ? z2 : (z - 16 / 116) / 7.787;
+    x *= 95.047;
+    y *= 100;
+    z *= 108.883;
+    return [x, y, z];
+  };
+  convert.lab.lch = function(lab) {
+    const l = lab[0];
+    const a = lab[1];
+    const b = lab[2];
+    let h;
+    const hr = Math.atan2(b, a);
+    h = hr * 360 / 2 / Math.PI;
+    if (h < 0) {
+      h += 360;
+    }
+    const c = Math.sqrt(a * a + b * b);
+    return [l, c, h];
+  };
+  convert.lch.lab = function(lch) {
+    const l = lch[0];
+    const c = lch[1];
+    const h = lch[2];
+    const hr = h / 360 * 2 * Math.PI;
+    const a = c * Math.cos(hr);
+    const b = c * Math.sin(hr);
+    return [l, a, b];
+  };
+  convert.rgb.ansi16 = function(args, saturation = null) {
+    const [r, g, b] = args;
+    let value = saturation === null ? convert.rgb.hsv(args)[2] : saturation;
+    value = Math.round(value / 50);
+    if (value === 0) {
+      return 30;
+    }
+    let ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
+    if (value === 2) {
+      ansi += 60;
+    }
+    return ansi;
+  };
+  convert.hsv.ansi16 = function(args) {
+    return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
+  };
+  convert.rgb.ansi256 = function(args) {
+    const r = args[0];
+    const g = args[1];
+    const b = args[2];
+    if (r >> 4 === g >> 4 && g >> 4 === b >> 4) {
+      if (r < 8) {
+        return 16;
+      }
+      if (r > 248) {
+        return 231;
+      }
+      return Math.round((r - 8) / 247 * 24) + 232;
+    }
+    const ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
+    return ansi;
+  };
+  convert.ansi16.rgb = function(args) {
+    args = args[0];
+    let color = args % 10;
+    if (color === 0 || color === 7) {
+      if (args > 50) {
+        color += 3.5;
+      }
+      color = color / 10.5 * 255;
+      return [color, color, color];
+    }
+    const mult = (Math.trunc(args > 50) + 1) * 0.5;
+    const r = (color & 1) * mult * 255;
+    const g = (color >> 1 & 1) * mult * 255;
+    const b = (color >> 2 & 1) * mult * 255;
+    return [r, g, b];
+  };
+  convert.ansi256.rgb = function(args) {
+    args = args[0];
+    if (args >= 232) {
+      const c = (args - 232) * 10 + 8;
+      return [c, c, c];
+    }
+    args -= 16;
+    let rem;
+    const r = Math.floor(args / 36) / 5 * 255;
+    const g = Math.floor((rem = args % 36) / 6) / 5 * 255;
+    const b = rem % 6 / 5 * 255;
+    return [r, g, b];
+  };
+  convert.rgb.hex = function(args) {
+    const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
+    const string = integer.toString(16).toUpperCase();
+    return "000000".slice(string.length) + string;
+  };
+  convert.hex.rgb = function(args) {
+    const match = args.toString(16).match(/[a-f\d]{6}|[a-f\d]{3}/i);
+    if (!match) {
+      return [0, 0, 0];
+    }
+    let colorString = match[0];
+    if (match[0].length === 3) {
+      colorString = [...colorString].map((char) => char + char).join("");
+    }
+    const integer = Number.parseInt(colorString, 16);
+    const r = integer >> 16 & 255;
+    const g = integer >> 8 & 255;
+    const b = integer & 255;
+    return [r, g, b];
+  };
+  convert.rgb.hcg = function(rgb) {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+    const max = Math.max(Math.max(r, g), b);
+    const min = Math.min(Math.min(r, g), b);
+    const chroma = max - min;
+    let hue;
+    const grayscale = chroma < 1 ? min / (1 - chroma) : 0;
+    if (chroma <= 0) {
+      hue = 0;
+    } else if (max === r) {
+      hue = (g - b) / chroma % 6;
+    } else if (max === g) {
+      hue = 2 + (b - r) / chroma;
+    } else {
+      hue = 4 + (r - g) / chroma;
+    }
+    hue /= 6;
+    hue %= 1;
+    return [hue * 360, chroma * 100, grayscale * 100];
+  };
+  convert.hsl.hcg = function(hsl) {
+    const s = hsl[1] / 100;
+    const l = hsl[2] / 100;
+    const c = l < 0.5 ? 2 * s * l : 2 * s * (1 - l);
+    let f = 0;
+    if (c < 1) {
+      f = (l - 0.5 * c) / (1 - c);
+    }
+    return [hsl[0], c * 100, f * 100];
+  };
+  convert.hsv.hcg = function(hsv) {
+    const s = hsv[1] / 100;
+    const v = hsv[2] / 100;
+    const c = s * v;
+    let f = 0;
+    if (c < 1) {
+      f = (v - c) / (1 - c);
+    }
+    return [hsv[0], c * 100, f * 100];
+  };
+  convert.hcg.rgb = function(hcg) {
+    const h = hcg[0] / 360;
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    if (c === 0) {
+      return [g * 255, g * 255, g * 255];
+    }
+    const pure = [0, 0, 0];
+    const hi = h % 1 * 6;
+    const v = hi % 1;
+    const w = 1 - v;
+    let mg = 0;
+    switch (Math.floor(hi)) {
+      case 0: {
+        pure[0] = 1;
+        pure[1] = v;
+        pure[2] = 0;
+        break;
+      }
+      case 1: {
+        pure[0] = w;
+        pure[1] = 1;
+        pure[2] = 0;
+        break;
+      }
+      case 2: {
+        pure[0] = 0;
+        pure[1] = 1;
+        pure[2] = v;
+        break;
+      }
+      case 3: {
+        pure[0] = 0;
+        pure[1] = w;
+        pure[2] = 1;
+        break;
+      }
+      case 4: {
+        pure[0] = v;
+        pure[1] = 0;
+        pure[2] = 1;
+        break;
+      }
+      default: {
+        pure[0] = 1;
+        pure[1] = 0;
+        pure[2] = w;
+      }
+    }
+    mg = (1 - c) * g;
+    return [
+      (c * pure[0] + mg) * 255,
+      (c * pure[1] + mg) * 255,
+      (c * pure[2] + mg) * 255
+    ];
+  };
+  convert.hcg.hsv = function(hcg) {
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    const v = c + g * (1 - c);
+    let f = 0;
+    if (v > 0) {
+      f = c / v;
+    }
+    return [hcg[0], f * 100, v * 100];
+  };
+  convert.hcg.hsl = function(hcg) {
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    const l = g * (1 - c) + 0.5 * c;
+    let s = 0;
+    if (l > 0 && l < 0.5) {
+      s = c / (2 * l);
+    } else if (l >= 0.5 && l < 1) {
+      s = c / (2 * (1 - l));
+    }
+    return [hcg[0], s * 100, l * 100];
+  };
+  convert.hcg.hwb = function(hcg) {
+    const c = hcg[1] / 100;
+    const g = hcg[2] / 100;
+    const v = c + g * (1 - c);
+    return [hcg[0], (v - c) * 100, (1 - v) * 100];
+  };
+  convert.hwb.hcg = function(hwb) {
+    const w = hwb[1] / 100;
+    const b = hwb[2] / 100;
+    const v = 1 - b;
+    const c = v - w;
+    let g = 0;
+    if (c < 1) {
+      g = (v - c) / (1 - c);
+    }
+    return [hwb[0], c * 100, g * 100];
+  };
+  convert.apple.rgb = function(apple) {
+    return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
+  };
+  convert.rgb.apple = function(rgb) {
+    return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
+  };
+  convert.gray.rgb = function(args) {
+    return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
+  };
+  convert.gray.hsl = function(args) {
+    return [0, 0, args[0]];
+  };
+  convert.gray.hsv = convert.gray.hsl;
+  convert.gray.hwb = function(gray) {
+    return [0, 100, gray[0]];
+  };
+  convert.gray.cmyk = function(gray) {
+    return [0, 0, 0, gray[0]];
+  };
+  convert.gray.lab = function(gray) {
+    return [gray[0], 0, 0];
+  };
+  convert.gray.hex = function(gray) {
+    const value = Math.round(gray[0] / 100 * 255) & 255;
+    const integer = (value << 16) + (value << 8) + value;
+    const string = integer.toString(16).toUpperCase();
+    return "000000".slice(string.length) + string;
+  };
+  convert.rgb.gray = function(rgb) {
+    const value = (rgb[0] + rgb[1] + rgb[2]) / 3;
+    return [value / 255 * 100];
+  };
+
+  // node_modules/.pnpm/color-convert@3.1.0/node_modules/color-convert/route.js
+  function buildGraph() {
+    const graph = {};
+    const models2 = Object.keys(conversions_default);
+    for (let { length } = models2, i = 0; i < length; i++) {
+      graph[models2[i]] = {
+        // http://jsperf.com/1-vs-infinity
+        // micro-opt, but this is simple.
+        distance: -1,
+        parent: null
+      };
+    }
+    return graph;
+  }
+  __name(buildGraph, "buildGraph");
+  function deriveBFS(fromModel) {
+    const graph = buildGraph();
+    const queue = [fromModel];
+    graph[fromModel].distance = 0;
+    while (queue.length > 0) {
+      const current = queue.pop();
+      const adjacents = Object.keys(conversions_default[current]);
+      for (let { length } = adjacents, i = 0; i < length; i++) {
+        const adjacent = adjacents[i];
+        const node = graph[adjacent];
+        if (node.distance === -1) {
+          node.distance = graph[current].distance + 1;
+          node.parent = current;
+          queue.unshift(adjacent);
+        }
+      }
+    }
+    return graph;
+  }
+  __name(deriveBFS, "deriveBFS");
+  function link(from, to) {
+    return function(args) {
+      return to(from(args));
+    };
+  }
+  __name(link, "link");
+  function wrapConversion(toModel, graph) {
+    const path = [graph[toModel].parent, toModel];
+    let fn = conversions_default[graph[toModel].parent][toModel];
+    let cur = graph[toModel].parent;
+    while (graph[cur].parent) {
+      path.unshift(graph[cur].parent);
+      fn = link(conversions_default[graph[cur].parent][cur], fn);
+      cur = graph[cur].parent;
+    }
+    fn.conversion = path;
+    return fn;
+  }
+  __name(wrapConversion, "wrapConversion");
+  function route(fromModel) {
+    const graph = deriveBFS(fromModel);
+    const conversion = {};
+    const models2 = Object.keys(graph);
+    for (let { length } = models2, i = 0; i < length; i++) {
+      const toModel = models2[i];
+      const node = graph[toModel];
+      if (node.parent === null) {
+        continue;
+      }
+      conversion[toModel] = wrapConversion(toModel, graph);
+    }
+    return conversion;
+  }
+  __name(route, "route");
+  var route_default = route;
+
+  // node_modules/.pnpm/color-convert@3.1.0/node_modules/color-convert/index.js
+  var convert2 = {};
+  var models = Object.keys(conversions_default);
+  function wrapRaw(fn) {
+    const wrappedFn = /* @__PURE__ */ __name(function(...args) {
+      const arg0 = args[0];
+      if (arg0 === void 0 || arg0 === null) {
+        return arg0;
+      }
+      if (arg0.length > 1) {
+        args = arg0;
+      }
+      return fn(args);
+    }, "wrappedFn");
+    if ("conversion" in fn) {
+      wrappedFn.conversion = fn.conversion;
+    }
+    return wrappedFn;
+  }
+  __name(wrapRaw, "wrapRaw");
+  function wrapRounded(fn) {
+    const wrappedFn = /* @__PURE__ */ __name(function(...args) {
+      const arg0 = args[0];
+      if (arg0 === void 0 || arg0 === null) {
+        return arg0;
+      }
+      if (arg0.length > 1) {
+        args = arg0;
+      }
+      const result = fn(args);
+      if (typeof result === "object") {
+        for (let { length } = result, i = 0; i < length; i++) {
+          result[i] = Math.round(result[i]);
+        }
+      }
+      return result;
+    }, "wrappedFn");
+    if ("conversion" in fn) {
+      wrappedFn.conversion = fn.conversion;
+    }
+    return wrappedFn;
+  }
+  __name(wrapRounded, "wrapRounded");
+  for (const fromModel of models) {
+    convert2[fromModel] = {};
+    Object.defineProperty(convert2[fromModel], "channels", { value: conversions_default[fromModel].channels });
+    Object.defineProperty(convert2[fromModel], "labels", { value: conversions_default[fromModel].labels });
+    const routes = route_default(fromModel);
+    const routeModels = Object.keys(routes);
+    for (const toModel of routeModels) {
+      const fn = routes[toModel];
+      convert2[fromModel][toModel] = wrapRounded(fn);
+      convert2[fromModel][toModel].raw = wrapRaw(fn);
+    }
+  }
+  var color_convert_default = convert2;
+
+  // node_modules/.pnpm/color@5.0.0/node_modules/color/index.js
+  var skippedModels = [
+    // To be honest, I don't really feel like keyword belongs in color convert, but eh.
+    "keyword",
+    // Gray conflicts with some method names, and has its own method defined.
+    "gray",
+    // Shouldn't really be in color-convert either...
+    "hex"
+  ];
+  var hashedModelKeys = {};
+  for (const model of Object.keys(color_convert_default)) {
+    hashedModelKeys[[...color_convert_default[model].labels].sort().join("")] = model;
+  }
+  var limiters = {};
+  function Color(object, model) {
+    if (!(this instanceof Color)) {
+      return new Color(object, model);
+    }
+    if (model && model in skippedModels) {
+      model = null;
+    }
+    if (model && !(model in color_convert_default)) {
+      throw new Error("Unknown model: " + model);
+    }
+    let i;
+    let channels;
+    if (object == null) {
+      this.model = "rgb";
+      this.color = [0, 0, 0];
+      this.valpha = 1;
+    } else if (object instanceof Color) {
+      this.model = object.model;
+      this.color = [...object.color];
+      this.valpha = object.valpha;
+    } else if (typeof object === "string") {
+      const result = color_string_default.get(object);
+      if (result === null) {
+        throw new Error("Unable to parse color from string: " + object);
+      }
+      this.model = result.model;
+      channels = color_convert_default[this.model].channels;
+      this.color = result.value.slice(0, channels);
+      this.valpha = typeof result.value[channels] === "number" ? result.value[channels] : 1;
+    } else if (object.length > 0) {
+      this.model = model || "rgb";
+      channels = color_convert_default[this.model].channels;
+      const newArray = Array.prototype.slice.call(object, 0, channels);
+      this.color = zeroArray(newArray, channels);
+      this.valpha = typeof object[channels] === "number" ? object[channels] : 1;
+    } else if (typeof object === "number") {
+      this.model = "rgb";
+      this.color = [
+        object >> 16 & 255,
+        object >> 8 & 255,
+        object & 255
+      ];
+      this.valpha = 1;
+    } else {
+      this.valpha = 1;
+      const keys = Object.keys(object);
+      if ("alpha" in object) {
+        keys.splice(keys.indexOf("alpha"), 1);
+        this.valpha = typeof object.alpha === "number" ? object.alpha : 0;
+      }
+      const hashedKeys = keys.sort().join("");
+      if (!(hashedKeys in hashedModelKeys)) {
+        throw new Error("Unable to parse color from object: " + JSON.stringify(object));
+      }
+      this.model = hashedModelKeys[hashedKeys];
+      const { labels } = color_convert_default[this.model];
+      const color = [];
+      for (i = 0; i < labels.length; i++) {
+        color.push(object[labels[i]]);
+      }
+      this.color = zeroArray(color);
+    }
+    if (limiters[this.model]) {
+      channels = color_convert_default[this.model].channels;
+      for (i = 0; i < channels; i++) {
+        const limit = limiters[this.model][i];
+        if (limit) {
+          this.color[i] = limit(this.color[i]);
+        }
+      }
+    }
+    this.valpha = Math.max(0, Math.min(1, this.valpha));
+    if (Object.freeze) {
+      Object.freeze(this);
+    }
+  }
+  __name(Color, "Color");
+  Color.prototype = {
+    toString() {
+      return this.string();
+    },
+    toJSON() {
+      return this[this.model]();
+    },
+    string(places) {
+      let self = this.model in color_string_default.to ? this : this.rgb();
+      self = self.round(typeof places === "number" ? places : 1);
+      const arguments_ = self.valpha === 1 ? self.color : [...self.color, this.valpha];
+      return color_string_default.to[self.model](...arguments_);
+    },
+    percentString(places) {
+      const self = this.rgb().round(typeof places === "number" ? places : 1);
+      const arguments_ = self.valpha === 1 ? self.color : [...self.color, this.valpha];
+      return color_string_default.to.rgb.percent(...arguments_);
+    },
+    array() {
+      return this.valpha === 1 ? [...this.color] : [...this.color, this.valpha];
+    },
+    object() {
+      const result = {};
+      const { channels } = color_convert_default[this.model];
+      const { labels } = color_convert_default[this.model];
+      for (let i = 0; i < channels; i++) {
+        result[labels[i]] = this.color[i];
+      }
+      if (this.valpha !== 1) {
+        result.alpha = this.valpha;
+      }
+      return result;
+    },
+    unitArray() {
+      const rgb = this.rgb().color;
+      rgb[0] /= 255;
+      rgb[1] /= 255;
+      rgb[2] /= 255;
+      if (this.valpha !== 1) {
+        rgb.push(this.valpha);
+      }
+      return rgb;
+    },
+    unitObject() {
+      const rgb = this.rgb().object();
+      rgb.r /= 255;
+      rgb.g /= 255;
+      rgb.b /= 255;
+      if (this.valpha !== 1) {
+        rgb.alpha = this.valpha;
+      }
+      return rgb;
+    },
+    round(places) {
+      places = Math.max(places || 0, 0);
+      return new Color([...this.color.map(roundToPlace(places)), this.valpha], this.model);
+    },
+    alpha(value) {
+      if (value !== void 0) {
+        return new Color([...this.color, Math.max(0, Math.min(1, value))], this.model);
+      }
+      return this.valpha;
+    },
+    // Rgb
+    red: getset("rgb", 0, maxfn(255)),
+    green: getset("rgb", 1, maxfn(255)),
+    blue: getset("rgb", 2, maxfn(255)),
+    hue: getset(["hsl", "hsv", "hsl", "hwb", "hcg"], 0, (value) => (value % 360 + 360) % 360),
+    saturationl: getset("hsl", 1, maxfn(100)),
+    lightness: getset("hsl", 2, maxfn(100)),
+    saturationv: getset("hsv", 1, maxfn(100)),
+    value: getset("hsv", 2, maxfn(100)),
+    chroma: getset("hcg", 1, maxfn(100)),
+    gray: getset("hcg", 2, maxfn(100)),
+    white: getset("hwb", 1, maxfn(100)),
+    wblack: getset("hwb", 2, maxfn(100)),
+    cyan: getset("cmyk", 0, maxfn(100)),
+    magenta: getset("cmyk", 1, maxfn(100)),
+    yellow: getset("cmyk", 2, maxfn(100)),
+    black: getset("cmyk", 3, maxfn(100)),
+    x: getset("xyz", 0, maxfn(95.047)),
+    y: getset("xyz", 1, maxfn(100)),
+    z: getset("xyz", 2, maxfn(108.833)),
+    l: getset("lab", 0, maxfn(100)),
+    a: getset("lab", 1),
+    b: getset("lab", 2),
+    keyword(value) {
+      if (value !== void 0) {
+        return new Color(value);
+      }
+      return color_convert_default[this.model].keyword(this.color);
+    },
+    hex(value) {
+      if (value !== void 0) {
+        return new Color(value);
+      }
+      return color_string_default.to.hex(...this.rgb().round().color);
+    },
+    hexa(value) {
+      if (value !== void 0) {
+        return new Color(value);
+      }
+      const rgbArray = this.rgb().round().color;
+      let alphaHex = Math.round(this.valpha * 255).toString(16).toUpperCase();
+      if (alphaHex.length === 1) {
+        alphaHex = "0" + alphaHex;
+      }
+      return color_string_default.to.hex(...rgbArray) + alphaHex;
+    },
+    rgbNumber() {
+      const rgb = this.rgb().color;
+      return (rgb[0] & 255) << 16 | (rgb[1] & 255) << 8 | rgb[2] & 255;
+    },
+    luminosity() {
+      const rgb = this.rgb().color;
+      const lum = [];
+      for (const [i, element] of rgb.entries()) {
+        const chan = element / 255;
+        lum[i] = chan <= 0.04045 ? chan / 12.92 : ((chan + 0.055) / 1.055) ** 2.4;
+      }
+      return 0.2126 * lum[0] + 0.7152 * lum[1] + 0.0722 * lum[2];
+    },
+    contrast(color2) {
+      const lum1 = this.luminosity();
+      const lum2 = color2.luminosity();
+      if (lum1 > lum2) {
+        return (lum1 + 0.05) / (lum2 + 0.05);
+      }
+      return (lum2 + 0.05) / (lum1 + 0.05);
+    },
+    level(color2) {
+      const contrastRatio = this.contrast(color2);
+      if (contrastRatio >= 7) {
+        return "AAA";
+      }
+      return contrastRatio >= 4.5 ? "AA" : "";
+    },
+    isDark() {
+      const rgb = this.rgb().color;
+      const yiq = (rgb[0] * 2126 + rgb[1] * 7152 + rgb[2] * 722) / 1e4;
+      return yiq < 128;
+    },
+    isLight() {
+      return !this.isDark();
+    },
+    negate() {
+      const rgb = this.rgb();
+      for (let i = 0; i < 3; i++) {
+        rgb.color[i] = 255 - rgb.color[i];
+      }
+      return rgb;
+    },
+    lighten(ratio) {
+      const hsl = this.hsl();
+      hsl.color[2] += hsl.color[2] * ratio;
+      return hsl;
+    },
+    darken(ratio) {
+      const hsl = this.hsl();
+      hsl.color[2] -= hsl.color[2] * ratio;
+      return hsl;
+    },
+    saturate(ratio) {
+      const hsl = this.hsl();
+      hsl.color[1] += hsl.color[1] * ratio;
+      return hsl;
+    },
+    desaturate(ratio) {
+      const hsl = this.hsl();
+      hsl.color[1] -= hsl.color[1] * ratio;
+      return hsl;
+    },
+    whiten(ratio) {
+      const hwb = this.hwb();
+      hwb.color[1] += hwb.color[1] * ratio;
+      return hwb;
+    },
+    blacken(ratio) {
+      const hwb = this.hwb();
+      hwb.color[2] += hwb.color[2] * ratio;
+      return hwb;
+    },
+    grayscale() {
+      const rgb = this.rgb().color;
+      const value = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
+      return Color.rgb(value, value, value);
+    },
+    fade(ratio) {
+      return this.alpha(this.valpha - this.valpha * ratio);
+    },
+    opaquer(ratio) {
+      return this.alpha(this.valpha + this.valpha * ratio);
+    },
+    rotate(degrees) {
+      const hsl = this.hsl();
+      let hue = hsl.color[0];
+      hue = (hue + degrees) % 360;
+      hue = hue < 0 ? 360 + hue : hue;
+      hsl.color[0] = hue;
+      return hsl;
+    },
+    mix(mixinColor, weight) {
+      if (!mixinColor || !mixinColor.rgb) {
+        throw new Error('Argument to "mix" was not a Color instance, but rather an instance of ' + typeof mixinColor);
+      }
+      const color1 = mixinColor.rgb();
+      const color2 = this.rgb();
+      const p = weight === void 0 ? 0.5 : weight;
+      const w = 2 * p - 1;
+      const a = color1.alpha() - color2.alpha();
+      const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2;
+      const w2 = 1 - w1;
+      return Color.rgb(
+        w1 * color1.red() + w2 * color2.red(),
+        w1 * color1.green() + w2 * color2.green(),
+        w1 * color1.blue() + w2 * color2.blue(),
+        color1.alpha() * p + color2.alpha() * (1 - p)
+      );
+    }
+  };
+  for (const model of Object.keys(color_convert_default)) {
+    if (skippedModels.includes(model)) {
+      continue;
+    }
+    const { channels } = color_convert_default[model];
+    Color.prototype[model] = function(...arguments_) {
+      if (this.model === model) {
+        return new Color(this);
+      }
+      if (arguments_.length > 0) {
+        return new Color(arguments_, model);
+      }
+      return new Color([...assertArray(color_convert_default[this.model][model].raw(this.color)), this.valpha], model);
+    };
+    Color[model] = function(...arguments_) {
+      let color = arguments_[0];
+      if (typeof color === "number") {
+        color = zeroArray(arguments_, channels);
+      }
+      return new Color(color, model);
+    };
+  }
+  function roundTo(number, places) {
+    return Number(number.toFixed(places));
+  }
+  __name(roundTo, "roundTo");
+  function roundToPlace(places) {
+    return function(number) {
+      return roundTo(number, places);
+    };
+  }
+  __name(roundToPlace, "roundToPlace");
+  function getset(model, channel, modifier) {
+    model = Array.isArray(model) ? model : [model];
+    for (const m of model) {
+      (limiters[m] || (limiters[m] = []))[channel] = modifier;
+    }
+    model = model[0];
+    return function(value) {
+      let result;
+      if (value !== void 0) {
+        if (modifier) {
+          value = modifier(value);
+        }
+        result = this[model]();
+        result.color[channel] = value;
+        return result;
+      }
+      result = this[model]().color[channel];
+      if (modifier) {
+        result = modifier(result);
+      }
+      return result;
+    };
+  }
+  __name(getset, "getset");
+  function maxfn(max) {
+    return function(v) {
+      return Math.max(0, Math.min(max, v));
+    };
+  }
+  __name(maxfn, "maxfn");
+  function assertArray(value) {
+    return Array.isArray(value) ? value : [value];
+  }
+  __name(assertArray, "assertArray");
+  function zeroArray(array, length) {
+    for (let i = 0; i < length; i++) {
+      if (typeof array[i] !== "number") {
+        array[i] = 0;
+      }
+    }
+    return array;
+  }
+  __name(zeroArray, "zeroArray");
+  var color_default = Color;
+
+  // src/utilities/color.ts
   var plainColors = {
     main: "",
     element: "",
@@ -1938,7 +4831,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       return computedColor;
     }),
     getHexComputed: CommonMemoize((color) => {
-      return (0, import_color.default)(_Color.getComputed(color)).hex();
+      return color_default(_Color.getComputed(color)).hex();
     }),
     isValidHex(color) {
       return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(color);
@@ -1947,135 +4840,200 @@ One of mods you are using is using an old version of SDK. It will work for now b
       const colorSettings = Player.Themed.ColorsModule;
       const globalSettings = Player.Themed.GlobalModule;
       Object.keys(colorSettings.special).forEach((key) => {
-        const clr = (0, import_color.default)(colorSettings.special[key]);
-        specialColors[key] = [clr.hex(), clr.lighten(0.2).hex()];
+        const typedKey = key;
+        const clr = color_default(colorSettings.special[typedKey]);
+        specialColors[typedKey] = [clr.hex(), clr.lighten(0.2).hex()];
       });
       if (globalSettings.doUseAdvancedColoring) {
         Object.keys(colorSettings.base).forEach((key) => {
-          plainColors[key] = colorSettings.base[key];
+          const typedKey = key;
+          plainColors[typedKey] = colorSettings.base[typedKey];
         });
       } else {
         const primaryColor2 = _Color.getHexComputed(colorSettings.base.main);
-        const elementColor2 = (0, import_color.default)(primaryColor2).lighten(0.2).hex();
+        const elementColor2 = color_default(primaryColor2).lighten(0.2).hex();
         const accentColor2 = _Color.getHexComputed(colorSettings.base.accent);
         const textColor2 = _Color.getHexComputed(colorSettings.base.text);
         plainColors.main = primaryColor2;
         plainColors.element = elementColor2;
-        plainColors.elementHover = (0, import_color.default)(elementColor2).lighten(0.2).hex();
-        plainColors.elementDisabled = (0, import_color.default)(elementColor2).darken(0.2).hex();
-        plainColors.elementHint = (0, import_color.default)(elementColor2).lighten(0.2).hex();
+        plainColors.elementHover = color_default(elementColor2).lighten(0.2).hex();
+        plainColors.elementDisabled = color_default(elementColor2).darken(0.2).hex();
+        plainColors.elementHint = color_default(elementColor2).lighten(0.2).hex();
         plainColors.text = textColor2;
         plainColors.accent = accentColor2;
-        plainColors.accentHover = (0, import_color.default)(accentColor2).lighten(0.2).hex();
-        plainColors.accentDisabled = (0, import_color.default)(accentColor2).darken(0.2).hex();
+        plainColors.accentHover = color_default(accentColor2).lighten(0.2).hex();
+        plainColors.accentDisabled = color_default(accentColor2).darken(0.2).hex();
       }
       plainColors.textShadow = _Color.getHexComputed("rgba(0,0,0,0.5)");
     }
   };
 
-  // src/Utilities/SDK.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_bondage_club_mod_sdk = __toESM(require_bcmodsdk());
-
-  // src/Utilities/Console.ts
-  init_define_LAST_COMMIT_HASH();
-  var STYLES = {
-    INFO: "color: #32CCCC",
-    LOG: "color: #CCCC32",
-    DEBUG: "color: #9E4BCF"
-  };
-  var cmdPrefix = "Themed";
-  function conInfo(...args) {
-    if (typeof args[0] === "string") console.info(`%c${cmdPrefix}: ${args[0]}`, STYLES.INFO, ...args.slice(1));
-    else console.info(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
-  }
-  __name(conInfo, "conInfo");
-  function conLog(...args) {
-    if (typeof args[0] === "string") console.log(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.log(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
-  }
-  __name(conLog, "conLog");
-  function conWarn(...args) {
-    if (typeof args[0] === "string") console.warn(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.warn(`%c${cmdPrefix}: `, STYLES.LOG, ...args);
-  }
-  __name(conWarn, "conWarn");
-  function conErr(...args) {
-    if (typeof args[0] === "string") console.error(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.error(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
-  }
-  __name(conErr, "conErr");
-  function conDebug(...args) {
-    if (false) {
-      if (typeof args[0] === "string") console.debug(`%c${cmdPrefix}: ${args[0]}`, STYLES.DEBUG, ...args.slice(1));
-      else console.debug(`%c${cmdPrefix}:`, STYLES.LOG, ...args);
+  // src/screens/colors.ts
+  var _GuiColors = class _GuiColors extends BaseSubscreen {
+    constructor() {
+      super(...arguments);
+      __publicField(this, "settingsBackup", {});
     }
-  }
-  __name(conDebug, "conDebug");
-
-  // src/Utilities/ModDefinition.ts
-  init_define_LAST_COMMIT_HASH();
-  var ModName = "Themed";
-  var FullModName = "BC Themed";
-  var ModRepository = "https://github.com/dDeepLb/Themed-BC";
-  var MOD_VERSION_CAPTION = false ? `${"1.5.6"} - ${"1a8ca4a6"}` : "1.5.6";
-
-  // src/Utilities/SDK.ts
-  var SDK = import_bondage_club_mod_sdk.default.registerMod(
-    {
-      name: ModName,
-      fullName: FullModName,
-      version: MOD_VERSION_CAPTION,
-      repository: ModRepository
-    },
-    {
-      allowReplace: false
+    get settings() {
+      return super.settings;
     }
-  );
-  var patchedFunctions = /* @__PURE__ */ new Map();
-  function initPatchableFunction(target) {
-    let result = patchedFunctions.get(target);
-    if (!result) {
-      result = {
-        name: target,
-        hooks: []
+    get pageStructure() {
+      const settings = this.settings;
+      const defaultSettings = getModule("ColorsModule").defaultSettings;
+      const isBaseMode = !modStorage.playerStorage.GlobalModule.doUseAdvancedColoring;
+      const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
+      const ret = [[], []];
+      const themeDropdownOptions = ["dark", "light"].map((e) => ({ attributes: { value: e, label: getText("colors.setting.theme-type-" + e), selected: e === this.settings.themeSettings.themeType } }));
+      const themeType = {
+        id: "tmd-theme-type",
+        type: "custom",
+        htmlOptions: {
+          tag: "div",
+          attributes: {
+            id: "tmd-theme-type-container"
+          },
+          children: [
+            {
+              tag: "label",
+              attributes: {
+                for: "tmd-theme-type-dropdown"
+              },
+              children: [getText("colors.setting.theme-type.title")]
+            },
+            ElementCreateDropdown("tmd-theme-type-dropdown", themeDropdownOptions, function() {
+              settings.themeSettings.themeType = this.value;
+              ColorsModule.reloadTheme();
+            })
+          ]
+        }
       };
-      patchedFunctions.set(target, result);
+      ret[0].push(themeType);
+      ret[0].push(...Object.entries(this.settings.base).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: key,
+          type: "color",
+          label: getText(`colors.setting.${key}.name`),
+          description: getText(`colors.setting.${key}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setSettingValue"),
+          disabled: isBaseMode && !baseModeKey(typedKey)
+        };
+      }).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)));
+      ret[1].push(...Object.entries(this.settings.special).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: key,
+          type: "color",
+          label: getText(`colors.setting.${key}.name`),
+          description: getText(`colors.setting.${key}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setSettingValue")
+        };
+      }));
+      return ret;
     }
-    return result;
-  }
-  __name(initPatchableFunction, "initPatchableFunction");
-  function patchFunction(target, patches) {
-    SDK.patchFunction(target, patches);
-  }
-  __name(patchFunction, "patchFunction");
-  function unpatchFunction(target) {
-    SDK.removePatches(target);
-  }
-  __name(unpatchFunction, "unpatchFunction");
-  function hookFunction(target, priority, hook, module = null) {
-    const data = initPatchableFunction(target);
-    if (data.hooks.some((h) => h.hook === hook)) {
-      conErr(`Duplicate hook for "${target}"`, hook);
-      return () => null;
+    load() {
+      super.load();
+      const typeToggleButton = advElement.createButton({
+        id: "tmd-inputs-type-toggle",
+        onClick: /* @__PURE__ */ __name(() => {
+          this.pageStructure.forEach((page) => {
+            page.forEach((elm) => {
+              if (elm.type == "color" || elm.type == "text") {
+                const e = document.getElementById(elm.id);
+                if (!e) return;
+                const elementType = e.getAttribute("type");
+                if (elementType == "color") {
+                  e.setAttribute("type", "text");
+                } else {
+                  e.setAttribute("type", "color");
+                }
+              }
+            });
+          });
+          this.resize();
+        }, "onClick"),
+        size: [90, 90],
+        options: {
+          image: `${"https://ddeeplb.github.io/Themed-BC/public"}/images/refresh.svg`,
+          tooltip: getText("colors.button.change_input_type")
+        }
+      });
+      const menu = document.getElementById("deeplib-nav-menu");
+      if (menu) {
+        ElementMenu.PrependItem(menu, typeToggleButton);
+      }
+      this.settingsBackup = CommonCloneDeep(this.settings);
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        document.getElementById(key)?.addEventListener("input", function() {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            const typedKey = key;
+            settings.base[typedKey] = this.value;
+          }
+          ColorsModule.reloadTheme();
+        });
+      });
+      Object.entries(this.settings.special).forEach(([key]) => {
+        document.getElementById(key)?.addEventListener("input", function() {
+          if (!_Color.isValidHex(this.value)) {
+            this.setCustomValidity("Invalid hex color");
+          } else {
+            this.setCustomValidity("");
+            const typedKey = key;
+            settings.special[typedKey] = this.value;
+          }
+          ColorsModule.reloadTheme();
+        });
+      });
     }
-    const removeCallback = SDK.hookFunction(target, priority, hook);
-    data.hooks.push({
-      hook,
-      priority,
-      module,
-      removeCallback
-    });
-    data.hooks.sort((a, b) => b.priority - a.priority);
-    return removeCallback;
-  }
-  __name(hookFunction, "hookFunction");
+    exit() {
+      const settings = getModule("ColorsModule").settings;
+      Object.entries(this.settings.base).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!input) return;
+        if (!_Color.isValidHex(input.value)) {
+          const typedKey = key;
+          settings.base[typedKey] = this.settingsBackup.base[typedKey];
+        }
+      });
+      Object.entries(this.settings.special).forEach(([key]) => {
+        const input = document.getElementById(key);
+        if (!input) return;
+        if (!_Color.isValidHex(input.value)) {
+          const typedKey = key;
+          settings.special[typedKey] = this.settingsBackup.special[typedKey];
+        }
+      });
+      super.exit();
+    }
+  };
+  __name(_GuiColors, "GuiColors");
+  __publicField(_GuiColors, "subscreenOptions", {
+    name: "colors",
+    icon: `${"https://ddeeplb.github.io/Themed-BC/public"}/images/palette.svg`
+  });
+  var GuiColors = _GuiColors;
 
-  // src/Hooks/GuiRedraw/AppearanceGetPreviewImageColor.ts
+  // src/utilities/mod_definition.ts
+  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"d910f4ae"}` : "1.6.0";
+  var ModuleCategory = {
+    Global: "Global",
+    Colors: "Colors",
+    Profiles: "Profiles",
+    Integration: "Integration",
+    GuiRedraw: "GuiRedraw"
+  };
+
+  // src/hooks/gui_redraw/appearance_get_preview_image_color.ts
   function hookAppearanceGetPreviewImageColor() {
-    hookFunction(
+    sdk.hookFunction(
       "AppearanceGetPreviewImageColor",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [c, item, hover] = args;
@@ -2096,15 +5054,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
           else return hover ? plainColors.elementHover : plainColors.element;
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookAppearanceGetPreviewImageColor, "hookAppearanceGetPreviewImageColor");
 
-  // src/Hooks/GuiRedraw/DialogGetMenuButtonColor.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/dialog_get_menu_button_color.ts
   function hookDialogGetMenuButtonColor() {
-    hookFunction("DialogGetMenuButtonColor", 0, (args, next) => {
+    sdk.hookFunction("DialogGetMenuButtonColor", 0, (args, next) => {
       if (!doRedraw()) return next(args);
       const [buttonName] = args;
       if (DialogIsMenuButtonDisabled(buttonName)) {
@@ -2114,19 +5071,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
       } else {
         return "%background";
       }
-    }, 3 /* GuiRedraw */);
+    }, ModuleCategory.GuiRedraw);
   }
   __name(hookDialogGetMenuButtonColor, "hookDialogGetMenuButtonColor");
 
-  // src/Hooks/GuiRedraw/DrawBackNextButton.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/draw_back_next_button.ts
   function hookDrawBackNextButton() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawBackNextButton",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [Left, Top, Width, Height, Label, Color7, Image, , , Disabled] = args;
+        const [Left, Top, Width, Height, Label, Color2, Image, , , Disabled] = args;
         let [, , , , , , , BackText, NextText, , ArrowWidth] = args;
         if (ArrowWidth == null || ArrowWidth > Width / 2) ArrowWidth = Width / 2;
         const LeftSplit = Left + ArrowWidth;
@@ -2157,7 +5113,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         MainCanvas.strokeStyle = plainColors.accent;
         MainCanvas.stroke();
         MainCanvas.closePath();
-        DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color7);
+        DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, Color2);
         DrawTextFit(Label, Left + Width / 2, Top + Height / 2 + 1, CommonIsMobile ? Width - 6 : Width - 36, "Black");
         if (Image != null && Image != "") {
           DrawImage(Image, Left + 2, Top + 2);
@@ -2186,16 +5142,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
             DrawButtonHover(Left, Top, Width, Height, MouseX < LeftSplit ? BackText() : MouseX >= RightSplit ? NextText() : "");
           });
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawBackNextButton, "hookDrawBackNextButton");
 
-  // src/Hooks/GuiRedraw/DrawButton.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Drawing.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/utilities/drawing.ts
   var _Image = {
     doNotColorizeImageIncludes: [
       "Assets/Female3DCG/",
@@ -2248,7 +5200,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
       "Icons/Small/Use.png",
       "Icons/Small/YouTube.png"
     ],
-    doColorizeImages: [],
+    doColorizeImages: [
+      ""
+    ],
     doDrawImage(source) {
       if (!source) return false;
       if (typeof source !== "string") return false;
@@ -2282,11 +5236,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(drawButtonRect, "drawButtonRect");
 
-  // src/Hooks/GuiRedraw/DrawButton.ts
+  // src/hooks/gui_redraw/draw_button.ts
   function hookDrawButton() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawButton",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [x, y, width, height, label, , image, hoveringText, isDisabled] = args;
@@ -2311,7 +5265,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           "%hover",
           "%disabled",
           isHovering,
-          isDisabled
+          isDisabled ?? false
         );
         DrawTextFit(label, x + width / 2, y + height / 2 + 1, width - 4, plainColors.text);
         if (image != null && image != "") {
@@ -2321,17 +5275,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
           DrawHoverElements.push(() => DrawButtonHover(x, y, width, height, hoveringText));
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawButton, "hookDrawButton");
 
-  // src/Hooks/GuiRedraw/DrawButtonHover.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/draw_button_hover.ts
   function hookDrawButtonHover() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawButtonHover",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [, , Width, Height, HoveringText] = args;
@@ -2345,47 +5298,45 @@ One of mods you are using is using an old version of SDK. It will work for now b
         DrawTextFit(HoveringText, Left + 225, Top + 33, 444, "Black");
         MainCanvas.restore();
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawButtonHover, "hookDrawButtonHover");
 
-  // src/Hooks/GuiRedraw/DrawCheckbox.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/draw_checkbox.ts
   function hookDrawCheckbox() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawCheckbox",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height, Text, IsChecked, Disabled = false, TextColor = "Black", CheckImage = "Icons/Checked.png"] = args;
         const backgroundColor = Disabled ? "%disabled" : "%background";
         DrawText(Text, Left + 100, Top + 33, TextColor, "");
-        DrawButton(Left, Top, Width, Height, "", backgroundColor, IsChecked ? CheckImage : "", null, Disabled);
+        DrawButton(Left, Top, Width, Height, "", backgroundColor, IsChecked ? CheckImage : "", void 0, Disabled);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawCheckbox, "hookDrawCheckbox");
 
-  // src/Hooks/GuiRedraw/DrawEmptyRect.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/draw_empty_rect.ts
   function hookDrawEmptyRect() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawEmptyRect",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
-        const [Left, Top, Width, Height, Color7, Thickness] = args;
+        const [Left, Top, Width, Height, Color2, Thickness] = args;
         const drawEmptyRect = /* @__PURE__ */ __name((color) => {
           MainCanvas.beginPath();
           MainCanvas.rect(Left, Top, Width, Height);
-          MainCanvas.lineWidth = Thickness;
+          MainCanvas.lineWidth = Thickness ?? 2;
           MainCanvas.strokeStyle = color;
           MainCanvas.stroke();
         }, "drawEmptyRect");
-        if (Color7?.startsWith("%" /* Custom */)) {
-          switch (Color7.substring(1).toLowerCase()) {
+        if (Color2?.startsWith("%" /* Custom */)) {
+          switch (Color2.substring(1).toLowerCase()) {
             case "border":
               drawEmptyRect(plainColors.accent);
               break;
@@ -2400,7 +5351,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
               break;
           }
         } else {
-          switch (_Color.getHexComputed(Color7).toLowerCase()) {
+          switch (_Color.getHexComputed(Color2).toLowerCase()) {
             case "#ffffff":
             case "#dddddd":
             case "#000000":
@@ -2412,17 +5363,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
           }
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawEmptyRect, "hookDrawEmptyRect");
 
-  // src/Hooks/GuiRedraw/DrawImageEx.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/draw_image_ex.ts
   function hookDrawImageEx() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawImageEx",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (typeof args[0] !== "string") return next(args);
@@ -2432,19 +5382,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
         Options ?? (Options = {});
         Options.HexColor = plainColors.accent;
         Options.FullAlpha = true;
-        next([Source, Canvas, X, Y, Options]);
+        return next([Source, Canvas, X, Y, Options]);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawImageEx, "hookDrawImageEx");
 
-  // src/Hooks/GuiRedraw/DrawPreviewBox.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/hooks/gui_redraw/draw_preview_box.ts
   function hookDrawPreviewBox() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawPreviewBox",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [X, Y, Path, Description, Options] = args;
@@ -2482,21 +5431,19 @@ One of mods you are using is using an old version of SDK. It will work for now b
         ControllerAddActiveArea(X, Y);
         DrawEmptyRect(X, Y, Width, Height, hover ? plainColors.accentHover : plainColors.accent);
         if (Path !== "") DrawImageResize(Path, ImageX, ImageY, ImageWidth, ImageHeight);
-        DrawPreviewIcons(Icons, X, Y);
+        DrawPreviewIcons(Icons ?? [], X, Y);
         if (Description) DrawTextFit(Description, X + Width / 2, Y + Height - 25, Width - 2 * Padding, Foreground);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawPreviewBox, "hookDrawPreviewBox");
 
-  // src/Hooks/GuiRedraw/DrawRect.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color2 = __toESM(require_color());
+  // src/hooks/gui_redraw/draw_rect.ts
   function hookDrawRect() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawRect",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         const [Left, Top, Width, Height] = args;
@@ -2520,7 +5467,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (color?.startsWith("%" /* Custom */)) {
           switch (color.substring(1)) {
             case "disabled":
-              color = hover ? (0, import_color2.default)(plainColors.elementDisabled).lighten(0.2).hex() : plainColors.elementDisabled;
+              color = hover ? color_default(plainColors.elementDisabled).lighten(0.2).hex() : plainColors.elementDisabled;
               break;
             case "hover":
               color = plainColors.elementHover;
@@ -2531,34 +5478,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "accent":
               color = hover ? plainColors.accentHover : plainColors.accent;
               break;
-            case "friendhint":
-              color = plainColors.elementHint;
-              break;
-            case "searchFullBlock":
-              color = (0, import_color2.default)(specialColors.blocked[hover]).mix((0, import_color2.default)(specialColors.roomBlocked[hover]), 0.5).hex();
-              break;
-            case "searchBlock":
-              color = specialColors.roomBlocked[hover];
-              break;
-            case "searchFullFriend":
-              color = (0, import_color2.default)(specialColors.roomFriend[hover]).mix((0, import_color2.default)(plainColors.elementDisabled), 0.5).hex();
-              break;
-            case "searchFriend":
-              color = specialColors.roomFriend[hover];
-              break;
-            case "searchFull":
-              color = plainColors.elementDisabled;
-              break;
-            case "searchGame":
-              color = specialColors.roomGame[hover];
-              break;
             case "allowed":
             case "equipped":
             case "crafted":
             case "limited":
-            case "blocked":
-              color = specialColors[color.substring(1)][hover];
+            case "blocked": {
+              const typedColor = color.substring(1);
+              color = specialColors[typedColor][hover];
               break;
+            }
             default:
               return next(args);
           }
@@ -2566,10 +5494,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
           let parsedColor = null;
           try {
             if (color[0] === "#" && color.length === 9 || color.startsWith("rgba"))
-              parsedColor = (0, import_color2.default)(color.toLowerCase()).hexa().toLowerCase();
+              parsedColor = color_default(color.toLowerCase()).hexa().toLowerCase();
             else
-              parsedColor = (0, import_color2.default)(color.toLowerCase()).hex().toLowerCase();
-          } catch (e) {
+              parsedColor = color_default(color.toLowerCase()).hex().toLowerCase();
+          } catch {
             parsedColor = null;
             return next(args);
           }
@@ -2582,6 +5510,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
             case "#ffffff88":
             case "#ffffffcc":
             case "#d7f6e9":
+            // LSCG Version Tooltip
             case "#808080":
               color = plainColors.element;
               break;
@@ -2602,8 +5531,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (buttonStates.includes(buttonStateSymbol)) {
           let parsedColor = null;
           try {
-            parsedColor = (0, import_color2.default)(color.toLowerCase());
-          } catch (e) {
+            parsedColor = color_default(color.toLowerCase());
+          } catch {
             parsedColor = null;
           }
           if (parsedColor !== null) {
@@ -2617,123 +5546,42 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         drawRect2(color);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawRect, "hookDrawRect");
 
-  // src/Hooks/GuiRedraw/DrawRoomBackground.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Data.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/String.ts
-  init_define_LAST_COMMIT_HASH();
-  var __String = class __String {
-    static encode(string) {
-      return LZString.compressToBase64(JSON.stringify(string));
-    }
-    static decode(string) {
-      const d = LZString.decompressFromBase64(string);
-      let data = {};
-      try {
-        const decoded = JSON.parse(d);
-        data = decoded;
-      } catch {
-      }
-      if (data) return data;
-    }
-  };
-  __name(__String, "_String");
-  var _String = __String;
-
-  // src/Utilities/Data.ts
-  var PlayerStorage = /* @__PURE__ */ __name(() => typeof Player?.[ModName] === "object" ? CommonCloneDeep(Player?.[ModName]) : void 0, "PlayerStorage");
-  var ExtensionStorage = /* @__PURE__ */ __name(() => Player.ExtensionSettings[ModName], "ExtensionStorage");
-  function settingsLoad() {
-    if (ExtensionStorage()) {
-      Player[ModName] = JSON.parse(LZString.decompressFromBase64(ExtensionStorage()));
-    } else if (Player.OnlineSettings[ModName]) {
-      Player[ModName] = JSON.parse(LZString.decompressFromBase64(Player.OnlineSettings[ModName]));
-      delete Player.OnlineSettings[ModName];
-      window.ServerAccountUpdate.QueueData({ OnlineSettings: Player.OnlineSettings });
-    } else {
-      Player[ModName] = {};
-    }
-  }
-  __name(settingsLoad, "settingsLoad");
-  function settingsSave() {
-    if (!ExtensionStorage()) Player.ExtensionSettings[ModName] = "";
-    const Data = {
-      Version: PlayerStorage().Version,
-      GlobalModule: PlayerStorage().GlobalModule,
-      ColorsModule: PlayerStorage().ColorsModule,
-      IntegrationModule: PlayerStorage().IntegrationModule,
-      ProfilesModule: PlayerStorage().ProfilesModule
-    };
-    Player.ExtensionSettings[ModName] = _String.encode(Data);
-    ServerPlayerExtensionSettingsSync(ModName);
-  }
-  __name(settingsSave, "settingsSave");
-  function settingsReset() {
-    Player[ModName] = {};
-    settingsSave();
-  }
-  __name(settingsReset, "settingsReset");
-  function localSettingsLoad() {
-    const data = localStorage.getItem("ThemedLocalData");
-    if (data) {
-      window.ThemedLocalData = JSON.parse(data);
-    } else {
-      window.ThemedLocalData = {
-        loginOptions: {
-          hideDummy: false,
-          hideCredits: false
-        }
-      };
-      localSettingsSave();
-    }
-  }
-  __name(localSettingsLoad, "localSettingsLoad");
-  function localSettingsSave() {
-    localStorage.setItem("ThemedLocalData", JSON.stringify(window.ThemedLocalData));
-  }
-  __name(localSettingsSave, "localSettingsSave");
-
-  // src/Hooks/GuiRedraw/DrawRoomBackground.ts
+  // src/hooks/gui_redraw/draw_room_background.ts
   function hookDrawRoomBackground() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawRoomBackground",
-      0 /* Observe */,
-      ([URL, ...args], next) => {
-        if (!doRedraw()) return next([URL, ...args]);
-        if (URL.includes("Sheet.jpg")) {
-          if (PlayerStorage().GlobalModule.doUseFlatColor) {
+      HookPriority.Observe,
+      ([URL2, ...args], next) => {
+        if (!doRedraw()) return next([URL2, ...args]);
+        if (URL2.includes("Sheet.jpg")) {
+          if (modStorage.playerStorage.GlobalModule.doUseFlatColor) {
             DrawRect(0, 0, 2e3, 1e3, plainColors.main);
           } else {
-            next([URL, ...args]);
+            next([URL2, ...args]);
             MainCanvas.save();
             MainCanvas.globalCompositeOperation = "multiply";
             DrawRect(0, 0, 2e3, 1e3, plainColors.main);
             MainCanvas.restore();
           }
         } else {
-          next([URL, ...args]);
+          next([URL2, ...args]);
         }
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawRoomBackground, "hookDrawRoomBackground");
 
-  // src/Hooks/GuiRedraw/DrawText.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color3 = __toESM(require_color());
+  // src/hooks/gui_redraw/draw_text.ts
   function hookDrawText() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawText",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
@@ -2741,7 +5589,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         const color = args[3];
         let parsedColor = color;
         try {
-          parsedColor = (0, import_color3.default)(color.toLowerCase()).hex();
+          parsedColor = color_default(color.toLowerCase()).hex();
         } catch (e) {
           parsedColor = color;
         }
@@ -2753,25 +5601,23 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         next(args);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawText, "hookDrawText");
 
-  // src/Hooks/GuiRedraw/DrawTextFit.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color4 = __toESM(require_color());
+  // src/hooks/gui_redraw/draw_text_fit.ts
   function hookDrawTextFit() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawTextFit",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
         if (!args[4]) return next(args);
         let parsedColor = args[4];
         try {
-          parsedColor = (0, import_color4.default)(args[4].toLowerCase()).hex();
+          parsedColor = color_default(args[4].toLowerCase()).hex();
         } catch (e) {
           parsedColor = args[4];
         }
@@ -2780,18 +5626,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         return next(args);
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawTextFit, "hookDrawTextFit");
 
-  // src/Hooks/GuiRedraw/DrawTextWrap.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color5 = __toESM(require_color());
+  // src/hooks/gui_redraw/draw_text_wrap.ts
   function hookDrawTextWrap() {
-    hookFunction(
+    sdk.hookFunction(
       "DrawTextWrap",
-      0 /* Observe */,
+      HookPriority.Observe,
       (args, next) => {
         if (!doRedraw()) return next(args);
         if (!args[0]) return next(args);
@@ -2815,7 +5659,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
         let parsedForeColor = ForeColor;
         try {
-          parsedForeColor = (0, import_color5.default)(ForeColor.toLowerCase()).hex();
+          parsedForeColor = color_default(ForeColor.toLowerCase()).hex();
         } catch (e) {
           parsedForeColor = ForeColor;
         }
@@ -2847,21 +5691,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
         } else MainCanvas.fillText(Text, X + Width / 2, Y + Height / 2);
         if (MaxLine != null && TextSize != null) MainCanvas.font = TextSize;
       },
-      3 /* GuiRedraw */
+      ModuleCategory.GuiRedraw
     );
   }
   __name(hookDrawTextWrap, "hookDrawTextWrap");
 
-  // src/Modules/GuiRedraw.ts
+  // src/modules/gui_redraw.ts
   var doRedraw = /* @__PURE__ */ __name(() => {
-    return PlayerStorage()?.GlobalModule?.themedEnabled && PlayerStorage().GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== "ClubCard";
+    return modStorage.playerStorage?.GlobalModule?.modEnabled && modStorage.playerStorage.GlobalModule?.doVanillaGuiOverhaul && CurrentScreen !== "ClubCard";
   }, "doRedraw");
   var _GuiRedrawModule = class _GuiRedrawModule extends BaseModule {
     constructor() {
       super(...arguments);
       __publicField(this, "patched", false);
     }
-    Load() {
+    load() {
       hookDrawRoomBackground();
       hookDrawButton();
       hookDrawCheckbox();
@@ -2880,39 +5724,28 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     patchGui() {
       if (this.patched) return false;
-      patchFunction("ChatSearchNormalDraw", {
-        // isBlocked
-        'bgColor = isFull ? "#884444" : "#FF9999";': 'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
-        // hasFriends
-        'bgColor = isFull ? "#448855" : "#CFFFCF";': 'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
-        // else
-        'bgColor = isFull ? "#666" : "White";': 'bgColor = isFull ? "%searchFull" : "%background";',
-        'blocksText.push({ text: friendsText, color: "#FFFF88"});': 'blocksText.push({ text: friendsText, color: "%friendhint"});',
-        'blocksText.push({ text: blockedText, color: "#FF9999" });': 'blocksText.push({ text: blockedText, color: "%searchBlock" });',
-        'blocksText.push({ text: gameText, color: "#9999FF"});': 'blocksText.push({ text: gameText, color: "%searchGame"});'
-      });
-      patchFunction("ChatSearchPermissionDraw", {
+      sdk.patchFunction("ChatSearchPermissionDraw", {
         'bgColor = Hover ? "red" : "pink";': 'bgColor = "%allowed";',
         'bgColor = Hover ? "green" : "lime";': 'bgColor = "%searchBlock";'
       });
-      patchFunction("DialogDraw", {
+      sdk.patchFunction("DialogDraw", {
         "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
         'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");': 'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");'
       });
-      patchFunction("DrawProcessScreenFlash", {
+      sdk.patchFunction("DrawProcessScreenFlash", {
         'DrawRect(0, 0, 2000, 1000, "#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));': 'DrawRect(0, 0, 2000, 1000, "!#ffffff" + DrawGetScreenFlashAlpha(FlashTime / Math.max(1, 4 - DrawLastDarkFactor)));',
         "DrawRect(0, 0, 2000, 1000, DrawScreenFlashColor + PinkFlashAlpha);": 'DrawRect(0, 0, 2000, 1000, "!" + DrawScreenFlashColor + PinkFlashAlpha);'
       });
-      patchFunction("ChatAdminRun", {
+      sdk.patchFunction("ChatAdminRun", {
         'const ButtonBackground = canEdit ? "White" : "#ebebe4";': 'const ButtonBackground = canEdit ? "%background" : "%disabled";'
       });
-      patchFunction("AppearanceRun", {
+      sdk.patchFunction("AppearanceRun", {
         'const ButtonColor = canAccess ? "White" : "#888";': 'const ButtonColor = canAccess ? "%background" : "%disabled";',
         'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "#fff" : "#aaa", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);': 'DrawButton(1635, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", layeringEnabled ? "%background" : "%disabled", "Icons/Small/Layering.png", TextGet("Layering"), !layeringEnabled);',
         'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "#aaa", null, null, !CanCycleColors);': 'DrawButton(1725, 145 + (A - CharacterAppearanceOffset) * 95, 160, 65, ColorButtonText, CanCycleColors ? ColorButtonColor : "%disabled", null, null, !CanCycleColors);',
         'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "#fff" : "#aaa", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);': 'DrawButton(1910, 145 + (A - CharacterAppearanceOffset) * 95, 65, 65, "", CanPickColor ? "%background" : "%disabled", CanPickColor ? ColorIsSimple ? "Icons/Small/ColorChange.png" : "Icons/Small/ColorChangeMulti.png" : "Icons/Small/ColorBlocked.png", null, !CanPickColor);'
       });
-      patchFunction("ExtendedItemGetButtonColor", {
+      sdk.patchFunction("ExtendedItemGetButtonColor", {
         'ButtonColor = "#888888";': 'ButtonColor = "%accent";',
         'ButtonColor = Hover ? "red" : "pink";': 'ButtonColor = "%blocked";',
         'ButtonColor = Hover ? "orange" : "#fed8b1";': 'ButtonColor = "%limited";',
@@ -2922,24 +5755,21 @@ One of mods you are using is using an old version of SDK. It will work for now b
         'ButtonColor = Hover ? "Cyan" : "LightGreen";': 'ButtonColor = "%allowed";',
         'ButtonColor = Hover ? "Cyan" : "White";': 'ButtonColor = Hover ? "%hover" : "%background";'
       });
-      patchFunction("PreferenceSubscreenDifficultyRun", {
+      sdk.patchFunction("PreferenceSubscreenDifficultyRun", {
         'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "#DDFFDD" : "White", "");': 'DrawButton(500, 320 + 150 * D, 300, 64, TextGet("DifficultyLevel" + D.toString()), (D == Player.GetDifficulty()) ? "%accent" : "%background", "");',
         'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "White" : "#ebebe4", "");': 'DrawButton(500, 825, 300, 64, TextGet("DifficultyChangeMode") + " " + TextGet("DifficultyLevel" + PreferenceDifficultyLevel.toString()), PreferenceDifficultyAccept ? "%background" : "%disabled", "");'
       });
-      patchFunction("ChatAdminRoomCustomizationRun", {
+      sdk.patchFunction("ChatAdminRoomCustomizationRun", {
         'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());': 'DrawButton(725, 840, 250, 65, TextGet("Clear"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());',
         'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "White" : "#ebebe4", null, null, !ChatRoomPlayerIsAdmin());': 'DrawButton(1025, 840, 250, 65, TextGet("Save"), ChatRoomPlayerIsAdmin() ? "%background" : "%disabled", null, null, !ChatRoomPlayerIsAdmin());'
       });
-      patchFunction("Shop2._AssetElementDraw", {
+      sdk.patchFunction("Shop2._AssetElementDraw", {
         'options.Background = "cyan";': 'options.Background = "%hover";',
         'options.Background = "white";': 'options.Background = "%background";',
         'options.Background = "gray";': 'options.Background = "%disabled";',
         'options.Background = "pink";': 'options.Background = "%equipped";'
       });
-      patchFunction("RelogRun", {
-        'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "White" : "Grey", "");': 'DrawButton(675, 750, 300, 60, TextGet("LogBackIn"), CanLogin ? "%background" : "%disabled", "", null, CanLogin);'
-      });
-      patchFunction("ChatRoomMenuDraw", {
+      sdk.patchFunction("ChatRoomMenuDraw", {
         'let color = "White";': 'let color = "%background";',
         'color = "White";': 'color = "%background";',
         'color = "Pink";': 'color = "%blocked";',
@@ -2951,18 +5781,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     unpatchGui() {
       if (!this.patched) return false;
-      unpatchFunction("ChatSearchNormalDraw");
-      unpatchFunction("ChatSearchPermissionDraw");
-      unpatchFunction("DialogDraw");
-      unpatchFunction("DrawProcessScreenFlash");
-      unpatchFunction("ChatAdminRun");
-      unpatchFunction("AppearanceRun");
-      unpatchFunction("ExtendedItemGetButtonColor");
-      unpatchFunction("PreferenceSubscreenDifficultyRun");
-      unpatchFunction("ChatAdminRoomCustomizationRun");
-      unpatchFunction("Shop2._AssetElementDraw");
-      unpatchFunction("RelogRun");
-      unpatchFunction("ChatRoomMenuDraw");
+      sdk.unpatchFunction("ChatSearchPermissionDraw");
+      sdk.unpatchFunction("DialogDraw");
+      sdk.unpatchFunction("DrawProcessScreenFlash");
+      sdk.unpatchFunction("ChatAdminRun");
+      sdk.unpatchFunction("AppearanceRun");
+      sdk.unpatchFunction("ExtendedItemGetButtonColor");
+      sdk.unpatchFunction("PreferenceSubscreenDifficultyRun");
+      sdk.unpatchFunction("ChatAdminRoomCustomizationRun");
+      sdk.unpatchFunction("Shop2._AssetElementDraw");
+      sdk.unpatchFunction("ChatRoomMenuDraw");
       this.patched = false;
     }
     toggleGuiPatches() {
@@ -2976,1020 +5804,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_GuiRedrawModule, "GuiRedrawModule");
   var GuiRedrawModule = _GuiRedrawModule;
 
-  // src/Translation.ts
-  init_define_LAST_COMMIT_HASH();
-  var _Localization = class _Localization {
-    static async load() {
-      const lang = TranslationLanguage.toLowerCase();
-      this.Translation = await _Localization.fetchLanguageFile(lang);
-      if (lang == "en") {
-        return;
-      }
-      this.FallbackTranslation = await _Localization.fetchLanguageFile("en");
-    }
-    static getText(srcTag) {
-      return this.Translation[srcTag] || this.FallbackTranslation?.[srcTag] || srcTag || "";
-    }
-    static async fetchLanguageFile(lang) {
-      const response = await fetch(`${"https://ddeeplb.github.io/Themed-BC/public"}/i18n/${lang}.lang`);
-      if (lang != "en" && !response.ok) {
-        return _Localization.fetchLanguageFile("en");
-      }
-      const langFileContent = await response.text();
-      return this.parseLanguageFile(langFileContent);
-    }
-    static parseLanguageFile(content) {
-      const translations = {};
-      const lines = content.split("\n");
-      for (const line of lines) {
-        if (line.trim() === "" || line.trim().startsWith("#")) {
-          continue;
-        }
-        const [key, value] = line.split("=");
-        translations[key.trim()] = value.trim();
-      }
-      return translations;
-    }
-  };
-  __name(_Localization, "Localization");
-  __publicField(_Localization, "Translation", new Object());
-  __publicField(_Localization, "FallbackTranslation", new Object());
-  var Localization = _Localization;
-  var getText = /* @__PURE__ */ __name((string) => Localization.getText(string), "getText");
-
-  // src/Base/SettingDefinitions.ts
-  init_define_LAST_COMMIT_HASH();
-  var SETTING_NAME_PREFIX = "Themed";
-  function setSubscreen(subscreen) {
-    if (!GUI.instance) {
-      throw new Error("Attempt to set subscreen before init");
-    }
-    GUI.instance.currentSubscreen = subscreen;
-    return GUI.instance.currentSubscreen;
-  }
-  __name(setSubscreen, "setSubscreen");
-
-  // src/Base/BaseSetting.ts
-  var _GuiSubscreen = class _GuiSubscreen {
-    constructor(module) {
-      __publicField(this, "module");
-      this.module = module;
-    }
-    get name() {
-      return "UNKNOWN";
-    }
-    get icon() {
-      return "";
-    }
-    get label() {
-      return "UNDEFINED SETTING SCREEN";
-    }
-    get message() {
-      return PreferenceMessage;
-    }
-    set message(message) {
-      PreferenceMessage = message;
-    }
-    get SubscreenName() {
-      return SETTING_NAME_PREFIX + this.constructor.name;
-    }
-    setSubscreen(screen) {
-      return setSubscreen(screen);
-    }
-    get settings() {
-      return this.module.settings;
-    }
-    get multipageStructure() {
-      return [[]];
-    }
-    get structure() {
-      return this.multipageStructure[Math.min(PreferencePageCurrent - 1, this.multipageStructure.length - 1)];
-    }
-    getYPos(ix) {
-      return _GuiSubscreen.START_Y + _GuiSubscreen.Y_MOD * (ix % 9);
-    }
-    getXPos(ix) {
-      return _GuiSubscreen.START_X + _GuiSubscreen.X_MOD * Math.floor(ix / 9);
-    }
-    hideElements() {
-      this.multipageStructure.forEach((item, ix) => {
-        if (ix != PreferencePageCurrent - 1) {
-          item.forEach((setting) => {
-            if (setting.type == "text" || setting.type == "number" || setting.type == "color") this.elementHide(setting.id);
-          });
-        }
-      });
-    }
-    Load() {
-      for (const module of modules()) {
-        if (!module.settingsScreen) continue;
-        if (!Object.keys(module.settings).length) module.registerDefaultSettings();
-      }
-      this.multipageStructure.forEach(
-        (s) => s.forEach((item) => {
-          switch (item.type) {
-            case "text": {
-              const input = ElementCreateInput(item.id, "text", item.setting?.(), "255");
-              input.setAttribute("autocomplete", "off");
-              break;
-            }
-            case "number":
-              ElementCreateInput(item.id, "number", item.setting?.(), "255");
-              break;
-            case "color": {
-              const elm = ElementCreateInput(item.id, "color", item.setting?.());
-              elm.classList.add("tmd-color-picker");
-              break;
-            }
-          }
-        })
-      );
-      CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
-    }
-    Run() {
-      _GuiSubscreen.POS_BAK = _GuiSubscreen.START_X;
-      MainCanvas.save();
-      _GuiSubscreen.START_X = 550;
-      MainCanvas.textAlign = "left";
-      DrawCharacter(Player, 50, 50, 0.9, false);
-      DrawText(getText(`${this.name}.title`), _GuiSubscreen.START_X, _GuiSubscreen.START_Y - _GuiSubscreen.Y_MOD, "Black", "#D7F6E9");
-      DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png", "Main Menu");
-      if (this.multipageStructure.length > 1) {
-        MainCanvas.textAlign = "center";
-        PreferencePageChangeDraw(1595, 75, this.multipageStructure.length);
-        MainCanvas.textAlign = "left";
-      }
-      this.hideElements();
-      this.structure.forEach((item, ix) => {
-        switch (item.type) {
-          case "checkbox":
-            this.drawCheckbox(item.label, item.description, item.setting(), ix, item.disabled);
-            break;
-          case "text":
-          case "number":
-          case "color":
-            this.elementPosition(item.id, item.label, item.description, ix, item.disabled);
-            break;
-          case "label":
-            this.drawLabel(item.label, item.description, ix);
-            break;
-          case "button":
-            this.drawBetterButton(item.position, item.size, item.label, item.color, item.image, item.disabled);
-            break;
-        }
-      });
-      _GuiSubscreen.START_X = _GuiSubscreen.POS_BAK;
-      MainCanvas.restore();
-    }
-    Click() {
-      _GuiSubscreen.POS_BAK = _GuiSubscreen.START_X;
-      _GuiSubscreen.TEXT_ALIGN_BAK = MainCanvas.textAlign;
-      _GuiSubscreen.START_X = 550;
-      MainCanvas.textAlign = "left";
-      if (MouseIn(1815, 75, 90, 90)) return this.Exit();
-      if (this.multipageStructure.length > 1) PreferencePageChangeClick(1595, 75, this.multipageStructure.length);
-      this.structure.forEach((item, ix) => {
-        switch (item.type) {
-          case "checkbox":
-            if (MouseIn(this.getXPos(ix), this.getYPos(ix) - 32, 64, 64) && !item.disabled) {
-              item.setSetting(!item.setting());
-            }
-            break;
-          case "button":
-            if (MouseIn(item.position[0], item.position[1], item.size[0], item.size[1])) item.callback();
-            break;
-        }
-      });
-      _GuiSubscreen.START_X = _GuiSubscreen.POS_BAK;
-      MainCanvas.textAlign = _GuiSubscreen.TEXT_ALIGN_BAK;
-    }
-    Exit() {
-      this.multipageStructure.forEach(
-        (s) => s.forEach((item) => {
-          switch (item.type) {
-            case "number":
-              if (!CommonIsNumeric(ElementValue(item.id))) {
-                ElementRemove(item.id);
-              }
-              break;
-            case "text":
-            case "color":
-              item.setSetting?.(ElementValue(item.id));
-              ElementRemove(item.id);
-              break;
-          }
-        })
-      );
-      CharacterAppearanceForceUpCharacter = -1;
-      CharacterLoadCanvas(Player);
-      getModule("ColorsModule").reloadTheme();
-      setSubscreen("MainMenu");
-      settingsSave();
-    }
-    Unload() {
-    }
-    tooltip(text) {
-      drawTooltip(300, 850, 1400, text, "left");
-    }
-    drawCheckbox(label, description, value, order, disabled = false) {
-      const checkboxSize = 64;
-      const labelOffset = checkboxSize + 30;
-      const isHovering = MouseIn(this.getXPos(order) + labelOffset, this.getYPos(order) - 32, 600, checkboxSize);
-      DrawTextFit(getText(label), this.getXPos(order) + labelOffset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      DrawCheckbox(this.getXPos(order), this.getYPos(order) - 32, checkboxSize, checkboxSize, "", value ?? false, disabled);
-      if (isHovering) this.tooltip(getText(description));
-    }
-    drawBetterButton(position, size, label, color, image = "", disabled = false) {
-      const isHovering = MouseIn(position[0], position[1] - 32, size[0], size[1]);
-      DrawButton(position[0], position[1], size[0], size[1], "", color, "", "", disabled);
-      DrawImageResize(image, position[0] + 10, position[1] + 10, 60, 60);
-      DrawTextFit(getText(label), position[0] + 80, position[1] + 40, 600, isHovering ? "Red" : "Black", "Gray");
-    }
-    drawButton(label, color, order, XOffset, disabled = false) {
-      const isHovering = MouseIn(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64);
-      DrawButton(this.getXPos(order) + XOffset, this.getYPos(order) - 32, 200, 64, "", color, "", "", disabled);
-      DrawTextFit(getText(label), this.getXPos(order) + XOffset + 58, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-    }
-    elementHide(elementId) {
-      ElementPosition(elementId, -999, -999, 1, 1);
-    }
-    elementPosition(elementId, label, description, order, disabled = false) {
-      const element = document.getElementById(elementId);
-      if (!element) return;
-      let offset = 0;
-      if (element?.type === "color") offset = -336;
-      const isHovering = MouseIn(this.getXPos(order) + 450 + offset, this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order) + 450 + offset, this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      ElementPositionFixed(elementId, this.getXPos(order), this.getYPos(order) - 32, 400 + offset, 64);
-      if (disabled) ElementSetAttribute(elementId, "disabled", "true");
-      if (!disabled) ElementRemoveAttribute(elementId, "disabled");
-      if (isHovering) this.tooltip(getText(description));
-    }
-    drawLabel(label, description, order) {
-      const isHovering = MouseIn(this.getXPos(order), this.getYPos(order) - 32, 600, 64);
-      DrawTextFit(getText(label), this.getXPos(order), this.getYPos(order), 600, isHovering ? "Red" : "Black", "Gray");
-      if (isHovering) this.tooltip(getText(description));
-    }
-  };
-  __name(_GuiSubscreen, "GuiSubscreen");
-  __publicField(_GuiSubscreen, "START_X", 180);
-  __publicField(_GuiSubscreen, "START_Y", 205);
-  __publicField(_GuiSubscreen, "X_MOD", 950);
-  __publicField(_GuiSubscreen, "Y_MOD", 75);
-  __publicField(_GuiSubscreen, "POS_BAK", _GuiSubscreen.START_X);
-  __publicField(_GuiSubscreen, "TEXT_ALIGN_BAK");
-  var GuiSubscreen = _GuiSubscreen;
-  function drawTooltip(x, y, width, text, align) {
-    const canvas = MainCanvas;
-    const bak = canvas.textAlign;
-    canvas.textAlign = align;
-    canvas.beginPath();
-    canvas.rect(x, y, width, 65);
-    canvas.fillStyle = doRedraw() ? plainColors.element : "#FFFF88";
-    canvas.fillRect(x, y, width, 65);
-    canvas.fill();
-    canvas.lineWidth = 2;
-    canvas.strokeStyle = doRedraw() ? plainColors.accent : "black";
-    canvas.stroke();
-    canvas.closePath();
-    DrawTextFit(text, align === "left" ? x + 3 : x + width / 2, y + 33, width - 6, doRedraw() ? plainColors.text : "black");
-    canvas.textAlign = bak;
-  }
-  __name(drawTooltip, "drawTooltip");
-
-  // src/Screens/Reset.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Style.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Utilities/Other.ts
-  init_define_LAST_COMMIT_HASH();
-  function sendLocalSmart(id, message, timeoutInSeconds) {
-    const div = document.createElement("div");
-    div.id = id;
-    div.setAttribute("class", "ChatMessage ThemedMessage");
-    div.setAttribute("data-time", ChatRoomCurrentTime());
-    div.setAttribute("data-sender", Player?.MemberNumber + "");
-    div.innerHTML = message.replaceAll("\n	", "") + /*html*/
-    `<br><a class="ThemedText" onClick='document.getElementById("${id}").remove();'><b>Close (Click)</b></a>`;
-    ChatRoomAppendChat(div);
-    if (!timeoutInSeconds) return;
-    setTimeout(() => div?.remove(), timeoutInSeconds * 1e3);
-  }
-  __name(sendLocalSmart, "sendLocalSmart");
-  function sendAction(msg, target) {
-    ServerSend("ChatRoomChat", {
-      Content: "Beep",
-      Type: "Action",
-      Sender: Player.MemberNumber,
-      ...target ? { Target: target } : {},
-      Dictionary: [
-        // EN
-        { Tag: "Beep", Text: "msg" },
-        // CN
-        { Tag: "\u53D1\u9001\u79C1\u804A", Text: "msg" },
-        // DE
-        { Tag: "Biep", Text: "msg" },
-        // FR
-        { Tag: "Sonner", Text: "msg" },
-        // Message itself
-        { Tag: "msg", Text: msg }
-      ]
-    });
-  }
-  __name(sendAction, "sendAction");
-  function useLgcModal(prompt2, acceptCallbackFn, cancelCallbackFn) {
-    if (document.getElementById("themed-modal")) return false;
-    const modal = document.createElement("div");
-    const modalTitle = document.createElement("div");
-    const modalButtons = document.createElement("div");
-    const modalAcceptButton = document.createElement("div");
-    const modalCancelButton = document.createElement("div");
-    modal.classList.add("themed-modal");
-    modalTitle.id = "modal-prompt";
-    modalButtons.id = "modal-buttons";
-    modalAcceptButton.id = "modal-button-accept";
-    modalCancelButton.id = "modal-button-cancel";
-    modalAcceptButton.classList.add("modal-button");
-    modalCancelButton.classList.add("modal-button");
-    modalTitle.innerHTML = prompt2;
-    modalAcceptButton.innerText = getText("modal.button.accept");
-    modalCancelButton.innerText = getText("modal.button.cancel");
-    modalAcceptButton.addEventListener("click", () => {
-      acceptCallbackFn();
-      modal.remove();
-    });
-    modalCancelButton.addEventListener("click", () => {
-      cancelCallbackFn();
-      modal.remove();
-    });
-    modalButtons.append(modalAcceptButton, modalCancelButton);
-    modal.append(modalTitle, modalButtons);
-    document.body.append(modal);
-  }
-  __name(useLgcModal, "useLgcModal");
-  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = { ...mergeTo };
-    for (const key in mergeFrom) {
-      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
-        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
-      } else if (key in mergedObject) {
-        mergedObject[key] = mergeFrom[key];
-      }
-    }
-    return mergedObject;
-  }
-  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  function hasSetter(obj, prop) {
-    return !!Object.getOwnPropertyDescriptor(obj, prop)?.["set"];
-  }
-  __name(hasSetter, "hasSetter");
-  function camelToKebabCase(str) {
-    return str.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
-  }
-  __name(camelToKebabCase, "camelToKebabCase");
-
-  // src/Utilities/Style.ts
-  var styles = {
-    inputs: "",
-    chat: "",
-    inventory: "",
-    friendList: "",
-    friendListBlur: "",
-    scrollbar: "",
-    selection: "",
-    WCE: "",
-    FUSAM: "",
-    TTS: ""
-  };
-  var Style = {
-    injectInline(styleId, styleSource) {
-      const isStyleLoaded = document.getElementById(styleId);
-      if (isStyleLoaded) return;
-      const styleElement = document.createElement("style");
-      styleElement.id = styleId;
-      styleElement.appendChild(document.createTextNode(styleSource));
-      document.head.appendChild(styleElement);
-    },
-    injectEmbed(styleId, styleLink) {
-      const isStyleLoaded = document.getElementById(styleId);
-      if (isStyleLoaded) return;
-      const styleElement = document.createElement("link");
-      styleElement.id = styleId;
-      styleElement.rel = "stylesheet";
-      styleElement.href = styleLink;
-      document.head.appendChild(styleElement);
-    },
-    eject(id) {
-      const style = document.getElementById(id);
-      if (!style) return;
-      style.remove();
-    },
-    reload(styleId, styleSource) {
-      Style.eject(styleId);
-      Style.injectInline(styleId, styleSource);
-    },
-    async fetch(link) {
-      return fetch(link).then((res) => res.text());
-    }
-  };
-  var BcStyle = {
-    injectAll() {
-      const isEnabled = PlayerStorage().GlobalModule.themedEnabled;
-      Style.injectEmbed("themed", `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/themed.css`);
-      if (!isEnabled) return;
-      Style.injectInline("root", composeRoot());
-      const styleIDs = Object.keys(styles);
-      styleIDs.forEach((id) => {
-        if (!PlayerStorage().IntegrationModule[id]) return;
-        Style.injectEmbed(id, `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/${id}.css`);
-      });
-    },
-    ejectAll() {
-      Style.eject("root");
-      Style.eject("themed");
-      const styleIDs = Object.keys(styles);
-      styleIDs.forEach((id) => {
-        Style.eject(id);
-      });
-    },
-    reloadAll() {
-      BcStyle.ejectAll();
-      BcStyle.injectAll();
-    }
-  };
-  function composeRoot() {
-    let genedColors = "";
-    Object.keys(plainColors).forEach((key) => {
-      genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[key]};
-	`;
-    });
-    Object.keys(specialColors).forEach((key) => {
-      genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[key][0]};
-	`;
-      genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[key][1]};
-	`;
-    });
-    return (
-      /*css*/
-      `
-    :root {
-      ${genedColors}
-    }
-    `.replace(/\t+|\n\s*/g, "	")
-    );
-  }
-  __name(composeRoot, "composeRoot");
-
-  // src/Screens/Reset.ts
-  var _GuiReset = class _GuiReset extends GuiSubscreen {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "allowedConfirmTime", 0);
-    }
-    get name() {
-      return "Reset";
-    }
-    get icon() {
-      return "";
-    }
-    Load() {
-      this.allowedConfirmTime = Date.now() + 5e3;
-      super.Load();
-    }
-    Run() {
-      GuiSubscreen.POS_BAK = GuiSubscreen.START_X;
-      GuiSubscreen.START_X = 180;
-      MainCanvas.save();
-      MainCanvas.textAlign = "center";
-      DrawText(getText("reset.label.perma_reset_of_mod_data"), 1e3, 125, "Black");
-      DrawText(getText("reset.label.warning"), 1e3, 225, "Black", "Black");
-      DrawText(getText("reset.label.if_u_confirm_perma_reset"), 1e3, 325, "Black");
-      DrawText(getText("reset.label.youll_able_to_use_mod"), 1e3, 550, "Gray");
-      DrawText(getText("reset.label.action_cannot_be_undone"), 1e3, 625, "Red", "Black");
-      const now = Date.now();
-      if (now < this.allowedConfirmTime) {
-        DrawButton(
-          300,
-          720,
-          200,
-          80,
-          `${getText("reset.button.confirm")} (${Math.floor((this.allowedConfirmTime - now) / 1e3)})`,
-          "#ddd",
-          void 0,
-          void 0,
-          true
-        );
-      } else {
-        DrawButton(300, 720, 200, 80, getText("reset.button.confirm"), "White");
-      }
-      DrawButton(1520, 720, 200, 80, getText("reset.button.cancel"), "White");
-      MainCanvas.restore();
-    }
-    Click() {
-      if (this.allowedConfirmTime === null) return;
-      if (MouseIn(300, 720, 200, 80) && Date.now() >= this.allowedConfirmTime) return this.Confirm();
-      if (MouseIn(1520, 720, 200, 80)) return this.Exit();
-    }
-    Confirm() {
-      this.allowedConfirmTime = null;
-      settingsReset();
-      for (const module of modules()) {
-        module.registerDefaultSettings();
-      }
-      _Color.composeRoot();
-      BcStyle.reloadAll();
-      this.setSubscreen(null);
-      PreferenceSubscreenExtensionsClear();
-    }
-  };
-  __name(_GuiReset, "GuiReset");
-  var GuiReset = _GuiReset;
-
-  // src/Screens/MainMenu.ts
-  var _MainMenu = class _MainMenu extends GuiSubscreen {
-    constructor(module) {
-      super(module);
-      __publicField(this, "subscreens", []);
-      this.subscreens = module.subscreens;
-    }
-    get name() {
-      return "MainMenu";
-    }
-    Load() {
-      if (!GUI.instance?.currentSubscreen) {
-        this.setSubscreen(this);
-        return;
-      }
-      super.Load();
-    }
-    Run() {
-      const tmp = GuiSubscreen.START_X;
-      MainCanvas.save();
-      GuiSubscreen.START_X = 550;
-      MainCanvas.textAlign = "left";
-      DrawCharacter(Player, 50, 50, 0.9, false);
-      DrawText(
-        getText("MainMenu.title").replace("$ModVersion", MOD_VERSION_CAPTION),
-        GuiSubscreen.START_X,
-        GuiSubscreen.START_Y - GuiSubscreen.Y_MOD,
-        "Black",
-        "#D7F6E9"
-      );
-      DrawButton(1815, 75, 90, 90, "", "White", "Icons/Exit.png");
-      MainCanvas.textAlign = "center";
-      let i = 0;
-      for (const screen of this.subscreens) {
-        const PX = Math.floor(i / 6);
-        const PY = i % 6;
-        if (screen.name == "MainMenu") continue;
-        DrawButton(GuiSubscreen.START_X + 430 * PX, 190 + 120 * PY, 450, 90, "", "White", "", "");
-        DrawImageResize(screen.icon, GuiSubscreen.START_X + 430 * PX + 10, 190 + 120 * PY + 10, 70, 70);
-        MainCanvas.textAlign = "left";
-        DrawTextFit(getText(`mainmenu.button.${screen.name}`), GuiSubscreen.START_X + 100 + 430 * PX, 235 + 120 * PY, 340, "Black");
-        MainCanvas.textAlign = "center";
-        i++;
-        MainCanvas.textAlign = "left";
-      }
-      DrawButton(1500, 830, 405, 80, "", "IndianRed");
-      DrawImageResize("Icons/ServiceBell.png", 1510, 840, 60, 60);
-      DrawTextFit("Reset", 1580, 870, 320, "Black");
-      GuiSubscreen.START_X = tmp;
-      MainCanvas.restore();
-    }
-    Click() {
-      if (MouseIn(1815, 75, 90, 90)) return this.Exit();
-      const tmp = GuiSubscreen.START_X;
-      GuiSubscreen.START_X = 550;
-      let i = 0;
-      for (const screen of this.subscreens) {
-        const PX = Math.floor(i / 6);
-        const PY = i % 6;
-        if (screen.name == "MainMenu") continue;
-        if (MouseIn(GuiSubscreen.START_X + 430 * PX, 190 + 120 * PY, 450, 90)) {
-          this.setSubscreen(screen);
-          return;
-        }
-        i++;
-      }
-      GuiSubscreen.START_X = tmp;
-      if (MouseIn(1500, 830, 405, 80)) this.setSubscreen(new GuiReset(getModule("GlobalModule")));
-    }
-    Exit() {
-      CharacterAppearanceForceUpCharacter = -1;
-      CharacterLoadCanvas(Player);
-      this.setSubscreen(null);
-      PreferenceSubscreenExtensionsClear();
-    }
-  };
-  __name(_MainMenu, "MainMenu");
-  var MainMenu = _MainMenu;
-
-  // src/Base/SettingUtils.ts
-  var _GUI = class _GUI extends BaseModule {
-    constructor() {
-      super();
-      __publicField(this, "_subscreens");
-      __publicField(this, "_mainMenu");
-      __publicField(this, "_currentSubscreen", null);
-      if (_GUI.instance) {
-        throw new Error("Duplicate initialization");
-      }
-      this._mainMenu = new MainMenu(this);
-      this._subscreens = [this._mainMenu];
-      _GUI.instance = this;
-    }
-    get subscreens() {
-      return this._subscreens;
-    }
-    get mainMenu() {
-      return this._mainMenu;
-    }
-    get currentSubscreen() {
-      return this._currentSubscreen;
-    }
-    set currentSubscreen(subscreen) {
-      if (this._currentSubscreen) {
-        this._currentSubscreen.Unload();
-      }
-      if (typeof subscreen === "string") {
-        const scr = this._subscreens?.find((s) => s.name === subscreen);
-        if (!scr) throw `Failed to find screen name ${subscreen}`;
-        this._currentSubscreen = scr;
-      } else {
-        this._currentSubscreen = subscreen;
-      }
-      PreferenceMessage = "";
-      PreferencePageCurrent = 1;
-      if (this._currentSubscreen) {
-        this._currentSubscreen.Load();
-      }
-    }
-    get currentCharacter() {
-      return Player;
-    }
-    get defaultSettings() {
-      return null;
-    }
-    Load() {
-      for (const module of modules()) {
-        if (!module.settingsScreen) continue;
-        this._subscreens.push(new module.settingsScreen(module));
-      }
-      this._mainMenu.subscreens = this._subscreens;
-      PreferenceRegisterExtensionSetting({
-        Identifier: "Themed",
-        ButtonText: getText("infosheet.button_text"),
-        Image: `${"https://ddeeplb.github.io/Themed-BC/public"}/icons/mod.png`,
-        load: /* @__PURE__ */ __name(() => {
-          setSubscreen(new MainMenu(this));
-        }, "load"),
-        run: /* @__PURE__ */ __name(() => {
-          if (this._currentSubscreen) {
-            MainCanvas.textAlign = "left";
-            this._currentSubscreen.Run();
-            MainCanvas.textAlign = "center";
-            this.drawDebug();
-          }
-        }, "run"),
-        click: /* @__PURE__ */ __name(() => {
-          if (this._currentSubscreen) {
-            this._currentSubscreen.Click();
-          }
-        }, "click"),
-        exit: /* @__PURE__ */ __name(() => {
-          if (this._currentSubscreen) {
-            this._currentSubscreen.Exit();
-          }
-        }, "exit")
-      });
-    }
-    drawDebug() {
-      if (false) {
-        if (MouseX > 0 || MouseY > 0) {
-          MainCanvas.save();
-          MainCanvas.lineWidth = 1;
-          MainCanvas.strokeStyle = "red";
-          MainCanvas.beginPath();
-          MainCanvas.moveTo(0, MouseY);
-          MainCanvas.lineTo(2e3, MouseY);
-          MainCanvas.moveTo(MouseX, 0);
-          MainCanvas.lineTo(MouseX, 1e3);
-          MainCanvas.stroke();
-          MainCanvas.fillStyle = "black";
-          MainCanvas.strokeStyle = "white";
-          MainCanvas.fillRect(0, 950, 250, 50);
-          MainCanvas.strokeRect(0, 950, 250, 50);
-          DrawText(`X: ${MouseX} Y: ${MouseY}`, 125, 975, "white");
-          MainCanvas.restore();
-        }
-      }
-    }
-  };
-  __name(_GUI, "GUI");
-  __publicField(_GUI, "instance", null);
-  var GUI = _GUI;
-
-  // src/Hooks/login_options.ts
-  init_define_LAST_COMMIT_HASH();
-  var ids = {
-    optionsOpen: "tmd-login-options-open",
-    optionsClose: "tmd-login-options-dialog-close",
-    optionsSheet: "tmd-login-options-dialog",
-    optionsContent: "tmd-login-options-dialog-content",
-    optionsStyle: "tmd-login-options-style"
-  };
-  var options = {
-    hideCredits: "Hide Credits",
-    hideDummy: "Hide Dummy"
-  };
-  function loadLoginOptions() {
-    localSettingsLoad();
-    patchLoginPage();
-    Style.injectEmbed(ids.optionsStyle, `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/login-options.css`);
-    createUI();
-    const cleanup = hookFunction("LoginRun", 0 /* Observe */, (args, next) => {
-      next(args);
-      ElementSetPosition(ids.optionsOpen, 2e3, 1e3, "bottom-right");
-      ElementSetSize(ids.optionsOpen, 90, 90);
-      ElementSetSize(ids.optionsSheet, 1e3, 500);
-    });
-    return () => {
-      removeUI();
-      Style.eject(ids.optionsStyle);
-      cleanup();
-      unpatchLoginPage();
-    };
-  }
-  __name(loadLoginOptions, "loadLoginOptions");
-  function createUI() {
-    const loginOptions = window.ThemedLocalData.loginOptions;
-    const optionsButton = ElementButton.Create(ids.optionsOpen, () => optionsSheet.showModal(), {
-      tooltip: "[Themed] Login Options",
-      image: "./Icons/Preference.png"
-    });
-    document.body.appendChild(optionsButton);
-    const optionsSheet = ElementCreate({
-      tag: "dialog",
-      attributes: {
-        id: ids.optionsSheet
-      },
-      children: [
-        ElementCreate({
-          tag: "div",
-          attributes: {
-            id: ids.optionsContent
-          },
-          children: [
-            ...Array.from(Object.entries(options)).map(([key, value]) => {
-              return {
-                tag: "label",
-                classList: ["tmd-login-options-label"],
-                children: [
-                  ElementCheckbox.Create(
-                    `tmd-login-options-${key}`,
-                    () => {
-                      loginOptions[key] = !loginOptions[key];
-                      localSettingsSave();
-                      repatchLoginPage();
-                    },
-                    {
-                      checked: loginOptions[key]
-                    }
-                  ),
-                  value
-                ]
-              };
-            })
-          ]
-        }),
-        ElementButton.Create(
-          ids.optionsClose,
-          () => optionsSheet.close(),
-          {
-            label: "Close"
-          }
-        )
-      ],
-      parent: document.body
-    });
-  }
-  __name(createUI, "createUI");
-  function removeUI() {
-    document.getElementById(ids.optionsOpen)?.remove();
-    document.getElementById(ids.optionsSheet)?.remove();
-  }
-  __name(removeUI, "removeUI");
-  function patchLoginPage() {
-    const loginOptions = window.ThemedLocalData.loginOptions;
-    if (loginOptions.hideDummy) {
-      patchFunction("LoginRun", {
-        "DrawCharacter(LoginCharacter, 1400, 100, 0.9);": ""
-      });
-      patchFunction("LoginDoNextThankYou", {
-        "CharacterRelease(LoginCharacter, false);": "",
-        "CharacterAppearanceFullRandom(LoginCharacter);": "",
-        'if (InventoryGet(LoginCharacter, "ItemNeck") != null) InventoryRemove(LoginCharacter, "ItemNeck", false);': "",
-        "CharacterFullRandomRestrain(LoginCharacter)": ""
-      });
-    }
-    if (loginOptions.hideCredits) {
-      patchFunction("LoginRun", {
-        "if (LoginCredits) LoginDrawCredits();": "if (false) LoginDrawCredits();",
-        'DrawImage("Screens/" + CurrentModule + "/" + CurrentScreen + "/Bubble.png", 1400, 16);': "",
-        'DrawText(TextGet("ThankYou") + " " + LoginThankYou, 1625, 53, "Black", "Gray");': ""
-      });
-      patchFunction("LoginDoNextThankYou", {
-        "LoginThankYou = CommonRandomItemFromList(LoginThankYou, LoginThankYouList)": ""
-      });
-    }
-  }
-  __name(patchLoginPage, "patchLoginPage");
-  function unpatchLoginPage() {
-    unpatchFunction("LoginRun");
-    unpatchFunction("LoginDoNextThankYou");
-  }
-  __name(unpatchLoginPage, "unpatchLoginPage");
-  function repatchLoginPage() {
-    unpatchLoginPage();
-    patchLoginPage();
-  }
-  __name(repatchLoginPage, "repatchLoginPage");
-
-  // src/Migrators/V140Migrator.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Migrators/BaseMigrator.ts
-  init_define_LAST_COMMIT_HASH();
-  var _BaseMigrator = class _BaseMigrator {
-  };
-  __name(_BaseMigrator, "BaseMigrator");
-  var BaseMigrator = _BaseMigrator;
-
-  // src/Migrators/V140Migrator.ts
-  var _V140Migrator = class _V140Migrator extends BaseMigrator {
-    get MigrationVersion() {
-      return "1.4.0";
-    }
-    Migrate() {
-      const colorsData = Player.Themed.ColorsModule;
-      const integrationsData = Player.Themed.IntegrationModule;
-      if (colorsData) {
-        if (Player.Themed.ColorsModule["primaryColor"]) {
-          Player.Themed.ColorsModule.base.main = Player.Themed.ColorsModule["primaryColor"];
-          delete Player.Themed.ColorsModule["primaryColor"];
-        }
-        if (Player.Themed.ColorsModule["accentColor"]) {
-          Player.Themed.ColorsModule.base.accent = Player.Themed.ColorsModule["accentColor"];
-          delete Player.Themed.ColorsModule["accentColor"];
-        }
-        if (Player.Themed.ColorsModule["textColor"]) {
-          Player.Themed.ColorsModule.base.text = Player.Themed.ColorsModule["textColor"];
-          delete Player.Themed.ColorsModule["textColor"];
-        }
-      }
-      if (integrationsData) {
-        if (Player.Themed.IntegrationModule["BC"]) {
-          Player.Themed.IntegrationModule.inputs = Player.Themed.IntegrationModule["BC"];
-          delete Player.Themed.IntegrationModule["BC"];
-        }
-        if (Player.Themed.IntegrationModule["BC_Chat"]) {
-          Player.Themed.IntegrationModule.chat = Player.Themed.IntegrationModule["BC_Chat"];
-          delete Player.Themed.IntegrationModule["BC_Chat"];
-        }
-        if (Player.Themed.IntegrationModule["BC_FriendList"]) {
-          Player.Themed.IntegrationModule.friendList = Player.Themed.IntegrationModule["BC_FriendList"];
-          delete Player.Themed.IntegrationModule["BC_FriendList"];
-        }
-        if (Player.Themed.IntegrationModule["BC_Other"]) {
-          Player.Themed.IntegrationModule.scrollbar = Player.Themed.IntegrationModule["BC_Other"];
-          Player.Themed.IntegrationModule.selection = Player.Themed.IntegrationModule["BC_Other"];
-          delete Player.Themed.IntegrationModule["BC_Other"];
-        }
-        if (Player.Themed.IntegrationModule["FBC"]) {
-          Player.Themed.IntegrationModule.WCE = Player.Themed.IntegrationModule["FBC"];
-          delete Player.Themed.IntegrationModule["FBC"];
-        }
-      }
-      return true;
-    }
-  };
-  __name(_V140Migrator, "V140Migrator");
-  var V140Migrator = _V140Migrator;
-
-  // src/Modules/Colors.ts
-  init_define_LAST_COMMIT_HASH();
-  var import_color6 = __toESM(require_color());
-
-  // src/Screens/Colors.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiColors = class _GuiColors extends GuiSubscreen {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "settingsBackup");
-    }
-    get name() {
-      return "Colors";
-    }
-    get icon() {
-      return "Icons/ColorChange.png";
-    }
-    get settings() {
-      return super.settings;
-    }
-    get multipageStructure() {
-      const defaultSettings = getModule("ColorsModule").defaultSettings;
-      const isBaseMode = !Player.Themed.GlobalModule.doUseAdvancedColoring;
-      const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
-      return [
-        Object.entries(this.settings.base).map(([key, value]) => ({
-          type: "color",
-          id: key,
-          label: `colors.setting.${key}.name`,
-          description: `colors.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[key], "setting"),
-          disabled: isBaseMode && !baseModeKey(key)
-        })).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
-        Object.entries(this.settings.special).map(([key, value]) => ({
-          type: "color",
-          id: key,
-          label: `colors.setting.${key}.name`,
-          description: `colors.setting.${key}.desc`,
-          setting: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[key], "setting")
-        }))
-      ];
-    }
-    Load() {
-      super.Load();
-      this.settingsBackup = CommonCloneDeep(this.settings);
-      const settings = getModule("ColorsModule").settings;
-      Object.entries(this.settings.base).forEach(([key]) => {
-        document.getElementById(key).addEventListener("input", function(ev) {
-          if (!_Color.isValidHex(this.value)) {
-            this.setCustomValidity("Invalid hex color");
-          } else {
-            this.setCustomValidity("");
-            settings.base[key] = this.value;
-          }
-          getModule("ColorsModule").reloadTheme();
-        });
-      }), Object.entries(this.settings.special).forEach(([key]) => {
-        document.getElementById(key).addEventListener("input", function(ev) {
-          if (!_Color.isValidHex(this.value)) {
-            this.setCustomValidity("Invalid hex color");
-          } else {
-            this.setCustomValidity("");
-            settings.special[key] = this.value;
-          }
-          getModule("ColorsModule").reloadTheme();
-        });
-      });
-    }
-    Run() {
-      DrawButton(1495, 75, 90, 90, "", "White", "Icons/Swap.png", getText("colors.button.change_input_type"));
-      super.Run();
-    }
-    Click() {
-      if (MouseIn(1495, 75, 90, 90)) {
-        this.multipageStructure.forEach((page) => {
-          page.forEach((elm) => {
-            if (elm.type == "color" || elm.type == "text") {
-              const e = document.getElementById(elm.id);
-              const elementType = e.getAttribute("type");
-              if (elementType == "color") {
-                e.setAttribute("type", "text");
-              } else {
-                e.setAttribute("type", "color");
-              }
-            }
-          });
-        });
-        return;
-      }
-      super.Click();
-    }
-    Exit() {
-      const settings = getModule("ColorsModule").settings;
-      Object.entries(this.settings.base).forEach(([key]) => {
-        const input = document.getElementById(key);
-        if (!_Color.isValidHex(input.value)) {
-          settings.base[key] = this.settingsBackup.base[key];
-        }
-      }), Object.entries(this.settings.special).forEach(([key]) => {
-        const input = document.getElementById(key);
-        if (!_Color.isValidHex(input.value)) {
-          settings.special[key] = this.settingsBackup.special[key];
-        }
-      });
-      super.Exit();
-    }
-  };
-  __name(_GuiColors, "GuiColors");
-  var GuiColors = _GuiColors;
-
-  // src/Utilities/Integration.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/utilities/integration.ts
   function changeModColors() {
     if (doRedraw()) {
       changeBctColors();
@@ -4018,7 +5833,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(resetBctColors, "resetBctColors");
   function changeMbsColors() {
     if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-      if (!PlayerStorage().IntegrationModule.MBS) return;
+      if (!modStorage.playerStorage.IntegrationModule.MBS) return;
       return mbs.css.setStyle({
         backgroundColor: plainColors.main,
         buttonColor: plainColors.element,
@@ -4032,7 +5847,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(changeMbsColors, "changeMbsColors");
   function resetMbsColors() {
     if (typeof mbs !== "undefined" && mbs.API_VERSION.major === 1 && mbs.API_VERSION.minor >= 3) {
-      if (!PlayerStorage().IntegrationModule.MBS)
+      if (!modStorage.playerStorage.IntegrationModule.MBS)
         mbs.css.setStyle({
           backgroundColor: mbs.css.DEFAULT_STYLE.backgroundColor,
           buttonColor: mbs.css.DEFAULT_STYLE.buttonColor,
@@ -4045,20 +5860,91 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(resetMbsColors, "resetMbsColors");
 
-  // src/Modules/Colors.ts
-  var primaryColor = (0, import_color6.default)("#202020");
+  // src/utilities/other.ts
+  function camelToKebabCase(str) {
+    return str.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+  }
+  __name(camelToKebabCase, "camelToKebabCase");
+
+  // src/utilities/style.ts
+  var styles = {
+    inputs: "",
+    chat: "",
+    inventory: "",
+    friendList: "",
+    friendListBlur: "",
+    scrollbar: "",
+    selection: "",
+    WCE: "",
+    FUSAM: "",
+    TTS: ""
+  };
+  var BcStyle = {
+    injectAll() {
+      const isEnabled = modStorage.playerStorage.GlobalModule.modEnabled;
+      Style.injectEmbed("tmd-style", `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/themed.css`);
+      if (!isEnabled) return;
+      Style.injectInline("tmd-root", composeRoot());
+      Style.injectEmbed("tmd-chat-room-search", `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/chatroom_search.css`);
+      const styleIDs = Object.keys(styles);
+      styleIDs.forEach((id) => {
+        if (!modStorage.playerStorage.IntegrationModule[id]) return;
+        Style.injectEmbed(id, `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/${id}.css`);
+      });
+    },
+    ejectAll() {
+      Style.eject("tmd-root");
+      Style.eject("tmd-style");
+      Style.eject("tmd-chat-room-search");
+      const styleIDs = Object.keys(styles);
+      styleIDs.forEach((id) => {
+        Style.eject(id);
+      });
+    },
+    reloadAll() {
+      BcStyle.ejectAll();
+      BcStyle.injectAll();
+    }
+  };
+  function composeRoot() {
+    let genedColors = "";
+    Object.keys(plainColors).forEach((key) => {
+      const typedKey = key;
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${plainColors[typedKey]};
+	`;
+    });
+    Object.keys(specialColors).forEach((key) => {
+      const typedKey = key;
+      genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[typedKey][0]};
+	`;
+      genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[typedKey][1]};
+	`;
+    });
+    return (
+      /*css*/
+      `
+    :root {
+      ${genedColors}
+    }
+    `.replace(/\t+|\n\s*/g, "	")
+    );
+  }
+  __name(composeRoot, "composeRoot");
+
+  // src/modules/colors.ts
+  var primaryColor = color_default("#202020");
   var elementColor = primaryColor.lighten(0.2);
-  var accentColor = (0, import_color6.default)("#440171");
-  var textColor = (0, import_color6.default)("#cccccc");
+  var accentColor = color_default("#440171");
+  var textColor = color_default("#cccccc");
   var specialColors2 = {
-    equipped: (0, import_color6.default)("#3575b5"),
-    crafted: (0, import_color6.default)("#aaa235"),
-    blocked: (0, import_color6.default)("#870c0c"),
-    limited: (0, import_color6.default)("#9d6600"),
-    allowed: (0, import_color6.default)("#008800"),
-    roomFriend: (0, import_color6.default)("#008800"),
-    roomBlocked: (0, import_color6.default)("#870c0c"),
-    roomGame: (0, import_color6.default)("#3575b5")
+    equipped: color_default("#3575b5"),
+    crafted: color_default("#aaa235"),
+    blocked: color_default("#870c0c"),
+    limited: color_default("#9d6600"),
+    allowed: color_default("#008800"),
+    roomFriend: color_default("#008800"),
+    roomBlocked: color_default("#870c0c"),
+    roomGame: color_default("#3575b5")
   };
   var _ColorsModule = class _ColorsModule extends BaseModule {
     get settingsScreen() {
@@ -4072,6 +5958,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     get defaultSettings() {
       return {
+        themeSettings: {
+          themeType: "dark"
+        },
         base: {
           main: primaryColor.hex(),
           element: elementColor.hex(),
@@ -4095,9 +5984,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
       };
     }
-    Load() {
+    load() {
     }
-    reloadTheme() {
+    static reloadTheme() {
+      deepLibLogger.info("Reloading theme");
+      const themeType = getModule("ColorsModule").settings.themeSettings.themeType;
+      document.body.dataset.tmdThemeType = themeType;
       _Color.composeRoot();
       BcStyle.reloadAll();
       changeModColors();
@@ -4107,65 +5999,65 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(_ColorsModule, "ColorsModule");
   var ColorsModule = _ColorsModule;
 
-  // src/Modules/Commands.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/modules/commands.ts
   var _CommandsModule = class _CommandsModule extends BaseModule {
-    Load() {
+    load() {
       CommandCombine([
         {
           Tag: "share-theme",
           Description: "[member number]: Shares your theme with other people that have Themed installed!",
           Action(args) {
-            if (!args) return getModule("ShareModule").share(null);
+            if (!args) return getModule("ShareModule").share(void 0);
             const targetNumber = parseInt(args, 10);
             const target = ChatRoomCharacter.find((c) => c.MemberNumber == targetNumber);
             if (!target)
-              sendLocalSmart("theme-share-error", `No character with MemberNumber ${targetNumber} found!`);
+              sendLocalMessage("theme-share-error", `No character with MemberNumber ${targetNumber} found!`);
             else
               getModule("ShareModule").share(target.MemberNumber);
           }
         }
       ]);
     }
-    Run() {
+    run() {
     }
   };
   __name(_CommandsModule, "CommandsModule");
   var CommandsModule = _CommandsModule;
 
-  // src/Modules/Global.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Screens/Global.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiGlobal = class _GuiGlobal extends GuiSubscreen {
-    get name() {
-      return "Global";
-    }
-    get icon() {
-      return "Icons/Preference.png";
-    }
+  // src/screens/global.ts
+  var _GuiGlobal = class _GuiGlobal extends BaseSubscreen {
     get settings() {
       return super.settings;
     }
-    get structure() {
+    get pageStructure() {
       const defaultSettings = getModule("GlobalModule").defaultSettings;
-      return Object.entries(this.settings).map(([key, value]) => ({
-        type: "checkbox",
-        label: `settings.setting.${key}.name`,
-        description: `settings.setting.${key}.desc`,
-        setting: /* @__PURE__ */ __name(() => value ?? defaultSettings[key], "setting"),
-        setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
-      }));
+      return [Object.entries(this.settings).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: `tmd-global-${key}`,
+          type: "checkbox",
+          label: getText(`settings.setting.${typedKey}.name`),
+          description: getText(`settings.setting.${typedKey}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name((val) => {
+            this.settings[typedKey] = val;
+            ColorsModule.reloadTheme();
+          }, "setSettingValue")
+        };
+      })];
     }
-    Load() {
-      super.Load();
+    load() {
+      super.load();
     }
   };
   __name(_GuiGlobal, "GuiGlobal");
+  __publicField(_GuiGlobal, "subscreenOptions", {
+    name: "global",
+    icon: `${"https://ddeeplb.github.io/Themed-BC/public"}/images/cog.svg`
+  });
   var GuiGlobal = _GuiGlobal;
 
-  // src/Modules/Global.ts
+  // src/modules/global.ts
   var _GlobalModule = class _GlobalModule extends BaseModule {
     get settingsScreen() {
       return GuiGlobal;
@@ -4178,7 +6070,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     get defaultSettings() {
       return {
-        themedEnabled: true,
+        modEnabled: true,
         doVanillaGuiOverhaul: true,
         doUseAdvancedColoring: false,
         doUseFlatColor: false,
@@ -4187,31 +6079,36 @@ One of mods you are using is using an old version of SDK. It will work for now b
         doShowNewVersionMessage: true
       };
     }
-    Load() {
-      changeModColors();
-      setTimeout(changeModColors, 6e4);
-      setTimeout(changeModColors, 3e5);
-      hookFunction(
+    load() {
+      ColorsModule.reloadTheme();
+      const reload = /* @__PURE__ */ __name(() => {
+        changeModColors();
+        BcStyle.reloadAll();
+      }, "reload");
+      setTimeout(reload, 6e4);
+      setTimeout(reload, 3e5);
+      sdk.hookFunction(
         "ChatRoomCurrentTime",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
           if (!this.settings.doShowLocaleTime) return next(args);
           const currentTime = new Date(Date.now());
           return currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
-      hookFunction(
+      sdk.hookFunction(
         "DialogDraw",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
-          if (!this.settings.themedEnabled) return next(args);
+          if (!this.settings.modEnabled) return next(args);
           if (!this.settings.doIndicateCharacterAbsence) return next(args);
           if (!(CurrentScreen == "ChatRoom")) return next(args);
           if (!CurrentCharacter) return next(args);
           next(args);
-          if (CurrentCharacter === null) return;
+          if (!CurrentCharacter || !CurrentCharacter?.MemberNumber) return;
           if (CurrentCharacter.IsPlayer()) return;
+          if (!CurrentCharacter?.Canvas?.getContext("2d") || !CurrentCharacter?.CanvasBlink?.getContext("2d")) return;
           if (ChatRoomCharacter.includes(CurrentCharacter)) {
             if (_GlobalModule.transparentCharacters.includes(CurrentCharacter.MemberNumber)) {
               CurrentCharacter.Canvas.getContext("2d").globalAlpha = 1;
@@ -4236,19 +6133,20 @@ One of mods you are using is using an old version of SDK. It will work for now b
             DrawImageEx("Icons/Warning.svg", MainCanvas, 500 + 125, 125, { Width: 250, Height: 250, HexColor: "#ff0000", FullAlpha: true });
           }
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
-      hookFunction(
+      sdk.hookFunction(
         "AppearanceRun",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
-          if (!this.settings.themedEnabled) return next(args);
+          if (!this.settings.modEnabled) return next(args);
           if (!this.settings.doIndicateCharacterAbsence) return next(args);
           if (!(CurrentScreen == "Appearance")) return next(args);
-          if (!CharacterAppearanceSelection) return next(args);
+          if (!CharacterAppearanceSelection || !CharacterAppearanceSelection.MemberNumber) return next(args);
           next(args);
           if (CharacterAppearanceSelection === null) return;
           if (CharacterAppearanceSelection.IsPlayer()) return;
+          if (!CharacterAppearanceSelection?.Canvas?.getContext("2d") || !CharacterAppearanceSelection?.CanvasBlink?.getContext("2d")) return;
           if (ChatRoomCharacter.includes(CharacterAppearanceSelection)) {
             if (_GlobalModule.transparentCharacters.includes(CharacterAppearanceSelection.MemberNumber)) {
               CharacterAppearanceSelection.Canvas.getContext("2d").globalAlpha = 1;
@@ -4273,58 +6171,59 @@ One of mods you are using is using an old version of SDK. It will work for now b
             DrawImageEx("Icons/Warning.svg", MainCanvas, 660 + 125, 125, { Width: 250, Height: 250, HexColor: "#ff0000" });
           }
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
-      hookFunction(
+      sdk.hookFunction(
         "ChatRoomSync",
-        0 /* Observe */,
+        HookPriority.Observe,
         (args, next) => {
-          Character.filter((character) => _GlobalModule.transparentCharacters?.includes(character.MemberNumber));
+          Character.filter((character) => character.IsPlayer() || !_GlobalModule.transparentCharacters?.includes(character.MemberNumber));
           return next(args);
         },
-        0 /* Global */
+        ModuleCategory.Global
       );
     }
-    Run() {
+    run() {
     }
   };
   __name(_GlobalModule, "GlobalModule");
   __publicField(_GlobalModule, "transparentCharacters", []);
   var GlobalModule = _GlobalModule;
 
-  // src/Modules/Integration.ts
-  init_define_LAST_COMMIT_HASH();
-
-  // src/Screens/Integration.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiIntegration = class _GuiIntegration extends GuiSubscreen {
-    get name() {
-      return "Integration";
-    }
-    get icon() {
-      return "Icons/Scripts.png";
-    }
+  // src/screens/integration.ts
+  var _GuiIntegration = class _GuiIntegration extends BaseSubscreen {
     get settings() {
       return super.settings;
     }
-    get structure() {
+    get pageStructure() {
       const defaultSettings = getModule("IntegrationModule").defaultSettings;
-      return Object.entries(this.settings).map(([key, value]) => ({
-        type: "checkbox",
-        label: `integration.setting.${key}.name`,
-        description: `integration.setting.${key}.desc`,
-        setting: /* @__PURE__ */ __name(() => value ?? defaultSettings[key], "setting"),
-        setSetting: /* @__PURE__ */ __name((val) => this.settings[key] = val, "setSetting")
-      }));
+      return [Object.entries(this.settings).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: `tmd-integration-${key}`,
+          type: "checkbox",
+          label: getText(`integration.setting.${key}.name`),
+          description: getText(`integration.setting.${key}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name((val) => {
+            this.settings[typedKey] = val;
+            ColorsModule.reloadTheme();
+          }, "setSettingValue")
+        };
+      })];
     }
-    Load() {
-      super.Load();
+    load() {
+      super.load();
     }
   };
   __name(_GuiIntegration, "GuiIntegration");
+  __publicField(_GuiIntegration, "subscreenOptions", {
+    name: "integration",
+    icon: `${"https://ddeeplb.github.io/Themed-BC/public"}/images/stars.svg`
+  });
   var GuiIntegration = _GuiIntegration;
 
-  // src/Modules/Integration.ts
+  // src/modules/integration.ts
   var _IntegrationModule = class _IntegrationModule extends BaseModule {
     get settingsScreen() {
       return GuiIntegration;
@@ -4350,453 +6249,532 @@ One of mods you are using is using an old version of SDK. It will work for now b
         MBS: true
       };
     }
-    Load() {
-      hookFunction(
-        "ChatRoomSync",
-        0 /* Observe */,
-        (args, next) => {
-          next(args);
-          BcStyle.reloadAll();
-        },
-        2 /* Integration */
-      );
+    load() {
     }
   };
   __name(_IntegrationModule, "IntegrationModule");
   var IntegrationModule = _IntegrationModule;
 
-  // src/Modules/Profiles.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/utilities/console.ts
+  var STYLES = {
+    INFO: "color: #32CCCC",
+    LOG: "color: #CCCC32",
+    DEBUG: "color: #9E4BCF"
+  };
+  var cmdPrefix = "Themed";
+  function conWarn(...args) {
+    if (typeof args[0] === "string") console.warn(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
+    else console.warn(`%c${cmdPrefix}: `, STYLES.LOG, ...args);
+  }
+  __name(conWarn, "conWarn");
 
-  // src/Screens/Profiles.ts
-  init_define_LAST_COMMIT_HASH();
-  var _GuiProfiles = class _GuiProfiles extends GuiSubscreen {
-    constructor() {
-      super(...arguments);
-      __publicField(this, "PreferenceText", "");
-      __publicField(this, "ProfileNames", ["", "", ""]);
-      __publicField(this, "tmpGlbl", GuiSubscreen.START_X);
-    }
-    get name() {
-      return "Profiles";
-    }
-    get icon() {
-      return "Icons/Title.png";
-    }
+  // src/screens/profiles.ts
+  var _GuiProfiles = class _GuiProfiles extends BaseSubscreen {
     get settings() {
       return super.settings;
     }
-    Load() {
-      super.Load();
+    load() {
+      super.load();
+      const profilesContainer = ElementCreate({
+        tag: "div",
+        classList: ["tmd-profiles-container"],
+        attributes: {
+          id: "tmd-profiles-container"
+        },
+        parent: layout.getSubscreen()
+      });
       for (let i = 0; i < 3; i++) {
-        const profileIndex = i + 1;
-        this.ProfileNames[i] = PlayerStorage()?.ProfilesModule?.[profileIndex]?.name ?? "";
+        const profileId = i + 1;
+        const profileName = this.settings[profileId].name || getText("profiles.text.profile") + ` ${profileId}`;
+        const profileElement = ElementCreate({
+          tag: "div",
+          attributes: {
+            id: `tmd-profile-${profileId}`
+          },
+          classList: ["tmd-profile"],
+          children: [
+            advElement.createLabel({
+              id: `tmd-profile-label-${profileId}`,
+              label: profileName
+            }),
+            this.createColorShowcase(profileId),
+            {
+              tag: "div",
+              classList: ["tmd-profile-buttons"],
+              children: [
+                advElement.createButton({
+                  id: `tmd-profiles-profile-save-${profileId}`,
+                  onClick: /* @__PURE__ */ __name(() => this.handleProfilesSaving(profileId), "onClick"),
+                  options: {
+                    label: getText("profiles.button.save")
+                  }
+                }),
+                advElement.createButton({
+                  id: `tmd-profiles-profile-load-${profileId}`,
+                  onClick: /* @__PURE__ */ __name(() => this.handleProfilesLoading(profileId), "onClick"),
+                  options: {
+                    label: getText("profiles.button.load"),
+                    disabled: !this.profileExists(profileId)
+                  }
+                }),
+                advElement.createButton({
+                  id: `tmd-profiles-profile-delete-${profileId}`,
+                  onClick: /* @__PURE__ */ __name(() => this.handleProfilesDeleting(profileId), "onClick"),
+                  options: {
+                    label: getText("profiles.button.delete"),
+                    disabled: !this.profileExists(profileId)
+                  }
+                })
+              ]
+            }
+          ]
+        });
+        profilesContainer.appendChild(profileElement);
       }
       CharacterAppearanceForceUpCharacter = Player.MemberNumber ?? -1;
     }
-    Run() {
-      MainCanvas.save();
-      super.Run();
-      MainCanvas.textAlign = "left";
-      for (let i = 0; i < 3; i++) {
-        const profileIndex = i + 1;
-        if (this.ProfileNames[i] === "")
-          DrawText(getText("profiles.text.profile") + ` ${profileIndex}`, this.getXPos(profileIndex), this.getYPos(profileIndex), "Black", "Gray");
-        if (this.ProfileNames[i] !== "")
-          DrawText(this.ProfileNames[i], this.getXPos(profileIndex), this.getYPos(profileIndex), "Black", "Gray");
-        this.drawButton("profiles.button.save", "white", profileIndex, 250);
-        this.drawButton("profiles.button.load", "white", profileIndex, 500);
-        this.drawButton("profiles.button.delete", "IndianRed", profileIndex, 750);
-      }
-      if (this.PreferenceText)
-        DrawText(this.PreferenceText, GuiSubscreen.START_X + 250, GuiSubscreen.START_Y - GuiSubscreen.Y_MOD, "Black", "Gray");
-      MainCanvas.restore();
+    resize(onLoad) {
+      super.resize(onLoad);
     }
-    Click() {
-      super.Click();
-      for (let i = 0; i < 3; i++) {
-        const profileIndex = i + 1;
-        this.handleProfilesSaving(profileIndex);
-        this.handleProfilesLoading(profileIndex);
-        this.handleProfilesDeleting(profileIndex);
+    async handleProfilesSaving(profileId) {
+      if (!this.profileCanBeSaved(profileId)) return;
+      const name = await Modal.prompt(getText("profiles.prompt"));
+      if (name === null) return;
+      const storage = modStorage.playerStorage;
+      const profile = this.settings[profileId];
+      if (!profile || Object.keys(profile).length === 0) {
+        this.settings[profileId] = {};
       }
-    }
-    Exit() {
-      CharacterAppearanceForceUpCharacter = -1;
-      CharacterLoadCanvas(Player);
-      this.PreferenceText = "";
-      super.Exit();
-    }
-    saveProfile(profileId, profileName) {
-      if (profileId < 1 || profileId > 3) {
-        conWarn(`Invalid profile id ${profileId}`);
-        return false;
-      }
-      if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-        Player[ModName].ProfilesModule[profileId] = {};
-      }
-      const saveData = {
-        GlobalModule: PlayerStorage().GlobalModule,
-        ColorsModule: PlayerStorage().ColorsModule,
-        IntegrationModule: PlayerStorage().IntegrationModule
-      };
-      Player[ModName].ProfilesModule[profileId] = {
-        name: profileName,
-        data: saveData
-      };
-      return true;
-    }
-    loadProfile(profileId) {
-      if (profileId < 1 || profileId > 3) {
-        conWarn(`Invalid profile id ${profileId}`);
-        return false;
-      }
-      if (Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length < 1) {
-        return false;
-      }
-      const data = PlayerStorage().ProfilesModule[profileId].data;
-      if (Object.keys(data).length < 1) {
-        return false;
-      }
-      if (data) {
-        Player[ModName].GlobalModule = data.GlobalModule;
-        Player[ModName].ColorsModule = data.ColorsModule;
-        Player[ModName].IntegrationModule = data.IntegrationModule;
-      }
-      return true;
-    }
-    deleteProfile(profileId) {
-      if (profileId < 1 || profileId > 3) {
-        conWarn(`Invalid profile id ${profileId}`);
-        return false;
-      }
-      if (!Object.keys(PlayerStorage()?.ProfilesModule?.[profileId]).length) {
-        return false;
-      }
-      Player[ModName].ProfilesModule[profileId] = {};
-      return true;
-    }
-    handleProfilesSaving(profileIndex) {
-      const formerIndex = profileIndex - 1;
-      if (MouseIn(this.getXPos(profileIndex) + 250, this.getYPos(profileIndex) - 32, 200, 64)) {
-        const promptedName = prompt(getText("profiles.prompt"));
-        if (promptedName === null) return;
-        this.ProfileNames[formerIndex] = promptedName;
-        if (this.ProfileNames[formerIndex] === "") {
-          this.saveProfile(profileIndex, "");
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_saved")}`;
+      this.settings[profileId] = CommonCloneDeep({
+        name,
+        data: {
+          GlobalModule: storage.GlobalModule,
+          ColorsModule: storage.ColorsModule,
+          IntegrationModule: storage.IntegrationModule
         }
-        if (this.ProfileNames[formerIndex] !== "") {
-          this.saveProfile(profileIndex, this.ProfileNames[formerIndex]);
-          this.PreferenceText = `${getText("profiles.text.profile")} "${this.ProfileNames[formerIndex]}" ${getText(
-            "profiles.text.has_been_saved"
-          )}`;
-        }
+      });
+      const display = name ? `"${name}"` : profileId;
+      ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_saved")}`);
+      this.updateProfileLabel(profileId);
+      this.updateProfileButtons(profileId);
+      this.updateProfileColorShowcase(profileId);
+    }
+    handleProfilesLoading(profileId) {
+      if (!this.profileExists(profileId)) {
+        ToastManager.error(`${getText("profiles.text.profile")} ${profileId} ${getText("profiles.text.doesnt_exist")}`);
         return;
       }
+      const data = this.settings[profileId].data;
+      modStorage.playerStorage = CommonCloneDeep({
+        ...modStorage.playerStorage,
+        GlobalModule: data.GlobalModule,
+        ColorsModule: data.ColorsModule,
+        IntegrationModule: data.IntegrationModule
+      });
+      const name = this.settings[profileId].name;
+      const display = name ? `"${name}"` : profileId;
+      ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_loaded")}`);
+      ColorsModule.reloadTheme();
     }
-    handleProfilesLoading(profileIndex) {
-      const formerIndex = profileIndex - 1;
-      if (MouseIn(this.getXPos(profileIndex) + 500, this.getYPos(profileIndex) - 32, 200, 64)) {
-        if (!this.loadProfile(profileIndex)) {
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.needs_to_be_saved")}`;
-          return;
-        }
-        if (this.ProfileNames[formerIndex] === "")
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_loaded")}`;
-        if (this.ProfileNames[formerIndex] !== "")
-          this.PreferenceText = `${getText("profiles.text.profile")} "${this.ProfileNames[formerIndex]}" ${getText(
-            "profiles.text.has_been_loaded"
-          )}`;
-        getModule("ColorsModule").reloadTheme();
+    handleProfilesDeleting(profileId) {
+      if (!this.profileExists(profileId)) {
+        ToastManager.info(`${getText("profiles.text.profile")} ${profileId} ${getText("profiles.text.doesnt_exist")}`);
         return;
       }
+      const name = this.settings[profileId].name;
+      this.settings[profileId] = {
+        name: "",
+        data: {}
+      };
+      const display = name ? `"${name}"` : profileId;
+      ToastManager.success(`${getText("profiles.text.profile")} ${display} ${getText("profiles.text.has_been_deleted")}`);
+      this.updateProfileLabel(profileId);
+      this.updateProfileButtons(profileId);
+      this.updateProfileColorShowcase(profileId);
     }
-    handleProfilesDeleting(profileIndex) {
-      const formerIndex = profileIndex - 1;
-      if (MouseIn(this.getXPos(profileIndex) + 750, this.getYPos(profileIndex) - 32, 200, 64)) {
-        if (!this.ProfileNames[formerIndex]) return;
-        if (this.deleteProfile(profileIndex)) {
-          if (this.ProfileNames[formerIndex] === "") {
-            this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.has_been_deleted")}`;
+    updateProfileButtons(profileId) {
+      const profileSaveButton = ElementWrap(`tmd-profiles-profile-save-${profileId}`);
+      const profileLoadButton = ElementWrap(`tmd-profiles-profile-load-${profileId}`);
+      const profileDeleteButton = ElementWrap(`tmd-profiles-profile-delete-${profileId}`);
+      if (!profileSaveButton || !profileLoadButton || !profileDeleteButton) return;
+      profileSaveButton.disabled = !this.profileCanBeSaved(profileId);
+      profileLoadButton.disabled = !this.profileExists(profileId);
+      profileDeleteButton.disabled = !this.profileExists(profileId);
+    }
+    updateProfileLabel(profileId) {
+      const name = this.settings[profileId].name;
+      const display = name ? name : `${getText("profiles.text.profile")} ${profileId}`;
+      const profileLabel = ElementWrap(`tmd-profile-label-${profileId}`);
+      if (!profileLabel) return;
+      profileLabel.textContent = display;
+    }
+    updateProfileColorShowcase(profileId) {
+      ElementWrap(`tmd-profile-color-showcase-${profileId}`)?.remove();
+      const colorShowcase = this.createColorShowcase(profileId);
+      if (colorShowcase) {
+        ElementWrap(`tmd-profile-label-${profileId}`)?.after(colorShowcase);
+      }
+    }
+    createColorShowcase(profileId) {
+      const exists = this.profileExists(profileId);
+      if (!exists) return null;
+      const profile = this.settings[profileId];
+      const colors = Object.entries(profile.data.ColorsModule.base);
+      return ElementCreate({
+        tag: "div",
+        classList: ["tmd-profile-color-showcase"],
+        attributes: {
+          id: `tmd-profile-color-showcase-${profileId}`
+        },
+        children: colors.map(([key, value]) => {
+          const isBaseMode = !profile.data.GlobalModule.doUseAdvancedColoring;
+          const baseModeKey = /* @__PURE__ */ __name((key2) => ["main", "accent", "text"].includes(key2), "baseModeKey");
+          if (isBaseMode && !baseModeKey(key)) {
             return;
           }
-          if (this.ProfileNames[formerIndex] !== "") {
-            this.PreferenceText = `${getText("profiles.text.profile")} "${this.ProfileNames[formerIndex]}" ${getText(
-              "profiles.text.has_been_deleted"
-            )}`;
-            this.ProfileNames[formerIndex] = "";
-            return;
-          }
-        }
-        if (!this.deleteProfile(profileIndex)) {
-          this.PreferenceText = `${getText("profiles.text.profile")} ${profileIndex} ${getText("profiles.text.not_saved_or_already_deleted")}`;
-          return;
-        }
-        return;
+          return advElement.createButton({
+            id: `tmd-profile-color-showcase-${profileId}-${key}`,
+            htmlOptions: {
+              button: {
+                style: {
+                  "--background-color": value
+                },
+                classList: ["tmd-profile-color-showcase-button"]
+              }
+            },
+            options: {
+              noStyling: true,
+              tooltip: getText(`colors.setting.${key}.name`)
+            }
+          });
+        })
+      });
+    }
+    isValidProfileId(id) {
+      if (id < 1 || id > 3) {
+        conWarn(`Invalid profile id ${id}`);
+        return false;
       }
+      return true;
+    }
+    profileCanBeSaved(profileId) {
+      if (!this.isValidProfileId(profileId)) return false;
+      return true;
+    }
+    profileExists(profileId) {
+      if (!this.isValidProfileId(profileId)) return false;
+      const data = this.settings[profileId]?.data || {};
+      if (!data || Object.keys(data).length === 0) return false;
+      return true;
     }
   };
   __name(_GuiProfiles, "GuiProfiles");
+  __publicField(_GuiProfiles, "subscreenOptions", {
+    name: "profiles",
+    icon: `${"https://ddeeplb.github.io/Themed-BC/public"}/images/users_group.svg`,
+    drawCharacter: false
+  });
   var GuiProfiles = _GuiProfiles;
 
-  // src/Modules/Profiles.ts
+  // src/modules/profiles.ts
   var _ProfilesModule = class _ProfilesModule extends BaseModule {
     get settings() {
       return super.settings;
+    }
+    set settings(val) {
+      super.settings = val;
     }
     get settingsScreen() {
       return GuiProfiles;
     }
     get defaultSettings() {
-      return {};
-    }
-    Load() {
       const profileDefaults = {
         GlobalModule: getModule("GlobalModule").defaultSettings,
         ColorsModule: getModule("ColorsModule").defaultSettings,
         IntegrationModule: getModule("IntegrationModule").defaultSettings
       };
+      const data = modStorage.playerStorage?.ProfilesModule || {};
       for (let i = 0; i < 3; i++) {
         const profileIndex = i + 1;
-        if (!PlayerStorage()?.ProfilesModule?.[profileIndex] || Object.keys(PlayerStorage()?.ProfilesModule?.[profileIndex]).length === 0) {
-          Player[ModName].ProfilesModule[profileIndex] = {
+        if (!data[profileIndex] || Object.keys(data[profileIndex]).length === 0) {
+          data[profileIndex] = {
             data: {},
             name: ""
           };
         }
-        if (Object.keys(Player[ModName].ProfilesModule[profileIndex].data).length > 0) Player[ModName].ProfilesModule[profileIndex].data = deepMergeMatchingProperties(profileDefaults, Player[ModName].ProfilesModule[profileIndex].data);
+        if (Object.keys(data[profileIndex].data).length > 0)
+          data[profileIndex].data = deepMergeMatchingProperties(profileDefaults, data[profileIndex].data);
       }
+      return data;
+    }
+    load() {
     }
   };
   __name(_ProfilesModule, "ProfilesModule");
   var ProfilesModule = _ProfilesModule;
 
-  // src/Modules/Share.ts
-  init_define_LAST_COMMIT_HASH();
+  // src/modules/share.ts
   var _ShareModule = class _ShareModule extends BaseModule {
-    Load() {
-      hookFunction("ChatRoomMessageProcessHidden", 0 /* Observe */, (args, next) => {
-        const data = args[0];
-        if (data.Content !== "ThemedTheme") return next(args);
-        const sender = ChatRoomCharacter.find((c) => c.MemberNumber == data.Sender);
+    constructor() {
+      super(...arguments);
+      __publicField(this, "channel", null);
+    }
+    load() {
+      this.channel = new EventChannel("share");
+      this.channel.registerListener("ThemedTheme", (data, sender) => {
+        const theme = data.Theme;
+        const version = data.ThemeVersion;
+        const settings = data.Settings;
         const senderName = CharacterNickname(sender);
-        const prompt2 = getText("modal.prompt.share").replace("$Sender", `${senderName} (${data.Sender})`).replace("$SenderPronoun", CharacterPronoun(sender, "Possessive", false));
-        const message = document.createElement("div");
-        message.id = sender.MemberNumber.toString();
-        message.setAttribute("class", "themed-chat-modal");
-        message.setAttribute("data-time", ChatRoomCurrentTime());
-        message.setAttribute("data-sender", sender.MemberNumber + "");
-        const text = document.createElement("div");
-        const button = document.createElement("div");
-        text.innerHTML = getText("modal.prompt.chat_share_notification").replace("$Sender", `${senderName} (${data.Sender})`);
-        button.innerHTML = getText("modal.button.show");
-        text.classList.add("modal-prompt");
-        button.classList.add("modal-button");
-        const messageData = data.Dictionary[0]["ThemedMessage"];
-        const theme = messageData.Theme;
-        const version = messageData.ThemeVersion;
-        const settings = Player.Themed.GlobalModule;
-        button.addEventListener("click", () => {
-          if (!version || version !== Player.Themed.Version) {
-            sendLocalSmart("theme-not-up-to-date", "Theme sent by " + senderName + " is not up-to-date!");
-            return;
-          }
-          useLgcModal(
-            prompt2,
-            () => {
-              this.acceptShare(theme, settings);
+        const prompt = getText("modal.prompt.share").replace("$Sender", `${senderName} (${sender.MemberNumber})`).replace("$SenderPronoun", CharacterPronoun(sender, "Possessive", false)).split("<br>").map((str) => ({
+          tag: "span",
+          children: [str]
+        }));
+        const shareNotification = getText("modal.prompt.chat_share_notification").replace("$Sender", `${senderName} (${sender.MemberNumber})`);
+        const message = ElementCreate({
+          tag: "div",
+          classList: ["themed-chat-modal"],
+          attributes: {
+            "data-time": ChatRoomCurrentTime(),
+            "data-sender": sender.MemberNumber?.toString(),
+            id: sender.MemberNumber?.toString()
+          },
+          children: [
+            {
+              tag: "span",
+              classList: ["modal-prompt"],
+              children: [
+                shareNotification
+              ]
             },
-            () => {
-            }
-          );
+            advElement.createButton({
+              id: ElementGenerateID(),
+              htmlOptions: {
+                button: {
+                  classList: ["modal-button"]
+                }
+              },
+              options: {
+                label: getText("modal.button.show")
+              },
+              onClick: /* @__PURE__ */ __name(() => {
+                if (!version || version !== Player.Themed.Version) {
+                  sendLocalMessage("theme-not-up-to-date", `Theme sent by ${senderName} is not up-to-date!`);
+                  return;
+                }
+                Modal.confirm(prompt).then((result) => {
+                  if (result) {
+                    this.acceptShare(theme, settings);
+                  }
+                });
+              }, "onClick")
+            })
+          ]
         });
-        message.append(text, button);
         ChatRoomAppendChat(message);
-        ElementScrollToEnd("TextAreaChatLog");
       });
     }
     acceptShare(data, settings) {
       Player.Themed.ColorsModule = data;
       Player.Themed.GlobalModule.doUseAdvancedColoring = settings.doUseAdvancedColoring;
-      settingsSave();
-      getModule("ColorsModule").reloadTheme();
+      modStorage.save();
+      ColorsModule.reloadTheme();
     }
     share(target) {
-      sendLocalSmart("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
-      sendAction(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`, target);
-      const packet = {
-        Type: "Hidden",
-        Content: "ThemedTheme",
-        Sender: Player.MemberNumber,
-        ...target ? { Target: target } : {},
-        Dictionary: [{
-          ThemedMessage: {
-            ThemeVersion: Player.Themed.Version,
-            Theme: Player.Themed.ColorsModule,
-            Settings: Player.Themed.GlobalModule
-          }
-        }]
-      };
-      ServerSend("ChatRoomChat", packet);
+      sendLocalMessage("theme-share", "Shared theme with " + (target ? CharacterNickname(ChatRoomCharacter.find((c) => c.MemberNumber == target)) : "everyone"));
+      sendActionMessage(`${CharacterNickname(Player)} shares ${CharacterPronoun(Player, "Possessive", false)} Themed theme!`, target);
+      this.channel?.sendEvent("ThemedTheme", {
+        Theme: Player.Themed.ColorsModule,
+        Settings: Player.Themed.GlobalModule,
+        ThemeVersion: Player.Themed.Version
+      });
     }
   };
   __name(_ShareModule, "ShareModule");
   var ShareModule = _ShareModule;
 
-  // src/Modules/Version.ts
-  init_define_LAST_COMMIT_HASH();
-  var _VersionModule = class _VersionModule extends BaseModule {
-    Load() {
-      hookFunction(
-        "ChatRoomSync",
-        0 /* Observe */,
-        (args, next) => {
-          next(args);
-          _VersionModule.sendNewVersionMessage();
-        },
-        4 /* Version */
-      );
+  // src/migrators/deeplib_migrator.ts
+  var _DeeplibMigrator = class _DeeplibMigrator extends BaseMigrator2 {
+    get migrationVersion() {
+      return "1.6.0";
     }
-    static isNewVersion(current, candidate) {
-      if (current !== void 0) {
-        const CURRENT_ = current.split("."), CANDIDATE_ = candidate.split(".");
-        for (let i = 0; i < 3; i++) {
-          if (CURRENT_[i] === CANDIDATE_[i]) {
-            continue;
-          }
-          return CANDIDATE_[i] > CURRENT_[i];
-        }
-      }
-      if (current === void 0 || current === "" || !current) {
-        return true;
-      }
-      return false;
-    }
-    static async sendNewVersionMessage() {
-      if (PlayerStorage().GlobalModule.doShowNewVersionMessage && _VersionModule.isItNewVersion) {
-        const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/public"}/html/Changelog.html`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
-        sendLocalSmart("ThemedNewVersion", changelog);
-      }
-    }
-    static saveVersion() {
-      if (PlayerStorage()) {
-        Player[ModName].Version = "1.5.6";
-      }
-    }
-    static loadVersion() {
-      if (PlayerStorage()?.Version) {
-        return PlayerStorage().Version;
-      }
-      return;
-    }
-    static checkNewVersion() {
-      const LoadedVersion = _VersionModule.loadVersion();
-      if (_VersionModule.isNewVersion(LoadedVersion, "1.5.6")) {
-        _VersionModule.isItNewVersion = true;
-      }
-    }
-    static checkVersionMigration() {
-      const PreviousVersion = _VersionModule.loadVersion();
-      for (const migrator of _VersionModule.Migrators) {
-        if (_VersionModule.isNewVersion(PreviousVersion, migrator.MigrationVersion)) {
-          migrator.Migrate();
-          conInfo(`Migrating ${ModName} from ${PreviousVersion} to ${migrator.MigrationVersion} with ${migrator.constructor.name}`);
-        }
-      }
-    }
-    static check() {
-      _VersionModule.checkNewVersion();
-      _VersionModule.checkVersionMigration();
-      _VersionModule.saveVersion();
-      settingsSave();
-    }
-    static registerMigrator(migrator) {
-      _VersionModule.Migrators.push(migrator);
+    migrate() {
+      Player.Themed.GlobalModule.modEnabled = Player.Themed.GlobalModule.themedEnabled;
+      delete Player.Themed.GlobalModule.themedEnabled;
+      ColorsModule.reloadTheme();
     }
   };
-  __name(_VersionModule, "VersionModule");
-  __publicField(_VersionModule, "isItNewVersion", false);
-  __publicField(_VersionModule, "Migrators", []);
-  var VersionModule = _VersionModule;
+  __name(_DeeplibMigrator, "DeeplibMigrator");
+  var DeeplibMigrator = _DeeplibMigrator;
 
-  // src/Themed.ts
-  function initWait() {
-    if (window.ThemedLoaded) return;
-    conLog("Init wait");
-    if (CurrentScreen == null || CurrentScreen === "Login") {
-      const cleanup = loadLoginOptions();
-      hookFunction("LoginResponse", 0, (args, next) => {
-        conDebug("Init! LoginResponse caught: ", args);
-        next(args);
-        const response = args[0];
-        if (response && typeof response.Name === "string" && typeof response.AccountName === "string") {
-          cleanup();
-          init();
-        }
+  // src/screens/reset.ts
+  var _GuiReset = class _GuiReset extends BaseSubscreen {
+    get name() {
+      return "reset";
+    }
+    load() {
+      super.load();
+      let timeToConfirm = 5;
+      ElementCreate({
+        tag: "div",
+        classList: ["tmd-reset-container"],
+        attributes: {
+          id: "tmd-reset-container"
+        },
+        children: [
+          advElement.createLabel({
+            id: "themed-reset-label-perma_reset_of_mod_data",
+            label: getText("reset.label.perma_reset_of_mod_data")
+          }),
+          {
+            tag: "br"
+          },
+          advElement.createLabel({
+            id: "themed-reset-label-warning",
+            label: getText("reset.label.warning")
+          }),
+          advElement.createLabel({
+            id: "themed-reset-label-if_u_confirm_perma_reset",
+            label: getText("reset.label.if_u_confirm_perma_reset")
+          }),
+          {
+            tag: "br"
+          },
+          advElement.createLabel({
+            id: "themed-reset-label-youll_able_to_use_mod",
+            label: getText("reset.label.youll_able_to_use_mod")
+          }),
+          {
+            tag: "br"
+          },
+          advElement.createLabel({
+            id: "themed-reset-label-action_cannot_be_undone",
+            label: getText("reset.label.action_cannot_be_undone")
+          }),
+          {
+            tag: "br"
+          },
+          {
+            tag: "div",
+            attributes: {
+              id: "tmd-reset-buttons-container"
+            },
+            children: [
+              advElement.createButton({
+                id: "tmd-reset-button",
+                onClick: /* @__PURE__ */ __name(() => {
+                  this.confirm();
+                  timer?.();
+                }, "onClick"),
+                options: {
+                  label: `${getText("reset.button.confirm")} (${timeToConfirm})`
+                },
+                disabled: true
+              }),
+              advElement.createButton({
+                id: "tmd-cancel-button",
+                onClick: /* @__PURE__ */ __name(() => {
+                  this.exit();
+                  timer?.();
+                }, "onClick"),
+                options: {
+                  label: getText("reset.button.cancel")
+                }
+              })
+            ]
+          }
+        ],
+        parent: layout.getSubscreen()
       });
-    } else {
-      conLog("Already logged in, init");
-      init();
+      const timer = TimerCreate(() => {
+        timeToConfirm--;
+        const button = ElementWrap("tmd-reset-button");
+        const buttonLabel = button?.querySelector(".button-label");
+        if (buttonLabel) {
+          buttonLabel.textContent = `${getText("reset.button.confirm")} (${timeToConfirm})`;
+        }
+        if (timeToConfirm <= 0) {
+          if (button && buttonLabel) {
+            button.disabled = false;
+            buttonLabel.textContent = getText("reset.button.confirm");
+          }
+          timer();
+        }
+      }, 1e3, true, "universal");
     }
-  }
-  __name(initWait, "initWait");
-  async function init() {
-    await Localization.load();
-    settingsLoad();
-    if (!initModules()) {
-      unload();
-      return;
+    resize(onLoad) {
+      super.resize(onLoad);
+      ElementSetPosition("tmd-reset-container", 500, 175, "top-left");
+      ElementSetSize("tmd-reset-container", 1e3, null);
     }
-    VersionModule.registerMigrator(new V140Migrator());
-    VersionModule.check();
-    for (const m of modules()) {
-      if (m.defaultSettings && hasSetter(m, "defaultSettings"))
-        m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
+    confirm() {
+      settingsReset();
+      for (const module of modules()) {
+        module.registerDefaultSettings();
+      }
+      ColorsModule.reloadTheme();
+      this.setSubscreen(null);
+      PreferenceSubscreenExtensionsClear();
     }
-    _Color.composeRoot();
-    BcStyle.injectAll();
-    window.ThemedLoaded = true;
-    conLog(`Loaded! Version: ${MOD_VERSION_CAPTION}`);
-  }
-  __name(init, "init");
-  function initModules() {
-    registerModule(new GUI());
-    registerModule(new GlobalModule());
-    registerModule(new ColorsModule());
-    registerModule(new GuiRedrawModule());
-    registerModule(new IntegrationModule());
-    registerModule(new ProfilesModule());
-    registerModule(new CommandsModule());
-    registerModule(new ShareModule());
-    registerModule(new VersionModule());
-    for (const m of modules()) {
-      m.Init();
-    }
-    for (const m of modules()) {
-      m.Load();
-    }
-    for (const m of modules()) {
-      m.Run();
-    }
-    conLog("Modules Loaded.");
-    return true;
-  }
-  __name(initModules, "initModules");
-  function unload() {
-    unloadModules();
-    delete window.ThemedLoaded;
-    conLog("Unloaded.");
-    return true;
-  }
-  __name(unload, "unload");
-  function unloadModules() {
-    for (const m of modules()) {
-      m.Unload();
-    }
-  }
-  __name(unloadModules, "unloadModules");
-  initWait();
-  return __toCommonJS(Themed_exports);
+  };
+  __name(_GuiReset, "GuiReset");
+  __publicField(_GuiReset, "subscreenOptions", {
+    drawCharacter: false,
+    name: "reset"
+  });
+  var GuiReset = _GuiReset;
+
+  // src/themed.ts
+  (async () => {
+    const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/public"}/text/changelog.txt`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
+    const modules2 = [
+      new GUI({
+        buttonText: "Themed",
+        identifier: "Themed",
+        image: `${"https://ddeeplb.github.io/Themed-BC/public"}/images/mod.png`
+      }),
+      new GlobalModule(),
+      new ColorsModule(),
+      new GuiRedrawModule(),
+      new IntegrationModule(),
+      new ProfilesModule(),
+      new CommandsModule(),
+      new ShareModule(),
+      new VersionModule({
+        newVersionMessage: changelog
+      })
+    ];
+    const migrators = [
+      new V140Migrator(),
+      new DeeplibMigrator()
+    ];
+    return initMod({
+      beforeLogin: /* @__PURE__ */ __name(() => loadLoginOptions(), "beforeLogin"),
+      modInfo: {
+        info: {
+          name: "Themed",
+          fullName: "Themed",
+          version: MOD_VERSION_CAPTION
+        }
+      },
+      mainMenuOptions: {
+        importExportSubscreen: new GuiImportExport({
+          customFileExtension: ".tmd",
+          onImport() {
+            modStorage.save();
+            ColorsModule.reloadTheme();
+          }
+        }),
+        repoLink: "https://github.com/dDeepLb/Themed-BC",
+        wikiLink: "https://github.com/dDeepLb/Themed-BC/wiki",
+        resetSubscreen: new GuiReset()
+      },
+      modules: modules2,
+      migrators,
+      translationOptions: {
+        pathToTranslationsFolder: `${"https://ddeeplb.github.io/Themed-BC/public"}/translations/`
+      }
+    });
+  })();
 })();
 //# sourceMappingURL=themed.js.map
