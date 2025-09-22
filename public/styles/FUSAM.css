@@ -1,31 +1,21 @@
-#fusam-addon-manager-container {
-  color: var(--tmd-text);
-  background-color: color-mix(in srgb, var(--tmd-main) 80%, rgba(0, 0, 0, 0.8) 100%);
+body[data-tmd-theme-type="dark"] {
+  --fusam-text: var(--tmd-text, #aaa);
+  /* no such thing in themed */
+  --fusam-text-placeholder: var(--tmd-accent, #797979);
+  --fusam-main: var(--tmd-main, #0f0f0ff2);
+  --fusam-inset-element: var(--tmd-main, #222);
+  --fusam-element: var(--tmd-element, #353535);
+  --fusam-border: var(--tmd-accent, #6c6c6c);
+  --icon-filter: invert(1);
 }
 
-.fusam.button,
-.fusam .button {
-  border-color: var(--tmd-accent);
-  background-color: var(--tmd-element);
-  color: var(--tmd-text);
-}
-
-.fusam.button:hover,
-.fusam .button:hover,
-.fusam.button:focus,
-.fusam .button:focus,
-.fusam select:hover,
-.fusam select:focus {
-  background-color: var(--tmd-accent);
-}
-
-.fusam select,
-.fusam option {
-  border-color: var(--tmd-accent);
-  background-color: var(--tmd-element);
-  color: var(--tmd-text);
-}
-
-.fusam select:disabled:hover {
-  background-color: var(--tmd-element-disabled);
+body[data-tmd-theme-type="light"] {
+  --fusam-text: var(--tmd-text, #000000);
+  /* no such thing in themed */
+  --fusam-text-placeholder: var(--tmd-accent, #808080);
+  --fusam-main: var(--tmd-main, #e0e0e0f2);
+  --fusam-inset-element: var(--tmd-main, #e6e6e6);
+  --fusam-element: var(--tmd-element, #ffffff);
+  --fusam-border: var(--tmd-accent, #a0a0a0);
+  --icon-filter: none;
 }
