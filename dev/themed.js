@@ -4878,34 +4878,60 @@ input[type=number] {
       return super.settings;
     }
     get pageStructure() {
+      const settings = this.settings;
       const defaultSettings = getModule("ColorsModule").defaultSettings;
       const isBaseMode = !modStorage.playerStorage.GlobalModule.doUseAdvancedColoring;
       const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
-      return [
-        Object.entries(this.settings.base).map(([key, value]) => {
-          const typedKey = key;
-          return {
-            id: key,
-            type: "color",
-            label: getText(`colors.setting.${key}.name`),
-            description: getText(`colors.setting.${key}.desc`),
-            setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setElementValue"),
-            setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setSettingValue"),
-            disabled: isBaseMode && !baseModeKey(typedKey)
-          };
-        }).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)),
-        Object.entries(this.settings.special).map(([key, value]) => {
-          const typedKey = key;
-          return {
-            id: key,
-            type: "color",
-            label: getText(`colors.setting.${key}.name`),
-            description: getText(`colors.setting.${key}.desc`),
-            setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setElementValue"),
-            setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setSettingValue")
-          };
-        })
-      ];
+      const ret = [[], []];
+      const themeDropdownOptions = ["dark", "light"].map((e) => ({ attributes: { value: e, label: getText("colors.setting.theme-type-" + e), selected: e === this.settings.themeSettings.themeType } }));
+      const themeType = {
+        id: "tmd-theme-type",
+        type: "custom",
+        htmlOptions: {
+          tag: "div",
+          attributes: {
+            id: "tmd-theme-type-container"
+          },
+          children: [
+            {
+              tag: "label",
+              attributes: {
+                for: "tmd-theme-type-dropdown"
+              },
+              children: [getText("colors.setting.theme-type.title")]
+            },
+            ElementCreateDropdown("tmd-theme-type-dropdown", themeDropdownOptions, function() {
+              settings.themeSettings.themeType = this.value;
+              ColorsModule.reloadTheme();
+            })
+          ]
+        }
+      };
+      ret[0].push(themeType);
+      ret[0].push(...Object.entries(this.settings.base).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: key,
+          type: "color",
+          label: getText(`colors.setting.${key}.name`),
+          description: getText(`colors.setting.${key}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.base[typedKey], "setSettingValue"),
+          disabled: isBaseMode && !baseModeKey(typedKey)
+        };
+      }).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)));
+      ret[1].push(...Object.entries(this.settings.special).map(([key, value]) => {
+        const typedKey = key;
+        return {
+          id: key,
+          type: "color",
+          label: getText(`colors.setting.${key}.name`),
+          description: getText(`colors.setting.${key}.desc`),
+          setElementValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setElementValue"),
+          setSettingValue: /* @__PURE__ */ __name(() => value ?? defaultSettings.special[typedKey], "setSettingValue")
+        };
+      }));
+      return ret;
     }
     load() {
       super.load();
@@ -4994,7 +5020,7 @@ input[type=number] {
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"fd976f05"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = true ? `${"1.6.0"} - ${"2be7c9e4"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5452,27 +5478,6 @@ input[type=number] {
             case "accent":
               color = hover ? plainColors.accentHover : plainColors.accent;
               break;
-            case "friendhint":
-              color = plainColors.elementHint;
-              break;
-            case "searchFullBlock":
-              color = color_default(specialColors.blocked[hover]).mix(color_default(specialColors.roomBlocked[hover]), 0.5).hex();
-              break;
-            case "searchBlock":
-              color = specialColors.roomBlocked[hover];
-              break;
-            case "searchFullFriend":
-              color = color_default(specialColors.roomFriend[hover]).mix(color_default(plainColors.elementDisabled), 0.5).hex();
-              break;
-            case "searchFriend":
-              color = specialColors.roomFriend[hover];
-              break;
-            case "searchFull":
-              color = plainColors.elementDisabled;
-              break;
-            case "searchGame":
-              color = specialColors.roomGame[hover];
-              break;
             case "allowed":
             case "equipped":
             case "crafted":
@@ -5719,17 +5724,6 @@ input[type=number] {
     }
     patchGui() {
       if (this.patched) return false;
-      sdk.patchFunction("ChatSearchNormalDraw", {
-        // isBlocked
-        'bgColor = isFull ? "#884444" : "#FF9999";': 'bgColor = isFull ? "%searchFullBlock" : "%searchBlock";',
-        // hasFriends
-        'bgColor = isFull ? "#448855" : "#CFFFCF";': 'bgColor = isFull ? "%searchFullFriend" : "%searchFriend";',
-        // else
-        'bgColor = isFull ? "#666" : "White";': 'bgColor = isFull ? "%searchFull" : "%background";',
-        'blocksText.push({ text: friendsText, color: "#FFFF88"});': 'blocksText.push({ text: friendsText, color: "%friendhint"});',
-        'blocksText.push({ text: blockedText, color: "#FF9999" });': 'blocksText.push({ text: blockedText, color: "%searchBlock" });',
-        'blocksText.push({ text: gameText, color: "#9999FF"});': 'blocksText.push({ text: gameText, color: "%searchGame"});'
-      });
       sdk.patchFunction("ChatSearchPermissionDraw", {
         'bgColor = Hover ? "red" : "pink";': 'bgColor = "%allowed";',
         'bgColor = Hover ? "green" : "lime";': 'bgColor = "%searchBlock";'
@@ -5787,7 +5781,6 @@ input[type=number] {
     }
     unpatchGui() {
       if (!this.patched) return false;
-      sdk.unpatchFunction("ChatSearchNormalDraw");
       sdk.unpatchFunction("ChatSearchPermissionDraw");
       sdk.unpatchFunction("DialogDraw");
       sdk.unpatchFunction("DrawProcessScreenFlash");
@@ -5889,9 +5882,10 @@ input[type=number] {
   var BcStyle = {
     injectAll() {
       const isEnabled = modStorage.playerStorage.GlobalModule.modEnabled;
-      Style.injectEmbed("themed", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/themed.css`);
+      Style.injectEmbed("tmd-style", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/themed.css`);
       if (!isEnabled) return;
-      Style.injectInline("root", composeRoot());
+      Style.injectInline("tmd-root", composeRoot());
+      Style.injectEmbed("tmd-chat-room-search", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/chatroom_search.css`);
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         if (!modStorage.playerStorage.IntegrationModule[id]) return;
@@ -5899,8 +5893,9 @@ input[type=number] {
       });
     },
     ejectAll() {
-      Style.eject("root");
-      Style.eject("themed");
+      Style.eject("tmd-root");
+      Style.eject("tmd-style");
+      Style.eject("tmd-chat-room-search");
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         Style.eject(id);
@@ -5963,6 +5958,9 @@ input[type=number] {
     }
     get defaultSettings() {
       return {
+        themeSettings: {
+          themeType: "dark"
+        },
         base: {
           main: primaryColor.hex(),
           element: elementColor.hex(),
@@ -5990,6 +5988,8 @@ input[type=number] {
     }
     static reloadTheme() {
       deepLibLogger.info("Reloading theme");
+      const themeType = getModule("ColorsModule").settings.themeSettings.themeType;
+      document.body.dataset.tmdThemeType = themeType;
       _Color.composeRoot();
       BcStyle.reloadAll();
       changeModColors();
@@ -6080,6 +6080,7 @@ input[type=number] {
       };
     }
     load() {
+      ColorsModule.reloadTheme();
       const reload = /* @__PURE__ */ __name(() => {
         changeModColors();
         BcStyle.reloadAll();
@@ -6747,12 +6748,7 @@ input[type=number] {
       new V140Migrator(),
       new DeeplibMigrator()
     ];
-    const initFunction = /* @__PURE__ */ __name(() => {
-      _Color.composeRoot();
-      BcStyle.injectAll();
-    }, "initFunction");
     return initMod({
-      initFunction,
       beforeLogin: /* @__PURE__ */ __name(() => loadLoginOptions(), "beforeLogin"),
       modInfo: {
         info: {
