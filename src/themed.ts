@@ -8,9 +8,7 @@ import { GuiRedrawModule } from './modules/gui_redraw';
 import { IntegrationModule } from './modules/integration';
 import { ProfilesModule } from './modules/profiles';
 import { ShareModule } from './modules/share';
-import { _Color } from './utilities/color';
 import { MOD_VERSION_CAPTION } from './utilities/mod_definition';
-import { BcStyle } from './utilities/style';
 import { DeeplibMigrator } from './migrators/deeplib_migrator';
 import { GuiReset } from './screens/reset';
 
@@ -42,13 +40,7 @@ import { GuiReset } from './screens/reset';
     new DeeplibMigrator(),
   ];
 
-  const initFunction = () => {
-    _Color.composeRoot();
-    BcStyle.injectAll();
-  };
-
   return initMod({
-    initFunction,
     beforeLogin: () => loadLoginOptions(),
     modInfo: {
       info: {

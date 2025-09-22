@@ -4,6 +4,7 @@ import { GuiGlobal } from '../screens/global';
 import { changeModColors } from '../utilities/integration';
 import { ModuleCategory } from '../utilities/mod_definition';
 import { BcStyle } from '../utilities/style';
+import { ColorsModule } from './colors';
 
 export class GlobalModule extends BaseModule {
   private static transparentCharacters: number[] = [];
@@ -33,6 +34,8 @@ export class GlobalModule extends BaseModule {
   }
 
   load(): void {
+    ColorsModule.reloadTheme()
+
     const reload = () => {
       changeModColors();
       BcStyle.reloadAll();
