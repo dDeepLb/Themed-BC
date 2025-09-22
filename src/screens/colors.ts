@@ -2,7 +2,7 @@ import { advElement, BaseSubscreen, getModule, getText, modStorage, SubscreenOpt
 import { BaseColorsModel, ColorsSettingsModel, SpecialColorsModel } from '../models/colors';
 import { ColorsModule } from '../modules/colors';
 import { _Color } from '../utilities/color';
-import { Input, SettingElement } from 'bc-deeplib/base/elements_typings';
+import { Custom, Input, SettingElement } from 'bc-deeplib/base/elements_typings';
 
 
 export class GuiColors extends BaseSubscreen {
@@ -18,11 +18,40 @@ export class GuiColors extends BaseSubscreen {
   }
 
   get pageStructure(): SettingElement[][] {
+    const settings = this.settings;
     const defaultSettings = getModule<ColorsModule>('ColorsModule').defaultSettings;
     const isBaseMode = !modStorage.playerStorage.GlobalModule.doUseAdvancedColoring;
     const baseModeKey = (key: keyof BaseColorsModel) => ['main', 'accent', 'text'].includes(key);
 
-    return [Object.entries(this.settings.base).map(([key, value]) => {
+    const ret: SettingElement[][] = [[], []];
+
+    const themeDropdownOptions: Omit<HTMLOptions<"option">, "tag">[] = ['dark', 'light'].map(e => ({ attributes: { value: e, label: getText('colors.setting.theme-type-' + e), selected: e === this.settings.themeSettings.themeType } }))
+    const themeType: Custom = {
+      id: 'tmd-theme-type',
+      type: 'custom',
+      htmlOptions: {
+        tag: 'div',
+        attributes: {
+          id: 'tmd-theme-type-container'
+        },
+        children: [
+          {
+            tag: "label",
+            attributes: {
+              for: 'tmd-theme-type-dropdown'
+            },
+            children: [getText('colors.setting.theme-type.title')]
+          },
+          ElementCreateDropdown('tmd-theme-type-dropdown', themeDropdownOptions, function () {
+            settings.themeSettings.themeType = this.value as 'dark' | 'light';
+            ColorsModule.reloadTheme();
+          })
+        ]
+      }
+    }
+    ret[0].push(themeType)
+
+    ret[0].push(...Object.entries(this.settings.base).map(([key, value]) => {
       const typedKey = key as keyof BaseColorsModel;
 
       return <Input>{
@@ -34,8 +63,10 @@ export class GuiColors extends BaseSubscreen {
         setSettingValue: () => value ?? defaultSettings.base[typedKey],
         disabled: isBaseMode && !baseModeKey(typedKey)
       };
-    }).sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)) as Input[],
-    Object.entries(this.settings.special).map(([key, value]) => {
+    })
+    .sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)) as Input[])
+
+    ret[1].push(...Object.entries(this.settings.special).map(([key, value]) => {
       const typedKey = key as keyof SpecialColorsModel;
 
       return <Input>{
@@ -46,7 +77,9 @@ export class GuiColors extends BaseSubscreen {
         setElementValue: () => value ?? defaultSettings.special[typedKey],
         setSettingValue: () => value ?? defaultSettings.special[typedKey],
       };
-    })];
+    }));
+
+    return ret;
   }
 
   load(): void {

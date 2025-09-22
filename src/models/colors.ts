@@ -1,9 +1,14 @@
 import { BaseSettingsModel as DL_BaseSettingsModel } from 'bc-deeplib/deeplib';
 
 export type ColorsSettingsModel = DL_BaseSettingsModel &  {
+  themeSettings: ThemeSettingsModel
   base: BaseColorsModel;
   special: SpecialColorsModel;
 };
+
+export type ThemeSettingsModel = {
+  themeType: 'dark' | 'light';
+}
 
 export type BaseColorsModel = {
   main: string;

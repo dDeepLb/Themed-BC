@@ -37,6 +37,9 @@ export class ColorsModule extends BaseModule {
 
   get defaultSettings() {
     return <ColorsSettingsModel>{
+      themeSettings: {
+        themeType: 'dark'
+      },
       base: {
         main: primaryColor.hex(),
         element: elementColor.hex(),
@@ -66,6 +69,8 @@ export class ColorsModule extends BaseModule {
 
   static reloadTheme(): void {
     deepLibLogger.info('Reloading theme');
+    const themeType = getModule<ColorsModule>('ColorsModule').settings.themeSettings.themeType;
+    document.body.dataset.tmdThemeType = themeType
     _Color.composeRoot();
     BcStyle.reloadAll();
     changeModColors();
