@@ -122,29 +122,29 @@ export class GuiColors extends BaseSubscreen {
     const settings = getModule<ColorsModule>('ColorsModule').settings;
 
     Object.entries(this.settings.base).forEach(([key]) => {
-      (document.getElementById(key) as HTMLInputElement)?.addEventListener('input', function() {
-        if(!_Color.isValidHex(this.value)) {
+      (document.getElementById(key) as HTMLInputElement)?.addEventListener('input', function () {
+        if (!_Color.isValidHex(this.value)) {
           this.setCustomValidity('Invalid hex color');
         } else {
           this.setCustomValidity('');
           const typedKey = key as keyof BaseColorsModel;
           settings.base[typedKey] = this.value;
         }
-        
+
         ColorsModule.reloadTheme();
       });
     });
 
     Object.entries(this.settings.special).forEach(([key]) => {
-      (document.getElementById(key) as HTMLInputElement)?.addEventListener('input', function() {
-        if(!_Color.isValidHex(this.value)) {
+      (document.getElementById(key) as HTMLInputElement)?.addEventListener('input', function () {
+        if (!_Color.isValidHex(this.value)) {
           this.setCustomValidity('Invalid hex color');
         } else {
           this.setCustomValidity('');
           const typedKey = key as keyof SpecialColorsModel;
           settings.special[typedKey] = this.value;
         }
-        
+
         ColorsModule.reloadTheme();
       });
     });
@@ -158,7 +158,7 @@ export class GuiColors extends BaseSubscreen {
 
       if (!input) return;
 
-      if(!_Color.isValidHex(input.value)) {
+      if (!_Color.isValidHex(input.value)) {
         const typedKey = key as keyof BaseColorsModel;
         settings.base[typedKey] = this.settingsBackup.base[typedKey];
       }
@@ -169,7 +169,7 @@ export class GuiColors extends BaseSubscreen {
 
       if (!input) return;
 
-      if(!_Color.isValidHex(input.value)) {
+      if (!_Color.isValidHex(input.value)) {
         const typedKey = key as keyof SpecialColorsModel;
         settings.special[typedKey] = this.settingsBackup.special[typedKey];
       }
