@@ -4,46 +4,23 @@
   color: var(--tmd-text);
 }
 
-.tts-option {
+.tts-option,
+.tts-select,
+.tts-tab,
+.tts-btn,
+.tts-link {
   background-color: var(--tmd-element);
-  border-color: var(--tmd-accent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   color: var(--tmd-text);
 }
 
-.tts-select {
+.tts-boxed-container,
+.tts-toggle-container {
   background-color: var(--tmd-element);
-  border-color: var(--tmd-accent);
-  color: var(--tmd-text);
-}
-
-.tts-tab {
-  background-color: var(--tmd-element);
-  border-color: var(--tmd-accent);
-  color: var(--tmd-text);
-}
-
-.tts-btn {
-  background-color: var(--tmd-element);
-  border: 1px solid var(--tmd-accent);
-  color: var(--tmd-text);
 }
 
 .tts-tab.active {
   background-color: var(--tmd-accent);
-}
-
-.tts-toggle-container {
-  border-color: var(--tmd-accent);
-}
-
-.tts-boxed-container {
-  border-color: var(--tmd-accent);
-}
-
-.tts-link {
-  border-color: var(--tmd-accent);
-  background-color: var(--tmd-element);
-  color: var(--tmd-text);
 }
 
 .tts-link:hover {
@@ -53,9 +30,13 @@
 
 .mo-modal-content {
   background-color: var(--tmd-main);
-  border: 1px solid var(--tmd-accent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   color: var(--tmd-text);
-  font-size: min(3dvh, 1.5dvw);
+  font-size: min(3vh, 1.5vw);
+}
+
+.tts-refresh-icon {
+  aspect-ratio: 1;
 }
 
 .mo-closer {
@@ -65,30 +46,30 @@
   top: 0px;
   right: 0px;
   background-color: var(--tmd-element);
-  border: 2px solid var(--tmd-accent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   aspect-ratio: 1 / 1;
   display: block;
-  width: min(3dvh, 1.5dvw);
+  width: min(3vh, 1.5vw);
   text-align: center;
 }
 
 .mo-closer+div {
-  margin-right: min(3dvh, 1.5dvw);
-  margin-bottom: min(3dvh, 1.5dvw);
+  margin-right: min(3vh, 1.5vw);
+  margin-bottom: min(3vh, 1.5vw);
 }
 
 label[for^="mo_userInput"] {
   color: var(--tmd-text);
-  font-size: min(3dvh, 1.5dvw);
+  font-size: min(3vh, 1.5vw);
 }
 
 input[id^="mo_userInput"] {
-  font-size: min(3dvh, 1.5dvw);
+  font-size: min(3vh, 1.5vw);
 }
 
 button[id^="mo_submitInput"] {
   background-color: var(--tmd-element);
-  border: 2px solid var(--tmd-accent);
+  border: min(0.2vh, 0.1vw) solid var(--tmd-accent);
   color: var(--tmd-text);
-  font-size: min(3dvh, 1.5dvw);
+  font-size: min(3vh, 1.5vw);
 }

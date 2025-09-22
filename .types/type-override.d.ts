@@ -1,10 +1,10 @@
 interface PlayerCharacter extends Character {
-  Themed: import('../src/Models/Settings').SettingsModel;
+  Themed: import('../src/models/settings').SettingsModel;
   BCT: any;
 }
 
 interface OtherCharacter extends Character {
-  Themed: import('../src/Models/Settings').SettingsModel;
+  Themed: import('../src/models/settings').SettingsModel;
 }
 
 interface ExtensionSettings {
