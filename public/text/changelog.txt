@@ -1,4 +1,9 @@
 1.6.0
+• Added new option in Colors to define type of your theme.
+  > Depending on this, some icons will be changed.
+  > For example, dark theme should have white icons, while light theme should have black icons.
+  > Currently you can see how it works only on Chat Room Search screen.
+• Adapted new chat room search to the themeable.
 • Migrated the mod to new architecture.
 • A lot of changes that are added by new architecture:
   • New UI & feel.
