@@ -5020,7 +5020,7 @@ input[type=number] {
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"d910f4ae"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"fd28d7e7"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
