@@ -2,6 +2,7 @@ import { modStorage, Style } from 'bc-deeplib/deeplib';
 import { IntegrationSettingsModel } from '../models/integration';
 import { plainColors, specialColors } from './color';
 import { camelToKebabCase } from './other';
+import Color from 'color';
 
 type styles = {
   [key in keyof Omit<IntegrationSettingsModel, 'modEnabled' | 'doShowNewVersionMessage' | 'MBS'>]: string;
@@ -66,6 +67,11 @@ export function composeRoot() {
     genedColors += `--tmd-${camelToKebabCase(key)}: ${specialColors[typedKey][0]};\n\t`;
     genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[typedKey][1]};\n\t`;
   });
+
+  genedColors += `--tmd-search-full-blocked: ${Color(specialColors.roomBlocked[0]).mix(Color(plainColors.elementDisabled), 0.5).hex()};\n\t`;
+  genedColors += `--tmd-search-full-blocked-hover: ${Color(specialColors.roomBlocked[1]).mix(Color(plainColors.elementDisabled), 0.5).hex()};\n\t`;
+  genedColors += `--tmd-search-full-friend: ${Color(specialColors.roomFriend[0]).mix(Color(plainColors.elementDisabled), 0.5).hex()};\n\t`;
+  genedColors += `--tmd-search-full-friend-hover: ${Color(specialColors.roomFriend[1]).mix(Color(plainColors.elementDisabled), 0.5).hex()};\n\t`;
 
   return /*css*/ `
     :root {
