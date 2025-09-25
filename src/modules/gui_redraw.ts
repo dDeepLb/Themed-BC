@@ -43,14 +43,6 @@ export class GuiRedrawModule extends BaseModule {
   patchGui() {
     if (this.patched) return false;
 
-    sdk.patchFunction('ChatSearchPermissionDraw', {
-      'bgColor = Hover ? "red" : "pink";':
-        'bgColor = "%allowed";',
-
-      'bgColor = Hover ? "green" : "lime";':
-        'bgColor = "%searchBlock";'
-    });
-
     sdk.patchFunction('DialogDraw', {
       'DrawRect(1087 + offset, 550, 225, 275, bgColor);':
         'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
@@ -143,7 +135,6 @@ export class GuiRedrawModule extends BaseModule {
   unpatchGui() {
     if (!this.patched) return false;
 
-    sdk.unpatchFunction('ChatSearchPermissionDraw');
     sdk.unpatchFunction('DialogDraw');
     sdk.unpatchFunction('DrawProcessScreenFlash');
     sdk.unpatchFunction('ChatAdminRun');
