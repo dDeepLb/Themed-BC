@@ -2,7 +2,7 @@ import { advElement, BaseSubscreen, getText, layout, Modal, modStorage, Subscree
 import { BaseColorsModel } from '../models/colors';
 import { ProfileEntryModel, ProfilesSettingsModel } from '../models/profiles';
 import { ColorsModule } from '../modules/colors';
-import { conWarn } from '../utilities/console';
+import { logger } from '../utilities/console';
 
 export class GuiProfiles extends BaseSubscreen {
 
@@ -236,7 +236,7 @@ export class GuiProfiles extends BaseSubscreen {
 
   private isValidProfileId(id: number): boolean {
     if (id < 1 || id > 3) {
-      conWarn(`Invalid profile id ${id}`);
+      logger.warn(`Invalid profile id ${id}`);
       return false;
     }
 
