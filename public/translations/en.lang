@@ -118,7 +118,7 @@ profiles.text.not_saved_or_already_deleted = is not saved or already deleted!
 # Reset
 reset.label.perma_reset_of_mod_data = - Permanent reset of Themed data -
 reset.label.warning = - Warning -
-reset.label.if_u_confirm_perma_reset = If you confirm, all Themed data () will be permanently reset!
+reset.label.if_u_confirm_perma_reset = If you confirm, all Themed data will be permanently reset!
 reset.label.youll_able_to_use_mod = You will be able to continue using Themed, but all of your configuration will be reset to default!
 reset.label.action_cannot_be_undone = This action cannot be undone!
 
