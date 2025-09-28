@@ -166,14 +166,6 @@ code {
   }
 }
 
-#deeplib-subscreen:has(#tmd-reset-container) {
-
-  #deeplib-subscreen-title,
-  #deeplib-exit {
-    display: none;
-  }
-}
-
 #tmd-reset-container {
   display: flex;
   flex-direction: column;

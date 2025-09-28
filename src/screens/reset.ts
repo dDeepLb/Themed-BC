@@ -9,7 +9,9 @@ export class GuiReset extends BaseSubscreen {
 
   protected static override subscreenOptions: SubscreenOptions = {
     drawCharacter: false,
-    name: 'reset'
+    name: 'reset',
+    doShowExitButton: false,
+    doShowTitle: false
   };
 
   load() {
