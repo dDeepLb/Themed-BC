@@ -5,7 +5,7 @@ var Themed = (() => {
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // node_modules/.pnpm/bc-deeplib@2.0.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  // node_modules/.pnpm/bc-deeplib@2.1.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
   var __create = Object.create;
   var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -391,15 +391,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
      */
     managePageElementsVisibility() {
       this.pageStructure.forEach((item, ix) => {
-        if (ix != _a2.currentPage - 1) {
-          item.forEach((setting) => {
-            domUtil.hide(`${setting.id}-container`);
-          });
-        } else {
-          item.forEach((setting) => {
-            domUtil.unhide(`${setting.id}-container`);
-          });
-        }
+        item.forEach((setting) => {
+          const element = ElementWrap(`${setting.id}-container`) ?? ElementWrap(`${setting.id}`);
+          if (ix != _a2.currentPage - 1) {
+            if (element) domUtil.hide(element);
+          } else {
+            if (element) domUtil.unhide(element);
+          }
+        });
       });
     }
     /**
@@ -460,12 +459,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
         });
         ElementMenu.AppendButton(menu, helpButton);
       }
-      const subscreenTitle = advElement.createLabel({
-        id: "deeplib-subscreen-title",
-        label: getText(`${this.options.name}.title`).replace("$ModVersion", ModSdkManager.ModInfo.version)
-      });
-      layout.appendToSubscreen(subscreenTitle);
-      if (this.options.name !== "mainmenu") {
+      if (this.options.doShowTitle) {
+        const subscreenTitle = advElement.createLabel({
+          id: "deeplib-subscreen-title",
+          label: getText(`${this.options.name}.title`).replace("$ModVersion", ModSdkManager.ModInfo.version)
+        });
+        layout.appendToSubscreen(subscreenTitle);
+      }
+      if (this.options.doShowExitButton) {
         const exitButton = advElement.createButton({
           id: "deeplib-exit",
           size: [90, 90],
@@ -501,6 +502,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
               break;
             case "custom":
               element = advElement.createCustom(item);
+              break;
+            case "dropdown":
+              element = advElement.createDropdown(item);
               break;
           }
           layout.appendToSettingsDiv(element);
@@ -549,16 +553,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       const offset = this.options.drawCharacter ? 0 : 380;
       const subscreen = layout.getSubscreen();
       const settingsDiv = layout.getSettingsDiv();
-      ElementSetPosition(subscreen || "", 0, 0);
-      ElementSetSize(subscreen || "", 2e3, 1e3);
-      ElementSetFontSize(subscreen || "", "auto");
-      if (this.options.name === "mainmenu") {
-        ElementSetPosition(settingsDiv || "", 530 - offset, 170);
-        ElementSetSize(settingsDiv || "", 600 + offset, 660);
-      } else {
-        ElementSetPosition(settingsDiv || "", 530 - offset, 170);
-        ElementSetSize(settingsDiv || "", 1e3 + offset, 660);
-      }
+      ElementSetPosition(subscreen, 0, 0);
+      ElementSetSize(subscreen, 2e3, 1e3);
+      ElementSetFontSize(subscreen, "auto");
+      ElementSetPosition(settingsDiv, 530 - offset, 170);
+      ElementSetSize(settingsDiv, this.options.settingsWidth ?? 1e3 + offset, 660);
       ElementSetPosition("deeplib-subscreen-title", 530 - offset, 75);
       ElementSetSize("deeplib-subscreen-title", 800, 60);
       ElementSetPosition("deeplib-nav-menu", 1905, 75, "top-right");
@@ -596,7 +595,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
     drawCharacter: true,
     name: "UNKNOWN",
     icon: "",
-    background: "Sheet"
+    background: "Sheet",
+    doShowExitButton: true,
+    doShowTitle: true,
+    settingsWidth: 1e3
   }), _a2);
   var styles_default = `.deeplib-subscreen,
 .deeplib-modal {
@@ -775,6 +777,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
 .deeplib-checkbox-container input.deeplib-input {
   width: min(5vh, 2.5vw);
   height: min(5vh, 2.5vw);
+  width: min(5dvh, 2.5dvw);
+  height: min(5dvh, 2.5dvw);
+  border-radius: min(1vh, 0.5vw);
   border-radius: min(1dvh, 0.5dvw);
 }
 
@@ -792,16 +797,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
 
 .deeplib-input-container:has(label.deeplib-text) {
   margin-top: min(1vh, 0.5vw);
+  margin-top: min(1dvh, 0.5dvw);
 }
 
 .deeplib-input-container input.deeplib-input {
   font-size: 0.6em;
-  padding: 5px 0;
+  padding: min(1vh, 0.5vw);
+  padding: min(1dvh, 0.5dvw);
   background-color: transparent;
   outline: none;
-  padding-left: min(1vh, 0.5vw);
-  padding-right: min(1vh, 0.5vw);
+  min-height: min(5vh, 2.5vw);
   min-height: min(5dvh, 2.5dvw);
+  border-radius: min(1vh, 0.5vw);
   border-radius: min(1dvh, 0.5dvw);
 }
 
@@ -809,6 +816,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
   padding: 0px;
   width: min(5vh, 2.5vw);
   height: min(5vh, 2.5vw);
+  width: min(5dvh, 2.5dvw);
+  height: min(5dvh, 2.5dvw);
   border-radius: 0px;
 }
 
@@ -817,15 +826,19 @@ One of mods you are using is using an old version of SDK. It will work for now b
   cursor: not-allowed;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.deeplib-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: min(2vh, 1vw);
+  gap: min(2dvh, 1dvw);
+  color: var(--deeplib-text-color);
 }
-
-input[type=number] {
-  appearance: textfield;
-  -moz-appearance: textfield;
+.deeplib-dropdown-container select {
+  padding: 0 min(1vh, 0.5vw);
+  padding: 0 min(1dvh, 0.5dvw);
+  border-radius: min(1vh, 0.5vw);
+  border-radius: min(1dvh, 0.5dvw);
 }
 
 .deeplib-highlight-text {
@@ -920,7 +933,7 @@ input[type=number] {
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.5);
 }
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL05WTUUvU3R1ZmYvQ29kZS9CQy9CQy1EZWVwTGliL3NyYy9zdHlsZXMiLCJzb3VyY2VzIjpbInZhcnMuc2NzcyIsImJ1dHRvbnMuc2NzcyIsImVsZW1lbnRzLnNjc3MiLCJpbnB1dHMuc2NzcyIsIm1lc3NhZ2VzLnNjc3MiLCJtb2RhbC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7RUFFRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FDZEY7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBRUE7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FDM0NGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUdFO0VBQ0U7RUFDQTs7QUFISjtFQU1FO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUN6R0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFJRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQzdERjtFQUNFO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUM3QkY7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBR0Y7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUtOO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0EiLCJzb3VyY2VzQ29udGVudCI6WyIuZGVlcGxpYi1zdWJzY3JlZW4sXG4uZGVlcGxpYi1tb2RhbCB7XG4gIC0tZGVlcGxpYi1iYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS10bWQtbWFpbiwgd2hpdGUpO1xuICAtLWRlZXBsaWItZWxlbWVudC1jb2xvcjogdmFyKC0tdG1kLWVsZW1lbnQsIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtaG92ZXItY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LWhvdmVyLCBjeWFuKTtcbiAgLS1kZWVwbGliLWFjY2VudC1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgI0ZGRkY4OCk7XG4gIC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yOiB2YXIoLS10bWQtYmxvY2tlZCwgcmVkKTtcbiAgLS1kZWVwbGliLXRleHQtY29sb3I6IHZhcigtLXRtZC10ZXh0LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LWhvdmVyLCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMnZoLCAwLjF2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJkdmgsIDAuMWR2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gIC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbn1cbiIsIi5kZWVwbGliLWJ1dHRvbiB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmcsXG4uZGVlcGxpYi1idXR0b24uYnV0dG9uLXN0eWxpbmc6OmJlZm9yZSB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiBpbWcge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMCU7XG4gIGxlZnQ6IDAlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24tY29sb3IpO1xuICBiYWNrZ3JvdW5kLWJsZW5kLW1vZGU6IG11bHRpcGx5O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gIG1hc2stcG9zaXRpb246IGxlZnQ7XG4gIG1hc2stc2l6ZTogY29udGFpbjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgbWFzay1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgY29sb3I6IHRyYW5zcGFyZW50O1xuXG4gIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgbWFzay1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItYnV0dG9uOmhvdmVyIGltZyB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcik7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLWxhYmVsIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQgIWltcG9ydGFudDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGZvbnQtc2l6ZTogbWluKDMuNmR2aCwgMS44ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tdG9vbHRpcCB7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG4iLCIjZGVlcGxpYi1wYWdlLWxhYmVsIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbiNkZWVwbGliLXN1YnNjcmVlbi10aXRsZSB7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi10ZXh0IHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiB7XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMDtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLXN1YnNjcmVlbiAqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgcG9pbnRlci1ldmVudHM6IGFsbDtcbn1cblxuLmRlZXBsaWItc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLWF1dG8tcm93czogbWluLWNvbnRlbnQ7XG4gIHBhZGRpbmc6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLW1pc2Mge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uLXJldmVyc2U7XG4gIGdhcDogbWluKDF2aCwgMC41dncpO1xufVxuXG4uZGVlcGxpYi10b29sdGlwIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBwYWRkaW5nOiBtaW4oMXZoLCAwLjV2dyk7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICB6LWluZGV4OiAxO1xufVxuXG4uZGVlcGxpYi1vdmVyZmxvdy1ib3gge1xuICBib3JkZXI6IHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci13aWR0aCk7XG59XG5cbi5kZWVwbGliLXByZXYtbmV4dCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBib3JkZXI6IG1pbigwLjJ2aCwgMC4xdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcblxuICAuZGVlcGxpYi1wcmV2LW5leHQtYnV0dG9uIHtcbiAgICAmOmhvdmVyIHtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1ob3Zlci1jb2xvcik7XG4gICAgICBib3JkZXItcmFkaXVzOiB2YXIoLS1kZWVwbGliLWJvcmRlci1yYWRpdXMpO1xuICAgIH1cbiAgICBcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYXNwZWN0LXJhdGlvOiAxO1xuICB9XG5cbiAgLmRlZXBsaWItcHJldi1uZXh0LWxhYmVsIHtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICB9XG59XG5cbiNkZWVwbGliLW5hdi1tZW51IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG59XG5cbiNkZWVwbGliLXN0b3JhZ2UtbWV0ZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMHB4O1xuICBsZWZ0OiAwcHg7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogdmFyKC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzKTtcbiAgei1pbmRleDogLTE7XG59XG5cbiNkZWVwbGliLXN0b3JhZ2UtYmFyIHtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMCU7XG4gIGJhY2tncm91bmQ6IHZhcigtLWRlZXBsaWItYWNjZW50LWNvbG9yKTtcbn1cbiIsIi5kZWVwbGliLWNoZWNrYm94LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWNoZWNrYm94LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0IHtcbiAgd2lkdGg6IG1pbig1dmgsIDIuNXZ3KTtcbiAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWNoZWNrYm94LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjaGVja2JveFwiXTpjaGVja2VkOjpiZWZvcmUge1xuICB3aWR0aDogODAlO1xuICBoZWlnaHQ6IDgwJTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjNlbTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyOmhhcyhsYWJlbC5kZWVwbGliLXRleHQpIHtcbiAgbWFyZ2luLXRvcDogbWluKDF2aCwgMC41dncpO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIGZvbnQtc2l6ZTogMC42ZW07XG4gIHBhZGRpbmc6IDVweCAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgb3V0bGluZTogbm9uZTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMXZoLCAwLjV2dyk7XG4gIHBhZGRpbmctcmlnaHQ6IG1pbigxdmgsIDAuNXZ3KTtcbiAgbWluLWhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG59XG5cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdIHtcbiAgcGFkZGluZzogMHB4O1xuICB3aWR0aDogbWluKDV2aCwgMi41dncpO1xuICBoZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgYm9yZGVyLXJhZGl1czogMHB4O1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY29sb3JcIl06ZGlzYWJsZWQge1xuICBib3JkZXI6IHZhcigtLWRlZXBsaWItYmxvY2tlZC1jb2xvcikgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpO1xuICBjdXJzb3I6IG5vdC1hbGxvd2VkO1xufVxuXG5pbnB1dDo6LXdlYmtpdC1vdXRlci1zcGluLWJ1dHRvbixcbmlucHV0Ojotd2Via2l0LWlubmVyLXNwaW4tYnV0dG9uIHtcbiAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lO1xuICBtYXJnaW46IDA7XG59XG5cbmlucHV0W3R5cGU9bnVtYmVyXSB7XG4gIGFwcGVhcmFuY2U6IHRleHRmaWVsZDtcbiAgLW1vei1hcHBlYXJhbmNlOiB0ZXh0ZmllbGQ7XG59XG4iLCIuZGVlcGxpYi1oaWdobGlnaHQtdGV4dCB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogcmdiKDIwMywgMTg1LCAyMyk7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSxcbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrMiddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2Uge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkICM0NDAxNzE7XG4gIGNvbG9yOiAjMTExO1xuICBwYWRkaW5nLWxlZnQ6IG1pbigwLjZkdmgsIDAuM2R2dyk7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICB3aGl0ZS1zcGFjZTogbm9ybWFsO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSxcbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrMiddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiAjMTExO1xufVxuIiwiLmRlZXBsaWItbW9kYWwge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMTAlO1xuICBsZWZ0OiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgei1pbmRleDogMTAwMTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC41ZW07XG4gIHdpZHRoOiBtYXgoNTBkdncsIDI1ZHZoKTtcbiAgZm9udC1zaXplOiBtaW4oNGR2aCwgMmR2dyk7XG4gIHBhZGRpbmc6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMmR2aCwgMC42ZHZ3KTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG5cbiAgLmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZvbnQtc2l6ZTogbWluKDIuNmR2aCwgMS44ZHZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICAgIHBhZGRpbmc6IG1pbigxZHZoLCAwLjVkdncpO1xuICB9XG5cbiAgaW5wdXQuZGVlcGxpYi1tb2RhbC1pbnB1dCB7XG4gICAgbWF4LXdpZHRoOiBtYXgoNTBkdmgsIDI1ZHZ3KTtcbiAgfVxuXG4gIC5kZWVwbGliLW1vZGFsLWJ1dHRvbi1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICAgIGdhcDogMC41ZW07XG4gICAgd2lkdGg6IDEwMCU7XG5cbiAgICAuZGVlcGxpYi1idXR0b24ge1xuICAgICAgZm9udC1zaXplOiAwLjhlbTtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICB3aWR0aDogYXV0bztcbiAgICAgIHBhZGRpbmc6IG1pbigwLjR2aCwgMC4ydncpIG1pbigydmgsIDF2dyk7XG5cbiAgICAgIC5idXR0b24tbGFiZWwge1xuICAgICAgICBkaXNwbGF5OiBjb250ZW50cztcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1wcm9tcHQtY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgfVxufVxuXG4uZGVlcGxpYi1tb2RhbC1ibG9ja2VyIHtcbiAgei1pbmRleDogMTAwMDtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDBkdnc7XG4gIGhlaWdodDogMTAwZHZoO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG59XG4iXX0= */`;
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21lZGlhL05WTUUvU3R1ZmYvQ29kZS9iYy9CQy1EZWVwTGliL3NyYy9zdHlsZXMiLCJzb3VyY2VzIjpbInZhcnMuc2NzcyIsImJ1dHRvbnMuc2NzcyIsImVsZW1lbnRzLnNjc3MiLCJpbnB1dHMuc2NzcyIsIm1lc3NhZ2VzLnNjc3MiLCJtb2RhbC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7RUFFRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FDZEY7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBRUE7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FDM0NGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUdFO0VBQ0U7RUFDQTs7QUFISjtFQU1FO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUN6R0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FDdkVKO0VBQ0U7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0FBQUE7RUFFRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQzdCRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFHRjtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBS047RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5kZWVwbGliLXN1YnNjcmVlbixcbi5kZWVwbGliLW1vZGFsIHtcbiAgLS1kZWVwbGliLWJhY2tncm91bmQtY29sb3I6IHZhcigtLXRtZC1tYWluLCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudCwgd2hpdGUpO1xuICAtLWRlZXBsaWItZWxlbWVudC1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWVsZW1lbnQtaG92ZXIsIGN5YW4pO1xuICAtLWRlZXBsaWItYWNjZW50LWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCAjRkZGRjg4KTtcbiAgLS1kZWVwbGliLWJsb2NrZWQtY29sb3I6IHZhcigtLXRtZC1ibG9ja2VkLCByZWQpO1xuICAtLWRlZXBsaWItdGV4dC1jb2xvcjogdmFyKC0tdG1kLXRleHQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWljb24tY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWljb24taG92ZXItY29sb3I6IHZhcigtLXRtZC1hY2NlbnQtaG92ZXIsIGJsYWNrKTtcbiAgLS1kZWVwbGliLWJvcmRlci1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgYmxhY2spO1xuICAtLWRlZXBsaWItYm9yZGVyLXdpZHRoOiBtaW4oMC4ydmgsIDAuMXZ3KTtcbiAgLS1kZWVwbGliLWJvcmRlci13aWR0aDogbWluKDAuMmR2aCwgMC4xZHZ3KTtcbiAgLS1kZWVwbGliLWJvcmRlci1yYWRpdXM6IG1pbigxdmgsIDAuNXZ3KTtcbiAgLS1kZWVwbGliLWJvcmRlci1yYWRpdXM6IG1pbigxZHZoLCAwLjVkdncpO1xufVxuIiwiLmRlZXBsaWItYnV0dG9uIHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbi5kZWVwbGliLWJ1dHRvbi5idXR0b24tc3R5bGluZyxcbi5kZWVwbGliLWJ1dHRvbi5idXR0b24tc3R5bGluZzo6YmVmb3JlIHtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIGltZyB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwJTtcbiAgbGVmdDogMCU7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGxlZnQ7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1jb2xvcik7XG4gIGJhY2tncm91bmQtYmxlbmQtbW9kZTogbXVsdGlwbHk7XG4gIGJhY2tncm91bmQtc2l6ZTogY29udGFpbjtcbiAgbWFzay1wb3NpdGlvbjogbGVmdDtcbiAgbWFzay1zaXplOiBjb250YWluO1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICBtYXNrLXJlcGVhdDogbm8tcmVwZWF0O1xuICBjb2xvcjogdHJhbnNwYXJlbnQ7XG5cbiAgYmFja2dyb3VuZC1pbWFnZTogdmFyKC0taW1hZ2UpO1xuICBtYXNrLWltYWdlOiB2YXIoLS1pbWFnZSk7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xufVxuXG4uZGVlcGxpYi1idXR0b246aG92ZXIgaW1nIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yKTtcbn1cblxuLmRlZXBsaWItYnV0dG9uIC5idXR0b24tbGFiZWwge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudCAhaW1wb3J0YW50O1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZm9udC1zaXplOiBtaW4oMy42ZHZoLCAxLjhkdncpO1xufVxuXG4uZGVlcGxpYi1idXR0b24gLmJ1dHRvbi10b29sdGlwIHtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbn1cbiIsIiNkZWVwbGliLXBhZ2UtbGFiZWwge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cblxuI2RlZXBsaWItc3Vic2NyZWVuLXRpdGxlIHtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbi5kZWVwbGliLXRleHQge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuLmRlZXBsaWItc3Vic2NyZWVuIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItc3Vic2NyZWVuICoge1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBwb2ludGVyLWV2ZW50czogYWxsO1xufVxuXG4uZGVlcGxpYi1zZXR0aW5ncyB7XG4gIGRpc3BsYXk6IGdyaWQ7XG4gIGdyaWQtYXV0by1yb3dzOiBtaW4tY29udGVudDtcbiAgcGFkZGluZzogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgZ2FwOiAwLjNlbTtcbn1cblxuLmRlZXBsaWItbWlzYyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW4tcmV2ZXJzZTtcbiAgZ2FwOiBtaW4oMXZoLCAwLjV2dyk7XG59XG5cbi5kZWVwbGliLXRvb2x0aXAge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIHotaW5kZXg6IDE7XG59XG5cbi5kZWVwbGliLW92ZXJmbG93LWJveCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbn1cblxuLmRlZXBsaWItcHJldi1uZXh0IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIGJvcmRlcjogbWluKDAuMnZoLCAwLjF2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1idXR0b24ge1xuICAgICY6aG92ZXIge1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yKTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gICAgfVxuICAgIFxuICAgIGhlaWdodDogMTAwJTtcbiAgICBhc3BlY3QtcmF0aW86IDE7XG4gIH1cblxuICAuZGVlcGxpYi1wcmV2LW5leHQtbGFiZWwge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIH1cbn1cblxuI2RlZXBsaWItbmF2LW1lbnUge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbn1cblxuI2RlZXBsaWItc3RvcmFnZS1tZXRlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJvcmRlci13aWR0aCkgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiB2YXIoLS1kZWVwbGliLWJvcmRlci1yYWRpdXMpO1xuICB6LWluZGV4OiAtMTtcbn1cblxuI2RlZXBsaWItc3RvcmFnZS1iYXIge1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAwJTtcbiAgYmFja2dyb3VuZDogdmFyKC0tZGVlcGxpYi1hY2NlbnQtY29sb3IpO1xufVxuIiwiLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjNlbTtcbn1cblxuLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXQge1xuICB3aWR0aDogbWluKDV2aCwgMi41dncpO1xuICBoZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgd2lkdGg6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBoZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wdmgsIDAuNXZ3KTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbn1cblxuLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNoZWNrYm94XCJdOmNoZWNrZWQ6OmJlZm9yZSB7XG4gIHdpZHRoOiA4MCU7XG4gIGhlaWdodDogODAlO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXI6aGFzKGxhYmVsLmRlZXBsaWItdGV4dCkge1xuICBtYXJnaW4tdG9wOiBtaW4oMXZoLCAwLjV2dyk7XG4gIG1hcmdpbi10b3A6IG1pbigxZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIGZvbnQtc2l6ZTogMC42ZW07XG4gIHBhZGRpbmc6IG1pbigxdmgsIDAuNXZ3KTtcbiAgcGFkZGluZzogbWluKDFkdmgsIDAuNWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xuICBvdXRsaW5lOiBub25lO1xuICBtaW4taGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gIG1pbi1oZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wdmgsIDAuNXZ3KTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdIHtcbiAgcGFkZGluZzogMHB4O1xuICB3aWR0aDogbWluKDV2aCwgMi41dncpO1xuICBoZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgd2lkdGg6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBoZWlnaHQ6IG1pbig1ZHZoLCAyLjVkdncpO1xuICBib3JkZXItcmFkaXVzOiAwcHg7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0W3R5cGU9XCJjb2xvclwiXTpkaXNhYmxlZCB7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ibG9ja2VkLWNvbG9yKSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci13aWR0aCk7XG4gIGN1cnNvcjogbm90LWFsbG93ZWQ7XG59XG5cbi5kZWVwbGliLWRyb3Bkb3duLWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogbWluKDJ2aCwgMXZ3KTtcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuXG4gIHNlbGVjdCB7XG4gICAgcGFkZGluZzogMCBtaW4oMXZoLCAwLjV2dyk7XG4gICAgcGFkZGluZzogMCBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMXZoLCAwLjV2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDFkdmgsIDAuNWR2dyk7XG4gIH1cbn0iLCIuZGVlcGxpYi1oaWdobGlnaHQtdGV4dCB7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogcmdiKDIwMywgMTg1LCAyMyk7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSxcbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrMiddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2Uge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2VlZTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkICM0NDAxNzE7XG4gIGNvbG9yOiAjMTExO1xuICBwYWRkaW5nLWxlZnQ6IG1pbigwLjZkdmgsIDAuM2R2dyk7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICB3aGl0ZS1zcGFjZTogbm9ybWFsO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSxcbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrMiddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UgYSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiAjMTExO1xufVxuIiwiLmRlZXBsaWItbW9kYWwge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMTAlO1xuICBsZWZ0OiA1MCU7XG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgei1pbmRleDogMTAwMTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC41ZW07XG4gIHdpZHRoOiBtYXgoNTBkdncsIDI1ZHZoKTtcbiAgZm9udC1zaXplOiBtaW4oNGR2aCwgMmR2dyk7XG4gIHBhZGRpbmc6IG1pbigyZHZoLCAxZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMmR2aCwgMC42ZHZ3KTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG5cbiAgLmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZvbnQtc2l6ZTogbWluKDIuNmR2aCwgMS44ZHZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICAgIHBhZGRpbmc6IG1pbigxZHZoLCAwLjVkdncpO1xuICB9XG5cbiAgaW5wdXQuZGVlcGxpYi1tb2RhbC1pbnB1dCB7XG4gICAgbWF4LXdpZHRoOiBtYXgoNTBkdmgsIDI1ZHZ3KTtcbiAgfVxuXG4gIC5kZWVwbGliLW1vZGFsLWJ1dHRvbi1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICAgIGdhcDogMC41ZW07XG4gICAgd2lkdGg6IDEwMCU7XG5cbiAgICAuZGVlcGxpYi1idXR0b24ge1xuICAgICAgZm9udC1zaXplOiAwLjhlbTtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICB3aWR0aDogYXV0bztcbiAgICAgIHBhZGRpbmc6IG1pbigwLjR2aCwgMC4ydncpIG1pbigydmgsIDF2dyk7XG5cbiAgICAgIC5idXR0b24tbGFiZWwge1xuICAgICAgICBkaXNwbGF5OiBjb250ZW50cztcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1wcm9tcHQtY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgfVxufVxuXG4uZGVlcGxpYi1tb2RhbC1ibG9ja2VyIHtcbiAgei1pbmRleDogMTAwMDtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDBkdnc7XG4gIGhlaWdodDogMTAwZHZoO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG59XG4iXX0= */`;
   var modStorage;
   var sdk;
   function initMod(options2) {
@@ -1168,6 +1181,7 @@ input[type=number] {
     }
     /** Sends the currently configured "new version" message to the local player. */
     static sendNewVersionMessage() {
+      if (!_a5.newVersionMessage) return;
       const beepLogLength = FriendListBeepLog.push({
         MemberNumber: Player.MemberNumber,
         MemberName: ModSdkManager.ModInfo.name,
@@ -1242,10 +1256,12 @@ input[type=number] {
           {
             type: "button",
             id: "test-deeplib-big-button",
+            options: {
+              label: "Big Button",
+              tooltip: "This is a big button",
+              image: "Icons/Exit.png"
+            },
             size: [405, 80],
-            label: "Big Button",
-            tooltip: "This is a big button",
-            image: "Icons/Exit.png",
             onClick() {
               deepLibLogger.info("Big Button Clicked");
             }
@@ -1253,9 +1269,11 @@ input[type=number] {
           {
             type: "button",
             id: "test-deeplib-small-button",
+            options: {
+              tooltip: "This is a small button",
+              image: "Icons/Exit.png"
+            },
             size: [90, 90],
-            tooltip: "This is a small button",
-            image: "Icons/Exit.png",
             onClick() {
               deepLibLogger.info("Small Button Clicked");
             }
@@ -1307,10 +1325,12 @@ input[type=number] {
           {
             type: "button",
             id: "test-deeplib-big-button2",
+            options: {
+              label: "Big Button",
+              tooltip: "This is a big button",
+              image: "Icons/Exit.png"
+            },
             size: [405, 80],
-            label: "Big Button",
-            tooltip: "This is a big button",
-            image: "Icons/Prev.png",
             onClick() {
               deepLibLogger.info("Big Button Clicked");
             }
@@ -1318,9 +1338,11 @@ input[type=number] {
           {
             type: "button",
             id: "test-deeplib-small-button2",
+            options: {
+              tooltip: "This is a small button",
+              image: "Icons/Next.png"
+            },
             size: [90, 90],
-            tooltip: "This is a small button",
-            image: "Icons/Next.png",
             onClick() {
               deepLibLogger.info("Small Button Clicked");
             }
@@ -1366,6 +1388,22 @@ input[type=number] {
             id: "test-deeplib-label2",
             label: "Label",
             description: "This is a label"
+          },
+          {
+            type: "dropdown",
+            id: "test-deeplib-dropdown",
+            label: "Dropdown",
+            description: "This is a dropdown",
+            optionsList: ["Option 1", "Option 2", "Option 3"],
+            setElementValue() {
+              return "Option 2";
+            },
+            setSettingValue(val) {
+              deepLibLogger.info("Dropdown value:", val);
+            },
+            options: {
+              width: 200
+            }
           }
         ]
       ];
@@ -1373,22 +1411,28 @@ input[type=number] {
   }, __name(_a6, "GuiDebug"), __name2(_a6, "GuiDebug"), __publicField(_a6, "subscreenOptions", {
     name: "debug"
   }), _a6);
+  function isPlainObject(value) {
+    return value !== null && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype;
+  }
+  __name(isPlainObject, "isPlainObject");
+  __name2(isPlainObject, "isPlainObject");
   function deepMerge(target, source) {
     if (target === void 0) return source;
     if (source === void 0) return target;
-    if (typeof target !== "object" || typeof source !== "object") {
-      return source;
+    if (Array.isArray(target) && Array.isArray(source)) {
+      return [...target, ...source];
     }
-    for (const key of Object.keys(source)) {
-      if (Array.isArray(source[key]) && Array.isArray(target[key])) {
-        target[key] = [...target[key], ...source[key]];
-      } else if (typeof source[key] === "object" && source[key] !== null) {
-        target[key] = deepMerge(target[key] || {}, source[key]);
-      } else {
-        target[key] = source[key];
+    if (isPlainObject(target) && isPlainObject(source)) {
+      const result = { ...target };
+      for (const key of Object.keys(source)) {
+        if (key === "__proto__" || key === "constructor" || key === "prototype") {
+          continue;
+        }
+        result[key] = key in target ? deepMerge(target[key], source[key]) : source[key];
       }
+      return result;
     }
-    return target;
+    return source;
   }
   __name(deepMerge, "deepMerge");
   __name2(deepMerge, "deepMerge");
@@ -1457,6 +1501,7 @@ input[type=number] {
     createInput: elementCreateInput,
     createLabel: elementCreateLabel,
     createCustom: elementCreateCustom,
+    createDropdown: elementCreateDropdown,
     createTooltip: elementCreateTooltip,
     getTooltip: elementGetTooltip,
     setTooltip: elementSetTooltip,
@@ -1487,7 +1532,7 @@ input[type=number] {
             disabled
           },
           children: [
-            image ? {
+            image ? deepMerge({
               tag: "img",
               attributes: {
                 id: `${options2.id}-image`,
@@ -1500,7 +1545,7 @@ input[type=number] {
               style: {
                 "--image": `url("${image}")`
               }
-            } : void 0
+            }, options2.htmlOptions?.img) : void 0
           ]
         }
       }, options2.htmlOptions ?? {})
@@ -1515,7 +1560,7 @@ input[type=number] {
     if (elem) return elem;
     options2.type = "checkbox";
     const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
-    const retElem = ElementCreate({
+    const retElem = ElementCreate(deepMerge({
       tag: "div",
       classList: ["deeplib-checkbox-container"],
       attributes: {
@@ -1530,23 +1575,23 @@ input[type=number] {
             id: options2.id,
             disabled,
             checked: options2?.setElementValue?.() || void 0
+          },
+          eventListeners: {
+            change: /* @__PURE__ */ __name2(function() {
+              options2?.setSettingValue?.(this.checked);
+            }, "change")
           }
-        }, options2.htmlOptions),
-        {
+        }, options2.htmlOptions?.checkbox),
+        deepMerge({
           tag: "label",
           classList: ["deeplib-text"],
           attributes: {
             for: options2.id
           },
           children: [options2.label]
-        }
-      ],
-      eventListeners: {
-        change: /* @__PURE__ */ __name2(() => {
-          options2?.setSettingValue?.(document.getElementById(options2.id)?.checked);
-        }, "change")
-      }
-    });
+        }, options2.htmlOptions?.label)
+      ]
+    }, options2.htmlOptions?.container));
     if (options2.description) {
       retElem.addEventListener("mouseover", () => {
         elementSetTooltip(options2.description || "");
@@ -1561,7 +1606,11 @@ input[type=number] {
   __name(elementCreateCheckbox, "elementCreateCheckbox");
   __name2(elementCreateCheckbox, "elementCreateCheckbox");
   function elementCreateCustom(options2) {
-    const elem = document.getElementById(options2.id);
+    var _a15, _b;
+    options2.id ?? (options2.id = ElementGenerateID());
+    (_a15 = options2.htmlOptions).attributes ?? (_a15.attributes = {});
+    (_b = options2.htmlOptions.attributes).id ?? (_b.id = options2.id);
+    const elem = document.getElementById(options2.htmlOptions.attributes.id);
     if (elem) return elem;
     options2.type = "custom";
     const retElem = ElementCreate(options2.htmlOptions);
@@ -1574,7 +1623,7 @@ input[type=number] {
     const elem = document.getElementById(options2.id);
     if (elem) return elem;
     const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
-    const retElem = ElementCreate({
+    const retElem = ElementCreate(deepMerge({
       tag: "div",
       classList: ["deeplib-input-container"],
       attributes: {
@@ -1590,23 +1639,23 @@ input[type=number] {
             placeholder: " ",
             disabled,
             value: options2?.setElementValue?.() || void 0
+          },
+          eventListeners: {
+            input: /* @__PURE__ */ __name2(function() {
+              options2?.setSettingValue?.(this.value);
+            }, "input")
           }
-        }, options2.htmlOptions),
-        options2.label ? {
+        }, options2.htmlOptions?.input),
+        options2.label ? deepMerge({
           tag: "label",
           classList: ["deeplib-text"],
           attributes: {
             for: options2.id
           },
           children: [options2.label]
-        } : void 0
-      ],
-      eventListeners: {
-        input: /* @__PURE__ */ __name2(() => {
-          options2?.setSettingValue?.(document.getElementById(options2.id)?.value);
-        }, "input")
-      }
-    });
+        }, options2.htmlOptions?.label) : void 0
+      ]
+    }, options2.htmlOptions?.container));
     if (options2.description) {
       retElem.addEventListener("mouseover", () => {
         elementSetTooltip(options2.description || "");
@@ -1647,6 +1696,50 @@ input[type=number] {
   }
   __name(elementCreateLabel, "elementCreateLabel");
   __name2(elementCreateLabel, "elementCreateLabel");
+  function elementCreateDropdown(options2) {
+    options2.id ?? (options2.id = ElementGenerateID());
+    const elem = document.getElementById(`${options2.id}-container`);
+    if (elem) return elem;
+    options2.type = "dropdown";
+    const retElem = ElementCreate(deepMerge({
+      tag: "div",
+      classList: ["deeplib-dropdown-container"],
+      attributes: {
+        id: `${options2.id}-container`
+      },
+      children: [
+        options2.label ? deepMerge({
+          tag: "label",
+          classList: ["deeplib-text"],
+          attributes: {
+            for: options2.id
+          },
+          children: [options2.label]
+        }, options2.htmlOptions?.label) : void 0,
+        ElementCreateDropdown(
+          options2.id,
+          options2.optionsList,
+          function() {
+            return options2.setSettingValue?.(this.value);
+          },
+          options2.options,
+          options2.htmlOptions?.select
+        )
+      ],
+      eventListeners: {
+        mouseover: /* @__PURE__ */ __name2(function() {
+          elementSetTooltip(options2.description ?? "");
+        }, "mouseover"),
+        mouseout: /* @__PURE__ */ __name2(function() {
+          elementSetTooltip("");
+        }, "mouseout")
+      }
+    }, options2.htmlOptions?.container));
+    BaseSubscreen.currentElements.push([retElem, options2]);
+    return retElem;
+  }
+  __name(elementCreateDropdown, "elementCreateDropdown");
+  __name2(elementCreateDropdown, "elementCreateDropdown");
   function elementCreateTooltip() {
     const element = ElementCreate({
       tag: "div",
@@ -2150,7 +2243,9 @@ input[type=number] {
       _a8.options = mainMenuOptions;
     }
   }, __name(_a8, "_MainMenu"), __name2(_a8, "MainMenu"), __publicField(_a8, "options", {}), __publicField(_a8, "subscreenOptions", {
-    name: "mainmenu"
+    name: "mainmenu",
+    doShowExitButton: false,
+    settingsWidth: 600
   }), _a8);
   async function PreferenceOpenSubscreen(subscreen, page = 1) {
     if (CurrentModule !== "Character" || CurrentScreen !== "Preference") {
@@ -2411,7 +2506,9 @@ input[type=number] {
       if (this.extensionStorage) {
         const parsed = _a10.dataDecompress(this.extensionStorage || "");
         if (parsed === null || !Object.hasOwn(parsed, "Version")) {
-          this.playerStorage = {};
+          this.playerStorage = {
+            Version: ModSdkManager.ModInfo.version
+          };
         } else {
           this.playerStorage = parsed;
         }
@@ -4883,28 +4980,22 @@ input[type=number] {
       const isBaseMode = !modStorage.playerStorage.GlobalModule.doUseAdvancedColoring;
       const baseModeKey = /* @__PURE__ */ __name((key) => ["main", "accent", "text"].includes(key), "baseModeKey");
       const ret = [[], []];
-      const themeDropdownOptions = ["dark", "light"].map((e) => ({ attributes: { value: e, label: getText("colors.setting.theme-type-" + e), selected: e === this.settings.themeSettings.themeType } }));
+      const themeDropdownOptions = ["dark", "light"].map((e) => ({
+        attributes: {
+          value: e,
+          label: getText("colors.setting.theme-type-" + e),
+          selected: e === this.settings.themeSettings.themeType
+        }
+      }));
       const themeType = {
         id: "tmd-theme-type",
-        type: "custom",
-        htmlOptions: {
-          tag: "div",
-          attributes: {
-            id: "tmd-theme-type-container"
-          },
-          children: [
-            {
-              tag: "label",
-              attributes: {
-                for: "tmd-theme-type-dropdown"
-              },
-              children: [getText("colors.setting.theme-type.title")]
-            },
-            ElementCreateDropdown("tmd-theme-type-dropdown", themeDropdownOptions, function() {
-              settings.themeSettings.themeType = this.value;
-              ColorsModule.reloadTheme();
-            })
-          ]
+        type: "dropdown",
+        optionsList: themeDropdownOptions,
+        label: getText("colors.setting.theme-type.name"),
+        description: getText("colors.setting.theme-type.desc"),
+        setSettingValue(val) {
+          settings.themeSettings.themeType = val;
+          ColorsModule.reloadTheme();
         }
       };
       ret[0].push(themeType);
@@ -5020,7 +5111,7 @@ input[type=number] {
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"fd28d7e7"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"19543e9d"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5724,10 +5815,6 @@ input[type=number] {
     }
     patchGui() {
       if (this.patched) return false;
-      sdk.patchFunction("ChatSearchPermissionDraw", {
-        'bgColor = Hover ? "red" : "pink";': 'bgColor = "%allowed";',
-        'bgColor = Hover ? "green" : "lime";': 'bgColor = "%searchBlock";'
-      });
       sdk.patchFunction("DialogDraw", {
         "DrawRect(1087 + offset, 550, 225, 275, bgColor);": 'DrawRect(1087 + offset, 550, 225, 275, disabled ? "%disabled" : (hover ? "%hover" : "%background"));DrawEmptyRect(1087 + offset, 550, 225, 275, "%border");',
         'const bgColor = disabled ? "Gray" : (hover ? "aqua" : "white");': 'const bgColor = disabled ? "%disabled" : (hover ? "%hover" : "%background");'
@@ -5781,7 +5868,6 @@ input[type=number] {
     }
     unpatchGui() {
       if (!this.patched) return false;
-      sdk.unpatchFunction("ChatSearchPermissionDraw");
       sdk.unpatchFunction("DialogDraw");
       sdk.unpatchFunction("DrawProcessScreenFlash");
       sdk.unpatchFunction("ChatAdminRun");
@@ -5920,6 +6006,14 @@ input[type=number] {
       genedColors += `--tmd-${camelToKebabCase(key)}-hover: ${specialColors[typedKey][1]};
 	`;
     });
+    genedColors += `--tmd-search-full-blocked: ${color_default(specialColors.roomBlocked[0]).mix(color_default(plainColors.elementDisabled), 0.5).hex()};
+	`;
+    genedColors += `--tmd-search-full-blocked-hover: ${color_default(specialColors.roomBlocked[1]).mix(color_default(plainColors.elementDisabled), 0.5).hex()};
+	`;
+    genedColors += `--tmd-search-full-friend: ${color_default(specialColors.roomFriend[0]).mix(color_default(plainColors.elementDisabled), 0.5).hex()};
+	`;
+    genedColors += `--tmd-search-full-friend-hover: ${color_default(specialColors.roomFriend[1]).mix(color_default(plainColors.elementDisabled), 0.5).hex()};
+	`;
     return (
       /*css*/
       `
@@ -6256,17 +6350,7 @@ input[type=number] {
   var IntegrationModule = _IntegrationModule;
 
   // src/utilities/console.ts
-  var STYLES = {
-    INFO: "color: #32CCCC",
-    LOG: "color: #CCCC32",
-    DEBUG: "color: #9E4BCF"
-  };
-  var cmdPrefix = "Themed";
-  function conWarn(...args) {
-    if (typeof args[0] === "string") console.warn(`%c${cmdPrefix}: ${args[0]}`, STYLES.LOG, ...args.slice(1));
-    else console.warn(`%c${cmdPrefix}: `, STYLES.LOG, ...args);
-  }
-  __name(conWarn, "conWarn");
+  var logger = new Logger("Themed");
 
   // src/screens/profiles.ts
   var _GuiProfiles = class _GuiProfiles extends BaseSubscreen {
@@ -6452,7 +6536,7 @@ input[type=number] {
     }
     isValidProfileId(id) {
       if (id < 1 || id > 3) {
-        conWarn(`Invalid profile id ${id}`);
+        logger.warn(`Invalid profile id ${id}`);
         return false;
       }
       return true;
@@ -6720,7 +6804,9 @@ input[type=number] {
   __name(_GuiReset, "GuiReset");
   __publicField(_GuiReset, "subscreenOptions", {
     drawCharacter: false,
-    name: "reset"
+    name: "reset",
+    doShowExitButton: false,
+    doShowTitle: false
   });
   var GuiReset = _GuiReset;
 

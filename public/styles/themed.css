@@ -149,11 +149,6 @@ code {
   color: var(--tmd-text, white);
 }
 
-#deeplib-subscreen:has(#tmd-reset-container) #deeplib-subscreen-title,
-#deeplib-subscreen:has(#tmd-reset-container) #deeplib-exit {
-  display: none;
-}
-
 #tmd-reset-container {
   display: flex;
   flex-direction: column;
@@ -172,12 +167,5 @@ code {
 }
 #tmd-reset-container #tmd-reset-buttons-container button .button-label {
   display: contents;
-}
-
-#tmd-theme-type-container {
-  display: flex;
-  gap: min(1vh, 5vw);
-  gap: min(1dvh, 5dvw);
-  color: var(--tmd-text, black);
 }
 /*# sourceMappingURL=themed.css.map */
