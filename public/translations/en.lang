@@ -52,7 +52,8 @@ colors.setting.text.name = Text color
 colors.setting.text.desc = Used for most text, excluding other colors.
 colors.setting.theme-type-dark = Dark
 colors.setting.theme-type-light = Light
-colors.setting.theme-type.title = Theme type
+colors.setting.theme-type.name = Theme type
+colors.setting.theme-type.desc = Decides what type your theme will be considered as. Currenly changes colors of certain icons. For example, dark theme should have white icons, while light theme should have black icons. 
 
 colors.setting.equipped.name = Equipped color
 colors.setting.equipped.desc = Used for indicating equipped items in inventory. Requires BC Inventory integration to be enabled.

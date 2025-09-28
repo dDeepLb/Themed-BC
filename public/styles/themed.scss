@@ -188,10 +188,3 @@ code {
     }
   }
 }
-
-#tmd-theme-type-container {
-  display: flex;
-  gap: min(1vh, 5vw);
-  gap: min(1dvh, 5dvw);
-  color: var(--tmd-text, black);
-}

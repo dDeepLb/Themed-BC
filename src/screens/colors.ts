@@ -2,7 +2,7 @@ import { advElement, BaseSubscreen, getModule, getText, modStorage, SubscreenOpt
 import { BaseColorsModel, ColorsSettingsModel, SpecialColorsModel } from '../models/colors';
 import { ColorsModule } from '../modules/colors';
 import { _Color } from '../utilities/color';
-import { Custom, Input, SettingElement } from 'bc-deeplib/base/elements_typings';
+import { Dropdown, Input, SettingElement } from 'bc-deeplib/base/elements_typings';
 
 
 export class GuiColors extends BaseSubscreen {
@@ -25,29 +25,24 @@ export class GuiColors extends BaseSubscreen {
 
     const ret: SettingElement[][] = [[], []];
 
-    const themeDropdownOptions: Omit<HTMLOptions<"option">, "tag">[] = ['dark', 'light'].map(e => ({ attributes: { value: e, label: getText('colors.setting.theme-type-' + e), selected: e === this.settings.themeSettings.themeType } }))
-    const themeType: Custom = {
-      id: 'tmd-theme-type',
-      type: 'custom',
-      htmlOptions: {
-        tag: 'div',
+    const themeDropdownOptions: Omit<HTMLOptions<"option">, "tag">[] = ['dark', 'light']
+      .map(e => ({
         attributes: {
-          id: 'tmd-theme-type-container'
-        },
-        children: [
-          {
-            tag: "label",
-            attributes: {
-              for: 'tmd-theme-type-dropdown'
-            },
-            children: [getText('colors.setting.theme-type.title')]
-          },
-          ElementCreateDropdown('tmd-theme-type-dropdown', themeDropdownOptions, function () {
-            settings.themeSettings.themeType = this.value as 'dark' | 'light';
-            ColorsModule.reloadTheme();
-          })
-        ]
-      }
+          value: e,
+          label: getText('colors.setting.theme-type-' + e),
+          selected: e === this.settings.themeSettings.themeType
+        }
+      }))
+    const themeType: Dropdown = {
+      id: 'tmd-theme-type',
+      type: 'dropdown',
+      optionsList: themeDropdownOptions,
+      label: getText('colors.setting.theme-type.name'),
+      description: getText('colors.setting.theme-type.desc'),
+      setSettingValue(val) {
+        settings.themeSettings.themeType = val as 'dark' | 'light';
+        ColorsModule.reloadTheme();
+      },
     }
     ret[0].push(themeType)
 
@@ -64,7 +59,7 @@ export class GuiColors extends BaseSubscreen {
         disabled: isBaseMode && !baseModeKey(typedKey)
       };
     })
-    .sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)) as Input[])
+      .sort((a, b) => (a.disabled ? 1 : 0) - (b.disabled ? 1 : 0)) as Input[])
 
     ret[1].push(...Object.entries(this.settings.special).map(([key, value]) => {
       const typedKey = key as keyof SpecialColorsModel;
