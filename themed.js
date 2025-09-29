@@ -5111,7 +5111,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"52620d7f"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"904312e6"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
