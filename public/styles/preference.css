@@ -1,0 +1,18 @@
+#preference-subscreen-h1,
+.preference-settings-dropdown,
+.preference-settings-range {
+  color: var(--tmd-text);
+}
+
+.preference-settings-word-delete img {
+  filter: invert(1);
+}
+
+#preference-subscreen {
+  color: var(--tmd-text);
+}
+
+.preference-settings-divider {
+  border-bottom-color: var(--tmd-accent);
+}
+/*# sourceMappingURL=preference.css.map */

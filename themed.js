@@ -5111,7 +5111,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"904312e6"}` : "1.6.0";
+  var MOD_VERSION_CAPTION = false ? `${"1.6.0"} - ${"1b2da6c5"}` : "1.6.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5972,6 +5972,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (!isEnabled) return;
       Style.injectInline("tmd-root", composeRoot());
       Style.injectEmbed("tmd-chat-room-search", `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/chatroom_search.css`);
+      Style.injectEmbed("tmd-preference", `${"https://ddeeplb.github.io/Themed-BC/public"}/styles/preference.css`);
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         if (!modStorage.playerStorage.IntegrationModule[id]) return;
@@ -5982,6 +5983,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       Style.eject("tmd-root");
       Style.eject("tmd-style");
       Style.eject("tmd-chat-room-search");
+      Style.eject("tmd-preference");
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         Style.eject(id);
