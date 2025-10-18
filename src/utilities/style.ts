@@ -29,7 +29,8 @@ export const BcStyle = {
     if (!isEnabled) return;
 
     Style.injectInline('tmd-root', composeRoot());
-    Style.injectEmbed('tmd-chat-room-search', `${PUBLIC_URL}/styles/chatroom_search.css`)
+    Style.injectEmbed('tmd-chat-room-search', `${PUBLIC_URL}/styles/chatroom_search.css`);
+    Style.injectEmbed('tmd-preference', `${PUBLIC_URL}/styles/preference.css`);
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
@@ -41,7 +42,8 @@ export const BcStyle = {
   ejectAll() {
     Style.eject('tmd-root');
     Style.eject('tmd-style');
-    Style.eject('tmd-chat-room-search')
+    Style.eject('tmd-chat-room-search');
+    Style.eject('tmd-preference');
 
     const styleIDs = Object.keys(styles) as (keyof typeof styles)[];
     styleIDs.forEach((id) => {
