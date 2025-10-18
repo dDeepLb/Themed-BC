@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Themed BC
 // @namespace https://www.bondageprojects.com/
-// @version 1.5.6
+// @version 1.6.1
 // @description Bondage Club with themes!
 // @author  dDeepLb
 // @match https://bondageprojects.elementfx.com/*
