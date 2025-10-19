@@ -1,4 +1,4 @@
-import { BaseSubscreen, getText, layout, modules, advElement, SubscreenOptions } from 'bc-deeplib/deeplib';
+import { BaseSubscreen, getText, layout, modules, advElement, SubscreenOptions, modStorage } from 'bc-deeplib/deeplib';
 import { settingsReset } from '../utilities/data';
 import { ColorsModule } from '../modules/colors';
 
@@ -120,7 +120,7 @@ export class GuiReset extends BaseSubscreen {
     settingsReset();
 
     for (const module of modules()) {
-      module.registerDefaultSettings();
+      module.registerDefaultSettings(modStorage.playerStorage);
     }
 
     ColorsModule.reloadTheme();
