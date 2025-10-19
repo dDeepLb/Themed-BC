@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       bc-deeplib:
-        specifier: ^2.2.0
-        version: 2.2.0(sass-embedded@1.90.0)
+        specifier: ^2.3.0
+        version: 2.3.0(sass-embedded@1.90.0)
       bondage-club-mod-sdk:
         specifier: ^1.2.0
         version: 1.2.0
@@ -81,8 +81,8 @@ importers:
 
 packages:
 
-  '@bufbuild/protobuf@2.7.0':
-    resolution: {integrity: sha512-qn6tAIZEw5i/wiESBF4nQxZkl86aY4KoO0IkUa2Lh+rya64oTOdJQFlZuMwI1Qz9VBJQrQC4QlSA2DNek5gCOA==}
+  '@bufbuild/protobuf@2.9.0':
+    resolution: {integrity: sha512-rnJenoStJ8nvmt9Gzye8nkYd6V22xUAnu4086ER7h1zJ508vStko4pMvDeQ446ilDTFpV5wnoc5YS7XvMwwMqA==}
 
   '@esbuild/aix-ppc64@0.25.9':
     resolution: {integrity: sha512-OaGtL73Jck6pBKjNIe24BnFE6agGl+6KxDtTfHhy1HmhthfKouEcOhqpSL64K4/0WCtbKFLOdzD/44cJ4k9opA==}
@@ -517,8 +517,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bc-deeplib@2.2.0:
-    resolution: {integrity: sha512-8EQaX5tWXiofLhQH+mYuyI7eZ4w5k6us89GuVBryptGskzYS72z5SfJ9ujPdfriHbfspYoUYb4OVW4tAQWI/hg==}
+  bc-deeplib@2.3.0:
+    resolution: {integrity: sha512-fol27FKF3e76h+40XijabhO3ypqkjK1SMnkH+GFuHphT9L6cF3xxJW1ovLv5lKi7QvOU7P/EVHuDAnRUhA1z+g==}
     hasBin: true
 
   bc-stubs@121.0.0:
@@ -830,6 +830,9 @@ packages:
 
   immutable@5.1.3:
     resolution: {integrity: sha512-+chQdDfvscSF1SJqv2gn4SRO2ZyS3xL3r7IW/wWEEzrzLisnOlKiQu5ytC/BVNcS15C39WT2Hg/bjKjDMcu+zg==}
+
+  immutable@5.1.4:
+    resolution: {integrity: sha512-p6u1bG3YSnINT5RQmx/yRZBpenIl30kVxkTLDyHLIMk0gict704Q9n+thfDI7lTRm9vXdDYutVzXhzcThxTnXA==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -1311,7 +1314,7 @@ packages:
 
 snapshots:
 
-  '@bufbuild/protobuf@2.7.0': {}
+  '@bufbuild/protobuf@2.9.0': {}
 
   '@esbuild/aix-ppc64@0.25.9':
     optional: true
@@ -1681,7 +1684,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bc-deeplib@2.2.0(sass-embedded@1.90.0):
+  bc-deeplib@2.3.0(sass-embedded@1.90.0):
     dependencies:
       bondage-club-mod-sdk: 1.2.0
       chokidar: 4.0.3
@@ -2040,6 +2043,8 @@ snapshots:
 
   immutable@5.1.3: {}
 
+  immutable@5.1.4: {}
+
   import-fresh@3.3.1:
     dependencies:
       parent-module: 1.0.1
@@ -2275,10 +2280,10 @@ snapshots:
 
   sass-embedded@1.90.0:
     dependencies:
-      '@bufbuild/protobuf': 2.7.0
+      '@bufbuild/protobuf': 2.9.0
       buffer-builder: 0.2.0
       colorjs.io: 0.5.2
-      immutable: 5.1.3
+      immutable: 5.1.4
       rxjs: 7.8.2
       supports-color: 8.1.1
       sync-child-process: 1.0.2
@@ -2306,7 +2311,7 @@ snapshots:
   sass@1.90.0:
     dependencies:
       chokidar: 4.0.3
-      immutable: 5.1.3
+      immutable: 5.1.4
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
