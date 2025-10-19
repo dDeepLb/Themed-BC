@@ -1,3 +1,6 @@
+1.6.2
+• Small fixes.
+
 1.6.1
 • Adapted new preference interface to be themeable.
 • Fixed when in Themed settings the character was unnecessarily forced up.
@@ -12,6 +15,3 @@
 • A lot of changes that are added by new architecture:
   • New UI & feel.
   • Import/Export screen (hella convenient).
-
-1.5.6
-• Add on-login screen options.

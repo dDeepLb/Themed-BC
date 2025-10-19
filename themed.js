@@ -5,7 +5,7 @@ var Themed = (() => {
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // node_modules/.pnpm/bc-deeplib@2.2.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  // node_modules/.pnpm/bc-deeplib@2.3.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
   var __create = Object.create;
   var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -243,8 +243,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (!this.settingsStorage) return {};
       if (!modStorage.playerStorage) {
         Player[modName] = {};
-        this.registerDefaultSettings();
-      } else if (!modStorage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
+        this.registerDefaultSettings(modStorage.playerStorage);
+      } else if (!modStorage.playerStorage[this.settingsStorage]) {
+        this.registerDefaultSettings(modStorage.playerStorage);
+      }
       return modStorage.playerStorage[this.settingsStorage];
     }
     /**
@@ -257,8 +259,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       if (!this.settingsStorage) return;
       if (!storage.playerStorage) {
         Player[modName] = {};
-        this.registerDefaultSettings();
-      } else if (!storage.playerStorage[this.settingsStorage]) this.registerDefaultSettings();
+        this.registerDefaultSettings(modStorage.playerStorage);
+      } else if (!storage.playerStorage[this.settingsStorage]) {
+        this.registerDefaultSettings(modStorage.playerStorage);
+      }
       storage.playerStorage[this.settingsStorage] = value;
     }
     /**
@@ -267,7 +271,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
      * Subclasses can override to perform additional setup.
      */
     init() {
-      this.registerDefaultSettings();
+      this.registerDefaultSettings(modStorage.playerStorage);
     }
     /**
      * Registers default settings for this module in persistent storage.
@@ -276,11 +280,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
      * If some settings already exist, they will be merged with defaults.
      * Existing values will NOT be overwritten.
      */
-    registerDefaultSettings() {
+    registerDefaultSettings(target) {
       const storage = this.settingsStorage;
       const defaults = this.defaultSettings;
       if (!storage || !defaults) return;
-      Player[ModSdkManager.ModInfo.name][storage] = Object.assign(defaults, Player[ModSdkManager.ModInfo.name][storage] ?? {});
+      target[storage] = Object.assign(defaults, target[storage] ?? {});
     }
     /**
      * Provides default settings for this module.
@@ -416,7 +420,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       var _a15, _b;
       for (const module of modules()) {
         if (!module.settingsScreen) continue;
-        if (!module.settings || !Object.keys(module.settings).length) module.registerDefaultSettings();
+        if (!module.settings || !Object.keys(module.settings).length) module.registerDefaultSettings(modStorage.playerStorage);
       }
       _a2.currentPage = 1;
       layout.getSubscreen();
@@ -562,8 +566,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
       ElementSetFontSize(subscreen, "auto");
       ElementSetPosition(settingsDiv, 530 - offset, 170);
       ElementSetSize(settingsDiv, this.options.settingsWidth ?? 1e3 + offset, 660);
-      ElementSetPosition("deeplib-subscreen-title", 530 - offset, 75);
-      ElementSetSize("deeplib-subscreen-title", 800, 60);
+      if (this.options.doShowTitle) {
+        ElementSetPosition("deeplib-subscreen-title", 530 - offset, 75);
+        ElementSetSize("deeplib-subscreen-title", 800, 60);
+      }
       ElementSetPosition("deeplib-nav-menu", 1905, 75, "top-right");
       ElementSetSize("deeplib-nav-menu", null, 90);
       ElementSetPosition(advElement.getTooltip() || "", 250, 850);
@@ -941,16 +947,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21udC9zaGluZG93cy9TdHVmZi9Db2RlL2JjL0JDLURlZXBMaWIvc3JjL3N0eWxlcyIsInNvdXJjZXMiOlsidmFycy5zY3NzIiwiYnV0dG9ucy5zY3NzIiwiZWxlbWVudHMuc2NzcyIsImlucHV0cy5zY3NzIiwibWVzc2FnZXMuc2NzcyIsIm1vZGFsLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtFQUVFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUNkRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFFQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUMzQ0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBR0U7RUFDRTtFQUNBOztBQUhKO0VBTUU7RUFDQTs7QUFHRjtFQUNFOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQ3pHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUN2RUo7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FDN0JGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUdGO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFLTjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmRlZXBsaWItc3Vic2NyZWVuLFxuLmRlZXBsaWItbW9kYWwge1xuICAtLWRlZXBsaWItYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tdG1kLW1haW4sIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1hY2NlbnQtY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsICNGRkZGODgpO1xuICAtLWRlZXBsaWItYmxvY2tlZC1jb2xvcjogdmFyKC0tdG1kLWJsb2NrZWQsIHJlZCk7XG4gIC0tZGVlcGxpYi10ZXh0LWNvbG9yOiB2YXIoLS10bWQtdGV4dCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWFjY2VudC1ob3ZlciwgYmxhY2spO1xuICAtLWRlZXBsaWItYm9yZGVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJ2aCwgMC4xdncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXdpZHRoOiBtaW4oMC4yZHZoLCAwLjFkdncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXJhZGl1czogbWluKDF2aCwgMC41dncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXJhZGl1czogbWluKDFkdmgsIDAuNWR2dyk7XG59XG4iLCIuZGVlcGxpYi1idXR0b24ge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLmRlZXBsaWItYnV0dG9uLmJ1dHRvbi1zdHlsaW5nLFxuLmRlZXBsaWItYnV0dG9uLmJ1dHRvbi1zdHlsaW5nOjpiZWZvcmUge1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1idXR0b24gaW1nIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDAlO1xuICBsZWZ0OiAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZC1wb3NpdGlvbjogbGVmdDtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1pY29uLWNvbG9yKTtcbiAgYmFja2dyb3VuZC1ibGVuZC1tb2RlOiBtdWx0aXBseTtcbiAgYmFja2dyb3VuZC1zaXplOiBjb250YWluO1xuICBtYXNrLXBvc2l0aW9uOiBsZWZ0O1xuICBtYXNrLXNpemU6IGNvbnRhaW47XG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIG1hc2stcmVwZWF0OiBuby1yZXBlYXQ7XG4gIGNvbG9yOiB0cmFuc3BhcmVudDtcblxuICBiYWNrZ3JvdW5kLWltYWdlOiB2YXIoLS1pbWFnZSk7XG4gIG1hc2staW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLWJ1dHRvbjpob3ZlciBpbWcge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24taG92ZXItY29sb3IpO1xufVxuXG4uZGVlcGxpYi1idXR0b24gLmJ1dHRvbi1sYWJlbCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBmb250LXNpemU6IG1pbigzLjZkdmgsIDEuOGR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLXRvb2x0aXAge1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuIiwiI2RlZXBsaWItcGFnZS1sYWJlbCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuXG4jZGVlcGxpYi1zdWJzY3JlZW4tdGl0bGUge1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuLmRlZXBsaWItdGV4dCB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi1zdWJzY3JlZW4ge1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDA7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xufVxuXG4uZGVlcGxpYi1zdWJzY3JlZW4gKiB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBvaW50ZXItZXZlbnRzOiBhbGw7XG59XG5cbi5kZWVwbGliLXNldHRpbmdzIHtcbiAgZGlzcGxheTogZ3JpZDtcbiAgZ3JpZC1hdXRvLXJvd3M6IG1pbi1jb250ZW50O1xuICBwYWRkaW5nOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1taXNjIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbi1yZXZlcnNlO1xuICBnYXA6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItdG9vbHRpcCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgcGFkZGluZzogbWluKDF2aCwgMC41dncpO1xuICBmb250LXNpemU6IDAuOGVtO1xuICBib3JkZXI6IG1pbigwLjJ2aCwgMC4xdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgei1pbmRleDogMTtcbn1cblxuLmRlZXBsaWItb3ZlcmZsb3ctYm94IHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcikgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpO1xufVxuXG4uZGVlcGxpYi1wcmV2LW5leHQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGdhcDogbWluKDJkdmgsIDFkdncpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG5cbiAgLmRlZXBsaWItcHJldi1uZXh0LWJ1dHRvbiB7XG4gICAgJjpob3ZlciB7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtaG92ZXItY29sb3IpO1xuICAgICAgYm9yZGVyLXJhZGl1czogdmFyKC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzKTtcbiAgICB9XG4gICAgXG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIGFzcGVjdC1yYXRpbzogMTtcbiAgfVxuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1sYWJlbCB7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgfVxufVxuXG4jZGVlcGxpYi1uYXYtbWVudSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGdhcDogbWluKDJkdmgsIDFkdncpO1xufVxuXG4jZGVlcGxpYi1zdG9yYWdlLW1ldGVyIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDBweDtcbiAgbGVmdDogMHB4O1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXI6IHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gIHotaW5kZXg6IC0xO1xufVxuXG4jZGVlcGxpYi1zdG9yYWdlLWJhciB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDAlO1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1kZWVwbGliLWFjY2VudC1jb2xvcik7XG59XG4iLCIuZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICB3aWR0aDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjB2aCwgMC41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl06Y2hlY2tlZDo6YmVmb3JlIHtcbiAgd2lkdGg6IDgwJTtcbiAgaGVpZ2h0OiA4MCU7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lcjpoYXMobGFiZWwuZGVlcGxpYi10ZXh0KSB7XG4gIG1hcmdpbi10b3A6IG1pbigxdmgsIDAuNXZ3KTtcbiAgbWFyZ2luLXRvcDogbWluKDFkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0IHtcbiAgZm9udC1zaXplOiAwLjZlbTtcbiAgcGFkZGluZzogbWluKDF2aCwgMC41dncpO1xuICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIG91dGxpbmU6IG5vbmU7XG4gIG1pbi1oZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgbWluLWhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjB2aCwgMC41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY29sb3JcIl0ge1xuICBwYWRkaW5nOiAwcHg7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICB3aWR0aDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IDBweDtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdOmRpc2FibGVkIHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJsb2NrZWQtY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcbn1cblxuLmRlZXBsaWItZHJvcGRvd24tY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiBtaW4oMnZoLCAxdncpO1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG5cbiAgc2VsZWN0IHtcbiAgICBwYWRkaW5nOiAwIG1pbigxdmgsIDAuNXZ3KTtcbiAgICBwYWRkaW5nOiAwIG1pbigxZHZoLCAwLjVkdncpO1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxdmgsIDAuNXZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxufSIsIi5kZWVwbGliLWhpZ2hsaWdodC10ZXh0IHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiByZ2IoMjAzLCAxODUsIDIzKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlLFxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsyJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2Uge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgIzQ0MDE3MTtcbiAgY29sb3I6ICMxMTE7XG4gIHBhZGRpbmctbGVmdDogbWluKDAuNmR2aCwgMC4zZHZ3KTtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdoaXRlLXNwYWNlOiBub3JtYWw7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhLFxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsyJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhIHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6ICMxMTE7XG59XG4iLCIuZGVlcGxpYi1tb2RhbCB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgdG9wOiAxMCU7XG4gIGxlZnQ6IDUwJTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpO1xuICB6LWluZGV4OiAxMDAxO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjVlbTtcbiAgd2lkdGg6IG1heCg1MGR2dywgMjVkdmgpO1xuICBmb250LXNpemU6IG1pbig0ZHZoLCAyZHZ3KTtcbiAgcGFkZGluZzogbWluKDJkdmgsIDFkdncpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4yZHZoLCAwLjZkdncpO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcblxuICAuZGVlcGxpYi1tb2RhbC1pbnB1dCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZm9udC1zaXplOiBtaW4oMi42ZHZoLCAxLjhkdncpO1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gICAgcGFkZGluZzogbWluKDFkdmgsIDAuNWR2dyk7XG4gIH1cblxuICBpbnB1dC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICBtYXgtd2lkdGg6IG1heCg1MGR2aCwgMjVkdncpO1xuICB9XG5cbiAgLmRlZXBsaWItbW9kYWwtYnV0dG9uLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gICAgZ2FwOiAwLjVlbTtcbiAgICB3aWR0aDogMTAwJTtcblxuICAgIC5kZWVwbGliLWJ1dHRvbiB7XG4gICAgICBmb250LXNpemU6IDAuOGVtO1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgcGFkZGluZzogbWluKDAuNHZoLCAwLjJ2dykgbWluKDJ2aCwgMXZ3KTtcblxuICAgICAgLmJ1dHRvbi1sYWJlbCB7XG4gICAgICAgIGRpc3BsYXk6IGNvbnRlbnRzO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIC5kZWVwbGliLW1vZGFsLXByb21wdC1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
   var modStorage;
   var sdk;
+  var logger;
   function initMod(options2) {
     sdk = new ModSdkManager(options2.modInfo.info, options2.modInfo.options);
     const MOD_NAME = ModSdkManager.ModInfo.name;
     modStorage = new ModStorage(ModSdkManager.ModInfo.name);
+    logger = new Logger(MOD_NAME);
     Style.injectInline("deeplib-style", styles_default);
-    deepLibLogger.debug(`Init wait for ${MOD_NAME}`);
+    logger.debug("Init wait");
     if (CurrentScreen == null || CurrentScreen === "Login") {
       options2.beforeLogin?.();
       const removeHook = sdk.hookFunction("LoginResponse", 0, (args, next) => {
-        deepLibLogger.debug(`Init for ${MOD_NAME}! LoginResponse caught: `, args);
+        logger.debug("Init! LoginResponse caught: ", args);
         next(args);
         const response = args[0];
         if (response === "InvalidNamePassword") return next(args);
@@ -960,7 +968,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         }
       });
     } else {
-      deepLibLogger.debug(`Already logged in, initing ${MOD_NAME}`);
+      logger.debug(`Already logged in, initing ${MOD_NAME}`);
       init(options2);
     }
   }
@@ -976,11 +984,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
       unloadMod();
       return;
     }
-    if (options2.migrators) {
-      for (const m of options2.migrators) {
-        VersionModule.registerMigrator(m);
-      }
-    }
     await options2.initFunction?.();
     if (options2.mainMenuOptions)
       MainMenu.setOptions(options2.mainMenuOptions);
@@ -991,12 +994,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
     }
     window[MOD_NAME + "Loaded"] = true;
-    deepLibLogger.log(`Loaded ${MOD_NAME}! Version: ${MOD_VERSION2}`);
+    logger.log(`Loaded! Version: ${MOD_VERSION2}`);
   }
   __name(init, "init");
   __name2(init, "init");
   function initModules(modulesToRegister) {
-    const MOD_NAME = ModSdkManager.ModInfo.name;
     for (const module of modulesToRegister) {
       registerModule(module);
     }
@@ -1009,7 +1011,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     for (const module of modules()) {
       module.run();
     }
-    deepLibLogger.debug(`Modules Loaded for ${MOD_NAME}.`);
+    logger.debug("Modules Loaded.");
     return true;
   }
   __name(initModules, "initModules");
@@ -1018,7 +1020,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     const MOD_NAME = ModSdkManager.ModInfo.name;
     unloadModules();
     delete window[MOD_NAME + "Loaded"];
-    deepLibLogger.debug(`Unloaded ${MOD_NAME}.`);
+    logger.debug("Unloaded.");
     return true;
   }
   __name(unloadMod, "unloadMod");
@@ -1048,8 +1050,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(getModule, "getModule");
   __name2(getModule, "getModule");
   var _a3;
-  var BaseMigrator2 = (_a3 = class {
-  }, __name(_a3, "BaseMigrator2"), __name2(_a3, "BaseMigrator"), _a3);
+  var BaseMigrator = (_a3 = class {
+  }, __name(_a3, "BaseMigrator"), __name2(_a3, "BaseMigrator"), _a3);
   var _a4;
   var GUI = (_a4 = class extends BaseModule {
     /** 
@@ -1120,6 +1122,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
     constructor(options2) {
       super();
       _a5.newVersionMessage = options2.newVersionMessage;
+      if (options2.migrators) {
+        _a5.migrators = options2.migrators;
+        _a5.migrators.sort((a, b) => a.migrationVersion.localeCompare(b.migrationVersion));
+      }
       _a5.beforeEach = options2.beforeEach;
       _a5.afterEach = options2.afterEach;
       _a5.beforeAll = options2.beforeAll;
@@ -1175,14 +1181,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
         _a5.afterEach?.();
       }
       _a5.afterAll?.();
-    }
-    /**
-     * Registers a new migrator for handling version-specific changes.
-     * Migrators are sorted by their `MigrationVersion` in ascending order.
-     */
-    static registerMigrator(migrator) {
-      _a5.migrators.push(migrator);
-      _a5.migrators.sort((a, b) => a.migrationVersion.localeCompare(b.migrationVersion));
     }
     /** Sends the currently configured "new version" message to the local player. */
     static sendNewVersionMessage() {
@@ -1246,13 +1244,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
   }, __name(_a5, "_VersionModule"), __name2(_a5, "VersionModule"), /** Whether the current session is running a new version compared to stored data */
   __publicField(_a5, "isItNewVersion", false), /** The current mod version (retrieved from `ModSdkManager.ModInfo.version`) */
-  __publicField(_a5, "version"), /** Message to display when a new version is detected */
-  __publicField(_a5, "newVersionMessage", ""), /** List of registered migration handlers, sorted by version */
-  __publicField(_a5, "migrators", []), /** Optional lifecycle hook. Runs before each migration */
-  __publicField(_a5, "beforeEach"), /** Optional lifecycle hook. Runs after each migration */
-  __publicField(_a5, "afterEach"), /** Optional lifecycle hook. Runs before all migrations */
-  __publicField(_a5, "beforeAll"), /** Optional lifecycle hook. Runs after all migrations */
-  __publicField(_a5, "afterAll"), _a5);
+  __publicField(_a5, "version"), __publicField(_a5, "newVersionMessage", ""), /** List of registered migration handlers, sorted by version */
+  __publicField(_a5, "migrators", []), __publicField(_a5, "beforeEach"), __publicField(_a5, "afterEach"), __publicField(_a5, "beforeAll"), __publicField(_a5, "afterAll"), _a5);
   var _a6;
   var GuiDebug = (_a6 = class extends BaseSubscreen {
     get pageStructure() {
@@ -2233,7 +2226,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           PreferenceSubscreenExtensionsClear();
         });
       } else if (returnScreen instanceof BaseSubscreen) {
-        setSubscreen(returnScreen ?? null).then(() => {
+        setSubscreen(returnScreen).then(() => {
         });
       } else if (Array.isArray(returnScreen)) {
         CommonSetScreen(...returnScreen);
@@ -2320,7 +2313,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (transferMethod === "clipboard") {
           await this.exportToClipboard(data);
         } else if (transferMethod === "file") {
-          await this.exportToFile(data, "themed_settings");
+          if (!await this.exportToFile(data, "settings")) {
+            return;
+          }
+          ;
         }
         this.importExportOptions.onExport?.();
         ToastManager.success("Data exported successfully.");
@@ -2344,6 +2340,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
         const data = JSON.parse(LZString.decompressFromBase64(importedData) ?? "");
         if (!data) {
           throw new Error("Invalid data.");
+        }
+        for (const module of modules()) {
+          module.registerDefaultSettings(data);
         }
         modStorage.playerStorage = data;
         this.importExportOptions.onImport?.();
@@ -2371,13 +2370,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
           const writable = await handle.createWritable();
           await writable.write(data);
           await writable.close();
+          return true;
         } catch (error) {
           throw new Error("File save cancelled or failed: " + error.message);
         }
       } else {
         const fileName = await Modal.prompt("Enter file name", suggestedName);
         if (fileName === null) {
-          return;
+          return false;
         } else if (fileName === "") {
           throw new Error("File name cannot be empty.");
         }
@@ -2391,6 +2391,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         });
         link2.click();
         URL.revokeObjectURL(link2.href);
+        return true;
       }
     }
     /** Opens a file picker and reads the selected file's contents, importing the data. */
@@ -3248,7 +3249,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   __name(repatchLoginPage, "repatchLoginPage");
 
   // src/migrators/v140_migrator.ts
-  var _V140Migrator = class _V140Migrator extends BaseMigrator2 {
+  var _V140Migrator = class _V140Migrator extends BaseMigrator {
     get migrationVersion() {
       return "1.4.0";
     }
@@ -5103,7 +5104,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = false ? `${"1.6.1"} - ${"acfa69b6"}` : "1.6.1";
+  var MOD_VERSION_CAPTION = false ? `${"1.6.2"} - ${"30668ee2"}` : "1.6.2";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -6344,7 +6345,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var IntegrationModule = _IntegrationModule;
 
   // src/utilities/console.ts
-  var logger = new Logger("Themed");
+  var logger2 = new Logger("Themed");
 
   // src/screens/profiles.ts
   var _GuiProfiles = class _GuiProfiles extends BaseSubscreen {
@@ -6530,7 +6531,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     isValidProfileId(id) {
       if (id < 1 || id > 3) {
-        logger.warn(`Invalid profile id ${id}`);
+        logger2.warn(`Invalid profile id ${id}`);
         return false;
       }
       return true;
@@ -6672,7 +6673,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var ShareModule = _ShareModule;
 
   // src/migrators/deeplib_migrator.ts
-  var _DeeplibMigrator = class _DeeplibMigrator extends BaseMigrator2 {
+  var _DeeplibMigrator = class _DeeplibMigrator extends BaseMigrator {
     get migrationVersion() {
       return "1.6.0";
     }
@@ -6788,11 +6789,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
     confirm() {
       settingsReset();
       for (const module of modules()) {
-        module.registerDefaultSettings();
+        module.registerDefaultSettings(modStorage.playerStorage);
       }
       ColorsModule.reloadTheme();
-      this.setSubscreen(null);
-      PreferenceSubscreenExtensionsClear();
+      PreferenceOpenSubscreen("Extensions").then(() => {
+        PreferenceSubscreenExtensionsClear();
+      });
     }
   };
   __name(_GuiReset, "GuiReset");
