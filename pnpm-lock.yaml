@@ -43,8 +43,8 @@ importers:
         specifier: ^8.43.0
         version: 8.43.0(eslint@9.35.0)(typescript@5.9.2)
       bc-stubs:
-        specifier: ~117.0.1
-        version: 117.0.1
+        specifier: ~121.0.0
+        version: 121.0.0
       chokidar:
         specifier: ^4.0.3
         version: 4.0.3
@@ -521,8 +521,8 @@ packages:
     resolution: {integrity: sha512-8EQaX5tWXiofLhQH+mYuyI7eZ4w5k6us89GuVBryptGskzYS72z5SfJ9ujPdfriHbfspYoUYb4OVW4tAQWI/hg==}
     hasBin: true
 
-  bc-stubs@117.0.1:
-    resolution: {integrity: sha512-QDIPXr+nOLTR6hQuwSKCDivhcIGXrVU/br8tzmBnD/g1asIPJWEqOZpqe/vs570n8fgOL12imG7hSdPcfjdpYA==}
+  bc-stubs@121.0.0:
+    resolution: {integrity: sha512-G+jJqA66CtYWyIPcPQ47naDZPOQfRXTYIpe5T6KuEsmbRrXhsG4n1S1ghtLxaZoUJddyr2MQ5jxh/oE5w1aUBw==}
 
   bondage-club-mod-sdk@1.2.0:
     resolution: {integrity: sha512-S+li+PgX7Qo5yccS/R/eAXC4Opq8lc5AdhTPjC2XhWxDGTieUQKj3QJ4ZLgL8x0ySnK7h+DvlkRZd8+OT5JErQ==}
@@ -1697,7 +1697,7 @@ snapshots:
       - sass-embedded
       - supports-color
 
-  bc-stubs@117.0.1:
+  bc-stubs@121.0.0:
     dependencies:
       socket.io-client: 4.6.1
     transitivePeerDependencies:
