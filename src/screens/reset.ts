@@ -125,7 +125,8 @@ export class GuiReset extends BaseSubscreen {
 
     ColorsModule.reloadTheme();
 
-    this.setSubscreen(null);
-    PreferenceSubscreenExtensionsClear();
+    PreferenceOpenSubscreen('Extensions').then(() => {
+      PreferenceSubscreenExtensionsClear();
+    });
   }
 }
