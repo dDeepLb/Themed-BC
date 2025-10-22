@@ -1,31 +1,16 @@
-#fusam-addon-manager-container {
-  color: var(--tmd-text);
-  background-color: color-mix(in srgb, var(--tmd-main) 80%, rgba(0, 0, 0, 0.8) 100%);
+body {
+  --fusam-text: var(--tmd-text);
+  --fusam-text-placeholder: var(--tmd-accent);
+  --fusam-main: var(--tmd-main);
+  --fusam-inset-element: var(--tmd-main);
+  --fusam-element: var(--tmd-element);
+  --fusam-border: var(--tmd-accent);
 }
 
-.fusam.button,
-.fusam .button {
-  border-color: var(--tmd-accent);
-  background-color: var(--tmd-element);
-  color: var(--tmd-text);
+body[data-tmd-theme-type="dark"] {
+  --icon-filter: invert(1);
 }
 
-.fusam.button:hover,
-.fusam .button:hover,
-.fusam.button:focus,
-.fusam .button:focus,
-.fusam select:hover,
-.fusam select:focus {
-  background-color: var(--tmd-accent);
-}
-
-.fusam select,
-.fusam option {
-  border-color: var(--tmd-accent);
-  background-color: var(--tmd-element);
-  color: var(--tmd-text);
-}
-
-.fusam select:disabled:hover {
-  background-color: var(--tmd-element-disabled);
+body[data-tmd-theme-type="light"] {
+  --icon-filter: none;
 }
