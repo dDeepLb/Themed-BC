@@ -40,7 +40,7 @@
 
     &[data-full=true] {
       --button-color: var(--tmd-element-disabled);
-      --hover-color: var(--tmd-element-disabled-hover);
+      --hover-color: color-mix(in srgb, var(--tmd-element-disabled), var(--tmd-element-hover) 50%);
 
       &[data-blocked=true] {
         --button-color: var(--tmd-search-full-blocked);
