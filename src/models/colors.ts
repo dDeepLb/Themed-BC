@@ -20,6 +20,7 @@ export type BaseColorsModel = {
   elementDisabled: string;
   elementHint: string;
   text: string;
+  textDisabled: string;
   textShadow: string;
 };
 

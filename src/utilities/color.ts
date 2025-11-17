@@ -8,6 +8,7 @@ export const plainColors: BaseColorsModel = {
   elementDisabled: '',
   elementHint: '',
   text: '',
+  textDisabled: '',
   textShadow: '',
   accent: '',
   accentHover: '',
@@ -81,10 +82,11 @@ export const _Color = {
       plainColors.elementDisabled = Color(elementColor).darken(0.2).hex();
       plainColors.elementHint = Color(elementColor).lighten(0.2).hex();
       plainColors.text = textColor;
+      plainColors.textDisabled = Color(textColor).darken(0.2).hex();
+      plainColors.textShadow = Color(textColor).darken(0.2).hex();
       plainColors.accent = accentColor;
       plainColors.accentHover = Color(accentColor).lighten(0.2).hex();
       plainColors.accentDisabled = Color(accentColor).darken(0.2).hex();
     }
-    plainColors.textShadow = _Color.getHexComputed('rgba(0,0,0,0.5)');
   },
 };

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       bc-deeplib:
-        specifier: ^2.3.0
-        version: 2.3.0(sass-embedded@1.90.0)
+        specifier: ^2.4.1
+        version: 2.4.1(sass-embedded@1.90.0)
       bondage-club-mod-sdk:
         specifier: ^1.2.0
         version: 1.2.0
@@ -81,8 +81,8 @@ importers:
 
 packages:
 
-  '@bufbuild/protobuf@2.9.0':
-    resolution: {integrity: sha512-rnJenoStJ8nvmt9Gzye8nkYd6V22xUAnu4086ER7h1zJ508vStko4pMvDeQ446ilDTFpV5wnoc5YS7XvMwwMqA==}
+  '@bufbuild/protobuf@2.10.1':
+    resolution: {integrity: sha512-ckS3+vyJb5qGpEYv/s1OebUHDi/xSNtfgw1wqKZo7MR9F2z+qXr0q5XagafAG/9O0QPVIUfST0smluYSTpYFkg==}
 
   '@esbuild/aix-ppc64@0.25.9':
     resolution: {integrity: sha512-OaGtL73Jck6pBKjNIe24BnFE6agGl+6KxDtTfHhy1HmhthfKouEcOhqpSL64K4/0WCtbKFLOdzD/44cJ4k9opA==}
@@ -517,8 +517,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bc-deeplib@2.3.0:
-    resolution: {integrity: sha512-fol27FKF3e76h+40XijabhO3ypqkjK1SMnkH+GFuHphT9L6cF3xxJW1ovLv5lKi7QvOU7P/EVHuDAnRUhA1z+g==}
+  bc-deeplib@2.4.1:
+    resolution: {integrity: sha512-gernXKeKJUS9tfD45jTEyqdbs3H4nD8bG/a1TKM8DWMvkyJ45dtsCuB8ZVE8EyOXEInoTg8jQD2Wm7xF5sazyA==}
     hasBin: true
 
   bc-stubs@121.0.0:
@@ -1314,7 +1314,7 @@ packages:
 
 snapshots:
 
-  '@bufbuild/protobuf@2.9.0': {}
+  '@bufbuild/protobuf@2.10.1': {}
 
   '@esbuild/aix-ppc64@0.25.9':
     optional: true
@@ -1684,7 +1684,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bc-deeplib@2.3.0(sass-embedded@1.90.0):
+  bc-deeplib@2.4.1(sass-embedded@1.90.0):
     dependencies:
       bondage-club-mod-sdk: 1.2.0
       chokidar: 4.0.3
@@ -2280,7 +2280,7 @@ snapshots:
 
   sass-embedded@1.90.0:
     dependencies:
-      '@bufbuild/protobuf': 2.9.0
+      '@bufbuild/protobuf': 2.10.1
       buffer-builder: 0.2.0
       colorjs.io: 0.5.2
       immutable: 5.1.4

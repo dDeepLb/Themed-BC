@@ -1,6 +1,6 @@
 {
   "name": "themed-bc",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Bondage Club now with themes!",
   "private": true,
   "type": "module",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/dDeepLb/Themed-BC#readme",
   "dependencies": {
-    "bc-deeplib": "^2.3.0",
+    "bc-deeplib": "^2.4.1",
     "bondage-club-mod-sdk": "^1.2.0",
     "color": "^5.0.0"
   },

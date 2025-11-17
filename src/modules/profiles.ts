@@ -1,4 +1,4 @@
-import { BaseModule, deepMergeMatchingProperties, getModule, modStorage, Subscreen } from 'bc-deeplib/deeplib';
+import { BaseModule, deepMerge, getModule, modStorage, Subscreen } from 'bc-deeplib/deeplib';
 import { ProfileSaveModel, ProfilesSettingsModel } from '../models/profiles';
 import { GuiProfiles } from '../screens/profiles';
 import { ColorsModule } from './colors';
@@ -37,7 +37,7 @@ export class ProfilesModule extends BaseModule {
       }
       
       if (Object.keys(data[profileIndex].data).length > 0) 
-        data[profileIndex].data = deepMergeMatchingProperties<ProfileSaveModel>(profileDefaults, data[profileIndex].data);
+        data[profileIndex].data = deepMerge(profileDefaults, data[profileIndex].data);
     }
 
     return data;
