@@ -5,7 +5,7 @@ var Themed = (() => {
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // node_modules/.pnpm/bc-deeplib@2.3.0_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  // node_modules/.pnpm/bc-deeplib@2.4.1_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
   var __create = Object.create;
   var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -271,7 +271,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
      * Subclasses can override to perform additional setup.
      */
     init() {
-      this.registerDefaultSettings(modStorage.playerStorage);
     }
     /**
      * Registers default settings for this module in persistent storage.
@@ -284,7 +283,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
       const storage = this.settingsStorage;
       const defaults = this.defaultSettings;
       if (!storage || !defaults) return;
-      target[storage] = Object.assign(defaults, target[storage] ?? {});
+      if (Object.entries(this.defaultSettings).length === 0) return;
+      target[storage] = deepMerge(this.defaultSettings, target[storage], { concatArrays: false });
     }
     /**
      * Provides default settings for this module.
@@ -426,8 +426,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
       layout.getSubscreen();
       const settingsElement = layout.getSettingsDiv();
       layout.appendToSubscreen(settingsElement);
-      const menu = ElementMenu.Create("deeplib-nav-menu", []);
-      layout.appendToSubscreen(menu);
+      _a2.menu = ElementMenu.Create("deeplib-nav-menu", []);
+      layout.appendToSubscreen(_a2.menu);
       if (this.pageStructure.length > 1) {
         const backNext = advElement.createBackNext({
           id: "deeplib-page-back-next",
@@ -437,7 +437,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           initialPrevTooltip: getText("settings.button.prev_button_hint"),
           initialLabel: this.getPageLabel()
         });
-        ElementMenu.PrependItem(menu, backNext);
+        _a2.menu.prepend(backNext);
       }
       if (this.options.help) {
         const onClick = this.options.help.onClick;
@@ -461,7 +461,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
             tooltip: this.options.help.tooltip
           }
         });
-        ElementMenu.AppendButton(menu, helpButton);
+        _a2.menu.append(helpButton);
       }
       if (this.options.doShowTitle) {
         const subscreenTitle = advElement.createLabel({
@@ -482,7 +482,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
             tooltip: getText("settings.button.back_button_hint")
           }
         });
-        ElementMenu.AppendButton(menu, exitButton);
+        _a2.menu.append(exitButton);
       }
       const tooltip = advElement.createTooltip();
       layout.appendToSubscreen(tooltip);
@@ -610,7 +610,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     doShowTitle: true,
     settingsWidth: 1e3,
     forceUpCharacter: false
-  }), _a2);
+  }), /** The menu at the top of the subscreen */
+  __publicField(_a2, "menu", null), _a2);
   var styles_default = `.deeplib-subscreen,
 .deeplib-modal {
   --deeplib-background-color: var(--tmd-main, white);
@@ -633,12 +634,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
   width: 100%;
   height: 100%;
 }
-
-.deeplib-button.button-styling,
-.deeplib-button.button-styling::before {
+.deeplib-button.button-styling, .deeplib-button.button-styling::before {
   border-radius: min(1dvh, 0.5dvw);
 }
-
 .deeplib-button img {
   position: absolute;
   top: 0%;
@@ -658,17 +656,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
   mask-image: var(--image);
   pointer-events: none;
 }
-
 .deeplib-button:hover img {
   background-color: var(--deeplib-icon-hover-color);
 }
-
 .deeplib-button .button-label {
   background-color: transparent !important;
   color: var(--deeplib-text-color);
   font-size: min(3.6dvh, 1.8dvw);
+  display: contents;
 }
-
 .deeplib-button .button-tooltip {
   border-radius: min(1dvh, 0.5dvw);
 }
@@ -677,11 +673,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 #deeplib-subscreen-title {
   text-align: left;
   color: var(--deeplib-text-color);
+  user-select: none;
+  pointer-events: none;
 }
 
 .deeplib-text {
@@ -751,12 +750,17 @@ One of mods you are using is using an old version of SDK. It will work for now b
 }
 .deeplib-prev-next .deeplib-prev-next-label {
   white-space: nowrap;
+  user-select: none;
 }
 
 #deeplib-nav-menu {
   display: flex;
   flex-direction: row;
   gap: min(2dvh, 1dvw);
+  z-index: 1;
+}
+#deeplib-nav-menu > .deeplib-button {
+  flex: 1 0 auto;
 }
 
 #deeplib-storage-meter {
@@ -771,8 +775,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   border-radius: var(--deeplib-border-radius);
   z-index: -1;
 }
-
-#deeplib-storage-bar {
+#deeplib-storage-meter #deeplib-storage-bar {
   height: 100%;
   width: 0%;
   background: var(--deeplib-accent-color);
@@ -783,9 +786,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
   flex-direction: row;
   align-items: center;
   gap: 0.3em;
+  width: fit-content;
 }
-
-.deeplib-checkbox-container input.deeplib-input {
+.deeplib-checkbox-container span {
+  user-select: none;
+}
+.deeplib-checkbox-container .deeplib-input {
   width: min(5vh, 2.5vw);
   height: min(5vh, 2.5vw);
   width: min(5dvh, 2.5dvw);
@@ -793,8 +799,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   border-radius: min(1vh, 0.5vw);
   border-radius: min(1dvh, 0.5dvw);
 }
-
-.deeplib-checkbox-container input.deeplib-input[type=checkbox]:checked::before {
+.deeplib-checkbox-container .deeplib-input[type=checkbox]:checked::before {
   width: 80%;
   height: 80%;
 }
@@ -804,14 +809,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
   flex-direction: row;
   align-items: center;
   gap: 0.3em;
+  width: fit-content;
 }
-
-.deeplib-input-container:has(label.deeplib-text) {
+.deeplib-input-container span {
+  user-select: none;
+}
+.deeplib-input-container:has(.deeplib-text) {
   margin-top: min(1vh, 0.5vw);
   margin-top: min(1dvh, 0.5dvw);
 }
-
-.deeplib-input-container input.deeplib-input {
+.deeplib-input-container .deeplib-input {
   font-size: 0.6em;
   padding: min(1vh, 0.5vw);
   padding: min(1dvh, 0.5dvw);
@@ -822,8 +829,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   border-radius: min(1vh, 0.5vw);
   border-radius: min(1dvh, 0.5dvw);
 }
-
-.deeplib-input-container input.deeplib-input[type=color] {
+.deeplib-input-container .deeplib-input[type=color] {
   padding: 0px;
   width: min(5vh, 2.5vw);
   height: min(5vh, 2.5vw);
@@ -831,8 +837,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   height: min(5dvh, 2.5dvw);
   border-radius: 0px;
 }
-
-.deeplib-input-container input.deeplib-input[type=color]:disabled {
+.deeplib-input-container .deeplib-input[type=color]:disabled {
   border: var(--deeplib-blocked-color) solid var(--deeplib-border-width);
   cursor: not-allowed;
 }
@@ -844,12 +849,16 @@ One of mods you are using is using an old version of SDK. It will work for now b
   gap: min(2vh, 1vw);
   gap: min(2dvh, 1dvw);
   color: var(--deeplib-text-color);
+  width: fit-content;
 }
 .deeplib-dropdown-container select {
   padding: 0 min(1vh, 0.5vw);
   padding: 0 min(1dvh, 0.5dvw);
   border-radius: min(1vh, 0.5vw);
   border-radius: min(1dvh, 0.5dvw);
+}
+.deeplib-dropdown-container span {
+  user-select: none;
 }
 
 .deeplib-highlight-text {
@@ -944,7 +953,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.5);
 }
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21udC9zaGluZG93cy9TdHVmZi9Db2RlL2JjL0JDLURlZXBMaWIvc3JjL3N0eWxlcyIsInNvdXJjZXMiOlsidmFycy5zY3NzIiwiYnV0dG9ucy5zY3NzIiwiZWxlbWVudHMuc2NzcyIsImlucHV0cy5zY3NzIiwibWVzc2FnZXMuc2NzcyIsIm1vZGFsLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtFQUVFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUNkRjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFFQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFOzs7QUMzQ0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBR0U7RUFDRTtFQUNBOztBQUhKO0VBTUU7RUFDQTs7QUFHRjtFQUNFOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7OztBQ3pHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7RUFDRTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUN2RUo7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FDN0JGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUdGO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFLTjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmRlZXBsaWItc3Vic2NyZWVuLFxuLmRlZXBsaWItbW9kYWwge1xuICAtLWRlZXBsaWItYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tdG1kLW1haW4sIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1hY2NlbnQtY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsICNGRkZGODgpO1xuICAtLWRlZXBsaWItYmxvY2tlZC1jb2xvcjogdmFyKC0tdG1kLWJsb2NrZWQsIHJlZCk7XG4gIC0tZGVlcGxpYi10ZXh0LWNvbG9yOiB2YXIoLS10bWQtdGV4dCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWFjY2VudC1ob3ZlciwgYmxhY2spO1xuICAtLWRlZXBsaWItYm9yZGVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJ2aCwgMC4xdncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXdpZHRoOiBtaW4oMC4yZHZoLCAwLjFkdncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXJhZGl1czogbWluKDF2aCwgMC41dncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXJhZGl1czogbWluKDFkdmgsIDAuNWR2dyk7XG59XG4iLCIuZGVlcGxpYi1idXR0b24ge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLmRlZXBsaWItYnV0dG9uLmJ1dHRvbi1zdHlsaW5nLFxuLmRlZXBsaWItYnV0dG9uLmJ1dHRvbi1zdHlsaW5nOjpiZWZvcmUge1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1idXR0b24gaW1nIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDAlO1xuICBsZWZ0OiAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZC1wb3NpdGlvbjogbGVmdDtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1pY29uLWNvbG9yKTtcbiAgYmFja2dyb3VuZC1ibGVuZC1tb2RlOiBtdWx0aXBseTtcbiAgYmFja2dyb3VuZC1zaXplOiBjb250YWluO1xuICBtYXNrLXBvc2l0aW9uOiBsZWZ0O1xuICBtYXNrLXNpemU6IGNvbnRhaW47XG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIG1hc2stcmVwZWF0OiBuby1yZXBlYXQ7XG4gIGNvbG9yOiB0cmFuc3BhcmVudDtcblxuICBiYWNrZ3JvdW5kLWltYWdlOiB2YXIoLS1pbWFnZSk7XG4gIG1hc2staW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG59XG5cbi5kZWVwbGliLWJ1dHRvbjpob3ZlciBpbWcge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWljb24taG92ZXItY29sb3IpO1xufVxuXG4uZGVlcGxpYi1idXR0b24gLmJ1dHRvbi1sYWJlbCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBmb250LXNpemU6IG1pbigzLjZkdmgsIDEuOGR2dyk7XG59XG5cbi5kZWVwbGliLWJ1dHRvbiAuYnV0dG9uLXRvb2x0aXAge1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuIiwiI2RlZXBsaWItcGFnZS1sYWJlbCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuXG4jZGVlcGxpYi1zdWJzY3JlZW4tdGl0bGUge1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuLmRlZXBsaWItdGV4dCB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi1zdWJzY3JlZW4ge1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDA7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xufVxuXG4uZGVlcGxpYi1zdWJzY3JlZW4gKiB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBvaW50ZXItZXZlbnRzOiBhbGw7XG59XG5cbi5kZWVwbGliLXNldHRpbmdzIHtcbiAgZGlzcGxheTogZ3JpZDtcbiAgZ3JpZC1hdXRvLXJvd3M6IG1pbi1jb250ZW50O1xuICBwYWRkaW5nOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1taXNjIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbi1yZXZlcnNlO1xuICBnYXA6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItdG9vbHRpcCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgcGFkZGluZzogbWluKDF2aCwgMC41dncpO1xuICBmb250LXNpemU6IDAuOGVtO1xuICBib3JkZXI6IG1pbigwLjJ2aCwgMC4xdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgei1pbmRleDogMTtcbn1cblxuLmRlZXBsaWItb3ZlcmZsb3ctYm94IHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcikgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpO1xufVxuXG4uZGVlcGxpYi1wcmV2LW5leHQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGdhcDogbWluKDJkdmgsIDFkdncpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG5cbiAgLmRlZXBsaWItcHJldi1uZXh0LWJ1dHRvbiB7XG4gICAgJjpob3ZlciB7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtaG92ZXItY29sb3IpO1xuICAgICAgYm9yZGVyLXJhZGl1czogdmFyKC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzKTtcbiAgICB9XG4gICAgXG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIGFzcGVjdC1yYXRpbzogMTtcbiAgfVxuXG4gIC5kZWVwbGliLXByZXYtbmV4dC1sYWJlbCB7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgfVxufVxuXG4jZGVlcGxpYi1uYXYtbWVudSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGdhcDogbWluKDJkdmgsIDFkdncpO1xufVxuXG4jZGVlcGxpYi1zdG9yYWdlLW1ldGVyIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDBweDtcbiAgbGVmdDogMHB4O1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXI6IHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IHZhcigtLWRlZXBsaWItYm9yZGVyLXJhZGl1cyk7XG4gIHotaW5kZXg6IC0xO1xufVxuXG4jZGVlcGxpYi1zdG9yYWdlLWJhciB7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDAlO1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1kZWVwbGliLWFjY2VudC1jb2xvcik7XG59XG4iLCIuZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dCB7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICB3aWR0aDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjB2aCwgMC41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1jaGVja2JveC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl06Y2hlY2tlZDo6YmVmb3JlIHtcbiAgd2lkdGg6IDgwJTtcbiAgaGVpZ2h0OiA4MCU7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lcjpoYXMobGFiZWwuZGVlcGxpYi10ZXh0KSB7XG4gIG1hcmdpbi10b3A6IG1pbigxdmgsIDAuNXZ3KTtcbiAgbWFyZ2luLXRvcDogbWluKDFkdmgsIDAuNWR2dyk7XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciBpbnB1dC5kZWVwbGliLWlucHV0IHtcbiAgZm9udC1zaXplOiAwLjZlbTtcbiAgcGFkZGluZzogbWluKDF2aCwgMC41dncpO1xuICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIG91dGxpbmU6IG5vbmU7XG4gIG1pbi1oZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgbWluLWhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjB2aCwgMC41dncpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xufVxuXG4uZGVlcGxpYi1pbnB1dC1jb250YWluZXIgaW5wdXQuZGVlcGxpYi1pbnB1dFt0eXBlPVwiY29sb3JcIl0ge1xuICBwYWRkaW5nOiAwcHg7XG4gIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gIGhlaWdodDogbWluKDV2aCwgMi41dncpO1xuICB3aWR0aDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gIGJvcmRlci1yYWRpdXM6IDBweDtcbn1cblxuLmRlZXBsaWItaW5wdXQtY29udGFpbmVyIGlucHV0LmRlZXBsaWItaW5wdXRbdHlwZT1cImNvbG9yXCJdOmRpc2FibGVkIHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJsb2NrZWQtY29sb3IpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLXdpZHRoKTtcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcbn1cblxuLmRlZXBsaWItZHJvcGRvd24tY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiBtaW4oMnZoLCAxdncpO1xuICBnYXA6IG1pbigyZHZoLCAxZHZ3KTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG5cbiAgc2VsZWN0IHtcbiAgICBwYWRkaW5nOiAwIG1pbigxdmgsIDAuNXZ3KTtcbiAgICBwYWRkaW5nOiAwIG1pbigxZHZoLCAwLjVkdncpO1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxdmgsIDAuNXZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxufSIsIi5kZWVwbGliLWhpZ2hsaWdodC10ZXh0IHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiByZ2IoMjAzLCAxODUsIDIzKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlLFxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsyJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2Uge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgIzQ0MDE3MTtcbiAgY29sb3I6ICMxMTE7XG4gIHBhZGRpbmctbGVmdDogbWluKDAuNmR2aCwgMC4zZHZ3KTtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdoaXRlLXNwYWNlOiBub3JtYWw7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2dbZGF0YS1jb2xvcnRoZW1lPSdkYXJrJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhLFxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsyJ10gZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhIHtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSBhIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6ICMxMTE7XG59XG4iLCIuZGVlcGxpYi1tb2RhbCB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgdG9wOiAxMCU7XG4gIGxlZnQ6IDUwJTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpO1xuICB6LWluZGV4OiAxMDAxO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjVlbTtcbiAgd2lkdGg6IG1heCg1MGR2dywgMjVkdmgpO1xuICBmb250LXNpemU6IG1pbig0ZHZoLCAyZHZ3KTtcbiAgcGFkZGluZzogbWluKDJkdmgsIDFkdncpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBib3JkZXItcmFkaXVzOiBtaW4oMS4yZHZoLCAwLjZkdncpO1xuICBib3JkZXI6IG1pbigwLjJkdmgsIDAuMWR2dykgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcblxuICAuZGVlcGxpYi1tb2RhbC1pbnB1dCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZm9udC1zaXplOiBtaW4oMi42ZHZoLCAxLjhkdncpO1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gICAgcGFkZGluZzogbWluKDFkdmgsIDAuNWR2dyk7XG4gIH1cblxuICBpbnB1dC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICBtYXgtd2lkdGg6IG1heCg1MGR2aCwgMjVkdncpO1xuICB9XG5cbiAgLmRlZXBsaWItbW9kYWwtYnV0dG9uLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gICAgZ2FwOiAwLjVlbTtcbiAgICB3aWR0aDogMTAwJTtcblxuICAgIC5kZWVwbGliLWJ1dHRvbiB7XG4gICAgICBmb250LXNpemU6IDAuOGVtO1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgcGFkZGluZzogbWluKDAuNHZoLCAwLjJ2dykgbWluKDJ2aCwgMXZ3KTtcblxuICAgICAgLmJ1dHRvbi1sYWJlbCB7XG4gICAgICAgIGRpc3BsYXk6IGNvbnRlbnRzO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIC5kZWVwbGliLW1vZGFsLXByb21wdC1jb250YWluZXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG59XG5cbi5kZWVwbGliLW1vZGFsLWJsb2NrZXIge1xuICB6LWluZGV4OiAxMDAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMGR2dztcbiAgaGVpZ2h0OiAxMDBkdmg7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC41KTtcbn1cbiJdfQ== */`;
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL21udC9zaGluZG93cy9TdHVmZi9Db2RlL2JjL0JDLURlZXBMaWIvc3JjL3N0eWxlcyIsInNvdXJjZXMiOlsidmFycy5zY3NzIiwiYnV0dG9ucy5zY3NzIiwiZWxlbWVudHMuc2NzcyIsImlucHV0cy5zY3NzIiwibWVzc2FnZXMuc2NzcyIsIm1vZGFsLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtFQUVFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOzs7QUNkRjtFQUNFO0VBQ0E7RUFDQTs7QUFFQTtFQUVFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUVBO0VBQ0E7RUFDQTs7QUFHRjtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBR0Y7RUFDRTs7O0FDM0NKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7OztBQUdGO0VBQ0U7OztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUdFO0VBQ0U7RUFDQTs7QUFISjtFQU1FO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7OztBQ2pISjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7OztBQUtOO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7OztBQU9SO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTs7QUFHRjtFQUNFOzs7QUN2Rko7RUFDRTtFQUNBOzs7QUFHRjtBQUFBO0VBRUU7RUFDQTtFQUNBOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7O0FBR0Y7QUFBQTtFQUVFOzs7QUFHRjtFQUNFO0VBQ0E7RUFDQTs7O0FDN0JGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBOztBQUdGO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFLTjtFQUNFO0VBQ0E7RUFDQTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmRlZXBsaWItc3Vic2NyZWVuLFxuLmRlZXBsaWItbW9kYWwge1xuICAtLWRlZXBsaWItYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tdG1kLW1haW4sIHdoaXRlKTtcbiAgLS1kZWVwbGliLWVsZW1lbnQtY29sb3I6IHZhcigtLXRtZC1lbGVtZW50LCB3aGl0ZSk7XG4gIC0tZGVlcGxpYi1lbGVtZW50LWhvdmVyLWNvbG9yOiB2YXIoLS10bWQtZWxlbWVudC1ob3ZlciwgY3lhbik7XG4gIC0tZGVlcGxpYi1hY2NlbnQtY29sb3I6IHZhcigtLXRtZC1hY2NlbnQsICNGRkZGODgpO1xuICAtLWRlZXBsaWItYmxvY2tlZC1jb2xvcjogdmFyKC0tdG1kLWJsb2NrZWQsIHJlZCk7XG4gIC0tZGVlcGxpYi10ZXh0LWNvbG9yOiB2YXIoLS10bWQtdGV4dCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1jb2xvcjogdmFyKC0tdG1kLWFjY2VudCwgYmxhY2spO1xuICAtLWRlZXBsaWItaWNvbi1ob3Zlci1jb2xvcjogdmFyKC0tdG1kLWFjY2VudC1ob3ZlciwgYmxhY2spO1xuICAtLWRlZXBsaWItYm9yZGVyLWNvbG9yOiB2YXIoLS10bWQtYWNjZW50LCBibGFjayk7XG4gIC0tZGVlcGxpYi1ib3JkZXItd2lkdGg6IG1pbigwLjJ2aCwgMC4xdncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXdpZHRoOiBtaW4oMC4yZHZoLCAwLjFkdncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXJhZGl1czogbWluKDF2aCwgMC41dncpO1xuICAtLWRlZXBsaWItYm9yZGVyLXJhZGl1czogbWluKDFkdmgsIDAuNWR2dyk7XG59XG4iLCIuZGVlcGxpYi1idXR0b24ge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcblxuICAmLmJ1dHRvbi1zdHlsaW5nLFxuICAmLmJ1dHRvbi1zdHlsaW5nOjpiZWZvcmUge1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxLjBkdmgsIDAuNWR2dyk7XG4gIH1cblxuICBpbWcge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDAlO1xuICAgIGxlZnQ6IDAlO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBsZWZ0O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItaWNvbi1jb2xvcik7XG4gICAgYmFja2dyb3VuZC1ibGVuZC1tb2RlOiBtdWx0aXBseTtcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW47XG4gICAgbWFzay1wb3NpdGlvbjogbGVmdDtcbiAgICBtYXNrLXNpemU6IGNvbnRhaW47XG4gICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgICBtYXNrLXJlcGVhdDogbm8tcmVwZWF0O1xuICAgIGNvbG9yOiB0cmFuc3BhcmVudDtcblxuICAgIGJhY2tncm91bmQtaW1hZ2U6IHZhcigtLWltYWdlKTtcbiAgICBtYXNrLWltYWdlOiB2YXIoLS1pbWFnZSk7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gIH1cblxuICAmOmhvdmVyIGltZyB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1pY29uLWhvdmVyLWNvbG9yKTtcbiAgfVxuXG4gIC5idXR0b24tbGFiZWwge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50ICFpbXBvcnRhbnQ7XG4gICAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gICAgZm9udC1zaXplOiBtaW4oMy42ZHZoLCAxLjhkdncpO1xuICAgIGRpc3BsYXk6IGNvbnRlbnRzO1xuICB9XG5cbiAgLmJ1dHRvbi10b29sdGlwIHtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICB9XG59IiwiI2RlZXBsaWItcGFnZS1sYWJlbCB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuI2RlZXBsaWItc3Vic2NyZWVuLXRpdGxlIHtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG4gIHVzZXItc2VsZWN0OiBub25lO1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbn1cblxuLmRlZXBsaWItdGV4dCB7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xufVxuXG4uZGVlcGxpYi1zdWJzY3JlZW4ge1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDA7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xufVxuXG4uZGVlcGxpYi1zdWJzY3JlZW4gKiB7XG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIHBvaW50ZXItZXZlbnRzOiBhbGw7XG59XG5cbi5kZWVwbGliLXNldHRpbmdzIHtcbiAgZGlzcGxheTogZ3JpZDtcbiAgZ3JpZC1hdXRvLXJvd3M6IG1pbi1jb250ZW50O1xuICBwYWRkaW5nOiBtaW4oMS4wZHZoLCAwLjVkdncpO1xuICBnYXA6IDAuM2VtO1xufVxuXG4uZGVlcGxpYi1taXNjIHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbi1yZXZlcnNlO1xuICBnYXA6IG1pbigxdmgsIDAuNXZ3KTtcbn1cblxuLmRlZXBsaWItdG9vbHRpcCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgcGFkZGluZzogbWluKDF2aCwgMC41dncpO1xuICBmb250LXNpemU6IDAuOGVtO1xuICBib3JkZXI6IG1pbigwLjJ2aCwgMC4xdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgei1pbmRleDogMTtcbn1cblxuLmRlZXBsaWItb3ZlcmZsb3ctYm94IHtcbiAgYm9yZGVyOiB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcikgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpO1xufVxuXG4uZGVlcGxpYi1wcmV2LW5leHQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGdhcDogbWluKDJkdmgsIDFkdncpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtY29sb3IpO1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgYm9yZGVyOiBtaW4oMC4ydmgsIDAuMXZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG5cbiAgLmRlZXBsaWItcHJldi1uZXh0LWJ1dHRvbiB7XG4gICAgJjpob3ZlciB7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1kZWVwbGliLWVsZW1lbnQtaG92ZXItY29sb3IpO1xuICAgICAgYm9yZGVyLXJhZGl1czogdmFyKC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzKTtcbiAgICB9XG5cbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYXNwZWN0LXJhdGlvOiAxO1xuICB9XG5cbiAgLmRlZXBsaWItcHJldi1uZXh0LWxhYmVsIHtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgIHVzZXItc2VsZWN0OiBub25lO1xuICB9XG59XG5cbiNkZWVwbGliLW5hdi1tZW51IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG4gIHotaW5kZXg6IDE7XG5cbiAgJj4uZGVlcGxpYi1idXR0b24ge1xuICAgIGZsZXg6IDEgMCBhdXRvO1xuICB9XG59XG5cbiNkZWVwbGliLXN0b3JhZ2UtbWV0ZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMHB4O1xuICBsZWZ0OiAwcHg7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlcjogdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgYm9yZGVyLXJhZGl1czogdmFyKC0tZGVlcGxpYi1ib3JkZXItcmFkaXVzKTtcbiAgei1pbmRleDogLTE7XG5cbiAgI2RlZXBsaWItc3RvcmFnZS1iYXIge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICB3aWR0aDogMCU7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZGVlcGxpYi1hY2NlbnQtY29sb3IpO1xuICB9XG59IiwiLmRlZXBsaWItY2hlY2tib3gtY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjNlbTtcbiAgd2lkdGg6IGZpdC1jb250ZW50O1xuXG4gIHNwYW4ge1xuICAgIHVzZXItc2VsZWN0OiBub25lO1xuICB9XG5cbiAgLmRlZXBsaWItaW5wdXQge1xuICAgIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gICAgaGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gICAgd2lkdGg6IG1pbig1ZHZoLCAyLjVkdncpO1xuICAgIGhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMHZoLCAwLjV2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcblxuICAgICZbdHlwZT1cImNoZWNrYm94XCJdOmNoZWNrZWQ6OmJlZm9yZSB7XG4gICAgICB3aWR0aDogODAlO1xuICAgICAgaGVpZ2h0OiA4MCU7XG4gICAgfVxuICB9XG59XG5cbi5kZWVwbGliLWlucHV0LWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogMC4zZW07XG4gIHdpZHRoOiBmaXQtY29udGVudDtcblxuICBzcGFuIHtcbiAgICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgfVxuXG4gICY6aGFzKC5kZWVwbGliLXRleHQpIHtcbiAgICBtYXJnaW4tdG9wOiBtaW4oMXZoLCAwLjV2dyk7XG4gICAgbWFyZ2luLXRvcDogbWluKDFkdmgsIDAuNWR2dyk7XG4gIH1cblxuICAuZGVlcGxpYi1pbnB1dCB7XG4gICAgZm9udC1zaXplOiAwLjZlbTtcbiAgICBwYWRkaW5nOiBtaW4oMXZoLCAwLjV2dyk7XG4gICAgcGFkZGluZzogbWluKDFkdmgsIDAuNWR2dyk7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gICAgb3V0bGluZTogbm9uZTtcbiAgICBtaW4taGVpZ2h0OiBtaW4oNXZoLCAyLjV2dyk7XG4gICAgbWluLWhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMHZoLCAwLjV2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcblxuICAgICZbdHlwZT1cImNvbG9yXCJdIHtcbiAgICAgIHBhZGRpbmc6IDBweDtcbiAgICAgIHdpZHRoOiBtaW4oNXZoLCAyLjV2dyk7XG4gICAgICBoZWlnaHQ6IG1pbig1dmgsIDIuNXZ3KTtcbiAgICAgIHdpZHRoOiBtaW4oNWR2aCwgMi41ZHZ3KTtcbiAgICAgIGhlaWdodDogbWluKDVkdmgsIDIuNWR2dyk7XG4gICAgICBib3JkZXItcmFkaXVzOiAwcHg7XG5cbiAgICAgICY6ZGlzYWJsZWQge1xuICAgICAgICBib3JkZXI6IHZhcigtLWRlZXBsaWItYmxvY2tlZC1jb2xvcikgc29saWQgdmFyKC0tZGVlcGxpYi1ib3JkZXItd2lkdGgpO1xuICAgICAgICBjdXJzb3I6IG5vdC1hbGxvd2VkO1xuICAgICAgfVxuICAgIH1cbiAgfVxufVxuXG5cbi5kZWVwbGliLWRyb3Bkb3duLWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGdhcDogbWluKDJ2aCwgMXZ3KTtcbiAgZ2FwOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuICB3aWR0aDogZml0LWNvbnRlbnQ7XG5cbiAgc2VsZWN0IHtcbiAgICBwYWRkaW5nOiAwIG1pbigxdmgsIDAuNXZ3KTtcbiAgICBwYWRkaW5nOiAwIG1pbigxZHZoLCAwLjVkdncpO1xuICAgIGJvcmRlci1yYWRpdXM6IG1pbigxdmgsIDAuNXZ3KTtcbiAgICBib3JkZXItcmFkaXVzOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxuXG4gIHNwYW4ge1xuICAgIHVzZXItc2VsZWN0OiBub25lO1xuICB9XG59IiwiLmRlZXBsaWItaGlnaGxpZ2h0LXRleHQge1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6IHJnYigyMDMsIDE4NSwgMjMpO1xufVxuXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyayddIGRpdi5DaGF0TWVzc2FnZS5kZWVwbGliLW1lc3NhZ2UsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZGVlcGxpYi1lbGVtZW50LWNvbG9yKTtcbiAgYm9yZGVyOiBtaW4oMC4yZHZoLCAwLjFkdncpIHNvbGlkIHZhcigtLWRlZXBsaWItYm9yZGVyLWNvbG9yKTtcbiAgY29sb3I6IHZhcigtLWRlZXBsaWItdGV4dC1jb2xvcik7XG59XG5cbiNUZXh0QXJlYUNoYXRMb2cgZGl2LkNoYXRNZXNzYWdlLmRlZXBsaWItbWVzc2FnZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCAjNDQwMTcxO1xuICBjb2xvcjogIzExMTtcbiAgcGFkZGluZy1sZWZ0OiBtaW4oMC42ZHZoLCAwLjNkdncpO1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2hpdGUtc3BhY2U6IG5vcm1hbDtcbn1cblxuI1RleHRBcmVhQ2hhdExvZ1tkYXRhLWNvbG9ydGhlbWU9J2RhcmsnXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEsXG4jVGV4dEFyZWFDaGF0TG9nW2RhdGEtY29sb3J0aGVtZT0nZGFyazInXSBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjb2xvcjogdmFyKC0tZGVlcGxpYi10ZXh0LWNvbG9yKTtcbn1cblxuI1RleHRBcmVhQ2hhdExvZyBkaXYuQ2hhdE1lc3NhZ2UuZGVlcGxpYi1tZXNzYWdlIGEge1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBjb2xvcjogIzExMTtcbn1cbiIsIi5kZWVwbGliLW1vZGFsIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICB0b3A6IDEwJTtcbiAgbGVmdDogNTAlO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7XG4gIHotaW5kZXg6IDEwMDE7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBnYXA6IDAuNWVtO1xuICB3aWR0aDogbWF4KDUwZHZ3LCAyNWR2aCk7XG4gIGZvbnQtc2l6ZTogbWluKDRkdmgsIDJkdncpO1xuICBwYWRkaW5nOiBtaW4oMmR2aCwgMWR2dyk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWRlZXBsaWItZWxlbWVudC1jb2xvcik7XG4gIGJvcmRlci1yYWRpdXM6IG1pbigxLjJkdmgsIDAuNmR2dyk7XG4gIGJvcmRlcjogbWluKDAuMmR2aCwgMC4xZHZ3KSBzb2xpZCB2YXIoLS1kZWVwbGliLWJvcmRlci1jb2xvcik7XG4gIGNvbG9yOiB2YXIoLS1kZWVwbGliLXRleHQtY29sb3IpO1xuXG4gIC5kZWVwbGliLW1vZGFsLWlucHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXNpemU6IG1pbigyLjZkdmgsIDEuOGR2dyk7XG4gICAgYm9yZGVyLXJhZGl1czogbWluKDEuMGR2aCwgMC41ZHZ3KTtcbiAgICBwYWRkaW5nOiBtaW4oMWR2aCwgMC41ZHZ3KTtcbiAgfVxuXG4gIGlucHV0LmRlZXBsaWItbW9kYWwtaW5wdXQge1xuICAgIG1heC13aWR0aDogbWF4KDUwZHZoLCAyNWR2dyk7XG4gIH1cblxuICAuZGVlcGxpYi1tb2RhbC1idXR0b24tY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbiAgICBnYXA6IDAuNWVtO1xuICAgIHdpZHRoOiAxMDAlO1xuXG4gICAgLmRlZXBsaWItYnV0dG9uIHtcbiAgICAgIGZvbnQtc2l6ZTogMC44ZW07XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgICBwYWRkaW5nOiBtaW4oMC40dmgsIDAuMnZ3KSBtaW4oMnZoLCAxdncpO1xuXG4gICAgICAuYnV0dG9uLWxhYmVsIHtcbiAgICAgICAgZGlzcGxheTogY29udGVudHM7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgLmRlZXBsaWItbW9kYWwtcHJvbXB0LWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIH1cbn1cblxuLmRlZXBsaWItbW9kYWwtYmxvY2tlciB7XG4gIHotaW5kZXg6IDEwMDA7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICB3aWR0aDogMTAwZHZ3O1xuICBoZWlnaHQ6IDEwMGR2aDtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjUpO1xufVxuIl19 */`;
   var modStorage;
   var sdk;
   var logger;
@@ -987,12 +996,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
     await options2.initFunction?.();
     if (options2.mainMenuOptions)
       MainMenu.setOptions(options2.mainMenuOptions);
-    for (const m of modules()) {
-      if (m.defaultSettings && hasGetter(m, "defaultSettings") && m.settings && hasSetter(m, "settings")) {
-        if (Object.entries(m.defaultSettings).length === 0) continue;
-        m.settings = deepMergeMatchingProperties(m.defaultSettings, m.settings);
-      }
-    }
     window[MOD_NAME + "Loaded"] = true;
     logger.log(`Loaded! Version: ${MOD_VERSION2}`);
   }
@@ -1010,6 +1013,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     for (const module of modules()) {
       module.run();
+    }
+    for (const module of modules()) {
+      module.registerDefaultSettings(modStorage.playerStorage);
     }
     logger.debug("Modules Loaded.");
     return true;
@@ -1410,14 +1416,14 @@ One of mods you are using is using an old version of SDK. It will work for now b
     name: "debug"
   }), _a6);
   function isPlainObject(value) {
-    return value !== null && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype;
+    return value !== null && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype && !Array.isArray(value);
   }
   __name(isPlainObject, "isPlainObject");
   __name2(isPlainObject, "isPlainObject");
-  function deepMerge(target, source) {
+  function deepMerge(target, source, options2 = { concatArrays: true }) {
     if (target === void 0) return source;
     if (source === void 0) return target;
-    if (Array.isArray(target) && Array.isArray(source)) {
+    if (Array.isArray(target) && Array.isArray(source) && options2.concatArrays) {
       return [...target, ...source];
     }
     if (isPlainObject(target) && isPlainObject(source)) {
@@ -1426,7 +1432,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
         if (key === "__proto__" || key === "constructor" || key === "prototype") {
           continue;
         }
-        result[key] = key in target ? deepMerge(target[key], source[key]) : source[key];
+        result[key] = key in target ? deepMerge(target[key], source[key], options2) : source[key];
       }
       return result;
     }
@@ -1459,20 +1465,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(exportToGlobal, "exportToGlobal");
   __name2(exportToGlobal, "exportToGlobal");
-  function deepMergeMatchingProperties(mergeTo, mergeFrom) {
-    const mergedObject = { ...mergeTo };
-    for (const key in mergeFrom) {
-      if (mergeFrom[key] !== null && typeof mergeFrom[key] === "object") {
-        mergedObject[key] = deepMergeMatchingProperties(mergedObject[key] || {}, mergeFrom[key]);
-      } else if (key in mergedObject) {
-        mergedObject[key] = mergeFrom[key];
-      }
-    }
-    return mergedObject;
-  }
-  __name(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  __name2(deepMergeMatchingProperties, "deepMergeMatchingProperties");
-  function hasGetter(obj, prop) {
+  function hasGetter3(obj, prop) {
     while (obj && obj !== Object.prototype) {
       const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
       if (descriptor?.get) return true;
@@ -1480,9 +1473,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     return false;
   }
-  __name(hasGetter, "hasGetter");
-  __name2(hasGetter, "hasGetter");
-  function hasSetter(obj, prop) {
+  __name(hasGetter3, "hasGetter3");
+  __name2(hasGetter3, "hasGetter");
+  function hasSetter3(obj, prop) {
     while (obj && obj !== Object.prototype) {
       const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
       if (descriptor?.set) return true;
@@ -1490,8 +1483,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     return false;
   }
-  __name(hasSetter, "hasSetter");
-  __name2(hasSetter, "hasSetter");
+  __name(hasSetter3, "hasSetter3");
+  __name2(hasSetter3, "hasSetter");
   var byteToKB = /* @__PURE__ */ __name2((nByte) => Math.round(nByte / 100) / 10, "byteToKB");
   var advElement = {
     createButton: elementCreateButton,
@@ -1559,10 +1552,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
     options2.type = "checkbox";
     const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
     const retElem = ElementCreate(deepMerge({
-      tag: "div",
+      tag: "label",
       classList: ["deeplib-checkbox-container"],
       attributes: {
-        id: `${options2.id}-container`
+        id: `${options2.id}-container`,
+        for: options2.id
       },
       children: [
         deepMerge({
@@ -1581,10 +1575,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
           }
         }, options2.htmlOptions?.checkbox),
         deepMerge({
-          tag: "label",
+          tag: "span",
           classList: ["deeplib-text"],
           attributes: {
-            for: options2.id
+            id: `${options2.id}-label`
           },
           children: [options2.label]
         }, options2.htmlOptions?.label)
@@ -1622,10 +1616,11 @@ One of mods you are using is using an old version of SDK. It will work for now b
     if (elem) return elem;
     const disabled = typeof options2?.disabled === "function" ? options2?.disabled() : options2?.disabled;
     const retElem = ElementCreate(deepMerge({
-      tag: "div",
+      tag: "label",
       classList: ["deeplib-input-container"],
       attributes: {
-        id: `${options2.id}-container`
+        id: `${options2.id}-container`,
+        for: options2.id
       },
       children: [
         deepMerge({
@@ -1645,10 +1640,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
           }
         }, options2.htmlOptions?.input),
         options2.label ? deepMerge({
-          tag: "label",
+          tag: "span",
           classList: ["deeplib-text"],
           attributes: {
-            for: options2.id
+            id: `${options2.id}-label`
           },
           children: [options2.label]
         }, options2.htmlOptions?.label) : void 0
@@ -1672,7 +1667,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     if (elem) return elem;
     options2.type = "label";
     const retElem = ElementCreate(deepMerge({
-      tag: "span",
+      tag: "label",
       classList: ["deeplib-label", "deeplib-text"],
       attributes: {
         id: options2.id
@@ -1700,17 +1695,18 @@ One of mods you are using is using an old version of SDK. It will work for now b
     if (elem) return elem;
     options2.type = "dropdown";
     const retElem = ElementCreate(deepMerge({
-      tag: "div",
+      tag: "label",
       classList: ["deeplib-dropdown-container"],
       attributes: {
-        id: `${options2.id}-container`
+        id: `${options2.id}-container`,
+        for: options2.id
       },
       children: [
         options2.label ? deepMerge({
-          tag: "label",
+          tag: "span",
           classList: ["deeplib-text"],
           attributes: {
-            for: options2.id
+            id: `${options2.id}-label`
           },
           children: [options2.label]
         }, options2.htmlOptions?.label) : void 0,
@@ -2160,7 +2156,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       }
       if (_a8.options.storageFullnessIndicator) {
         const maxStorageCapacityKB = 180;
-        const currentStorageCapacityKB = byteToKB(ModStorage.measureSize(Player.OnlineSettings));
+        const currentStorageCapacityKB = byteToKB(ModStorage.measureSize(modStorage.extensionStorage));
         const fullness = (currentStorageCapacityKB / maxStorageCapacityKB * 100).toFixed(1);
         const storageFullnessWrapper = advElement.createButton({
           id: CommonGenerateUniqueID(),
@@ -4896,6 +4892,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
     elementDisabled: "",
     elementHint: "",
     text: "",
+    textDisabled: "",
     textShadow: "",
     accent: "",
     accentHover: "",
@@ -4950,11 +4947,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
         plainColors.elementDisabled = color_default(elementColor2).darken(0.2).hex();
         plainColors.elementHint = color_default(elementColor2).lighten(0.2).hex();
         plainColors.text = textColor2;
+        plainColors.textDisabled = color_default(textColor2).darken(0.2).hex();
+        plainColors.textShadow = color_default(textColor2).darken(0.2).hex();
         plainColors.accent = accentColor2;
         plainColors.accentHover = color_default(accentColor2).lighten(0.2).hex();
         plainColors.accentDisabled = color_default(accentColor2).darken(0.2).hex();
       }
-      plainColors.textShadow = _Color.getHexComputed("rgba(0,0,0,0.5)");
     }
   };
 
@@ -5104,7 +5102,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = true ? `${"1.6.2"} - ${"c6ef7137"}` : "1.6.2";
+  var MOD_VERSION_CAPTION = true ? `${"1.6.2"} - ${"989f70fd"}` : "1.6.2";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -5966,6 +5964,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       Style.injectInline("tmd-root", composeRoot());
       Style.injectEmbed("tmd-chat-room-search", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/chatroom_search.css`);
       Style.injectEmbed("tmd-preference", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/preference.css`);
+      Style.injectEmbed("tmd-misc", `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/styles/misc.css`);
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         if (!modStorage.playerStorage.IntegrationModule[id]) return;
@@ -5977,6 +5976,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       Style.eject("tmd-style");
       Style.eject("tmd-chat-room-search");
       Style.eject("tmd-preference");
+      Style.eject("tmd-misc");
       const styleIDs = Object.keys(styles);
       styleIDs.forEach((id) => {
         Style.eject(id);
@@ -6059,7 +6059,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
           accent: accentColor.hex(),
           accentHover: accentColor.lighten(0.3).hex(),
           accentDisabled: accentColor.darken(0.2).hex(),
-          text: textColor.hex()
+          text: textColor.hex(),
+          textDisabled: textColor.darken(0.2).hex(),
+          textShadow: textColor.darken(0.2).hex()
         },
         special: {
           equipped: specialColors2.equipped.hex(),
@@ -6075,8 +6077,12 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     load() {
     }
+    registerDefaultSettings(target) {
+      super.registerDefaultSettings(target);
+      _ColorsModule.reloadTheme();
+    }
     static reloadTheme() {
-      deepLibLogger.info("Reloading theme");
+      logger.info("Reloading theme");
       const themeType = getModule("ColorsModule").settings.themeSettings.themeType;
       document.body.dataset.tmdThemeType = themeType;
       _Color.composeRoot();
@@ -6582,7 +6588,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
           };
         }
         if (Object.keys(data[profileIndex].data).length > 0)
-          data[profileIndex].data = deepMergeMatchingProperties(profileDefaults, data[profileIndex].data);
+          data[profileIndex].data = deepMerge(profileDefaults, data[profileIndex].data);
       }
       return data;
     }
@@ -6809,6 +6815,10 @@ One of mods you are using is using an old version of SDK. It will work for now b
   // src/themed.ts
   (async () => {
     const changelog = await fetch(`${"https://ddeeplb.github.io/Themed-BC/dev/public"}/text/changelog.txt`).then((res) => res.text()).then((text) => text.replace(/\r\n/g, "\n"));
+    const migrators = [
+      new V140Migrator(),
+      new DeeplibMigrator()
+    ];
     const modules2 = [
       new GUI({
         buttonText: "Themed",
@@ -6823,12 +6833,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
       new CommandsModule(),
       new ShareModule(),
       new VersionModule({
-        newVersionMessage: changelog
+        newVersionMessage: changelog,
+        migrators
       })
-    ];
-    const migrators = [
-      new V140Migrator(),
-      new DeeplibMigrator()
     ];
     return initMod({
       beforeLogin: /* @__PURE__ */ __name(() => loadLoginOptions(), "beforeLogin"),
@@ -6852,7 +6859,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
         resetSubscreen: new GuiReset()
       },
       modules: modules2,
-      migrators,
       translationOptions: {
         pathToTranslationsFolder: `${"https://ddeeplb.github.io/Themed-BC/dev/public"}/translations/`
       }
