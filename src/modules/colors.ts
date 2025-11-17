@@ -5,7 +5,7 @@ import { _Color } from '../utilities/color';
 import { changeModColors } from '../utilities/integration';
 import { BcStyle } from '../utilities/style';
 import { GuiRedrawModule } from './gui_redraw';
-import { BaseModule, deepLibLogger, getModule, Subscreen } from 'bc-deeplib/deeplib';
+import { BaseModule, getModule, logger, Subscreen } from 'bc-deeplib/deeplib';
 
 const primaryColor = Color('#202020');
 const elementColor = primaryColor.lighten(0.2);
@@ -68,7 +68,7 @@ export class ColorsModule extends BaseModule {
   }
 
   static reloadTheme(): void {
-    deepLibLogger.info('Reloading theme');
+    logger.info('Reloading theme');
     const themeType = getModule<ColorsModule>('ColorsModule').settings.themeSettings.themeType;
     document.body.dataset.tmdThemeType = themeType
     _Color.composeRoot();
