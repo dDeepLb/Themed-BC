@@ -50,6 +50,8 @@ export class ColorsModule extends BaseModule {
         accentHover: accentColor.lighten(0.3).hex(),
         accentDisabled: accentColor.darken(0.2).hex(),
         text: textColor.hex(),
+        textDisabled: textColor.darken(0.2).hex(),
+        textShadow: textColor.darken(0.2).hex(),
       },
       special: {
         equipped: specialColors.equipped.hex(),
