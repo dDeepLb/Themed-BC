@@ -1,0 +1,37 @@
+/* #region InformationSheet */
+#AllowedInteractions-dropdown-label {
+  color: var(--tmd-text);
+}
+
+/* #endregion InformationSheet */
+/* #region Title */
+#title-subscreen-h1,
+#input-nickname-group {
+  color: var(--tmd-text);
+}
+
+#title-subscreen-titlebuttons .button.title-button[active] {
+  --button-color: var(--tmd-accent);
+  --hover-color: var(--tmd-accent-hover);
+  background-color: var(--tmd-accent);
+}
+
+/* #endregion Title */
+/* #region Keybindings */
+#keybind-main-content {
+  --border-color: var(--tmd-accent);
+  --text-color: var(--tmd-text);
+}
+
+.keybind-combo:disabled {
+  color: var(--tmd-text-disabled);
+}
+
+#keybind-manager .keybind-combo:not(:disabled) {
+  --button-color: var(--tmd-element);
+  --hover-color: var(--tmd-element-hover);
+  --disabled-color: var(--tmd-element-disabled);
+}
+
+/* #endregion Keybindings */
+/*# sourceMappingURL=misc.css.map */
