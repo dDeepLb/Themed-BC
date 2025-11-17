@@ -17,6 +17,11 @@ import { GuiReset } from './screens/reset';
     .then((res) => res.text())
     .then((text) => text.replace(/\r\n/g, '\n'));
 
+  const migrators: Array<BaseMigrator> = [
+    new V140Migrator(),
+    new DeeplibMigrator(),
+  ];
+
   const modules: Array<BaseModule> = [
     new GUI({
       buttonText: 'Themed',
@@ -31,13 +36,9 @@ import { GuiReset } from './screens/reset';
     new CommandsModule(),
     new ShareModule(),
     new VersionModule({
-      newVersionMessage: changelog
+      newVersionMessage: changelog,
+      migrators
     })
-  ];
-
-  const migrators: Array<BaseMigrator> = [
-    new V140Migrator(),
-    new DeeplibMigrator(),
   ];
 
   return initMod({
@@ -62,7 +63,6 @@ import { GuiReset } from './screens/reset';
       resetSubscreen: new GuiReset()
     },
     modules,
-    migrators,
     translationOptions: {
       pathToTranslationsFolder: `${PUBLIC_URL}/translations/`,
     }
