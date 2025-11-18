@@ -33,5 +33,17 @@
   --disabled-color: var(--tmd-element-disabled);
 }
 
+#keybind-help-sheet {
+  color: var(--tmd-text);
+  background-color: var(--tmd-element-hint);
+  border-color: var(--tmd-accent);
+}
+
+#keybind-modal {
+  color: var(--tmd-text);
+  background-color: color-mix(in srgb, var(--tmd-element-hint) 70%, transparent);
+  border-color: var(--tmd-accent);
+}
+
 /* #endregion Keybindings */
 /*# sourceMappingURL=misc.css.map */
