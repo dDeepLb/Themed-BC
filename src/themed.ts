@@ -43,11 +43,15 @@ import { GuiReset } from './screens/reset';
 
   return initMod({
     beforeLogin: () => loadLoginOptions(),
+    initFunction: () => {
+      ColorsModule.reloadTheme();
+    },
     modInfo: {
       info: {
         name: 'Themed',
         fullName: 'Themed',
-        version: MOD_VERSION_CAPTION
+        version: MOD_VERSION_CAPTION,
+        repository: 'https://github.com/dDeepLb/Themed-BC',
       }
     },
     mainMenuOptions: {
