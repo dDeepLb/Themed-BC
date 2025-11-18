@@ -43,6 +43,9 @@ import { GuiReset } from './screens/reset';
 
   return initMod({
     beforeLogin: () => loadLoginOptions(),
+    initFunction: () => {
+      ColorsModule.reloadTheme();
+    },
     modInfo: {
       info: {
         name: 'Themed',

@@ -69,11 +69,6 @@ export class ColorsModule extends BaseModule {
   load(): void {
   }
 
-  registerDefaultSettings(target: SettingsModel): void {
-    super.registerDefaultSettings(target);
-    ColorsModule.reloadTheme();
-  }
-
   static reloadTheme(): void {
     logger.info('Reloading theme');
     const themeType = getModule<ColorsModule>('ColorsModule').settings.themeSettings.themeType;
