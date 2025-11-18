@@ -5,7 +5,7 @@ var Themed = (() => {
   var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // node_modules/.pnpm/bc-deeplib@2.4.1_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
+  // node_modules/.pnpm/bc-deeplib@2.4.2_sass-embedded@1.90.0/node_modules/bc-deeplib/dist/deeplib.js
   var __create = Object.create;
   var __defProp2 = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -284,7 +284,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
       const defaults = this.defaultSettings;
       if (!storage || !defaults) return;
       if (Object.entries(this.defaultSettings).length === 0) return;
-      target[storage] = deepMerge(this.defaultSettings, target[storage], { concatArrays: false });
+      target[storage] = deepMerge(this.defaultSettings, target[storage], { concatArrays: false, matchingOnly: true });
     }
     /**
      * Provides default settings for this module.
@@ -1420,7 +1420,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(isPlainObject, "isPlainObject");
   __name2(isPlainObject, "isPlainObject");
-  function deepMerge(target, source, options2 = { concatArrays: true }) {
+  function deepMerge(target, source, options2 = { concatArrays: true, matchingOnly: false }) {
     if (target === void 0) return source;
     if (source === void 0) return target;
     if (Array.isArray(target) && Array.isArray(source) && options2.concatArrays) {
@@ -1428,10 +1428,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     if (isPlainObject(target) && isPlainObject(source)) {
       const result = { ...target };
-      for (const key of Object.keys(source)) {
-        if (key === "__proto__" || key === "constructor" || key === "prototype") {
-          continue;
-        }
+      const keys = options2.matchingOnly ? Object.keys(source).filter((k) => k in target) : Object.keys(source);
+      for (const key of keys) {
+        if (key === "__proto__" || key === "constructor" || key === "prototype") continue;
         result[key] = key in target ? deepMerge(target[key], source[key], options2) : source[key];
       }
       return result;
@@ -1465,7 +1464,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   }
   __name(exportToGlobal, "exportToGlobal");
   __name2(exportToGlobal, "exportToGlobal");
-  function hasGetter3(obj, prop) {
+  function hasGetter(obj, prop) {
     while (obj && obj !== Object.prototype) {
       const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
       if (descriptor?.get) return true;
@@ -1473,9 +1472,9 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     return false;
   }
-  __name(hasGetter3, "hasGetter3");
-  __name2(hasGetter3, "hasGetter");
-  function hasSetter3(obj, prop) {
+  __name(hasGetter, "hasGetter");
+  __name2(hasGetter, "hasGetter");
+  function hasSetter(obj, prop) {
     while (obj && obj !== Object.prototype) {
       const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
       if (descriptor?.set) return true;
@@ -1483,8 +1482,8 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     return false;
   }
-  __name(hasSetter3, "hasSetter3");
-  __name2(hasSetter3, "hasSetter");
+  __name(hasSetter, "hasSetter");
+  __name2(hasSetter, "hasSetter");
   var byteToKB = /* @__PURE__ */ __name2((nByte) => Math.round(nByte / 100) / 10, "byteToKB");
   var advElement = {
     createButton: elementCreateButton,
@@ -5102,7 +5101,7 @@ One of mods you are using is using an old version of SDK. It will work for now b
   var GuiColors = _GuiColors;
 
   // src/utilities/mod_definition.ts
-  var MOD_VERSION_CAPTION = true ? `${"1.7.0"} - ${"f8fae3ba"}` : "1.7.0";
+  var MOD_VERSION_CAPTION = true ? `${"1.7.0"} - ${"d92ec4b6"}` : "1.7.0";
   var ModuleCategory = {
     Global: "Global",
     Colors: "Colors",
@@ -6077,10 +6076,6 @@ One of mods you are using is using an old version of SDK. It will work for now b
     }
     load() {
     }
-    registerDefaultSettings(target) {
-      super.registerDefaultSettings(target);
-      _ColorsModule.reloadTheme();
-    }
     static reloadTheme() {
       logger.info("Reloading theme");
       const themeType = getModule("ColorsModule").settings.themeSettings.themeType;
@@ -6839,11 +6834,15 @@ One of mods you are using is using an old version of SDK. It will work for now b
     ];
     return initMod({
       beforeLogin: /* @__PURE__ */ __name(() => loadLoginOptions(), "beforeLogin"),
+      initFunction: /* @__PURE__ */ __name(() => {
+        ColorsModule.reloadTheme();
+      }, "initFunction"),
       modInfo: {
         info: {
           name: "Themed",
           fullName: "Themed",
-          version: MOD_VERSION_CAPTION
+          version: MOD_VERSION_CAPTION,
+          repository: "https://github.com/dDeepLb/Themed-BC"
         }
       },
       mainMenuOptions: {
