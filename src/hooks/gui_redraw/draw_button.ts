@@ -41,7 +41,7 @@ export function hookDrawButton() {
 		DrawTextFit(label, x + width / 2, y + (height / 2) + 1, width - 2 * buttonPadding, plainColors.text);
 		if (image) {
 			const img = DrawGetImage(image);
-			if (img.complete) {
+			if (img?.complete || img) {
 				const buttonRect = RectMakeRect(x + buttonPadding, y + buttonPadding, width - 2 * buttonPadding, height - 2 * buttonPadding);
 				const baseImageRect = RectMakeRect(x + buttonPadding, y + buttonPadding, img.width, img.height);
 				const [, imageRect] = RectFitIntoRect(baseImageRect, buttonRect, DrawingResizeMode.ShowFullOriginalRatio);
