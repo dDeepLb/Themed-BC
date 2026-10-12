@@ -6,7 +6,9 @@ export const _Image = {
     'Icons/LARP/',
     'Icons/MagicBattle/',
     'Screens/',
-    'http'
+    'http',
+		'Icons/Activity/',
+		'Icons/Expressions/'
   ],
 
   doColorizeImageIncludes: [
@@ -65,7 +67,9 @@ export const _Image = {
     'Icons/MagicBattle/',
     'Screens/',
     'http',
-    'data:'
+    'data:',
+		'Icons/Activity/',
+		'Icons/Expressions/'
   ],
 
   doColorizeHTMLImageIncludes: [
