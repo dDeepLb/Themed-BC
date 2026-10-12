@@ -8,7 +8,8 @@ export const _Image = {
     'Screens/',
     'http',
 		'Icons/Activity/',
-		'Icons/Expressions/'
+		'Icons/Expressions/',
+		'Assets/Map/'
   ],
 
   doColorizeImageIncludes: [
@@ -63,7 +64,8 @@ export const _Image = {
     'http',
     'data:',
 		'Icons/Activity/',
-		'Icons/Expressions/'
+		'Icons/Expressions/',
+		'Assets/Map/'
   ],
 
   doColorizeHTMLImageIncludes: [
