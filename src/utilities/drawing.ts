@@ -47,12 +47,6 @@ export const _Image = {
     'Icons/Color.png',
     'Icons/ColorChange.png',
     'Icons/ColorChangeMulti.png',
-    'Icons/Small/ColorBlocked.png',
-    'Icons/Small/ColorChange.png',
-    'Icons/Small/ColorChangeMulti.png',
-    'Icons/Small/Naked.png',
-    'Icons/Small/Use.png',
-    'Icons/Small/YouTube.png',
   ],
 
   doColorizeImages: [
@@ -118,12 +112,6 @@ export const _Image = {
     'Icons/Color.png',
     'Icons/ColorChange.png',
     'Icons/ColorChangeMulti.png',
-    'Icons/Small/ColorBlocked.png',
-    'Icons/Small/ColorChange.png',
-    'Icons/Small/ColorChangeMulti.png',
-    'Icons/Small/Naked.png',
-    'Icons/Small/Use.png',
-    'Icons/Small/YouTube.png',
   ],
 
   doColorizeHTMLImages: [
