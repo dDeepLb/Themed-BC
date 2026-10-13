@@ -4002,7 +4002,10 @@ var Themed = (() => {
       "Icons/LARP/",
       "Icons/MagicBattle/",
       "Screens/",
-      "http"
+      "http",
+      "Icons/Activity/",
+      "Icons/Expressions/",
+      "Assets/Map/"
     ],
     doColorizeImageIncludes: [
       "https://protokink.github.io/Themed/public"
@@ -4038,13 +4041,7 @@ var Themed = (() => {
       "Icons/WinkNone.png",
       "Icons/Color.png",
       "Icons/ColorChange.png",
-      "Icons/ColorChangeMulti.png",
-      "Icons/Small/ColorBlocked.png",
-      "Icons/Small/ColorChange.png",
-      "Icons/Small/ColorChangeMulti.png",
-      "Icons/Small/Naked.png",
-      "Icons/Small/Use.png",
-      "Icons/Small/YouTube.png"
+      "Icons/ColorChangeMulti.png"
     ],
     doColorizeImages: [
       ""
@@ -4057,7 +4054,10 @@ var Themed = (() => {
       "Icons/MagicBattle/",
       "Screens/",
       "http",
-      "data:"
+      "data:",
+      "Icons/Activity/",
+      "Icons/Expressions/",
+      "Assets/Map/"
     ],
     doColorizeHTMLImageIncludes: [
       "https://protokink.github.io/Themed/public"
@@ -4103,13 +4103,7 @@ var Themed = (() => {
       "Icons/WinkNone.png",
       "Icons/Color.png",
       "Icons/ColorChange.png",
-      "Icons/ColorChangeMulti.png",
-      "Icons/Small/ColorBlocked.png",
-      "Icons/Small/ColorChange.png",
-      "Icons/Small/ColorChangeMulti.png",
-      "Icons/Small/Naked.png",
-      "Icons/Small/Use.png",
-      "Icons/Small/YouTube.png"
+      "Icons/ColorChangeMulti.png"
     ],
     doColorizeHTMLImages: [
       ""
